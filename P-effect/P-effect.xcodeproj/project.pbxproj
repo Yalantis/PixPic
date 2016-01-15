@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
+		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
+		FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BE1C49510200A01715 /* PEFPost.swift */; };
+		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46861C47E8AB008060CD /* P_effectTests.swift */; };
 		FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46911C47E8AB008060CD /* P_effectUITests.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
@@ -38,6 +41,9 @@
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FD6C17BE1C49510200A01715 /* PEFPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEFPost.swift; sourceTree = "<group>"; };
+		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				FDE508D31C49482F003C772B /* User.swift */,
+				FD6C17BE1C49510200A01715 /* PEFPost.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 		FDAF46A31C49369E008060CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD6C17C01C49540A00A01715 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				FDAF46AD1C4936CA008060CD /* Fonts */,
 				FDAF46AE1C4936CA008060CD /* Images */,
 				FDAF46AF1C4936CA008060CD /* Storyboards */,
+				FD6C17BC1C49506100A01715 /* Constants.swift */,
 				FDAF467D1C47E8AA008060CD /* Info.plist */,
 			);
 			path = Resources;
@@ -465,7 +474,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
+				FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
+				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
