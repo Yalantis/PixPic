@@ -1,7 +1,9 @@
 inhibit_all_warnings!
 
 pod 'Parse'
+
 pod 'SDWebImage', '~>3.7'
 pod 'SVPullToRefresh'
 pod 'Toast', '~> 3.0'
+pod 'ParseFacebookUtilsV4'
 

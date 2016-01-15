@@ -14,6 +14,7 @@
 		FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */; };
 		FDAF46B31C49371D008060CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B11C49371D008060CD /* Main.storyboard */; };
 		FDAF46B51C49377B008060CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B41C49377B008060CD /* Assets.xcassets */; };
+		FDE508D41C49482F003C772B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE508D31C49482F003C772B /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		FDAF46B11C49371D008060CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FDAF46B41C49377B008060CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
+		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		FDAF46A21C49369E008060CD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				FDE508D31C49482F003C772B /* User.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
