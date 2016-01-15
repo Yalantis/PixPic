@@ -164,6 +164,7 @@
 				FDAF46A41C49369E008060CD /* Service */,
 				FDAF46A51C49369E008060CD /* ViewController */,
 				FDAF46A61C49369E008060CD /* ViewModel */,
+				FDE508D21C4939B0003C772B /* View */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -266,6 +267,13 @@
 				FDAF46B11C49371D008060CD /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FDE508D21C4939B0003C772B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
