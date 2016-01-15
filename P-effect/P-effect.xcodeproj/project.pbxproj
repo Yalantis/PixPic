@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FDAF46721C47E8AA008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46711C47E8AA008060CD /* AppDelegate.swift */; };
-		FDAF46741C47E8AA008060CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46731C47E8AA008060CD /* ViewController.swift */; };
-		FDAF46771C47E8AA008060CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46751C47E8AA008060CD /* Main.storyboard */; };
-		FDAF46791C47E8AA008060CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46781C47E8AA008060CD /* Assets.xcassets */; };
-		FDAF467C1C47E8AA008060CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF467A1C47E8AA008060CD /* LaunchScreen.storyboard */; };
+		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
 		FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46861C47E8AB008060CD /* P_effectTests.swift */; };
 		FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46911C47E8AB008060CD /* P_effectUITests.swift */; };
+		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
+		FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */; };
+		FDAF46B31C49371D008060CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B11C49371D008060CD /* Main.storyboard */; };
+		FDAF46B51C49377B008060CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B41C49377B008060CD /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,19 +34,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF46711C47E8AA008060CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDAF46731C47E8AA008060CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		FDAF46761C47E8AA008060CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FDAF46781C47E8AA008060CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FDAF467B1C47E8AA008060CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF46861C47E8AB008060CD /* P_effectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_effectTests.swift; sourceTree = "<group>"; };
 		FDAF46881C47E8AB008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF46911C47E8AB008060CD /* P_effectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_effectUITests.swift; sourceTree = "<group>"; };
 		FDAF46931C47E8AB008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDAF46A01C49369E008060CD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FDAF46B11C49371D008060CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		FDAF46B41C49377B008060CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +78,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		468733C5E0D7CEB26FEA9271 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A04F06C86371F8045FB9A166 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F84ED9858785A5DACC7DD377 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */,
+				417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FDAF46651C47E8AA008060CD = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +102,8 @@
 				FDAF46851C47E8AB008060CD /* P-effectTests */,
 				FDAF46901C47E8AB008060CD /* P-effectUITests */,
 				FDAF466F1C47E8AA008060CD /* Products */,
+				F84ED9858785A5DACC7DD377 /* Pods */,
+				468733C5E0D7CEB26FEA9271 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,12 +120,12 @@
 		FDAF46701C47E8AA008060CD /* P-effect */ = {
 			isa = PBXGroup;
 			children = (
-				FDAF46711C47E8AA008060CD /* AppDelegate.swift */,
-				FDAF46731C47E8AA008060CD /* ViewController.swift */,
-				FDAF46751C47E8AA008060CD /* Main.storyboard */,
-				FDAF46781C47E8AA008060CD /* Assets.xcassets */,
-				FDAF467A1C47E8AA008060CD /* LaunchScreen.storyboard */,
-				FDAF467D1C47E8AA008060CD /* Info.plist */,
+				FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */,
+				FDAF469F1C49369E008060CD /* AppDelegate */,
+				FDAF46A11C49369E008060CD /* Classes */,
+				FDAF46A71C49369E008060CD /* Misc */,
+				FDAF46AB1C49369E008060CD /* ThirdPartyLibs */,
+				FDAF46AA1C49369E008060CD /* Resources */,
 			);
 			path = "P-effect";
 			sourceTree = "<group>";
@@ -125,6 +148,126 @@
 			path = "P-effectUITests";
 			sourceTree = "<group>";
 		};
+		FDAF469F1C49369E008060CD /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46A01C49369E008060CD /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		FDAF46A11C49369E008060CD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46A21C49369E008060CD /* DTO */,
+				FDAF46A31C49369E008060CD /* Model */,
+				FDAF46A41C49369E008060CD /* Service */,
+				FDAF46A51C49369E008060CD /* ViewController */,
+				FDAF46A61C49369E008060CD /* ViewModel */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FDAF46A21C49369E008060CD /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		FDAF46A31C49369E008060CD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FDAF46A41C49369E008060CD /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		FDAF46A51C49369E008060CD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		FDAF46A61C49369E008060CD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FDAF46A71C49369E008060CD /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46A81C49369E008060CD /* Categories */,
+				FDAF46A91C49369E008060CD /* Protocols */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		FDAF46A81C49369E008060CD /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		FDAF46A91C49369E008060CD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		FDAF46AA1C49369E008060CD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46AD1C4936CA008060CD /* Fonts */,
+				FDAF46AE1C4936CA008060CD /* Images */,
+				FDAF46AF1C4936CA008060CD /* Storyboards */,
+				FDAF467D1C47E8AA008060CD /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FDAF46AB1C49369E008060CD /* ThirdPartyLibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThirdPartyLibs;
+			sourceTree = "<group>";
+		};
+		FDAF46AD1C4936CA008060CD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FDAF46AE1C4936CA008060CD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46B41C49377B008060CD /* Assets.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		FDAF46AF1C4936CA008060CD /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */,
+				FDAF46B11C49371D008060CD /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +275,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDAF46961C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effect" */;
 			buildPhases = (
+				C1CB40DCC9F3A2B255CC44C3 /* Check Pods Manifest.lock */,
 				FDAF466A1C47E8AA008060CD /* Sources */,
 				FDAF466B1C47E8AA008060CD /* Frameworks */,
 				FDAF466C1C47E8AA008060CD /* Resources */,
+				FBE582243B45C74004DF8596 /* Embed Pods Frameworks */,
+				178C03CD58BE5F6D86B590AC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,9 +378,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDAF467C1C47E8AA008060CD /* LaunchScreen.storyboard in Resources */,
-				FDAF46791C47E8AA008060CD /* Assets.xcassets in Resources */,
-				FDAF46771C47E8AA008060CD /* Main.storyboard in Resources */,
+				FDAF46B31C49371D008060CD /* Main.storyboard in Resources */,
+				FDAF46B51C49377B008060CD /* Assets.xcassets in Resources */,
+				FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,13 +400,60 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		178C03CD58BE5F6D86B590AC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1CB40DCC9F3A2B255CC44C3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FBE582243B45C74004DF8596 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDAF466A1C47E8AA008060CD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDAF46741C47E8AA008060CD /* ViewController.swift in Sources */,
-				FDAF46721C47E8AA008060CD /* AppDelegate.swift in Sources */,
+				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,25 +487,6 @@
 			targetProxy = FDAF468E1C47E8AB008060CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		FDAF46751C47E8AA008060CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FDAF46761C47E8AA008060CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FDAF467A1C47E8AA008060CD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FDAF467B1C47E8AA008060CD /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		FDAF46941C47E8AB008060CD /* Debug */ = {
@@ -400,23 +574,30 @@
 		};
 		FDAF46971C47E8AB008060CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		FDAF46981C47E8AB008060CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -487,6 +668,7 @@
 				FDAF46981C47E8AB008060CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FDAF46991C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +677,7 @@
 				FDAF469B1C47E8AB008060CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FDAF469C1C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +686,7 @@
 				FDAF469E1C47E8AB008060CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
