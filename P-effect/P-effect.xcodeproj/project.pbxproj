@@ -35,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		49F4156C1C49598100143E78 /* Peffect.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; name = Peffect.mobileprovision; path = ../../../../../Downloads/Peffect.mobileprovision; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +208,7 @@
 		FDAF46A71C49369E008060CD /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				49F4156C1C49598100143E78 /* Peffect.mobileprovision */,
 				FDAF46A81C49369E008060CD /* Categories */,
 				FDAF46A91C49369E008060CD /* Protocols */,
 			);
@@ -289,6 +291,7 @@
 				FDAF466C1C47E8AA008060CD /* Resources */,
 				FBE582243B45C74004DF8596 /* Embed Pods Frameworks */,
 				178C03CD58BE5F6D86B590AC /* Copy Pods Resources */,
+				49F4156A1C49532E00143E78 /* Fabric 2 Run Script */,
 			);
 			buildRules = (
 			);
@@ -424,6 +427,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		49F4156A1C49532E00143E78 /* Fabric 2 Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric 2 Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2aece811a0eb3240b1f287f2020a19ffe9b55774 8900520a9b6a25ec8fd36d1b99db220c64064fef3a32846dd4a0e76f4a33f328";
+		};
 		C1CB40DCC9F3A2B255CC44C3 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,6 +531,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -559,6 +577,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -588,7 +607,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effect";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -603,7 +622,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effect";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
 			};
