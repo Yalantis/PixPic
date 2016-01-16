@@ -6,4 +6,7 @@ pod 'SDWebImage', '~>3.7'
 pod 'SVPullToRefresh'
 pod 'Toast', '~> 3.0'
 pod 'ParseFacebookUtilsV4'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit' 
 
