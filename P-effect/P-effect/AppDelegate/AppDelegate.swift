@@ -14,15 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+        //TODO: Save string constants in the constants file
         Parse.setApplicationId("8yjIQdP3FPBBe9VwRcsfJrth2dWSDBjsFPC47v2c", clientKey: "fJwIVMqkD8DlpYNzfyrESiKQTfqzVU6IrAJnTef3")
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        if let _ = PFUser.currentUser() {
-            PFUser.enableRevocableSessionInBackground()
+        if User.currentUser() != nil {
+            User.enableRevocableSessionInBackground()
         } else {
-            //TODO: Authorizate user
+            //TODO: Authorize user
         }
         
         return true
