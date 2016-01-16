@@ -9,18 +9,17 @@
         <!--Feed View Controller-->
         <scene sceneID="DBf-Kw-7IP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Root View Controller" id="P4x-GP-BLW"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="202.13333333333333" y="364.46666666666664"/>
         </scene>
         <!--Autorization View Controller-->
         <scene sceneID="fmf-n5-Ce7">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nn6-zN-BCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" sceneMemberID="viewController">
+                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kgu-Oi-6Bf"/>
                         <viewControllerLayoutGuide type="bottom" id="xYT-Sx-453"/>
@@ -43,6 +42,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                        <connections>
+                                            <action selector="logInWithFBButtonTapped:" destination="DMj-G5-MWz" eventType="touchUpInside" id="W00-7u-md3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wr1-88-U9r">
                                         <rect key="frame" x="20" y="101" width="242" height="46"/>
@@ -76,6 +78,7 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nn6-zN-BCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="603" y="-386"/>
         </scene>
