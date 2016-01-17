@@ -24,10 +24,6 @@ class PEFPost: PFObject {
     
     override class func query() -> PFQuery? {
         let query = PFQuery(className: PEFPost.parseClassName())
-        //query.cachePolicy = .CacheElseNetwork
-        
-        //TODO: to puzzle out in query.cachePolicy
-        
         query.includeKey("user")
         query.orderByDescending("updatedAt")
         query.limit = displayLimit
