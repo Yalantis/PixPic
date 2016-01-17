@@ -29,7 +29,7 @@ class PostDataSource: NSObject {
     }
     
     @objc func fetchData() {
-        loader.loadData() {
+        loader.loadData(nil) {
             [weak self] (objects: [PEFPost]?, error: NSError?) in
             self?.tableView?.pullToRefreshView.stopAnimating()
             if let objects = objects {
