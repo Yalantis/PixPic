@@ -29,7 +29,7 @@ class Router {
     
     func showFeed() {
         let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue)
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushViewController(vc!, animated: true)
     }
     
 }
