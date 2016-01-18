@@ -1,5 +1,5 @@
 //
-//  PEFPost.swift
+//  Post.swift
 //  P-effect
 //
 //  Created by Jack Lapin on 15.01.16.
@@ -9,7 +9,7 @@
 var pagination: Int = 0
 let displayLimit = 20
 
-class PEFPost: PFObject {
+class Post: PFObject {
     
     @NSManaged var image: PFFile
     @NSManaged var user: User?
@@ -23,7 +23,7 @@ class PEFPost: PFObject {
     }
     
     override class func query() -> PFQuery? {
-        let query = PFQuery(className: PEFPost.parseClassName())
+        let query = PFQuery(className: Post.parseClassName())
         query.includeKey("user")
         query.orderByDescending("updatedAt")
         query.limit = displayLimit
@@ -33,10 +33,10 @@ class PEFPost: PFObject {
     
 }
 
-extension PEFPost: PFSubclassing {
+extension Post: PFSubclassing {
     
     class func parseClassName() -> String {
-        return "PEFPost"
+        return "Post"
     }
     
 }

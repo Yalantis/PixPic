@@ -15,13 +15,13 @@
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
 		FD1490461C4BF768002A3245 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490451C4BF768002A3245 /* LoaderService.swift */; };
 		FD1490481C4BF7CE002A3245 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490471C4BF7CE002A3245 /* PhotoGenerator.swift */; };
-		FD14904A1C4BFA71002A3245 /* PEFPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490491C4BFA71002A3245 /* PEFPostModel.swift */; };
+		FD14904A1C4BFA71002A3245 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490491C4BFA71002A3245 /* PostModel.swift */; };
 		FD14904C1C4BFE36002A3245 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14904B1C4BFE36002A3245 /* Reachability.swift */; };
 		FD14904E1C4BFF35002A3245 /* SaverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14904D1C4BFF35002A3245 /* SaverService.swift */; };
 		FD1490501C4C0154002A3245 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD14904F1C4C0154002A3245 /* AlertService.swift */; };
 		FD1490521C4C04F1002A3245 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490511C4C04F1002A3245 /* PostDataSource.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
-		FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BE1C49510200A01715 /* PEFPost.swift */; };
+		FD6C17BF1C49510200A01715 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BE1C49510200A01715 /* Post.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46861C47E8AB008060CD /* P_effectTests.swift */; };
 		FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46911C47E8AB008060CD /* P_effectUITests.swift */; };
@@ -59,13 +59,13 @@
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD1490451C4BF768002A3245 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
 		FD1490471C4BF7CE002A3245 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
-		FD1490491C4BFA71002A3245 /* PEFPostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEFPostModel.swift; sourceTree = "<group>"; };
+		FD1490491C4BFA71002A3245 /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		FD14904B1C4BFE36002A3245 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FD14904D1C4BFF35002A3245 /* SaverService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaverService.swift; sourceTree = "<group>"; };
 		FD14904F1C4C0154002A3245 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FD1490511C4C04F1002A3245 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FD6C17BE1C49510200A01715 /* PEFPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEFPost.swift; sourceTree = "<group>"; };
+		FD6C17BE1C49510200A01715 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				FDE508D31C49482F003C772B /* User.swift */,
-				FD6C17BE1C49510200A01715 /* PEFPost.swift */,
+				FD6C17BE1C49510200A01715 /* Post.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				FD6C17C01C49540A00A01715 /* UserModel.swift */,
-				FD1490491C4BFA71002A3245 /* PEFPostModel.swift */,
+				FD1490491C4BFA71002A3245 /* PostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -513,7 +513,7 @@
 				FD1490521C4C04F1002A3245 /* PostDataSource.swift in Sources */,
 				FD1490501C4C0154002A3245 /* AlertService.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
-				FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */,
+				FD6C17BF1C49510200A01715 /* Post.swift in Sources */,
 				FD1490461C4BF768002A3245 /* LoaderService.swift in Sources */,
 				FD14904E1C4BFF35002A3245 /* SaverService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
@@ -521,7 +521,7 @@
 				FD14904C1C4BFE36002A3245 /* Reachability.swift in Sources */,
 				FD1490481C4BF7CE002A3245 /* PhotoGenerator.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
-				FD14904A1C4BFA71002A3245 /* PEFPostModel.swift in Sources */,
+				FD14904A1C4BFA71002A3245 /* PostModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

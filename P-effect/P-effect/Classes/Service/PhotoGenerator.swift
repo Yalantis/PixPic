@@ -23,7 +23,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             (alert: UIAlertAction!) -> Void in
             self.takePhoto()
         })
-        let selectFromLibraryAction = UIAlertAction(title: "Upload photo", style: .Default, handler: {
+        let selectFromLibraryAction = UIAlertAction(title: "Choose photo from library", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.selectFromLibrary()
         })

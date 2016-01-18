@@ -8,23 +8,15 @@
 
 import Foundation
 
-typealias LoadingCompletion = (objects: [PEFPost]?, error: NSError?) -> ()
+typealias LoadingCompletion = (objects: [Post]?, error: NSError?) -> ()
 
 class LoaderService: NSObject {
     
-    func deleteObject(object: AnyObject?) -> () {
-        
-    }
-    
-    func updateExistingObject(object: AnyObject?) -> () {
-        
-    }
-    
     func loadData(user: User?, completion: LoadingCompletion?) {
-        var array = [PEFPost]()
+        var array = [Post]()
         if User.currentUser() != nil {
             
-            let query = PEFPost.query()
+            let query = Post.query()
             
             let reachability: Reachability
             do {
@@ -34,20 +26,12 @@ class LoaderService: NSObject {
                 return
             }
             
-            reachability.whenReachable = { reachability in
-                dispatch_async(dispatch_get_main_queue()) {
-                    if reachability.isReachableViaWiFi() {
-                        print("Reachable via WiFi")
-                    } else {
-                        print("Reachable via Cellular")
-                    }
-                }
+            if !reachability.isReachable() {
+                query?.fromLocalDatastore()
             }
-            reachability.whenUnreachable = { reachability in
-                dispatch_async(dispatch_get_main_queue()) {
-                    query?.fromLocalDatastore()
-                    query?.cachePolicy = PFCachePolicy.CacheThenNetwork
-                }
+            
+            if reachability.isReachableViaWiFi() {
+                query?.cachePolicy = PFCachePolicy.NetworkElseCache
             }
             
             if let user = user, userId = user.facebookId {
@@ -59,9 +43,9 @@ class LoaderService: NSObject {
                 if error == nil {
                     if let objects = objects {
                         for object in objects {
-                            array.append(object as! PEFPost)
-                            (object as! PEFPost).saveEventually()
-                            (object as! PEFPost).pinInBackground()
+                            array.append(object as! Post)
+                            (object as! Post).saveEventually()
+                            (object as! Post).pinInBackground()
                         }
                     }
                     pagination = pagination + 1

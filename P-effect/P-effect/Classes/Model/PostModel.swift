@@ -6,17 +6,17 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-class PEFPostModel: NSObject {
+class PostModel: NSObject {
     
-    var post: PEFPost
+    var post: Post
     
-    init(aPost: PEFPost) {
+    init(aPost: Post) {
         post = aPost
         super.init()
     }
     
     init(image: PFFile, user: User, comment: String?) {
-        post = PEFPost()
+        post = Post()
         super.init()
         post.image = image
         post.user = user

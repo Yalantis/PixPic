@@ -29,13 +29,12 @@ class SaverService {
     
     private class func upload(file: PFFile, comment: String?) {
         if let user = User.currentUser() {
-            let post = PEFPostModel(image: file, user: user, comment: comment).post
+            let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
                     AlertService.simpleAlert("Upload successful!")
                 } else {
                     if let error = error?.userInfo["error"] as? String {
-                        //TODO : handle error with response!!
                         print(error)
                     }
                 }

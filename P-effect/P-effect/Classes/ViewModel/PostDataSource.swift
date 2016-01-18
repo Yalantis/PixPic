@@ -11,7 +11,7 @@ import Foundation
 class PostDataSource: NSObject {
 
     
-    private var arrayOfPosts: [PEFPost] = [PEFPost]() {
+    private var arrayOfPosts: [Post] = [Post]() {
         didSet {
             tableView?.reloadData()
         }
@@ -30,7 +30,7 @@ class PostDataSource: NSObject {
     
     @objc func fetchData() {
         loader.loadData(nil) {
-            [weak self] (objects: [PEFPost]?, error: NSError?) in
+            [weak self] (objects: [Post]?, error: NSError?) in
             self?.tableView?.pullToRefreshView.stopAnimating()
             if let objects = objects {
                 self?.arrayOfPosts = objects
@@ -42,7 +42,7 @@ class PostDataSource: NSObject {
         return arrayOfPosts.count
     }
     
-    func modelAtIndex(indexPath: NSIndexPath) -> PEFPost? {
+    func modelAtIndex(indexPath: NSIndexPath) -> Post? {
         let model = arrayOfPosts[Int(indexPath.row)]
         return model
     }
