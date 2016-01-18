@@ -14,6 +14,8 @@
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
 		95199AE51C4CDA540086D613 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AE41C4CDA540086D613 /* AuthorizationViewController.swift */; };
+		95199AEF1C4D12A40086D613 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEE1C4D12A40086D613 /* AuthService.swift */; };
+		95199AF11C4D14D10086D613 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AF01C4D14D10086D613 /* Router.swift */; };
 		FD1490461C4BF768002A3245 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490451C4BF768002A3245 /* LoaderService.swift */; };
 		FD1490481C4BF7CE002A3245 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490471C4BF7CE002A3245 /* PhotoGenerator.swift */; };
 		FD14904A1C4BFA71002A3245 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD1490491C4BFA71002A3245 /* PostModel.swift */; };
@@ -57,6 +59,8 @@
 		49F415721C4A7AA600143E78 /* Silverfake.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silverfake.otf; sourceTree = "<group>"; };
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95199AE41C4CDA540086D613 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		95199AEE1C4D12A40086D613 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		95199AF01C4D14D10086D613 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD1490451C4BF768002A3245 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
@@ -237,6 +241,8 @@
 				FD1490451C4BF768002A3245 /* LoaderService.swift */,
 				FD14904D1C4BFF35002A3245 /* SaverService.swift */,
 				FD14904F1C4C0154002A3245 /* AlertService.swift */,
+				95199AEE1C4D12A40086D613 /* AuthService.swift */,
+				95199AF01C4D14D10086D613 /* Router.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -535,12 +541,14 @@
 				FD6C17BF1C49510200A01715 /* Post.swift in Sources */,
 				FD1490461C4BF768002A3245 /* LoaderService.swift in Sources */,
 				FD14904E1C4BFF35002A3245 /* SaverService.swift in Sources */,
+				95199AF11C4D14D10086D613 /* Router.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				FD14904C1C4BFE36002A3245 /* Reachability.swift in Sources */,
 				FD1490481C4BF7CE002A3245 /* PhotoGenerator.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				FD14904A1C4BFA71002A3245 /* PostModel.swift in Sources */,
+				95199AEF1C4D12A40086D613 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

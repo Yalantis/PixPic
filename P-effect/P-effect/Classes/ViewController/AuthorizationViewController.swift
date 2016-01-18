@@ -11,7 +11,7 @@ import UIKit
 class AuthorizationViewController: UIViewController {
 
     @IBAction private func logInWithFBButtonTapped() {
-        
+        AuthService().logIn(self)
     }
 
 }
