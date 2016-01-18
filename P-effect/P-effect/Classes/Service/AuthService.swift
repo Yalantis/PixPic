@@ -10,56 +10,74 @@ import UIKit
 
 class AuthService: NSObject {
     
-    func logIn(fromViewController: UIViewController) {
-        
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile"]) { [unowned self] user, error in
-            print("\(user)")
+    func logIn() {
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile"], block: { user, error in
+            if(error != nil) {
+                print("\(error!.localizedDescription)")
+                return
+            }
+            if(FBSDKAccessToken.currentAccessToken() != nil) {
+                self.getUserInfo()
+            }
+        })
+    }
 
-            if user!.isNew {
-                print("new")
-                
-
-            } else if user == nil {
-                print("nil")
-            } else {
-                print("\(user)")
-                self.loadData()
+    private func getUserInfo() {
+        let requestParameters = ["fields": "id, first_name, last_name"]
+        let userInfo = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
+        userInfo.startWithCompletionHandler() { [unowned self] connection, result, error in
+            
+            if(error != nil) {
+                print("\(error.localizedDescription)")
+                return
             }
             
+            if(result != nil) {
+                let userId:String = result["id"] as! String
+                let userFirstName:String? = result["first_name"] as? String
+                let userLastName:String? = result["last_name"] as? String
+                
+                var userName = String()
+                
+                if let userFirstName = userFirstName {
+                    userName = userFirstName + " "
+                }
+                
+                if let userLastName = userLastName {
+                    userName = userName + userLastName
+                }
+                self.saveUser(userName, facebookId: userId)
+            }
         }
     }
     
-        func loadData() {
-            let request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-            request.startWithCompletionHandler { connection, result, error in
-                if error != nil {
-                    let userData = result as! [String: AnyObject]
-                    let facebookID = userData["id"] as! String
-                    let name = userData["name"] as! String
-                    
-                    let pictureURL = NSURL(string: "https://graph.facebook.com/\(facebookID)/picture?type=large&return_ssl_resources=1")
-                    
-                    print("\(name) \(facebookID)")
-                    
-                    
-                }
+    func saveUser(username: String, facebookId: String) {
+        let myUser = User()
+        myUser.username = username
+        myUser.facebookId = facebookId
+        myUser.password = " "
+    
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            
+            let userProfile = "https://graph.facebook.com/" + facebookId + "/picture?type=large"
+            let profilePictureUrl = NSURL(string: userProfile)
+            let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
+            
+            if(profilePictureData != nil) {
+                let profileFileObject = PFFile(data:profilePictureData!)
+                myUser.avatar = profileFileObject
             }
+            myUser.signUpInBackgroundWithBlock({ success, error in
+                if success {
+                    print("User details are now updated")
+                }
+
+            })
         }
+    }
+    
+    func logOut() {
+        User.logOut()
+    }
+    
 }
-
-
-//        
-//        let login = FBSDKLoginManager()
-//        login.logInWithReadPermissions(["public_profile"], fromViewController: fromViewController) { result, error in
-//
-//            if (error != nil) {
-//                print("Process error")
-//            } else if (result.isCancelled) {
-//                print("Cancelled")
-//            } else {
-//                print("Logged in")
-//                print("\(result.token)")
-//                
-//            }
-//        }
-
