@@ -22,15 +22,14 @@ class Router {
         navigationController = UINavigationController(rootViewController: root)
     }
     
-    func showFeedInVC(vc: UIViewController) {
-        vc.performSegueWithIdentifier(, sender: nil)
+    func showLogin() {
+        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue) as! AuthorizationViewController
+        navigationController.pushViewController(vc, animated: true)
     }
     
-//    func showFeed() {
-//        let feedStoryboard = UIStoryboard(name: "FeedStoryboard", bundle: nil)
-//        let vc = feedStoryboard.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue) as! FeedVC
-//        vc.router = self
-//        navigationController.pushViewController(vc, animated: true)
-//    }
+    func showFeed() {
+        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue)
+        navigationController.pushViewController(vc, animated: true)
+    }
     
 }

@@ -21,13 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
 
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
         if User.currentUser() != nil {
             User.enableRevocableSessionInBackground()
-        } else {
-            Router().showFeedInVC(<#T##vc: UIViewController##UIViewController#>)
-//            AuthService.logIn()
-        }
+        } 
         
         Fabric.with([Crashlytics.self])
         return true

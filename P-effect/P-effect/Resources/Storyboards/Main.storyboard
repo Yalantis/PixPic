@@ -19,7 +19,7 @@
         <!--Autorization View Controller-->
         <scene sceneID="fmf-n5-Ce7">
             <objects>
-                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthorizationViewController" id="DMj-G5-MWz" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kgu-Oi-6Bf"/>
                         <viewControllerLayoutGuide type="bottom" id="xYT-Sx-453"/>
