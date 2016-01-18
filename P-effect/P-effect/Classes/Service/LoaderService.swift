@@ -1,0 +1,64 @@
+//
+//  LoaderService.swift
+//  P-effect
+//
+//  Created by Jack Lapin on 17.01.16.
+//  Copyright © 2016 Yalantis. All rights reserved.
+//
+
+import Foundation
+
+typealias LoadingCompletion = (objects: [Post]?, error: NSError?) -> ()
+
+class LoaderService: NSObject {
+    
+    func loadData(user: User?, completion: LoadingCompletion?) {
+        var array = [Post]()
+        if User.currentUser() != nil {
+            
+            let query = Post.query()
+            
+            let reachability: Reachability
+            do {
+                reachability = try Reachability.reachabilityForInternetConnection()
+            } catch {
+                print("Unable to create Reachability")
+                return
+            }
+            
+            if !reachability.isReachable() {
+                query?.fromLocalDatastore()
+            }
+            
+            if reachability.isReachableViaWiFi() {
+                query?.cachePolicy = PFCachePolicy.NetworkElseCache
+            }
+            
+            if let user = user, userId = user.facebookId {
+                query?.whereKey("facebookId", equalTo: userId)
+            }
+            
+            query?.findObjectsInBackgroundWithBlock {
+                (objects:[PFObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if let objects = objects {
+                        for object in objects {
+                            array.append(object as! Post)
+                            (object as! Post).saveEventually()
+                            (object as! Post).pinInBackground()
+                        }
+                    }
+                    pagination = pagination + 1
+                    completion?(objects: array, error: nil)
+                } else {
+                    print("Error: \(error!) \(error!.userInfo)")
+                    completion?(objects: nil, error: error)
+                }
+            }
+        } else {
+            print("No user signUP")
+            completion?(objects: nil, error: nil)
+        }
+    }
+
+}
