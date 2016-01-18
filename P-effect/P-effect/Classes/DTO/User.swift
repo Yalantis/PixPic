@@ -25,4 +25,15 @@ class User: PFUser {
         return PFUser.currentUser() as? User
     }
     
+    override class func parseClassName() -> String {
+        return "User"
+    }
+    
+    override class func query() -> PFQuery? {
+        let query = PFQuery(className: User.parseClassName())
+        query.includeKey("facebookId")
+        query.orderByDescending("updatedAt")
+        return query
+    }
+    
 }

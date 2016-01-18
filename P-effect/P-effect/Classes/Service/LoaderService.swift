@@ -8,11 +8,36 @@
 
 import Foundation
 
-typealias LoadingCompletion = (objects: [Post]?, error: NSError?) -> ()
+typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
+typealias LoadingUserCompletion = (object: User?, error: NSError?) -> ()
+
 
 class LoaderService: NSObject {
     
-    func loadData(user: User?, completion: LoadingCompletion?) {
+    func loadUserData(facebookId: String?, completion: LoadingUserCompletion?) {
+        var user = User()
+        if let facebookId = facebookId {
+            let query = User.query()
+            query?.whereKey("facebookId", equalTo: facebookId)
+            query?.findObjectsInBackgroundWithBlock {
+                (objects:[PFObject]?, error: NSError?) -> Void in
+                if error == nil {
+                    if let objects = objects {
+                        user = objects.first as! User
+                    }
+                    completion?(object: user, error: nil)
+                } else {
+                    print("Error: \(error!) \(error!.userInfo)")
+                    completion?(object: nil, error: error)
+                }
+            }
+        }  else {
+            print("No facebookId to find a User")
+            completion?(object: nil, error: nil)
+        }
+    }
+    
+    func loadData(user: User?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
         if User.currentUser() != nil {
             
