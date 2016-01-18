@@ -9,7 +9,7 @@
 import UIKit
 
 class PostViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
     
@@ -20,9 +20,5 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
-    
-    func setContent(content: PEFPost) {
 
-    }
-    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let kReuseIdentifier = "PostViewCellIdentifier"
+let kReuseIdentifier = "PostViewCellIdentifier"
 
 class FeedViewController: UITableViewController {
 
@@ -25,13 +25,4 @@ class FeedViewController: UITableViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kReuseIdentifier) as! PostViewCell
-        return cell
-    }
-
 }
