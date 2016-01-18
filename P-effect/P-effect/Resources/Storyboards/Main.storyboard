@@ -1,86 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Feed View Controller-->
         <scene sceneID="DBf-Kw-7IP">
             <objects>
                 <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fZe-Uy-SUR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="0XT-tR-OJ6">
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0XT-tR-OJ6" id="jjz-mp-h3Q">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zxU-FX-7D0" id="3ij-5H-Nb1"/>
+                            <outlet property="delegate" destination="zxU-FX-7D0" id="nd2-zb-QVl"/>
+                        </connections>
+                    </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="P4x-GP-BLW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379" y="384.99999999999994"/>
+            <point key="canvasLocation" x="202.13333333333333" y="364.46666666666664"/>
         </scene>
         <!--Autorization View Controller-->
         <scene sceneID="fmf-n5-Ce7">
             <objects>
-                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kgu-Oi-6Bf"/>
                         <viewControllerLayoutGuide type="bottom" id="xYT-Sx-453"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="z4a-rP-YNk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="yMT-la-wki">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jaq-SL-nHE">
-                                <rect key="frame" x="23" y="201" width="554" height="199"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1i-qh-wuv">
-                                        <rect key="frame" x="156" y="20" width="242" height="46"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
-                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
-                                        <connections>
-                                            <action selector="logInWithFBButtonTapped" destination="DMj-G5-MWz" eventType="touchUpInside" id="g0L-Q9-9jt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wr1-88-U9r">
-                                        <rect key="frame" x="156" y="101" width="242" height="46"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
-                                        <state key="normal" title="Proceed without login " backgroundImage="facebook_login_btn">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
-                                        <connections>
-                                            <segue destination="zxU-FX-7D0" kind="show" id="yGF-8t-RuE"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="wr1-88-U9r" firstAttribute="top" secondItem="n1i-qh-wuv" secondAttribute="bottom" constant="35" id="8UH-3J-Ygf"/>
-                                    <constraint firstItem="n1i-qh-wuv" firstAttribute="centerX" secondItem="Jaq-SL-nHE" secondAttribute="centerX" id="IUa-cL-5ej"/>
-                                    <constraint firstItem="wr1-88-U9r" firstAttribute="leading" secondItem="n1i-qh-wuv" secondAttribute="leading" id="hbW-dF-bKw"/>
-                                    <constraint firstItem="n1i-qh-wuv" firstAttribute="top" secondItem="Jaq-SL-nHE" secondAttribute="top" constant="20" id="tX9-ul-nes"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Jaq-SL-nHE" firstAttribute="centerY" secondItem="z4a-rP-YNk" secondAttribute="centerY" id="Ng9-FP-XEG"/>
-                            <constraint firstItem="Jaq-SL-nHE" firstAttribute="centerX" secondItem="z4a-rP-YNk" secondAttribute="centerX" id="RI3-Mm-IZp"/>
-                            <constraint firstItem="Jaq-SL-nHE" firstAttribute="top" secondItem="kgu-Oi-6Bf" secondAttribute="bottom" constant="181" id="aDk-XV-8Yd"/>
-                            <constraint firstItem="Jaq-SL-nHE" firstAttribute="leading" secondItem="z4a-rP-YNk" secondAttribute="leadingMargin" constant="3" id="gsZ-5M-KdC"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn6-zN-BCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1130.625" y="-407.74647887323943"/>
+            <point key="canvasLocation" x="586" y="364"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="KDO-bP-6w7">
@@ -91,14 +61,14 @@
                         <viewControllerLayoutGuide type="bottom" id="ZlS-LO-0XT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Its-9K-4wo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGo-NJ-r3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1831.875" y="384.50704225352109"/>
+            <point key="canvasLocation" x="977" y="364"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zhB-qf-K11">
@@ -114,15 +84,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-441" y="384.99999999999994"/>
+            <point key="canvasLocation" x="-235.19999999999999" y="364.46666666666664"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="facebook_icon" width="10" height="20"/>
-        <image name="facebook_login_btn" width="242" height="46"/>
-        <image name="facebook_login_btn_pressed" width="242" height="46"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="yGF-8t-RuE"/>
-    </inferredMetricsTieBreakers>
 </document>
