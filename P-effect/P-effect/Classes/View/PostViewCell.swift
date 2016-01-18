@@ -1,0 +1,30 @@
+//
+//  PostViewCell.swift
+//  P-effect
+//
+//  Created by anna on 1/18/16.
+//  Copyright © 2016 Yalantis. All rights reserved.
+//
+
+import UIKit
+
+class PostViewCell: UITableViewCell {
+
+    @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var profileLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}
