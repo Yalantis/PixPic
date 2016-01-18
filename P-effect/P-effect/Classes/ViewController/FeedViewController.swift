@@ -16,10 +16,6 @@ class FeedViewController: UITableViewController {
         super.viewDidLoad()
         setupTableView()
     }
-
-    @IBAction func userProfileButtonTapped(sender: AnyObject) {
-        
-    }
     
     private func setupTableView() {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
