@@ -54,3 +54,4 @@ class UserModel: NSObject {
     }
 
 }
+
