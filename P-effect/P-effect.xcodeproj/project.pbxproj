@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
+		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
+		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
+		49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415711C4A791600143E78 /* Scratch Detail.otf */; };
+		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
+		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
+		FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BE1C49510200A01715 /* PEFPost.swift */; };
+		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46861C47E8AB008060CD /* P_effectTests.swift */; };
 		FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46911C47E8AB008060CD /* P_effectUITests.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */; };
 		FDAF46B31C49371D008060CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B11C49371D008060CD /* Main.storyboard */; };
-		FDAF46B51C49377B008060CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B41C49377B008060CD /* Assets.xcassets */; };
+		FDE508D41C49482F003C772B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE508D31C49482F003C772B /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +43,16 @@
 
 /* Begin PBXFileReference section */
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
+		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
+		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
+		49F415721C4A7AA600143E78 /* Silverfake.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silverfake.otf; sourceTree = "<group>"; };
+		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FD6C17BE1C49510200A01715 /* PEFPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PEFPost.swift; sourceTree = "<group>"; };
+		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,8 +64,8 @@
 		FDAF46A01C49369E008060CD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDAF46B11C49371D008060CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		FDAF46B41C49377B008060CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
+		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +100,17 @@
 				A04F06C86371F8045FB9A166 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49F4156D1C4A591500143E78 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				49F415721C4A7AA600143E78 /* Silverfake.otf */,
+				49F415701C4A791600143E78 /* Scratch Basic.otf */,
+				49F415711C4A791600143E78 /* Scratch Detail.otf */,
+				49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		F84ED9858785A5DACC7DD377 /* Pods */ = {
@@ -172,6 +199,8 @@
 		FDAF46A21C49369E008060CD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				FDE508D31C49482F003C772B /* User.swift */,
+				FD6C17BE1C49510200A01715 /* PEFPost.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -179,6 +208,7 @@
 		FDAF46A31C49369E008060CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FD6C17C01C49540A00A01715 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -230,9 +260,10 @@
 		FDAF46AA1C49369E008060CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FDAF46AD1C4936CA008060CD /* Fonts */,
+				49F4156D1C4A591500143E78 /* Fonts */,
 				FDAF46AE1C4936CA008060CD /* Images */,
 				FDAF46AF1C4936CA008060CD /* Storyboards */,
+				FD6C17BC1C49506100A01715 /* Constants.swift */,
 				FDAF467D1C47E8AA008060CD /* Info.plist */,
 			);
 			path = Resources;
@@ -245,17 +276,10 @@
 			path = ThirdPartyLibs;
 			sourceTree = "<group>";
 		};
-		FDAF46AD1C4936CA008060CD /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		FDAF46AE1C4936CA008060CD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FDAF46B41C49377B008060CD /* Assets.xcassets */,
+				49F415761C4A842F00143E78 /* Assets.xcassets */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -387,9 +411,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
+				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
+				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				FDAF46B31C49371D008060CD /* Main.storyboard in Resources */,
-				FDAF46B51C49377B008060CD /* Assets.xcassets in Resources */,
+				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */,
+				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,7 +504,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE508D41C49482F003C772B /* User.swift in Sources */,
+				FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
+				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,8 +561,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -552,6 +584,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "537d042f-2da1-4d7c-96e1-91048856d405";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,8 +608,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -591,6 +624,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "537d042f-2da1-4d7c-96e1-91048856d405";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

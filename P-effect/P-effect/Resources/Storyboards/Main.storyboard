@@ -28,7 +28,7 @@
                             <outlet property="delegate" destination="zxU-FX-7D0" id="nd2-zb-QVl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ucF-D0-6o0"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="P4x-GP-BLW"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

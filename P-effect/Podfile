@@ -1,8 +1,13 @@
 inhibit_all_warnings!
 
 pod 'Parse'
+
 pod 'SDWebImage', '~>3.7'
 pod 'SVPullToRefresh'
 pod 'Toast', '~> 3.0'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'ParseFacebookUtilsV4'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit' 
