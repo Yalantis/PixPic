@@ -13,7 +13,7 @@
 		49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415711C4A791600143E78 /* Scratch Detail.otf */; };
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
-		95F5823A1C4A9ED60050A0D8 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F582391C4A9ED60050A0D8 /* AuthorizationViewController.swift */; };
+		95199AE51C4CDA540086D613 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AE41C4CDA540086D613 /* AuthorizationViewController.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BE1C49510200A01715 /* PEFPost.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
@@ -49,7 +49,7 @@
 		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
 		49F415721C4A7AA600143E78 /* Silverfake.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silverfake.otf; sourceTree = "<group>"; };
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		95F582391C4A9ED60050A0D8 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorizationViewController.swift; path = "P-effect/Classes/AuthorizationViewController.swift"; sourceTree = SOURCE_ROOT; };
+		95199AE41C4CDA540086D613 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		FDAF46A51C49369E008060CD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				95F582391C4A9ED60050A0D8 /* AuthorizationViewController.swift */,
+				95199AE41C4CDA540086D613 /* AuthorizationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -492,7 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95F5823A1C4A9ED60050A0D8 /* AuthorizationViewController.swift in Sources */,
+				95199AE51C4CDA540086D613 /* AuthorizationViewController.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				FD6C17BF1C49510200A01715 /* PEFPost.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
