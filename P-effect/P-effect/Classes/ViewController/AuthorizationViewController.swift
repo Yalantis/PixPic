@@ -10,7 +10,7 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
 
-    @IBAction func logInWithFBButtonTapped() {
+    @IBAction private func logInWithFBButtonTapped() {
         
     }
 
