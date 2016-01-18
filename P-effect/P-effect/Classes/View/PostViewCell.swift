@@ -16,15 +16,13 @@ class PostViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var profileLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static var nib: UINib? {
+        let nib = UINib(nibName: String(self), bundle: nil)
+        return nib
     }
+    
+    func setContent(content: PEFPost) {
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
 }

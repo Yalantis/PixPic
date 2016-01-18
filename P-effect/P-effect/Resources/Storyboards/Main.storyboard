@@ -8,8 +8,7 @@
         <!--Feed View Controller-->
         <scene sceneID="DBf-Kw-7IP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" sceneMemberID="viewController">
+                <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fZe-Uy-SUR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,8 +18,15 @@
                             <outlet property="delegate" destination="zxU-FX-7D0" id="nd2-zb-QVl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="P4x-GP-BLW"/>
+                    <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
+                        <barButtonItem key="rightBarButtonItem" image="User Male-50" id="eed-Oc-yJB">
+                            <connections>
+                                <action selector="userProfileButtonTapped:" destination="zxU-FX-7D0" id="81N-hI-IE6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="202.13333333333333" y="364.46666666666664"/>
         </scene>
@@ -77,4 +83,7 @@
             <point key="canvasLocation" x="-235.19999999999999" y="364.46666666666664"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="User Male-50" width="25" height="25"/>
+    </resources>
 </document>
