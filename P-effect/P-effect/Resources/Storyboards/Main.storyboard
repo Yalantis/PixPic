@@ -13,33 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPostsCell" rowHeight="350" id="yv0-iy-A1R">
-                                <rect key="frame" x="0.0" y="28" width="600" height="350"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yv0-iy-A1R" id="13v-7X-R44">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="349"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y7e-PB-GaO">
-                                            <rect key="frame" x="279" y="1" width="42" height="351"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="350" id="1wl-Fz-KqT"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Y7e-PB-GaO" firstAttribute="centerY" secondItem="13v-7X-R44" secondAttribute="centerY" id="Dib-iJ-WWj"/>
-                                        <constraint firstItem="Y7e-PB-GaO" firstAttribute="top" secondItem="13v-7X-R44" secondAttribute="top" constant="1" id="PMk-bd-50M"/>
-                                        <constraint firstItem="Y7e-PB-GaO" firstAttribute="centerX" secondItem="13v-7X-R44" secondAttribute="centerX" id="cqh-se-BVm"/>
-                                        <constraint firstAttribute="bottom" secondItem="Y7e-PB-GaO" secondAttribute="bottom" constant="1" id="fqh-vM-AsY"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="zxU-FX-7D0" id="vnq-vf-Ol4"/>
                             <outlet property="delegate" destination="zxU-FX-7D0" id="q3Y-im-YvP"/>
@@ -121,7 +94,7 @@
         <scene sceneID="kEf-LR-r38">
             <objects>
                 <tableViewController id="5uc-YH-wBN" customClass="ProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8d-Ce-9r9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8d-Ce-9r9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -188,7 +161,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="5pB-Ac-M6a" firstAttribute="centerY" secondItem="N6n-X4-hzl" secondAttribute="centerY" id="Nki-sA-gZJ"/>
                                 <constraint firstItem="5pB-Ac-M6a" firstAttribute="centerX" secondItem="N6n-X4-hzl" secondAttribute="centerX" id="uEu-a7-Lh0"/>
@@ -217,6 +190,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableViewFooter" destination="N6n-X4-hzl" id="zZe-FF-aGH"/>
                         <outlet property="userAvatar" destination="g37-PW-4gA" id="hH8-Em-yBh"/>
                         <outlet property="userName" destination="GY0-1y-oJV" id="CzV-g9-aiq"/>
                     </connections>
@@ -234,12 +208,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="5uc-YH-wBN" kind="relationship" relationship="rootViewController" id="VVf-Rq-NDw"/>
+                        <segue destination="5uc-YH-wBN" kind="relationship" relationship="rootViewController" id="aXh-31-Wmi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-441" y="384.99999999999994"/>
+            <point key="canvasLocation" x="-407" y="378"/>
         </scene>
     </scenes>
     <resources>

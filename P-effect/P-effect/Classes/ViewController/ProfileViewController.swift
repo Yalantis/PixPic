@@ -11,39 +11,39 @@ import UIKit
 class ProfileViewController: UITableViewController {
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var tableViewFooter: UIView!
+    var dataSource: PostDataSource? {
+        didSet {
+            tableView!.dataSource = dataSource
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
+        setupController()
+    }
+
+    // MARK: - Inner func 
+    func setupController() {
+        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
+        tableView.dataSource = dataSource
+        setupTableViewFooter()
+        if (dataSource?.countOfModels() > 0) {
+            tableView.tableFooterView = nil
+            tableView.scrollEnabled = true
+        }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        self.tableView.sectionFooterHeight = 0
+    func setupTableViewFooter() {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        var frame: CGRect = tableViewFooter.frame
+        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+        tableViewFooter.frame = frame
+        tableView.tableFooterView = tableViewFooter;
     }
-    // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 10
-    }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        self.tableView.sectionFooterHeight = 0
-        return UITableViewCell()
-    }
-    
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 0
-//    }
     
     // MARK: - IBActions
     @IBAction func editProfile(sender: AnyObject) {
-        User.logOut()
         
     }
 

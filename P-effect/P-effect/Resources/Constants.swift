@@ -32,7 +32,7 @@ struct Constants {
     }
     
     struct Profile {
-        static let ZeroPostsCellIdentifier = "noPostsCell"
+        static let HeaderHeight = 224 as CGFloat
         static let AvatarImageCornerRadius = 62.5 as CGFloat
     }
 }
