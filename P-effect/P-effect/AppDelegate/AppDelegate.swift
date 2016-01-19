@@ -19,10 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-                
-        if User.currentUser() != nil {
-            User.enableRevocableSessionInBackground()
-        }
+        
+        Router.sharedRouter().onStart(true)
         
         Fabric.with([Crashlytics.self])
         return true
