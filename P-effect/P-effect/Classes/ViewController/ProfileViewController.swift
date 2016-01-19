@@ -29,8 +29,8 @@ class ProfileViewController: UITableViewController {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         tableView.dataSource = dataSource
         setupTableViewFooter()
-        if let modelsCount = dataSource?.countOfModels() {
-            if (modelsCount > 0) {
+        if let dataSource = dataSource {
+            if (dataSource.countOfModels() > 0) {
             tableView.tableFooterView = nil
             tableView.scrollEnabled = true
             }
