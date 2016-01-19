@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostViewCellIdentifier" rowHeight="344" id="r5v-vb-fgJ" customClass="PostViewCell" customModule="P_effect" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="344"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="r5v-vb-fgJ" id="Xjk-lM-W8a">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="343"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rmj-Dm-1kq" userLabel="Container">
+                        <rect key="frame" x="6" y="6" width="588" height="337"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lAC-3v-EJG" userLabel="Feed Photo Image View">
+                                <rect key="frame" x="0.0" y="36" width="588" height="300"/>
+                                <color key="backgroundColor" red="0.99668560610000001" green="0.86410837269999996" blue="0.46923528689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lAC-3v-EJG" secondAttribute="height" multiplier="49:25" id="92v-W9-nW7"/>
+                                    <constraint firstAttribute="height" constant="300" id="wpk-ig-89l"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cwl-Tp-fcJ" userLabel="Profile Photo Image View">
+                                <rect key="frame" x="0.0" y="3" width="48" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Hco-7m-lVZ"/>
+                                    <constraint firstAttribute="width" constant="48" id="rPv-Sh-Ta4"/>
+                                </constraints>
+                            </imageView>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrK-av-14L" userLabel="Profile Name Label">
+                                <rect key="frame" x="52" y="9" width="530" height="21"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7e-Ms-s1y" userLabel="Date Label">
+                                <rect key="frame" x="543" y="10" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="a7e-Ms-s1y" firstAttribute="bottom" secondItem="vrK-av-14L" secondAttribute="bottom" constant="1" id="1WW-E0-tiR"/>
+                            <constraint firstAttribute="trailing" secondItem="lAC-3v-EJG" secondAttribute="trailing" id="8YC-ZK-J8u"/>
+                            <constraint firstAttribute="trailing" secondItem="a7e-Ms-s1y" secondAttribute="trailing" constant="3" id="ObY-Na-gFO"/>
+                            <constraint firstAttribute="trailing" secondItem="vrK-av-14L" secondAttribute="trailing" constant="6" id="RbL-wc-aom"/>
+                            <constraint firstItem="Cwl-Tp-fcJ" firstAttribute="top" secondItem="vrK-av-14L" secondAttribute="top" constant="-6" id="fvn-5W-NTH"/>
+                            <constraint firstItem="Cwl-Tp-fcJ" firstAttribute="leading" secondItem="Rmj-Dm-1kq" secondAttribute="leading" id="hUv-Oo-sL3"/>
+                            <constraint firstItem="lAC-3v-EJG" firstAttribute="top" secondItem="Cwl-Tp-fcJ" secondAttribute="bottom" constant="-15" id="kiS-fM-cTE"/>
+                            <constraint firstItem="vrK-av-14L" firstAttribute="leading" secondItem="Cwl-Tp-fcJ" secondAttribute="trailing" constant="4" id="kpS-3J-ccJ"/>
+                            <constraint firstItem="lAC-3v-EJG" firstAttribute="leading" secondItem="Rmj-Dm-1kq" secondAttribute="leading" id="lP7-B6-Ijv"/>
+                            <constraint firstItem="Cwl-Tp-fcJ" firstAttribute="top" secondItem="Rmj-Dm-1kq" secondAttribute="top" constant="3" id="xmo-d1-rvQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Rmj-Dm-1kq" firstAttribute="top" secondItem="Xjk-lM-W8a" secondAttribute="top" constant="6" id="109-u0-5iJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Rmj-Dm-1kq" secondAttribute="bottom" id="63A-NV-Ozu"/>
+                    <constraint firstAttribute="trailing" secondItem="Rmj-Dm-1kq" secondAttribute="trailing" constant="6" id="Qdu-ig-YVK"/>
+                    <constraint firstItem="Rmj-Dm-1kq" firstAttribute="leading" secondItem="Xjk-lM-W8a" secondAttribute="leading" constant="6" id="oPu-50-arm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="a7e-Ms-s1y" id="bvd-4L-a1m"/>
+                <outlet property="postImageView" destination="lAC-3v-EJG" id="hhw-dh-U1M"/>
+                <outlet property="profileImageView" destination="Cwl-Tp-fcJ" id="7E9-ew-S8A"/>
+                <outlet property="profileLabel" destination="vrK-av-14L" id="V0p-On-2ff"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
