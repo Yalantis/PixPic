@@ -8,12 +8,12 @@
 
 import UIKit
 
-class AuthService: NSObject {
+class AuthService {
     
     func logIn() {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile"], block: { user, error in
-            if(error != nil) {
-                print("\(error!.localizedDescription)")
+            if let error = error {
+                print("\(error.localizedDescription)")
                 return
             }
             if(FBSDKAccessToken.currentAccessToken() != nil) {
@@ -27,12 +27,12 @@ class AuthService: NSObject {
         let userInfo = FBSDKGraphRequest(graphPath: "me", parameters: requestParameters)
         userInfo.startWithCompletionHandler() { [unowned self] connection, result, error in
             
-            if(error != nil) {
+            if let error = error {
                 print("\(error.localizedDescription)")
                 return
             }
             
-            if(result != nil) {
+            if let result = result {
                 let userId:String = result["id"] as! String
                 let userFirstName:String? = result["first_name"] as? String
                 let userLastName:String? = result["last_name"] as? String

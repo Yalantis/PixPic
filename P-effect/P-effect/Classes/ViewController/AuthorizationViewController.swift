@@ -12,6 +12,7 @@ class AuthorizationViewController: UIViewController {
 
     @IBAction private func logInWithFBButtonTapped() {
         AuthService().logIn()
+        Router(rootViewController: self).showFeed()
     }
 
 }

@@ -11,25 +11,30 @@ import UIKit
 private enum ViewController: String {
     case Feed = "FeedViewController"
     case Login = "AuthorizationViewController"
-    case Profile = ""
+    case Profile = "ProfileViewController"
 }
 
 class Router {
     
     private let navigationController: UINavigationController
     
-    init(root: UIViewController) {
-        navigationController = UINavigationController(rootViewController: root)
+    init(rootViewController: UIViewController) {
+        navigationController = UINavigationController(rootViewController: rootViewController)
     }
     
     func showLogin() {
-        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue) as! AuthorizationViewController
-        navigationController.pushViewController(vc, animated: true)
+        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
+        if let vc = vc {
+            navigationController.pushViewController(vc, animated: true)
+        }
+        
     }
     
     func showFeed() {
         let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue)
-        navigationController.pushViewController(vc!, animated: true)
+        if let vc = vc {
+            navigationController.pushViewController(vc, animated: true)
+        }
     }
     
 }

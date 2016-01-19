@@ -17,14 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.enableLocalDatastore()
-
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
-        
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         if User.currentUser() != nil {
             User.enableRevocableSessionInBackground()
-        } 
+        } else {
+            print("Error")
+        }
         
         Fabric.with([Crashlytics.self])
         return true
