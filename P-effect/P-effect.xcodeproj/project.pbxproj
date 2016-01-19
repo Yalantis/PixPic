@@ -13,9 +13,9 @@
 		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
 		49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415711C4A791600143E78 /* Scratch Detail.otf */; };
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
+		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
+		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
 		72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A04F06C86371F8045FB9A166 /* libPods.a */; };
-		95199AE71C4CF55B0086D613 /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95199AE61C4CF55B0086D613 /* PostViewCell.xib */; };
-		95199AE91C4CF5CF0086D613 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AE81C4CF5CF0086D613 /* PostViewCell.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
@@ -62,8 +62,8 @@
 		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
 		49F415721C4A7AA600143E78 /* Silverfake.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silverfake.otf; sourceTree = "<group>"; };
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		95199AE61C4CF55B0086D613 /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
-		95199AE81C4CF5CF0086D613 /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
+		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,13 +128,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		49EA86391C4D216300528619 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		49F4156D1C4A591500143E78 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +137,15 @@
 				49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		49FE57C31C4E63E500C4B30F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */,
+				49FE57C51C4E63E500C4B30F /* PostViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		F84ED9858785A5DACC7DD377 /* Pods */ = {
@@ -219,7 +221,7 @@
 		FDAF46A11C49369E008060CD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				49EA86391C4D216300528619 /* View */,
+				49FE57C31C4E63E500C4B30F /* View */,
 				FDAF46A21C49369E008060CD /* DTO */,
 				FDAF46A31C49369E008060CD /* Model */,
 				FDAF46A41C49369E008060CD /* Service */,
@@ -337,15 +339,6 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		FDE508D21C4939B0003C772B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				95199AE61C4CF55B0086D613 /* PostViewCell.xib */,
-				95199AE81C4CF5CF0086D613 /* PostViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -458,7 +451,7 @@
 			files = (
 				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
-				95199AE71C4CF55B0086D613 /* PostViewCell.xib in Resources */,
+				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				FDAF46B31C49371D008060CD /* Main.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
@@ -536,9 +529,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
 				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
-				95199AE91C4CF5CF0086D613 /* PostViewCell.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
@@ -670,6 +663,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "a185d14b-6a5f-4c20-98b4-6a8cc1d9fea3";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
