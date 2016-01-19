@@ -10,7 +10,6 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
-    
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var tableViewFooter: UIView!
