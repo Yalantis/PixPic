@@ -9,7 +9,6 @@
 import Foundation
 
 class PostDataSource: NSObject {
-
     
     private var arrayOfPosts: [Post] = [Post]() {
         didSet {

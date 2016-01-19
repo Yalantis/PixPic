@@ -11,6 +11,12 @@ import UIKit
 let kReuseIdentifier = "PostViewCellIdentifier"
 
 class FeedViewController: UITableViewController {
+    
+    var dataSource: PostDataSource? {
+        didSet {
+            tableView!.dataSource = dataSource
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +27,13 @@ class FeedViewController: UITableViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
     }
     
-    @IBAction func profileButtonTapped(sender: AnyObject) {
-
+    private func setupDataSource() {
+        dataSource = PostDataSource()
+        dataSource?.tableView = tableView
+        dataSource?.fetchData()
+    }
+    
+    @IBAction private func profileButtonTapped(sender: AnyObject) {
         Router(rootViewController: self).showLogin()
     }
     
