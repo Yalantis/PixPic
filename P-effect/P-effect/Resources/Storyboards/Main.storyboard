@@ -19,7 +19,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
-                        <barButtonItem key="rightBarButtonItem" image="User Male-50" id="eed-Oc-yJB">
+                        <barButtonItem key="rightBarButtonItem" image="user_male_50" id="eed-Oc-yJB">
                             <connections>
                                 <action selector="profileButtonTapped:" destination="zxU-FX-7D0" id="utP-ss-JQ7"/>
                             </connections>
@@ -114,7 +114,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
-                        <barButtonItem key="rightBarButtonItem" image="Edit User-50" id="Ta1-st-R01">
+                        <barButtonItem key="rightBarButtonItem" image="edit_user_50" id="Ta1-st-R01">
                             <connections>
                                 <action selector="profileSettings:" destination="5uc-YH-wBN" id="832-IE-YwB"/>
                             </connections>
@@ -139,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="zxU-FX-7D0" kind="relationship" relationship="rootViewController" id="p93-N3-gUn"/>
+                        <segue destination="zxU-FX-7D0" kind="relationship" relationship="rootViewController" id="Kxn-g4-Bjd"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,10 +214,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Edit User-50" width="25" height="25"/>
-        <image name="User Male-50" width="25" height="25"/>
+        <image name="edit_user_50" width="25" height="25"/>
         <image name="facebook_icon" width="10" height="20"/>
         <image name="facebook_login_btn" width="242" height="46"/>
         <image name="facebook_login_btn_pressed" width="242" height="46"/>
+        <image name="user_male_50" width="25" height="25"/>
     </resources>
 </document>
