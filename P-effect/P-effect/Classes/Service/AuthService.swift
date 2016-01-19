@@ -10,6 +10,18 @@ import UIKit
 
 class AuthService {
     
+    func anonymousLogIn() {
+        PFAnonymousUtils.logInWithBlock {
+            (user: PFUser?, error: NSError?) -> Void in
+            if error != nil || user == nil {
+                print("Anonymous login failed.")
+            } else {
+                let userLocal = UserModel.init(aUser: user as! User)
+                print(User.currentUser())
+            }
+        }
+    }
+    
     func logIn() {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile"]) { user, error in
             if let error = error {

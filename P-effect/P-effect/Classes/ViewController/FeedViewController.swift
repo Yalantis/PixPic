@@ -21,4 +21,21 @@ class FeedViewController: UITableViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
     }
     
+    @IBAction func profileButtonTapped(sender: AnyObject) {
+
+        Router(rootViewController: self).showLogin()
+        
+//        let currentUser = User.currentUser()
+
+//        if let currentUser = currentUser {
+//            UserModel(aUser: currentUser).linkOrUnlinkFacebook({ (state, error) -> () in
+//                if state == true {
+//                    Router(rootViewController: self).showProfile()
+//                } else {
+//                    Router(rootViewController: self).showLogin()
+//                }
+//            })
+//        }
+    }
+    
 }

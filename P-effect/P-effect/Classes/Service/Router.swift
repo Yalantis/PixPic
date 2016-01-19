@@ -23,11 +23,9 @@ class Router {
     }
     
     func showLogin() {
-        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
-        if let vc = vc {
-            navigationController.pushViewController(vc, animated: true)
-        }
-        
+        let st = UIStoryboard(name: "Main", bundle: nil)
+        let vc = st.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func showFeed() {
@@ -37,4 +35,11 @@ class Router {
         }
     }
     
+    func showProfile() {
+        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Profile.rawValue)
+        if let vc = vc {
+            navigationController.pushViewController(vc, animated: true)
+        }
+    }
+
 }
