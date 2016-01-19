@@ -14,7 +14,7 @@ class User: PFUser {
     @NSManaged var facebookId: String?
     @NSManaged var passwordSet: Bool
     
-    override class func initialize(){
+    override class func initialize() {
         var onceToken : dispatch_once_t = 0;
         dispatch_once(&onceToken) {
             self.registerSubclass()
@@ -25,9 +25,6 @@ class User: PFUser {
         return PFUser.currentUser() as? User
     }
     
-    override class func parseClassName() -> String {
-        return "User"
-    }
     
     override class func query() -> PFQuery? {
         let query = PFQuery(className: User.parseClassName())
