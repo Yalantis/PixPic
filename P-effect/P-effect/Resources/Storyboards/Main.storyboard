@@ -104,7 +104,7 @@
                                         </state>
                                         <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
                                         <connections>
-                                            <action selector="withoutLoginButtonTapped:" destination="Qhm-Jo-13p" eventType="touchUpInside" id="0ac-i4-E7m"/>
+                                            <action selector="withoutLoginButtonTapped:" destination="Qhm-Jo-13p" eventType="touchUpInside" id="ydL-4f-LKx"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -125,9 +125,6 @@
                             <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerY" secondItem="Xtg-gM-uwC" secondAttribute="centerY" id="rsm-T6-WYd"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="withoutLoginButtonTapped" destination="6qL-uh-azE" id="h0z-i0-dbo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rds-m3-ANr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

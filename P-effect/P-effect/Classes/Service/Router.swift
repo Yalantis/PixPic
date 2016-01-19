@@ -23,8 +23,8 @@ class Router {
     }
     
     func showLogin() {
-        let st = UIStoryboard(name: "Main", bundle: nil)
-        let vc = st.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
         navigationController.pushViewController(vc, animated: true)
     }
     

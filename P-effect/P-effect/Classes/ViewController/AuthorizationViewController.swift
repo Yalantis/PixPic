@@ -17,12 +17,12 @@ class AuthorizationViewController: UIViewController {
 
     @IBAction private func logInWithFBButtonTapped() {
         AuthService().logIn()
-        Router(rootViewController: self).showProfile()
+//        Router(rootViewController: self).showProfile()
     }
     
     
     @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
         AuthService().anonymousLogIn()
-        Router(rootViewController: self).showFeed()
+//        Router(rootViewController: self).showFeed()
     }
 }
