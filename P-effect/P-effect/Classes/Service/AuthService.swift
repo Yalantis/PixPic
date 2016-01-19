@@ -55,7 +55,7 @@ class AuthService {
         let myUser = User.currentUser()!
         myUser.username = username
         myUser.facebookId = facebookId
-        myUser.password = " "
+        myUser.password = NSUUID().UUIDString
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             let userProfile = "https://graph.facebook.com/" + facebookId + "/picture?type=large"
