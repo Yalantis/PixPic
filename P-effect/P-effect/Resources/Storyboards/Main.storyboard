@@ -185,7 +185,7 @@
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
                         <barButtonItem key="rightBarButtonItem" image="Edit User-50" id="Ta1-st-R01">
                             <connections>
-                                <action selector="editProfile:" destination="5uc-YH-wBN" id="Vfg-2t-7Mm"/>
+                                <action selector="profileSettings:" destination="5uc-YH-wBN" id="832-IE-YwB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

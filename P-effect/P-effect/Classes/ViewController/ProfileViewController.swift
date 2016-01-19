@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileViewController: UITableViewController {
+    
+    
     @IBOutlet weak var userAvatar: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var tableViewFooter: UIView!
@@ -43,7 +45,7 @@ class ProfileViewController: UITableViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func editProfile(sender: AnyObject) {
+    @IBAction func profileSettings(sender: AnyObject) {
         
     }
 
