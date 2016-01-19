@@ -52,13 +52,12 @@ class AuthService {
     }
     
     private func saveUser(username: String, facebookId: String) {
-        let myUser:User = User.currentUser()!
+        let myUser = User.currentUser()!
         myUser.username = username
         myUser.facebookId = facebookId
         myUser.password = " "
     
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            
             let userProfile = "https://graph.facebook.com/" + facebookId + "/picture?type=large"
             let profilePictureUrl = NSURL(string: userProfile)
             let profilePictureData = NSData(contentsOfURL: profilePictureUrl!)
@@ -67,11 +66,7 @@ class AuthService {
                 let profileFileObject = PFFile(data:profilePictureData)
                 myUser.avatar = profileFileObject
             }
-            myUser.signUpInBackgroundWithBlock({ success, error in
-                if success {
-                    print("User details are now updated")
-                }
-            })
+            myUser.signUpInBackground()
         }
     }
     
