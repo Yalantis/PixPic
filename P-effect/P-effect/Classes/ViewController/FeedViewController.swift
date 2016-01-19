@@ -23,7 +23,7 @@ class FeedViewController: UITableViewController {
     
     @IBAction func profileButtonTapped(sender: AnyObject) {
 
-        Router(rootViewController: self).showLogin()
+     //   Router(rootViewController: self).showLogin()
     }
     
 }

@@ -15,7 +15,7 @@ class User: PFUser {
     @NSManaged var passwordSet: Bool
     
     override class func initialize() {
-        var onceToken : dispatch_once_t = 0;
+        var onceToken: dispatch_once_t = 0;
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }
@@ -28,7 +28,6 @@ class User: PFUser {
     
     override class func query() -> PFQuery? {
         let query = PFQuery(className: User.parseClassName())
-        query.includeKey("facebookId")
         query.orderByDescending("updatedAt")
         return query
     }
