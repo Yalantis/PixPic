@@ -27,8 +27,8 @@ class ProfileViewController: UITableViewController {
 
     // MARK: - Inner func 
     func setupController() {
-        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
+        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         tableView.dataSource = dataSource
         setupTableViewFooter()
         applyUser()
@@ -49,6 +49,7 @@ class ProfileViewController: UITableViewController {
     }
     
     func applyUser() {
+        userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         if let currentUser = User.currentUser() {
             userModel = UserModel(aUser: currentUser)
             userModel?.checkIfUsernameExists({ (completion) -> () in
