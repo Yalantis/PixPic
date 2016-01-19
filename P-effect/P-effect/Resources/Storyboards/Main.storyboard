@@ -116,23 +116,14 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="centerY" secondItem="QrS-9l-54S" secondAttribute="centerY" priority="700" id="4xN-wx-mMM"/>
-                                        <constraint firstAttribute="bottom" secondItem="g37-PW-4gA" secondAttribute="bottom" id="8WY-un-Mj5"/>
+                                        <constraint firstAttribute="bottom" secondItem="g37-PW-4gA" secondAttribute="bottom" priority="700" id="8WY-un-Mj5"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="centerX" secondItem="QrS-9l-54S" secondAttribute="centerX" priority="700" id="DC6-Dl-EEP"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="trailing" secondItem="QrS-9l-54S" secondAttribute="trailingMargin" id="Enb-bV-S7d"/>
-                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" id="Gsl-N0-UlW"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="top" id="KPe-Z1-i37"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="top" id="Kuj-11-chV"/>
-                                        <constraint firstAttribute="bottom" secondItem="g37-PW-4gA" secondAttribute="bottom" id="O2s-FM-vBN"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leadingMargin" id="TsJ-9x-8SP"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="top" id="VWX-cD-b8L"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="top" id="X0g-gx-X50"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="bottom" secondItem="QrS-9l-54S" secondAttribute="bottomMargin" id="YvY-8U-iua"/>
-                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" id="aeC-qk-aQL"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leading" id="cDp-Pz-jlL"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leading" id="q0b-yi-IeD"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leading" id="rNG-4H-vB1"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leading" id="tar-OI-4V2"/>
-                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="topMargin" id="wma-q4-PP1"/>
+                                        <constraint firstItem="g37-PW-4gA" firstAttribute="trailing" secondItem="QrS-9l-54S" secondAttribute="trailingMargin" priority="700" id="Enb-bV-S7d"/>
+                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" priority="700" id="Gsl-N0-UlW"/>
+                                        <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leadingMargin" priority="700" id="TsJ-9x-8SP"/>
+                                        <constraint firstItem="g37-PW-4gA" firstAttribute="bottom" secondItem="QrS-9l-54S" secondAttribute="bottomMargin" priority="700" id="YvY-8U-iua"/>
+                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" priority="700" id="aeC-qk-aQL"/>
+                                        <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="topMargin" priority="700" id="wma-q4-PP1"/>
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GY0-1y-oJV">
