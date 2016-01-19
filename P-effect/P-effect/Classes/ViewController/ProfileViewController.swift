@@ -10,9 +10,9 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
-    @IBOutlet weak var userAvatar: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var tableViewFooter: UIView!
+    @IBOutlet private weak var userAvatar: UIImageView!
+    @IBOutlet private weak var userName: UILabel!
+    @IBOutlet private weak var tableViewFooter: UIView!
     var dataSource: PostDataSource? {
         didSet {
             tableView!.dataSource = dataSource
@@ -29,9 +29,11 @@ class ProfileViewController: UITableViewController {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         tableView.dataSource = dataSource
         setupTableViewFooter()
-        if (dataSource?.countOfModels() > 0) {
+        if let modelsCount = dataSource?.countOfModels() {
+            if (modelsCount > 0) {
             tableView.tableFooterView = nil
             tableView.scrollEnabled = true
+            }
         }
     }
     
