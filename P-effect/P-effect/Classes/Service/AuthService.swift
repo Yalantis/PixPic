@@ -64,9 +64,16 @@ class AuthService {
                     FBSDKLoginManager().logOut()
                     completion(nil, error)
                 } else {
-                    if let _ = FBSDKAccessToken.currentAccessToken() {
-                        let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
-                        fbRequest.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
+                    guard let _ = FBSDKAccessToken.currentAccessToken()
+                        else {
+                            print("Facebook login error.")
+                            completion(nil, nil)
+                            return
+                    }
+                    let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+                    fbRequest.startWithCompletionHandler(
+                        {
+                            (FBSDKGraphRequestConnection, result, error) -> Void in
                             let user = User()
                             if (error == nil && result != nil) {
                                 let facebookData = result as! NSDictionary
@@ -80,14 +87,10 @@ class AuthService {
                                 user.setValue(facebookData.objectForKey("id"), forKey: "facebookId")
                                 let nickname: String = String(facebookData.objectForKey("first_name")!) + " " + String(facebookData.objectForKey("last_name")!)
                                 user.setValue(nickname, forKey: "username")
-                                completion (user, nil)
+                                completion(user, nil)
                             }
-                            }
-                        )
-                    } else {
-                        print("Facebook login error.")
-                        completion (nil, nil)
-                    }
+                        }
+                    )
                 }
             }
         )

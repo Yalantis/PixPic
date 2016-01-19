@@ -19,7 +19,7 @@ class UserModel: NSObject {
     
     func checkIfUsernameExists(completion:(Bool) -> ()) {
         let query = PFUser.query()?.whereKey("username", equalTo: user.username!)
-        query!.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+        query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
             if object != nil {
                 completion(true)
                 print("username exists")
@@ -31,7 +31,7 @@ class UserModel: NSObject {
     
     func checkIfFacebookIdExists(completion:(Bool) -> ()) {
         let query = User.query()?.whereKey("facebookId", equalTo: user.facebookId!)
-        query!.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+        query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
             if object != nil {
                 completion(true)
                 print("facebookId exists")

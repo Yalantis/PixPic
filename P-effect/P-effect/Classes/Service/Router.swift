@@ -42,9 +42,9 @@ class Router {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let controllerIdentifier = ViewControllerIDs.Login.rawValue
         let viewController = mainStoryboard.instantiateViewControllerWithIdentifier(controllerIdentifier) as! AuthorizationViewController
-        if let viewController: UIViewController = UINavigationController.init(rootViewController: viewController) {
-            show(viewController, animated: animated)
-        }
+        let viewControllerTo: UIViewController = UINavigationController.init(rootViewController: viewController)
+        show(viewControllerTo, animated: animated)
+
     }
     
     func showHome(animated animated:Bool) {
