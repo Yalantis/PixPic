@@ -8,8 +8,9 @@
         <!--Feed View Controller-->
         <scene sceneID="DBf-Kw-7IP">
             <objects>
-                <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FeedViewController" id="zxU-FX-7D0" userLabel="Feed View Controller" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="Root View Controller" id="P4x-GP-BLW"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
