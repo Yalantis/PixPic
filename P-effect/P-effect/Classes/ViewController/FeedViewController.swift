@@ -21,4 +21,9 @@ class FeedViewController: UITableViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
     }
     
+    @IBAction func profileButtonTapped(sender: AnyObject) {
+
+        Router(rootViewController: self).showLogin()
+    }
+    
 }

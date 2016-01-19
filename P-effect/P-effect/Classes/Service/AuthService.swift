@@ -10,6 +10,17 @@ import UIKit
 
 class AuthService {
     
+    func anonymousLogIn() {
+        PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) in
+            if error != nil || user == nil {
+                print("Anonymous login failed.")
+            } else {
+                UserModel.init(aUser: user as! User)
+                print(User.currentUser())
+            }
+        }
+    }
+    
     func logIn() {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile"]) { user, error in
             if let error = error {
@@ -66,7 +77,11 @@ class AuthService {
                 let profileFileObject = PFFile(data:profilePictureData)
                 myUser.avatar = profileFileObject
             }
-            myUser.signUpInBackground()
+            
+            UserModel.init(aUser: myUser as! User)
+            print(User.currentUser())
+
+//            myUser.signUpInBackground()
         }
     }
     

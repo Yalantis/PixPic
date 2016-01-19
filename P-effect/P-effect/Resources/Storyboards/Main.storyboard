@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qhm-Jo-13p">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -8,7 +8,7 @@
         <!--Feed View Controller-->
         <scene sceneID="DBf-Kw-7IP">
             <objects>
-                <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FeedViewController" id="zxU-FX-7D0" userLabel="Feed View Controller" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fZe-Uy-SUR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,30 +19,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
-                        <barButtonItem key="rightBarButtonItem" image="User Male-50" id="eed-Oc-yJB"/>
+                        <barButtonItem key="rightBarButtonItem" image="User Male-50" id="eed-Oc-yJB">
+                            <connections>
+                                <action selector="profileButtonTapped:" destination="zxU-FX-7D0" id="utP-ss-JQ7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="328" y="378"/>
-        </scene>
-        <!--Autorization View Controller-->
-        <scene sceneID="fmf-n5-Ce7">
-            <objects>
-                <viewController id="DMj-G5-MWz" userLabel="Autorization View Controller" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kgu-Oi-6Bf"/>
-                        <viewControllerLayoutGuide type="bottom" id="xYT-Sx-453"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yMT-la-wki">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nn6-zN-BCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="750" y="-160"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="kEf-LR-r38">
@@ -102,11 +88,11 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pB-Ac-M6a">
                                     <rect key="frame" x="218" y="163" width="165" height="24"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="5pB-Ac-M6a" firstAttribute="centerY" secondItem="N6n-X4-hzl" secondAttribute="centerY" id="Nki-sA-gZJ"/>
                                 <constraint firstItem="5pB-Ac-M6a" firstAttribute="centerX" secondItem="N6n-X4-hzl" secondAttribute="centerX" id="uEu-a7-Lh0"/>
@@ -160,9 +146,78 @@
             </objects>
             <point key="canvasLocation" x="-407" y="378"/>
         </scene>
+        <!--Autorization View Controller-->
+        <scene sceneID="4Z2-Wq-Zvx">
+            <objects>
+                <viewController storyboardIdentifier="AuthorizationViewController" id="Qhm-Jo-13p" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ecw-Sd-Yoh"/>
+                        <viewControllerLayoutGuide type="bottom" id="wcA-Lr-HqU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xtg-gM-uwC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyF-1U-WEQ">
+                                <rect key="frame" x="23" y="201" width="554" height="199"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1g-mI-Yws">
+                                        <rect key="frame" x="156" y="20" width="242" height="46"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                        <connections>
+                                            <action selector="logInWithFBButtonTapped" destination="Qhm-Jo-13p" eventType="touchUpInside" id="OW7-FK-8mD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qL-uh-azE">
+                                        <rect key="frame" x="156" y="101" width="242" height="46"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                        <state key="normal" title="Proceed without login " backgroundImage="facebook_login_btn">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                        <connections>
+                                            <action selector="withoutLoginButtonTapped:" destination="Qhm-Jo-13p" eventType="touchUpInside" id="ydL-4f-LKx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="6qL-uh-azE" firstAttribute="top" secondItem="t1g-mI-Yws" secondAttribute="bottom" constant="35" id="ILy-Ug-1Sh"/>
+                                    <constraint firstItem="6qL-uh-azE" firstAttribute="leading" secondItem="t1g-mI-Yws" secondAttribute="leading" id="P31-2B-Xs9"/>
+                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="top" secondItem="OyF-1U-WEQ" secondAttribute="top" constant="20" id="gja-aD-UMz"/>
+                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="centerX" secondItem="OyF-1U-WEQ" secondAttribute="centerX" id="qV4-vm-SdJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerX" secondItem="Xtg-gM-uwC" secondAttribute="centerX" id="8wN-FQ-rR1"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="leading" secondItem="Xtg-gM-uwC" secondAttribute="leadingMargin" constant="3" id="d7f-kM-5dL"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="top" secondItem="ecw-Sd-Yoh" secondAttribute="bottom" constant="181" id="hLy-uB-iWu"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerY" secondItem="Xtg-gM-uwC" secondAttribute="centerY" id="rsm-T6-WYd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rds-m3-ANr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676" y="-350"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Edit User-50" width="25" height="25"/>
         <image name="User Male-50" width="25" height="25"/>
+        <image name="facebook_icon" width="10" height="20"/>
+        <image name="facebook_login_btn" width="242" height="46"/>
+        <image name="facebook_login_btn_pressed" width="242" height="46"/>
     </resources>
 </document>

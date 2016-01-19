@@ -9,10 +9,17 @@
 import UIKit
 
 class AuthorizationViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
     @IBAction private func logInWithFBButtonTapped() {
         AuthService().logIn()
-        Router(rootViewController: self).showFeed()
     }
-
+    
+    
+    @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
+        AuthService().anonymousLogIn()
+    }
 }

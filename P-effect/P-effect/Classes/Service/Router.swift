@@ -23,18 +23,21 @@ class Router {
     }
     
     func showLogin() {
-        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
-        if let vc = vc {
-            navigationController.pushViewController(vc, animated: true)
-        }
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(ViewController.Login.rawValue)
+        navigationController.pushViewController(vc, animated: true)
     }
     
     func showFeed() {
-        let vc = navigationController.storyboard?.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue)
-        if let vc = vc {
-            navigationController.pushViewController(vc, animated: true)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(ViewController.Feed.rawValue)
+        navigationController.pushViewController(vc, animated: true)
     }
     
+    func showProfile() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(ViewController.Profile.rawValue)
+        navigationController.pushViewController(vc, animated: true)
+    }
+
 }
