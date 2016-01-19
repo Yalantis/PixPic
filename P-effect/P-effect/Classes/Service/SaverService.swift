@@ -17,9 +17,9 @@ class SaverService {
             { (succeeded, error) -> () in
                 if succeeded {
                     print("Saved!")
-                    SaverService.upload(file, comment: comment)
-                } else if let _ = error {
-                    //TODO : handle error with response!!
+                    SaverService.uploadPost(file, comment: comment)
+                } else if let error = error {
+                    print(error)
                 }
             }, progressBlock: { percent in
                 print("Uploaded: \(percent)%")
@@ -27,7 +27,27 @@ class SaverService {
         )
     }
     
-    private class func upload(file: PFFile, comment: String?) {
+    
+    func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
+        if let avatar = avatar {
+            avatar.saveInBackgroundWithBlock(
+                { (succeeded, error) -> () in
+                    if succeeded {
+                        print("Saved!")
+                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
+                    } else if let error = error {
+                        print(error)
+                    }
+                }, progressBlock: { percent in
+                    print("Uploaded: \(percent)%")
+                }
+            )
+        }
+    }
+    
+    //MARK: - private
+    
+    private class func uploadPost(file: PFFile, comment: String?) {
         if let user = User.currentUser() {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
@@ -40,8 +60,23 @@ class SaverService {
                 }
             }
         } else {
-           // TODO: - plug in Auth Service
-           // AuthService.logIn()
+            // Auth service
+        }
+    }
+    
+    private class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?) {
+        user.avatar = avatar
+        if let nickname = nickname {
+            user.username = nickname
+            user.saveInBackgroundWithBlock{ succeeded, error in
+                if succeeded {
+                    AlertService.simpleAlert("User data has been changed!")
+                } else {
+                    if let error = error?.userInfo["error"] as? String {
+                        print(error)
+                    }
+                }
+            }
         }
     }
 }

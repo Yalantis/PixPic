@@ -57,7 +57,6 @@ extension PostDataSource: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath)
-      //  TODO: - setup cell with model
       //  cell.model = modelAtIndex(indexPath)
         return cell
     }
