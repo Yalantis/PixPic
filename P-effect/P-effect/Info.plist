@@ -24,23 +24,12 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb1698949640383957</string>
-                <string>fbauth2</string>
+				<string>fbauth2</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>FacebookAppID</key>
-	<string>1698949640383957</string>
-	<key>FacebookDisplayName</key>
-	<string>P-effect</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -55,6 +44,17 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>1698949640383957</string>
+	<key>FacebookDisplayName</key>
+	<string>P-effect</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -88,8 +88,6 @@
 	<array>
 		<string>Ribbon_V2_2011.otf</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
