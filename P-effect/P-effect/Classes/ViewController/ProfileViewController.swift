@@ -16,28 +16,31 @@ class ProfileViewController: UITableViewController {
         super.viewDidLoad()
         
         self.userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
- }
-
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.sectionFooterHeight = 0
+    }
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+
+        return 10
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell  = tableView.dequeueReusableCellWithIdentifier(Constants.Profile.ZeroPostsCellIdentifier, forIndexPath: indexPath) as! ZeroPostsCell
-        cell.setupText()
-        
-        return cell
+        self.tableView.sectionFooterHeight = 0
+        return UITableViewCell()
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        <#code#>
-    }
-
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 0
+//    }
+    
     // MARK: - IBActions
     @IBAction func editProfile(sender: AnyObject) {
         User.logOut()
