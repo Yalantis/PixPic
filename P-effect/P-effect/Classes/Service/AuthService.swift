@@ -11,12 +11,11 @@ import UIKit
 class AuthService {
     
     func anonymousLogIn() {
-        PFAnonymousUtils.logInWithBlock {
-            (user: PFUser?, error: NSError?) -> Void in
+        PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) in
             if error != nil || user == nil {
                 print("Anonymous login failed.")
             } else {
-                let userLocal = UserModel.init(aUser: user as! User)
+                UserModel.init(aUser: user as! User)
                 print(User.currentUser())
             }
         }
@@ -78,7 +77,11 @@ class AuthService {
                 let profileFileObject = PFFile(data:profilePictureData)
                 myUser.avatar = profileFileObject
             }
-            myUser.signUpInBackground()
+            
+            UserModel.init(aUser: myUser as! User)
+            print(User.currentUser())
+
+//            myUser.signUpInBackground()
         }
     }
     
