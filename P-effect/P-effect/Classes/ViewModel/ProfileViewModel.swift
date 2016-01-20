@@ -10,14 +10,15 @@ import UIKit
 
 class ProfileViewModel: NSObject {
     var user: User
+    var userName: String{
+        get {
+            return  user.username!
+        }
+    }
     
     init(profileUser: User) {
         user = profileUser
         super.init()
-    }
-    
-    func userName() -> String{
-        return  user.username!
     }
     
     func userAvatar(completion: LoadingImageCompletion) {
