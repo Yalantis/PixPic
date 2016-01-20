@@ -19,8 +19,6 @@
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
-		FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46861C47E8AB008060CD /* P_effectTests.swift */; };
-		FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46911C47E8AB008060CD /* P_effectUITests.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDAF46B21C49371D008060CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */; };
 		FDAF46B31C49371D008060CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDAF46B11C49371D008060CD /* Main.storyboard */; };
@@ -72,11 +70,7 @@
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF46861C47E8AB008060CD /* P_effectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_effectTests.swift; sourceTree = "<group>"; };
-		FDAF46881C47E8AB008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF46911C47E8AB008060CD /* P_effectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P_effectUITests.swift; sourceTree = "<group>"; };
-		FDAF46931C47E8AB008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDAF46A01C49369E008060CD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDAF46B01C49371D008060CD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDAF46B11C49371D008060CD /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -161,8 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				FDAF46701C47E8AA008060CD /* P-effect */,
-				FDAF46851C47E8AB008060CD /* P-effectTests */,
-				FDAF46901C47E8AB008060CD /* P-effectUITests */,
 				FDAF466F1C47E8AA008060CD /* Products */,
 				F84ED9858785A5DACC7DD377 /* Pods */,
 				468733C5E0D7CEB26FEA9271 /* Frameworks */,
@@ -190,24 +182,6 @@
 				FDAF46AA1C49369E008060CD /* Resources */,
 			);
 			path = "P-effect";
-			sourceTree = "<group>";
-		};
-		FDAF46851C47E8AB008060CD /* P-effectTests */ = {
-			isa = PBXGroup;
-			children = (
-				FDAF46861C47E8AB008060CD /* P_effectTests.swift */,
-				FDAF46881C47E8AB008060CD /* Info.plist */,
-			);
-			path = "P-effectTests";
-			sourceTree = "<group>";
-		};
-		FDAF46901C47E8AB008060CD /* P-effectUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FDAF46911C47E8AB008060CD /* P_effectUITests.swift */,
-				FDAF46931C47E8AB008060CD /* Info.plist */,
-			);
-			path = "P-effectUITests";
 			sourceTree = "<group>";
 		};
 		FDAF469F1C49369E008060CD /* AppDelegate */ = {
@@ -553,7 +527,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDAF46871C47E8AB008060CD /* P_effectTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +534,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDAF46921C47E8AB008060CD /* P_effectUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
