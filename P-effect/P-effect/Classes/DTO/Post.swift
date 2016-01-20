@@ -6,9 +6,6 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-var pagination: Int = 0
-let displayLimit = 20
-
 class Post: PFObject {
     
     @NSManaged var image: PFFile
@@ -24,10 +21,8 @@ class Post: PFObject {
     
     override class func query() -> PFQuery? {
         let query = PFQuery(className: Post.parseClassName())
-//        query.includeKey("user")
+        query.includeKey("user")
         query.orderByDescending("updatedAt")
-//        query.limit = displayLimit
-//        query.skip = pagination * query.limit
         return query
     }
     

@@ -55,10 +55,6 @@ class LoaderService: NSObject {
                 query?.fromLocalDatastore()
             }
             
-            if reachability.isReachableViaWiFi() {
-                //query?.cachePolicy = PFCachePolicy.NetworkElseCache
-            }
-            
             if let user = user, userId = user.facebookId {
                 query?.whereKey("facebookId", equalTo: userId)
             }
@@ -69,11 +65,10 @@ class LoaderService: NSObject {
                     if let objects = objects {
                         for object in objects {
                             array.append(object as! Post)
-                          //  (object as! Post).saveEventually()
+                            (object as! Post).saveEventually()
                             (object as! Post).pinInBackground()
                         }
                     }
-                    pagination = pagination + 1
                     completion?(objects: array, error: nil)
                 } else {
                     print("Error: \(error!) \(error!.userInfo)")

@@ -21,6 +21,7 @@ class FeedViewController: UIViewController {
         didSet {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
+            postDataSource?.shouldPullToRefreshHandle = true
         }
     }
 
