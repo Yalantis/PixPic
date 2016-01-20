@@ -12,26 +12,14 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var photoGenerator = PhotoGenerator()
     
+    private var image: UIImage?
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nickNameTextField: UITextField!
     
     @IBOutlet weak var saveChangesButton: UIButton!
     @IBAction func avatarTapAction(sender: AnyObject) {
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
-            self?.handlePhotoSelected(selectedImage)
-        }
         photoGenerator.showInView(self)
-    }
-    
-    @IBAction func saveChangesAction(sender: AnyObject) {
-        if let image = avatarImageView.image {
-            let pictureData = UIImageJPEGRepresentation(image, 1)
-            if let file = PFFile(name: "image", data: pictureData!) {
-                let saver = SaverService()
-                saver.saveAndUploadUserData(User.currentUser()!, avatar: file, nickname: nickNameTextField.text)
-                self.navigationController?.popToRootViewControllerAnimated(true)
-            }
-        }
     }
     
     override func viewDidLoad() {
@@ -41,6 +29,9 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func setupImagesAndText() {
+        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+            self?.handlePhotoSelected(selectedImage)
+        }
         saveChangesButton.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         let imgFromPFFileRepresentator = ImageLoaderService()
@@ -50,6 +41,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
                 print(error)
             } else {
                 self?.avatarImageView.image = image
+                self?.image = image
             }
         }
     }
@@ -63,11 +55,26 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
         avatarImageView.image = image
     }
     
+    @IBAction func saveChangesAction(sender: AnyObject) {
+        if let image = image {
+            let pictureData = UIImageJPEGRepresentation(image, 1)
+            if let file = PFFile(name: "image", data: pictureData!) {
+                let saver = SaverService()
+                saver.saveAndUploadUserData(
+                    User.currentUser()!,
+                    avatar: file,
+                    nickname: nickNameTextField.text
+                )
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+        }
+    }
+    
     //MARK: - TextFiel delegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        return true
+        return false
     }
 
 }
