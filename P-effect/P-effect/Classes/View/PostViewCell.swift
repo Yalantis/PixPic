@@ -37,7 +37,7 @@ class PostViewCell: UITableViewCell {
         
         self.profileImageView.clipsToBounds = true
         self.postImageView.clipsToBounds = true
-        
+                
     }
 
     private func setContent() {

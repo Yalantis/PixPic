@@ -44,6 +44,7 @@ class FeedViewController: UIViewController {
             saver.saveAndUploadPost(file, comment: nil)
         }
     }
+
     
     //MARK: - lifesicle
     
@@ -52,6 +53,10 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
+        
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
     private func setupTableView() {
