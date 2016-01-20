@@ -10,16 +10,17 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
+    @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     private var dataSource: PostDataSource? {
         didSet {
-            tableView!.dataSource = dataSource
+                dataSource!.tableView = tableView
         }
     }
-    var userModel: UserModel?
-
+    var model: ProfileViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
@@ -29,9 +30,12 @@ class ProfileViewController: UITableViewController {
     func setupController() {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
-        tableView.dataSource = dataSource
         setupTableViewFooter()
         applyUser()
+        if (model!.userIsCurrentUser()) {
+            profileSettingsButton.enabled = true
+        }
+        dataSource = PostDataSource()
         if let dataSource = dataSource {
             if (dataSource.countOfModels() > 0) {
             tableView.tableFooterView = nil
@@ -50,26 +54,12 @@ class ProfileViewController: UITableViewController {
     
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
-        if let currentUser = User.currentUser() {
-            userModel = UserModel(aUser: currentUser)
-            userModel?.checkIfUsernameExists({ (completion) -> () in
-                if completion {
-                    self.userName.text = self.userModel?.user.username
-                }
-            })
-            if let avatar = userModel?.user.avatar {
-                avatar.getDataInBackgroundWithBlock {
-                    (imageData: NSData?, error: NSError?) -> Void in
-                    if error == nil {
-                        if let imageData = imageData {
-                            self.userAvatar.image = UIImage(data:imageData)
-                        }
-                    } else {
-                        print(error)
-                    }
-                }
-            }
-        }
+        userName.text = model?.userName()
+        model?.userAvatar({ (avatarImage) -> () in
+            self.userAvatar.image = avatarImage
+            }, downloadingError: { (error) -> () in
+                self.view.makeToast(error?.localizedDescription)
+        })
     }
     
     // MARK: - IBActions

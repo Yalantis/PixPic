@@ -100,7 +100,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
-                        <barButtonItem key="rightBarButtonItem" image="Edit User-50" id="Ta1-st-R01">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="Edit User-50" id="Ta1-st-R01">
                             <connections>
                                 <action selector="profileSettings:" destination="5uc-YH-wBN" id="832-IE-YwB"/>
                             </connections>
