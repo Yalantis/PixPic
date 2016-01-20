@@ -16,7 +16,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var tableViewFooter: UIView!
     private var dataSource: PostDataSource? {
         didSet {
-                dataSource!.tableView = tableView
+            dataSource?.tableView = tableView
         }
     }
     var model: ProfileViewModel?

@@ -199,12 +199,12 @@
 		FDAF46A11C49369E008060CD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				49FE57C31C4E63E500C4B30F /* View */,
 				FDAF46A21C49369E008060CD /* DTO */,
 				FDAF46A31C49369E008060CD /* Model */,
 				FDAF46A41C49369E008060CD /* Service */,
-				FDAF46A51C49369E008060CD /* ViewController */,
+				49FE57C31C4E63E500C4B30F /* View */,
 				FDAF46A61C49369E008060CD /* ViewModel */,
+				FDAF46A51C49369E008060CD /* ViewController */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
