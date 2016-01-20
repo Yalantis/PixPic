@@ -62,7 +62,6 @@ class FeedViewController: UIViewController {
     private func setupDataSource() {
         postDataSource = PostDataSource()
         tableView.dataSource = postDataSource
-        
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
