@@ -16,7 +16,7 @@ class PostDataSource: NSObject {
         }
     }
     var tableView: UITableView?
-    let loader = LoaderService()
+    private let loader = LoaderService()
     
     override init() {
         super.init()
@@ -27,8 +27,8 @@ class PostDataSource: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    @objc func fetchData() {
-        loader.loadData(nil) {
+    @objc func fetchData(user: User?) {
+        loader.loadData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
             self?.tableView?.pullToRefreshView.stopAnimating()
             if let objects = objects {
@@ -55,8 +55,8 @@ extension PostDataSource: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath)
-      //  cell.model = modelAtIndex(indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(kPostViewCellIdentifier, forIndexPath: indexPath) as! PostViewCell
+        cell.post = modelAtIndex(indexPath)
         return cell
     }
 }
