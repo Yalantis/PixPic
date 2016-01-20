@@ -18,29 +18,45 @@ class PostViewCell: UITableViewCell {
     
     let imageLoader = ImageLoaderService()
     
-    var post: Post! {
+    var post: Post? {
         didSet {
             setContent()
         }
     }
     
-    private func setContent() {
-        dateLabel.text = String(post.createdAt)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         
-        imageLoader.getImageForContentItem(post.image) { [unowned self] image, error in
-            if error == nil {
-                self.postImageView.image = image
-            } else {
+        profileImageView.userInteractionEnabled = true
+        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
+        profileImageView.addGestureRecognizer(imageGestureRecognizer)
+        
+        profileLabel.userInteractionEnabled = true
+        let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
+        profileLabel.addGestureRecognizer(labelGestureRecognizer)
+        
+        self.profileImageView.clipsToBounds = true
+        self.postImageView.clipsToBounds = true
+        
+    }
+
+    private func setContent() {
+        dateLabel.text = String(post?.createdAt)
+        
+        imageLoader.getImageForContentItem(post?.image) { [unowned self] image, error in
+            if let error = error {
                 print("\(error)")
+            } else {
+                self.postImageView.image = image
             }
         }
         
-        let user = post.user
+        let user = post?.user
         if let user = user {
             profileLabel.text = user.username
             
             imageLoader.getImageForContentItem(user.avatar) { [unowned self] image, error in
-                if error == nil {
+                if error == nil && image != nil {
                     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
                     self.profileImageView.clipsToBounds = true
                     self.profileImageView.layer.borderWidth = 3.0
@@ -51,12 +67,20 @@ class PostViewCell: UITableViewCell {
                 }
             }
         }
-
     }
     
     static var nib: UINib? {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
+    }
+    
+    private func profileTapped(recognizer: UIGestureRecognizer) {
+        let board = UIStoryboard(name: "Main", bundle: nil)
+        let controller = board.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.user = post?.user
+        if let window = UIApplication.sharedApplication().delegate!.window! as UIWindow! {
+            window.rootViewController = controller
+        }
     }
     
 }
