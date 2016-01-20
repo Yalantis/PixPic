@@ -10,8 +10,9 @@ import UIKit
 
 let kReuseIdentifier = "PostViewCellIdentifier"
 
-class FeedViewController: UITableViewController {
+class FeedViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     var dataSource: PostDataSource? {
         didSet {
             tableView!.dataSource = dataSource
@@ -34,7 +35,18 @@ class FeedViewController: UITableViewController {
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
-        Router(rootViewController: self).showLogin()
+        
+        if let currentUser = PFUser.currentUser() {
+            if PFAnonymousUtils.isLinkedWithUser(currentUser) {
+                Router.sharedRouter().showLogin(animated: true)
+            } else {
+                let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+                controller.user = currentUser as? User
+                navigationController?.pushViewController(controller, animated: true)
+            }
+        } else {
+            //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
+        }
     }
     
 }
