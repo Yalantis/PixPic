@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Router.sharedRouter().onStart(true)
         
-      //  Fabric.with([Crashlytics.self])
+        Fabric.with([Crashlytics.self])
         return true
     }
 

@@ -26,9 +26,8 @@ class FeedViewController: UIViewController {
 
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
-        photoGenerator.completionImageReceived = { [unowned self] selectedImage in
-            self.handlePhotoSelected(selectedImage)
-            
+        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+            self?.handlePhotoSelected(selectedImage)
         }
         photoGenerator.showInView(self)
     }
@@ -39,7 +38,7 @@ class FeedViewController: UIViewController {
     
     func setSelectedPhoto(image: UIImage) {
         postImageView.image = image
-        let pictureData = UIImageJPEGRepresentation((postImageView.image)!, 0.5)
+        let pictureData = UIImageJPEGRepresentation(image, 0.5)
         if let file = PFFile(name: "image", data: pictureData!) {
             let saver = SaverService()
             saver.saveAndUploadPost(file, comment: nil)

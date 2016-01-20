@@ -43,11 +43,11 @@ class PostViewCell: UITableViewCell {
     private func setContent() {
         dateLabel.text = String(post?.createdAt)
         
-        imageLoader.getImageForContentItem(post?.image) { [unowned self] image, error in
+        imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
             if let error = error {
                 print("\(error)")
             } else {
-                self.postImageView.image = image
+                self?.postImageView.image = image
             }
         }
         
@@ -57,15 +57,15 @@ class PostViewCell: UITableViewCell {
         if let user = user {
             profileLabel.text = user.username
             
-            imageLoader.getImageForContentItem(user.avatar) { [unowned self] image, error in
+            imageLoader.getImageForContentItem(user.avatar) { [weak self] image, error in
                 if error == nil && image != nil {
-                    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-                    self.profileImageView.clipsToBounds = true
-                    self.profileImageView.layer.borderWidth = 3.0
-                    self.profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
-                    self.profileImageView.image = image
+                    self?.profileImageView.layer.cornerRadius = (self?.profileImageView.frame.size.width)! / 2
+                    self?.profileImageView.clipsToBounds = true
+                    self?.profileImageView.layer.borderWidth = 3.0
+                    self?.profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
+                    self?.profileImageView.image = image
                 } else if  error == nil && image == nil {
-                    self.profileImageView.image = UIImage(named: "user_male_50")
+                    self?.profileImageView.image = UIImage(named: "user_male_50")
 
                 } else  {
                     print("\(error)")
