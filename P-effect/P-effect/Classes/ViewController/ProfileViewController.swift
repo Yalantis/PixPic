@@ -10,17 +10,17 @@ import UIKit
 
 class ProfileViewController: UITableViewController {
     
-    var user: User?
-    
+    @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
-    var dataSource: PostDataSource? {
+    private var dataSource: PostDataSource? {
         didSet {
-            dataSource?.tableView = tableView
+            dataSource!.tableView = tableView
         }
     }
-
+    var model: ProfileViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
@@ -28,9 +28,14 @@ class ProfileViewController: UITableViewController {
 
     // MARK: - Inner func 
     func setupController() {
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
-        tableView.dataSource = dataSource
         setupTableViewFooter()
+        applyUser()
+        if (model!.userIsCurrentUser()) {
+            profileSettingsButton.enabled = true
+        }
+        dataSource = PostDataSource()
         if let dataSource = dataSource {
             if (dataSource.countOfModels() > 0) {
             tableView.tableFooterView = nil
@@ -45,6 +50,18 @@ class ProfileViewController: UITableViewController {
         frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
+    }
+    
+    func applyUser() {
+        userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
+        userName.text = model?.userName
+        model?.userAvatar({[weak self] (image, error) -> () in
+            if error == nil {
+                self?.userAvatar.image = image
+            } else {
+                self?.view.makeToast(error?.localizedDescription)
+            }
+        })
     }
     
     // MARK: - IBActions

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089CA41C4FA09C00027191 /* ProfileViewModel.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
 		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		49089CA41C4FA09C00027191 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
 		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */,
+				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
+				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,
