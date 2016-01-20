@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Feed View Controller-->
-        <scene sceneID="DBf-Kw-7IP">
+        <!--Feed-->
+        <scene sceneID="See-yb-Ljy">
             <objects>
-                <tableViewController id="zxU-FX-7D0" userLabel="Feed View Controller" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fZe-Uy-SUR">
+                <viewController id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eiC-e1-lIt"/>
+                        <viewControllerLayoutGuide type="bottom" id="vf9-Xn-rsh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SZq-Vy-ZEO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iB2-ds-2xE">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="Xa5-e1-dLo"/>
+                                </items>
+                            </toolbar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-06-XZv">
+                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="zxU-FX-7D0" id="3ij-5H-Nb1"/>
-                            <outlet property="delegate" destination="zxU-FX-7D0" id="nd2-zb-QVl"/>
-                        </connections>
-                    </tableView>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iB2-ds-2xE" secondAttribute="trailing" id="6vy-hL-kay"/>
+                            <constraint firstItem="iB2-ds-2xE" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="RTa-dF-NpR"/>
+                            <constraint firstItem="Ddw-06-XZv" firstAttribute="top" secondItem="eiC-e1-lIt" secondAttribute="bottom" id="Tik-cd-ebs"/>
+                            <constraint firstItem="Ddw-06-XZv" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="bCq-Sd-V9v"/>
+                            <constraint firstItem="iB2-ds-2xE" firstAttribute="top" secondItem="Ddw-06-XZv" secondAttribute="bottom" id="fY3-sd-EE4"/>
+                            <constraint firstItem="vf9-Xn-rsh" firstAttribute="top" secondItem="iB2-ds-2xE" secondAttribute="bottom" id="lUY-z1-nQr"/>
+                            <constraint firstAttribute="trailing" secondItem="Ddw-06-XZv" secondAttribute="trailing" id="srK-vv-cys"/>
+                        </constraints>
+                    </view>
                     <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
-                        <barButtonItem key="rightBarButtonItem" image="User Male-50" id="eed-Oc-yJB"/>
+                        <barButtonItem key="rightBarButtonItem" image="user_male_50" id="eed-Oc-yJB">
+                            <connections>
+                                <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0y7-qG-YAw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="tableView" destination="Ddw-06-XZv" id="nXm-NU-4Xn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQb-ld-Djv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="328" y="378"/>
+            <point key="canvasLocation" x="334" y="378"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="kEf-LR-r38">
             <objects>
-                <tableViewController id="5uc-YH-wBN" customClass="ProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProfileViewController" id="5uc-YH-wBN" customClass="ProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8d-Ce-9r9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -119,22 +147,91 @@
         <!--Navigation Controller-->
         <scene sceneID="zhB-qf-K11">
             <objects>
-                <navigationController id="ch3-5m-z1m" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FeedViewController" id="ch3-5m-z1m" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U6X-Ti-d9L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="zxU-FX-7D0" kind="relationship" relationship="rootViewController" id="VSt-d5-Qa3"/>
+                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="e3y-A0-bHV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-407" y="378"/>
         </scene>
+        <!--Autorization View Controller-->
+        <scene sceneID="4Z2-Wq-Zvx">
+            <objects>
+                <viewController storyboardIdentifier="AuthorizationViewController" id="Qhm-Jo-13p" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ecw-Sd-Yoh"/>
+                        <viewControllerLayoutGuide type="bottom" id="wcA-Lr-HqU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xtg-gM-uwC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyF-1U-WEQ">
+                                <rect key="frame" x="23" y="201" width="554" height="199"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1g-mI-Yws">
+                                        <rect key="frame" x="156" y="20" width="242" height="46"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                        <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                        <connections>
+                                            <action selector="logInWithFBButtonTapped" destination="Qhm-Jo-13p" eventType="touchUpInside" id="OW7-FK-8mD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qL-uh-azE">
+                                        <rect key="frame" x="156" y="101" width="242" height="46"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                        <state key="normal" title="Proceed without login " backgroundImage="facebook_login_btn">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                        <connections>
+                                            <action selector="withoutLoginButtonTapped:" destination="Qhm-Jo-13p" eventType="touchUpInside" id="ydL-4f-LKx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="6qL-uh-azE" firstAttribute="top" secondItem="t1g-mI-Yws" secondAttribute="bottom" constant="35" id="ILy-Ug-1Sh"/>
+                                    <constraint firstItem="6qL-uh-azE" firstAttribute="leading" secondItem="t1g-mI-Yws" secondAttribute="leading" id="P31-2B-Xs9"/>
+                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="top" secondItem="OyF-1U-WEQ" secondAttribute="top" constant="20" id="gja-aD-UMz"/>
+                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="centerX" secondItem="OyF-1U-WEQ" secondAttribute="centerX" id="qV4-vm-SdJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerX" secondItem="Xtg-gM-uwC" secondAttribute="centerX" id="8wN-FQ-rR1"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="leading" secondItem="Xtg-gM-uwC" secondAttribute="leadingMargin" constant="3" id="d7f-kM-5dL"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="top" secondItem="ecw-Sd-Yoh" secondAttribute="bottom" constant="181" id="hLy-uB-iWu"/>
+                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerY" secondItem="Xtg-gM-uwC" secondAttribute="centerY" id="rsm-T6-WYd"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rds-m3-ANr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="676" y="-350"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Edit User-50" width="25" height="25"/>
-        <image name="User Male-50" width="25" height="25"/>
+        <image name="facebook_icon" width="10" height="20"/>
+        <image name="facebook_login_btn" width="242" height="46"/>
+        <image name="facebook_login_btn_pressed" width="242" height="46"/>
+        <image name="user_male_50" width="25" height="25"/>
     </resources>
 </document>
