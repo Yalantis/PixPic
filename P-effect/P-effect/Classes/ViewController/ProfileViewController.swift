@@ -17,9 +17,10 @@ class ProfileViewController: UITableViewController {
     private var dataSource: PostDataSource? {
         didSet {
             dataSource?.tableView = tableView
+            dataSource?.fetchData(nil)
         }
     }
-    var model: ProfileViewModel?
+    var model: ProfileViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,26 +29,22 @@ class ProfileViewController: UITableViewController {
 
     // MARK: - Inner func 
     func setupController() {
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        dataSource = PostDataSource()
+        tableView.dataSource = dataSource
+        self.tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
         if (model!.userIsCurrentUser()) {
             profileSettingsButton.enabled = true
         }
-        dataSource = PostDataSource()
-        if let dataSource = dataSource {
-            if (dataSource.countOfModels() > 0) {
-            tableView.tableFooterView = nil
-            tableView.scrollEnabled = true
-            }
-        }
     }
     
     func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
-        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+// uncomment this wen transitions will work as planed
+//        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
     }
@@ -63,10 +60,20 @@ class ProfileViewController: UITableViewController {
             }
         })
     }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let dataSource = dataSource {
+            if (dataSource.countOfModels() > 0) {
+                tableView.tableFooterView = nil
+                tableView.scrollEnabled = true
+            }
+        }
+    }
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        
+        self.view.reloadInputViews()
+        tableView.tableFooterView = nil
+        tableView.scrollEnabled = true
     }
 
 }

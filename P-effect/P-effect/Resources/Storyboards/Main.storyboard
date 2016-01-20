@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -63,7 +63,7 @@
         <scene sceneID="kEf-LR-r38">
             <objects>
                 <tableViewController storyboardIdentifier="ProfileViewController" id="5uc-YH-wBN" customClass="ProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8d-Ce-9r9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="460" sectionHeaderHeight="28" sectionFooterHeight="28" id="S8d-Ce-9r9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,15 +71,14 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="224"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrS-9l-54S">
+                                <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrS-9l-54S">
                                     <rect key="frame" x="238" y="36" width="125" height="125"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g37-PW-4gA">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g37-PW-4gA">
                                             <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
-                                            <color key="backgroundColor" red="0.070304177701473236" green="0.18891370296478271" blue="0.96075278520584106" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="700" constant="125" id="8z4-yx-gJk"/>
-                                                <constraint firstAttribute="height" priority="700" constant="125" id="JFr-1e-akw"/>
+                                                <constraint firstAttribute="width" priority="900" constant="125" id="8z4-yx-gJk"/>
+                                                <constraint firstAttribute="height" priority="900" constant="125" id="JFr-1e-akw"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -111,7 +110,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="N6n-X4-hzl">
-                            <rect key="frame" x="0.0" y="296" width="600" height="350"/>
+                            <rect key="frame" x="0.0" y="224" width="600" height="350"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pB-Ac-M6a">
@@ -127,29 +126,20 @@
                                 <constraint firstItem="5pB-Ac-M6a" firstAttribute="centerX" secondItem="N6n-X4-hzl" secondAttribute="centerX" id="uEu-a7-Lh0"/>
                             </constraints>
                         </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rmp-i8-kVR">
-                                <rect key="frame" x="0.0" y="252" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rmp-i8-kVR" id="Q48-vM-hEl">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="5uc-YH-wBN" id="kAs-xB-xNk"/>
                             <outlet property="delegate" destination="5uc-YH-wBN" id="TqP-P9-VE5"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
-                        <barButtonItem key="rightBarButtonItem" image="Edit User-50" id="Ta1-st-R01">
+                        <barButtonItem key="rightBarButtonItem" image="settings_50" id="Ta1-st-R01">
                             <connections>
-                                <action selector="profileSettings:" destination="5uc-YH-wBN" id="832-IE-YwB"/>
+                                <action selector="profileSettings:" destination="5uc-YH-wBN" id="Vj2-xv-iLM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileSettingsButton" destination="Ta1-st-R01" id="3mQ-jr-ld1"/>
                         <outlet property="tableViewFooter" destination="N6n-X4-hzl" id="zZe-FF-aGH"/>
                         <outlet property="userAvatar" destination="g37-PW-4gA" id="hH8-Em-yBh"/>
                         <outlet property="userName" destination="GY0-1y-oJV" id="CzV-g9-aiq"/>
@@ -267,12 +257,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="e3y-A0-bHV"/>
+                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="RkP-p3-2U6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-407" y="378"/>
+            <point key="canvasLocation" x="-375" y="378"/>
         </scene>
         <!--Autorization View Controller-->
         <scene sceneID="4Z2-Wq-Zvx">
@@ -342,10 +332,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Edit User-50" width="25" height="25"/>
         <image name="facebook_icon" width="10" height="20"/>
         <image name="facebook_login_btn" width="242" height="46"/>
         <image name="facebook_login_btn_pressed" width="242" height="46"/>
+        <image name="settings_50" width="25" height="25"/>
         <image name="user_male_50" width="25" height="25"/>
     </resources>
 </document>
