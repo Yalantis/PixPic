@@ -70,7 +70,7 @@ class FeedViewController: UIViewController {
                 Router.sharedRouter().showLogin(animated: true)
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                controller.user = currentUser as? User
+                controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
                 navigationController?.pushViewController(controller, animated: true)
             }
         } else {
