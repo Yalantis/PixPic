@@ -45,6 +45,7 @@ class FeedViewController: UIViewController {
             saver.saveAndUploadPost(file, comment: nil)
         }
     }
+
     
     //MARK: - lifesicle
     
