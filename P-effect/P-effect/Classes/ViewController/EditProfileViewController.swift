@@ -29,6 +29,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
             if let file = PFFile(name: "image", data: pictureData!) {
                 let saver = SaverService()
                 saver.saveAndUploadUserData(User.currentUser()!, avatar: file, nickname: nickNameTextField.text)
+                self.navigationController?.popToRootViewControllerAnimated(true)
             }
         }
     }
