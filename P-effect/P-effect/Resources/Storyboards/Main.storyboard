@@ -40,7 +40,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
-                        <barButtonItem key="rightBarButtonItem" image="user_male_50" id="eed-Oc-yJB"/>
+                        <barButtonItem key="rightBarButtonItem" image="user_male_50" id="eed-Oc-yJB">
+                            <connections>
+                                <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Ddw-06-XZv" id="nXm-NU-4Xn"/>

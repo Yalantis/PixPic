@@ -51,6 +51,8 @@ class PostViewCell: UITableViewCell {
             }
         }
         
+        profileImageView.image = UIImage(named: "user_male_50")
+
         let user = post?.user
         if let user = user {
             profileLabel.text = user.username
@@ -62,7 +64,10 @@ class PostViewCell: UITableViewCell {
                     self.profileImageView.layer.borderWidth = 3.0
                     self.profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
                     self.profileImageView.image = image
-                } else {
+                } else if  error == nil && image == nil {
+                    self.profileImageView.image = UIImage(named: "user_male_50")
+
+                } else  {
                     print("\(error)")
                 }
             }
