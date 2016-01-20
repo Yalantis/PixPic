@@ -8,17 +8,15 @@
 
 import UIKit
 
-typealias LoadingImageComplition = (image: UIImage, error: NSError?) -> ()
+typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> ()
 
-class ImageLoaderService: NSObject {
+class ImageLoaderService {
     
-    func getImageForContentItem(content: PFFile?, complition: LoadingImageComplition) {
+    func getImageForContentItem(content: PFFile?, completion: LoadingImageCompletion) {
         if let content = content {
             content.getDataInBackgroundWithBlock { data, error in
-                if let data = data {
-                    if let image = UIImage(data: data) {
-                        complition(image: image, error: error)
-                    }
+                if let data = data, let image = UIImage(data: data){
+                    completion(image: image, error: error)
                 }
             }
         }
