@@ -16,11 +16,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nickNameTextField: UITextField!
-    
     @IBOutlet weak var saveChangesButton: UIButton!
-    @IBAction func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInView(self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +49,10 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     func setSelectedPhoto(image: UIImage) {
         avatarImageView.image = image
+    }
+    
+    @IBAction func avatarTapAction(sender: AnyObject) {
+        photoGenerator.showInView(self)
     }
     
     @IBAction func saveChangesAction(sender: AnyObject) {
