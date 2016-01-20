@@ -34,8 +34,8 @@ class Router {
             showHome(animated: true)
             return
         }
-        // hidden login anonumous user
-        showLogin(animated: false)
+        AuthService().anonymousLogIn()
+        showHome(animated: true)
     }
     
     func showLogin(animated animated:Bool) {
