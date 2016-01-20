@@ -48,7 +48,7 @@ class SaverService {
     //MARK: - private
     
     private class func uploadPost(file: PFFile, comment: String?) {
-        if let user = User.currentUser() {
+        if let user = PFUser.currentUser() as? User {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {

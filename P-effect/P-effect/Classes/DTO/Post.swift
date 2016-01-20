@@ -24,10 +24,10 @@ class Post: PFObject {
     
     override class func query() -> PFQuery? {
         let query = PFQuery(className: Post.parseClassName())
-        query.includeKey("user")
+//        query.includeKey("user")
         query.orderByDescending("updatedAt")
-        query.limit = displayLimit
-        query.skip = pagination * query.limit
+//        query.limit = displayLimit
+//        query.skip = pagination * query.limit
         return query
     }
     
