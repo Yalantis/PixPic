@@ -41,7 +41,7 @@ class PostViewCell: UITableViewCell {
     }
 
     private func setContent() {
-        dateLabel.text = String(post?.createdAt)
+        dateLabel.text = MHPrettyDate.prettyDateFromDate(post?.createdAt, withFormat: MHPrettyDateLongRelativeTime)
         
         imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
             if let error = error {
@@ -79,7 +79,7 @@ class PostViewCell: UITableViewCell {
         return nib
     }
     
-    private func profileTapped(recognizer: UIGestureRecognizer) {
+    dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
         let board = UIStoryboard(name: "Main", bundle: nil)
         let controller = board.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         controller.user = post?.user
