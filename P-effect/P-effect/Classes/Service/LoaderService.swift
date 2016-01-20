@@ -39,7 +39,7 @@ class LoaderService: NSObject {
     
     func loadData(user: User?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
-        if User.currentUser() != nil {
+        if PFUser.currentUser() != nil {
             
             let query = Post.query()
             
@@ -56,7 +56,7 @@ class LoaderService: NSObject {
             }
             
             if reachability.isReachableViaWiFi() {
-                query?.cachePolicy = PFCachePolicy.NetworkElseCache
+                //query?.cachePolicy = PFCachePolicy.NetworkElseCache
             }
             
             if let user = user, userId = user.facebookId {
@@ -69,7 +69,7 @@ class LoaderService: NSObject {
                     if let objects = objects {
                         for object in objects {
                             array.append(object as! Post)
-                            (object as! Post).saveEventually()
+                          //  (object as! Post).saveEventually()
                             (object as! Post).pinInBackground()
                         }
                     }

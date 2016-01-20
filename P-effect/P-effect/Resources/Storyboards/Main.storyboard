@@ -20,7 +20,11 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iB2-ds-2xE">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Item" id="Xa5-e1-dLo"/>
+                                    <barButtonItem systemItem="camera" id="Xa5-e1-dLo">
+                                        <connections>
+                                            <action selector="choosePhoto:" destination="fm0-UY-D5k" id="uyT-z8-OHy"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-06-XZv">
