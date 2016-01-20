@@ -55,10 +55,12 @@ class ProfileViewController: UITableViewController {
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName()
-        model?.userAvatar({ (avatarImage) -> () in
-            self.userAvatar.image = avatarImage
-            }, downloadingError: { (error) -> () in
-                self.view.makeToast(error?.localizedDescription)
+        model?.userAvatar({[weak self] (image, error) -> () in
+            if error == nil {
+                self?.userAvatar.image = image
+            } else {
+                self?.view.makeToast(error?.localizedDescription)
+            }
         })
     }
     

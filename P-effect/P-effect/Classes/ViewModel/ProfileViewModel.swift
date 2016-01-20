@@ -20,16 +20,9 @@ class ProfileViewModel: NSObject {
         return  user.username!
     }
     
-    func userAvatar(image:(UIImage) -> (), downloadingError:(NSError?) -> ()) {
-        if let avatar = user.avatar {
-            avatar.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if error == nil, let imageData = imageData {
-                    image(UIImage(data:imageData)!)
-                } else {
-                    downloadingError(error)
-                }
-            }
+    func userAvatar(completion: LoadingImageCompletion) {
+        ImageLoaderService().getImageForContentItem(user.avatar) { (image, error) -> () in
+            completion(image: image, error: error)
         }
     }
     
