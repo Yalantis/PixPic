@@ -36,7 +36,7 @@ class AuthorizationViewController: UIViewController {
                             user.checkIfUsernameExists({ (exists) -> () in
                                 if exists {
                                     let controller = self?.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                                    controller.user = user.user
+                                    controller.model = ProfileViewModel.init(profileUser: user.user)
                                     self?.navigationController?.pushViewController(controller, animated: true)
                                     print("Username is already taken!")
                                 } else {
@@ -75,7 +75,6 @@ class AuthorizationViewController: UIViewController {
             }
         )
     }
-    
     
     @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
         AuthService().anonymousLogIn()

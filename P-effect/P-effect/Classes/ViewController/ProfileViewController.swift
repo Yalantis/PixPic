@@ -16,7 +16,7 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var tableViewFooter: UIView!
     private var dataSource: PostDataSource? {
         didSet {
-            dataSource?.tableView = tableView
+            dataSource!.tableView = tableView
         }
     }
     var model: ProfileViewModel?
@@ -28,7 +28,7 @@ class ProfileViewController: UITableViewController {
 
     // MARK: - Inner func 
     func setupController() {
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kReuseIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
