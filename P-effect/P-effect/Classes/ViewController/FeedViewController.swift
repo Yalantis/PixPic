@@ -21,6 +21,7 @@ class FeedViewController: UIViewController {
         didSet {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
+            postDataSource?.shouldPullToRefreshHandle = true
         }
     }
 
@@ -61,6 +62,7 @@ class FeedViewController: UIViewController {
     private func setupDataSource() {
         postDataSource = PostDataSource()
         tableView.dataSource = postDataSource
+        
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {

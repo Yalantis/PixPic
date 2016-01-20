@@ -15,6 +15,7 @@ class PostDataSource: NSObject {
             tableView?.reloadData()
         }
     }
+    var shouldPullToRefreshHandle: Bool?
     var tableView: UITableView?
     private let loader = LoaderService()
     
@@ -30,7 +31,9 @@ class PostDataSource: NSObject {
     @objc func fetchData(user: User?) {
         loader.loadData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
-            self?.tableView?.pullToRefreshView.stopAnimating()
+            if self?.shouldPullToRefreshHandle == true {
+                self?.tableView?.pullToRefreshView.stopAnimating()
+            }
             if let objects = objects {
                 self?.arrayOfPosts = objects
             }
