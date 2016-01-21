@@ -13,6 +13,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     private lazy var photoGenerator = PhotoGenerator()
     
     private var image: UIImage?
+    private var userName: String?
     
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nickNameTextField: UITextField!
@@ -21,25 +22,50 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupImagesAndText()
-        navigationController?.navigationBarHidden = false
+        makeNavigation()
     }
     
     private func setupImagesAndText() {
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2
+        avatarImageView.layer.masksToBounds = true
         saveChangesButton.enabled = false
         nickNameTextField.text = User.currentUser()?.username
+        userName = User.currentUser()?.username
         let imgFromPFFileRepresentator = ImageLoaderService()
-        imgFromPFFileRepresentator.getImageForContentItem(User.currentUser()?.avatar) {
-            [weak self](image, error) -> () in
+        let user = User.currentUser()!
+        let loader = LoaderService()
+        loader.loadUserData(user.facebookId) {[weak self](object, error) -> () in
             if let error = error {
                 print(error)
             } else {
-                self?.avatarImageView.image = image
-                self?.image = image
+                imgFromPFFileRepresentator.getImageForContentItem(User.currentUser()?.avatar) {
+                    [weak self](image, error) -> () in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self?.avatarImageView.image = image
+                        self?.image = image
+                    }
+                }
             }
         }
+
+    }
+    
+    private func makeNavigation() {
+        let navigationItem = UINavigationItem()
+        navigationItem.title = "Edit profile"
+        let rightButton = UIBarButtonItem(title: "LogOut", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = rightButton
+        navigationController?.navigationBar.items = [navigationItem]
+    }
+    
+    func btn_logout(sender: UIBarButtonItem) {
+        User.logOut()
+        self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
     private func handlePhotoSelected(image: UIImage) {
@@ -58,7 +84,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveChangesAction(sender: AnyObject) {
         if let image = image {
             let pictureData = UIImageJPEGRepresentation(image, 1)
-            if let file = PFFile(name: "image", data: pictureData!) {
+            if let file = PFFile(name: "avatar", data: pictureData!) {
+                User.currentUser()?.setObject(file, forKey: "avatar")
                 let saver = SaverService()
                 saver.saveAndUploadUserData(
                     User.currentUser()!,
@@ -76,5 +103,11 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return false
     }
-
+    
+    @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
+        let afterStr = sender.text
+        if userName != afterStr {
+            saveChangesButton.enabled = true
+        }
+    }
 }
