@@ -34,7 +34,10 @@ class ProfileViewController: UITableViewController {
         dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
-        self.tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        navigationItem.backBarButtonItem?.title = "Back"
+        self.navigationController?.navigationItem.backBarButtonItem?.title = "Back1"
+        navigationController.
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
@@ -54,6 +57,7 @@ class ProfileViewController: UITableViewController {
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
+        navigationItem.title = model?.userName
         model?.userAvatar({[weak self] (image, error) -> () in
             if error == nil {
                 self?.userAvatar.image = image
