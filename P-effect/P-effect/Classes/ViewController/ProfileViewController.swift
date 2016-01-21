@@ -14,13 +14,16 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
+    
+    private var activityShown: Bool?
     private var dataSource: PostDataSource? {
         didSet {
-            dataSource!.tableView = tableView
+            dataSource?.tableView = tableView
+            dataSource?.fetchData(model.user)
         }
     }
-    var model: ProfileViewModel?
-    
+    var model: ProfileViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
@@ -28,19 +31,15 @@ class ProfileViewController: UITableViewController {
 
     // MARK: - Inner func 
     func setupController() {
+        dataSource = PostDataSource()
+        showToast()
+        tableView.dataSource = dataSource
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
         if (model!.userIsCurrentUser()) {
             profileSettingsButton.enabled = true
-        }
-        dataSource = PostDataSource()
-        if let dataSource = dataSource {
-            if (dataSource.countOfModels() > 0) {
-            tableView.tableFooterView = nil
-            tableView.scrollEnabled = true
-            }
         }
     }
     
@@ -55,6 +54,7 @@ class ProfileViewController: UITableViewController {
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
+        navigationItem.title = model?.userName
         model?.userAvatar({[weak self] (image, error) -> () in
             if error == nil {
                 self?.userAvatar.image = image
@@ -64,9 +64,28 @@ class ProfileViewController: UITableViewController {
         })
     }
     
+    func showToast() {
+        self.view.makeToastActivity(CSToastPositionCenter)
+        activityShown = true
+
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.view.hideToastActivity()
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (activityShown == true) {
+                view.hideToastActivity()
+                tableView.tableFooterView = nil
+                tableView.scrollEnabled = true
+        }
+    }
+    
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        self.navigationController?.showViewController(controller, sender: self)
     }
 
 }

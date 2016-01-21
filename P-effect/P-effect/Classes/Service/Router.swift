@@ -12,7 +12,7 @@ private let appRouterAnimationDelay = 0.3
 private let appRouterAnimationDuration = 0.45
 
 private enum ViewControllerIDs: String {
-    case Feed = "FeedViewController"
+    case Feed = "MainNavigationController"
     case Login = "AuthorizationViewController"
     case Profile = "ProfileViewController"
 }

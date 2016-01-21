@@ -33,7 +33,7 @@ class SaverService {
             avatar.saveInBackgroundWithBlock(
                 { (succeeded, error) -> () in
                     if succeeded {
-                        print("Saved!")
+                        print("Avatar saved!")
                         SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
                     } else if let error = error {
                         print(error)
