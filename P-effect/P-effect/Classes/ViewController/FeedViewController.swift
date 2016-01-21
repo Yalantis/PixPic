@@ -9,6 +9,7 @@
 import UIKit
 
 let kPostViewCellIdentifier = "PostViewCellIdentifier"
+let kTopCellBarHeight: CGFloat = 48.0
 
 class FeedViewController: UIViewController {
     
@@ -22,17 +23,11 @@ class FeedViewController: UIViewController {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
             postDataSource?.shouldPullToRefreshHandle = true
-            postDataSource?.delegate = self
         }
     }
 
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-            navigationController?.pushViewController(controller, animated: true)
-            return
-        }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
@@ -51,17 +46,18 @@ class FeedViewController: UIViewController {
             saver.saveAndUploadPost(file, comment: nil)
         }
     }
-
+    
     //MARK: - lifesicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupDataSource()
-        setupLoadersCallback()        
+        setupLoadersCallback()
     }
     
     private func setupTableView() {
+        tableView.delegate = self
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
     }
     
@@ -72,17 +68,17 @@ class FeedViewController: UIViewController {
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         
-        if let currentUser = User.currentUser() {
+        if let currentUser = PFUser.currentUser() {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
-                let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-                navigationController?.pushViewController(controller, animated: true)
+                Router.sharedRouter().showLogin(animated: true)
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                controller.model = ProfileViewModel.init(profileUser: currentUser as! User)
-                self.navigationController?.showViewController(controller, sender: self)
+                controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
+                navigationController?.pushViewController(controller, animated: true)
             }
+        } else {
+            //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
         }
-        
     }
     
     //MARK: - UserInteractive
@@ -108,12 +104,14 @@ class FeedViewController: UIViewController {
     
 }
 
-extension FeedViewController: PostDataSourceDelegate {
+extension FeedViewController: UITableViewDelegate {
     
-    func showUserProfile(user: User) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        controller.model = ProfileViewModel.init(profileUser: user)
-        self.navigationController?.showViewController(controller, sender: self)
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
     }
     
 }
