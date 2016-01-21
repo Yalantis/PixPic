@@ -37,7 +37,7 @@ class AuthorizationViewController: UIViewController {
                                                 print(error)
                                             } else {
                                                 print("LINKED!!! NEED TO UPDATE DATA")
-                                                AuthService.updatePFUserDataFromFB()
+                                                AuthService.updatePFUserDataFromFB(nil)
                                             }
                                         }
                                     )

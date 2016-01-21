@@ -66,27 +66,21 @@ class AuthService {
                 } else {
                     guard let _ = FBSDKAccessToken.currentAccessToken()
                         else {
+                            let userError = NSError(
+                                domain: NSBundle.mainBundle().bundleIdentifier!,
+                                code: 701,
+                                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
+                            )
                             print("Facebook login error.")
-                            completion(nil, nil)
+                            completion(nil, userError)
                             return
                     }
-                    let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
-                    fbRequest.startWithCompletionHandler(
-                        {
-                            (FBSDKGraphRequestConnection, result, error) -> Void in
-                            let user = User()
-                            if (error == nil && result != nil) {
-                                let facebookData = result as! NSDictionary
-                                if let avatarURL = NSURL(string: facebookData.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as! String) {
-                                    let avatarFile = PFFile(name: "avatar", data: NSData(contentsOfURL: avatarURL)!)
-                                    user.setValue(avatarFile, forKey: "avatar")
-                                }
-                                if let email = facebookData.objectForKey("email") as? String {
-                                    user.email = email
-                                }
-                                user.setValue(facebookData.objectForKey("id"), forKey: "facebookId")
-                                let nickname: String = String(facebookData.objectForKey("first_name")!) + " " + String(facebookData.objectForKey("last_name")!)
-                                user.setValue(nickname, forKey: "username")
+                    
+                    AuthService.updatePFUserDataFromFB(
+                        { (user, error) -> () in
+                            if let error = error {
+                                completion(nil, error)
+                            } else {
                                 completion(user, nil)
                             }
                         }
@@ -96,34 +90,44 @@ class AuthService {
         )
     }
     
-    class func updatePFUserDataFromFB() -> () {
+    class func updatePFUserDataFromFB(completion: ((User?, NSError?) -> ())?) {
         let user = User.currentUser()!
-        let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+        let fbRequest = FBSDKGraphRequest(
+            graphPath: "me",
+            parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+        
         fbRequest.startWithCompletionHandler(
-            {
-                (FBSDKGraphRequestConnection, result, error) -> Void in
+            { (FBSDKGraphRequestConnection, result, error) -> () in
                 
                 if (error == nil && result != nil) {
                     let facebookData = result as! NSDictionary
                     if let avatarURL = NSURL(string: facebookData.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as! String) {
-                        let avatarFile = PFFile(name: "avatar", data: NSData(contentsOfURL: avatarURL)!)
-                        user.setValue(avatarFile, forKey: "avatar")
+                        let avatarFile = PFFile(name: Constants.UserKey.Avatar,
+                            data: NSData(contentsOfURL: avatarURL)!)
+                        user.setValue(avatarFile, forKey: Constants.UserKey.Avatar)
                     }
-                    if let email = facebookData.objectForKey("email") as? String {
+                    if let email = facebookData["email"] as? String {
                         user.email = email
                     }
                     user.setValue(facebookData.objectForKey("id"), forKey: "facebookId")
-                    let nickname: String = String(facebookData.objectForKey("first_name")!) + " " + String(facebookData.objectForKey("last_name")!)
-                    user.setValue(nickname, forKey: "username")
+                    if let firstname = facebookData.objectForKey("first_name"),
+                        lastname = facebookData.objectForKey("last_name") {
+                            let nickname: String = String(firstname) + " " + String(lastname)
+                            user.setValue(nickname, forKey: "username")
+                    }
                     user.saveInBackgroundWithBlock(
                         { (succes, error) -> Void in
                             if let error = error {
                                 print(error)
+                                completion?(nil, error)
                             } else {
+                                completion?(user, nil)
                                 print("NEW DATAA FOR OLD USER")
                             }
                         }
                     )
+                } else {
+                    completion?(nil, error)
                 }
             }
         )

@@ -31,6 +31,11 @@ struct Constants {
 
     }
     
+    struct UserKey {
+        static let Avatar = "avatar"
+    }
+    
+    
     struct Profile {
         static let HeaderHeight = 224 as CGFloat
         static let AvatarImageCornerRadius = 62.5 as CGFloat

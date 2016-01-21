@@ -137,7 +137,6 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings_50" id="Ta1-st-R01">
                             <connections>
                                 <action selector="profileSettings:" destination="5uc-YH-wBN" id="Vj2-xv-iLM"/>
-                                <segue destination="fkd-F7-BN1" kind="show" id="0fX-S9-jqd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
