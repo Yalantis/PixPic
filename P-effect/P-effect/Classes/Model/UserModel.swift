@@ -9,7 +9,7 @@
 import UIKit
 
 class UserModel: NSObject {
-  
+    
     var user: User
     
     init(aUser: User) {
@@ -43,13 +43,22 @@ class UserModel: NSObject {
     
     func linkOrUnlinkFacebook(completion: (Bool?, NSError?) -> ()) {
         if PFFacebookUtils.isLinkedWithUser(user) {
-            PFFacebookUtils.unlinkUserInBackground(user, block: { (success, error) -> Void in
-                success ? completion(true, error) : completion(false, error)
-            })
+            PFFacebookUtils.unlinkUserInBackground(
+                user,
+                block: {
+                    (success, error) -> () in
+                    success ? completion(true, error) : completion(false, error)
+                }
+            )
         } else {
-            PFFacebookUtils.linkUserInBackground(user, withReadPermissions: ["public_profile", "email"], block: { (success, error) -> Void in
-                success ? completion(true, error) : completion(false, error)
-            })
+            PFFacebookUtils.linkUserInBackground(
+                user,
+                withReadPermissions: ["public_profile", "email"],
+                block: {
+                    (success, error) -> () in
+                    success ? completion(true, error) : completion(false, error)
+                }
+            )
         }
     }
     

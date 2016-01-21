@@ -47,7 +47,7 @@ class SaverService {
     
     //MARK: - private
     
-    private class func uploadPost(file: PFFile, comment: String?) {
+    class func uploadPost(file: PFFile, comment: String?) {
         if let user = PFUser.currentUser() as? User {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
@@ -64,13 +64,14 @@ class SaverService {
         }
     }
     
-    private class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?) {
+     class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
             user.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
                     AlertService.simpleAlert("User data has been changed!")
+                    
                 } else {
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
