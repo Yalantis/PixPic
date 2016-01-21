@@ -22,6 +22,7 @@ class FeedViewController: UIViewController {
         didSet {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
+            postDataSource?.delegate = self
             postDataSource?.shouldPullToRefreshHandle = true
         }
     }
@@ -70,12 +71,13 @@ class FeedViewController: UIViewController {
         
         if let currentUser = PFUser.currentUser() {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
-                Router.sharedRouter().showLogin(animated: true)
+                let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+                navigationController?.pushViewController(controller, animated: true)
+
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
-                navigationController?.pushViewController(controller, animated: true)
-            }
+                self.navigationController?.showViewController(controller, sender: self)            }
         } else {
             //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
         }
@@ -115,3 +117,13 @@ extension FeedViewController: UITableViewDelegate {
     }
     
 }
+
+extension FeedViewController: PostDataSourceDelegate {
+    
+    func showUserProfile(user: User) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.model = ProfileViewModel.init(profileUser: user)
+        self.navigationController?.showViewController(controller, sender: self)
+    }
+}
+

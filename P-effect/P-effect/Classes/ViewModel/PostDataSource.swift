@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol PostDataSourceDelegate: class {
+    
+    func showUserProfile(user: User) 
+}
+
 class PostDataSource: NSObject {
     
     private var arrayOfPosts: [Post] = [Post]() {
@@ -18,6 +23,7 @@ class PostDataSource: NSObject {
     var shouldPullToRefreshHandle: Bool?
     var tableView: UITableView?
     private let loader = LoaderService()
+    weak var delegate: PostDataSourceDelegate?
     
     override init() {
         super.init()
@@ -59,10 +65,21 @@ extension PostDataSource: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kPostViewCellIdentifier, forIndexPath: indexPath) as! PostViewCell
+        cell.delegate = self
         cell.post = modelAtIndex(indexPath)
    
         return cell
     }
+    
 }
+
+extension PostDataSource: PostViewCellDelegate {
+    
+    func didChooseCellWithUser(user: User) {
+        delegate?.showUserProfile(user)
+    }
+    
+}
+
 
 
