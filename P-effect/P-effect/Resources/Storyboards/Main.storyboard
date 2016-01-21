@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Feed-->
+        <!--P-effect-->
         <scene sceneID="See-yb-Ljy">
             <objects>
                 <viewController id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,7 +44,7 @@
                             <constraint firstAttribute="trailing" secondItem="Ddw-06-XZv" secondAttribute="trailing" id="srK-vv-cys"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Feed" id="P4x-GP-BLW">
+                    <navigationItem key="navigationItem" title="P-effect" id="P4x-GP-BLW">
                         <barButtonItem key="rightBarButtonItem" image="user_male_50" id="eed-Oc-yJB">
                             <connections>
                                 <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
