@@ -14,11 +14,10 @@ class AuthorizationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        networkActivityIndicator!.center = view.center
     }
     
     @IBAction private func logInWithFBButtonTapped() {
+        view.makeToastActivity(CSToastPositionCenter)
         AuthService.signInWithFacebookInController(
             self, completion: {
                 (user, error) -> () in
@@ -26,19 +25,16 @@ class AuthorizationViewController: UIViewController {
                     let user = UserModel.init(aUser: user)
                     user.checkIfFacebookIdExists({ [unowned self] (exists) -> () in
                         if !exists {
-                            self.view.addSubview(self.networkActivityIndicator!)
-                            self.networkActivityIndicator?.startAnimating()
 
                             PFFacebookUtils.logInInBackgroundWithAccessToken(
                                 FBSDKAccessToken.currentAccessToken(), block: {
                                     (user: PFUser?, error:NSError?) -> Void in
                                     
-                                    self.networkActivityIndicator?.stopAnimating()
-                                    
                                     PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
                                     Router.sharedRouter().showHome(animated: true)
                                 }
                             )
+                            self.view.hideToastActivity()
                             
                         } else {
                             user.checkIfUsernameExists({ (exists) -> () in
