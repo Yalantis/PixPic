@@ -28,6 +28,11 @@ class FeedViewController: UIViewController {
 
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            navigationController?.pushViewController(controller, animated: true)
+            return
+        }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
@@ -47,7 +52,6 @@ class FeedViewController: UIViewController {
         }
     }
 
-    
     //MARK: - lifesicle
     
     override func viewDidLoad() {
@@ -74,7 +78,7 @@ class FeedViewController: UIViewController {
                 navigationController?.pushViewController(controller, animated: true)
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                controller.model = ProfileViewModel.init(profileUser: currentUser)
+                controller.model = ProfileViewModel.init(profileUser: currentUser as! User)
                 navigationController?.pushViewController(controller, animated: true)
             }
         }
