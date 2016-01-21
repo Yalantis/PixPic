@@ -15,14 +15,13 @@ class AuthorizationViewController: UIViewController {
     }
     
     @IBAction private func logInWithFBButtonTapped() {
-        self.view.makeToastActivity(CSToastPositionCenter)
-
+        view.makeToastActivity(CSToastPositionCenter)
         AuthService.signInWithFacebookInController(
             self, completion: {
                 (user, error) -> () in
                 if let user = user as User! {
                     let user = UserModel.init(aUser: user)
-                    user.checkIfFacebookIdExists({ [unowned self] (exists) -> () in
+                    user.checkIfFacebookIdExists({ [unowned self] exists in
                         if !exists {
                             PFFacebookUtils.logInInBackgroundWithAccessToken(
                                 FBSDKAccessToken.currentAccessToken(), block: {
