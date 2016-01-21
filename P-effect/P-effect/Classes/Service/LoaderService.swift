@@ -55,8 +55,8 @@ class LoaderService: NSObject {
                 query?.fromLocalDatastore()
             }
             
-            if let user = user, userId = user.facebookId {
-                query?.whereKey("facebookId", equalTo: userId)
+            if let user = user {
+                query?.whereKey("user", equalTo: user)
             }
             
             query?.findObjectsInBackgroundWithBlock {

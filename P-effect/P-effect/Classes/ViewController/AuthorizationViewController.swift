@@ -76,7 +76,4 @@ class AuthorizationViewController: UIViewController {
         )
     }
     
-    @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
-        AuthService().anonymousLogIn()
-    }
 }
