@@ -10,23 +10,31 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
     
+    var networkActivityIndicator: UIActivityIndicatorView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        networkActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        networkActivityIndicator!.center = view.center
     }
     
     @IBAction private func logInWithFBButtonTapped() {
         AuthService.signInWithFacebookInController(
             self, completion: {
-                [weak self](user, error) -> () in
+                (user, error) -> () in
                 if let user = user as User! {
                     let user = UserModel.init(aUser: user)
-                    user.checkIfFacebookIdExists({ (exists) -> () in
-                        if exists {
-                            // need progress here
+                    user.checkIfFacebookIdExists({ [unowned self] (exists) -> () in
+                        if !exists {
+                            self.view.addSubview(self.networkActivityIndicator!)
+                            self.networkActivityIndicator?.startAnimating()
+
                             PFFacebookUtils.logInInBackgroundWithAccessToken(
                                 FBSDKAccessToken.currentAccessToken(), block: {
                                     (user: PFUser?, error:NSError?) -> Void in
-                                    //need stop progress here
+                                    
+                                    self.networkActivityIndicator?.stopAnimating()
+                                    
                                     PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
                                     Router.sharedRouter().showHome(animated: true)
                                 }
@@ -35,9 +43,9 @@ class AuthorizationViewController: UIViewController {
                         } else {
                             user.checkIfUsernameExists({ (exists) -> () in
                                 if exists {
-                                    let controller = self?.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+                                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                                     controller.model = ProfileViewModel.init(profileUser: user.user)
-                                    self?.navigationController?.pushViewController(controller, animated: true)
+                                    self.navigationController?.pushViewController(controller, animated: true)
                                     print("Username is already taken!")
                                 } else {
                                     if user.user.facebookId != nil  {
@@ -46,10 +54,11 @@ class AuthorizationViewController: UIViewController {
                                         AuthService.signUpWithFacebookUser(
                                             user.user, token: token, completion: {
                                                 (success, error) -> () in
+                                                print("\(error)")
                                                 if success == true {
                                                     Router.sharedRouter().showHome(animated: true)
                                                 } else {
-                                                    // handle error
+                                                   handleError(error!)
                                                 }
                                             }
                                         )
@@ -59,14 +68,13 @@ class AuthorizationViewController: UIViewController {
                                             if success == true {
                                                 Router.sharedRouter().showHome(animated: true)
                                             } else {
-                                                // handle error
+                                                handleError(error!)
                                             }
                                         }
                                     }
                                 }
                                 }
                             )
-                            
                         }
                         }
                     )
@@ -75,7 +83,7 @@ class AuthorizationViewController: UIViewController {
             }
         )
     }
-    
+        
     @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
         AuthService().anonymousLogIn()
     }
