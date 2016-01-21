@@ -14,13 +14,17 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
+    
+    var model: ProfileViewModel!
+    private var activityShown: Bool?
     private var dataSource: PostDataSource? {
         didSet {
             dataSource?.tableView = tableView
             dataSource?.fetchData(nil)
+            self.view.makeToastActivity(CSToastPositionCenter)
+            activityShown = true
         }
     }
-    var model: ProfileViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,20 +64,18 @@ class ProfileViewController: UITableViewController {
             }
         })
     }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if let dataSource = dataSource {
-            if (dataSource.countOfModels() > 0) {
+        if (activityShown == true) {
+                view.hideToastActivity()
                 tableView.tableFooterView = nil
                 tableView.scrollEnabled = true
-            }
         }
     }
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        self.view.reloadInputViews()
-        tableView.tableFooterView = nil
-        tableView.scrollEnabled = true
+
     }
 
 }
