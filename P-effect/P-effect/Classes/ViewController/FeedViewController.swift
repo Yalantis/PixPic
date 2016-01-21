@@ -113,7 +113,7 @@ extension FeedViewController: PostDataSourceDelegate {
     func showUserProfile(user: User) {
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         controller.model = ProfileViewModel.init(profileUser: user)
-        self.navigationController?.showViewController(controller, sender: self)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
 }

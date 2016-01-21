@@ -44,7 +44,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
                 self?.image = image
             }
         }
-
+        
     }
     
     private func makeNavigation() {
@@ -59,8 +59,17 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func logout(sender: UIBarButtonItem) {
-        User.logOut()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        view.makeToastActivity(view)
+        if User.currentUser() != nil {
+            User.currentUser()?.deleteInBackgroundWithBlock(
+                {[weak self] (deleteSuccessful, error) -> () in
+                    print("success = \(deleteSuccessful)")
+                    self?.view.hideToastActivity()
+                    User.logOut()
+                    self?.navigationController?.popToRootViewControllerAnimated(true)
+                }
+            )
+        }
     }
     
     private func handlePhotoSelected(image: UIImage) {
