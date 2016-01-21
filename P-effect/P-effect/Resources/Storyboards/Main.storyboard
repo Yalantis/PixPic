@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -9,7 +9,7 @@
         <!--P-effect-->
         <scene sceneID="See-yb-Ljy">
             <objects>
-                <viewController id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" automaticallyAdjustsScrollViewInsets="NO" id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eiC-e1-lIt"/>
                         <viewControllerLayoutGuide type="bottom" id="vf9-Xn-rsh"/>
@@ -154,7 +154,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="PMu-2m-3mP">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oW6-ph-8Hy"/>
                         <viewControllerLayoutGuide type="bottom" id="7oV-XE-8lN"/>
@@ -181,6 +181,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
+                                            <action selector="searchTextFieldValueChanged:" destination="fkd-F7-BN1" eventType="editingDidEnd" id="VFK-d1-Z6H"/>
                                             <outlet property="delegate" destination="fkd-F7-BN1" id="AV0-Pn-oKH"/>
                                         </connections>
                                     </textField>

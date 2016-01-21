@@ -9,7 +9,7 @@
 import UIKit
 
 class AuthorizationViewController: UIViewController {
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,15 +21,26 @@ class AuthorizationViewController: UIViewController {
                 (user, error) -> () in
                 if let user = user as User! {
                     let user = UserModel.init(aUser: user)
+                    
                     user.checkIfFacebookIdExists({ [unowned self] exists in
                         if !exists {
                             PFFacebookUtils.logInInBackgroundWithAccessToken(
                                 FBSDKAccessToken.currentAccessToken(), block: {
-                                    (user: PFUser?, error:NSError?) -> Void in
-                                    
+                                    ( user: PFUser?, error:NSError?) -> () in
                                     self.view.hideToastActivity()
-
+            
                                     PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
+                                    let currentUser = UserModel.init(aUser: User.currentUser()!)
+                                    currentUser.linkOrUnlinkFacebook(
+                                        { (success, error) -> () in
+                                            if let error = error {
+                                                print(error)
+                                            } else {
+                                                print("LINKED!!! NEED TO UPDATE DATA")
+                                                AuthService.updatePFUserDataFromFB(nil)
+                                            }
+                                        }
+                                    )
                                     Router.sharedRouter().showHome(animated: true)
                                 }
                             )
@@ -52,7 +63,7 @@ class AuthorizationViewController: UIViewController {
                                                 if success == true {
                                                     Router.sharedRouter().showHome(animated: true)
                                                 } else {
-                                                   handleError(error!)
+                                                    handleError(error!)
                                                 }
                                             }
                                         )
@@ -77,7 +88,7 @@ class AuthorizationViewController: UIViewController {
             }
         )
     }
-        
+    
     @IBAction func withoutLoginButtonTapped(sender: AnyObject) {
         AuthService().anonymousLogIn()
     }
