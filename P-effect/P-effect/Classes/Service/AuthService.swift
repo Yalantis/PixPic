@@ -96,6 +96,39 @@ class AuthService {
         )
     }
     
+    class func updatePFUserDataFromFB() -> () {
+        let user = User.currentUser()!
+        let fbRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
+        fbRequest.startWithCompletionHandler(
+            {
+                (FBSDKGraphRequestConnection, result, error) -> Void in
+                
+                if (error == nil && result != nil) {
+                    let facebookData = result as! NSDictionary
+                    if let avatarURL = NSURL(string: facebookData.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as! String) {
+                        let avatarFile = PFFile(name: "avatar", data: NSData(contentsOfURL: avatarURL)!)
+                        user.setValue(avatarFile, forKey: "avatar")
+                    }
+                    if let email = facebookData.objectForKey("email") as? String {
+                        user.email = email
+                    }
+                    user.setValue(facebookData.objectForKey("id"), forKey: "facebookId")
+                    let nickname: String = String(facebookData.objectForKey("first_name")!) + " " + String(facebookData.objectForKey("last_name")!)
+                    user.setValue(nickname, forKey: "username")
+                    user.saveInBackgroundWithBlock(
+                        { (succes, error) -> Void in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                print("NEW DATAA FOR OLD USER")
+                            }
+                        }
+                    )
+                }
+            }
+        )
+    }
+    
     
     func anonymousLogIn() {
         PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) in

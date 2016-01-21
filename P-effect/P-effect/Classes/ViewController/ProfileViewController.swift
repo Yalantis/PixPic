@@ -14,13 +14,15 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
+    
+    var model: ProfileViewModel!
+    private var activityShown: Bool?
     private var dataSource: PostDataSource? {
         didSet {
             dataSource?.tableView = tableView
-            dataSource?.fetchData(nil)
+            dataSource?.fetchData(model.user)
         }
     }
-    var model: ProfileViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,7 @@ class ProfileViewController: UITableViewController {
     // MARK: - Inner func 
     func setupController() {
         dataSource = PostDataSource()
+        showToast()
         tableView.dataSource = dataSource
         self.tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
@@ -43,8 +46,7 @@ class ProfileViewController: UITableViewController {
     func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
-// uncomment this wen transitions will work as planed
-//        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
     }
@@ -60,20 +62,28 @@ class ProfileViewController: UITableViewController {
             }
         })
     }
+    
+    func showToast() {
+        self.view.makeToastActivity(CSToastPositionCenter)
+        activityShown = true
+
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.view.hideToastActivity()
+        }
+    }
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if let dataSource = dataSource {
-            if (dataSource.countOfModels() > 0) {
+        if (activityShown == true) {
+                view.hideToastActivity()
                 tableView.tableFooterView = nil
                 tableView.scrollEnabled = true
-            }
         }
     }
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        self.view.reloadInputViews()
-        tableView.tableFooterView = nil
-        tableView.scrollEnabled = true
+
     }
 
 }

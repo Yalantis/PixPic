@@ -134,9 +134,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
-                        <barButtonItem key="rightBarButtonItem" image="settings_50" id="Ta1-st-R01">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings_50" id="Ta1-st-R01">
                             <connections>
                                 <action selector="profileSettings:" destination="5uc-YH-wBN" id="Vj2-xv-iLM"/>
+                                <segue destination="fkd-F7-BN1" kind="show" id="0fX-S9-jqd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -260,7 +261,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="RkP-p3-2U6"/>
+                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="doS-7a-1qq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
