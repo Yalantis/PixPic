@@ -79,7 +79,7 @@ class FeedViewController: UIViewController {
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: currentUser as! User)
-                navigationController?.pushViewController(controller, animated: true)
+                self.navigationController?.showViewController(controller, sender: self)
             }
         }
         
@@ -113,7 +113,7 @@ extension FeedViewController: PostDataSourceDelegate {
     func showUserProfile(user: User) {
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         controller.model = ProfileViewModel.init(profileUser: user)
-        navigationController?.pushViewController(controller, animated: true)
+        self.navigationController?.showViewController(controller, sender: self)
     }
     
 }

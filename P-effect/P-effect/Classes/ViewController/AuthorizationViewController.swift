@@ -39,7 +39,7 @@ class AuthorizationViewController: UIViewController {
                                 if exists {
                                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                                     controller.model = ProfileViewModel.init(profileUser: user.user)
-                                    self.navigationController?.pushViewController(controller, animated: true)
+                                    self.navigationController?.showViewController(controller, sender: self)
                                     print("Username is already taken!")
                                 } else {
                                     if user.user.facebookId != nil  {

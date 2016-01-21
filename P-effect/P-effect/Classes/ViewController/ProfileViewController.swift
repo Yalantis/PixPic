@@ -15,7 +15,6 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     
-    var model: ProfileViewModel!
     private var activityShown: Bool?
     private var dataSource: PostDataSource? {
         didSet {
@@ -23,7 +22,8 @@ class ProfileViewController: UITableViewController {
             dataSource?.fetchData(model.user)
         }
     }
-    
+    var model: ProfileViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
@@ -84,7 +84,8 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("EditProfileViewController") as! EditProfileViewController
+        self.navigationController?.showViewController(controller, sender: self)
     }
 
 }
