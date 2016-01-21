@@ -47,8 +47,7 @@ class ProfileViewController: UITableViewController {
     func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
-// uncomment this wen transitions will work as planed
-//        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
     }

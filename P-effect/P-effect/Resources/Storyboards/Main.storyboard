@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -132,9 +132,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="11R-fr-8zq">
-                        <barButtonItem key="rightBarButtonItem" image="settings_50" id="Ta1-st-R01">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings_50" id="Ta1-st-R01">
                             <connections>
                                 <action selector="profileSettings:" destination="5uc-YH-wBN" id="Vj2-xv-iLM"/>
+                                <segue destination="fkd-F7-BN1" kind="show" id="0fX-S9-jqd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -257,7 +258,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="RkP-p3-2U6"/>
+                        <segue destination="fm0-UY-D5k" kind="relationship" relationship="rootViewController" id="doS-7a-1qq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXd-D4-Ri4" userLabel="First Responder" sceneMemberID="firstResponder"/>
