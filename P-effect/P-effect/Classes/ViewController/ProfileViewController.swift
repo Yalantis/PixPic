@@ -48,7 +48,11 @@ class ProfileViewController: UITableViewController {
     func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
-        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+        if let navigationController = navigationController {
+            frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
+        } else {
+            frame.size.height = Constants.Profile.PossibleInsets
+        }
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
     }
@@ -80,8 +84,12 @@ class ProfileViewController: UITableViewController {
         if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
             self.automaticallyAdjustsScrollViewInsets = false
             var insets = tableView.contentInset
-            insets.top = (navigationController?.navigationBar.bounds.size.height)! +
-                UIApplication.sharedApplication().statusBarFrame.size.height
+            if let navigationController = navigationController {
+                insets.top = navigationController.navigationBar.bounds.size.height +
+                 UIApplication.sharedApplication().statusBarFrame.size.height
+            } else {
+                insets.top = Constants.Profile.PossibleInsets
+            }
             tableView.contentInset = insets
             tableView.scrollIndicatorInsets = insets
         }

@@ -43,7 +43,7 @@ class LoaderService: NSObject {
         load(user, query: query, completion: completion)
     }
     
-    func loadPagedData(user: User?, leap: Int!, completion: LoadingPostsCompletion?) {
+    func loadPagedData(user: User?, leap: Int, completion: LoadingPostsCompletion?) {
         let query = Post.query()
         query?.limit = Constants.DataSource.QueryLimit
         query?.skip = leap
@@ -59,6 +59,7 @@ class LoaderService: NSObject {
             reachability = try Reachability.reachabilityForInternetConnection()
         } catch {
             print("Unable to create Reachability")
+            completion!(objects: nil,error: nil)
             return
         }
         
