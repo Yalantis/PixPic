@@ -29,6 +29,11 @@ class FeedViewController: UIViewController {
 
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
+        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            navigationController?.pushViewController(controller, animated: true)
+            return
+        }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
