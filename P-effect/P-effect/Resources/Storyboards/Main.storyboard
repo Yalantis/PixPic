@@ -251,7 +251,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zhB-qf-K11">
             <objects>
-                <navigationController storyboardIdentifier="FeedViewController" id="ch3-5m-z1m" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" id="ch3-5m-z1m" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="U6X-Ti-d9L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
