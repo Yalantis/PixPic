@@ -20,9 +20,7 @@ class ProfileViewController: UITableViewController {
     private var dataSource: PostDataSource? {
         didSet {
             dataSource?.tableView = tableView
-            dataSource?.fetchData(nil)
-            self.view.makeToastActivity(CSToastPositionCenter)
-            activityShown = true
+            dataSource?.fetchData(model.user)
         }
     }
     
@@ -34,6 +32,7 @@ class ProfileViewController: UITableViewController {
     // MARK: - Inner func 
     func setupController() {
         dataSource = PostDataSource()
+        showToast()
         tableView.dataSource = dataSource
         self.tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
@@ -62,6 +61,16 @@ class ProfileViewController: UITableViewController {
                 self?.view.makeToast(error?.localizedDescription)
             }
         })
+    }
+    
+    func showToast() {
+        self.view.makeToastActivity(CSToastPositionCenter)
+        activityShown = true
+
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.view.hideToastActivity()
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
