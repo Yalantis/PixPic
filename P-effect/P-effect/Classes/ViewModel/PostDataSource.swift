@@ -60,6 +60,9 @@ extension PostDataSource: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(kPostViewCellIdentifier, forIndexPath: indexPath) as! PostViewCell
         cell.post = modelAtIndex(indexPath)
+   
         return cell
     }
 }
+
+

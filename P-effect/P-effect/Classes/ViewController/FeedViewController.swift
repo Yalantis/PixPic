@@ -9,6 +9,7 @@
 import UIKit
 
 let kPostViewCellIdentifier = "PostViewCellIdentifier"
+let kTopCellBarHeight: CGFloat = 48.0
 
 class FeedViewController: UIViewController {
     
@@ -45,7 +46,6 @@ class FeedViewController: UIViewController {
             saver.saveAndUploadPost(file, comment: nil)
         }
     }
-
     
     //MARK: - lifesicle
     
@@ -57,6 +57,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupTableView() {
+        tableView.delegate = self
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
     }
     
@@ -99,6 +100,18 @@ class FeedViewController: UIViewController {
             [weak self]() -> () in
             self?.postDataSource?.fetchData(nil)
         }
+    }
+    
+}
+
+extension FeedViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
     }
     
 }
