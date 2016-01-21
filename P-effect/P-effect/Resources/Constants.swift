@@ -41,4 +41,8 @@ struct Constants {
         static let AvatarImageCornerRadius = 62.5 as CGFloat
         static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
     }
+    
+    struct BackButtonTitle {
+        static let PositionAdjustment = UIOffsetMake(0, -70)
+    }
 }
