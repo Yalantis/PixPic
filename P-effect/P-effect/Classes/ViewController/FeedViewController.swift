@@ -22,6 +22,7 @@ class FeedViewController: UIViewController {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
             postDataSource?.shouldPullToRefreshHandle = true
+            postDataSource?.delegate = self
         }
     }
 
@@ -53,7 +54,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupDataSource()
-        setupLoadersCallback()
+        setupLoadersCallback()        
     }
     
     private func setupTableView() {
@@ -67,17 +68,17 @@ class FeedViewController: UIViewController {
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         
-        if let currentUser = PFUser.currentUser() {
+        if let currentUser = User.currentUser() {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
-                Router.sharedRouter().showLogin(animated: true)
+                let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+                navigationController?.pushViewController(controller, animated: true)
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
+                controller.model = ProfileViewModel.init(profileUser: currentUser)
                 navigationController?.pushViewController(controller, animated: true)
             }
-        } else {
-            //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
         }
+        
     }
     
     //MARK: - UserInteractive
@@ -99,6 +100,16 @@ class FeedViewController: UIViewController {
             [weak self]() -> () in
             self?.postDataSource?.fetchData(nil)
         }
+    }
+    
+}
+
+extension FeedViewController: PostDataSourceDelegate {
+    
+    func showUserProfile(user: User) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.model = ProfileViewModel.init(profileUser: user)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

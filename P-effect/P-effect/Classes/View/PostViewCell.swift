@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PostViewCellDelegate: class {
+    
+    func showUserProfile(user: User)
+}
+
 class PostViewCell: UITableViewCell {
     
     @IBOutlet private weak var postImageView: UIImageView!
@@ -17,6 +22,7 @@ class PostViewCell: UITableViewCell {
     @IBOutlet private weak var profileLabel: UILabel!
     
     let imageLoader = ImageLoaderService()
+    weak var delegate: PostViewCellDelegate?
     
     var post: Post? {
         didSet {
@@ -80,12 +86,9 @@ class PostViewCell: UITableViewCell {
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
-        let controller = board.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        controller.model = ProfileViewModel.init(profileUser: (post?.user)!)
-        if let window = UIApplication.sharedApplication().delegate!.window! as UIWindow! {
-            window.rootViewController = controller
-        }
+        
+       delegate!.showUserProfile((post?.user)!)
     }
     
 }
+
