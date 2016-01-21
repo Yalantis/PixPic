@@ -10,7 +10,7 @@ import UIKit
 
 protocol PostViewCellDelegate: class {
     
-    func showUserProfile(user: User)
+    func didChooseCellWithUser(user: User)
 }
 
 class PostViewCell: UITableViewCell {
@@ -86,8 +86,7 @@ class PostViewCell: UITableViewCell {
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
-        
-       delegate!.showUserProfile((post?.user)!)
+       delegate?.didChooseCellWithUser((post?.user)!)
     }
     
 }

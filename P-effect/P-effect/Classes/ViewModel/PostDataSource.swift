@@ -76,7 +76,7 @@ extension PostDataSource: UITableViewDataSource {
 
 extension PostDataSource: PostViewCellDelegate {
     
-    func showUserProfile(user: User) {
+    func didChooseCellWithUser(user: User) {
         delegate?.showUserProfile(user)
     }
     
