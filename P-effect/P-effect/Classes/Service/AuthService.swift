@@ -134,13 +134,15 @@ class AuthService {
     }
     
     
-    func anonymousLogIn() {
+    func anonymousLogIn(completion: (object: User?, error: NSError?) -> ()) {
         PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) in
             if error != nil || user == nil {
                 print("Anonymous login failed.")
+                completion(object: nil, error: error)
             } else {
-                UserModel.init(aUser: user as! User)
+                let userModel = UserModel.init(aUser: user as! User)
                 print(User.currentUser())
+                completion(object: userModel.user, error: error)
             }
         }
     }

@@ -34,8 +34,9 @@ class Router {
             showHome(animated: true)
             return
         }
-        AuthService().anonymousLogIn()
-        showHome(animated: true)
+        AuthService().anonymousLogIn { [weak self] (object, error) -> () in
+            self?.showHome(animated: true)
+        }
     }
     
     func showLogin(animated animated:Bool) {
