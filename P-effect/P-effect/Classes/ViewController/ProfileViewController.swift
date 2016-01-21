@@ -34,9 +34,6 @@ class ProfileViewController: UITableViewController {
         dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
-        navigationItem.backBarButtonItem?.title = "Back"
-        self.navigationController?.navigationItem.backBarButtonItem?.title = "Back1"
-        navigationController.
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
