@@ -35,7 +35,7 @@ class LoaderService: NSObject {
             print("No facebookId to find a User")
             completion?(object: nil, error: nil)
         }
-    }
+    }               
     
     func loadData(user: User?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
