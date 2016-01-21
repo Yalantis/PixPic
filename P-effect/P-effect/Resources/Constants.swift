@@ -36,4 +36,8 @@ struct Constants {
         static let AvatarImageCornerRadius = 62.5 as CGFloat
         static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
     }
+    
+    struct DataSource {
+        static let QueryLimit = 2 as Int
+    }
 }

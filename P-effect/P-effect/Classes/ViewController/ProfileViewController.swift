@@ -20,6 +20,7 @@ class ProfileViewController: UITableViewController {
         didSet {
             dataSource?.tableView = tableView
             dataSource?.fetchData(model.user)
+            dataSource?.shouldPullToRefreshHandle = true
         }
     }
     var model: ProfileViewModel!
@@ -27,6 +28,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
+        setupLoadersCallback()
     }
 
     // MARK: - Inner func 
@@ -74,6 +76,25 @@ class ProfileViewController: UITableViewController {
         }
     }
     
+    private func setupLoadersCallback() {
+        if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
+            self.automaticallyAdjustsScrollViewInsets = false
+            var insets = tableView.contentInset
+            insets.top = (navigationController?.navigationBar.bounds.size.height)! +
+                UIApplication.sharedApplication().statusBarFrame.size.height
+            tableView.contentInset = insets
+            tableView.scrollIndicatorInsets = insets
+        }
+        tableView.addPullToRefreshWithActionHandler {
+            [weak self] () -> () in
+            self?.dataSource?.fetchData(self?.model.user)
+        }
+        tableView.addInfiniteScrollingWithActionHandler {
+            [weak self]() -> () in
+            self?.dataSource?.fetchPagedData(self?.model.user)
+        }
+    }
+    // MARK: Delegate methods
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (activityShown == true) {
                 view.hideToastActivity()

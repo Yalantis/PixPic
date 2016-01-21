@@ -102,7 +102,7 @@ class FeedViewController: UIViewController {
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
-            self?.postDataSource?.fetchData(nil)
+            self?.postDataSource?.fetchPagedData(nil)
         }
     }
     
