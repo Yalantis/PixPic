@@ -29,7 +29,7 @@
                                 </items>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="460" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-06-XZv">
-                                <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -37,9 +37,9 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iB2-ds-2xE" secondAttribute="trailing" id="6vy-hL-kay"/>
                             <constraint firstItem="iB2-ds-2xE" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="RTa-dF-NpR"/>
-                            <constraint firstItem="Ddw-06-XZv" firstAttribute="top" secondItem="eiC-e1-lIt" secondAttribute="bottom" id="Tik-cd-ebs"/>
                             <constraint firstItem="Ddw-06-XZv" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="bCq-Sd-V9v"/>
                             <constraint firstItem="iB2-ds-2xE" firstAttribute="top" secondItem="Ddw-06-XZv" secondAttribute="bottom" id="fY3-sd-EE4"/>
+                            <constraint firstItem="Ddw-06-XZv" firstAttribute="top" secondItem="SZq-Vy-ZEO" secondAttribute="top" id="hjg-fq-5lK"/>
                             <constraint firstItem="vf9-Xn-rsh" firstAttribute="top" secondItem="iB2-ds-2xE" secondAttribute="bottom" id="lUY-z1-nQr"/>
                             <constraint firstAttribute="trailing" secondItem="Ddw-06-XZv" secondAttribute="trailing" id="srK-vv-cys"/>
                         </constraints>
@@ -276,53 +276,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyF-1U-WEQ">
-                                <rect key="frame" x="23" y="201" width="554" height="199"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1g-mI-Yws">
-                                        <rect key="frame" x="156" y="20" width="242" height="46"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
-                                        <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
-                                        <connections>
-                                            <action selector="logInWithFBButtonTapped" destination="Qhm-Jo-13p" eventType="touchUpInside" id="OW7-FK-8mD"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qL-uh-azE">
-                                        <rect key="frame" x="156" y="101" width="242" height="46"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
-                                        <state key="normal" title="Proceed without login " backgroundImage="facebook_login_btn">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
-                                        <connections>
-                                            <action selector="withoutLoginButtonTapped:" destination="Qhm-Jo-13p" eventType="touchUpInside" id="ydL-4f-LKx"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="6qL-uh-azE" firstAttribute="top" secondItem="t1g-mI-Yws" secondAttribute="bottom" constant="35" id="ILy-Ug-1Sh"/>
-                                    <constraint firstItem="6qL-uh-azE" firstAttribute="leading" secondItem="t1g-mI-Yws" secondAttribute="leading" id="P31-2B-Xs9"/>
-                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="top" secondItem="OyF-1U-WEQ" secondAttribute="top" constant="20" id="gja-aD-UMz"/>
-                                    <constraint firstItem="t1g-mI-Yws" firstAttribute="centerX" secondItem="OyF-1U-WEQ" secondAttribute="centerX" id="qV4-vm-SdJ"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1g-mI-Yws">
+                                <rect key="frame" x="179" y="277" width="242" height="46"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                <connections>
+                                    <action selector="logInWithFBButtonTapped" destination="Qhm-Jo-13p" eventType="touchUpInside" id="OW7-FK-8mD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerX" secondItem="Xtg-gM-uwC" secondAttribute="centerX" id="8wN-FQ-rR1"/>
-                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="leading" secondItem="Xtg-gM-uwC" secondAttribute="leadingMargin" constant="3" id="d7f-kM-5dL"/>
-                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="top" secondItem="ecw-Sd-Yoh" secondAttribute="bottom" constant="181" id="hLy-uB-iWu"/>
-                            <constraint firstItem="OyF-1U-WEQ" firstAttribute="centerY" secondItem="Xtg-gM-uwC" secondAttribute="centerY" id="rsm-T6-WYd"/>
+                            <constraint firstItem="t1g-mI-Yws" firstAttribute="centerX" secondItem="Xtg-gM-uwC" secondAttribute="centerX" id="728-Kc-wlx"/>
+                            <constraint firstItem="t1g-mI-Yws" firstAttribute="centerY" secondItem="Xtg-gM-uwC" secondAttribute="centerY" id="y5C-Kc-p5z"/>
                         </constraints>
                     </view>
                 </viewController>
