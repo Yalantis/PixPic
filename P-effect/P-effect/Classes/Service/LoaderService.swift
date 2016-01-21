@@ -53,13 +53,19 @@ class LoaderService: NSObject {
     private func load(user: User?, query:PFQuery?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
         
-        if PFUser.currentUser() != nil {
+        guard let unwrappedUser = PFUser.currentUser()
+            else {
+                print("No user signUP")
+                completion?(objects: nil, error: nil)
+                return
+        }
+//        if PFUser.currentUser() != nil {
         let reachability: Reachability
         do {
             reachability = try Reachability.reachabilityForInternetConnection()
         } catch {
             print("Unable to create Reachability")
-            completion!(objects: nil,error: nil)
+            completion?(objects: nil,error: nil)
             return
         }
         
@@ -87,10 +93,7 @@ class LoaderService: NSObject {
                 completion?(objects: nil, error: error)
             }
         }
-    } else {
-    print("No user signUP")
-    completion?(objects: nil, error: nil)
     }
 }
 
-}
+
