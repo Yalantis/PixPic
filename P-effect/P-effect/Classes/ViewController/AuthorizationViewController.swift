@@ -9,9 +9,7 @@
 import UIKit
 
 class AuthorizationViewController: UIViewController {
-    
-    var networkActivityIndicator: UIActivityIndicatorView?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -23,18 +21,18 @@ class AuthorizationViewController: UIViewController {
                 (user, error) -> () in
                 if let user = user as User! {
                     let user = UserModel.init(aUser: user)
-                    user.checkIfFacebookIdExists({ [unowned self] (exists) -> () in
+                    user.checkIfFacebookIdExists({ [unowned self] exists in
                         if !exists {
-
                             PFFacebookUtils.logInInBackgroundWithAccessToken(
                                 FBSDKAccessToken.currentAccessToken(), block: {
                                     (user: PFUser?, error:NSError?) -> Void in
                                     
+                                    self.view.hideToastActivity()
+
                                     PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
                                     Router.sharedRouter().showHome(animated: true)
                                 }
                             )
-                            self.view.hideToastActivity()
                             
                         } else {
                             user.checkIfUsernameExists({ (exists) -> () in

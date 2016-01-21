@@ -47,7 +47,7 @@ class PostViewCell: UITableViewCell {
     }
 
     private func setContent() {
-        dateLabel.text = MHPrettyDate.prettyDateFromDate(post?.createdAt, withFormat: MHPrettyDateLongRelativeTime)
+        dateLabel.text = MHPrettyDate.prettyDateFromDate(post?.createdAt, withFormat: MHPrettyDateShortRelativeTime)
         
         imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
             if let error = error {
