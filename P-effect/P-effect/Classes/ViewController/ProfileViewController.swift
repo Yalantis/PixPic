@@ -24,7 +24,6 @@ class ProfileViewController: UITableViewController {
     }
     var model: ProfileViewModel!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
@@ -35,7 +34,7 @@ class ProfileViewController: UITableViewController {
         dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
-        self.tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
@@ -55,6 +54,7 @@ class ProfileViewController: UITableViewController {
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
+        navigationItem.title = model?.userName
         model?.userAvatar({[weak self] (image, error) -> () in
             if error == nil {
                 self?.userAvatar.image = image
@@ -87,7 +87,7 @@ class ProfileViewController: UITableViewController {
         let board = UIStoryboard(name: "Main", bundle: nil)
         let controllerIdentifier = "EditProfileViewController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.showViewController(viewController, sender: self)
     }
 
 }
