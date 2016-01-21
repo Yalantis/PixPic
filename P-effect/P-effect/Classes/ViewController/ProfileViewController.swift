@@ -68,8 +68,8 @@ class ProfileViewController: UITableViewController {
         activityShown = true
 
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
-            self.view.hideToastActivity()
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.view.hideToastActivity()
         }
     }
     
