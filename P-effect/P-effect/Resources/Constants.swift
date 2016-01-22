@@ -48,6 +48,6 @@ struct Constants {
     }
     
     struct BackButtonTitle {
-        static let PositionAdjustment = UIOffsetMake(0, -70)
+        static let PositionOnNavigationBar = UIOffsetMake(0, -70)
     }
 }

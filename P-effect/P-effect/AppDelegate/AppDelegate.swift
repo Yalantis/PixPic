@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(Constants.BackButtonTitle.PositionAdjustment, forBarMetrics: .Default)
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(Constants.BackButtonTitle.PositionOnNavigationBar, forBarMetrics: .Default)
 
         Router.sharedRouter().onStart(true)
         
