@@ -106,12 +106,6 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDelegate {
     
-    func showUserProfile(user: User) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        controller.model = ProfileViewModel.init(profileUser: user)
-        self.navigationController?.pushViewController(controller, animated: true)
-    }
-
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width + kTopCellBarHeight
     }

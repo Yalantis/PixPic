@@ -59,17 +59,9 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func logout(sender: UIBarButtonItem) {
-        view.makeToastActivity(view)
-        if User.currentUser() != nil {
-            User.currentUser()?.deleteInBackgroundWithBlock(
-                {[weak self] (deleteSuccessful, error) -> () in
-                    print("success = \(deleteSuccessful)")
-                    self?.view.hideToastActivity()
-                    User.logOut()
-                    self?.navigationController?.popToRootViewControllerAnimated(true)
-                }
-            )
-        }
+        AuthService().logOut()
+        AuthService().anonymousLogIn()
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
     private func handlePhotoSelected(image: UIImage) {

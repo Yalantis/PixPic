@@ -53,7 +53,7 @@ class ProfileViewController: UITableViewController {
     
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
-        userName.text = model?.userName
+        userName.text = User.currentUser()?.username
         navigationItem.title = model?.userName
         model?.userAvatar({[weak self] (image, error) -> () in
             if error == nil {

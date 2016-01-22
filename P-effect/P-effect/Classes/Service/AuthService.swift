@@ -10,88 +10,39 @@ import UIKit
 
 class AuthService {
     
-    class func signUpWithUser(user: User, completion: (Bool?, NSError?) -> ()) {
-        user.signUpInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            if let error = error {
-                completion (false, error)
-            } else {
-                user.saveInBackgroundWithBlock(
-                    {(success, error) -> Void in
-                        if success {
-                            completion (true, nil)
-                            print("New user saved to parse!")
-                        } else {
-                            completion (false, nil)
-                            print("Failed to save new user to parse.")
+    class func signInWithFacebookInController(
+        controller: UIViewController,
+        completion: (User?, ErrorType?) -> ()) {
+            let loginManager = FBSDKLoginManager()
+            loginManager.loginBehavior = .Native
+            loginManager.logInWithReadPermissions(
+                ["public_profile", "email"], fromViewController: controller, handler: {
+                    (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+                    if error != nil {
+                        FBSDKLoginManager().logOut()
+                        completion(nil, error)
+                    } else if result.isCancelled {
+                        FBSDKLoginManager().logOut()
+                        completion(nil, error)
+                    } else {
+                        guard let _ = FBSDKAccessToken.currentAccessToken()
+                            else {
+                                let userError = NSError(
+                                    domain: NSBundle.mainBundle().bundleIdentifier!,
+                                    code: 701,
+                                    userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
+                                )
+                                print("Facebook login error.")
+                                completion(nil, userError)
+                                return
                         }
+                        completion(nil, error)
                     }
-                )
-            }
-        }
-    }
-    
-    class func signUpWithFacebookUser(user: User, token: FBSDKAccessToken, completion: (Bool?, NSError?) -> ()) {
-        user.password = NSUUID().UUIDString
-        self.signUpWithUser(user) { (success, error) -> () in
-            if success == true {
-                PFFacebookUtils.linkUserInBackground(
-                    user, withAccessToken: token, block: {
-                        (success, error) -> Void in
-                        if success {
-                            completion(true, error)
-                        } else {
-                            completion(false, error)
-                        }
-                    }
-                )
-            } else {
-                completion(false, error)
-            }
-        }
-    }
-    
-    
-    class func signInWithFacebookInController(controller: UIViewController, completion: (User?, ErrorType?) -> ()) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.loginBehavior = .Native
-        loginManager.logInWithReadPermissions(
-            ["public_profile", "email"], fromViewController: controller, handler: {
-                (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                if error != nil {
-                    FBSDKLoginManager().logOut()
-                    completion(nil, error)
-                } else if result.isCancelled {
-                    FBSDKLoginManager().logOut()
-                    completion(nil, error)
-                } else {
-                    guard let _ = FBSDKAccessToken.currentAccessToken()
-                        else {
-                            let userError = NSError(
-                                domain: NSBundle.mainBundle().bundleIdentifier!,
-                                code: 701,
-                                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
-                            )
-                            print("Facebook login error.")
-                            completion(nil, userError)
-                            return
-                    }
-                    
-                    AuthService.updatePFUserDataFromFB(
-                        { (user, error) -> () in
-                            if let error = error {
-                                completion(nil, error)
-                            } else {
-                                completion(user, nil)
-                            }
-                        }
-                    )
                 }
-            }
-        )
+            )
     }
     
-    class func updatePFUserDataFromFB(completion: ((User?, NSError?) -> ())?) {
-        let user = User.currentUser()!
+    class func updatePFUserDataFromFB(user: User, completion: ((User?, NSError?) -> ())?) {
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
@@ -131,8 +82,8 @@ class AuthService {
                 }
             }
         )
+        
     }
-    
     
     func anonymousLogIn() {
         PFAnonymousUtils.logInWithBlock { (user: PFUser?, error: NSError?) in
@@ -147,6 +98,15 @@ class AuthService {
     
     
     func logOut() {
+        if PFFacebookUtils.isLinkedWithUser(User.currentUser()!) {
+            PFFacebookUtils.unlinkUserInBackground(
+                User.currentUser()!,
+                block: {
+                    (success, error) -> () in
+                    print("ss")
+                }
+            )
+        }
         User.logOut()
     }
     

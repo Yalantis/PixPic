@@ -16,71 +16,60 @@ class AuthorizationViewController: UIViewController {
     
     @IBAction private func logInWithFBButtonTapped() {
         view.makeToastActivity(CSToastPositionCenter)
-        AuthService.signInWithFacebookInController(
+        FB.signInWithFacebookInController(
             self, completion: {
-                (user, error) -> () in
+                [weak self](user, error) -> () in
                 if let user = user as User! {
-                    let user = UserModel.init(aUser: user)
-                    
-                    user.checkIfFacebookIdExists({ [unowned self] exists in
-                        if !exists {
-                            PFFacebookUtils.logInInBackgroundWithAccessToken(
-                                FBSDKAccessToken.currentAccessToken(), block: {
-                                    ( user: PFUser?, error:NSError?) -> () in
-                                    self.view.hideToastActivity()
-            
-                                    PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
-                                    let currentUser = UserModel.init(aUser: User.currentUser()!)
-                                    currentUser.linkOrUnlinkFacebook(
-                                        { (success, error) -> () in
-                                            if let error = error {
-                                                print(error)
-                                            } else {
-                                                print("LINKED!!! NEED TO UPDATE DATA")
-                                                AuthService.updatePFUserDataFromFB(nil)
-                                            }
+                    UserModel.init(aUser: user).checkIfFacebookIdExists(
+                        {(exists) -> () in
+                            if exists {
+                                user.passwordSet = false
+                                FB.signInWithPermission(
+                                    { (user, error) -> () in
+                                        if let error = error {
+                                            print(error)
+                                        } else if let user = user {
+                                            print("SIGNING INN!!!  with ",  user.username)
+                                            self?.view.hideToastActivity()
+                                            Router.sharedRouter().showHome(animated: true)
+                                        } else {
+                                            print("unknown trouble while signing IN")
                                         }
-                                    )
-                                    Router.sharedRouter().showHome(animated: true)
-                                }
-                            )
-                            
-                        } else {
-                            user.checkIfUsernameExists({ (exists) -> () in
-                                if exists {
-                                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-                                    controller.model = ProfileViewModel.init(profileUser: user.user)
-                                    self.navigationController?.showViewController(controller, sender: self)
-                                    print("Username is already taken!")
-                                } else {
-                                    if user.user.facebookId != nil  {
-                                        user.user.passwordSet = false
-                                        let token = FBSDKAccessToken.currentAccessToken()
-                                        AuthService.signUpWithFacebookUser(
-                                            user.user, token: token, completion: {
-                                                (success, error) -> () in
-                                                print("\(error)")
-                                                if success == true {
-                                                    Router.sharedRouter().showHome(animated: true)
+                                    }
+                                )
+                                
+                            } else {
+                                
+                                PFFacebookUtils.logInInBackgroundWithAccessToken(
+                                    FBSDKAccessToken.currentAccessToken(), block: {
+                                        ( user: PFUser?, error:NSError?) -> () in
+                                        PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
+                                        let user = UserModel.init(aUser: User.currentUser()!)
+                                        user.linkOrUnlinkFacebook(
+                                            { (success, error) -> () in
+                                                if let error = error {
+                                                    print(error)
                                                 } else {
-                                                    handleError(error!)
+                                                    print("LINKED!!! NEED TO UPDATE DATA")
+                                                    AuthService.updatePFUserDataFromFB(
+                                                        user.user,
+                                                        completion: {
+                                                            (user, error) -> () in
+                                                            if let error = error {
+                                                                print(error)
+                                                            } else if let _ = user {
+                                                                print("User has been updated")
+                                                            }
+                                                        }
+                                                    )
                                                 }
                                             }
                                         )
-                                    } else {
-                                        user.user.passwordSet = true
-                                        AuthService.signUpWithUser(user.user) { (success, error) -> () in
-                                            if success == true {
-                                                Router.sharedRouter().showHome(animated: true)
-                                            } else {
-                                                handleError(error!)
-                                            }
-                                        }
+                                        self?.view.hideToastActivity()
+                                        Router.sharedRouter().showHome(animated: true)
                                     }
-                                }
-                                }
-                            )
-                        }
+                                )
+                            }
                         }
                     )
                 }

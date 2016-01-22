@@ -9,7 +9,7 @@
         <!--P-effect-->
         <scene sceneID="See-yb-Ljy">
             <objects>
-                <viewController storyboardIdentifier="FeedViewController" automaticallyAdjustsScrollViewInsets="NO" id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eiC-e1-lIt"/>
                         <viewControllerLayoutGuide type="bottom" id="vf9-Xn-rsh"/>
@@ -33,6 +33,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="460" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-06-XZv">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SZq-Vy-ZEO" id="PIk-i2-xtV"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -154,7 +157,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="PMu-2m-3mP">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oW6-ph-8Hy"/>
                         <viewControllerLayoutGuide type="bottom" id="7oV-XE-8lN"/>
@@ -181,7 +184,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="searchTextFieldValueChanged:" destination="fkd-F7-BN1" eventType="editingDidEnd" id="VFK-d1-Z6H"/>
+                                            <action selector="searchTextFieldValueChanged:" destination="fkd-F7-BN1" eventType="editingDidEnd" id="jF0-Hn-1v7"/>
                                             <outlet property="delegate" destination="fkd-F7-BN1" id="AV0-Pn-oKH"/>
                                         </connections>
                                     </textField>
@@ -311,7 +314,7 @@
         <image name="facebook_icon" width="10" height="20"/>
         <image name="facebook_login_btn" width="242" height="46"/>
         <image name="facebook_login_btn_pressed" width="242" height="46"/>
-        <image name="settings_50" width="25" height="25"/>
-        <image name="user_male_50" width="25" height="25"/>
+        <image name="settings_50" width="50" height="50"/>
+        <image name="user_male_50" width="50" height="50"/>
     </resources>
 </document>

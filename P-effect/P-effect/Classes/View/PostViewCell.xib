@@ -55,7 +55,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-TD-CO3" userLabel="Feed Photo Image View">
                         <rect key="frame" x="16" y="64" width="412" height="412"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="412" id="y67-PH-36s"/>
+                            <constraint firstAttribute="width" secondItem="S7j-TD-CO3" secondAttribute="height" multiplier="1:1" id="shb-69-wS2"/>
                         </constraints>
                     </imageView>
                 </subviews>
