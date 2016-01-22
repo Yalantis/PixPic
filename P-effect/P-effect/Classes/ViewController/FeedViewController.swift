@@ -88,7 +88,8 @@ class FeedViewController: UIViewController {
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
-                self.navigationController?.showViewController(controller, sender: self)            }
+                self.navigationController?.showViewController(controller, sender: self)
+            }
         } else {
             //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
         }
@@ -128,12 +129,8 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text = ""
-        
-        if postDataSource?.countOfModels() == 0 {
-            text = "No data is currently available"
-        }
-        
+        let text = "No data is currently available"
+
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
@@ -141,11 +138,7 @@ extension FeedViewController: DZNEmptyDataSetSource {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text = ""
-        
-        if postDataSource?.countOfModels() == 0 {
-            text = "Please pull down to refresh"
-        }
+        let text  = "Please pull down to refresh"
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
