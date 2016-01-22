@@ -34,9 +34,15 @@ class Router {
             showHome(animated: true)
             return
         }
-        AuthService().anonymousLogIn()
-        showHome(animated: true)
-    }
+        
+        AuthService().anonymousLogIn(completion: { [weak self] object in
+                self?.showHome(animated: true)
+            }, failure: { error in
+                if let error = error {
+                    handleError(error)
+                }
+            })
+        }
     
     func showLogin(animated animated:Bool) {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
