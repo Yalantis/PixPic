@@ -46,4 +46,8 @@ struct Constants {
     struct DataSource {
         static let QueryLimit = 2 as Int
     }
+    
+    struct BackButtonTitle {
+        static let HideTitlePosition = UIOffsetMake(0, -70)
+    }
 }
