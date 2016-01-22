@@ -60,9 +60,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
-        
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
+        setupPlaceholderForEmptyDataSet()
     }
     
     private func setupTableView() {
@@ -73,6 +71,11 @@ class FeedViewController: UIViewController {
     private func setupDataSource() {
         postDataSource = PostDataSource()
         tableView.dataSource = postDataSource
+    }
+    
+    private func setupPlaceholderForEmptyDataSet() {
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
@@ -125,7 +128,7 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
+        var text = ""
         
         if postDataSource?.countOfModels() == 0 {
             text = "No data is currently available"
@@ -138,13 +141,13 @@ extension FeedViewController: DZNEmptyDataSetSource {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text: String = ""
+        var text = ""
         
         if postDataSource?.countOfModels() == 0 {
             text = "Please pull down to refresh"
         }
         
-        let paragraph =  NSMutableParagraphStyle()
+        let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
         
