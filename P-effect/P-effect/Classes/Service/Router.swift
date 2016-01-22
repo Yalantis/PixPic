@@ -34,13 +34,14 @@ class Router {
             showHome(animated: true)
             return
         }
-        AuthService().anonymousLogIn({ [weak self] object in
-            self?.showHome(animated: true)
-            }) { error in
+        
+        AuthService().anonymousLogIn(completion: { [weak self] object in
+                self?.showHome(animated: true)
+            }, failure: { error in
                 if let error = error {
                     handleError(error)
                 }
-            }
+            })
         }
     
     func showLogin(animated animated:Bool) {
