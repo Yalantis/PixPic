@@ -17,7 +17,8 @@ class FeedViewController: UIViewController {
     private lazy var postImageView = UIImageView()
     
     @IBOutlet weak var tableView: UITableView!
-    
+    private var activityShown: Bool?
+
     var postDataSource: PostDataSource? {
         didSet {
             postDataSource?.tableView = tableView
@@ -70,6 +71,14 @@ class FeedViewController: UIViewController {
     
     private func setupDataSource() {
         postDataSource = PostDataSource()
+        view.makeToastActivity(CSToastPositionCenter)
+        
+        activityShown = true
+
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.view.hideToastActivity()
+        }
         tableView.dataSource = postDataSource
     }
     
@@ -129,7 +138,14 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data is currently available"
+        var text = ""
+        if postDataSource?.countOfModels() == 0 {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+                text = "No data is currently available"
+            }
+//            text = "No data is currently available"
+        }
 
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
@@ -138,7 +154,15 @@ extension FeedViewController: DZNEmptyDataSetSource {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please pull down to refresh"
+        var text = ""
+        
+        if postDataSource?.countOfModels() == 0 {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+                text = "No data is currently available"
+            }
+//            text = "Please pull down to refresh"
+        }
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
@@ -161,6 +185,14 @@ extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width + kTopCellBarHeight
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (activityShown == true) {
+            view.hideToastActivity()
+            tableView.tableFooterView = nil
+            tableView.scrollEnabled = true
+        }
     }
     
 }
