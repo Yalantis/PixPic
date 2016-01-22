@@ -60,6 +60,9 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
+        
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
     }
     
     private func setupTableView() {
@@ -108,7 +111,50 @@ class FeedViewController: UIViewController {
             self?.postDataSource?.fetchData(nil)
         }
     }
+
+}
+
+extension FeedViewController: DZNEmptyDataSetDelegate {
     
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+}
+
+extension FeedViewController: DZNEmptyDataSetSource {
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text: String = ""
+        
+        if postDataSource?.countOfModels() == 0 {
+            text = "No data is currently available"
+        }
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        var text: String = ""
+        
+        if postDataSource?.countOfModels() == 0 {
+            text = "Please pull down to refresh"
+        }
+        
+        let paragraph =  NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+
 }
 
 extension FeedViewController: UITableViewDelegate {
@@ -131,4 +177,6 @@ extension FeedViewController: PostDataSourceDelegate {
         self.navigationController?.showViewController(controller, sender: self)
     }
 }
+
+
 
