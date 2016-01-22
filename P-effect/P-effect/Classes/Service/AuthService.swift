@@ -140,10 +140,6 @@ class AuthService {
                 let userModel = UserModel.init(aUser: user as! User)
                 print(User.currentUser())
                 completion(object: userModel.user)
-                print("Anonymous login failed.")
-                completion(object: user as? User)
-                failure(error: error)
-
             } else {
                 print("Anonymous login failed.")
                 completion(object: user as? User)
