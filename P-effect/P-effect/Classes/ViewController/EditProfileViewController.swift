@@ -44,7 +44,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
                 self?.image = image
             }
         }
-
+        
     }
     
     private func makeNavigation() {
@@ -59,10 +59,16 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func logout(sender: UIBarButtonItem) {
-        User.logOut()
-        self.navigationController?.popToRootViewControllerAnimated(true)
+        AuthService().logOut()
+        AuthService().anonymousLogIn(completion: { [weak self] object in
+            Router.sharedRouter().showHome(animated: true)
+            }, failure: { error in
+                if let error = error {
+                    handleError(error)
+                }
+        })
     }
-    
+
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
         saveChangesButton.enabled = true

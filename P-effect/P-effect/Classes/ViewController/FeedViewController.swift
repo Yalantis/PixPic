@@ -154,7 +154,7 @@ extension FeedViewController: DZNEmptyDataSetSource {
 }
 
 extension FeedViewController: UITableViewDelegate {
-    
+
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width + kTopCellBarHeight
     }
