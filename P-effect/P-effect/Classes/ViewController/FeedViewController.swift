@@ -180,6 +180,3 @@ extension FeedViewController: PostDataSourceDelegate {
         self.navigationController?.showViewController(controller, sender: self)
     }
 }
-
-
-
