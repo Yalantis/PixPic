@@ -138,12 +138,10 @@ class AuthService {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
                 failure(error: error)
-            } else {
-                if let user = user {
-                    let userModel = UserModel.init(aUser: user as! User)
-                    print(User.currentUser())
-                    completion(object: userModel.user)
-                }
+            } else if let user = user {
+                let userModel = UserModel.init(aUser: user as! User)
+                print(User.currentUser())
+                completion(object: userModel.user)
             }
         }
     }

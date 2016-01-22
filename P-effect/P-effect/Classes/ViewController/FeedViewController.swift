@@ -138,7 +138,7 @@ extension FeedViewController: DZNEmptyDataSetSource {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text  = "Please pull down to refresh"
+        let text = "Please pull down to refresh"
         
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
