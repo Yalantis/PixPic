@@ -22,12 +22,18 @@ class FeedViewController: UIViewController {
         didSet {
             postDataSource?.tableView = tableView
             postDataSource?.fetchData(nil)
+            postDataSource?.delegate = self
             postDataSource?.shouldPullToRefreshHandle = true
         }
     }
 
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
+        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            navigationController?.pushViewController(controller, animated: true)
+            return
+        }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
@@ -54,6 +60,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
+        setupPlaceholderForEmptyDataSet()
     }
     
     private func setupTableView() {
@@ -66,15 +73,22 @@ class FeedViewController: UIViewController {
         tableView.dataSource = postDataSource
     }
     
+    private func setupPlaceholderForEmptyDataSet() {
+        tableView.emptyDataSetDelegate = self
+        tableView.emptyDataSetSource = self
+    }
+    
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         
         if let currentUser = PFUser.currentUser() {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
-                Router.sharedRouter().showLogin(animated: true)
+                let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+                navigationController?.pushViewController(controller, animated: true)
+
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
-                navigationController?.pushViewController(controller, animated: true)
+                self.navigationController?.showViewController(controller, sender: self)
             }
         } else {
             //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
@@ -98,10 +112,45 @@ class FeedViewController: UIViewController {
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
-            self?.postDataSource?.fetchData(nil)
+            self?.postDataSource?.fetchPagedData(nil)
         }
     }
+
+}
+
+extension FeedViewController: DZNEmptyDataSetDelegate {
     
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+}
+
+extension FeedViewController: DZNEmptyDataSetSource {
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No data is currently available"
+
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Please pull down to refresh"
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+
 }
 
 extension FeedViewController: UITableViewDelegate {
@@ -120,4 +169,13 @@ extension FeedViewController: UITableViewDelegate {
         return tableView.bounds.width + kTopCellBarHeight
     }
     
+}
+
+extension FeedViewController: PostDataSourceDelegate {
+    
+    func showUserProfile(user: User) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.model = ProfileViewModel.init(profileUser: user)
+        self.navigationController?.showViewController(controller, sender: self)
+    }
 }

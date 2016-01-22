@@ -37,48 +37,63 @@ class LoaderService: NSObject {
         }
     }               
     
-    func loadData(user: User?, completion: LoadingPostsCompletion?) {
+    func loadFreshData(user: User?, completion: LoadingPostsCompletion?) {
+        let query = Post.query()
+        query?.limit = Constants.DataSource.QueryLimit
+        load(user, query: query, completion: completion)
+    }
+    
+    func loadPagedData(user: User?, leap: Int, completion: LoadingPostsCompletion?) {
+        let query = Post.query()
+        query?.limit = Constants.DataSource.QueryLimit
+        query?.skip = leap
+        load(user, query: query, completion: completion)
+    }
+    
+    private func load(user: User?, query:PFQuery?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
-        if PFUser.currentUser() != nil {
-            
-            let query = Post.query()
-            
-            let reachability: Reachability
-            do {
-                reachability = try Reachability.reachabilityForInternetConnection()
-            } catch {
-                print("Unable to create Reachability")
+        
+        guard let unwrappedUser = PFUser.currentUser()
+            else {
+                print("No user signUP")
+                completion?(objects: nil, error: nil)
                 return
-            }
-            
-            if !reachability.isReachable() {
-                query?.fromLocalDatastore()
-            }
-            
-            if let user = user {
-                query?.whereKey("user", equalTo: user)
-            }
-            
-            query?.findObjectsInBackgroundWithBlock {
-                (objects:[PFObject]?, error: NSError?) -> Void in
-                if error == nil {
-                    if let objects = objects {
-                        for object in objects {
-                            array.append(object as! Post)
-                            (object as! Post).saveEventually()
-                            (object as! Post).pinInBackground()
-                        }
+        }
+//        if PFUser.currentUser() != nil {
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            completion?(objects: nil,error: nil)
+            return
+        }
+        
+        if !reachability.isReachable() {
+            query?.fromLocalDatastore()
+        }
+        
+        if let user = user {
+            query?.whereKey("user", equalTo: user)
+        }
+        
+        query?.findObjectsInBackgroundWithBlock {
+            (objects:[PFObject]?, error: NSError?) -> Void in
+            if error == nil {
+                if let objects = objects {
+                    for object in objects {
+                        array.append(object as! Post)
+                        (object as! Post).saveEventually()
+                        (object as! Post).pinInBackground()
                     }
-                    completion?(objects: array, error: nil)
-                } else {
-                    print("Error: \(error!) \(error!.userInfo)")
-                    completion?(objects: nil, error: error)
                 }
+                completion?(objects: array, error: nil)
+            } else {
+                print("Error: \(error!) \(error!.userInfo)")
+                completion?(objects: nil, error: error)
             }
-        } else {
-            print("No user signUP")
-            completion?(objects: nil, error: nil)
         }
     }
-
 }
+
+
