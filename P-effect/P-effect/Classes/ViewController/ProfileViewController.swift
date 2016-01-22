@@ -20,6 +20,7 @@ class ProfileViewController: UITableViewController {
         didSet {
             dataSource?.tableView = tableView
             dataSource?.fetchData(model.user)
+            dataSource?.shouldPullToRefreshHandle = true
         }
     }
     var model: ProfileViewModel!
@@ -27,6 +28,7 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupController()
+        setupLoadersCallback()
     }
 
     // MARK: - Inner func 
@@ -46,7 +48,11 @@ class ProfileViewController: UITableViewController {
     func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
-        frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - (navigationController?.navigationBar.frame.size.height)!)
+        if let navigationController = navigationController {
+            frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
+        } else {
+            frame.size.height = Constants.Profile.PossibleInsets
+        }
         tableViewFooter.frame = frame
         tableView.tableFooterView = tableViewFooter;
     }
@@ -74,6 +80,29 @@ class ProfileViewController: UITableViewController {
         }
     }
     
+    private func setupLoadersCallback() {
+        if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
+            self.automaticallyAdjustsScrollViewInsets = false
+            var insets = tableView.contentInset
+            if let navigationController = navigationController {
+                insets.top = navigationController.navigationBar.bounds.size.height +
+                 UIApplication.sharedApplication().statusBarFrame.size.height
+            } else {
+                insets.top = Constants.Profile.PossibleInsets
+            }
+            tableView.contentInset = insets
+            tableView.scrollIndicatorInsets = insets
+        }
+        tableView.addPullToRefreshWithActionHandler {
+            [weak self] () -> () in
+            self?.dataSource?.fetchData(self?.model.user)
+        }
+        tableView.addInfiniteScrollingWithActionHandler {
+            [weak self]() -> () in
+            self?.dataSource?.fetchPagedData(self?.model.user)
+        }
+    }
+    // MARK: Delegate methods
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (activityShown == true) {
                 view.hideToastActivity()
