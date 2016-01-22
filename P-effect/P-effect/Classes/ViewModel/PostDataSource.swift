@@ -35,13 +35,23 @@ class PostDataSource: NSObject {
     }
     
     @objc func fetchData(user: User?) {
-        loader.loadData(user) {
+        loader.loadFreshData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
             if self?.shouldPullToRefreshHandle == true {
                 self?.tableView?.pullToRefreshView.stopAnimating()
             }
             if let objects = objects {
                 self?.arrayOfPosts = objects
+            }
+        }
+    }
+    
+    @objc func fetchPagedData(user: User?) {
+        loader.loadPagedData(user, leap: countOfModels()) {
+            [weak self] (objects: [Post]?, error: NSError?) in
+            if let objects = objects {
+                self?.tableView?.infiniteScrollingView.stopAnimating()
+                self?.arrayOfPosts.appendContentsOf(objects)
             }
         }
     }
