@@ -16,37 +16,38 @@ class AuthorizationViewController: UIViewController {
     
     @IBAction private func logInWithFBButtonTapped() {
         view.makeToastActivity(CSToastPositionCenter)
-        FB.signInWithFacebookInController(
+        FBAuthorization.signInWithFacebookInController(
             self, completion: {
-                [weak self](user, error) -> () in
+                [weak self] user, error in
                 if let user = user as User! {
                     UserModel.init(aUser: user).checkIfFacebookIdExists(
-                        {(exists) -> () in
+                        { exists in
                             if exists {
                                 user.passwordSet = false
-                                FB.signInWithPermission(
-                                    { (user, error) -> () in
+                                FBAuthorization.signInWithPermission(
+                                    { user, error in
                                         if let error = error {
                                             print(error)
                                         } else if let user = user {
                                             print("SIGNING INN!!!  with ",  user.username)
-                                            self?.view.hideToastActivity()
                                             Router.sharedRouter().showHome(animated: true)
                                         } else {
                                             print("unknown trouble while signing IN")
                                         }
+                                        self?.view.hideToastActivity()
                                     }
                                 )
                                 
                             } else {
                                 
                                 PFFacebookUtils.logInInBackgroundWithAccessToken(
-                                    FBSDKAccessToken.currentAccessToken(), block: {
-                                        ( user: PFUser?, error:NSError?) -> () in
+                                    FBSDKAccessToken.currentAccessToken(),
+                                    block: {
+                                        user, error in
                                         PFFacebookUtils.logInInBackgroundWithAccessToken(FBSDKAccessToken.currentAccessToken())
                                         let user = UserModel.init(aUser: User.currentUser()!)
                                         user.linkOrUnlinkFacebook(
-                                            { (success, error) -> () in
+                                            { success, error in
                                                 if let error = error {
                                                     print(error)
                                                 } else {
@@ -54,7 +55,7 @@ class AuthorizationViewController: UIViewController {
                                                     AuthService.updatePFUserDataFromFB(
                                                         user.user,
                                                         completion: {
-                                                            (user, error) -> () in
+                                                            user, error in
                                                             if let error = error {
                                                                 print(error)
                                                             } else if let _ = user {

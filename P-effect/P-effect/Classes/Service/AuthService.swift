@@ -10,38 +10,6 @@ import UIKit
 
 class AuthService {
     
-    class func signInWithFacebookInController(
-        controller: UIViewController,
-        completion: (User?, ErrorType?) -> ()) {
-            let loginManager = FBSDKLoginManager()
-            loginManager.loginBehavior = .Native
-            loginManager.logInWithReadPermissions(
-                ["public_profile", "email"], fromViewController: controller, handler: {
-                    (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                    if error != nil {
-                        FBSDKLoginManager().logOut()
-                        completion(nil, error)
-                    } else if result.isCancelled {
-                        FBSDKLoginManager().logOut()
-                        completion(nil, error)
-                    } else {
-                        guard let _ = FBSDKAccessToken.currentAccessToken()
-                            else {
-                                let userError = NSError(
-                                    domain: NSBundle.mainBundle().bundleIdentifier!,
-                                    code: 701,
-                                    userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
-                                )
-                                print("Facebook login error.")
-                                completion(nil, userError)
-                                return
-                        }
-                        completion(nil, error)
-                    }
-                }
-            )
-    }
-    
     class func updatePFUserDataFromFB(user: User, completion: ((User?, NSError?) -> ())?) {
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
@@ -100,16 +68,8 @@ class AuthService {
     
     
     func logOut() {
-        if PFFacebookUtils.isLinkedWithUser(User.currentUser()!) {
-            PFFacebookUtils.unlinkUserInBackground(
-                User.currentUser()!,
-                block: {
-                    (success, error) -> () in
-                    print("ss")
-                }
-            )
-        }
         User.logOut()
+        FBSDKLoginManager().logOut()
     }
     
 }

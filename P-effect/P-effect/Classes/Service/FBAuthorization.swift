@@ -8,13 +8,13 @@
 
 import Foundation
 
-class FB {
+class FBAuthorization {
     
     class func signInWithPermission(completion: (User?, ErrorType?) -> ()) {
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(
-            ["public_profile", "email"],
+        PFFacebookUtils.logInInBackgroundWithAccessToken(
+            FBSDKAccessToken.currentAccessToken(),
             block: {
-                (user, error) -> () in
+                user, error in
                 if let user = user as? User {
                     print(user)
                     print(PFUser.currentUser() ?? "No user")
@@ -22,7 +22,7 @@ class FB {
                         AuthService.updatePFUserDataFromFB(
                             user,
                             completion: {
-                                (user, error) -> () in
+                                user, error in
                                 completion(user, nil)
                             }
                         )
@@ -31,7 +31,14 @@ class FB {
                 } else if let error = error {
                     completion(nil, error)
                 } else {
-                    //generate error
+                    let userError = NSError(
+                        domain: NSBundle.mainBundle().bundleIdentifier!,
+                        code: 701,
+                        userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
+                    )
+                    print("Facebook login error.")
+                    completion(nil, userError)
+                    return
                 }
             }
         )
@@ -45,7 +52,7 @@ class FB {
             fromViewController: controller,
             handler: {
                 (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
-                if error != nil {
+                if let error = error {
                     FBSDKLoginManager().logOut()
                     completion(nil, error)
                 } else if result.isCancelled {

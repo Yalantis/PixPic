@@ -60,10 +60,15 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     @objc func logout(sender: UIBarButtonItem) {
         AuthService().logOut()
-        AuthService().anonymousLogIn()
-        navigationController?.popToRootViewControllerAnimated(true)
+        AuthService().anonymousLogIn(completion: { [weak self] object in
+            Router.sharedRouter().showHome(animated: true)
+            }, failure: { error in
+                if let error = error {
+                    handleError(error)
+                }
+        })
     }
-    
+
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
         saveChangesButton.enabled = true
