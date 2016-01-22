@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
+        let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(buttonTitlePosition, forBarMetrics: .Default)
+
         Router.sharedRouter().onStart(true)
         
         Fabric.with([Crashlytics.self])
