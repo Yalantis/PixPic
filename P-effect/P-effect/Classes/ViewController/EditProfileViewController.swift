@@ -78,6 +78,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveChangesAction(sender: AnyObject) {
+        if 
         if let image = image {
             let pictureData = UIImageJPEGRepresentation(image, 1)
             if let file = PFFile(name: Constants.UserKey.Avatar, data: pictureData!) {

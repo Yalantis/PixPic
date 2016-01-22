@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904A1B51C526EA200F26E05 /* ValidationService.swift */; };
 		49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089CA41C4FA09C00027191 /* ProfileViewModel.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4904A1B51C526EA200F26E05 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		49089CA41C4FA09C00027191 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				FDD0F0B21C4E528700331799 /* SaverService.swift */,
 				95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */,
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
+				4904A1B51C526EA200F26E05 /* ValidationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
+				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
