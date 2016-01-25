@@ -33,19 +33,13 @@ class PostViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        profileImageView.userInteractionEnabled = true
         let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
         profileImageView.addGestureRecognizer(imageGestureRecognizer)
         
-        profileLabel.userInteractionEnabled = true
         let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
         
-        profileImageView.clipsToBounds = true
-        postImageView.clipsToBounds = true
-        
         selectionStyle = .None
-                
     }
 
     private func setContent() {
@@ -92,4 +86,3 @@ class PostViewCell: UITableViewCell {
     }
     
 }
-
