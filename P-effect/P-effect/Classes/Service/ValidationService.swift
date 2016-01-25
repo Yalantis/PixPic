@@ -34,7 +34,7 @@ class ValidationService: NSObject {
 }
 
     private func userNameContainsOnlyLetters(userName: String) -> Bool {
-        if userName.characters.first == ns {
+        if userName.characters.first == " " {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false
         }
