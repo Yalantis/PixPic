@@ -42,6 +42,7 @@ class ProfileViewController: UITableViewController {
         applyUser()
         if (model!.userIsCurrentUser()) {
             profileSettingsButton.enabled = true
+            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
         }
     }
     
