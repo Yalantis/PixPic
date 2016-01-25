@@ -60,6 +60,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
+        view.makeToastActivity(CSToastPositionCenter)
     }
     
     private func setupTableView() {
@@ -70,6 +71,11 @@ class FeedViewController: UIViewController {
     private func setupDataSource() {
         postDataSource = PostDataSource()
         tableView.dataSource = postDataSource
+    }
+    
+    private func setupPlaceholderForEmptyDataSet() {
+        tableView?.emptyDataSetDelegate = self
+        tableView?.emptyDataSetSource = self
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
@@ -123,6 +129,10 @@ extension FeedViewController: UITableViewDelegate {
         return tableView.bounds.width + kTopCellBarHeight
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        view.hideToastActivity()
+    }
+    
 }
 
 extension FeedViewController: PostDataSourceDelegate {
@@ -132,4 +142,47 @@ extension FeedViewController: PostDataSourceDelegate {
         controller.model = ProfileViewModel.init(profileUser: user)
         self.navigationController?.showViewController(controller, sender: self)
     }
+    
+    func showPlaceholderForEmptyDataSet() {
+        if postDataSource?.countOfModels() == 0 {
+            setupPlaceholderForEmptyDataSet()
+            view.hideToastActivity()
+            tableView.reloadData()
+        }
+    }
+}
+
+extension FeedViewController: DZNEmptyDataSetDelegate {
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+}
+
+extension FeedViewController: DZNEmptyDataSetSource {
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No data is currently available"
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Please pull down to refresh"
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
 }

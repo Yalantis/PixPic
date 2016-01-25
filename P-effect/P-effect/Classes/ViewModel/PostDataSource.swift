@@ -10,27 +10,20 @@ import Foundation
 
 protocol PostDataSourceDelegate: class {
     
-    func showUserProfile(user: User) 
+    func showUserProfile(user: User)
+    func showPlaceholderForEmptyDataSet()
 }
 
 class PostDataSource: NSObject {
     
     private var arrayOfPosts: [Post] = [Post]() {
         didSet {
-            tableView?.hideToastActivity()
-            if countOfModels() == 0 {
-                setupPlaceholderForEmptyDataSet()
-            }
             tableView?.reloadData()
+            delegate?.showPlaceholderForEmptyDataSet()
         }
     }
     
-    var tableView: UITableView? {
-        didSet {
-            tableView?.makeToastActivity(CSToastPositionCenter)
-        }
-    }
-    
+    var tableView: UITableView?
     var shouldPullToRefreshHandle: Bool?
     
     private let loader = LoaderService()
@@ -43,11 +36,6 @@ class PostDataSource: NSObject {
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    private func setupPlaceholderForEmptyDataSet() {
-        tableView?.emptyDataSetDelegate = self
-        tableView?.emptyDataSetSource = self
     }
     
     @objc func fetchData(user: User?) {
@@ -109,41 +97,6 @@ extension PostDataSource: PostViewCellDelegate {
     
     func didChooseCellWithUser(user: User) {
         delegate?.showUserProfile(user)
-    }
-    
-}
-
-extension PostDataSource: DZNEmptyDataSetDelegate {
-    
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
-        return true
-    }
-    
-}
-
-extension PostDataSource: DZNEmptyDataSetSource {
-    
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data is currently available"
-        
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please pull down to refresh"
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
-        
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-            NSParagraphStyleAttributeName: paragraph]
-        
-        return NSAttributedString(string: text, attributes: attributes)
     }
     
 }
