@@ -50,4 +50,14 @@ struct Constants {
     struct BackButtonTitle {
         static let HideTitlePosition = UIOffsetMake(0, -70)
     }
+    
+    struct Validation {
+        static let WrongLenght = "Lenght of the username have to be more then 3 and less then 30 characters long" as String
+        static let AlreadyExist = "Username already exist" as String
+        static let SpaceInBegining = "Username can't start with spaces" as String
+        static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ " as String
+        static let SpaceInEnd = "Username can't end with spaces" as String
+        static let NumbersAndSymbolsInUsername = "Username have to consist only with letters an numbers" as String
+        static let TwoSpacesInRow = "Username can't consist two or more spaces in row" as String
+    }
 }

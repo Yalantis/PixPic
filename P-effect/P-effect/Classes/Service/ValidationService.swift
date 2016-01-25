@@ -9,17 +9,55 @@
 import UIKit
 
 class ValidationService: NSObject {
-    class func valdateUserName(userName: String, completion:(Bool)->()){
-        if userName
+    class func valdateUserName(userName: String, completion:(Bool)->()) {
+        if !userNameContainsOnlyLetters(userName) {
+            completion(false)
+            return
+        }
+        
+        if (userName.characters.count < 3) && (userName.characters.count > 30) {
+            AlertService.simpleAlert(Constants.Validation.WrongLenght)
+            completion (false)
+            return
+        }
+        
         let query = PFUser.query()?.whereKey("username", equalTo: userName)
-        query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
+            query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
             if object != nil {
-                completion(true)
-                print("username exists")
-            } else {
+                AlertService.simpleAlert(Constants.Validation.AlreadyExist)
                 completion(false)
+            } else {
+                completion(true)
             }
         })
-    }
 
+        
+    }
 }
+
+    func userNameContainsOnlyLetters(userName: String) -> Bool {
+        if userName.characters.first == " " {
+            AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
+            return false
+        }
+        let characterSet:NSCharacterSet = NSCharacterSet(charactersInString: Constants.Validation.CharacterSet)
+        if let match = userName.rangeOfCharacterFromSet(characterSet.invertedSet) {
+            AlertService.simpleAlert(Constants.Validation.NumbersAndSymbolsInUsername)
+            return false
+        } else {
+            var previousChar = " " as Character
+            for char in userName.characters {
+                if ((previousChar == " ")  && (char == " ")) {
+                    AlertService.simpleAlert(Constants.Validation.TwoSpacesInRow)
+                    return false
+                }
+                previousChar = char
+            }
+            if userName.characters.last == " " {
+                AlertService.simpleAlert(Constants.Validation.SpaceInEnd)
+                return false
+            }
+        }
+        
+    return true
+    }
