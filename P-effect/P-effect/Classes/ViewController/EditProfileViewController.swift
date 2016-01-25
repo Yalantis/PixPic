@@ -68,7 +68,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
                 }
         })
     }
-
+    
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
         saveChangesButton.enabled = true
@@ -84,10 +84,17 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveChangesAction(sender: AnyObject) {
-        ValidationService.valdateUserName(userName!) { [weak self] (completion) -> () in
+        ValidationService.valdateUserName(userName!) {
+            [weak self] completion -> () in
             if completion {
-                if let image = self?.image, let file = PFFile(name: Constants.UserKey.Avatar, data: UIImageJPEGRepresentation (image, 1)!) {
-                        SaverService.uploadUserChanges(User.currentUser()!, avatar: file, nickname: self?.userName)
+                if let image = self?.image, let file = PFFile(name:
+                    Constants.UserKey.Avatar,
+                    data: UIImageJPEGRepresentation (image, 1)!) {
+                        SaverService.uploadUserChanges(
+                            User.currentUser()!,
+                            avatar: file,
+                            nickname: self?.userName
+                        )
                         self?.navigationController?.popToRootViewControllerAnimated(true)
                 }
             }
