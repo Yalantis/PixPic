@@ -317,7 +317,7 @@
         <image name="facebook_icon" width="10" height="20"/>
         <image name="facebook_login_btn" width="242" height="46"/>
         <image name="facebook_login_btn_pressed" width="242" height="46"/>
-        <image name="settings_50" width="25" height="25"/>
-        <image name="user_male_50" width="25" height="25"/>
+        <image name="settings_50" width="50" height="50"/>
+        <image name="user_male_50" width="50" height="50"/>
     </resources>
 </document>
