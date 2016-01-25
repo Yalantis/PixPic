@@ -41,8 +41,10 @@ class PostViewCell: UITableViewCell {
         let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
         
-        self.profileImageView.clipsToBounds = true
-        self.postImageView.clipsToBounds = true
+        profileImageView.clipsToBounds = true
+        postImageView.clipsToBounds = true
+        
+        selectionStyle = .None
                 
     }
 
