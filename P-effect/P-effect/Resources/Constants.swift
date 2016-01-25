@@ -61,5 +61,6 @@ struct Constants {
         static let TwoSpacesInRow = "Username can't consist two or more spaces in row" as String
         static let MinUserName = 3 as Int
         static let MaxUserName = 30 as Int
+        static let WhiteSpace = " " as Character
     }
 }

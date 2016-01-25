@@ -34,7 +34,7 @@ class ValidationService: NSObject {
 }
 
     private func userNameContainsOnlyLetters(userName: String) -> Bool {
-        if userName.characters.first == " " {
+        if userName.characters.first == Constants.Validation.WhiteSpace {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false
         }
@@ -43,15 +43,15 @@ class ValidationService: NSObject {
             AlertService.simpleAlert(Constants.Validation.NumbersAndSymbolsInUsername)
             return false
         } else {
-            var previousChar = " " as Character
+            var previousChar = Constants.Validation.WhiteSpace as Character
             for char in userName.characters {
-                if ((previousChar == " ")  && (char == " ")) {
+                if ((previousChar == Constants.Validation.WhiteSpace)  && (char == Constants.Validation.WhiteSpace)) {
                     AlertService.simpleAlert(Constants.Validation.TwoSpacesInRow)
                     return false
                 }
                 previousChar = char
             }
-            if userName.characters.last == " " {
+            if userName.characters.last == Constants.Validation.WhiteSpace {
                 AlertService.simpleAlert(Constants.Validation.SpaceInEnd)
                 return false
             }
