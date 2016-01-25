@@ -12,6 +12,7 @@ class User: PFUser {
     
     @NSManaged var avatar: PFFile?
     @NSManaged var facebookId: String?
+    @NSManaged var appUsername: String?
     @NSManaged var passwordSet: Bool
     
     override class func initialize() {
