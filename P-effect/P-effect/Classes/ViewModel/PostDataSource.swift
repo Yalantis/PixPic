@@ -17,11 +17,22 @@ class PostDataSource: NSObject {
     
     private var arrayOfPosts: [Post] = [Post]() {
         didSet {
+            tableView?.hideToastActivity()
+            if countOfModels() == 0 {
+                setupPlaceholderForEmptyDataSet()
+            }
             tableView?.reloadData()
         }
     }
+    
+    var tableView: UITableView? {
+        didSet {
+            tableView?.makeToastActivity(CSToastPositionCenter)
+        }
+    }
+    
     var shouldPullToRefreshHandle: Bool?
-    var tableView: UITableView?
+    
     private let loader = LoaderService()
     weak var delegate: PostDataSourceDelegate?
     
@@ -34,6 +45,11 @@ class PostDataSource: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    private func setupPlaceholderForEmptyDataSet() {
+        tableView?.emptyDataSetDelegate = self
+        tableView?.emptyDataSetSource = self
+    }
+    
     @objc func fetchData(user: User?) {
         loader.loadFreshData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
@@ -42,6 +58,9 @@ class PostDataSource: NSObject {
             }
             if let objects = objects {
                 self?.arrayOfPosts = objects
+            }
+            if let error = error {
+                handleError(error)
             }
         }
     }
@@ -52,6 +71,9 @@ class PostDataSource: NSObject {
             if let objects = objects {
                 self?.tableView?.infiniteScrollingView.stopAnimating()
                 self?.arrayOfPosts.appendContentsOf(objects)
+            }
+            if let error = error {
+                handleError(error)
             }
         }
     }
@@ -91,5 +113,37 @@ extension PostDataSource: PostViewCellDelegate {
     
 }
 
+extension PostDataSource: DZNEmptyDataSetDelegate {
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+}
 
-
+extension PostDataSource: DZNEmptyDataSetSource {
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "No data is currently available"
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
+            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let text = "Please pull down to refresh"
+        
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineBreakMode = .ByWordWrapping
+        paragraph.alignment = .Center
+        
+        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
+            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+            NSParagraphStyleAttributeName: paragraph]
+        
+        return NSAttributedString(string: text, attributes: attributes)
+    }
+    
+}

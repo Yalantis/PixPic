@@ -17,7 +17,6 @@ class FeedViewController: UIViewController {
     private lazy var postImageView = UIImageView()
     
     @IBOutlet weak var tableView: UITableView!
-    private var activityShown: Bool?
 
     var postDataSource: PostDataSource? {
         didSet {
@@ -61,7 +60,6 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
-        setupPlaceholderForEmptyDataSet()
     }
     
     private func setupTableView() {
@@ -71,20 +69,7 @@ class FeedViewController: UIViewController {
     
     private func setupDataSource() {
         postDataSource = PostDataSource()
-        view.makeToastActivity(CSToastPositionCenter)
-        
-        activityShown = true
-
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.view.hideToastActivity()
-        }
         tableView.dataSource = postDataSource
-    }
-    
-    private func setupPlaceholderForEmptyDataSet() {
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
@@ -127,55 +112,6 @@ class FeedViewController: UIViewController {
 
 }
 
-extension FeedViewController: DZNEmptyDataSetDelegate {
-    
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
-        return true
-    }
-    
-}
-
-extension FeedViewController: DZNEmptyDataSetSource {
-    
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text = ""
-        if postDataSource?.countOfModels() == 0 {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                text = "No data is currently available"
-            }
-//            text = "No data is currently available"
-        }
-
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        var text = ""
-        
-        if postDataSource?.countOfModels() == 0 {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                text = "No data is currently available"
-            }
-//            text = "Please pull down to refresh"
-        }
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
-        
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-            NSParagraphStyleAttributeName: paragraph]
-        
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-
-}
 
 extension FeedViewController: UITableViewDelegate {
 
@@ -185,14 +121,6 @@ extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width + kTopCellBarHeight
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (activityShown == true) {
-            view.hideToastActivity()
-            tableView.tableFooterView = nil
-            tableView.scrollEnabled = true
-        }
     }
     
 }
