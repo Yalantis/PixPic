@@ -34,7 +34,7 @@ class SaverService {
                 { (succeeded, error) -> () in
                     if succeeded {
                         print("Avatar saved!")
-                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
+                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname, completion: nil)
                     } else if let error = error {
                         print(error)
                     }
@@ -64,17 +64,20 @@ class SaverService {
         }
     }
     
-     class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?) {
+    class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())?) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
             user.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
-                    AlertService.simpleAlert("User data has been changed!")
+                    completion!(true, nil)
+                    AlertService.simpleAlert("User data has been updated!")
                     
                 } else {
+                    AlertService.simpleAlert("Some error wile saving! Try gain later")
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
+                        completion!(nil, error)
                     }
                 }
             }
