@@ -59,5 +59,7 @@ struct Constants {
         static let SpaceInEnd = "Username can't end with spaces" as String
         static let NumbersAndSymbolsInUsername = "Username have to consist only with letters an numbers" as String
         static let TwoSpacesInRow = "Username can't consist two or more spaces in row" as String
+        static let MinUserName = 3 as Int
+        static let MaxUserName = 30 as Int
     }
 }
