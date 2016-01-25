@@ -70,17 +70,19 @@ class SaverService {
             user.username = nickname
             user.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
-                    completion!(true, nil)
+                    completion?(true, nil)
                     AlertService.simpleAlert("User data has been updated!")
                     
                 } else {
                     AlertService.simpleAlert("Some error wile saving! Try gain later")
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
-                        completion!(nil, error)
+                        completion?(false, error)
                     }
                 }
             }
+        } else {
+            completion?(false, "User name can not be empty")
         }
     }
 }

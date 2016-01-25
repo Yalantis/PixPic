@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let logoutMessage = "This will logout you. And you will not be able to share you photos..("
+
 class EditProfileViewController: UIViewController, UITextFieldDelegate, MBProgressHUDDelegate {
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -72,13 +74,16 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, MBProgre
             title: "LogOut",
             style: UIBarButtonItemStyle.Plain,
             target: self,
-            action: Selector("loguotAction:")
+            action: Selector("logoutAction:")
         )
         navigationItem.rightBarButtonItem = rightButton
     }
     
-    func loguotAction(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: nil, message: "This will logout you. And you will not be able to share you photos..(", preferredStyle: .ActionSheet)
+    func logoutAction(sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: nil,
+            message: logoutMessage,
+            preferredStyle: .ActionSheet
+        )
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
             (action) in
