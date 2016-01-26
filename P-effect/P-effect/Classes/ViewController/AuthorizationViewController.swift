@@ -28,7 +28,6 @@ class AuthorizationViewController: UIViewController {
                                     { user, error in
                                         if let error = error {
                                             handleError(error as NSError)
-                                            print(error)
                                         } else if let user = user {
                                             print("SIGNING INN!!!  with ",  user.username)
                                             Router.sharedRouter().showHome(animated: true)
@@ -51,8 +50,6 @@ class AuthorizationViewController: UIViewController {
                                             { success, error in
                                                 if let error = error {
                                                     handleError(error)
-
-                                                    print(error)
                                                 } else {
                                                     print("LINKED!!! NEED TO UPDATE DATA")
                                                     AuthService.updatePFUserDataFromFB(
@@ -61,8 +58,6 @@ class AuthorizationViewController: UIViewController {
                                                             user, error in
                                                             if let error = error {
                                                                 handleError(error)
-
-                                                                print(error)
                                                             } else if let _ = user {
                                                                 print("User has been updated")
                                                             }
@@ -81,12 +76,23 @@ class AuthorizationViewController: UIViewController {
                 }
                 else {
                     Router.sharedRouter().showHome(animated: true)
+                    
+                    let reachability: Reachability
+                    do {
+                        reachability = try Reachability.reachabilityForInternetConnection()
+                    } catch {
+                        print("Unable to create Reachability")
+                        return
+                    }
+                    
+                    if !reachability.isReachable() {
+                        let message = reachability.currentReachabilityStatus.description
+                        AlertService.simpleAlert(message)
+                    }
                 }
                 if let error = error {
                     handleError(error as NSError)
-                    print(error)
                 }
-                print("connectWithFacebookAction called")
             }
             
         )
