@@ -43,6 +43,9 @@ class PostDataSource: NSObject {
             if let objects = objects {
                 self?.arrayOfPosts = objects
             }
+            if let error = error {
+                handleError(error)
+            }
         }
     }
     
@@ -52,6 +55,9 @@ class PostDataSource: NSObject {
             if let objects = objects {
                 self?.tableView?.infiniteScrollingView.stopAnimating()
                 self?.arrayOfPosts.appendContentsOf(objects)
+            }
+            if let error = error {
+                handleError(error)
             }
         }
     }
@@ -90,6 +96,3 @@ extension PostDataSource: PostViewCellDelegate {
     }
     
 }
-
-
-
