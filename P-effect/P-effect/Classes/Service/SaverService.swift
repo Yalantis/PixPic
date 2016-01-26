@@ -8,6 +8,12 @@
 
 import Foundation
 
+private let messageDataSuccessfullyUpdated = "User data has been updated!"
+private let messageDataNotUpdated = "Some error wile saving! Try again later"
+private let messageUsernameCanNotBeEmpty = "User name can not be empty"
+private let messageUploadSuccessful = "Upload successful!"
+
+
 class SaverService {
     
     //MARK: - public
@@ -34,7 +40,7 @@ class SaverService {
                 { (succeeded, error) -> () in
                     if succeeded {
                         print("Avatar saved!")
-                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname, completion: nil)
+                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
                     } else if let error = error {
                         print(error)
                     }
@@ -52,7 +58,7 @@ class SaverService {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
-                    AlertService.simpleAlert("Upload successful!")
+                    AlertService.simpleAlert(messageUploadSuccessful)
                 } else {
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
@@ -64,17 +70,17 @@ class SaverService {
         }
     }
     
-    class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())?) {
+    class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
-            user.saveInBackgroundWithBlock{ succeeded, error in
+            user.saveInBackgroundWithBlock {
+                succeeded, error in
                 if succeeded {
                     completion?(true, nil)
-                    AlertService.simpleAlert("User data has been updated!")
-                    
+                    AlertService.simpleAlert(messageDataSuccessfullyUpdated)
                 } else {
-                    AlertService.simpleAlert("Some error wile saving! Try gain later")
+                    AlertService.simpleAlert(messageDataNotUpdated)
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
                         completion?(false, error)
@@ -82,7 +88,7 @@ class SaverService {
                 }
             }
         } else {
-            completion?(false, "User name can not be empty")
+            completion?(false, messageUsernameCanNotBeEmpty)
         }
     }
 }
