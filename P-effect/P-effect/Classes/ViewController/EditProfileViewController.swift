@@ -84,8 +84,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func saveChangesAction(sender: AnyObject) {
-        ValidationService.valdateUserName(userName!) {
-            [weak self] completion -> () in
+        ValidationService.valdateUserName(userName!) { [weak self] completion in
             if completion {
                 if let image = self?.image, let file = PFFile(name:
                     Constants.UserKey.Avatar,

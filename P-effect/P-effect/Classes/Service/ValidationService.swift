@@ -9,26 +9,28 @@
 import UIKit
 
 class ValidationService: NSObject {
-    class func valdateUserName(userName: String, completion: (Bool)->()) {
+    
+    class func valdateUserName(userName: String, completion: (Bool) -> ()) {
         if !userNameContainsOnlyLetters(userName) {
             completion(false)
             return
         }
         
-        if userName.characters.count < Constants.Validation.MinUserName && userName.characters.count > Constants.Validation.MaxUserName {
+        if userName.characters.count < Constants.Validation.MinUserName &&
+            userName.characters.count > Constants.Validation.MaxUserName {
             AlertService.simpleAlert(Constants.Validation.WrongLenght)
             completion (false)
             return
         }
         
         let query = PFUser.query()?.whereKey("username", equalTo: userName)
-        query?.getFirstObjectInBackgroundWithBlock() { (object, error) -> Void in
-        if object != nil {
-            AlertService.simpleAlert(Constants.Validation.AlreadyExist)
-            completion(false)
-        } else {
-            completion(true)
-        }
+        query?.getFirstObjectInBackgroundWithBlock { object, error in
+            if object != nil {
+                AlertService.simpleAlert(Constants.Validation.AlreadyExist)
+                completion(false)
+            } else {
+                completion(true)
+            }
         }
     }
 }
@@ -38,14 +40,14 @@ class ValidationService: NSObject {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false
         }
-        let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: Constants.Validation.CharacterSet)
-        if let match = userName.rangeOfCharacterFromSet(characterSet.invertedSet) {
+        let invalidCharacterSet: NSCharacterSet = NSCharacterSet(charactersInString: Constants.Validation.CharacterSet).invertedSet
+        if let containsInvalidSymbols = userName.rangeOfCharacterFromSet(invalidCharacterSet) {
             AlertService.simpleAlert(Constants.Validation.NumbersAndSymbolsInUsername)
             return false
         } else {
             var previousChar = Constants.Validation.WhiteSpace as Character
             for char in userName.characters {
-                if ((previousChar == Constants.Validation.WhiteSpace)  && (char == Constants.Validation.WhiteSpace)) {
+                if previousChar == Constants.Validation.WhiteSpace && char == Constants.Validation.WhiteSpace {
                     AlertService.simpleAlert(Constants.Validation.TwoSpacesInRow)
                     return false
                 }
