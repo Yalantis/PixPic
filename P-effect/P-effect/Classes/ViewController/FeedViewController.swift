@@ -16,7 +16,7 @@ class FeedViewController: UIViewController {
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 
     var postDataSource: PostDataSource? {
         didSet {

@@ -12,6 +12,7 @@ protocol PostDataSourceDelegate: class {
     
     func showUserProfile(user: User)
     func showPlaceholderForEmptyDataSet()
+    
 }
 
 class PostDataSource: NSObject {
@@ -24,9 +25,9 @@ class PostDataSource: NSObject {
     }
     
     var tableView: UITableView?
-    var shouldPullToRefreshHandle: Bool?
+    var shouldPullToRefreshHandle: Bool!
     
-    private let loader = LoaderService()
+    private lazy var loader = LoaderService()
     weak var delegate: PostDataSourceDelegate?
     
     override init() {
