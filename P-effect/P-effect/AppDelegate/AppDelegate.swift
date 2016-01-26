@@ -51,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
-        
         let currentInstallation = PFInstallation.currentInstallation()
         if(currentInstallation.badge != 0){
             currentInstallation.badge = 0
