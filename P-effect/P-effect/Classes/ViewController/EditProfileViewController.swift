@@ -26,8 +26,8 @@ class EditProfileViewController: UIViewController {
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var saveChangesButton: UIButton!
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -242,7 +242,6 @@ class EditProfileViewController: UIViewController {
             }
         )
     }
-    
     
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
         let afterStr = sender.text
