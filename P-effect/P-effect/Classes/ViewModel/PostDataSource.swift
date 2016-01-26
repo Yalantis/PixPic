@@ -25,7 +25,7 @@ class PostDataSource: NSObject {
     }
     
     var tableView: UITableView?
-    var shouldPullToRefreshHandle: Bool!
+    var shouldPullToRefreshHandle: Bool = false
     
     private lazy var loader = LoaderService()
     weak var delegate: PostDataSourceDelegate?
