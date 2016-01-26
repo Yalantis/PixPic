@@ -45,7 +45,7 @@ struct Constants {
     }
     
     struct DataSource {
-        static let QueryLimit = 2 as Int
+        static let QueryLimit = 10 as Int
     }
     
     struct BackButtonTitle {
