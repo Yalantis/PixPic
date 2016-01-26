@@ -85,21 +85,18 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func saveChangesAction(sender: AnyObject) {
         ValidationService.valdateUserName(userName!) { [weak self] completion in
-            if completion {
-                if let image = self?.image, let file = PFFile(name:
-                    Constants.UserKey.Avatar,
-                    data: UIImageJPEGRepresentation (image, 1)!) {
-                        SaverService.uploadUserChanges(
-                            User.currentUser()!,
-                            avatar: file,
-                            nickname: self?.userName
-                        )
-                        self?.navigationController?.popToRootViewControllerAnimated(true)
+            if !completion {
+                return
+            }
+            if let image = self?.image {
+                let file = PFFile(name: Constants.UserKey.Avatar, data: UIImageJPEGRepresentation (image, 1)!)
+                if let file = file {
+                    SaverService.uploadUserChanges(User.currentUser()!, avatar: file, nickname: self?.userName)
+                    self?.navigationController?.popToRootViewControllerAnimated(true)
                 }
             }
         }
     }
-    
     //MARK: - TextFiel delegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
