@@ -10,9 +10,12 @@ import UIKit
 
 class PhotoEditorViewController: UIViewController {
     
+    @IBOutlet weak var effectsPickerContainer: UIView!
+    @IBOutlet weak var imageContainer: UIView!
+    
+    var model: PhotoEditorModel!
 
     @IBOutlet weak var postImage: UIImageView!
-    var imageModel: UIImage?
     @IBOutlet weak var leftToolbarButton: UIBarButtonItem!
     @IBOutlet weak var rightToolbarButton: UIBarButtonItem!
 
@@ -23,12 +26,13 @@ class PhotoEditorViewController: UIViewController {
     }
 
     func setupView() {
-        if let image = imageModel {
-            postImage.image = image
-        }
-        var size = postImage.frame.size
+//        if let image = imageModel {
+//            postImage.image = image
+//        }
+        
+        var size = imageContainer.bounds.size
         size.height = size.width
-        postImage.frame.size = size
+        imageContainer.frame.size = size
         
         leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
         rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5

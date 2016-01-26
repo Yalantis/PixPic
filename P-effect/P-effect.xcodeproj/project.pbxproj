@@ -10,6 +10,10 @@
 		49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089CA41C4FA09C00027191 /* ProfileViewModel.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
+		499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */; };
+		499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */; };
+		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
+		499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
 		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
 		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
@@ -63,6 +67,10 @@
 		49089CA41C4FA09C00027191 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
+		499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
+		499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerViewController.swift; sourceTree = "<group>"; };
+		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerModel.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
 		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
 		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
@@ -259,6 +267,8 @@
 				95199AEA1C4CF6A00086D613 /* FeedViewController.swift */,
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
 				FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */,
+				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
+				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -268,6 +278,8 @@
 			children = (
 				FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */,
 				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
+				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
+				499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -522,12 +534,16 @@
 			files = (
 				FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */,
 				FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */,
+				499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
+				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
+				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
 				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
+				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,

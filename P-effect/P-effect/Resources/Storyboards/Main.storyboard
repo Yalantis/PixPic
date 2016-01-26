@@ -76,13 +76,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-dl-en4">
                                 <rect key="frame" x="0.0" y="456" width="600" height="100"/>
                                 <connections>
-                                    <segue destination="M0f-RH-7IE" kind="embed" id="Unj-ax-1aP"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
-                                <rect key="frame" x="0.0" y="36" width="600" height="420"/>
-                                <connections>
-                                    <segue destination="JkI-vZ-tCt" kind="embed" id="Xi7-6t-bC1"/>
+                                    <segue destination="sQo-iX-oiF" kind="embed" id="6H1-lR-Jeo"/>
                                 </connections>
                             </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkp-bY-vAG">
@@ -101,25 +95,31 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <containerView opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
+                                <rect key="frame" x="0.0" y="36" width="600" height="420"/>
+                                <connections>
+                                    <segue destination="JkI-vZ-tCt" kind="embed" id="Xi7-6t-bC1"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="CSU-ye-LVh" secondAttribute="bottom" id="15O-tJ-gbO"/>
-                            <constraint firstItem="CSU-ye-LVh" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="DGB-0q-Yuz"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="MYp-Q5-HUd"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="leading" secondItem="XDS-dl-en4" secondAttribute="leading" id="OZo-5M-R1k"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="SLx-BP-3dD"/>
-                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="BEp-tC-hT2" secondAttribute="top" constant="456" id="Wfv-K0-UO6"/>
-                            <constraint firstAttribute="trailing" secondItem="XDS-dl-en4" secondAttribute="trailing" id="bFk-pX-Tgq"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="trailing" secondItem="XDS-dl-en4" secondAttribute="trailing" id="cWO-Kk-OWu"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="bottom" secondItem="Nfi-8L-JZ4" secondAttribute="top" id="e7k-CX-bIg"/>
-                            <constraint firstItem="XDS-dl-en4" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="fJ5-ge-k30"/>
-                            <constraint firstAttribute="trailing" secondItem="CSU-ye-LVh" secondAttribute="trailing" id="pUj-Hu-SbA"/>
-                            <constraint firstItem="CSU-ye-LVh" firstAttribute="top" secondItem="01u-i3-87M" secondAttribute="bottom" constant="16" id="qFI-sX-6nz"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="uTv-nd-4kZ"/>
+                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="BEp-tC-hT2" secondAttribute="top" constant="456" id="6Sb-so-kUq"/>
+                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="CSU-ye-LVh" secondAttribute="bottom" id="ER5-Bt-RAu"/>
+                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="LpR-ei-Pqw"/>
+                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="RtR-3T-luC"/>
+                            <constraint firstItem="XDS-dl-en4" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="S0H-df-eTU"/>
+                            <constraint firstAttribute="trailing" secondItem="XDS-dl-en4" secondAttribute="trailing" id="VzV-zC-QdG"/>
+                            <constraint firstItem="CSU-ye-LVh" firstAttribute="top" secondItem="01u-i3-87M" secondAttribute="bottom" constant="16" id="cW2-Ln-bj0"/>
+                            <constraint firstAttribute="trailing" secondItem="Qkp-bY-vAG" secondAttribute="trailing" id="gzt-0g-gW1"/>
+                            <constraint firstItem="Nfi-8L-JZ4" firstAttribute="top" secondItem="Qkp-bY-vAG" secondAttribute="bottom" id="o58-JW-c31"/>
+                            <constraint firstAttribute="trailing" secondItem="CSU-ye-LVh" secondAttribute="trailing" id="qZY-O6-T9v"/>
+                            <constraint firstItem="CSU-ye-LVh" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="rF0-xz-1HV"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="effectsPickerContainer" destination="XDS-dl-en4" id="9BL-k5-f2i"/>
+                        <outlet property="imageContainer" destination="CSU-ye-LVh" id="utj-Vc-EYd"/>
                         <outlet property="leftToolbarButton" destination="tpO-46-vtZ" id="cux-fV-tL5"/>
                         <outlet property="rightToolbarButton" destination="sZ7-G1-q5q" id="StF-n0-hEf"/>
                     </connections>
@@ -127,6 +127,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ev-mc-7MU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="331" y="1109"/>
+        </scene>
+        <!--Effects Picker View Controller-->
+        <scene sceneID="QZ6-GV-vQi">
+            <objects>
+                <collectionViewController id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XbQ-2j-2Mn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R52-vm-AFz">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EBj-No-79Q">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="sQo-iX-oiF" id="3gu-qC-Ew0"/>
+                            <outlet property="delegate" destination="sQo-iX-oiF" id="hnE-3l-EvQ"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KvI-Qj-KmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="477" y="1631"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="kEf-LR-r38">
@@ -386,33 +420,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGB-WO-j1t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="7GN-8b-PNB">
-            <objects>
-                <viewController id="M0f-RH-7IE" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QqX-AV-9UK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Npt-CT-UwS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="482" y="1631"/>
-        </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="PpH-jg-JCp">
             <objects>
-                <viewController id="JkI-vZ-tCt" sceneMemberID="viewController">
+                <viewController id="JkI-vZ-tCt" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s4Q-Gi-VgG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-Jc-E8P">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
+                                <color key="backgroundColor" red="0.46769773960113525" green="0.58180910348892212" blue="0.09031001478433609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="rawImage" destination="sDn-Jc-E8P" id="t4u-Dr-D20"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz9-BX-bq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-179" y="1791"/>
+            <point key="canvasLocation" x="-189" y="1791"/>
         </scene>
     </scenes>
     <resources>
