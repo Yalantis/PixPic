@@ -27,6 +27,7 @@ class AuthorizationViewController: UIViewController {
                                 FBAuthorization.signInWithPermission(
                                     { user, error in
                                         if let error = error {
+                                            handleError(error as NSError)
                                             print(error)
                                         } else if let user = user {
                                             print("SIGNING INN!!!  with ",  user.username)
@@ -49,6 +50,8 @@ class AuthorizationViewController: UIViewController {
                                         user.linkOrUnlinkFacebook(
                                             { success, error in
                                                 if let error = error {
+                                                    handleError(error)
+
                                                     print(error)
                                                 } else {
                                                     print("LINKED!!! NEED TO UPDATE DATA")
@@ -57,6 +60,8 @@ class AuthorizationViewController: UIViewController {
                                                         completion: {
                                                             user, error in
                                                             if let error = error {
+                                                                handleError(error)
+
                                                                 print(error)
                                                             } else if let _ = user {
                                                                 print("User has been updated")
@@ -74,8 +79,16 @@ class AuthorizationViewController: UIViewController {
                         }
                     )
                 }
+                else {
+                    Router.sharedRouter().showHome(animated: true)
+                }
+                if let error = error {
+                    handleError(error as NSError)
+                    print(error)
+                }
                 print("connectWithFacebookAction called")
             }
+            
         )
     }
     
