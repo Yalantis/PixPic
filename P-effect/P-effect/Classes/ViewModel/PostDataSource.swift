@@ -10,7 +10,9 @@ import Foundation
 
 protocol PostDataSourceDelegate: class {
     
-    func showUserProfile(user: User) 
+    func showUserProfile(user: User)
+    func showPlaceholderForEmptyDataSet()
+    
 }
 
 class PostDataSource: NSObject {
@@ -18,11 +20,14 @@ class PostDataSource: NSObject {
     private var arrayOfPosts: [Post] = [Post]() {
         didSet {
             tableView?.reloadData()
+            delegate?.showPlaceholderForEmptyDataSet()
         }
     }
-    var shouldPullToRefreshHandle: Bool?
+    
     var tableView: UITableView?
-    private let loader = LoaderService()
+    var shouldPullToRefreshHandle: Bool = false
+    
+    private lazy var loader = LoaderService()
     weak var delegate: PostDataSourceDelegate?
     
     override init() {
