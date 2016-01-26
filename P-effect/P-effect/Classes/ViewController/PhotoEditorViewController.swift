@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol PhotoEditorDelegate: class {
+    
+    func didChooseEffect(effect: UIImage)
+    func saveEffectOnImage() -> UIImage
+}
+
 class PhotoEditorViewController: UIViewController {
     
     @IBOutlet weak var effectsPickerContainer: UIView!
@@ -16,8 +22,13 @@ class PhotoEditorViewController: UIViewController {
     @IBOutlet weak var rightToolbarButton: UIBarButtonItem!
     
     var model: PhotoEditorModel!
-    var effectsPickerController: EffectsPickerViewController?
+    var effectsPickerController: EffectsPickerViewController? {
+        didSet {
+            effectsPickerController?.delegate = self
+        }
+    }
     var imageController: ImageViewController?
+    weak var delegate: PhotoEditorDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +37,7 @@ class PhotoEditorViewController: UIViewController {
     }
 
     func setupView() {
-        var size = imageContainer.frame.size
-        size.width = UIScreen.mainScreen().bounds.width
-        size.height = size.width
-        imageContainer.frame.size = size
-        size.height = effectsPickerContainer.frame.height
-        effectsPickerContainer.frame.size = size
-        
-        leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
-        rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
-    }
+            }
 
     @IBAction func postEditedImage(sender: AnyObject) {
         
@@ -45,13 +47,33 @@ class PhotoEditorViewController: UIViewController {
         
     }
     
+    func didChooseEffectFromPicket(effect: UIImage) {
+        delegate?.didChooseEffect(effect)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        var size = imageContainer.frame.size
+        size.width = UIScreen.mainScreen().bounds.width
+        size.height = size.width
+        imageContainer.bounds.size = size
+        size.height = effectsPickerContainer.frame.height
+        effectsPickerContainer.bounds.size = size
+        
+        leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
+        rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
+        view.superview?.layoutIfNeeded()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segue.identifier! {
             case Constants.PhotoEditor.ImageViewControllerSegue:
                 imageController = segue.destinationViewController as? ImageViewController
+                imageController?.model = ImageViewModel.init(image: model.originalImage)
                 break
             case Constants.PhotoEditor.EffectsPickerSegue:
                 effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
+                effectsPickerController?.model = EffectsPickerModel()
                 break
             default:
                 break

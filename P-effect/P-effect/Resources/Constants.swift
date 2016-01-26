@@ -56,4 +56,8 @@ struct Constants {
         static let ImageViewControllerSegue = "ImageViewControllerSegue"
         static let EffectsPickerSegue = "EffectsPickerSegue"
     }
+    
+    struct EffectsPicker {
+        static let EffectsPickerCellIdentifier = "EffectsPickerCell"
+    }
 }

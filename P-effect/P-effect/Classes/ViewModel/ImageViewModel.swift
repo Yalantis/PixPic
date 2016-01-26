@@ -1,5 +1,5 @@
 //
-//  PhotoEditorModel.swift
+//  ImageViewModel.swift
 //  P-effect
 //
 //  Created by Illya on 1/26/16.
@@ -8,21 +8,14 @@
 
 import UIKit
 
-class PhotoEditorModel: NSObject {
+class ImageViewModel: NSObject {
     
-    var originalImage: UIImage
+    var originalImage: UIImage?
     
     init(image: UIImage) {
         originalImage = image
         
         super.init()
     }
-    
-    class func postImage(image: UIImage) {
-        
-    }
-    
-    class func saveImageToLibrary(image: UIImage) {
-        
-    }
+
 }

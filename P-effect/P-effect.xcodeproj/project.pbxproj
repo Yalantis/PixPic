@@ -15,6 +15,7 @@
 		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
 		499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */; };
 		499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Main.storyboard */; };
+		499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
 		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
 		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
@@ -72,6 +73,7 @@
 		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerModel.swift; sourceTree = "<group>"; };
 		499DD0541C57D2D300DABCD5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
 		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
 		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
 				499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */,
+				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
+				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,

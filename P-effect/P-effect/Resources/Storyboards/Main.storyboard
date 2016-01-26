@@ -69,12 +69,12 @@
                         <viewControllerLayoutGuide type="top" id="01u-i3-87M"/>
                         <viewControllerLayoutGuide type="bottom" id="Nfi-8L-JZ4"/>
                     </layoutGuides>
-                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="BEp-tC-hT2">
+                    <view key="view" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" id="BEp-tC-hT2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-dl-en4">
-                                <rect key="frame" x="0.0" y="456" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="456" width="600" height="93"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="LZ4-uJ-qVb"/>
                                 </constraints>
@@ -85,6 +85,12 @@
                                 </variation>
                                 <connections>
                                     <segue destination="sQo-iX-oiF" kind="embed" identifier="EffectsPickerSegue" id="6H1-lR-Jeo"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
+                                <rect key="frame" x="0.0" y="36" width="600" height="420"/>
+                                <connections>
+                                    <segue destination="JkI-vZ-tCt" kind="embed" identifier="ImageViewControllerSegue" id="Xi7-6t-bC1"/>
                                 </connections>
                             </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkp-bY-vAG">
@@ -103,17 +109,11 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
-                                <rect key="frame" x="0.0" y="36" width="600" height="420"/>
-                                <connections>
-                                    <segue destination="JkI-vZ-tCt" kind="embed" identifier="ImageViewControllerSegue" id="Xi7-6t-bC1"/>
-                                </connections>
-                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qkp-bY-vAG" firstAttribute="bottom" secondItem="Nfi-8L-JZ4" secondAttribute="top" id="00b-nL-2iT"/>
-                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="LpR-ei-Pqw"/>
+                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" constant="7" id="LpR-ei-Pqw"/>
                             <constraint firstItem="Qkp-bY-vAG" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="RtR-3T-luC"/>
                             <constraint firstItem="XDS-dl-en4" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="S0H-df-eTU"/>
                             <constraint firstItem="CSU-ye-LVh" firstAttribute="centerX" secondItem="BEp-tC-hT2" secondAttribute="centerX" id="TDY-bo-o2X"/>
@@ -141,24 +141,25 @@
         <scene sceneID="QZ6-GV-vQi">
             <objects>
                 <collectionViewController storyboardIdentifier="EffectsPicker" id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XbQ-2j-2Mn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="XbQ-2j-2Mn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R52-vm-AFz">
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="R52-vm-AFz">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="EBj-No-79Q">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" reuseIdentifier="EffectsPickerCell" id="EBj-No-79Q">
+                                <rect key="frame" x="0.0" y="22" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.14509804549999999" green="0.77647060160000003" blue="0.066666670139999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -166,10 +167,11 @@
                             <outlet property="delegate" destination="sQo-iX-oiF" id="hnE-3l-EvQ"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvI-Qj-KmY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="1631"/>
+            <point key="canvasLocation" x="515" y="1631"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="kEf-LR-r38">
@@ -435,6 +437,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="rawImage" destination="sDn-Jc-E8P" id="t4u-Dr-D20"/>
                     </connections>
