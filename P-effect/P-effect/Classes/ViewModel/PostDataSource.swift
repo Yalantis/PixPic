@@ -10,7 +10,9 @@ import Foundation
 
 protocol PostDataSourceDelegate: class {
     
-    func showUserProfile(user: User) 
+    func showUserProfile(user: User)
+    func showPlaceholderForEmptyDataSet()
+    
 }
 
 class PostDataSource: NSObject {
@@ -18,11 +20,14 @@ class PostDataSource: NSObject {
     private var arrayOfPosts: [Post] = [Post]() {
         didSet {
             tableView?.reloadData()
+            delegate?.showPlaceholderForEmptyDataSet()
         }
     }
-    var shouldPullToRefreshHandle: Bool?
+    
     var tableView: UITableView?
-    private let loader = LoaderService()
+    var shouldPullToRefreshHandle: Bool = false
+    
+    private lazy var loader = LoaderService()
     weak var delegate: PostDataSourceDelegate?
     
     override init() {
@@ -43,6 +48,9 @@ class PostDataSource: NSObject {
             if let objects = objects {
                 self?.arrayOfPosts = objects
             }
+            if let error = error {
+                handleError(error)
+            }
         }
     }
     
@@ -52,6 +60,9 @@ class PostDataSource: NSObject {
             if let objects = objects {
                 self?.tableView?.infiniteScrollingView.stopAnimating()
                 self?.arrayOfPosts.appendContentsOf(objects)
+            }
+            if let error = error {
+                handleError(error)
             }
         }
     }
@@ -90,6 +101,3 @@ extension PostDataSource: PostViewCellDelegate {
     }
     
 }
-
-
-
