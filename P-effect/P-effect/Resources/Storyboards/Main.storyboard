@@ -154,7 +154,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="PMu-2m-3mP">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="fkd-F7-BN1" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oW6-ph-8Hy"/>
                         <viewControllerLayoutGuide type="bottom" id="7oV-XE-8lN"/>
@@ -178,13 +178,13 @@
                                         </connections>
                                     </button>
                                     <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l7B-ps-0Gz">
-                                        <rect key="frame" x="59" y="70" width="256" height="256"/>
+                                        <rect key="frame" x="59" y="100" width="256" height="256"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l7B-ps-0Gz" secondAttribute="height" multiplier="1:1" id="vyj-lv-dyr"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcR-1x-Grd" userLabel="Edit Image Button">
-                                        <rect key="frame" x="59" y="70" width="256" height="256"/>
+                                        <rect key="frame" x="59" y="100" width="256" height="256"/>
                                         <connections>
                                             <action selector="avatarTapAction:" destination="fkd-F7-BN1" eventType="touchUpInside" id="A2n-WU-v71"/>
                                         </connections>
@@ -207,7 +207,7 @@
                                 <constraints>
                                     <constraint firstItem="l7B-ps-0Gz" firstAttribute="bottom" secondItem="UcR-1x-Grd" secondAttribute="bottom" id="2uI-K5-rjX"/>
                                     <constraint firstItem="l7B-ps-0Gz" firstAttribute="centerX" secondItem="EiG-JV-lVg" secondAttribute="centerX" id="EgM-V5-5vu"/>
-                                    <constraint firstItem="l7B-ps-0Gz" firstAttribute="top" secondItem="EiG-JV-lVg" secondAttribute="top" constant="70" id="HBV-Zl-Zea"/>
+                                    <constraint firstItem="l7B-ps-0Gz" firstAttribute="top" secondItem="EiG-JV-lVg" secondAttribute="top" constant="100" id="HBV-Zl-Zea"/>
                                     <constraint firstItem="UcR-1x-Grd" firstAttribute="leading" secondItem="l7B-ps-0Gz" secondAttribute="leading" id="PnE-MS-1jh"/>
                                     <constraint firstItem="9ek-mu-CwH" firstAttribute="leading" secondItem="EiG-JV-lVg" secondAttribute="leading" constant="96" id="Vfj-Bj-ACW"/>
                                     <constraint firstAttribute="trailing" secondItem="9ek-mu-CwH" secondAttribute="trailing" constant="95" id="YeQ-8X-uhD"/>

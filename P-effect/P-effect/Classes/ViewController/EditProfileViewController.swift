@@ -19,8 +19,8 @@ class EditProfileViewController: UIViewController {
     private var image: UIImage?
     private var userName: String?
     
-    var kbHeight: CGFloat?
-    private var kbHidden: Bool = true
+    private var kbHeight: CGFloat?
+    private var kbHidden = true
     private var someChangesMade: Bool = false
     
     @IBOutlet private weak var avatarImageView: UIImageView!
@@ -34,19 +34,8 @@ class EditProfileViewController: UIViewController {
         
         makeNavigation()
         view.layoutIfNeeded()
-        setupImagesAndText()
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "keyboardWillShow:",
-            name:UIKeyboardWillShowNotification,
-            object: nil
-        )
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "keyboardWillHide:",
-            name:UIKeyboardWillHideNotification,
-            object: nil
-        )
+        configureImagesAndText()
+        subscribeOnNotifications()
     }
     
     deinit {
@@ -59,7 +48,22 @@ class EditProfileViewController: UIViewController {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
     }
     
-    private func setupImagesAndText() {
+    private func subscribeOnNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "keyboardWillShow:",
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "keyboardWillHide:",
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    private func configureImagesAndText() {
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
@@ -176,20 +180,14 @@ class EditProfileViewController: UIViewController {
     
     private func animateTextField(up: Bool) {
         if let kbheight = kbHeight {
-            let movement = (up ? -kbheight : kbheight)
-            if kbHidden {
-                self.bottomConstraint.constant = -movement
-                self.topConstraint.constant = movement
-            } else {
-                self.bottomConstraint.constant = 0
-                self.topConstraint.constant = 0
-            }
+            let movement = (up ? kbheight : -kbheight)
+            bottomConstraint.constant = (kbHidden ? movement : 0)
+            topConstraint.constant = (kbHidden ? -movement : 0)
             view.needsUpdateConstraints()
             UIView.animateWithDuration(
                 0.3,
                 animations: {
                     [weak self] in
-                    
                     self?.view.layoutIfNeeded()
                 }
             )
@@ -212,11 +210,7 @@ class EditProfileViewController: UIViewController {
         self.image = image
     }
     
-    @IBAction func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInView(self)
-    }
-    
-    @IBAction func saveChangesAction(sender: AnyObject) {
+    private func saveChanges() {
         someChangesMade = false
         guard let image = image
             else { return }
@@ -241,6 +235,14 @@ class EditProfileViewController: UIViewController {
                 }
             }
         )
+    }
+    
+    @IBAction func avatarTapAction(sender: AnyObject) {
+        photoGenerator.showInView(self)
+    }
+    
+    @IBAction func saveChangesAction(sender: AnyObject) {
+        saveChanges()
     }
     
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
