@@ -51,4 +51,9 @@ struct Constants {
     struct BackButtonTitle {
         static let HideTitlePosition = UIOffsetMake(0, -70)
     }
+    
+    struct PhotoEditor {
+        static let ImageViewControllerSegue = "ImageViewControllerSegue"
+        static let EffectsPickerSegue = "EffectsPickerSegue"
+    }
 }

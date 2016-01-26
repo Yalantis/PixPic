@@ -12,13 +12,13 @@ class PhotoEditorViewController: UIViewController {
     
     @IBOutlet weak var effectsPickerContainer: UIView!
     @IBOutlet weak var imageContainer: UIView!
-    
-    var model: PhotoEditorModel!
-
-    @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var leftToolbarButton: UIBarButtonItem!
     @IBOutlet weak var rightToolbarButton: UIBarButtonItem!
-
+    
+    var model: PhotoEditorModel!
+    var effectsPickerController: EffectsPickerViewController?
+    var imageController: ImageViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,13 +26,12 @@ class PhotoEditorViewController: UIViewController {
     }
 
     func setupView() {
-//        if let image = imageModel {
-//            postImage.image = image
-//        }
-        
-        var size = imageContainer.bounds.size
+        var size = imageContainer.frame.size
+        size.width = UIScreen.mainScreen().bounds.width
         size.height = size.width
         imageContainer.frame.size = size
+        size.height = effectsPickerContainer.frame.height
+        effectsPickerContainer.frame.size = size
         
         leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
         rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
@@ -46,4 +45,18 @@ class PhotoEditorViewController: UIViewController {
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+            case Constants.PhotoEditor.ImageViewControllerSegue:
+                imageController = segue.destinationViewController as? ImageViewController
+                break
+            case Constants.PhotoEditor.EffectsPickerSegue:
+                effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
+                break
+            default:
+                break
+        }
+        
+        super.prepareForSegue(segue, sender: sender)
+    }
 }

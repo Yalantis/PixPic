@@ -69,14 +69,22 @@
                         <viewControllerLayoutGuide type="top" id="01u-i3-87M"/>
                         <viewControllerLayoutGuide type="bottom" id="Nfi-8L-JZ4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="BEp-tC-hT2">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="BEp-tC-hT2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDS-dl-en4">
                                 <rect key="frame" x="0.0" y="456" width="600" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="LZ4-uJ-qVb"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="LZ4-uJ-qVb"/>
+                                    </mask>
+                                </variation>
                                 <connections>
-                                    <segue destination="sQo-iX-oiF" kind="embed" id="6H1-lR-Jeo"/>
+                                    <segue destination="sQo-iX-oiF" kind="embed" identifier="EffectsPickerSegue" id="6H1-lR-Jeo"/>
                                 </connections>
                             </containerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkp-bY-vAG">
@@ -95,26 +103,27 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <containerView opaque="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="CSU-ye-LVh">
                                 <rect key="frame" x="0.0" y="36" width="600" height="420"/>
                                 <connections>
-                                    <segue destination="JkI-vZ-tCt" kind="embed" id="Xi7-6t-bC1"/>
+                                    <segue destination="JkI-vZ-tCt" kind="embed" identifier="ImageViewControllerSegue" id="Xi7-6t-bC1"/>
                                 </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="BEp-tC-hT2" secondAttribute="top" constant="456" id="6Sb-so-kUq"/>
-                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="CSU-ye-LVh" secondAttribute="bottom" id="ER5-Bt-RAu"/>
+                            <constraint firstItem="Qkp-bY-vAG" firstAttribute="bottom" secondItem="Nfi-8L-JZ4" secondAttribute="top" id="00b-nL-2iT"/>
                             <constraint firstItem="Qkp-bY-vAG" firstAttribute="top" secondItem="XDS-dl-en4" secondAttribute="bottom" id="LpR-ei-Pqw"/>
                             <constraint firstItem="Qkp-bY-vAG" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="RtR-3T-luC"/>
                             <constraint firstItem="XDS-dl-en4" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="S0H-df-eTU"/>
+                            <constraint firstItem="CSU-ye-LVh" firstAttribute="centerX" secondItem="BEp-tC-hT2" secondAttribute="centerX" id="TDY-bo-o2X"/>
                             <constraint firstAttribute="trailing" secondItem="XDS-dl-en4" secondAttribute="trailing" id="VzV-zC-QdG"/>
-                            <constraint firstItem="CSU-ye-LVh" firstAttribute="top" secondItem="01u-i3-87M" secondAttribute="bottom" constant="16" id="cW2-Ln-bj0"/>
+                            <constraint firstAttribute="bottom" secondItem="CSU-ye-LVh" secondAttribute="bottom" constant="144" id="c8y-8j-bw5"/>
                             <constraint firstAttribute="trailing" secondItem="Qkp-bY-vAG" secondAttribute="trailing" id="gzt-0g-gW1"/>
-                            <constraint firstItem="Nfi-8L-JZ4" firstAttribute="top" secondItem="Qkp-bY-vAG" secondAttribute="bottom" id="o58-JW-c31"/>
                             <constraint firstAttribute="trailing" secondItem="CSU-ye-LVh" secondAttribute="trailing" id="qZY-O6-T9v"/>
                             <constraint firstItem="CSU-ye-LVh" firstAttribute="leading" secondItem="BEp-tC-hT2" secondAttribute="leading" id="rF0-xz-1HV"/>
+                            <constraint firstItem="CSU-ye-LVh" firstAttribute="top" secondItem="01u-i3-87M" secondAttribute="bottom" constant="16" id="vOy-ez-niZ"/>
+                            <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="CSU-ye-LVh" secondAttribute="bottom" id="wtw-MZ-RZO"/>
                         </constraints>
                     </view>
                     <connections>
@@ -131,7 +140,7 @@
         <!--Effects Picker View Controller-->
         <scene sceneID="QZ6-GV-vQi">
             <objects>
-                <collectionViewController id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EffectsPicker" id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XbQ-2j-2Mn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -407,23 +416,14 @@
             </objects>
             <point key="canvasLocation" x="676" y="-350"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="2Vu-iJ-u1v">
-            <objects>
-                <viewController id="cTO-NG-tqd" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="PFB-pC-khM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PGB-WO-j1t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Image View Controller-->
         <scene sceneID="PpH-jg-JCp">
             <objects>
-                <viewController id="JkI-vZ-tCt" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageController" id="JkI-vZ-tCt" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VRb-Ta-wiy"/>
+                        <viewControllerLayoutGuide type="bottom" id="z7M-qA-EI9"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s4Q-Gi-VgG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

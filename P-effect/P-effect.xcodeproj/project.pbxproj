@@ -14,6 +14,7 @@
 		499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */; };
 		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
 		499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */; };
+		499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Main.storyboard */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
 		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
 		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
@@ -30,7 +31,6 @@
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
-		FD8EFA091C51244500B1C021 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD8EFA081C51244500B1C021 /* Main.storyboard */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertService.swift */; };
 		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
@@ -71,6 +71,7 @@
 		499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerViewController.swift; sourceTree = "<group>"; };
 		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerModel.swift; sourceTree = "<group>"; };
+		499DD0541C57D2D300DABCD5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
 		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
 		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
@@ -88,7 +89,6 @@
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		FD8EFA081C51244500B1C021 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,7 +338,7 @@
 		FDAF46AF1C4936CA008060CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				FD8EFA081C51244500B1C021 /* Main.storyboard */,
+				499DD0541C57D2D300DABCD5 /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -453,7 +453,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD8EFA091C51244500B1C021 /* Main.storyboard in Resources */,
+				499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */,
 				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
