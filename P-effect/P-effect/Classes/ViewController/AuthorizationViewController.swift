@@ -94,7 +94,6 @@ class AuthorizationViewController: UIViewController {
                     handleError(error as NSError)
                 }
             }
-            
         )
     }
     
