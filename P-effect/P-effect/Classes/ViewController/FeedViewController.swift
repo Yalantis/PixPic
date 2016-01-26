@@ -106,9 +106,24 @@ class FeedViewController: UIViewController {
             tableView.contentInset = insets
             tableView.scrollIndicatorInsets = insets
         }
+        
         tableView.addPullToRefreshWithActionHandler {
             [weak self] () -> () in
-            self?.postDataSource?.fetchData(nil)
+            let reachability: Reachability
+            do {
+                reachability = try Reachability.reachabilityForInternetConnection()
+            } catch {
+                print("Unable to create Reachability")
+                return
+            }
+            
+            if !reachability.isReachable() {
+                let message = reachability.currentReachabilityStatus.description
+                AlertService.simpleAlert(message)
+                self?.tableView?.pullToRefreshView.stopAnimating()
+            } else {
+                self?.postDataSource?.fetchData(nil)
+            }
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
