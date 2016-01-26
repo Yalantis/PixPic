@@ -41,7 +41,11 @@ class FeedViewController: UIViewController {
     }
     
     private func handlePhotoSelected(image: UIImage) {
-        setSelectedPhoto(image)
+        let board = UIStoryboard(name: "Main", bundle: nil)
+        let controllerIdentifier = "EditProfileViewController"
+        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
+        navigationController?.showViewController(viewController, sender: self)
+//        setSelectedPhoto(image)
     }
     
     func setSelectedPhoto(image: UIImage) {
