@@ -19,7 +19,7 @@ class EditProfileViewController: UIViewController {
     private var image: UIImage?
     private var userName: String?
     
-    var kbHeight: CGFloat?
+    private var kbHeight: CGFloat?
     private var kbHidden = true
     private var someChangesMade: Bool = false
     
@@ -35,6 +35,20 @@ class EditProfileViewController: UIViewController {
         makeNavigation()
         view.layoutIfNeeded()
         configureImagesAndText()
+        subscribeOnNotifications()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
+    }
+    
+    private func subscribeOnNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "keyboardWillShow:",
@@ -47,16 +61,6 @@ class EditProfileViewController: UIViewController {
             name: UIKeyboardWillHideNotification,
             object: nil
         )
-    }
-    
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
     }
     
     private func configureImagesAndText() {
