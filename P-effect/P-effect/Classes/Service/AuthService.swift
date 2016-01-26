@@ -53,7 +53,6 @@ class AuthService {
         
     }
     
-    
     func anonymousLogIn(completion completion: (object: User?) -> (), failure: (error: NSError?) -> ()) {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
@@ -65,7 +64,6 @@ class AuthService {
             }
         }
     }
-    
     
     func logOut() {
         User.logOut()
