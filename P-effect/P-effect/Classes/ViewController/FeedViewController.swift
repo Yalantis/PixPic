@@ -16,8 +16,8 @@ class FeedViewController: UIViewController {
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
     
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet private weak var tableView: UITableView!
+
     var postDataSource: PostDataSource? {
         didSet {
             postDataSource?.tableView = tableView
@@ -60,7 +60,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
-        setupPlaceholderForEmptyDataSet()
+        view.makeToastActivity(CSToastPositionCenter)
     }
     
     private func setupTableView() {
@@ -74,8 +74,8 @@ class FeedViewController: UIViewController {
     }
     
     private func setupPlaceholderForEmptyDataSet() {
-        tableView.emptyDataSetDelegate = self
-        tableView.emptyDataSetSource = self
+        tableView?.emptyDataSetDelegate = self
+        tableView?.emptyDataSetSource = self
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
@@ -118,6 +118,40 @@ class FeedViewController: UIViewController {
 
 }
 
+
+extension FeedViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.width + kTopCellBarHeight
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        view.hideToastActivity()
+    }
+    
+}
+
+extension FeedViewController: PostDataSourceDelegate {
+    
+    func showUserProfile(user: User) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.model = ProfileViewModel.init(profileUser: user)
+        self.navigationController?.showViewController(controller, sender: self)
+    }
+    
+    func showPlaceholderForEmptyDataSet() {
+        if postDataSource?.countOfModels() == 0 {
+            setupPlaceholderForEmptyDataSet()
+            view.hideToastActivity()
+            tableView.reloadData()
+        }
+    }
+}
+
 extension FeedViewController: DZNEmptyDataSetDelegate {
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
@@ -130,7 +164,7 @@ extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let text = "No data is currently available"
-
+        
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
@@ -150,26 +184,5 @@ extension FeedViewController: DZNEmptyDataSetSource {
         
         return NSAttributedString(string: text, attributes: attributes)
     }
-
-}
-
-extension FeedViewController: UITableViewDelegate {
-
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
-    }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
-    }
-    
-}
-
-extension FeedViewController: PostDataSourceDelegate {
-    
-    func showUserProfile(user: User) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        controller.model = ProfileViewModel.init(profileUser: user)
-        self.navigationController?.showViewController(controller, sender: self)
-    }
 }

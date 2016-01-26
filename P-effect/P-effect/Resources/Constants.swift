@@ -41,6 +41,7 @@ struct Constants {
         static let AvatarImageCornerRadius = 62.5 as CGFloat
         static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
         static let PossibleInsets = 45 as CGFloat
+        static let SettingsButtonImage = "settings_50" as String
     }
     
     struct DataSource {
