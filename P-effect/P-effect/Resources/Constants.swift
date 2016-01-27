@@ -41,10 +41,11 @@ struct Constants {
         static let AvatarImageCornerRadius = 62.5 as CGFloat
         static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
         static let PossibleInsets = 45 as CGFloat
+        static let SettingsButtonImage = "settings_50" as String
     }
     
     struct DataSource {
-        static let QueryLimit = 2 as Int
+        static let QueryLimit = 10 as Int
     }
     
     struct BackButtonTitle {

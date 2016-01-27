@@ -8,6 +8,12 @@
 
 import Foundation
 
+private let messageDataSuccessfullyUpdated = "User data has been updated!"
+private let messageDataNotUpdated = "Some error wile saving! Try again later"
+private let messageUsernameCanNotBeEmpty = "User name can not be empty"
+private let messageUploadSuccessful = "Upload successful!"
+
+
 class SaverService {
     
     //MARK: - public
@@ -52,7 +58,7 @@ class SaverService {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
-                    AlertService.simpleAlert("Upload successful!")
+                    AlertService.simpleAlert(messageUploadSuccessful)
                 } else {
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
@@ -64,20 +70,25 @@ class SaverService {
         }
     }
     
-     class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?) {
+    class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
-            user.saveInBackgroundWithBlock{ succeeded, error in
+            user.saveInBackgroundWithBlock {
+                succeeded, error in
                 if succeeded {
-                    AlertService.simpleAlert("User data has been changed!")
-                    
+                    completion?(true, nil)
+                    AlertService.simpleAlert(messageDataSuccessfullyUpdated)
                 } else {
+                    AlertService.simpleAlert(messageDataNotUpdated)
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
+                        completion?(false, error)
                     }
                 }
             }
+        } else {
+            completion?(false, messageUsernameCanNotBeEmpty)
         }
     }
 }

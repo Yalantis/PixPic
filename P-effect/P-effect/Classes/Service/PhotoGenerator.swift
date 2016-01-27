@@ -39,7 +39,9 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     // MARK: - Private methods
     private func takePhoto() {
-        if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
+        let cameraExist: Bool = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+            || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
+        if cameraExist {
             imagePickerController.sourceType = .Camera
             imagePickerController.cameraCaptureMode = .Photo
             imagePickerController.modalPresentationStyle = .FullScreen
