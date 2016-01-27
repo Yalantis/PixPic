@@ -64,4 +64,13 @@ struct Constants {
         static let MaxUserName = 30 as Int
         static let WhiteSpace = " " as Character
     }
+    
+    struct PhotoEditor {
+        static let ImageViewControllerSegue = "ImageViewControllerSegue"
+        static let EffectsPickerSegue = "EffectsPickerSegue"
+    }
+    
+    struct EffectsPicker {
+        static let EffectsPickerCellIdentifier = "EffectsPickerCell"
+    }
 }
