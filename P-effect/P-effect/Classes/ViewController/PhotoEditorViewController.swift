@@ -37,7 +37,7 @@ class PhotoEditorViewController: UIViewController {
     }
 
     func setupView() {
-            }
+    }
 
     @IBAction func postEditedImage(sender: AnyObject) {
         

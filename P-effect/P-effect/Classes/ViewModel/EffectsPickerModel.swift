@@ -19,13 +19,11 @@ class EffectsPickerModel: NSObject {
 extension EffectsPickerModel: UICollectionViewDataSource {
     
      func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
      func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return 15
     }
     

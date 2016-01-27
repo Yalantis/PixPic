@@ -19,9 +19,7 @@ class ImageViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
     
-
 }
 
 extension ImageViewController: PhotoEditorDelegate {
@@ -35,6 +33,4 @@ extension ImageViewController: PhotoEditorDelegate {
         return UIImage(named: "edit_50")!
     }
 
-   
-    
 }
