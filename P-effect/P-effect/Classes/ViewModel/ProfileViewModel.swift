@@ -18,6 +18,7 @@ class ProfileViewModel: NSObject {
     
     init(profileUser: User) {
         user = profileUser
+        
         super.init()
     }
     
