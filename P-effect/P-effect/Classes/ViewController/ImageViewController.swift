@@ -11,12 +11,12 @@ import UIKit
 class ImageViewController: UIViewController {
     
     var model: ImageViewModel!
-
+    
     @IBOutlet private weak var rawImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       rawImage.image = model.originalImage()
         // Do any additional setup after loading the view.
     }
     
@@ -24,11 +24,11 @@ class ImageViewController: UIViewController {
 
 extension ImageViewController: PhotoEditorDelegate {
     
-    func didChooseEffect(effect: UIImage) {
+    func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
         print("show choosed effect")
     }
     
-    func imageWithEffect() -> UIImage {
+    func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage {
         print("apply choosed effect on image")
         return UIImage(named: "edit_50")!
     }

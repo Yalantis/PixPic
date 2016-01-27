@@ -10,8 +10,8 @@ import UIKit
 
 protocol PhotoEditorDelegate: class {
     
-    func didChooseEffect(effect: UIImage)
-    func imageWithEffect() -> UIImage
+    func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage)
+    func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage
 }
 
 class PhotoEditorViewController: UIViewController {
@@ -48,7 +48,7 @@ class PhotoEditorViewController: UIViewController {
     }
     
     func didChooseEffectFromPicket(effect: UIImage) {
-        delegate?.didChooseEffect(effect)
+        delegate?.photoEditor(self, didChooseEffect: effect)
     }
     
     override func viewWillLayoutSubviews() {
@@ -69,7 +69,7 @@ class PhotoEditorViewController: UIViewController {
         switch segue.identifier! {
             case Constants.PhotoEditor.ImageViewControllerSegue:
                 imageController = segue.destinationViewController as? ImageViewController
-                imageController?.model = ImageViewModel.init(image: model.originalImage)
+                imageController?.model = ImageViewModel.init(image: model.originalImage())
             case Constants.PhotoEditor.EffectsPickerSegue:
                 effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
                 effectsPickerController?.model = EffectsPickerModel()

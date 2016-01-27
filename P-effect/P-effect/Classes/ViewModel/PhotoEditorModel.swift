@@ -10,10 +10,10 @@ import UIKit
 
 class PhotoEditorModel: NSObject {
     
-    var originalImage: UIImage
+    private let setedOriginalImage: UIImage
     
     init(image: UIImage) {
-        originalImage = image
+        setedOriginalImage = image
         
         super.init()
     }
@@ -24,5 +24,9 @@ class PhotoEditorModel: NSObject {
     
     func saveImageToLibrary(image: UIImage) {
         
+    }
+    
+    func originalImage() -> UIImage {
+        return setedOriginalImage
     }
 }

@@ -10,12 +10,16 @@ import UIKit
 
 class ImageViewModel: NSObject {
     
-    var originalImage: UIImage?
+    private let setedOriginalImage: UIImage
     
     init(image: UIImage) {
-        originalImage = image
+        setedOriginalImage = image
         
         super.init()
+    }
+    
+    func originalImage() -> UIImage {
+        return setedOriginalImage
     }
 
 }
