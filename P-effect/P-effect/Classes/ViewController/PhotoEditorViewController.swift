@@ -11,15 +11,15 @@ import UIKit
 protocol PhotoEditorDelegate: class {
     
     func didChooseEffect(effect: UIImage)
-    func saveEffectOnImage() -> UIImage
+    func imageWithEffect() -> UIImage
 }
 
 class PhotoEditorViewController: UIViewController {
     
-    @IBOutlet weak var effectsPickerContainer: UIView!
-    @IBOutlet weak var imageContainer: UIView!
-    @IBOutlet weak var leftToolbarButton: UIBarButtonItem!
-    @IBOutlet weak var rightToolbarButton: UIBarButtonItem!
+    @IBOutlet private weak var effectsPickerContainer: UIView!
+    @IBOutlet private weak var imageContainer: UIView!
+    @IBOutlet private weak var leftToolbarButton: UIBarButtonItem!
+    @IBOutlet private weak var rightToolbarButton: UIBarButtonItem!
     
     var model: PhotoEditorModel!
     var effectsPickerController: EffectsPickerViewController? {
@@ -39,11 +39,11 @@ class PhotoEditorViewController: UIViewController {
     func setupView() {
     }
 
-    @IBAction func postEditedImage(sender: AnyObject) {
+    @IBAction private func postEditedImage(sender: AnyObject) {
         
     }
     
-    @IBAction func saveToImageLibrary(sender: AnyObject) {
+    @IBAction private func saveToImageLibrary(sender: AnyObject) {
         
     }
     

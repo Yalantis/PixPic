@@ -11,7 +11,7 @@ import UIKit
 
 class EffectsPickerViewController: UICollectionViewController {
     
-    var delegate: PhotoEditorViewController?
+    weak var delegate: PhotoEditorViewController?
     var model: EffectsPickerModel? {
         didSet {
             collectionView?.dataSource = model
@@ -27,7 +27,7 @@ class EffectsPickerViewController: UICollectionViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        view!.superview?.layoutIfNeeded()
+        collectionView?.superview?.layoutIfNeeded()
     }
 
 }

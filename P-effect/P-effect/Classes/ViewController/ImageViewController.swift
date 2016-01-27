@@ -12,7 +12,7 @@ class ImageViewController: UIViewController {
     
     var model: ImageViewModel!
 
-    @IBOutlet weak var rawImage: UIImageView!
+    @IBOutlet private weak var rawImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ extension ImageViewController: PhotoEditorDelegate {
         print("show choosed effect")
     }
     
-    func saveEffectOnImage() -> UIImage {
+    func imageWithEffect() -> UIImage {
         print("apply choosed effect on image")
         return UIImage(named: "edit_50")!
     }
