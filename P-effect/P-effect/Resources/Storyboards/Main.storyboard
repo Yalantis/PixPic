@@ -89,10 +89,8 @@
                                         <constraint firstAttribute="bottom" secondItem="g37-PW-4gA" secondAttribute="bottom" priority="700" id="8WY-un-Mj5"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="centerX" secondItem="QrS-9l-54S" secondAttribute="centerX" priority="700" id="DC6-Dl-EEP"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="trailing" secondItem="QrS-9l-54S" secondAttribute="trailingMargin" priority="700" id="Enb-bV-S7d"/>
-                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" priority="700" id="Gsl-N0-UlW"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="leading" secondItem="QrS-9l-54S" secondAttribute="leadingMargin" priority="700" id="TsJ-9x-8SP"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="bottom" secondItem="QrS-9l-54S" secondAttribute="bottomMargin" priority="700" id="YvY-8U-iua"/>
-                                        <constraint firstAttribute="trailing" secondItem="g37-PW-4gA" secondAttribute="trailing" priority="700" id="aeC-qk-aQL"/>
                                         <constraint firstItem="g37-PW-4gA" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="topMargin" priority="700" id="wma-q4-PP1"/>
                                     </constraints>
                                 </stackView>

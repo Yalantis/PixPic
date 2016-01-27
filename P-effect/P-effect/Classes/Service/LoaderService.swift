@@ -59,7 +59,7 @@ class LoaderService: NSObject {
                 completion?(objects: nil, error: nil)
                 return
         }
-//        if PFUser.currentUser() != nil {
+        
         let reachability: Reachability
         do {
             reachability = try Reachability.reachabilityForInternetConnection()
