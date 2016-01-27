@@ -18,11 +18,11 @@ class PhotoEditorModel: NSObject {
         super.init()
     }
     
-    class func postImage(image: UIImage) {
+    func postImage(image: UIImage) {
         
     }
     
-    class func saveImageToLibrary(image: UIImage) {
+    func saveImageToLibrary(image: UIImage) {
         
     }
 }

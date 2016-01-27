@@ -70,11 +70,9 @@ class PhotoEditorViewController: UIViewController {
             case Constants.PhotoEditor.ImageViewControllerSegue:
                 imageController = segue.destinationViewController as? ImageViewController
                 imageController?.model = ImageViewModel.init(image: model.originalImage)
-                break
             case Constants.PhotoEditor.EffectsPickerSegue:
                 effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
                 effectsPickerController?.model = EffectsPickerModel()
-                break
             default:
                 break
         }
