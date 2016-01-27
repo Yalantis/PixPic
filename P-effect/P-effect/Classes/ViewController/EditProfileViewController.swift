@@ -237,12 +237,16 @@ class EditProfileViewController: UIViewController {
         )
     }
     
-    @IBAction func avatarTapAction(sender: AnyObject) {
+    @IBAction private func avatarTapAction(sender: AnyObject) {
         photoGenerator.showInView(self)
     }
     
-    @IBAction func saveChangesAction(sender: AnyObject) {
-        saveChanges()
+    @IBAction private func saveChangesAction(sender: AnyObject) {
+        ValidationService.valdateUserName(userName!) { [weak self] completion in
+            if completion {
+                self?.saveChanges()
+            }
+        }
     }
     
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
