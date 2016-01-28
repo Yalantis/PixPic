@@ -24,16 +24,13 @@ class AlertService: NSObject {
             while let presentedViewController = topController.presentedViewController {
                 topController = presentedViewController
             }
-            
             let title = "Notification"
             var message = "Message"
-            
             if let aps = userInfo["aps"] as? NSDictionary {
                 if let alert = aps["alert"] as? NSString {
                     message = alert as String
                 }
             }
-            
             topController.view.makeToast(
                 message,
                 duration: 3.0,

@@ -41,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
@@ -82,21 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
         let currentInstallation = PFInstallation.currentInstallation()
-        if currentInstallation.badge != 0 {
-            currentInstallation.badge = 0
-        }
+        currentInstallation.badge = 0
         currentInstallation.saveEventually()
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
         let currentInstallation = PFInstallation.currentInstallation()
-        if currentInstallation.badge != 0 {
-            currentInstallation.badge = 0
-        }
+        currentInstallation.badge = 0
         currentInstallation.saveEventually()
     }
     
     func onTokenUpdated(notification: NSNotification) {
-        print("Token updated")
+        print(notification)
     }
 }
