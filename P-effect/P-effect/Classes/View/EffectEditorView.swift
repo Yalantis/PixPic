@@ -151,12 +151,11 @@ class EffectEditorView: UIView {
                 // Resizing
                 
                 let point = recognizer.locationInView(self)
-                var wChange: CGFloat = 0.0, hChange: CGFloat = 0.0
                 
-                wChange = (point.x - prevPoint!.x) as CGFloat
+                let wChange = point.x - prevPoint!.x
                 let wRatioChange = wChange / bounds.size.width
                 
-                hChange = wRatioChange * bounds.size.height
+                let hChange = wRatioChange * bounds.size.height
                 
                 if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
                     prevPoint = recognizer.locationOfTouch(0, inView: self)
