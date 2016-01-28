@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState == .Inactive  {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
-        
         PFPush.handlePush(userInfo)
     }
     
@@ -67,9 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         
+        if application.applicationState == .Active {
+            AlertService.notificationAlert(userInfo)
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        }
+        
         if PFUser.currentUser() != nil {
             completionHandler(UIBackgroundFetchResult.NewData)
-            Router.sharedRouter().showHome(animated: true)
         } else {
             completionHandler(UIBackgroundFetchResult.NoData)
         }
@@ -81,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if currentInstallation.badge != 0 {
             currentInstallation.badge = 0
         }
+        currentInstallation.saveEventually()
     }
     
 }
