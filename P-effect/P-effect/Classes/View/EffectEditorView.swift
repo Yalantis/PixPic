@@ -85,6 +85,9 @@ class EffectEditorView: UIView {
         resizingControl.image = UIImage(named: "delete_50")
         resizingControl.userInteractionEnabled = true
         
+        let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
+        resizingControl?.addGestureRecognizer(panResizeGesture)
+
         addSubview(resizingControl!)
         
         deltaAngle = atan2(frame.origin.y + frame.size.height - center.y, frame.origin.x + frame.size.width - center.x)
@@ -118,4 +121,83 @@ class EffectEditorView: UIView {
         close!.superview!.removeFromSuperview()
     }
     
+    dynamic private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == .Began {
+            enableTransluceny(state: true)
+            prevPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
+        } else if recognizer.state == .Changed {
+            enableTransluceny(state: true)
+            
+            // preventing from the picture being shrinked too far by resizing
+            if bounds.size.width < minWidth || self.bounds.size.height < minHeight {
+                
+                bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
+                resizingControl.frame = CGRectMake(bounds.size.width - kStickerViewControlSize,
+                    bounds.size.height-kStickerViewControlSize,
+                    kStickerViewControlSize,
+                    kStickerViewControlSize)
+                
+                deleteControl.frame = CGRectMake(0, 0, kStickerViewControlSize, kStickerViewControlSize);
+                prevPoint = recognizer.locationInView(self)
+                
+            } else {
+                // Resizing
+                
+                let point = recognizer.locationInView(self)
+                var wChange: CGFloat = 0.0, hChange: CGFloat = 0.0
+                
+                wChange = (point.x - prevPoint!.x) as CGFloat
+                let wRatioChange = wChange / bounds.size.width
+                
+                hChange = wRatioChange * self.bounds.size.height;
+                
+                if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
+                    prevPoint = recognizer.locationOfTouch(0, inView: self)
+                    return
+                }
+                
+                bounds = CGRectMake(bounds.origin.x,
+                    bounds.origin.y,
+                    bounds.size.width + wChange,
+                    bounds.size.height + hChange)
+                
+                resizingControl.frame = CGRectMake(bounds.size.width - kStickerViewControlSize,
+                    bounds.size.height - kStickerViewControlSize,
+                    kStickerViewControlSize,
+                    kStickerViewControlSize)
+                
+                deleteControl.frame = CGRectMake(0, 0, kStickerViewControlSize, kStickerViewControlSize)
+                
+                prevPoint = recognizer.locationOfTouch(0, inView: self)
+            }
+            // Rotation
+            
+            let angle = atan2(recognizer.locationInView(superview).y - center.y,
+                recognizer.locationInView(superview).x - center.x)
+            
+            let angleDiff = deltaAngle - angle
+            
+            transform = CGAffineTransformMakeRotation(-angleDiff);
+            
+            borderView.frame = CGRectInset(bounds, kUserResizableViewGlobalInset, kUserResizableViewGlobalInset)
+            borderView.setNeedsDisplay()
+            setNeedsDisplay()
+            
+        } else if recognizer.state == .Ended {
+            enableTransluceny(state: false)
+            prevPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
+        }
+        
+    }
+    
+    private func enableTransluceny(state state: Bool) {
+        if state == true {
+            alpha = 0.65
+        } else {
+            alpha = 1.0
+        }
+    }
+
 }
