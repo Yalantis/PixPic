@@ -39,8 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        
-        
         return true
     }
 
@@ -57,8 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         if application.applicationState == .Inactive  {
-            // The application was just brought from the background to the foreground,
-            // so we consider the app as having been "opened by a push notification."
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         
@@ -70,24 +66,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
-
         
-        if let photoId: String = userInfo["p"] as? String {
-            let targetPhoto = PFObject(withoutDataWithClassName: "Photo", objectId: photoId)
-            targetPhoto.fetchIfNeededInBackgroundWithBlock { (object: PFObject?, error: NSError?) -> Void in
-                // Show profile view controller
-                if error != nil {
-                    completionHandler(UIBackgroundFetchResult.Failed)
-                } else if PFUser.currentUser() != nil {
-                    let viewController = ProfileViewController()
-          //          self.navigationController.pushViewController(viewController, animated: true)
-                    completionHandler(UIBackgroundFetchResult.NewData)
-                } else {
-                    completionHandler(UIBackgroundFetchResult.NoData)
-                }
-            }
+        if PFUser.currentUser() != nil {
+            completionHandler(UIBackgroundFetchResult.NewData)
+            Router.sharedRouter().showHome(animated: true)
+        } else {
+            completionHandler(UIBackgroundFetchResult.NoData)
         }
-        completionHandler(UIBackgroundFetchResult.NoData)
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
