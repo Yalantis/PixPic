@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E27e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -422,28 +422,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-Jc-E8P">
-                                <rect key="frame" x="5" y="5" width="590" height="590"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-Jc-E8P">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
                                 <color key="backgroundColor" red="0.46769773960113525" green="0.58180910348892212" blue="0.09031001478433609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="sDn-Jc-E8P" secondAttribute="height" multiplier="1:1" id="d8I-di-Mln"/>
-                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="sDn-Jc-E8P" secondAttribute="trailing" constant="5" id="V3z-MU-9me"/>
-                            <constraint firstItem="sDn-Jc-E8P" firstAttribute="centerY" secondItem="s4Q-Gi-VgG" secondAttribute="centerY" id="bxq-gL-cbF"/>
-                            <constraint firstItem="sDn-Jc-E8P" firstAttribute="leading" secondItem="s4Q-Gi-VgG" secondAttribute="leading" constant="5" id="inL-g8-5c6"/>
-                            <constraint firstAttribute="bottom" secondItem="sDn-Jc-E8P" secondAttribute="bottom" priority="750" constant="5" id="m7V-YT-55G"/>
-                            <constraint firstItem="sDn-Jc-E8P" firstAttribute="top" secondItem="VRb-Ta-wiy" secondAttribute="bottom" constant="5" id="wcs-ee-1EI"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="bxq-gL-cbF"/>
-                                <exclude reference="m7V-YT-55G"/>
-                            </mask>
-                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
@@ -452,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jz9-BX-bq3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-345" y="1794"/>
+            <point key="canvasLocation" x="-189" y="1791"/>
         </scene>
     </scenes>
     <resources>
