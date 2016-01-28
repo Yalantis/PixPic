@@ -45,8 +45,6 @@ class AlertService: NSObject {
                     (didTap: Bool) in
                     if didTap {
                         Router.sharedRouter().showHome(animated: true)
-                    } else {
-                        
                     }
                 }
             )
