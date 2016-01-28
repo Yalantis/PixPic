@@ -155,11 +155,16 @@ class EffectEditorView: UIView {
                     prevPoint = recognizer.locationOfTouch(0, inView: self)
                     return
                 }
+                let startBounds = bounds
                 
                 bounds = CGRectMake(bounds.origin.x,
                     bounds.origin.y,
                     bounds.size.width + wChange,
                     bounds.size.height + hChange)
+                
+                if (!CGRectEqualToRect(CGRectIntersection(superview!.bounds, frame), frame)) {
+                    bounds = startBounds
+                }
                 
                 resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
                     bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
