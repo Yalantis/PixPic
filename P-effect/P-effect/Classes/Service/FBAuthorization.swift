@@ -83,6 +83,8 @@ class FBAuthorization {
                                     }
                                     user.setValue(facebookData.objectForKey("id"), forKey: "facebookId")
                                     completion (user, nil)
+                                } else {
+                                    completion (user, nil)
                                 }
                             }
                         )
