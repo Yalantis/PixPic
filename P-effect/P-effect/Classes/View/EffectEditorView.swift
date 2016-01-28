@@ -71,6 +71,9 @@ class EffectEditorView: UIView {
         deleteControl.image = UIImage(named: "delete_50")
         deleteControl.userInteractionEnabled = true
         
+        let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
+        deleteControl?.addGestureRecognizer(singleTap)
+        
         addSubview(deleteControl!)
         
         resizingControl = UIImageView(frame: CGRectMake(frame.size.width - kStickerViewControlSize,
@@ -108,6 +111,11 @@ class EffectEditorView: UIView {
         bringSubviewToFront(borderView)
         bringSubviewToFront(deleteControl)
         bringSubviewToFront(resizingControl)
+    }
+    
+    dynamic private func singleTap(recognizer: UIPanGestureRecognizer) {
+        let close = recognizer.view
+        close!.superview!.removeFromSuperview()
     }
     
 }
