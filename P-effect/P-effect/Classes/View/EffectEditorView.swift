@@ -192,6 +192,61 @@ class EffectEditorView: UIView {
         
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        enableTransluceny(state: true)
+        
+        let touch = touches.first
+        if let touch = touch {
+            touchStart = touch.locationInView(superview)
+        }
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        enableTransluceny(state: true)
+        
+        let touchLocation = touches.first?.locationInView(self)
+        if CGRectContainsPoint(resizingControl.frame, touchLocation!) {
+            return
+        }
+        
+        let touch = touches.first?.locationInView(superview)
+        translateUsingTouchLocation(touch!)
+        touchStart = touch
+    }
+    
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        enableTransluceny(state: false)
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        enableTransluceny(state: false)
+    }
+    
+    private func translateUsingTouchLocation(touchPoint: CGPoint) {
+        var newCenter = CGPointMake(center.x + touchPoint.x - touchStart!.x, center.y + touchPoint.y - touchStart!.y)
+        
+        let midPointX = CGRectGetMidX(bounds)
+        if newCenter.x > (superview?.bounds.size.width)! - midPointX {
+            newCenter.x = (superview?.bounds.size.width)! - midPointX
+        }
+        
+        if newCenter.x < midPointX {
+            newCenter.x = midPointX
+        }
+        
+        let midPointY = CGRectGetMidY(bounds)
+        if newCenter.y > (superview?.bounds.size.height)! - midPointY {
+            newCenter.y = (superview?.bounds.size.height)! - midPointY
+        }
+        
+        if newCenter.y < midPointY {
+            newCenter.y = midPointY
+        }
+        
+        center = newCenter
+    }
+
+    
     private func enableTransluceny(state state: Bool) {
         if state == true {
             alpha = 0.65
