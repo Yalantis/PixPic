@@ -90,20 +90,13 @@ class SaverService {
         }
         
         dispatch_async(dispatch_get_main_queue()) {
-           
-            do {
-                _ = try model.effectsGroup.save()
-            } catch _ {
-            }
-           
-            
             for _ in 0..<3 {
                 let effectsGroup = EffectsGroup()
                 effectsGroup.image = PFFile(name: "image", data: pictureData!)!
-//                do {
-//                    _ = try effectsGroup.save()
-//                } catch _ {
-//                }
+                do {
+                    _ = try effectsGroup.save()
+                } catch _ {
+                }
                 
                 for _ in 0..<4 {
                     let effectsSticker = EffectsSticker()
@@ -130,20 +123,19 @@ class SaverService {
             effects.saveInBackgroundWithBlock {
                 (success: Bool, error: NSError?) -> Void in
                 if (success) {
-                    // The post has been added to the user's likes relation.
+                    effects.groupsRelation.query().findObjectsInBackgroundWithBlock {
+                        (objects: [PFObject]?, error: NSError?) -> Void in
+                        if let error = error {
+                            // There was an error
+                        } else {
+                            print(objects)
+                            // objects has all the Posts the current user liked.
+                        }
+                    }
                     print(success)
                 } else {
                     // There was a problem, check error.description
                 }
-            }
-        }
-        effects.groupsRelation.query().findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            if let error = error {
-                // There was an error
-            } else {
-                print(objects)
-                // objects has all the Posts the current user liked.
             }
         }
     }
