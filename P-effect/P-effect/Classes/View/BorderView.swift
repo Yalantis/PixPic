@@ -16,9 +16,12 @@ class BorderView: UIView {
         CGContextSetLineWidth(context, 1.0)
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
-        CGContextAddRect(context, CGRectInset(bounds,
+        
+        let borderRect = CGRectInset(bounds,
             Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2,
-            Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2))
+            Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2)
+        
+        CGContextAddRect(context, borderRect)
         
         CGContextStrokePath(context)
         CGContextRestoreGState(context)
@@ -27,12 +30,16 @@ class BorderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.clearColor()
+        setupView()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        setupView()
+    }
+    
+    private func setupView() {
         backgroundColor = UIColor.clearColor()
     }
 

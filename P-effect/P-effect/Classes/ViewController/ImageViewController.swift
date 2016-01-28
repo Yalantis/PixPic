@@ -17,26 +17,24 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         rawImage.image = model.originalImage()
+        rawImage.layoutIfNeeded()
         
-        let image = UIImage(named: "profile_placeholder")
         
-        let userResizableView = EffectEditorView(image: image!)
-        userResizableView.center = rawImage.convertPoint(rawImage.center, fromView: rawImage.superview)
+        // dummy
+        let im = UIImage(named: "profile_placeholder")
+        let userResizableView = EffectEditorView(image: im!)
+        userResizableView.center = rawImage.center
         rawImage.addSubview(userResizableView)
+        //
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        view.subviews.first?.layoutIfNeeded()
-    }
 }
 
 extension ImageViewController: PhotoEditorDelegate {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
         let userResizableView = EffectEditorView(image: didChooseEffect)
-        userResizableView.center = rawImage.convertPoint(rawImage.center, fromView: rawImage.superview)
+        userResizableView.center = rawImage.center
         rawImage.addSubview(userResizableView)
     }
     

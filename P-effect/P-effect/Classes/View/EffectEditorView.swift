@@ -12,7 +12,7 @@ class EffectEditorView: UIView {
     
     private var touchStart: CGPoint?
     private var prevPoint: CGPoint?
-    private var deltaAngle: CGFloat!
+    private var deltaAngle: CGFloat?
     
     private var minWidth: CGFloat?
     private var minHeight: CGFloat?
@@ -26,8 +26,8 @@ class EffectEditorView: UIView {
         
         super.init(frame: effectImageView.frame)
         
-        setupDefaultAttributes()
         setupContentView(effectImageView)
+        setupDefaultAttributes()
     }
     
     override init(frame: CGRect) {
@@ -43,13 +43,17 @@ class EffectEditorView: UIView {
     }
     
     private func setupDefaultAttributes() {
-        borderView = BorderView(frame: CGRectInset(bounds,
+        let borderViewFrame = CGRectInset(bounds,
             Constants.EffectEditor.UserResizableViewGlobalInset,
-            Constants.EffectEditor.UserResizableViewGlobalInset))
+            Constants.EffectEditor.UserResizableViewGlobalInset)
         
-        addSubview(borderView!)
+        borderView = BorderView(frame: borderViewFrame)
         
-        if (Constants.EffectEditor.UserResizableViewDefaultMinWidth > bounds.size.width / 2) {
+        addSubview(borderView)
+        
+        let needUseDefaultMinSize = Constants.EffectEditor.UserResizableViewDefaultMinWidth > bounds.size.width / 2
+        
+        if needUseDefaultMinSize {
             minWidth = Constants.EffectEditor.UserResizableViewDefaultMinWidth
             minHeight =
                 bounds.size.height * (Constants.EffectEditor.UserResizableViewDefaultMinWidth / self.bounds.size.width)
@@ -57,33 +61,38 @@ class EffectEditorView: UIView {
             minWidth = bounds.size.width / 2
             minHeight = bounds.size.height / 2
         }
-        
-        deleteControl = UIImageView(frame: CGRectMake(0, 0,
+        let deleteControlFrame = CGRectMake(0, 0,
             Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize))
+            Constants.EffectEditor.StickerViewControlSize)
+        
+        deleteControl = UIImageView(frame: deleteControlFrame)
+        deleteControl.layer.cornerRadius = deleteControl.frame.size.width / 2
         
         deleteControl.backgroundColor = UIColor.whiteColor()
         deleteControl.image = UIImage(named: "delete_50")
         deleteControl.userInteractionEnabled = true
         
         let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
-        deleteControl?.addGestureRecognizer(singleTap)
+        deleteControl.addGestureRecognizer(singleTap)
         
-        addSubview(deleteControl!)
+        addSubview(deleteControl)
         
-        resizingControl = UIImageView(frame: CGRectMake(frame.size.width - Constants.EffectEditor.StickerViewControlSize,
+        let resizingControlFrame = CGRectMake(frame.size.width - Constants.EffectEditor.StickerViewControlSize,
             frame.size.height - Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize))
+            Constants.EffectEditor.StickerViewControlSize)
+        
+        resizingControl = UIImageView(frame: resizingControlFrame)
+        resizingControl.layer.cornerRadius = resizingControl.frame.size.width / 2
         
         resizingControl.backgroundColor = UIColor.whiteColor()
-        resizingControl.image = UIImage(named: "delete_50")
+        resizingControl.image = UIImage(named: "resize_four_dir_50")
         resizingControl.userInteractionEnabled = true
         
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
-        resizingControl?.addGestureRecognizer(panResizeGesture)
-
-        addSubview(resizingControl!)
+        resizingControl.addGestureRecognizer(panResizeGesture)
+        
+        addSubview(resizingControl)
         
         deltaAngle = atan2(frame.origin.y + frame.size.height - center.y, frame.origin.x + frame.size.width - center.x)
     }
@@ -107,28 +116,26 @@ class EffectEditorView: UIView {
             subview.frame = CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)
             subview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
-        
-        bringSubviewToFront(borderView)
-        bringSubviewToFront(deleteControl)
-        bringSubviewToFront(resizingControl)
     }
     
     dynamic private func singleTap(recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
-        close!.superview!.removeFromSuperview()
+        if let close = close {
+            close.superview?.removeFromSuperview()
+        }
     }
     
     dynamic private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
         if recognizer.state == .Began {
-            enableTransluceny(state: true)
+            enableTranslucency(true)
             prevPoint = recognizer.locationInView(self)
             setNeedsDisplay()
         } else if recognizer.state == .Changed {
-            enableTransluceny(state: true)
+            enableTranslucency(true)
             
             // preventing from the picture being shrinked too far by resizing
-            if bounds.size.width < minWidth || self.bounds.size.height < minHeight {
-                
+            let needResizing = bounds.size.width < minWidth || bounds.size.height < minHeight
+            if needResizing {
                 bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
                 resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
                     bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
@@ -137,7 +144,7 @@ class EffectEditorView: UIView {
                 
                 deleteControl.frame = CGRectMake(0, 0,
                     Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize);
+                    Constants.EffectEditor.StickerViewControlSize)
                 prevPoint = recognizer.locationInView(self)
                 
             } else {
@@ -149,7 +156,7 @@ class EffectEditorView: UIView {
                 wChange = (point.x - prevPoint!.x) as CGFloat
                 let wRatioChange = wChange / bounds.size.width
                 
-                hChange = wRatioChange * self.bounds.size.height;
+                hChange = wRatioChange * bounds.size.height
                 
                 if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
                     prevPoint = recognizer.locationOfTouch(0, inView: self)
@@ -182,9 +189,10 @@ class EffectEditorView: UIView {
             let angle = atan2(recognizer.locationInView(superview).y - center.y,
                 recognizer.locationInView(superview).x - center.x)
             
-            let angleDiff = deltaAngle - angle
-            
-            transform = CGAffineTransformMakeRotation(-angleDiff);
+            if let deltaAngle = deltaAngle {
+                let angleDiff = deltaAngle - angle
+                transform = CGAffineTransformMakeRotation(-angleDiff)
+            }
             
             borderView.frame = CGRectInset(bounds,
                 Constants.EffectEditor.UserResizableViewGlobalInset,
@@ -193,7 +201,7 @@ class EffectEditorView: UIView {
             setNeedsDisplay()
             
         } else if recognizer.state == .Ended {
-            enableTransluceny(state: false)
+            enableTranslucency(false)
             prevPoint = recognizer.locationInView(self)
             setNeedsDisplay()
         }
@@ -201,7 +209,7 @@ class EffectEditorView: UIView {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        enableTransluceny(state: true)
+        enableTranslucency(true)
         
         let touch = touches.first
         if let touch = touch {
@@ -210,7 +218,7 @@ class EffectEditorView: UIView {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        enableTransluceny(state: true)
+        enableTranslucency(true)
         
         let touchLocation = touches.first?.locationInView(self)
         if CGRectContainsPoint(resizingControl.frame, touchLocation!) {
@@ -223,28 +231,31 @@ class EffectEditorView: UIView {
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        enableTransluceny(state: false)
+        enableTranslucency(false)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        enableTransluceny(state: false)
+        enableTranslucency(false)
     }
     
     private func translateUsingTouchLocation(touchPoint: CGPoint) {
         var newCenter = CGPointMake(center.x + touchPoint.x - touchStart!.x, center.y + touchPoint.y - touchStart!.y)
         
         let midPointX = CGRectGetMidX(bounds)
-        if newCenter.x > (superview?.bounds.size.width)! - midPointX {
-            newCenter.x = (superview?.bounds.size.width)! - midPointX
+        let midPointY = CGRectGetMidY(bounds)
+        
+        if let superview = superview {
+            if newCenter.x > superview.bounds.size.width - midPointX {
+                newCenter.x = superview.bounds.size.width - midPointX
+            }
+            
+            if newCenter.y > superview.bounds.size.height - midPointY {
+                newCenter.y = superview.bounds.size.height - midPointY
+            }
         }
         
         if newCenter.x < midPointX {
             newCenter.x = midPointX
-        }
-        
-        let midPointY = CGRectGetMidY(bounds)
-        if newCenter.y > (superview?.bounds.size.height)! - midPointY {
-            newCenter.y = (superview?.bounds.size.height)! - midPointY
         }
         
         if newCenter.y < midPointY {
@@ -253,14 +264,14 @@ class EffectEditorView: UIView {
         
         center = newCenter
     }
-
     
-    private func enableTransluceny(state state: Bool) {
+    
+    private func enableTranslucency(state: Bool) {
         if state == true {
             alpha = 0.65
         } else {
             alpha = 1.0
         }
     }
-
+    
 }
