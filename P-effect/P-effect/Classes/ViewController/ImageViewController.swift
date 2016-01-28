@@ -25,7 +25,9 @@ class ImageViewController: UIViewController {
 extension ImageViewController: PhotoEditorDelegate {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
-        print("show choosed effect")
+        let userResizableView = EffectEditorView(image: didChooseEffect)
+        userResizableView.center = rawImage.center
+        rawImage.addSubview(userResizableView)
     }
     
     func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage {
