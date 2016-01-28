@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904A1B51C526EA200F26E05 /* ValidationService.swift */; };
 		49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089CA41C4FA09C00027191 /* ProfileViewModel.swift */; };
+		492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */; };
+		492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F01C5A024E00D98404 /* EffectsVersion.swift */; };
+		492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* EffectsSticker.swift */; };
+		492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* EffectsModel.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
 		499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */; };
@@ -68,6 +72,10 @@
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4904A1B51C526EA200F26E05 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		49089CA41C4FA09C00027191 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsGroup.swift; sourceTree = "<group>"; };
+		492D17F01C5A024E00D98404 /* EffectsVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsVersion.swift; sourceTree = "<group>"; };
+		492D17F21C5A027D00D98404 /* EffectsSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsSticker.swift; sourceTree = "<group>"; };
+		492D17F41C5A186100D98404 /* EffectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsModel.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
@@ -234,6 +242,9 @@
 			children = (
 				FDD0F0BB1C4E52F300331799 /* Post.swift */,
 				FDE508D31C49482F003C772B /* User.swift */,
+				492D17F21C5A027D00D98404 /* EffectsSticker.swift */,
+				492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */,
+				492D17F01C5A024E00D98404 /* EffectsVersion.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -243,6 +254,7 @@
 			children = (
 				FD6C17C01C49540A00A01715 /* UserModel.swift */,
 				FDD0F0BD1C4E531000331799 /* PostModel.swift */,
+				492D17F41C5A186100D98404 /* EffectsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -552,17 +564,21 @@
 				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
+				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
+				492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
+				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,

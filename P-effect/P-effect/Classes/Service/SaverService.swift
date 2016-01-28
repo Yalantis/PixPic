@@ -51,25 +51,6 @@ class SaverService {
         }
     }
     
-    //MARK: - private
-    
-    class func uploadPost(file: PFFile, comment: String?) {
-        if let user = PFUser.currentUser() as? User {
-            let post = PostModel(image: file, user: user, comment: comment).post
-            post.saveInBackgroundWithBlock{ succeeded, error in
-                if succeeded {
-                    AlertService.simpleAlert(messageUploadSuccessful)
-                } else {
-                    if let error = error?.userInfo["error"] as? String {
-                        print(error)
-                    }
-                }
-            }
-        } else {
-            // Auth service
-        }
-    }
-    
     class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
@@ -91,4 +72,109 @@ class SaverService {
             completion?(false, messageUsernameCanNotBeEmpty)
         }
     }
+    
+    class func uploadEffects() {
+        
+        
+        let image = UIImage(named: "delete_50_1")
+        let pictureData = UIImageJPEGRepresentation(image!, 0.5)
+//        effectsGroup.image = PFFile(name: "image", data: pictureData!)!
+        
+        let model =  EffectsModel.init()
+        var effects = model.effectsVersion
+        //        effects.groupsRelation.addObject(model.effectsGroup)
+        
+        do {
+            _ = try effects.save()
+        } catch _ {
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+           
+            do {
+                _ = try model.effectsGroup.save()
+            } catch _ {
+            }
+           
+            
+            for _ in 0..<3 {
+                let effectsGroup = EffectsGroup()
+                effectsGroup.image = PFFile(name: "image", data: pictureData!)!
+//                do {
+//                    _ = try effectsGroup.save()
+//                } catch _ {
+//                }
+                
+                for _ in 0..<4 {
+                    let effectsSticker = EffectsSticker()
+                    effectsSticker.image = PFFile(name: "image", data: pictureData!)!
+                    do {
+                        _ = try effectsSticker.save()
+                    } catch _ {
+                    }
+                    
+                    effectsGroup.stickersRelation.addObject(effectsSticker)
+                    do {
+                        _ = try effectsGroup.save()
+                    } catch _ {
+                    }
+                }
+                
+                effects.groupsRelation.addObject(effectsGroup)
+                do {
+                    _ = try effects.save()
+                } catch _ {
+                }
+            }
+            
+            effects.saveInBackgroundWithBlock {
+                (success: Bool, error: NSError?) -> Void in
+                if (success) {
+                    // The post has been added to the user's likes relation.
+                    print(success)
+                } else {
+                    // There was a problem, check error.description
+                }
+            }
+        }
+        effects.groupsRelation.query().findObjectsInBackgroundWithBlock {
+            (objects: [PFObject]?, error: NSError?) -> Void in
+            if let error = error {
+                // There was an error
+            } else {
+                print(objects)
+                // objects has all the Posts the current user liked.
+            }
+        }
+    }
+    
+    
+    //MARK: - private
+    
+    private class func uploadEffectsStickers() {
+        
+    }
+    
+    private class func uploadEffectsGroup() {
+        
+    }
+    
+    
+    private class func uploadPost(file: PFFile, comment: String?) {
+        if let user = PFUser.currentUser() as? User {
+            let post = PostModel(image: file, user: user, comment: comment).post
+            post.saveInBackgroundWithBlock{ succeeded, error in
+                if succeeded {
+                    AlertService.simpleAlert(messageUploadSuccessful)
+                } else {
+                    if let error = error?.userInfo["error"] as? String {
+                        print(error)
+                    }
+                }
+            }
+        } else {
+            // Auth service
+        }
+    }
+    
 }

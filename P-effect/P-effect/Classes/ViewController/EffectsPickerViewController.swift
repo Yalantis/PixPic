@@ -17,11 +17,16 @@ class EffectsPickerViewController: UICollectionViewController {
             collectionView?.dataSource = model
         }
     }
+    var groupsShown: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    automaticallyAdjustsScrollViewInsets = false
+        
+        
+        SaverService.uploadEffects()
+        groupsShown = true
+        model = EffectsPickerModel()
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillLayoutSubviews() {
@@ -30,4 +35,17 @@ class EffectsPickerViewController: UICollectionViewController {
         collectionView?.superview?.layoutIfNeeded()
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if groupsShown == true {
+            //TODO: change it to reload array with selected group of effects
+            model?.effects = 10
+            collectionView.reloadData()
+            groupsShown = false
+        } else if indexPath.row == 0 {
+            //TODO: change it to reload array with groups
+        model?.effects = 3
+        groupsShown = true
+        collectionView.reloadData()
+        }
+    }
 }

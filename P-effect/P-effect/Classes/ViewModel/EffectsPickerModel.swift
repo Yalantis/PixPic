@@ -9,8 +9,12 @@
 import UIKit
 
 class EffectsPickerModel: NSObject {
+    var effects: Int
+    
     
     override init() {
+        effects = 3
+
         super.init()
     }
 
@@ -24,7 +28,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
     
     
      func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return effects
     }
     
      func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
