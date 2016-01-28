@@ -10,12 +10,6 @@ import UIKit
 
 class EffectEditorView: UIView {
     
-    private let kUserResizableViewGlobalInset: CGFloat =  5.0
-    private let kUserResizableViewDefaultMinWidth: CGFloat =  48.0
-    
-    private let kUserResizableViewInteractiveBorderSize: CGFloat =  10.0
-    private let kStickerViewControlSize: CGFloat =  36.0
-    
     private var touchStart: CGPoint?
     private var prevPoint: CGPoint?
     private var deltaAngle: CGFloat!
@@ -50,22 +44,23 @@ class EffectEditorView: UIView {
     
     private func setupDefaultAttributes() {
         borderView = BorderView(frame: CGRectInset(bounds,
-            kUserResizableViewGlobalInset,
-            kUserResizableViewGlobalInset))
+            Constants.EffectEditor.UserResizableViewGlobalInset,
+            Constants.EffectEditor.UserResizableViewGlobalInset))
         
         addSubview(borderView!)
         
-        if (kUserResizableViewDefaultMinWidth > bounds.size.width / 2) {
-            minWidth = kUserResizableViewDefaultMinWidth
-            minHeight = bounds.size.height * (kUserResizableViewDefaultMinWidth / self.bounds.size.width)
+        if (Constants.EffectEditor.UserResizableViewDefaultMinWidth > bounds.size.width / 2) {
+            minWidth = Constants.EffectEditor.UserResizableViewDefaultMinWidth
+            minHeight =
+                bounds.size.height * (Constants.EffectEditor.UserResizableViewDefaultMinWidth / self.bounds.size.width)
         } else {
             minWidth = bounds.size.width / 2
             minHeight = bounds.size.height / 2
         }
         
         deleteControl = UIImageView(frame: CGRectMake(0, 0,
-            kStickerViewControlSize,
-            kStickerViewControlSize))
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize))
         
         deleteControl.backgroundColor = UIColor.whiteColor()
         deleteControl.image = UIImage(named: "delete_50")
@@ -76,10 +71,10 @@ class EffectEditorView: UIView {
         
         addSubview(deleteControl!)
         
-        resizingControl = UIImageView(frame: CGRectMake(frame.size.width - kStickerViewControlSize,
-            frame.size.height - kStickerViewControlSize,
-            kStickerViewControlSize,
-            kStickerViewControlSize))
+        resizingControl = UIImageView(frame: CGRectMake(frame.size.width - Constants.EffectEditor.StickerViewControlSize,
+            frame.size.height - Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize))
         
         resizingControl.backgroundColor = UIColor.whiteColor()
         resizingControl.image = UIImage(named: "delete_50")
@@ -99,8 +94,10 @@ class EffectEditorView: UIView {
         contentView.addSubview(content)
         
         contentView.frame = CGRectInset(bounds,
-            kUserResizableViewGlobalInset + kUserResizableViewInteractiveBorderSize / 2,
-            kUserResizableViewGlobalInset + kUserResizableViewInteractiveBorderSize / 2)
+            Constants.EffectEditor.UserResizableViewGlobalInset +
+                Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2,
+            Constants.EffectEditor.UserResizableViewGlobalInset +
+                Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2)
         
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
@@ -133,12 +130,14 @@ class EffectEditorView: UIView {
             if bounds.size.width < minWidth || self.bounds.size.height < minHeight {
                 
                 bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
-                resizingControl.frame = CGRectMake(bounds.size.width - kStickerViewControlSize,
-                    bounds.size.height-kStickerViewControlSize,
-                    kStickerViewControlSize,
-                    kStickerViewControlSize)
+                resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
+                    bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize)
                 
-                deleteControl.frame = CGRectMake(0, 0, kStickerViewControlSize, kStickerViewControlSize);
+                deleteControl.frame = CGRectMake(0, 0,
+                    Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize);
                 prevPoint = recognizer.locationInView(self)
                 
             } else {
@@ -162,12 +161,14 @@ class EffectEditorView: UIView {
                     bounds.size.width + wChange,
                     bounds.size.height + hChange)
                 
-                resizingControl.frame = CGRectMake(bounds.size.width - kStickerViewControlSize,
-                    bounds.size.height - kStickerViewControlSize,
-                    kStickerViewControlSize,
-                    kStickerViewControlSize)
+                resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
+                    bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize)
                 
-                deleteControl.frame = CGRectMake(0, 0, kStickerViewControlSize, kStickerViewControlSize)
+                deleteControl.frame = CGRectMake(0, 0,
+                    Constants.EffectEditor.StickerViewControlSize,
+                    Constants.EffectEditor.StickerViewControlSize)
                 
                 prevPoint = recognizer.locationOfTouch(0, inView: self)
             }
@@ -180,7 +181,9 @@ class EffectEditorView: UIView {
             
             transform = CGAffineTransformMakeRotation(-angleDiff);
             
-            borderView.frame = CGRectInset(bounds, kUserResizableViewGlobalInset, kUserResizableViewGlobalInset)
+            borderView.frame = CGRectInset(bounds,
+                Constants.EffectEditor.UserResizableViewGlobalInset,
+                Constants.EffectEditor.UserResizableViewGlobalInset)
             borderView.setNeedsDisplay()
             setNeedsDisplay()
             

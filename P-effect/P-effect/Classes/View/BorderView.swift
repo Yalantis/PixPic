@@ -10,8 +10,6 @@ import UIKit
 
 class BorderView: UIView {
     
-    let kUserResizableViewInteractiveBorderSize: CGFloat = 10.0
-
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         CGContextSaveGState(context)
@@ -19,8 +17,8 @@ class BorderView: UIView {
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
         CGContextAddRect(context, CGRectInset(bounds,
-            kUserResizableViewInteractiveBorderSize / 2,
-            kUserResizableViewInteractiveBorderSize / 2))
+            Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2,
+            Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2))
         
         CGContextStrokePath(context)
         CGContextRestoreGState(context)
