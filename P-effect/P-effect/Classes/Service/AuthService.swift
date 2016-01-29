@@ -60,7 +60,8 @@ class AuthService {
                 let userModel = UserModel.init(aUser: user as! User)
                 print(User.currentUser())
                 completion(object: userModel.user)
-                PFInstallation.addPFUserToCurrentInstallation()            }
+                PFInstallation.addPFUserToCurrentInstallation()
+            }
         }
     }
     
