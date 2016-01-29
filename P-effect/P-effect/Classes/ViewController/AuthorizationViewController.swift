@@ -61,6 +61,7 @@ class AuthorizationViewController: UIViewController {
                 handleError(error as NSError)
             } else if let user = user {
                 print("SIGNING INN!!!  with ", user.username)
+                PFInstallation.addPFUserToCurrentInstallation()
                 Router.sharedRouter().showHome(animated: true)
             } else {
                 print("unknown trouble while signing IN")

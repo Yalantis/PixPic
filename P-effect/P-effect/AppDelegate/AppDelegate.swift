@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
         let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(buttonTitlePosition, forBarMetrics: .Default)
 
@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         return true
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -64,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            Router.sharedRouter().showHome(animated: true)
         }
         
         if application.applicationState == .Active {
@@ -81,10 +86,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
         let currentInstallation = PFInstallation.currentInstallation()
-        if currentInstallation.badge != 0 {
-            currentInstallation.badge = 0
-        }
+        currentInstallation.badge = 0
         currentInstallation.saveEventually()
     }
     
+    func applicationDidEnterBackground(application: UIApplication) {
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.badge = 0
+        currentInstallation.saveEventually()
+    }
+    
+    func onTokenUpdated(notification: NSNotification) {
+        print(notification)
+    }
 }
