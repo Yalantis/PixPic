@@ -30,6 +30,7 @@
 		95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */; };
 		95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7B21C50998D004E2145 /* ErrorHandler.swift */; };
 		FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12C1041C5185EE006F99FD /* FBAuthorization.swift */; };
+		FD6326C01C5AC01C007DA1DB /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
@@ -90,6 +91,7 @@
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD12C1041C5185EE006F99FD /* FBAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthorization.swift; sourceTree = "<group>"; };
+		FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		FDAF46A81C49369E008060CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
+				FD6326C01C5AC01C007DA1DB /* PFInstallation+User.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
