@@ -127,78 +127,85 @@ class EffectEditorView: UIView {
         } else if recognizer.state == .Changed {
             enableTranslucency(true)
             
-            // preventing from the picture being shrinked too far by resizing
             let needResizing = bounds.size.width < minWidth || bounds.size.height < minHeight
+            
             if needResizing {
-                bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
-                resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
-                    bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize)
-                
-                deleteControl.frame = CGRectMake(0, 0,
-                    Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize)
-                prevPoint = recognizer.locationInView(self)
-                
+                changeInitialSizeView(recognizer)
             } else {
-                // Resizing
-                
-                let point = recognizer.locationInView(self)
-                
-                let wChange = point.x - prevPoint!.x
-                let wRatioChange = wChange / bounds.size.width
-                
-                let hChange = wRatioChange * bounds.size.height
-                
-                if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
-                    prevPoint = recognizer.locationOfTouch(0, inView: self)
-                    return
-                }
-                let startBounds = bounds
-                
-                bounds = CGRectMake(bounds.origin.x,
-                    bounds.origin.y,
-                    bounds.size.width + wChange,
-                    bounds.size.height + hChange)
-                
-                if (!CGRectEqualToRect(CGRectIntersection(superview!.bounds, frame), frame)) {
-                    bounds = startBounds
-                }
-                
-                resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
-                    bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize)
-                
-                deleteControl.frame = CGRectMake(0, 0,
-                    Constants.EffectEditor.StickerViewControlSize,
-                    Constants.EffectEditor.StickerViewControlSize)
-                
-                prevPoint = recognizer.locationOfTouch(0, inView: self)
-            }
-            // Rotation
-            
-            let angle = atan2(recognizer.locationInView(superview).y - center.y,
-                recognizer.locationInView(superview).x - center.x)
-            
-            if let deltaAngle = deltaAngle {
-                let angleDiff = deltaAngle - angle
-                transform = CGAffineTransformMakeRotation(-angleDiff)
+                resizeView(recognizer)
             }
             
-            borderView.frame = CGRectInset(bounds,
-                Constants.EffectEditor.UserResizableViewGlobalInset,
-                Constants.EffectEditor.UserResizableViewGlobalInset)
-            borderView.setNeedsDisplay()
-            setNeedsDisplay()
+            rotateViewWithAngle(angle: deltaAngle, recognizer: recognizer)
             
         } else if recognizer.state == .Ended {
             enableTranslucency(false)
             prevPoint = recognizer.locationInView(self)
             setNeedsDisplay()
         }
+    }
+    
+    private func changeInitialSizeView(recognizer: UIPanGestureRecognizer) {
+        bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
+        resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
+            bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize)
         
+        deleteControl.frame = CGRectMake(0, 0,
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize)
+        prevPoint = recognizer.locationInView(self)
+    }
+    
+    private func resizeView(recognizer: UIPanGestureRecognizer) {
+        let point = recognizer.locationInView(self)
+        
+        let wChange = point.x - prevPoint!.x
+        let wRatioChange = wChange / bounds.size.width
+        
+        let hChange = wRatioChange * bounds.size.height
+        
+        if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
+            prevPoint = recognizer.locationOfTouch(0, inView: self)
+            return
+        }
+        let startBounds = bounds
+        
+        bounds = CGRectMake(bounds.origin.x,
+            bounds.origin.y,
+            bounds.size.width + wChange,
+            bounds.size.height + hChange)
+        
+        if (!CGRectEqualToRect(CGRectIntersection(superview!.bounds, frame), frame)) {
+            bounds = startBounds
+        }
+        
+        resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
+            bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize)
+        
+        deleteControl.frame = CGRectMake(0, 0,
+            Constants.EffectEditor.StickerViewControlSize,
+            Constants.EffectEditor.StickerViewControlSize)
+        
+        prevPoint = recognizer.locationOfTouch(0, inView: self)
+    }
+    
+    private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
+        let angle = atan2(recognizer.locationInView(superview).y - center.y,
+            recognizer.locationInView(superview).x - center.x)
+        
+        if let deltaAngle = deltaAngle {
+            let angleDiff = deltaAngle - angle
+            transform = CGAffineTransformMakeRotation(-angleDiff)
+        }
+        
+        borderView.frame = CGRectInset(bounds,
+            Constants.EffectEditor.UserResizableViewGlobalInset,
+            Constants.EffectEditor.UserResizableViewGlobalInset)
+        borderView.setNeedsDisplay()
+        setNeedsDisplay()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -257,7 +264,6 @@ class EffectEditorView: UIView {
         
         center = newCenter
     }
-    
     
     private func enableTranslucency(state: Bool) {
         if state == true {
