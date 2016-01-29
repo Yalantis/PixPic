@@ -16,8 +16,16 @@ class ImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       rawImage.image = model.originalImage()
-        // Do any additional setup after loading the view.
+        rawImage.image = model.originalImage()
+        rawImage.layoutIfNeeded()
+        
+        
+        // dummy
+        let im = UIImage(named: "profile_placeholder")
+        let userResizableView = EffectEditorView(image: im!)
+        userResizableView.center = rawImage.center
+        rawImage.addSubview(userResizableView)
+        //
     }
     
 }
@@ -25,7 +33,9 @@ class ImageViewController: UIViewController {
 extension ImageViewController: PhotoEditorDelegate {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
-        print("show choosed effect")
+        let userResizableView = EffectEditorView(image: didChooseEffect)
+        userResizableView.center = rawImage.center
+        rawImage.addSubview(userResizableView)
     }
     
     func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage {
