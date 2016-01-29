@@ -10,9 +10,64 @@ import Foundation
 
 typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
 typealias LoadingUserCompletion = (object: User?, error: NSError?) -> ()
+typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> ()
 
 
 class LoaderService: NSObject {
+    
+    class func loadEffects(completion: LoadingEffectsCompletion?) {
+        var effectsArray = [EffectsModel]()
+        var arrayOfStickers = Array<EffectsSticker>()
+        var effectsVersion = EffectsVersion()
+        var countOfModels = 0
+        
+        let query = EffectsVersion.query()
+        
+        query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+            if error != nil {
+                print("Error: \(error!) \(error!.userInfo)")
+                completion?(objects: nil, error: error)
+                return
+            }
+            if let object = object {
+                effectsVersion = object as! EffectsVersion
+            }
+            
+            effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
+                (objects:[PFObject]?, error: NSError?) in
+                if error != nil {
+                    print("Error: \(error!) \(error!.userInfo)")
+                    completion?(objects: nil, error: error)
+                    return
+                }
+                if let objects = objects {
+                    countOfModels = objects.count
+                    for group in objects {
+                        
+                        (group as! EffectsGroup).stickersRelation.query().findObjectsInBackgroundWithBlock{
+                            (objects:[PFObject]?, error: NSError?) in
+                            if error != nil {
+                                print("Error: \(error!) \(error!.userInfo)")
+                                completion?(objects: nil, error: error)
+                                return
+                            }
+                            if let objects = objects {
+                                arrayOfStickers = objects as! [EffectsSticker]
+                                let model = EffectsModel()
+                                model.effectsGroup = group as! EffectsGroup
+                                model.effectsStickers = arrayOfStickers
+                                effectsArray.append(model)
+                                print(effectsArray)
+                                if countOfModels == effectsArray.count {
+                                    completion?(objects: effectsArray, error: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     func loadUserData(facebookId: String?, completion: LoadingUserCompletion?) {
         var user = User()

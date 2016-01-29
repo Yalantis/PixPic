@@ -9,29 +9,16 @@
 import UIKit
 
 class EffectsModel: NSObject {
-    var effectsVersion: EffectsVersion
-    var effectsGroup: EffectsGroup{
-        didSet {
-            let image = UIImage(named: "delete_50_1")
-            let pictureData = UIImageJPEGRepresentation(image!, 0.5)
-            effectsGroup.image = PFFile(name: "image", data: pictureData!)!
-        }
-    }
-    var effectsSticker: EffectsSticker{
-        didSet {
-            let image = UIImage(named: "delete_50_1")
-            let pictureData = UIImageJPEGRepresentation(image!, 0.5)
-            effectsSticker.image = PFFile(name: "image", data: pictureData!)!
-        }
-    }
+    
+    var effectsGroup: EffectsGroup
+    var effectsStickers: [EffectsSticker]
     
     override init() {
-        effectsVersion = EffectsVersion()
-        effectsSticker = EffectsSticker()
+//        effectsVersion = EffectsVersion()
+        effectsStickers = [EffectsSticker]()
         effectsGroup = EffectsGroup()
         
-        effectsVersion.version = 0.1
-//        
+//
 //        let image = UIImage(named: "delete_50_1")
 //        let pictureData = UIImageJPEGRepresentation(image!, 0.5)
 //        effectsGroup.image = PFFile(name: "image", data: pictureData!)!

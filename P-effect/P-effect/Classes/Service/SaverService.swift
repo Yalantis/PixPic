@@ -77,11 +77,13 @@ class SaverService {
         
         
         let image = UIImage(named: "delete_50_1")
+        let image2 = UIImage(named: "wedding_photo_50")
         let pictureData = UIImageJPEGRepresentation(image!, 0.5)
+        let pictureData2 = UIImageJPEGRepresentation(image2!, 0.5)
 //        effectsGroup.image = PFFile(name: "image", data: pictureData!)!
         
         let model =  EffectsModel.init()
-        var effects = model.effectsVersion
+        var effects = EffectsVersion()
         //        effects.groupsRelation.addObject(model.effectsGroup)
         
         do {
@@ -92,7 +94,7 @@ class SaverService {
         dispatch_async(dispatch_get_main_queue()) {
             for _ in 0..<3 {
                 let effectsGroup = EffectsGroup()
-                effectsGroup.image = PFFile(name: "image", data: pictureData!)!
+                effectsGroup.image = PFFile(name: "image", data: pictureData2!)!
                 do {
                     _ = try effectsGroup.save()
                 } catch _ {

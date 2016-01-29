@@ -6,8 +6,6 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-import UIKit
-
 class EffectsVersion: PFObject {
     
     @NSManaged var version: Float
@@ -23,7 +21,7 @@ class EffectsVersion: PFObject {
     }
     
     override class func query() -> PFQuery? {
-        let query = PFQuery(className: Post.parseClassName())
+        let query = PFQuery(className: EffectsVersion.parseClassName())
         query.orderByDescending("version")
         return query
     }

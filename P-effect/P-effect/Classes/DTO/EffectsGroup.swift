@@ -6,8 +6,6 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-import UIKit
-
 class EffectsGroup: PFObject {
     
     @NSManaged var image: PFFile
@@ -24,7 +22,7 @@ class EffectsGroup: PFObject {
     }
     
     override class func query() -> PFQuery? {
-        let query = PFQuery(className: Post.parseClassName())
+        let query = PFQuery(className: EffectsGroup.parseClassName())
 //        query.includeKey("EffectsVersion")
         query.orderByDescending("updatedAt")
         return query

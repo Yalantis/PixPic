@@ -148,15 +148,15 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" reuseIdentifier="EffectsPickerCell" id="EBj-No-79Q">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" reuseIdentifier="EffectsPickerCell" id="EBj-No-79Q" customClass="EffectViewCell" customModule="P_effect" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="8" width="130" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-jc-Ewc">
-                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-jc-Ewc">
+                                            <rect key="frame" x="0.0" y="0.0" width="130" height="130"/>
                                             <color key="backgroundColor" red="0.53699982166290283" green="0.91306149959564209" blue="0.55111145973205566" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="fvh-jc-Ewc" secondAttribute="height" multiplier="1:1" id="ddX-nL-XnL"/>
@@ -167,11 +167,14 @@
                                 </view>
                                 <color key="backgroundColor" red="0.14509804549999999" green="0.77647060160000003" blue="0.066666670139999995" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="fvh-jc-Ewc" secondAttribute="trailing" constant="111" id="0nN-VK-uZL"/>
-                                    <constraint firstAttribute="bottom" secondItem="fvh-jc-Ewc" secondAttribute="bottom" constant="111" id="MHV-6c-FXD"/>
+                                    <constraint firstAttribute="trailing" secondItem="fvh-jc-Ewc" secondAttribute="trailing" id="0nN-VK-uZL"/>
+                                    <constraint firstAttribute="bottom" secondItem="fvh-jc-Ewc" secondAttribute="bottom" id="MHV-6c-FXD"/>
                                     <constraint firstItem="fvh-jc-Ewc" firstAttribute="top" secondItem="EBj-No-79Q" secondAttribute="top" id="an8-N3-YFY"/>
                                     <constraint firstItem="fvh-jc-Ewc" firstAttribute="leading" secondItem="EBj-No-79Q" secondAttribute="leading" id="xM6-Hk-jRB"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="effectImage" destination="fvh-jc-Ewc" id="IhE-gi-gi4"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
