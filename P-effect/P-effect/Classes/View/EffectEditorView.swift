@@ -65,12 +65,9 @@ class EffectEditorView: UIView {
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
         
-        deleteControl = UIImageView(frame: deleteControlFrame)
-        deleteControl.layer.cornerRadius = deleteControl.frame.size.width / 2
+        let deleteControlImage = UIImage(named: "delete_50")
         
-        deleteControl.backgroundColor = UIColor.whiteColor()
-        deleteControl.image = UIImage(named: "delete_50")
-        deleteControl.userInteractionEnabled = true
+        deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
         
         let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
         deleteControl.addGestureRecognizer(singleTap)
@@ -82,12 +79,9 @@ class EffectEditorView: UIView {
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
         
-        resizingControl = UIImageView(frame: resizingControlFrame)
-        resizingControl.layer.cornerRadius = resizingControl.frame.size.width / 2
+        let resizingControlImage = UIImage(named: "resize_four_dir_50")
         
-        resizingControl.backgroundColor = UIColor.whiteColor()
-        resizingControl.image = UIImage(named: "resize_four_dir_50")
-        resizingControl.userInteractionEnabled = true
+        resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
         
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
         resizingControl.addGestureRecognizer(panResizeGesture)
@@ -271,6 +265,18 @@ class EffectEditorView: UIView {
         } else {
             alpha = 1.0
         }
+    }
+    
+    private func createControlWithFrame(frame: CGRect, image: UIImage?) -> UIImageView {
+        let control = UIImageView(frame: frame)
+        control.layer.cornerRadius = control.frame.size.width / 2
+        control.backgroundColor = UIColor.whiteColor()
+        if let image = image {
+            control.image = image
+        }
+        control.userInteractionEnabled = true
+        
+        return control
     }
     
 }
