@@ -14,7 +14,6 @@ class AuthService {
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
-        
         fbRequest.startWithCompletionHandler(
             { (FBSDKGraphRequestConnection, result, error) -> () in
                 if (error == nil && result != nil) {

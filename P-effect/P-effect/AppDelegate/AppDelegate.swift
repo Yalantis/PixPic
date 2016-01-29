@@ -18,11 +18,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         User.registerSubclass()
         Parse.enableLocalDatastore()
-        Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
+        FBSDKApplicationDelegate.sharedInstance().application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        Parse.setApplicationId(
+            Constants.ParseApplicationId.AppID,
+            clientKey: Constants.ParseApplicationId.ClientKey
+        )
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onTokenUpdated:", name:FBSDKAccessTokenDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "onTokenUpdated:",
+            name:FBSDKAccessTokenDidChangeNotification,
+            object: nil
+        )
         let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(buttonTitlePosition, forBarMetrics: .Default)
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
+            buttonTitlePosition,
+            forBarMetrics: .Default
+        )
 
         Router.sharedRouter().onStart(true)
         
@@ -99,4 +114,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func onTokenUpdated(notification: NSNotification) {
         print(notification)
     }
+    
 }
