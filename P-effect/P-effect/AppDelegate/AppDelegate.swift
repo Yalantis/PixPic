@@ -16,36 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        User.registerSubclass()
-        Parse.enableLocalDatastore()
         FBSDKApplicationDelegate.sharedInstance().application(
             application,
             didFinishLaunchingWithOptions: launchOptions
         )
+        setupParse()
+
         Parse.setApplicationId(
             Constants.ParseApplicationId.AppID,
             clientKey: Constants.ParseApplicationId.ClientKey
         )
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "onTokenUpdated:",
-            name:FBSDKAccessTokenDidChangeNotification,
-            object: nil
-        )
-        let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
-            buttonTitlePosition,
-            forBarMetrics: .Default
-        )
-
-        Router.sharedRouter().onStart(true)
-        
         Fabric.with([Crashlytics.self])
-        
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
         
         if application.applicationState != UIApplicationState.Background {
             let oldPushHandlerOnly = !self.respondsToSelector(Selector("application:didReceiveRemoteNotification:fetchCompletionHandler:"))
@@ -54,11 +36,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
+        setupNotifications(application)
+        setupUI()
+        
+        Router.sharedRouter().onStart(true)
         return true
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    private func setupParse() {
+        User.registerSubclass()
+        Parse.enableLocalDatastore()
+
+    }
+    
+    private func setupUI() {
+        let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
+            buttonTitlePosition,
+            forBarMetrics: .Default
+        )
+    }
+    
+    private func setupNotifications(application: UIApplication) {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "onTokenUpdated:",
+            name:FBSDKAccessTokenDidChangeNotification,
+            object: nil
+        )
+        let settings = UIUserNotificationSettings(
+            forTypes: [.Alert, .Badge, .Sound],
+            categories: nil
+        )
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
