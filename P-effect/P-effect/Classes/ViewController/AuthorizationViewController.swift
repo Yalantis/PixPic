@@ -20,23 +20,29 @@ class AuthorizationViewController: UIViewController {
     }
     
     private func signInWithFacebook() {
-        FBAuthorization.signInWithFacebookInController(self, completion: { [weak self] user, error in
-            if let error = error {
-                handleError(error as NSError)
-            }
-            if let user = user as User! {
-                UserModel.init(aUser: user).checkIfFacebookIdExists({ exists in
-                    if exists {
-                        user.passwordSet = false
-                        self?.signIn()
-                    } else {
-                        self?.logIn()
-                    }
-                })
+        FBAuthorization.signInWithFacebookInController(
+            self,
+            completion: {
+                [weak self] user, error in
+                if let error = error {
+                    handleError(error as NSError)
+                }
+                if let user = user as User! {
+                    UserModel.init(aUser: user).checkIfFacebookIdExists(
+                        { exists in
+                            if exists {
+                                user.passwordSet = false
+                                self?.signIn()
+                            } else {
+                                self?.logIn(user)
+                            }
+                        }
+                    )
                 } else {
                     self?.proceedWithoutAuthorization()
                 }
-            })
+            }
+        )
     }
     
     private func proceedWithoutAuthorization() {
@@ -56,42 +62,54 @@ class AuthorizationViewController: UIViewController {
     }
     
     private func signIn() {
-        FBAuthorization.signInWithPermission({ [weak self] user, error in
-            if let error = error {
-                handleError(error as NSError)
-            } else if let user = user {
-                print("SIGNING INN!!!  with ", user.username)
-                PFInstallation.addPFUserToCurrentInstallation()
-                Router.sharedRouter().showHome(animated: true)
-            } else {
-                print("unknown trouble while signing IN")
+        FBAuthorization.signInWithPermission(
+            { [weak self] user, error in
+                if let error = error {
+                    handleError(error as NSError)
+                } else if let user = user {
+                    print("SIGNING INN!!!  with ", user.username)
+                    PFInstallation.addPFUserToCurrentInstallation()
+                    Router.sharedRouter().showHome(animated: true)
+                } else {
+                    print("unknown trouble while signing IN")
+                }
+                self?.view.hideToastActivity()
             }
-            self?.view.hideToastActivity()
-        })
+        )
     }
     
-    private func logIn() {
+    private func logIn(user: User) {
+        let userWithFB = user
         PFFacebookUtils.logInInBackgroundWithAccessToken(
-            FBSDKAccessToken.currentAccessToken(), block: { [weak self] user, error in
-                let user = UserModel.init(aUser: User.currentUser()!)
-                user.linkOrUnlinkFacebook({ success, error in
-                    if let error = error {
-                        handleError(error)
-                    } else {
-                        print("LINKED!!! NEED TO UPDATE DATA")
-                        AuthService.updatePFUserDataFromFB(user.user, completion: { user, error in
-                            if let error = error {
-                                handleError(error)
-                            } else if let _ = user {
-                                print("User has been updated")
-                            }
-                        })
+            FBSDKAccessToken.currentAccessToken(), block: {
+                [weak self] user, error in
+                let userNew = UserModel.init(aUser: User.currentUser()!)
+                userNew.linkOrUnlinkFacebook(
+                    { success, error in
+                        if let error = error {
+                            handleError(error)
+                        } else {
+                            print("LINKED!!! NEED TO UPDATE DATA")
+                            userNew.user.facebookId = userWithFB.facebookId
+                            userNew.user.username = userWithFB.username
+                            userNew.user.email = userWithFB.email
+                            userNew.user.avatar = userWithFB.avatar
+                            userNew.user.saveInBackgroundWithBlock(
+                                { (succes, error) -> Void in
+                                    if let error = error {
+                                        print(error)
+                                    } else {
+                                        print("NEW DATAA FOR OLD USER")
+                                    }
+                                }
+                            )
+                        }
                     }
-                })
+                )
                 self?.view.hideToastActivity()
                 Router.sharedRouter().showHome(animated: true)
-        })
-
+            }
+        )
     }
     
 }
