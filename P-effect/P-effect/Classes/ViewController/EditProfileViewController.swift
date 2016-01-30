@@ -18,11 +18,13 @@ class EditProfileViewController: UIViewController {
     
     private var image: UIImage?
     private var userName: String?
+    private var originalUserName: String?
     
     private var kbHeight: CGFloat?
     private var kbHidden = true
     private var someChangesMade: Bool = false
-    
+    private var usernameChanged: Bool = false
+
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var saveChangesButton: UIButton!
@@ -74,6 +76,8 @@ class EditProfileViewController: UIViewController {
         saveChangesButton.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
+        originalUserName = userName
+        
         let imgFromPFFileRepresentator = ImageLoaderService()
         imgFromPFFileRepresentator.getImageForContentItem(User.currentUser()?.avatar) {
             [weak self](image, error) -> () in
@@ -242,7 +246,10 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction private func saveChangesAction(sender: AnyObject) {
-        
+        if originalUserName == userName {
+            saveChanges()
+            return
+        }
         ValidationService.valdateUserName(userName!) { [weak self] completion in
             if completion {
                 self?.saveChanges()

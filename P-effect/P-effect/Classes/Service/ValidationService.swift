@@ -16,7 +16,7 @@ class ValidationService: NSObject {
             return
         }
         
-        if userName.characters.count < Constants.Validation.MinUserName &&
+        if userName.characters.count < Constants.Validation.MinUserName ||
             userName.characters.count > Constants.Validation.MaxUserName {
                 AlertService.simpleAlert(Constants.Validation.WrongLenght)
                 completion (false)
