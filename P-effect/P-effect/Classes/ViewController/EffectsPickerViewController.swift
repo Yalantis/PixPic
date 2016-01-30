@@ -38,14 +38,20 @@ class EffectsPickerViewController: UICollectionViewController {
         
         collectionView?.superview?.layoutIfNeeded()
     }
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            
+            return CGSizeMake(collectionView.bounds.size.height, (collectionView.bounds.size.height))
 
+    }
+    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let model = model
             else { return }
         if model.groupsShown == true {
             //TODO: change it to reload array with selected group of effects
             model.shownGroupNumber = indexPath.row
-            collectionView.reloadData()
+                    collectionView.reloadData()
             model.groupsShown = false
         } else if indexPath.row == 0 {
             //TODO: change it to reload array with groups

@@ -18,9 +18,9 @@ class ValidationService: NSObject {
         
         if userName.characters.count < Constants.Validation.MinUserName &&
             userName.characters.count > Constants.Validation.MaxUserName {
-            AlertService.simpleAlert(Constants.Validation.WrongLenght)
-            completion (false)
-            return
+                AlertService.simpleAlert(Constants.Validation.WrongLenght)
+                completion (false)
+                return
         }
         
         let query = PFUser.query()?.whereKey("username", equalTo: userName)
@@ -33,9 +33,41 @@ class ValidationService: NSObject {
             }
         }
     }
-}
-
-    private func userNameContainsOnlyLetters(userName: String) -> Bool {
+    
+    class func needToUpdateVersion(completion: (Bool) -> ()){
+        var effectsVersion = EffectsVersion()
+        let query = EffectsVersion.query()
+        let queryFromLockal = EffectsVersion.query()
+        queryFromLockal?.fromLocalDatastore()
+        
+        query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+            if error != nil {
+                print("Error: \(error!) \(error!.userInfo)")
+                completion(false)
+                return
+            } else {
+                if let object = object {
+                    effectsVersion = object as! EffectsVersion
+                    queryFromLockal?.getFirstObjectInBackgroundWithBlock { (localObject: PFObject?, error: NSError?) in
+                        if error != nil {
+                            print("Error: \(error!) \(error!.userInfo)")
+                            completion(true)
+                            return
+                        }
+                        if let localObject = localObject {
+                            if effectsVersion.version > (localObject as! EffectsVersion).version {
+                                completion(true)
+                            } else {
+                                completion (false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private class func userNameContainsOnlyLetters(userName: String) -> Bool {
         if userName.characters.first == Constants.Validation.WhiteSpace {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false
@@ -59,5 +91,8 @@ class ValidationService: NSObject {
             }
         }
         
-    return true
+        return true
     }
+    
+    
+}

@@ -23,49 +23,59 @@ class LoaderService: NSObject {
         
         let query = EffectsVersion.query()
         
-        query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
-            if error != nil {
-                print("Error: \(error!) \(error!.userInfo)")
-                completion?(objects: nil, error: error)
-                return
-            }
-            if let object = object {
-                effectsVersion = object as! EffectsVersion
+        ValidationService.needToUpdateVersion { needUpdate in
+            if !needUpdate {
+                query?.fromLocalDatastore()
             }
             
-            effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
-                (objects:[PFObject]?, error: NSError?) in
+            query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
                 if error != nil {
                     print("Error: \(error!) \(error!.userInfo)")
                     completion?(objects: nil, error: error)
                     return
                 }
-                if let objects = objects {
-                    countOfModels = objects.count
-                    for group in objects {
-                        
-                        (group as! EffectsGroup).stickersRelation.query().findObjectsInBackgroundWithBlock{
-                            (objects:[PFObject]?, error: NSError?) in
-                            if error != nil {
-                                print("Error: \(error!) \(error!.userInfo)")
-                                completion?(objects: nil, error: error)
-                                return
-                            }
-                            if let objects = objects {
-                                arrayOfStickers = objects as! [EffectsSticker]
-                                let model = EffectsModel()
-                                model.effectsGroup = group as! EffectsGroup
-                                model.effectsStickers = arrayOfStickers
-                                effectsArray.append(model)
-                                print(effectsArray)
-                                if countOfModels == effectsArray.count {
-                                    completion?(objects: effectsArray, error: nil)
+                if let object = object {
+                    effectsVersion = object as! EffectsVersion
+                    effectsVersion.pinInBackground()
+                }
+                
+                effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
+                    (objects:[PFObject]?, error: NSError?) in
+                    if error != nil {
+                        print("Error: \(error!) \(error!.userInfo)")
+                        completion?(objects: nil, error: error)
+                        return
+                    }
+                    if let objects = objects {
+                        countOfModels = objects.count
+                        for group in objects {
+                            (group as! EffectsGroup).pinInBackground()
+                            (group as! EffectsGroup).stickersRelation.query().findObjectsInBackgroundWithBlock{
+                                (objects:[PFObject]?, error: NSError?) in
+                                if error != nil {
+                                    print("Error: \(error!) \(error!.userInfo)")
+                                    completion?(objects: nil, error: error)
+                                    return
+                                }
+                                if let objects = objects {
+                                    arrayOfStickers = objects as! [EffectsSticker]
+                                    let model = EffectsModel()
+                                    model.effectsGroup = group as! EffectsGroup
+                                    model.effectsStickers = arrayOfStickers
+                                    effectsArray.append(model)
+                                    for sticker in objects {
+                                        (sticker as! EffectsSticker).pinInBackground()
+                                    }
+                                    if countOfModels == effectsArray.count {
+                                        completion?(objects: effectsArray, error: nil)
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+            
         }
     }
     
@@ -90,7 +100,7 @@ class LoaderService: NSObject {
             print("No facebookId to find a User")
             completion?(object: nil, error: nil)
         }
-    }               
+    }
     
     func loadFreshData(user: User?, completion: LoadingPostsCompletion?) {
         let query = Post.query()
