@@ -37,10 +37,10 @@ class ValidationService: NSObject {
     class func needToUpdateVersion(completion: (Bool) -> ()){
         var effectsVersion = EffectsVersion()
         let query = EffectsVersion.query()
-        let queryFromLockal = EffectsVersion.query()
-        queryFromLockal?.fromLocalDatastore()
+        let queryFromLocal = EffectsVersion.query()
+        queryFromLocal?.fromLocalDatastore()
         
-        query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
+        query?.getFirstObjectInBackgroundWithBlock { object, error in
             if error != nil {
                 print("Error: \(error!) \(error!.userInfo)")
                 completion(false)
@@ -48,7 +48,7 @@ class ValidationService: NSObject {
             } else {
                 if let object = object {
                     effectsVersion = object as! EffectsVersion
-                    queryFromLockal?.getFirstObjectInBackgroundWithBlock { (localObject: PFObject?, error: NSError?) in
+                    queryFromLocal?.getFirstObjectInBackgroundWithBlock { localObject, error in
                         if error != nil {
                             print("Error: \(error!) \(error!.userInfo)")
                             completion(true)

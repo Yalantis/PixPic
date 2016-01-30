@@ -20,17 +20,14 @@ class EffectsPickerViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        SaverService.uploadEffects()
+        
         model = EffectsPickerModel()
-        model?.downloadEffects{ [weak self] (completion) in
+        model?.downloadEffects{ [weak self] completion in
             if completion {
                 self!.model?.groupsShown = true
                 self?.collectionView?.reloadData()
             }
         }
-        collectionView?.superview?.layoutIfNeeded()
-        print (collectionView!.frame.size)
-        automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillLayoutSubviews() {
@@ -38,6 +35,7 @@ class EffectsPickerViewController: UICollectionViewController {
         
         collectionView?.superview?.layoutIfNeeded()
     }
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
@@ -45,7 +43,6 @@ class EffectsPickerViewController: UICollectionViewController {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            print (collectionView.frame.size)
             return UIEdgeInsetsMake(-66, 0, 0, 0);
     }
     
@@ -61,10 +58,9 @@ class EffectsPickerViewController: UICollectionViewController {
             model.groupsShown = true
             collectionView.reloadData()
         } else {
-            model.effectImageAtIndexPath(indexPath, completion: { [weak self] (image) in
+            model.effectImageAtIndexPath(indexPath) { [weak self] image in
                 self?.delegate?.didChooseEffectFromPicket(image)
-                })
+            }
         }
     }
-    
 }

@@ -75,7 +75,6 @@ class LoaderService: NSObject {
                     }
                 }
             }
-            
         }
     }
     

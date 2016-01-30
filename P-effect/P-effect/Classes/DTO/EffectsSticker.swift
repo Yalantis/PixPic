@@ -9,7 +9,6 @@
 class EffectsSticker: PFObject {
     
     @NSManaged var image: PFFile
-//    @NSManaged var group: EffectsGroup?
     
     override class func initialize() {
         var onceToken: dispatch_once_t = 0
@@ -17,12 +16,7 @@ class EffectsSticker: PFObject {
             self.registerSubclass()
         }
     }
-    
-    override class func query() -> PFQuery? {
-        let query = PFQuery(className: EffectsSticker.parseClassName())
-        return query
-    }
-        
+
 }
 
 extension EffectsSticker: PFSubclassing {

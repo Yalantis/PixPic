@@ -28,7 +28,7 @@ class PhotoEditorViewController: UIViewController {
         }
     }
     var imageController: ImageViewController?
-    var delegate: PhotoEditorDelegate?
+    weak var delegate: PhotoEditorDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

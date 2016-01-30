@@ -22,7 +22,7 @@ class EffectsPickerModel: NSObject {
     }
     
     func downloadEffects(completion: (Bool) -> ()) {
-        LoaderService.loadEffects { [weak self] (objects, error) in
+        LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
                 self?.effects = objects
                 print(objects)
@@ -38,7 +38,8 @@ class EffectsPickerModel: NSObject {
     
     func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage) -> ()) {
         let imageLoader = ImageLoaderService()
-        imageLoader.getImageForContentItem(effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image) { (image, error) -> () in
+        imageLoader.getImageForContentItem(effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image) {
+            image, error in
             if error != nil {
                 return
             } else {
@@ -57,22 +58,19 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         return 1
     }
     
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let effects = effects
             else { return 0}
-            if groupsShown == true{
-                return effects.count
-            } else {
-                if let shownGroupNumber = shownGroupNumber {
-                    return  effects[shownGroupNumber].effectsStickers.count + 1
-                }
+        if groupsShown == true{
+            return effects.count
+        } else {
+            if let shownGroupNumber = shownGroupNumber {
+                return  effects[shownGroupNumber].effectsStickers.count + 1
             }
+        }
         return 0
     }
-    //        return (effects?.count)!
-
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             Constants.EffectsPicker.EffectsPickerCellIdentifier, forIndexPath: indexPath

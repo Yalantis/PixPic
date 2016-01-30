@@ -9,6 +9,7 @@
 class EffectsVersion: PFObject {
     
     @NSManaged var version: Float
+    
     var groupsRelation: PFRelation! {
         return relationForKey("groupsRelation")
     }
