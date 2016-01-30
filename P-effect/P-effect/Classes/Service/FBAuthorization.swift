@@ -51,7 +51,7 @@ class FBAuthorization {
             ["public_profile", "email"],
             fromViewController: controller,
             handler: {
-                (result:FBSDKLoginManagerLoginResult!, error:NSError!) -> Void in
+                (result:FBSDKLoginManagerLoginResult!, error:NSError!) in
                 if let error = error {
                     FBSDKLoginManager().logOut()
                     completion(nil, error)
@@ -65,7 +65,7 @@ class FBAuthorization {
                             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]
                         )
                         fbRequest.startWithCompletionHandler(
-                            { (FBSDKGraphRequestConnection, result, error) -> Void in
+                            { FBSDKGraphRequestConnection, result, error in
                                 let user = User()
                                 if (error == nil && result != nil) {
                                     let facebookData = result as! NSDictionary

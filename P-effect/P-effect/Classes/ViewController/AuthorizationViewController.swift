@@ -74,7 +74,7 @@ class AuthorizationViewController: UIViewController {
                     user.user.email = userWithFB.email
                     user.user.avatar = userWithFB.avatar
                     user.user.saveInBackgroundWithBlock(
-                        { succes, error -> Void in
+                        { succes, error in
                             if let error = error {
                                 print(error)
                             } else {

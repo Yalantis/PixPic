@@ -33,7 +33,7 @@ class AuthService {
                             user.setValue(nickname, forKey: "username")
                     }
                     user.saveInBackgroundWithBlock(
-                        { (succes, error) -> Void in
+                        { succes, error in
                             if let error = error {
                                 print(error)
                                 completion?(nil, error)
