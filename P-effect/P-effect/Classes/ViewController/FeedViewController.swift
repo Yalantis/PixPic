@@ -26,7 +26,38 @@ class FeedViewController: UIViewController {
             postDataSource?.shouldPullToRefreshHandle = true
         }
     }
-
+    
+    //MARK: - lifesicle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        setupDataSource()
+        setupLoadersCallback()
+        view.makeToastActivity(CSToastPositionCenter)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+    }
+    
+    private func setupDataSource() {
+        postDataSource = PostDataSource()
+        tableView.dataSource = postDataSource
+    }
+    
+    private func setupPlaceholderForEmptyDataSet() {
+        tableView?.emptyDataSetDelegate = self
+        tableView?.emptyDataSetSource = self
+    }
+    
     //MARK: - photo editor
     @IBAction func choosePhoto(sender: AnyObject) {
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
@@ -45,7 +76,7 @@ class FeedViewController: UIViewController {
         let controllerIdentifier = "PhotoEditorController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
-        navigationController?.showViewController(viewController, sender: self)
+      //  navigationController?.showViewController(viewController, sender: self)
         setSelectedPhoto(image)
     }
     
@@ -56,31 +87,6 @@ class FeedViewController: UIViewController {
             let saver = SaverService()
             saver.saveAndUploadPost(file, comment: nil)
         }
-    }
-    
-    //MARK: - lifesicle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupTableView()
-        setupDataSource()
-        setupLoadersCallback()
-        view.makeToastActivity(CSToastPositionCenter)
-    }
-    
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
-    }
-    
-    private func setupDataSource() {
-        postDataSource = PostDataSource()
-        tableView.dataSource = postDataSource
-    }
-    
-    private func setupPlaceholderForEmptyDataSet() {
-        tableView?.emptyDataSetDelegate = self
-        tableView?.emptyDataSetSource = self
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {

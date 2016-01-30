@@ -32,14 +32,19 @@ class PostDataSource: NSObject {
     
     override init() {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "fetchData", name: Constants.NotificationKey.NewPostUploaded, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "fetchData:",
+            name: Constants.NotificationKey.NewPostUploaded,
+            object: nil
+        )
     }
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    @objc func fetchData(user: User?) {
+    dynamic func fetchData(user: User?) {
         loader.loadFreshData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
             if self?.shouldPullToRefreshHandle == true {
@@ -47,6 +52,7 @@ class PostDataSource: NSObject {
             }
             if let objects = objects {
                 self?.arrayOfPosts = objects
+                self?.tableView?.reloadData()
             }
             if let error = error {
                 handleError(error)

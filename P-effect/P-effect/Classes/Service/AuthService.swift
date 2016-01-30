@@ -48,7 +48,6 @@ class AuthService {
                 }
             }
         )
-        
     }
     
     func anonymousLogIn(completion completion: (object: User?) -> (), failure: (error: NSError?) -> ()) {
@@ -65,6 +64,7 @@ class AuthService {
     }
     
     func logOut() {
+        PFFacebookUtils.unlinkUserInBackground(User.currentUser()!)
         User.logOut()
         FBSDKLoginManager().logOut()
     }

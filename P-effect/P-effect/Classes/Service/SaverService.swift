@@ -9,7 +9,7 @@
 import Foundation
 
 private let messageDataSuccessfullyUpdated = "User data has been updated!"
-private let messageDataNotUpdated = "Some error wile saving! Try again later"
+private let messageDataNotUpdated = "Troubles with the update! Check it out later"
 private let messageUsernameCanNotBeEmpty = "User name can not be empty"
 private let messageUploadSuccessful = "Upload successful!"
 
@@ -37,7 +37,7 @@ class SaverService {
     func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
         if let avatar = avatar {
             avatar.saveInBackgroundWithBlock(
-                { (succeeded, error) -> () in
+                { succeeded, error -> () in
                     if succeeded {
                         print("Avatar saved!")
                         SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
@@ -59,6 +59,10 @@ class SaverService {
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
                     AlertService.simpleAlert(messageUploadSuccessful)
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        Constants.NotificationKey.NewPostUploaded,
+                        object: nil
+                    )
                 } else {
                     if let error = error?.userInfo["error"] as? String {
                         print(error)
