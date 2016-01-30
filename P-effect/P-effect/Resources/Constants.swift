@@ -71,7 +71,7 @@ struct Constants {
     }
     
     struct EffectsPicker {
-        static let MagicalTopInsetsDestroyer = -66 as Float
+        static let MagicalTopInsetsDestroyer = -66 as CGFloat
         static let EffectsPickerCellIdentifier = "EffectsPickerCell"
     }
     
