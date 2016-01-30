@@ -35,11 +35,25 @@ class EffectsPickerModel: NSObject {
         EffectsGroup()
         EffectsSticker()
     }
+    
+    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage) -> ()) {
+        let imageLoader = ImageLoaderService()
+        imageLoader.getImageForContentItem(effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image) { (image, error) -> () in
+            if error != nil {
+                return
+            } else {
+                if let image = image {
+                    completion(image)
+                }
+            }
+        }
+    }
+    
 }
 
 extension EffectsPickerModel: UICollectionViewDataSource {
-     
-     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     

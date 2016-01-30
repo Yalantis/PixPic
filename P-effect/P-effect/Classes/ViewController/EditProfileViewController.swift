@@ -242,6 +242,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction private func saveChangesAction(sender: AnyObject) {
+        
         ValidationService.valdateUserName(userName!) { [weak self] completion in
             if completion {
                 self?.saveChanges()
