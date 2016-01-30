@@ -14,10 +14,8 @@ class AuthService {
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
             parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"])
-        
         fbRequest.startWithCompletionHandler(
             { (FBSDKGraphRequestConnection, result, error) -> () in
-                
                 if (error == nil && result != nil) {
                     let facebookData = result as! NSDictionary
                     if let avatarURL = NSURL(string: facebookData.objectForKey("picture")?.objectForKey("data")?.objectForKey("url") as! String) {
@@ -61,6 +59,7 @@ class AuthService {
                 let userModel = UserModel.init(aUser: user as! User)
                 print(User.currentUser())
                 completion(object: userModel.user)
+                PFInstallation.addPFUserToCurrentInstallation()
             }
         }
     }
