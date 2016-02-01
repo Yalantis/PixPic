@@ -40,6 +40,7 @@ class LoaderService: NSObject {
                         return
                 }
                 effectsVersion = object as! EffectsVersion
+                effectsVersion.saveEventually()
                 effectsVersion.pinInBackground()
                 
                 effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
@@ -56,6 +57,7 @@ class LoaderService: NSObject {
                     }
                     countOfModels = objects.count
                     for group in objects as! [EffectsGroup] {
+                        group.saveEventually()
                         group.pinInBackground()
                         group.stickersRelation.query().findObjectsInBackgroundWithBlock{
                             (objects:[PFObject]?, error: NSError?) in
@@ -74,8 +76,9 @@ class LoaderService: NSObject {
                             model.effectsGroup = group
                             model.effectsStickers = arrayOfStickers
                             effectsArray.append(model)
-                            for sticker in objects {
-                                (sticker as! EffectsSticker).pinInBackground()
+                            for sticker in arrayOfStickers {
+                                sticker.saveEventually()
+                                sticker.pinInBackground()
                             }
                             if countOfModels == effectsArray.count {
                                 completion?(objects: effectsArray, error: nil)
