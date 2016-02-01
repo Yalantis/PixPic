@@ -36,18 +36,17 @@ extension ImageViewController: PhotoEditorDelegate {
     
     func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage {
         if withEffects {
-            return rawImage.image!
-        } else {
             for effect in effects {
                 effect.hideControls()
             }
             let rect = rawImage.bounds
             UIGraphicsBeginImageContext(rect.size)
-            guard let context = UIGraphicsGetCurrentContext() else {
-                return rawImage.image!
-            }
+            let context = UIGraphicsGetCurrentContext()!
             rawImage.layer.renderInContext(context)
+            
             return UIGraphicsGetImageFromCurrentImageContext()
+        } else {
+            return rawImage.image!
         }
     }
     
