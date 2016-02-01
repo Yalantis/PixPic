@@ -32,8 +32,18 @@ extension ImageViewController: PhotoEditorDelegate {
     }
     
     func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage {
-        print("apply choosed effect on image")
-        return UIImage(named: "edit_50")!
+        guard didAskForImageWithEffect else {
+            return rawImage.image!
+        }
+        for effectEditorView in rawImage.subviews as! [EffectEditorView] {
+            effectEditorView.hideControls()
+        }
+        let rect = rawImage.bounds
+        UIGraphicsBeginImageContext(rect.size)
+        if let context = UIGraphicsGetCurrentContext() {
+            rawImage.layer.renderInContext(context)
+        }
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
     
 }
