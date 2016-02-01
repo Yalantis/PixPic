@@ -20,12 +20,13 @@ class LoaderService: NSObject {
         var arrayOfStickers = [EffectsSticker]()
         var effectsVersion = EffectsVersion()
         var countOfModels = 0
-        
+        var isQueryFromLocalDataStoure = false
         let query = EffectsVersion.query()
         
         ValidationService.needToUpdateVersion { needUpdate in
             if !needUpdate {
                 query?.fromLocalDatastore()
+                isQueryFromLocalDataStoure = true
             }
             
             query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
@@ -42,8 +43,11 @@ class LoaderService: NSObject {
                 effectsVersion = object as! EffectsVersion
                 effectsVersion.saveEventually()
                 effectsVersion.pinInBackground()
-                
-                effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
+                let groupsRelationQuery = effectsVersion.groupsRelation.query()
+                if isQueryFromLocalDataStoure {
+                groupsRelationQuery.fromLocalDatastore()
+                }
+                groupsRelationQuery.findObjectsInBackgroundWithBlock {
                     (objects:[PFObject]?, error: NSError?) in
                     if  let error = error {
                         print("Error: \(error) \(error.userInfo)")
@@ -59,7 +63,11 @@ class LoaderService: NSObject {
                     for group in objects as! [EffectsGroup] {
                         group.saveEventually()
                         group.pinInBackground()
-                        group.stickersRelation.query().findObjectsInBackgroundWithBlock{
+                        let stickersRelationQuery = group.stickersRelation.query()
+                        if isQueryFromLocalDataStoure {
+                            stickersRelationQuery.fromLocalDatastore()
+                        }
+                        stickersRelationQuery.findObjectsInBackgroundWithBlock{
                             (objects:[PFObject]?, error: NSError?) in
                             if let error = error {
                                 print("Error: \(error) \(error.userInfo)")

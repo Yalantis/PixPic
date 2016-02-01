@@ -40,6 +40,20 @@ class ValidationService: NSObject {
         let queryFromLocal = EffectsVersion.query()
         queryFromLocal?.fromLocalDatastore()
         
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            completion(false)
+            return
+        }
+        
+        if !reachability.isReachable() {
+            completion(false)
+            return
+        }
+        
         query?.getFirstObjectInBackgroundWithBlock { object, error in
             if error != nil {
                 print("Error: \(error!) \(error!.userInfo)")
