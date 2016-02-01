@@ -33,7 +33,7 @@ class AuthService {
                             user.setValue(nickname, forKey: "username")
                     }
                     user.saveInBackgroundWithBlock(
-                        { (succes, error) -> Void in
+                        { succes, error in
                             if let error = error {
                                 print(error)
                                 completion?(nil, error)
@@ -48,7 +48,6 @@ class AuthService {
                 }
             }
         )
-        
     }
     
     func anonymousLogIn(completion completion: (object: User?) -> (), failure: (error: NSError?) -> ()) {
@@ -65,6 +64,7 @@ class AuthService {
     }
     
     func logOut() {
+        PFFacebookUtils.unlinkUserInBackground(User.currentUser()!)
         User.logOut()
         FBSDKLoginManager().logOut()
     }

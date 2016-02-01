@@ -9,7 +9,7 @@
 import UIKit
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let backWithChangesMessage = "Save your changes? or say NO to discard"
+private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 
 
 class EditProfileViewController: UIViewController {
@@ -114,7 +114,7 @@ class EditProfileViewController: UIViewController {
                 title: "Save changes",
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let NOAction = UIAlertAction(title: "NO", style: .Cancel) {
+            let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
                 [weak self] action in
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self?.navigationController?.popViewControllerAnimated(true)

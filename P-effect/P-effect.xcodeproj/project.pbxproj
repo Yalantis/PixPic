@@ -37,7 +37,8 @@
 		95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0711C58EA8700D52150 /* EffectEditorView.swift */; };
 		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
 		FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12C1041C5185EE006F99FD /* FBAuthorization.swift */; };
-		FD6326C01C5AC01C007DA1DB /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */; };
+		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
+		FD3B4A071C5BF87F00F0FC52 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3B4A061C5BF87F00F0FC52 /* libBolts.a */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
@@ -105,7 +106,8 @@
 		A04F06C86371F8045FB9A166 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD12C1041C5185EE006F99FD /* FBAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthorization.swift; sourceTree = "<group>"; };
-		FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
+		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
+		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD3B4A071C5BF87F00F0FC52 /* libBolts.a in Frameworks */,
 				72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +160,7 @@
 		468733C5E0D7CEB26FEA9271 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD3B4A061C5BF87F00F0FC52 /* libBolts.a */,
 				A04F06C86371F8045FB9A166 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -325,7 +329,7 @@
 		FDAF46A81C49369E008060CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				FD6326BF1C5AC01B007DA1DB /* PFInstallation+User.swift */,
+				FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -569,6 +573,7 @@
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
+				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
 				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
@@ -582,7 +587,6 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
-				FD6326C01C5AC01C007DA1DB /* PFInstallation+User.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
@@ -670,7 +674,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
@@ -711,7 +715,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
 				SDKROOT = iphoneos;
@@ -734,6 +738,10 @@
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
@@ -755,6 +763,10 @@
 				INFOPLIST_FILE = "P-effect/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yalantis.P-effect";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
