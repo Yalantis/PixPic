@@ -29,37 +29,46 @@ class LoaderService: NSObject {
             }
             
             query?.getFirstObjectInBackgroundWithBlock { (object: PFObject?, error: NSError?) in
-                if error != nil {
-                    print("Error: \(error!) \(error!.userInfo)")
+                if let error = error {
+                    print("Error: \(error) \(error.userInfo)")
                     completion?(objects: nil, error: error)
                     return
                 }
                 guard let object = object
-                    else { return }
+                    else {
+                        completion?(objects: nil, error: nil)
+                        return
+                }
                 effectsVersion = object as! EffectsVersion
                 effectsVersion.pinInBackground()
                 
                 effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
                     (objects:[PFObject]?, error: NSError?) in
-                    if error != nil {
-                        print("Error: \(error!) \(error!.userInfo)")
+                    if  let error = error {
+                        print("Error: \(error) \(error.userInfo)")
                         completion?(objects: nil, error: error)
                         return
                     }
                     guard let objects = objects
-                        else { return }
+                        else {
+                            completion?(objects: nil, error: nil)
+                            return
+                    }
                     countOfModels = objects.count
                     for group in objects as! [EffectsGroup] {
                         group.pinInBackground()
                         group.stickersRelation.query().findObjectsInBackgroundWithBlock{
                             (objects:[PFObject]?, error: NSError?) in
-                            if error != nil {
-                                print("Error: \(error!) \(error!.userInfo)")
+                            if let error = error {
+                                print("Error: \(error) \(error.userInfo)")
                                 completion?(objects: nil, error: error)
                                 return
                             }
                             guard let objects = objects
-                                else { return }
+                                else {
+                                    completion?(objects: nil, error: nil)
+                                    return
+                            }
                             arrayOfStickers = objects as! [EffectsSticker]
                             let model = EffectsModel()
                             model.effectsGroup = group

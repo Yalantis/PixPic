@@ -9,13 +9,13 @@
 class EffectsVersion: PFObject {
     
     @NSManaged var version: Float
-    
+    static var onceToken: dispatch_once_t = 0
+
     var groupsRelation: PFRelation! {
         return relationForKey("groupsRelation")
     }
     
     override class func initialize() {
-        var onceToken: dispatch_once_t = 0
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }

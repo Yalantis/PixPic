@@ -9,13 +9,13 @@
 class EffectsGroup: PFObject {
     
     @NSManaged var image: PFFile
+    static var onceToken: dispatch_once_t = 0
     
     var stickersRelation: PFRelation! {
         return relationForKey("stickersRelation")
     }
     
     override class func initialize() {
-        var onceToken: dispatch_once_t = 0
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }
