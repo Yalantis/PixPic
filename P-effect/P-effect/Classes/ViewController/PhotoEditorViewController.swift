@@ -11,7 +11,8 @@ import UIKit
 protocol PhotoEditorDelegate: class {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage)
-    func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage
+    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage
+    
 }
 
 class PhotoEditorViewController: UIViewController {

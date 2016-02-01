@@ -42,6 +42,12 @@ class EffectEditorView: UIView {
         setupDefaultAttributes()
     }
     
+    func switchControls(toState state: Bool) {
+        resizingControl.hidden = state
+        deleteControl.hidden = state
+        borderView.hidden = state
+    }
+    
     private func setupDefaultAttributes() {
         let borderViewFrame = CGRectInset(bounds,
             Constants.EffectEditor.UserResizableViewGlobalInset,
