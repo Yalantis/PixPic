@@ -32,9 +32,9 @@ class AuthorizationViewController: UIViewController {
                         { exists in
                             if exists {
                                 user.passwordSet = false
-                                self?.signIn()
+                                self?.signIn(user)
                             } else {
-                                self?.logIn(user)
+                                self?.signUp(user)
                             }
                         }
                     )
@@ -54,21 +54,37 @@ class AuthorizationViewController: UIViewController {
             print("Unable to create Reachability")
             return
         }
-        
         if !reachability.isReachable() {
             let message = reachability.currentReachabilityStatus.description
             AlertService.simpleAlert(message)
         }
     }
     
-    private func signIn() {
+    private func signUp(user: User) {
+        let userWithFB = user
         FBAuthorization.signInWithPermission(
             { [weak self] user, error in
                 if let error = error {
                     handleError(error as NSError)
                 } else if let user = user {
-                    print("SIGNING INN!!!  with ", user.username)
-                    PFInstallation.addPFUserToCurrentInstallation()
+                    let user = UserModel.init(aUser: user)
+                    user.user.facebookId = userWithFB.facebookId
+                    user.user.username = userWithFB.username
+                    user.user.email = userWithFB.email
+                    user.user.avatar = userWithFB.avatar
+                    user.user.saveInBackgroundWithBlock(
+                        { succes, error in
+                            if let error = error {
+                                print(error)
+                            } else {
+                                print("NEW DATAA FOR LINKED USER")
+                                let installation = PFInstallation.currentInstallation()
+                                installation["user"] = user.user
+                                installation.saveInBackground()
+                            }
+                        }
+                    )
+                    print("SIGNING UP!!!  with ", user.user.username)
                     Router.sharedRouter().showHome(animated: true)
                 } else {
                     print("unknown trouble while signing IN")
@@ -78,34 +94,30 @@ class AuthorizationViewController: UIViewController {
         )
     }
     
-    private func logIn(user: User) {
-        let userWithFB = user
+    private func signIn(user: User) {
+        let token = FBSDKAccessToken.currentAccessToken()
+        print(token)
         PFFacebookUtils.logInInBackgroundWithAccessToken(
-            FBSDKAccessToken.currentAccessToken(), block: {
+            token,
+            block: {
                 [weak self] user, error in
-                let userNew = UserModel.init(aUser: User.currentUser()!)
-                userNew.linkOrUnlinkFacebook(
-                    { success, error in
-                        if let error = error {
-                            handleError(error)
-                        } else {
-                            print("LINKED!!! NEED TO UPDATE DATA")
-                            userNew.user.facebookId = userWithFB.facebookId
-                            userNew.user.username = userWithFB.username
-                            userNew.user.email = userWithFB.email
-                            userNew.user.avatar = userWithFB.avatar
-                            userNew.user.saveInBackgroundWithBlock(
-                                { (succes, error) -> Void in
-                                    if let error = error {
-                                        print(error)
-                                    } else {
-                                        print("NEW DATAA FOR OLD USER")
-                                    }
-                                }
-                            )
+                if let error = error {
+                    handleError(error)
+                } else {
+                    let user = UserModel.init(aUser: user as! User)
+                    user.linkIfUnlinkFacebook(
+                        { error in
+                            if let error = error {
+                                handleError(error)
+                            } else {
+                                print("already linked!")
+                                let installation = PFInstallation.currentInstallation()
+                                installation["user"] = user.user
+                                installation.saveInBackground()
+                            }
                         }
-                    }
-                )
+                    )
+                }
                 self?.view.hideToastActivity()
                 Router.sharedRouter().showHome(animated: true)
             }

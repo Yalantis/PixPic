@@ -16,16 +16,9 @@ class ImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         rawImage.image = model.originalImage()
-        rawImage.layoutIfNeeded()
-        
-        
-        // dummy
-        let im = UIImage(named: "profile_placeholder")
-        let userResizableView = EffectEditorView(image: im!)
-        userResizableView.center = rawImage.center
-        rawImage.addSubview(userResizableView)
-        //
+        // Do any additional setup after loading the view.
     }
     
 }
@@ -42,5 +35,5 @@ extension ImageViewController: PhotoEditorDelegate {
         print("apply choosed effect on image")
         return UIImage(named: "edit_50")!
     }
-
+    
 }

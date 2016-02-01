@@ -41,22 +41,16 @@ class UserModel: NSObject {
         })
     }
     
-    func linkOrUnlinkFacebook(completion: (Bool?, NSError?) -> ()) {
+    func linkIfUnlinkFacebook(completion: (NSError?) -> ()) {
         if PFFacebookUtils.isLinkedWithUser(user) {
-            PFFacebookUtils.unlinkUserInBackground(
-                user,
-                block: {
-                    (success, error) -> () in
-                    success ? completion(true, error) : completion(false, error)
-                }
-            )
+            completion(nil)
         } else {
             PFFacebookUtils.linkUserInBackground(
                 user,
                 withReadPermissions: ["public_profile", "email"],
                 block: {
-                    (success, error) -> () in
-                    success ? completion(true, error) : completion(false, error)
+                    success, error in
+                    success ? completion(nil) : completion(error)
                 }
             )
         }
