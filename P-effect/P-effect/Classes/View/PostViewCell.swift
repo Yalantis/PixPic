@@ -15,8 +15,8 @@ protocol PostViewCellDelegate: class {
 
 class PostViewCell: UITableViewCell {
     
-    private var isImageDowloaded = false
-    private var isAvatarDowloaded = false
+    private var isImageDownloaded = false
+    private var isAvatarDownloaded = false
     
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -47,22 +47,18 @@ class PostViewCell: UITableViewCell {
 
     private func setContent() {
         dateLabel.text = MHPrettyDate.prettyDateFromDate(post?.createdAt, withFormat: MHPrettyDateShortRelativeTime)
-        if !isImageDowloaded {
+        if !isImageDownloaded {
             postImageView.image = UIImage(named: "image_placeholder")
         }
-        let convertPFFileToImageActivityIndicator = UIActivityIndicatorView()
-        postImageView.addSubview(convertPFFileToImageActivityIndicator)
-        convertPFFileToImageActivityIndicator.startAnimating()
         imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
             if let error = error {
                 print("\(error)")
             } else {
                 self?.postImageView.image = image
-                convertPFFileToImageActivityIndicator.stopAnimating()
-                self?.isImageDowloaded = true
+                self?.isImageDownloaded = true
             }
         }
-        if !isAvatarDowloaded {
+        if !isAvatarDownloaded {
             profileImageView.image = UIImage(named: "user_male_50")
         }
 
@@ -77,7 +73,7 @@ class PostViewCell: UITableViewCell {
                     self?.profileImageView.layer.borderWidth = 3.0
                     self?.profileImageView.layer.borderColor = UIColor.whiteColor().CGColor
                     self?.profileImageView.image = image
-                    self?.isAvatarDowloaded = true
+                    self?.isAvatarDownloaded = true
                 } else if  error == nil && image == nil {
                     self?.profileImageView.image = UIImage(named: "user_male_50")
 
