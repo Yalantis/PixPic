@@ -36,7 +36,7 @@ class AlertService: NSObject {
                 duration: 3.0,
                 position: CSToastPositionTop,
                 title: title,
-                image: UIImage(named: "atention_50"),
+                image: UIImage(named: "ic_notification"),
                 style: nil,
                 completion: {
                     (didTap: Bool) in
