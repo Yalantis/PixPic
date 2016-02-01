@@ -35,7 +35,7 @@ class LoaderService: NSObject {
                     return
                 }
                 guard let object = object
-                    else {return}
+                    else { return }
                 effectsVersion = object as! EffectsVersion
                 effectsVersion.pinInBackground()
                 
@@ -47,7 +47,7 @@ class LoaderService: NSObject {
                         return
                     }
                     guard let objects = objects
-                        else {return}
+                        else { return }
                     countOfModels = objects.count
                     for group in objects as! [EffectsGroup] {
                         group.pinInBackground()
@@ -59,7 +59,7 @@ class LoaderService: NSObject {
                                 return
                             }
                             guard let objects = objects
-                                else {return}
+                                else { return }
                             arrayOfStickers = objects as! [EffectsSticker]
                             let model = EffectsModel()
                             model.effectsGroup = group

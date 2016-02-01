@@ -64,11 +64,10 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         if groupsShown == true {
             return effects.count
         } else {
-            if let shownGroupNumber = shownGroupNumber {
-                return  effects[shownGroupNumber].effectsStickers.count + 1
-            }
+            guard let shownGroupNumber = shownGroupNumber
+                else { return 0 }
+            return  effects[shownGroupNumber].effectsStickers.count + 1
         }
-        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
