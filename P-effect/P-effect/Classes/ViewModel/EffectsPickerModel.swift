@@ -36,21 +36,23 @@ class EffectsPickerModel: NSObject {
         EffectsSticker()
     }
     
-    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage) -> ()) {
+    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
         let imageLoader = ImageLoaderService()
-        imageLoader.getImageForContentItem(effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image) {
+        let image = effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image
+        imageLoader.getImageForContentItem(image) {
             image, error in
-            if error != nil {
+            if let error = error {
+                completion(nil, error)
                 return
-            } else {
-                if let image = image {
-                    completion(image)
-                }
+            }
+            if let image = image {
+                completion(image, nil)
             }
         }
     }
-    
 }
+
+
 
 extension EffectsPickerModel: UICollectionViewDataSource {
     

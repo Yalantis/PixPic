@@ -52,8 +52,13 @@ class EffectsPickerViewController: UICollectionViewController {
             model.groupsShown = true
             collectionView.reloadData()
         } else {
-            model.effectImageAtIndexPath(indexPath) { [weak self] image in
-                self?.delegate?.didChooseEffectFromPicket(image)
+            model.effectImageAtIndexPath(indexPath) { [weak self] image, error in
+                if error != nil {
+                    return
+                }
+                if let image = image {
+                    self?.delegate?.didChooseEffectFromPicket(image)
+                }
             }
         }
     }

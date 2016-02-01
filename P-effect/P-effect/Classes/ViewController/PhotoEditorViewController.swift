@@ -30,11 +30,6 @@ class PhotoEditorViewController: UIViewController {
     var imageController: ImageViewController?
     weak var delegate: PhotoEditorDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-
     @IBAction private func postEditedImage(sender: AnyObject) {
         
     }

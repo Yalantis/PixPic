@@ -22,8 +22,8 @@ class EditProfileViewController: UIViewController {
     
     private var kbHeight: CGFloat?
     private var kbHidden = true
-    private var someChangesMade: Bool = false
-    private var usernameChanged: Bool = false
+    private var someChangesMade = false
+    private var usernameChanged = false
 
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
