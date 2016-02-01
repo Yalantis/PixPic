@@ -25,8 +25,9 @@ class EffectsPickerModel: NSObject {
         LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
                 self?.effects = objects
-                print(objects)
                 completion(true)
+            } else {
+                completion(false)
             }
         }
     }

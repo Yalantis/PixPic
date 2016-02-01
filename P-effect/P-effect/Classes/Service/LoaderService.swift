@@ -90,7 +90,8 @@ class LoaderService: NSObject {
                             }
                             if countOfModels == effectsArray.count {
                                 completion?(objects: effectsArray, error: nil)
-                            }
+                                return
+                            } 
                         }
                     }
                 }

@@ -23,7 +23,7 @@ class EffectsPickerViewController: UICollectionViewController {
             }
         }
     }
-
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         

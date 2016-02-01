@@ -133,7 +133,7 @@
         <!--Effects Picker View Controller-->
         <scene sceneID="QZ6-GV-vQi">
             <objects>
-                <collectionViewController storyboardIdentifier="EffectsPicker" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EffectsPicker" autoresizesArchivedViewToFullSize="NO" id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="XbQ-2j-2Mn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
