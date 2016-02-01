@@ -20,7 +20,7 @@ class SaverService {
     
     func saveAndUploadPost(file: PFFile, comment: String?) {
         file.saveInBackgroundWithBlock(
-            { (succeeded, error) -> () in
+            { succeeded, error in
                 if succeeded {
                     print("Saved!")
                     SaverService.uploadPost(file, comment: comment)
@@ -37,7 +37,7 @@ class SaverService {
     func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
         if let avatar = avatar {
             avatar.saveInBackgroundWithBlock(
-                { succeeded, error -> () in
+                { succeeded, error in
                     if succeeded {
                         print("Avatar saved!")
                         SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
