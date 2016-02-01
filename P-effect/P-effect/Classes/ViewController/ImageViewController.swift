@@ -35,19 +35,19 @@ extension ImageViewController: PhotoEditorDelegate {
     }
     
     func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage {
-        if withEffects {
-            for effect in effects {
-                effect.hideControls()
-            }
-            let rect = rawImage.bounds
-            UIGraphicsBeginImageContext(rect.size)
-            let context = UIGraphicsGetCurrentContext()!
-            rawImage.layer.renderInContext(context)
-            
-            return UIGraphicsGetImageFromCurrentImageContext()
-        } else {
+        guard withEffects else {
             return rawImage.image!
         }
+        
+        for effect in effects {
+            effect.switchControls(toState: false)
+        }
+        let rect = rawImage.bounds
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        rawImage.layer.renderInContext(context)
+        
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
     
 }
