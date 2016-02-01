@@ -17,7 +17,7 @@ class LoaderService: NSObject {
     
     class func loadEffects(completion: LoadingEffectsCompletion?) {
         var effectsArray = [EffectsModel]()
-        var arrayOfStickers = Array<EffectsSticker>()
+        var arrayOfStickers = [EffectsSticker]()
         var effectsVersion = EffectsVersion()
         var countOfModels = 0
         
@@ -77,7 +77,6 @@ class LoaderService: NSObject {
             }
         }
     }
-    
     
     func loadUserData(facebookId: String?, completion: LoadingUserCompletion?) {
         var user = User()
@@ -159,6 +158,7 @@ class LoaderService: NSObject {
             }
         }
     }
+    
 }
 
 
