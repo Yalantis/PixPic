@@ -51,30 +51,6 @@ class SaverService {
         }
     }
     
-    //MARK: - private
-    
-    class func uploadPost(file: PFFile, comment: String?) {
-        if let user = PFUser.currentUser() as? User {
-            let post = PostModel(image: file, user: user, comment: comment).post
-            post.saveInBackgroundWithBlock {
-                succeeded, error in
-                if succeeded {
-                    AlertService.simpleAlert(messageUploadSuccessful)
-                    NSNotificationCenter.defaultCenter().postNotificationName(
-                        Constants.NotificationKey.NewPostUploaded,
-                        object: nil
-                    )
-                } else {
-                    if let error = error?.userInfo["error"] as? String {
-                        print(error)
-                    }
-                }
-            }
-        } else {
-            // Auth service
-        }
-    }
-    
     class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
@@ -96,4 +72,24 @@ class SaverService {
             completion?(false, messageUsernameCanNotBeEmpty)
         }
     }
+    
+    //MARK: - private
+    
+    private class func uploadPost(file: PFFile, comment: String?) {
+        if let user = PFUser.currentUser() as? User {
+            let post = PostModel(image: file, user: user, comment: comment).post
+            post.saveInBackgroundWithBlock{ succeeded, error in
+                if succeeded {
+                    AlertService.simpleAlert(messageUploadSuccessful)
+                } else {
+                    if let error = error?.userInfo["error"] as? String {
+                        print(error)
+                    }
+                }
+            }
+        } else {
+            // Auth service
+        }
+    }
+    
 }

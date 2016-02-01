@@ -11,16 +11,16 @@ import UIKit
 class ValidationService: NSObject {
     
     class func valdateUserName(userName: String, completion: (Bool) -> ()) {
-        if !userNameContainsOnlyLetters(userName) {
+        if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
             return
         }
         
-        if userName.characters.count < Constants.Validation.MinUserName &&
+        if userName.characters.count < Constants.Validation.MinUserName ||
             userName.characters.count > Constants.Validation.MaxUserName {
-            AlertService.simpleAlert(Constants.Validation.WrongLenght)
-            completion (false)
-            return
+                AlertService.simpleAlert(Constants.Validation.WrongLenght)
+                completion(false)
+                return
         }
         
         let query = PFUser.query()?.whereKey("username", equalTo: userName)
@@ -33,9 +33,55 @@ class ValidationService: NSObject {
             }
         }
     }
-}
-
-    private func userNameContainsOnlyLetters(userName: String) -> Bool {
+    
+    static func needToUpdateVersion(completion: (Bool) -> ()){
+        var effectsVersion = EffectsVersion()
+        let query = EffectsVersion.query()
+        let queryFromLocal = EffectsVersion.query()
+        queryFromLocal?.fromLocalDatastore()
+        
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            completion(false)
+            return
+        }
+        
+        if !reachability.isReachable() {
+            completion(false)
+            return
+        }
+        
+        query?.getFirstObjectInBackgroundWithBlock { object, error in
+            if error != nil {
+                print("Error: \(error!) \(error!.userInfo)")
+                completion(false)
+                return
+            } else {
+                if let object = object {
+                    effectsVersion = object as! EffectsVersion
+                    queryFromLocal?.getFirstObjectInBackgroundWithBlock { localObject, error in
+                        if error != nil {
+                            print("Error: \(error!) \(error!.userInfo)")
+                            completion(true)
+                            return
+                        }
+                        if let localObject = localObject {
+                            if effectsVersion.version > (localObject as! EffectsVersion).version {
+                                completion(true)
+                            } else {
+                                completion (false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private class func isUserNameContainsOnlyLetters(userName: String) -> Bool {
         if userName.characters.first == Constants.Validation.WhiteSpace {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false
@@ -59,5 +105,8 @@ class ValidationService: NSObject {
             }
         }
         
-    return true
+        return true
     }
+    
+    
+}

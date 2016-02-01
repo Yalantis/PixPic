@@ -30,15 +30,6 @@ class PhotoEditorViewController: UIViewController {
     var imageController: ImageViewController?
     weak var delegate: PhotoEditorDelegate?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupView()
-    }
-    
-    func setupView() {
-    }
-    
     @IBAction private func postEditedImage(sender: AnyObject) {
         
     }
@@ -53,6 +44,7 @@ class PhotoEditorViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
         var size = imageContainer.frame.size
         size.width = UIScreen.mainScreen().bounds.width
         size.height = size.width
@@ -70,6 +62,7 @@ class PhotoEditorViewController: UIViewController {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
             imageController?.model = ImageViewModel.init(image: model.originalImage())
+            delegate = imageController
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.model = EffectsPickerModel()

@@ -77,8 +77,8 @@ class FeedViewController: UIViewController {
         let controllerIdentifier = "PhotoEditorController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
-      //  navigationController?.showViewController(viewController, sender: self)
-        setSelectedPhoto(image)
+        navigationController?.showViewController(viewController, sender: self)
+//        setSelectedPhoto(image)
     }
     
     func setSelectedPhoto(image: UIImage) {

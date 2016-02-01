@@ -97,7 +97,21 @@ class ProfileViewController: UITableViewController {
         }
         tableView.addPullToRefreshWithActionHandler {
             [weak self] () -> () in
-            self?.dataSource?.fetchData(self?.model.user)
+            let reachability: Reachability
+            do {
+                reachability = try Reachability.reachabilityForInternetConnection()
+            } catch {
+                print("Unable to create Reachability")
+                return
+            }
+            
+            if !reachability.isReachable() {
+                let message = reachability.currentReachabilityStatus.description
+                AlertService.simpleAlert(message)
+                self?.tableView?.pullToRefreshView.stopAnimating()
+            } else {
+                self?.dataSource?.fetchData(self?.model.user)
+            }
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
