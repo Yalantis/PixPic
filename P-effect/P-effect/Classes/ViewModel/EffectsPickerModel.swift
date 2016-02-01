@@ -10,7 +10,7 @@ import UIKit
 
 class EffectsPickerModel: NSObject {
     
-    var effects: [EffectsModel]?
+    private var effects: [EffectsModel]?
     var groupsShown: Bool?
     var shownGroupNumber: Int?
     
@@ -60,8 +60,8 @@ extension EffectsPickerModel: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let effects = effects
-            else { return 0}
-        if groupsShown == true{
+            else { return 0 }
+        if groupsShown == true {
             return effects.count
         } else {
             if let shownGroupNumber = shownGroupNumber {
@@ -75,16 +75,16 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             Constants.EffectsPicker.EffectsPickerCellIdentifier, forIndexPath: indexPath
             ) as! EffectViewCell
-        if let groupsShown = groupsShown, let effects = effects {
-            if groupsShown == true {
-                cell.setGroupContent(effects[indexPath.row].effectsGroup)
-            } else {
-                if let shownGroupNumber = shownGroupNumber {
-                    if indexPath.row == 0 {
-                        cell.setGroupContent(effects[shownGroupNumber].effectsGroup)
-                    } else {
-                        cell.setStickerContent(effects[shownGroupNumber].effectsStickers[indexPath.row - 1])
-                    }
+        guard let groupsShown = groupsShown, let effects = effects
+            else {return cell}
+        if groupsShown == true {
+            cell.setGroupContent(effects[indexPath.row].effectsGroup)
+        } else {
+            if let shownGroupNumber = shownGroupNumber {
+                if indexPath.row == 0 {
+                    cell.setGroupContent(effects[shownGroupNumber].effectsGroup)
+                } else {
+                    cell.setStickerContent(effects[shownGroupNumber].effectsStickers[indexPath.row - 1])
                 }
             }
         }

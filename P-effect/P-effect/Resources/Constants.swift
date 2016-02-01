@@ -60,9 +60,9 @@ struct Constants {
         static let SpaceInEnd = "Username can't end with spaces" as String
         static let NumbersAndSymbolsInUsername = "Username have to consist only with letters an numbers" as String
         static let TwoSpacesInRow = "Username can't consist two or more spaces in row" as String
-        static let MinUserName = 3 as Int
-        static let MaxUserName = 30 as Int
-        static let WhiteSpace = " " as Character
+        static let MinUserName: Int = 3
+        static let MaxUserName: Int = 30
+        static let WhiteSpace: Character = " "
     }
     
     struct PhotoEditor {
@@ -71,7 +71,7 @@ struct Constants {
     }
     
     struct EffectsPicker {
-        static let MagicalTopInsetsDestroyer = -66 as CGFloat
+        static let MagicalTopInsetsDestroyer: CGFloat = -65
         static let EffectsPickerCellIdentifier = "EffectsPickerCell"
     }
     

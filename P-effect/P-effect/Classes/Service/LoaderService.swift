@@ -34,10 +34,10 @@ class LoaderService: NSObject {
                     completion?(objects: nil, error: error)
                     return
                 }
-                if let object = object {
-                    effectsVersion = object as! EffectsVersion
-                    effectsVersion.pinInBackground()
-                }
+                guard let object = object
+                    else {return}
+                effectsVersion = object as! EffectsVersion
+                effectsVersion.pinInBackground()
                 
                 effectsVersion.groupsRelation.query().findObjectsInBackgroundWithBlock {
                     (objects:[PFObject]?, error: NSError?) in
@@ -46,30 +46,30 @@ class LoaderService: NSObject {
                         completion?(objects: nil, error: error)
                         return
                     }
-                    if let objects = objects {
-                        countOfModels = objects.count
-                        for group in objects {
-                            (group as! EffectsGroup).pinInBackground()
-                            (group as! EffectsGroup).stickersRelation.query().findObjectsInBackgroundWithBlock{
-                                (objects:[PFObject]?, error: NSError?) in
-                                if error != nil {
-                                    print("Error: \(error!) \(error!.userInfo)")
-                                    completion?(objects: nil, error: error)
-                                    return
-                                }
-                                if let objects = objects {
-                                    arrayOfStickers = objects as! [EffectsSticker]
-                                    let model = EffectsModel()
-                                    model.effectsGroup = group as! EffectsGroup
-                                    model.effectsStickers = arrayOfStickers
-                                    effectsArray.append(model)
-                                    for sticker in objects {
-                                        (sticker as! EffectsSticker).pinInBackground()
-                                    }
-                                    if countOfModels == effectsArray.count {
-                                        completion?(objects: effectsArray, error: nil)
-                                    }
-                                }
+                    guard let objects = objects
+                        else {return}
+                    countOfModels = objects.count
+                    for group in objects as! [EffectsGroup] {
+                        group.pinInBackground()
+                        group.stickersRelation.query().findObjectsInBackgroundWithBlock{
+                            (objects:[PFObject]?, error: NSError?) in
+                            if error != nil {
+                                print("Error: \(error!) \(error!.userInfo)")
+                                completion?(objects: nil, error: error)
+                                return
+                            }
+                            guard let objects = objects
+                                else {return}
+                            arrayOfStickers = objects as! [EffectsSticker]
+                            let model = EffectsModel()
+                            model.effectsGroup = group
+                            model.effectsStickers = arrayOfStickers
+                            effectsArray.append(model)
+                            for sticker in objects {
+                                (sticker as! EffectsSticker).pinInBackground()
+                            }
+                            if countOfModels == effectsArray.count {
+                                completion?(objects: effectsArray, error: nil)
                             }
                         }
                     }
@@ -77,6 +77,7 @@ class LoaderService: NSObject {
             }
         }
     }
+    
     
     func loadUserData(facebookId: String?, completion: LoadingUserCompletion?) {
         var user = User()

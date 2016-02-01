@@ -15,19 +15,18 @@ class EffectsPickerViewController: UICollectionViewController {
     var model: EffectsPickerModel? {
         didSet {
             collectionView?.dataSource = model
+            model?.downloadEffects{ [weak self] completion in
+                if completion {
+                    self!.model?.groupsShown = true
+                    self?.collectionView?.reloadData()
+                }
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        model = EffectsPickerModel()
-        model?.downloadEffects{ [weak self] completion in
-            if completion {
-                self!.model?.groupsShown = true
-                self?.collectionView?.reloadData()
-            }
-        }
     }
     
     override func viewWillLayoutSubviews() {

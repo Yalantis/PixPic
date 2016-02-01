@@ -15,17 +15,15 @@ class EffectViewCell: UICollectionViewCell {
     private let imageLoader = ImageLoaderService()
     
     func setGroupContent(group: EffectsGroup) {
-        imageLoader.getImageForContentItem(group.image) { [weak self] image, error in
-            if let error = error {
-                print("\(error)")
-            } else {
-                self?.effectImage.image = image
-            }
-        }
+        downloadImageFromFile(group.image)
     }
     
     func setStickerContent(sticker: EffectsSticker) {
-        imageLoader.getImageForContentItem(sticker.image) { [weak self] image, error in
+        downloadImageFromFile(sticker.image)
+    }
+    
+    private func downloadImageFromFile(file: PFFile) {
+        imageLoader.getImageForContentItem(file) { [weak self] image, error in
             if let error = error {
                 print("\(error)")
             } else {
@@ -33,5 +31,4 @@ class EffectViewCell: UICollectionViewCell {
             }
         }
     }
-    
 }

@@ -11,7 +11,7 @@ import UIKit
 class ValidationService: NSObject {
     
     class func valdateUserName(userName: String, completion: (Bool) -> ()) {
-        if !userNameContainsOnlyLetters(userName) {
+        if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
             return
         }
@@ -19,7 +19,7 @@ class ValidationService: NSObject {
         if userName.characters.count < Constants.Validation.MinUserName ||
             userName.characters.count > Constants.Validation.MaxUserName {
                 AlertService.simpleAlert(Constants.Validation.WrongLenght)
-                completion (false)
+                completion(false)
                 return
         }
         
@@ -34,7 +34,7 @@ class ValidationService: NSObject {
         }
     }
     
-    class func needToUpdateVersion(completion: (Bool) -> ()){
+    static func needToUpdateVersion(completion: (Bool) -> ()){
         var effectsVersion = EffectsVersion()
         let query = EffectsVersion.query()
         let queryFromLocal = EffectsVersion.query()
@@ -67,7 +67,7 @@ class ValidationService: NSObject {
         }
     }
     
-    private class func userNameContainsOnlyLetters(userName: String) -> Bool {
+    private class func isUserNameContainsOnlyLetters(userName: String) -> Bool {
         if userName.characters.first == Constants.Validation.WhiteSpace {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)
             return false

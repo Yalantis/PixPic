@@ -10,13 +10,7 @@ import UIKit
 
 class EffectsModel: NSObject {
     
-    var effectsGroup: EffectsGroup
-    var effectsStickers: [EffectsSticker]
-    
-    override init() {
-        effectsStickers = [EffectsSticker]()
-        effectsGroup = EffectsGroup()
+    lazy var effectsGroup = EffectsGroup()
+    lazy var effectsStickers = [EffectsSticker]()
 
-        super.init()
-     }
 }
