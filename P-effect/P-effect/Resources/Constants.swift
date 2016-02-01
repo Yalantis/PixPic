@@ -73,4 +73,12 @@ struct Constants {
     struct EffectsPicker {
         static let EffectsPickerCellIdentifier = "EffectsPickerCell"
     }
+    
+    struct EffectEditor {
+        static let UserResizableViewGlobalInset: CGFloat =  5.0
+        static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
+        
+        static let UserResizableViewInteractiveBorderSize: CGFloat =  10.0
+        static let StickerViewControlSize: CGFloat =  36.0
+    }
 }
