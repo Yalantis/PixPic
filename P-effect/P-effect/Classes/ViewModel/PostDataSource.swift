@@ -49,7 +49,7 @@ class PostDataSource: NSObject {
         fetchData(nil)
     }
 
-    dynamic func fetchData(user: User?) {
+    func fetchData(user: User?) {
         loader.loadFreshData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in
             if self?.shouldPullToRefreshHandle == true {
@@ -65,7 +65,7 @@ class PostDataSource: NSObject {
         }
     }
     
-    @objc func fetchPagedData(user: User?) {
+    dynamic func fetchPagedData(user: User?) {
         loader.loadPagedData(user, leap: countOfModels()) {
             [weak self] (objects: [Post]?, error: NSError?) in
             if let objects = objects {
