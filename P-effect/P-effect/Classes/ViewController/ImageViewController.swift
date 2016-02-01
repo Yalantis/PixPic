@@ -16,7 +16,8 @@ class ImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       rawImage.image = model.originalImage()
+        
+        rawImage.image = model.originalImage()
         // Do any additional setup after loading the view.
     }
     
@@ -32,5 +33,5 @@ extension ImageViewController: PhotoEditorDelegate {
         print("apply choosed effect on image")
         return UIImage(named: "edit_50")!
     }
-
+    
 }

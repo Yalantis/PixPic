@@ -27,6 +27,7 @@ class ProfileViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupController()
         setupLoadersCallback()
     }

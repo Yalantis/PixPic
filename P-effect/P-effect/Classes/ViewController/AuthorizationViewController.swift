@@ -27,7 +27,6 @@ class AuthorizationViewController: UIViewController {
                 if let error = error {
                     handleError(error as NSError)
                 }
-                print(user)
                 if let user = user as User! {
                     UserModel.init(aUser: user).checkIfFacebookIdExists(
                         { exists in
@@ -107,7 +106,7 @@ class AuthorizationViewController: UIViewController {
                 } else {
                     let user = UserModel.init(aUser: user as! User)
                     user.linkIfUnlinkFacebook(
-                        { success, error in
+                        { error in
                             if let error = error {
                                 handleError(error)
                             } else {

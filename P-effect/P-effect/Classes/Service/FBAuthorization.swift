@@ -16,7 +16,6 @@ class FBAuthorization {
             block: {
                 user, error in
                 if let user = user as? User {
-                    print(user)
                     print(PFUser.currentUser() ?? "No user")
                     if user.isNew {
                         AuthService.updatePFUserDataFromFB(
@@ -51,7 +50,7 @@ class FBAuthorization {
             ["public_profile", "email"],
             fromViewController: controller,
             handler: {
-                (result:FBSDKLoginManagerLoginResult!, error:NSError!) in
+                result, error in
                 if let error = error {
                     FBSDKLoginManager().logOut()
                     completion(nil, error)

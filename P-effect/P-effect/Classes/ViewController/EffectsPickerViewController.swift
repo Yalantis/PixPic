@@ -21,7 +21,7 @@ class EffectsPickerViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    automaticallyAdjustsScrollViewInsets = false
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     override func viewWillLayoutSubviews() {

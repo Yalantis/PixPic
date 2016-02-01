@@ -27,10 +27,11 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //MARK: - lifesicle
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
