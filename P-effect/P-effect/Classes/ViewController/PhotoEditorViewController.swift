@@ -11,7 +11,8 @@ import UIKit
 protocol PhotoEditorDelegate: class {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage)
-    func photoEditor(photoEditor: PhotoEditorViewController, didAskForImageWithEffect: Bool) -> UIImage
+    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage
+    
 }
 
 class PhotoEditorViewController: UIViewController {
@@ -30,12 +31,81 @@ class PhotoEditorViewController: UIViewController {
     var imageController: ImageViewController?
     weak var delegate: PhotoEditorDelegate?
     
-    @IBAction private func postEditedImage(sender: AnyObject) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back")
+        navigationItem.leftBarButtonItem = newBackButton;
     }
     
-    @IBAction private func saveToImageLibrary(sender: AnyObject) {
+    @IBAction private func postEditedImage() {
+        guard let reachability = try? Reachability.reachabilityForInternetConnection() where reachability.isReachable() else {
+            suggestSaveToPhotoLibrary()
+            return
+        }
         
+        do {
+            try savePostToTheNet()
+        } catch let exception {
+            ExceptionHandler.handle(exception as! Exception)
+        }
+    }
+    
+    @IBAction private func saveToImageLibrary() {
+        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+            ExceptionHandler.handle(Exception.CantApplyEffects)
+            
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        AlertService.simpleAlert("Image saved to library")
+    }
+    
+    private func savePostToTheNet() throws {
+        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+            throw Exception.CantApplyEffects
+        }
+        let pictureData = UIImageJPEGRepresentation(image, 0.5)!
+        guard let file = PFFile(name: "image", data: pictureData) else {
+            throw Exception.CantCreateParseFile
+        }
+        SaverService().saveAndUploadPost(file, comment: nil)
+        navigationController!.popViewControllerAnimated(true)
+    }
+    
+    private func suggestSaveToPhotoLibrary() {
+        let alertController = UIAlertController(title: Exception.NoConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
+            self.saveToImageLibrary()
+        }
+        alertController.addAction(saveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func back() {
+        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
+            self.saveToImageLibrary()
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(saveAction)
+        
+        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { _ in
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(dontSaveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func didChooseEffectFromPicket(effect: UIImage) {
@@ -52,8 +122,8 @@ class PhotoEditorViewController: UIViewController {
         size.height = effectsPickerContainer.frame.height
         effectsPickerContainer.bounds.size = size
         
-        leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
-        rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
+        leftToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
+        rightToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
         view.superview?.layoutIfNeeded()
     }
     
