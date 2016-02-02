@@ -41,6 +41,10 @@
 		FD3B4A071C5BF87F00F0FC52 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3B4A061C5BF87F00F0FC52 /* libBolts.a */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
+		FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */; };
+		FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */; };
+		FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */; };
+		FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertService.swift */; };
@@ -110,6 +114,10 @@
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
+		FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseColor.swift"; sourceTree = "<group>"; };
+		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
+		FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
@@ -196,6 +204,14 @@
 				417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FD7C43151C60AA4A003E4072 /* UIsettings */ = {
+			isa = PBXGroup;
+			children = (
+				FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */,
+			);
+			path = UIsettings;
 			sourceTree = "<group>";
 		};
 		FDAF46651C47E8AA008060CD = {
@@ -287,6 +303,7 @@
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
 				4904A1B51C526EA200F26E05 /* ValidationService.swift */,
 				FD12C1041C5185EE006F99FD /* FBAuthorization.swift */,
+				FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -320,6 +337,7 @@
 		FDAF46A71C49369E008060CD /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				FD7C43151C60AA4A003E4072 /* UIsettings */,
 				FDAF46A81C49369E008060CD /* Categories */,
 				FDAF46A91C49369E008060CD /* Protocols */,
 			);
@@ -330,6 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */,
+				FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */,
+				FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -571,6 +591,7 @@
 				499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
+				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
@@ -583,12 +604,14 @@
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
+				FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */,
 				492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
+				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
@@ -601,6 +624,7 @@
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,
+				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,

@@ -83,18 +83,6 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
-        if self.respondsToSelector(Selector("automaticallyAdjustsScrollViewInsets")) {
-            self.automaticallyAdjustsScrollViewInsets = false
-            var insets = tableView.contentInset
-            if let navigationController = navigationController {
-                insets.top = navigationController.navigationBar.bounds.size.height +
-                 UIApplication.sharedApplication().statusBarFrame.size.height
-            } else {
-                insets.top = Constants.Profile.PossibleInsets
-            }
-            tableView.contentInset = insets
-            tableView.scrollIndicatorInsets = insets
-        }
         tableView.addPullToRefreshWithActionHandler {
             [weak self] () -> () in
             let reachability: Reachability

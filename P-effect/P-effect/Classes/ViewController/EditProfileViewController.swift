@@ -10,6 +10,7 @@ import UIKit
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
+private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
 
 class EditProfileViewController: UIViewController {
@@ -141,12 +142,14 @@ class EditProfileViewController: UIViewController {
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
             action in
+            PushNotificationQueue.handleNotifiactionQueue()
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(cancelAction)
         
         let OKAction = UIAlertAction(title: "Logout me!", style: .Default) {
             [weak self] action in
+            
             self?.logout()
         }
         alertController.addAction(OKAction)
@@ -154,6 +157,18 @@ class EditProfileViewController: UIViewController {
     }
     
     private func logout() {
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return
+        }
+        
+        if !reachability.isReachable() {
+            AlertService.simpleAlert(logoutWithoutConnectionAttempt)
+            return
+        }
         AuthService().logOut()
         AuthService().anonymousLogIn(
             completion: {
@@ -234,11 +249,12 @@ class EditProfileViewController: UIViewController {
                     self?.view.hideToastActivity()
                     self?.view.userInteractionEnabled = true
                 } else {
-                    self?.view.hideToastActivity()
-                    self?.navigationController?.popToRootViewControllerAnimated(true)
+
                 }
             }
         )
+        view.hideToastActivity()
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
     @IBAction private func avatarTapAction(sender: AnyObject) {

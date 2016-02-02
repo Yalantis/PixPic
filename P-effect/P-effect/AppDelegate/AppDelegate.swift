@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             buttonTitlePosition,
             forBarMetrics: .Default
         )
+        AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
     private func setupNotifications(application: UIApplication) {
@@ -102,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if application.applicationState == .Active {
-            AlertService.notificationAlert(userInfo)
+            AlertService.notificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         
