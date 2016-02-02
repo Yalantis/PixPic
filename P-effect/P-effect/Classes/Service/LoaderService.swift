@@ -138,7 +138,7 @@ class LoaderService: NSObject {
     private func load(user: User?, query:PFQuery?, completion: LoadingPostsCompletion?) {
         var array = [Post]()
         
-        guard let unwrappedUser = PFUser.currentUser()
+        guard let _ = PFUser.currentUser()
             else {
                 print("No user signUP")
                 completion?(objects: nil, error: nil)

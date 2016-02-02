@@ -81,6 +81,10 @@ class SaverService {
             post.saveInBackgroundWithBlock{ succeeded, error in
                 if succeeded {
                     AlertService.simpleAlert(messageUploadSuccessful)
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        Constants.NotificationKey.NewPostUploaded,
+                        object: nil
+                    )
                 } else {
                     if let error = error?.userInfo["error"] as? String {
                         print(error)

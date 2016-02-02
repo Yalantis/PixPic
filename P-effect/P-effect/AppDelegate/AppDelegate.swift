@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             buttonTitlePosition,
             forBarMetrics: .Default
         )
+        AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
     private func setupNotifications(application: UIApplication) {
