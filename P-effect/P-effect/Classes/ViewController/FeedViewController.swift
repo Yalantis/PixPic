@@ -17,7 +17,7 @@ class FeedViewController: UIViewController {
     private lazy var postImageView = UIImageView()
     
     @IBOutlet private weak var tableView: UITableView!
-
+    
     var postDataSource: PostDataSource? {
         didSet {
             postDataSource?.tableView = tableView
@@ -78,7 +78,7 @@ class FeedViewController: UIViewController {
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
         navigationController?.showViewController(viewController, sender: self)
-//        setSelectedPhoto(image)
+        //        setSelectedPhoto(image)
     }
     
     func setSelectedPhoto(image: UIImage) {
@@ -96,7 +96,7 @@ class FeedViewController: UIViewController {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
                 navigationController?.pushViewController(controller, animated: true)
-
+                
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
@@ -142,12 +142,12 @@ class FeedViewController: UIViewController {
             self?.postDataSource?.fetchPagedData(nil)
         }
     }
-
+    
 }
 
 
 extension FeedViewController: UITableViewDelegate {
-
+    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.width + kTopCellBarHeight
     }

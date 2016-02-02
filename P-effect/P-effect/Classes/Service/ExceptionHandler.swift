@@ -11,8 +11,8 @@ import Foundation
 enum Exception: String, ErrorType {
     
     case NoConnection = "There is no internet connection"
-    case CouldntApplyEffects = "Couldn't apply effects to photo"
-    case CouldntCreateParseFile = "Couldnt create parse file"
+    case CantApplyEffects = "Can't apply effects to photo"
+    case CantCreateParseFile = "Can't create parse file"
     
 }
 

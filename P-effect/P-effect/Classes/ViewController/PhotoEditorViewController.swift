@@ -41,7 +41,7 @@ class PhotoEditorViewController: UIViewController {
     
     @IBAction private func postEditedImage() {
         guard let reachability = try? Reachability.reachabilityForInternetConnection() where reachability.isReachable() else {
-            suggestSeveToPhotoLibrary()
+            suggestSaveToPhotoLibrary()
             return
         }
         
@@ -54,7 +54,7 @@ class PhotoEditorViewController: UIViewController {
     
     @IBAction private func saveToImageLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            ExceptionHandler.handle(Exception.CouldntApplyEffects)
+            ExceptionHandler.handle(Exception.CantApplyEffects)
             
             return
         }
@@ -64,17 +64,17 @@ class PhotoEditorViewController: UIViewController {
     
     private func savePostToTheNet() throws {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            throw Exception.CouldntApplyEffects
+            throw Exception.CantApplyEffects
         }
         let pictureData = UIImageJPEGRepresentation(image, 0.5)!
         guard let file = PFFile(name: "image", data: pictureData) else {
-            throw Exception.CouldntCreateParseFile
+            throw Exception.CantCreateParseFile
         }
         SaverService().saveAndUploadPost(file, comment: nil)
         navigationController!.popViewControllerAnimated(true)
     }
     
-    private func suggestSeveToPhotoLibrary() {
+    private func suggestSaveToPhotoLibrary() {
         let alertController = UIAlertController(title: Exception.NoConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
         
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
