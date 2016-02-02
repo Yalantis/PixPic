@@ -54,7 +54,7 @@ class PhotoEditorViewController: UIViewController {
     
     @IBAction private func saveToImageLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            ExceptionHandler.handle(Exception.couldntApplyEffectsToPhoto)
+            ExceptionHandler.handle(Exception.CouldntApplyEffects)
             
             return
         }
@@ -64,18 +64,18 @@ class PhotoEditorViewController: UIViewController {
     
     private func savePostToTheNet() throws {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            throw Exception.couldntApplyEffectsToPhoto
+            throw Exception.CouldntApplyEffects
         }
         let pictureData = UIImageJPEGRepresentation(image, 0.5)!
         guard let file = PFFile(name: "image", data: pictureData) else {
-            throw Exception.couldntCreateParseFile
+            throw Exception.CouldntCreateParseFile
         }
         SaverService().saveAndUploadPost(file, comment: nil)
         navigationController!.popViewControllerAnimated(true)
     }
     
     private func suggestSeveToPhotoLibrary() {
-        let alertController = UIAlertController(title: Exception.noConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: Exception.NoConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
         
         let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
             self.saveToImageLibrary()
