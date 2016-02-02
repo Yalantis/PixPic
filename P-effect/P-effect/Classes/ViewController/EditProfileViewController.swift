@@ -117,6 +117,7 @@ class EditProfileViewController: UIViewController {
             )
             let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
                 [weak self] action in
+                PushNotificationQueue.handleNotifiactionQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self?.navigationController?.popViewControllerAnimated(true)
             }
@@ -125,6 +126,7 @@ class EditProfileViewController: UIViewController {
             let YESAction = UIAlertAction(title: "Save", style: .Default) {
                 [weak self] action in
                 self?.saveChangesAction(alertController)
+                PushNotificationQueue.handleNotifiactionQueue()
             }
             alertController.addAction(YESAction)
             

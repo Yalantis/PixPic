@@ -21,10 +21,6 @@ class AppearanceConfigurator {
         UINavigationBar.appearance().barTintColor = UIColor.appBaseBlueColor()
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        
-//        if let font = UIFont.appFontSanFranciscoDisplayMediumWithSize(NavigationBarTitleFontSize) {
-//            UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName : UIColor.whiteColor()]
-//        }
         UINavigationBar.appearance().backIndicatorImage = UIImage.appBackButton()
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage.appBackButton()
     }

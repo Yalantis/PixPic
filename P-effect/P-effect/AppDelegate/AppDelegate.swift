@@ -103,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if application.applicationState == .Active {
-            AlertService.notificationAlert(userInfo, message: nil)
+            AlertService.notificationAlert(userInfo)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         

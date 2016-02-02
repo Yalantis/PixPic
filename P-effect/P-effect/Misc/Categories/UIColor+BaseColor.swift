@@ -28,7 +28,6 @@ extension UIColor {
 extension UIColor {
     
     // MARK: - Base colors
-    
     public class func appBaseBlueColor() -> UIColor {
         return UIColor(hexString: "3BB0DE")
     }

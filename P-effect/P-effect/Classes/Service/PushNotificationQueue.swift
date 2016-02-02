@@ -23,8 +23,9 @@ class PushNotificationQueue: NSObject {
     }
     
     class func addObjectInQueue(message: String?) {
-        guard let message = message
-            else { return }
+        guard let message = message else {
+            return
+        }
         notificationQueue.append(message)
     }
     
@@ -38,9 +39,9 @@ class PushNotificationQueue: NSObject {
     
     class func showNotificationFromQueue() {
         if notificationQueue.count == 1 {
-            AlertService.notificationAlert([:], message: notificationQueue[0])
+            AlertService.notificationAlert(message: notificationQueue[0])
         } else if notificationQueue.count > 1 {
-            AlertService.notificationAlert([:], message: String(notificationQueue.count) + " new amazing posts!")
+            AlertService.notificationAlert(message: String(notificationQueue.count) + " new amazing posts!")
         } else {
             return
         }

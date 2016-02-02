@@ -65,7 +65,6 @@ class Router {
     }
     
     // MARK: - Private
-    
     private func switchRootToViewController(viewController: UIViewController?) {
         if let window = UIApplication.sharedApplication().delegate!.window! as UIWindow! {
             window.rootViewController = viewController

@@ -22,14 +22,17 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         let takePhotoAction = UIAlertAction(title: "Take photo", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.takePhoto()
+            PushNotificationQueue.handleNotifiactionQueue()
         })
         let selectFromLibraryAction = UIAlertAction(title: "Choose photo from library", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.selectFromLibrary()
+            PushNotificationQueue.handleNotifiactionQueue()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
+            PushNotificationQueue.handleNotifiactionQueue()
         })
         actionSheetVC.addAction(selectFromLibraryAction)
         actionSheetVC.addAction(takePhotoAction)

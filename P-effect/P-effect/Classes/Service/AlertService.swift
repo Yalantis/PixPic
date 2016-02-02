@@ -16,10 +16,11 @@ class AlertService: NSObject {
         }
     }
     
-    class func notificationAlert(userInfo: [NSObject : AnyObject], var message: String?) {
+    class func notificationAlert(userInfo: [NSObject : AnyObject] = [:], var message: String? = nil) {
         
-        guard let topController = AlertService().topController()
-            else { return }
+        guard let topController = AlertService().topController() else {
+            return
+        }
         let title = "Notification"
         if let _ = message {
         } else {
