@@ -43,9 +43,9 @@ class EffectEditorView: UIView {
     }
     
     func switchControls(toState state: Bool) {
-        resizingControl.hidden = state
-        deleteControl.hidden = state
-        borderView.hidden = state
+        resizingControl.hidden = !state
+        deleteControl.hidden = !state
+        borderView.hidden = !state
     }
     
     private func setupDefaultAttributes() {

@@ -46,8 +46,12 @@ extension ImageViewController: PhotoEditorDelegate {
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()!
         rawImage.layer.renderInContext(context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        for effect in effects {
+            effect.switchControls(toState: true)
+        }
         
-        return UIGraphicsGetImageFromCurrentImageContext()
+        return image
     }
     
 }

@@ -93,13 +93,13 @@
                                 <items>
                                     <barButtonItem title="Save" id="tpO-46-vtZ">
                                         <connections>
-                                            <action selector="saveToImageLibrary:" destination="4h3-pX-QbQ" id="MpZ-P1-SuX"/>
+                                            <action selector="saveToImageLibrary" destination="4h3-pX-QbQ" id="yzJ-co-V53"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rCV-eb-XCV"/>
                                     <barButtonItem title="Post" id="sZ7-G1-q5q">
                                         <connections>
-                                            <action selector="postEditedImage:" destination="4h3-pX-QbQ" id="aEH-VI-MFi"/>
+                                            <action selector="postEditedImage" destination="4h3-pX-QbQ" id="C4W-Ms-flo"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
