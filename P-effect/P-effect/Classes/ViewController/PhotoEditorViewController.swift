@@ -33,73 +33,79 @@ class PhotoEditorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back:")
-        self.navigationItem.leftBarButtonItem = newBackButton;
+        
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back")
+        navigationItem.leftBarButtonItem = newBackButton;
     }
     
-    func back(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
-            self.saveToImageLibrary(nil)
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-        alertController.addAction(saveAction)
-        
-        let DontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { (action) in
-            self.navigationController?.popViewControllerAnimated(true)
-        }
-        alertController.addAction(DontSaveAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    @IBAction private func postEditedImage(sender: AnyObject) {
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
-            
+    @IBAction private func postEditedImage() {
+        guard let reachability = try? Reachability.reachabilityForInternetConnection() where reachability.isReachable() else {
+            suggestSeveToPhotoLibrary()
             return
         }
-        if reachability.isReachable() {
-            guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-                return
-            }
-            let pictureData = UIImageJPEGRepresentation(image, 0.5)
-            guard let file = PFFile(name: "image", data: pictureData!) else {
-                return
-            }
-            let saver = SaverService()
-            saver.saveAndUploadPost(file, comment: nil)
-            navigationController?.popViewControllerAnimated(true)
-        } else {
-            let message = reachability.currentReachabilityStatus.description
-            let alertController = UIAlertController(title: message, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
-            
-            let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
-                self.saveToImageLibrary(nil)
-            }
-            alertController.addAction(saveAction)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
+        
+        do {
+            try savePostToTheNet()
+        } catch let exception {
+            ExceptionHandler.handle(exception as! Exception)
         }
     }
     
-    @IBAction private func saveToImageLibrary(sender: AnyObject?) {
+    @IBAction private func saveToImageLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+            ExceptionHandler.handle(Exception.couldntApplyEffectsToPhoto)
+            
             return
         }
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         AlertService.simpleAlert("Image saved to library")
+    }
+    
+    private func savePostToTheNet() throws {
+        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+            throw Exception.couldntApplyEffectsToPhoto
+        }
+        let pictureData = UIImageJPEGRepresentation(image, 0.5)!
+        guard let file = PFFile(name: "image", data: pictureData) else {
+            throw Exception.couldntCreateParseFile
+        }
+        SaverService().saveAndUploadPost(file, comment: nil)
+        navigationController!.popViewControllerAnimated(true)
+    }
+    
+    private func suggestSeveToPhotoLibrary() {
+        let alertController = UIAlertController(title: Exception.noConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
+            self.saveToImageLibrary()
+        }
+        alertController.addAction(saveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func back() {
+        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
+            self.saveToImageLibrary()
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(saveAction)
+        
+        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { _ in
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(dontSaveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func didChooseEffectFromPicket(effect: UIImage) {
