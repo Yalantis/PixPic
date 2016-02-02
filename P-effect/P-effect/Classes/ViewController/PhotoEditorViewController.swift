@@ -31,12 +31,75 @@ class PhotoEditorViewController: UIViewController {
     var imageController: ImageViewController?
     weak var delegate: PhotoEditorDelegate?
     
-    @IBAction private func postEditedImage(sender: AnyObject) {
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back:")
+        self.navigationItem.leftBarButtonItem = newBackButton;
     }
     
-    @IBAction private func saveToImageLibrary(sender: AnyObject) {
+    func back(sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
         
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
+            self.saveToImageLibrary(nil)
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        alertController.addAction(saveAction)
+        
+        let DontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { (action) in
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        alertController.addAction(DontSaveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction private func postEditedImage(sender: AnyObject) {
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            
+            return
+        }
+        if reachability.isReachable() {
+            guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+                return
+            }
+            let pictureData = UIImageJPEGRepresentation(image, 0.5)
+            guard let file = PFFile(name: "image", data: pictureData!) else {
+                return
+            }
+            let saver = SaverService()
+            saver.saveAndUploadPost(file, comment: nil)
+            navigationController?.popViewControllerAnimated(true)
+        } else {
+            let message = reachability.currentReachabilityStatus.description
+            let alertController = UIAlertController(title: message, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
+            
+            let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
+                self.saveToImageLibrary(nil)
+            }
+            alertController.addAction(saveAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction private func saveToImageLibrary(sender: AnyObject?) {
+        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        AlertService.simpleAlert("Image saved to library")
     }
     
     func didChooseEffectFromPicket(effect: UIImage) {
@@ -53,8 +116,8 @@ class PhotoEditorViewController: UIViewController {
         size.height = effectsPickerContainer.frame.height
         effectsPickerContainer.bounds.size = size
         
-        leftToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
-        rightToolbarButton.width = UIScreen.mainScreen().bounds.width*0.5
+        leftToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
+        rightToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
         view.superview?.layoutIfNeeded()
     }
     
