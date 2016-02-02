@@ -28,7 +28,7 @@ extension UIColor {
 extension UIColor {
     
     // MARK: - Base colors
-    public class func appBaseBlueColor() -> UIColor {
-        return UIColor(hexString: "3BB0DE")
+    public class func appBaseDarkColor() -> UIColor {
+        return UIColor(hexString: "333333")
     }
 }

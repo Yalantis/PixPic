@@ -8,12 +8,12 @@
 
 import Foundation
 
-private var notificationQueue = [String]()
-
 class PushNotificationQueue: NSObject {
     
-    class func handleNotifiactionQueue() {
-        let _ = NSTimer.scheduledTimerWithTimeInterval(
+    static var notificationQueue = [String]()
+    
+    class func handleNotificationQueue() {
+        NSTimer.scheduledTimerWithTimeInterval(
             2,
             target: PushNotificationQueue.self,
             selector: "showNotificationFromQueue",
@@ -34,19 +34,17 @@ class PushNotificationQueue: NSObject {
     }
     
     private func countOfNotificationsInQueue() -> Int {
-        return notificationQueue.count
+        return PushNotificationQueue.notificationQueue.count
     }
     
     class func showNotificationFromQueue() {
         if notificationQueue.count == 1 {
-            AlertService.notificationAlert(message: notificationQueue[0])
+            AlertService.notificationAlert(message: notificationQueue.first)
         } else if notificationQueue.count > 1 {
-            AlertService.notificationAlert(message: String(notificationQueue.count) + " new amazing posts!")
-        } else {
-            return
+            AlertService.notificationAlert(
+                message: String(notificationQueue.count) + " new amazing posts!"
+            )
         }
     }
     
-    
-
 }

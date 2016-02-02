@@ -67,15 +67,10 @@ class AlertService: NSObject {
             case .TopButton:
                 notification.dismissWithGravityAnimation(true)
                 Router.sharedRouter().showHome(animated: true)
-                break;
-                
             case .BottomButton:
                 notification.dismissWithGravityAnimation(true)
-                break;
-                
             case .Tap:
                 notification.dismissWithGravityAnimation(true)
-                break;
             }
         }
         return notification
