@@ -47,17 +47,7 @@ class AuthorizationViewController: UIViewController {
     
     private func proceedWithoutAuthorization() {
         Router.sharedRouter().showHome(animated: true)
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
-            return
-        }
-        if !reachability.isReachable() {
-            let message = reachability.currentReachabilityStatus.description
-            AlertService.simpleAlert(message)
-        }
+        ReachabilityHelper.isInternetAccessAvailable()
     }
     
     private func signUp(user: User) {

@@ -85,8 +85,7 @@ class FeedViewController: UIViewController {
         postImageView.image = image
         let pictureData = UIImageJPEGRepresentation(image, 0.5)
         if let file = PFFile(name: "image", data: pictureData!) {
-            let saver = SaverService()
-            saver.saveAndUploadPost(file, comment: nil)
+            SaverService.saveAndUploadPost(file)
         }
     }
     
@@ -110,19 +109,8 @@ class FeedViewController: UIViewController {
     //MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler {
-            [weak self] () -> () in
-            let reachability: Reachability
-            do {
-                reachability = try Reachability.reachabilityForInternetConnection()
-            } catch {
-                print("Unable to create Reachability")
-                return
-            }
-            
-            if !reachability.isReachable() {
-                let message = reachability.currentReachabilityStatus.description
-                AlertService.simpleAlert(message)
+        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+            if !ReachabilityHelper.isInternetAccessAvailable() {
                 self?.tableView?.pullToRefreshView.stopAnimating()
             } else {
                 self?.postDataSource?.fetchData(nil)

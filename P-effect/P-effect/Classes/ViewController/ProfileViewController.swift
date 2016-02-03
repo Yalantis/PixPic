@@ -69,7 +69,7 @@ class ProfileViewController: UITableViewController {
             } else {
                 self?.view.makeToast(error?.localizedDescription)
             }
-        })
+            })
     }
     
     func showToast() {
@@ -83,19 +83,8 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler {
-            [weak self] () -> () in
-            let reachability: Reachability
-            do {
-                reachability = try Reachability.reachabilityForInternetConnection()
-            } catch {
-                print("Unable to create Reachability")
-                return
-            }
-            
-            if !reachability.isReachable() {
-                let message = reachability.currentReachabilityStatus.description
-                AlertService.simpleAlert(message)
+        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+            if !ReachabilityHelper.isInternetAccessAvailable() {
                 self?.tableView?.pullToRefreshView.stopAnimating()
             } else {
                 self?.dataSource?.fetchData(self?.model.user)
@@ -109,9 +98,9 @@ class ProfileViewController: UITableViewController {
     // MARK: Delegate methods
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (activityShown == true) {
-                view.hideToastActivity()
-                tableView.tableFooterView = nil
-                tableView.scrollEnabled = true
+            view.hideToastActivity()
+            tableView.tableFooterView = nil
+            tableView.scrollEnabled = true
         }
     }
     
