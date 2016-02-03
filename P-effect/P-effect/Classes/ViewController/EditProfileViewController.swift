@@ -189,7 +189,7 @@ class EditProfileViewController: UIViewController {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 if kbHeight == 0 {
                     kbHeight = keyboardSize.height
-                    self.animateTextField(true)
+                    animateTextField(true)
                 }
                 kbHidden = false
             }
@@ -217,7 +217,6 @@ class EditProfileViewController: UIViewController {
     }
     
     dynamic private func dismissKeyboard() {
-        
         view.endEditing(true)
         kbHidden = true
     }
