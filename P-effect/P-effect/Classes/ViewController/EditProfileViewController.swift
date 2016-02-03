@@ -159,16 +159,7 @@ class EditProfileViewController: UIViewController {
     }
     
     private func logout() {
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
-            return
-        }
-        
-        if !reachability.isReachable() {
-            AlertService.simpleAlert(logoutWithoutConnectionAttempt)
+        guard ReachabilityHelper.isInternetAccessAvailable() else {
             return
         }
         AuthService().logOut()
