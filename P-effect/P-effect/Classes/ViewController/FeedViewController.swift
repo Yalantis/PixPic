@@ -28,7 +28,6 @@ class FeedViewController: UIViewController {
     }
     
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,7 +76,7 @@ class FeedViewController: UIViewController {
         let controllerIdentifier = "PhotoEditorController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
-        navigationController?.showViewController(viewController, sender: self)
+        navigationController?.pushViewController(viewController, animated: false)
         //        setSelectedPhoto(image)
     }
     
