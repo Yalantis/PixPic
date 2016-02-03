@@ -21,7 +21,7 @@ class EditProfileViewController: UIViewController {
     private var userName: String?
     private var originalUserName: String?
     
-    private var kbHeight: CGFloat? = 0.0
+    private var kbHeight: CGFloat = 0.0
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
@@ -203,19 +203,17 @@ class EditProfileViewController: UIViewController {
     }
     
     private func animateTextField(up: Bool) {
-        if let kbheight = kbHeight {
-            let movement = (up ? kbheight : -kbheight)
-            bottomConstraint.constant = (kbHidden ? movement : 0)
-            topConstraint.constant = (kbHidden ? -movement : 0)
-            view.needsUpdateConstraints()
-            UIView.animateWithDuration(
-                0.3,
-                animations: {
-                    [weak self] in
-                    self?.view.layoutIfNeeded()
-                }
-            )
-        }
+        let movement = (up ? kbHeight : -kbHeight)
+        bottomConstraint.constant = (kbHidden ? movement : 0)
+        topConstraint.constant = (kbHidden ? -movement : 0)
+        view.needsUpdateConstraints()
+        UIView.animateWithDuration(
+            0.3,
+            animations: {
+                [weak self] in
+                self?.view.layoutIfNeeded()
+            }
+        )
     }
     
     dynamic private func dismissKeyboard() {
