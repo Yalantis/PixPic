@@ -18,6 +18,7 @@ class FeedViewController: UIViewController {
     private var reachability: Reachability?
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak var photoButton: UIBarButtonItem!
     
     var postDataSource: PostDataSource? {
         didSet {
@@ -41,6 +42,9 @@ class FeedViewController: UIViewController {
         if reachability?.isReachable() == false {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
+            photoButton.enabled = false
+        } else {
+            photoButton.enabled = true
         }
     }
     

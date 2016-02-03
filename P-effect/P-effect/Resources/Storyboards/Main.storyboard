@@ -54,6 +54,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="photoButton" destination="Xa5-e1-dLo" id="rG2-rk-ejr"/>
                         <outlet property="tableView" destination="Ddw-06-XZv" id="nXm-NU-4Xn"/>
                     </connections>
                 </viewController>
