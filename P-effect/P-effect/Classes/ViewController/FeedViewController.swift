@@ -110,11 +110,12 @@ class FeedViewController: UIViewController {
     
     private func setupLoadersCallback() {
         tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
-            if !ReachabilityHelper.isInternetAccessAvailable() {
+            guard ReachabilityHelper.isInternetAccessAvailable() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
-            } else {
-                self?.postDataSource?.fetchData(nil)
+                
+                return
             }
+            self?.postDataSource?.fetchData(nil)
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in

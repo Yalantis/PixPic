@@ -40,7 +40,7 @@ class ValidationService: NSObject {
         let queryFromLocal = EffectsVersion.query()
         queryFromLocal?.fromLocalDatastore()
         
-        if !ReachabilityHelper.isInternetAccessAvailable() {
+        guard ReachabilityHelper.isInternetAccessAvailable() else {
             completion(false)
             
             return
