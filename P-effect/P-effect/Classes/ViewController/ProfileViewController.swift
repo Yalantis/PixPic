@@ -120,7 +120,7 @@ class ProfileViewController: UITableViewController {
         let board = UIStoryboard(name: "Main", bundle: nil)
         let controllerIdentifier = "EditProfileViewController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
-        navigationController?.showViewController(viewController, sender: self)
+        navigationController!.showViewController(viewController, sender: self)
     }
 
 }
