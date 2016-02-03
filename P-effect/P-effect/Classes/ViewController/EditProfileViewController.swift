@@ -210,8 +210,7 @@ class EditProfileViewController: UIViewController {
         UIView.animateWithDuration(
             0.3,
             animations: {
-                [weak self] in
-                self?.view.layoutIfNeeded()
+                self.view.layoutIfNeeded()
             }
         )
     }
