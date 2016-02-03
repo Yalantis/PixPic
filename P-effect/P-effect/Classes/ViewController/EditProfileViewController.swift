@@ -21,7 +21,7 @@ class EditProfileViewController: UIViewController {
     private var userName: String?
     private var originalUserName: String?
     
-    private var kbHeight: CGFloat?
+    private var kbHeight: CGFloat = 0.0
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
@@ -187,8 +187,10 @@ class EditProfileViewController: UIViewController {
     dynamic private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-                kbHeight = keyboardSize.height
-                self.animateTextField(true)
+                if kbHeight == 0 {
+                    kbHeight = keyboardSize.height
+                    animateTextField(true)
+                }
                 kbHidden = false
             }
         }
@@ -197,22 +199,20 @@ class EditProfileViewController: UIViewController {
     dynamic private func keyboardWillHide(notification: NSNotification) {
         animateTextField(false)
         kbHidden = true
+        kbHeight = 0
     }
     
     private func animateTextField(up: Bool) {
-        if let kbheight = kbHeight {
-            let movement = (up ? kbheight : -kbheight)
-            bottomConstraint.constant = (kbHidden ? movement : 0)
-            topConstraint.constant = (kbHidden ? -movement : 0)
-            view.needsUpdateConstraints()
-            UIView.animateWithDuration(
-                0.3,
-                animations: {
-                    [weak self] in
-                    self?.view.layoutIfNeeded()
-                }
-            )
-        }
+        let movement = (up ? kbHeight : -kbHeight)
+        bottomConstraint.constant = (kbHidden ? movement : 0)
+        topConstraint.constant = (kbHidden ? -movement : 0)
+        view.needsUpdateConstraints()
+        UIView.animateWithDuration(
+            0.3,
+            animations: {
+                self.view.layoutIfNeeded()
+            }
+        )
     }
     
     dynamic private func dismissKeyboard() {
