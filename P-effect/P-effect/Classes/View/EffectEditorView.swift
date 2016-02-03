@@ -245,7 +245,9 @@ class EffectEditorView: UIView {
     }
     
     private func translateUsingTouchLocation(touchPoint: CGPoint) {
-        center = CGPointMake(center.x + touchPoint.x - touchStart!.x, center.y + touchPoint.y - touchStart!.y)
+        if var touchStart = touchStart {
+            center = CGPointMake(center.x + touchPoint.x - touchStart.x, center.y + touchPoint.y - touchStart.y)
+        }
     }
     
     private func enableTranslucency(state: Bool) {
