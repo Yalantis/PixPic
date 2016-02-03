@@ -15,7 +15,12 @@ protocol PostViewCellDelegate: class {
 
 class PostViewCell: UITableViewCell {
     
-    private var imgURL: String?
+    static var nib: UINib? {
+        let nib = UINib(nibName: String(self), bundle: nil)
+        return nib
+    }
+    
+    private var postImageURL: String?
     private var avatarURL: String?
     
     @IBOutlet private weak var postImageView: UIImageView!
@@ -30,10 +35,8 @@ class PostViewCell: UITableViewCell {
     var post: Post? {
         didSet {
             setContent()
-            imgURL = post?.image.url
-            if let avatar = post?.user?.avatar {
-                avatarURL = avatar.url
-            }
+            postImageURL = post?.image.url
+            avatarURL = post?.user?.avatar?.url
         }
     }
     
@@ -45,7 +48,6 @@ class PostViewCell: UITableViewCell {
         
         let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
-        
         selectionStyle = .None
     }
     
@@ -54,8 +56,12 @@ class PostViewCell: UITableViewCell {
             post?.createdAt,
             withFormat: MHPrettyDateShortRelativeTime
         )
-        
-        if post?.image.url != imgURL {
+        setPostImage()
+        setAvatarImage()
+    }
+    
+    private func setPostImage() {
+        if post?.image.url != postImageURL {
             postImageView?.image = nil
             imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
                 if let error = error {
@@ -65,29 +71,27 @@ class PostViewCell: UITableViewCell {
                 }
             }
         }
-        
-        let user = post?.user
-        if let user = user {
-            profileLabel.text = user.username
-            if avatarURL != post?.user?.avatar?.url {
-                profileImageView.image = nil
-                imageLoader.getImageForContentItem(user.avatar) { [weak self] image, error in
-                    if error == nil && image != nil {
-                        self?.profileImageView.layer.cornerRadius = (self?.profileImageView.frame.size.width)! / 2
-                        self?.profileImageView.image = image
-                    } else if  error == nil && image == nil {
-                        self?.profileImageView.image = UIImage(named: "user_male_50")
-                    } else  {
-                        print("\(error)")
-                    }
+    }
+    
+    private func setAvatarImage() {
+        guard let user = post?.user else {
+            profileImageView.image = UIImage(named: "user_male_50")
+            return
+        }
+        profileLabel.text = user.username
+        if avatarURL != post?.user?.avatar?.url {
+            profileImageView.image = nil
+            imageLoader.getImageForContentItem(user.avatar) { [weak self] image, error in
+                if error == nil && image != nil {
+                    self?.profileImageView.layer.cornerRadius = (self?.profileImageView.frame.size.width)! / 2
+                    self?.profileImageView.image = image
+                } else if  error == nil && image == nil {
+                    self?.profileImageView.image = UIImage(named: "user_male_50")
+                } else  {
+                    print("\(error)")
                 }
             }
         }
-    }
-    
-    static var nib: UINib? {
-        let nib = UINib(nibName: String(self), bundle: nil)
-        return nib
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {

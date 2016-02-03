@@ -27,7 +27,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         let takePhotoAction = UIAlertAction(
             title: "Take photo",
             style: .Default,
-            handler: { alert in
+            handler: { _ in
                 self.takePhoto()
                 PushNotificationQueue.handleNotificationQueue()
             }
@@ -35,7 +35,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         let selectFromLibraryAction = UIAlertAction(
             title: "Choose photo from library",
             style: .Default,
-            handler: { alert in
+            handler: { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
             }
@@ -44,7 +44,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(
             title: "Cancel",
             style: .Cancel,
-            handler: { alert in
+            handler: { _ in
                 PushNotificationQueue.handleNotificationQueue()
             }
         )
@@ -61,15 +61,21 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         if cameraExist {
             imagePickerController.sourceType = .Camera
             checkCamera()
-            imagePickerController.cameraCaptureMode = .Photo
-            imagePickerController.modalPresentationStyle = .FullScreen
-            imagePickerController.allowsEditing = true
-            
-            controller.presentViewController(imagePickerController, animated: true, completion: nil)
         }
         else {
             noCamera()
         }
+    }
+    
+    private func callCamera() {
+        imagePickerController.cameraCaptureMode = .Photo
+        imagePickerController.modalPresentationStyle = .FullScreen
+        imagePickerController.allowsEditing = true
+        controller.presentViewController(
+            imagePickerController,
+            animated: true,
+            completion: nil
+        )
     }
     
     private func noCamera() {
@@ -97,17 +103,21 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     private func checkCamera() {
         let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         switch authStatus {
-        case .Authorized: break
-        case .Denied: alertToEncourageCameraAccessInitially()
-        case .NotDetermined: alertPromptToAllowCameraAccessViaSetting()
-        default: alertToEncourageCameraAccessInitially()
+        case .Authorized:
+            callCamera()
+            break
+            
+        case .Denied:
+            askCameraAccessViaSettings()
+        default:
+            askCameraAccess()
         }
     }
     
-    private func alertToEncourageCameraAccessInitially() {
+    private func askCameraAccessViaSettings() {
         let alert = UIAlertController(
             title: "IMPORTANT",
-            message: "Camera access required ",
+            message: "Camera access required",
             preferredStyle: UIAlertControllerStyle.Alert
         )
         alert.addAction(UIAlertAction(
@@ -118,16 +128,15 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         alert.addAction(UIAlertAction(
             title: "Allow Camera",
             style: .Cancel,
-            handler: { alert in
-                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            handler: { _ in
+                UIApplication.redirectToAppSettings()
             }
             )
         )
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func alertPromptToAllowCameraAccessViaSetting() {
-        
+    func askCameraAccess() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Please allow camera access",
@@ -136,11 +145,11 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         alert.addAction(UIAlertAction(
             title: "Dismiss",
             style: .Cancel
-            ) { alert in
+            ) { _ in
                 if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
+                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
                         dispatch_async(dispatch_get_main_queue()) {
-                            self?.checkCamera()
+                            self.checkCamera()
                         }
                     }
                 }
@@ -162,4 +171,5 @@ extension PhotoGenerator: UIImagePickerControllerDelegate {
     public func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
+    
 }

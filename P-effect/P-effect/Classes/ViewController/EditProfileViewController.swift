@@ -146,7 +146,7 @@ class EditProfileViewController: UIViewController {
         let cancelAction = UIAlertAction(
             title: "Cancel",
             style: .Cancel
-            ) { action in
+            ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -155,8 +155,8 @@ class EditProfileViewController: UIViewController {
         let OKAction = UIAlertAction(
             title: "Logout me!",
             style: .Default
-            ) { [weak self] action in
-                self?.logout()
+            ) { _ in
+                self.logout()
         }
         alertController.addAction(OKAction)
         presentViewController(alertController, animated: true) { }
