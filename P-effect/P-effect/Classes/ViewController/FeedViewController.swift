@@ -62,7 +62,7 @@ class FeedViewController: UIViewController {
     @IBAction func choosePhoto(sender: AnyObject) {
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-            navigationController?.pushViewController(controller, animated: true)
+            navigationController!.pushViewController(controller, animated: true)
             return
         }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
@@ -76,7 +76,7 @@ class FeedViewController: UIViewController {
         let controllerIdentifier = "PhotoEditorController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
-        navigationController?.pushViewController(viewController, animated: false)
+        navigationController!.pushViewController(viewController, animated: false)
         //        setSelectedPhoto(image)
     }
     
@@ -94,12 +94,12 @@ class FeedViewController: UIViewController {
         if let currentUser = PFUser.currentUser() {
             if PFAnonymousUtils.isLinkedWithUser(currentUser) {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-                navigationController?.pushViewController(controller, animated: true)
+                navigationController!.pushViewController(controller, animated: true)
                 
             } else {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
                 controller.model = ProfileViewModel.init(profileUser: (currentUser as? User)!)
-                self.navigationController?.showViewController(controller, sender: self)
+                self.navigationController!.showViewController(controller, sender: self)
             }
         } else {
             //TODO: if it's required to check "if let currentUser = PFUser.currentUser()" (we've created it during the app initialization)
@@ -157,7 +157,7 @@ extension FeedViewController: PostDataSourceDelegate {
     func showUserProfile(user: User) {
         let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         controller.model = ProfileViewModel.init(profileUser: user)
-        self.navigationController?.showViewController(controller, sender: self)
+        self.navigationController!.showViewController(controller, sender: self)
     }
     
     func showPlaceholderForEmptyDataSet() {

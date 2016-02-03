@@ -119,7 +119,7 @@ class EditProfileViewController: UIViewController {
                 [weak self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
-                self?.navigationController?.popViewControllerAnimated(true)
+                self?.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(NOAction)
             
@@ -132,7 +132,7 @@ class EditProfileViewController: UIViewController {
             
             self.presentViewController(alertController, animated: true) {}
         } else {
-            navigationController?.popViewControllerAnimated(true)
+            navigationController!.popViewControllerAnimated(true)
         }
     }
     
@@ -256,7 +256,7 @@ class EditProfileViewController: UIViewController {
             }
         )
         view.hideToastActivity()
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController!.popToRootViewControllerAnimated(true)
     }
     
     @IBAction private func avatarTapAction(sender: AnyObject) {
