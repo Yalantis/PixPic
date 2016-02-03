@@ -40,16 +40,12 @@ class PhotoEditorViewController: UIViewController {
     }
     
     @IBAction private func postEditedImage() {
-        guard let reachability = try? Reachability.reachabilityForInternetConnection() where reachability.isReachable() else {
+        guard ReachabilityHelper.isInternetAccessAvailable() else{
             suggestSaveToPhotoLibrary()
+            
             return
         }
-        
-        do {
-            try savePostToTheNet()
-        } catch let exception {
-            ExceptionHandler.handle(exception as! Exception)
-        }
+        postToTheNet()
     }
     
     @IBAction private func saveToImageLibrary() {
@@ -62,25 +58,38 @@ class PhotoEditorViewController: UIViewController {
         AlertService.simpleAlert("Image saved to library")
     }
     
-    private func savePostToTheNet() throws {
-        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            throw Exception.CantApplyEffects
+    private func postToTheNet() {
+        do {
+            guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
+                throw Exception.CantApplyEffects
+            }
+            let pictureData = UIImageJPEGRepresentation(image, 0.5)!
+            guard let file = PFFile(name: "image", data: pictureData) else {
+                throw Exception.CantCreateParseFile
+            }
+            SaverService.saveAndUploadPost(file)
+            navigationController!.popViewControllerAnimated(true)
+        } catch let exception {
+            ExceptionHandler.handle(exception as! Exception)
         }
-        let pictureData = UIImageJPEGRepresentation(image, 0.5)!
-        guard let file = PFFile(name: "image", data: pictureData) else {
-            throw Exception.CantCreateParseFile
-        }
-        SaverService().saveAndUploadPost(file, comment: nil)
-        navigationController!.popViewControllerAnimated(true)
     }
     
     private func suggestSaveToPhotoLibrary() {
-        let alertController = UIAlertController(title: Exception.NoConnection.rawValue, message: "Would you like to save results to photo library?", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(
+            title: Exception.NoConnection.rawValue,
+            message: "Would you like to save results to photo library or post after internet access appears?",
+            preferredStyle: .ActionSheet
+        )
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { (action) in
+        let saveAction = UIAlertAction(title: "Save now", style: .Default) { _ in
             self.saveToImageLibrary()
         }
         alertController.addAction(saveAction)
+        
+        let postAction = UIAlertAction(title: "Post with delay", style: .Default) { _ in
+            self.postToTheNet()
+        }
+        alertController.addAction(postAction)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)

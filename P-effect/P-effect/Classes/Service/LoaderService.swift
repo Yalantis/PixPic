@@ -45,7 +45,7 @@ class LoaderService: NSObject {
                 effectsVersion.pinInBackground()
                 let groupsRelationQuery = effectsVersion.groupsRelation.query()
                 if isQueryFromLocalDataStoure {
-                groupsRelationQuery.fromLocalDatastore()
+                    groupsRelationQuery.fromLocalDatastore()
                 }
                 groupsRelationQuery.findObjectsInBackgroundWithBlock {
                     (objects:[PFObject]?, error: NSError?) in
@@ -144,20 +144,11 @@ class LoaderService: NSObject {
                 completion?(objects: nil, error: nil)
                 return
         }
-        
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-        } catch {
-            print("Unable to create Reachability")
+        guard ReachabilityHelper.isInternetAccessAvailable() else {
             completion?(objects: nil,error: nil)
+            
             return
         }
-        
-        if !reachability.isReachable() {
-            query?.fromLocalDatastore()
-        }
-        
         if let user = user {
             query?.whereKey("user", equalTo: user)
         }

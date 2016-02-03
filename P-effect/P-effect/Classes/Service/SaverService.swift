@@ -14,11 +14,14 @@ private let messageUsernameCanNotBeEmpty = "User name can not be empty"
 private let messageUploadSuccessful = "Upload successful!"
 
 
-class SaverService {
+final class SaverService {
+    
+    init () {
+        
+    }
     
     //MARK: - public
-    
-    func saveAndUploadPost(file: PFFile, comment: String?) {
+    static func saveAndUploadPost(file: PFFile, comment: String? = nil) {
         file.saveInBackgroundWithBlock(
             { succeeded, error in
                 if succeeded {
@@ -34,7 +37,7 @@ class SaverService {
     }
     
     
-    func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
+    static func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
         if let avatar = avatar {
             avatar.saveInBackgroundWithBlock(
                 { succeeded, error in
@@ -51,7 +54,7 @@ class SaverService {
         }
     }
     
-    class func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
+    static func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
@@ -75,7 +78,7 @@ class SaverService {
     
     //MARK: - private
     
-    private class func uploadPost(file: PFFile, comment: String?) {
+    private static func uploadPost(file: PFFile, comment: String?) {
         if let user = PFUser.currentUser() as? User {
             let post = PostModel(image: file, user: user, comment: comment).post
             post.saveInBackgroundWithBlock{ succeeded, error in

@@ -24,14 +24,14 @@ class ProfileViewController: UITableViewController {
         }
     }
     var model: ProfileViewModel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupController()
         setupLoadersCallback()
     }
-
+    
     // MARK: - Inner func 
     func setupController() {
         dataSource = PostDataSource()
@@ -69,13 +69,13 @@ class ProfileViewController: UITableViewController {
             } else {
                 self?.view.makeToast(error?.localizedDescription)
             }
-        })
+            })
     }
     
     func showToast() {
         self.view.makeToastActivity(CSToastPositionCenter)
         activityShown = true
-
+        
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
             self?.view.hideToastActivity()
@@ -83,23 +83,13 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler {
-            [weak self] () -> () in
-            let reachability: Reachability
-            do {
-                reachability = try Reachability.reachabilityForInternetConnection()
-            } catch {
-                print("Unable to create Reachability")
+        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+            guard ReachabilityHelper.isInternetAccessAvailable() else {
+                self?.tableView?.pullToRefreshView.stopAnimating()
+                
                 return
             }
-            
-            if !reachability.isReachable() {
-                let message = reachability.currentReachabilityStatus.description
-                AlertService.simpleAlert(message)
-                self?.tableView?.pullToRefreshView.stopAnimating()
-            } else {
-                self?.dataSource?.fetchData(self?.model.user)
-            }
+            self?.dataSource?.fetchData(self?.model.user)
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
@@ -109,9 +99,9 @@ class ProfileViewController: UITableViewController {
     // MARK: Delegate methods
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (activityShown == true) {
-                view.hideToastActivity()
-                tableView.tableFooterView = nil
-                tableView.scrollEnabled = true
+            view.hideToastActivity()
+            tableView.tableFooterView = nil
+            tableView.scrollEnabled = true
         }
     }
     
@@ -122,5 +112,5 @@ class ProfileViewController: UITableViewController {
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
     }
-
+    
 }
