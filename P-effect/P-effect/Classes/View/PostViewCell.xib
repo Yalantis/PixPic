@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15E33e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E33e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -15,6 +15,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="444" height="487"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OAP-rW-k05">
+                        <rect key="frame" x="0.0" y="0.0" width="444" height="487"/>
+                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDP-Hd-y7z">
                         <rect key="frame" x="8" y="8" width="428" height="48"/>
                         <subviews>
@@ -25,11 +34,19 @@
                                     <constraint firstAttribute="width" secondItem="mKW-T4-hJj" secondAttribute="height" multiplier="1:1" id="8ZQ-pw-MOr"/>
                                     <constraint firstAttribute="height" constant="48" id="Ywa-9w-aGA"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.1113415948" green="0.1559536638" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPN-n4-G12" userLabel="Profile Name Label">
                                 <rect key="frame" x="56" y="0.0" width="330" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.98039215686274506" green="0.97254901960784312" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0in-Qe-iir" userLabel="Data Label">
@@ -39,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="0in-Qe-iir" secondAttribute="trailing" id="GrC-75-USd"/>
                             <constraint firstItem="mKW-T4-hJj" firstAttribute="leading" secondItem="zDP-Hd-y7z" secondAttribute="leading" id="JLN-8q-Ikv"/>
@@ -53,7 +70,7 @@
                             <constraint firstAttribute="bottom" secondItem="mKW-T4-hJj" secondAttribute="bottom" id="ruE-8n-ajC"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-TD-CO3" userLabel="Feed Photo Image View">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S7j-TD-CO3" userLabel="Feed Photo Image View">
                         <rect key="frame" x="16" y="64" width="412" height="412"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -62,12 +79,16 @@
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="OAP-rW-k05" firstAttribute="top" secondItem="FGQ-y1-oTy" secondAttribute="top" id="8AI-Y6-Um7"/>
                     <constraint firstItem="S7j-TD-CO3" firstAttribute="top" secondItem="zDP-Hd-y7z" secondAttribute="bottom" constant="8" id="HEb-GG-qo5"/>
                     <constraint firstAttribute="trailingMargin" secondItem="S7j-TD-CO3" secondAttribute="trailing" constant="8" id="Kbr-Tw-sBP"/>
                     <constraint firstAttribute="trailing" secondItem="zDP-Hd-y7z" secondAttribute="trailing" constant="8" id="Ox2-p6-7uC"/>
+                    <constraint firstAttribute="trailing" secondItem="OAP-rW-k05" secondAttribute="trailing" id="QdI-ba-vf2"/>
                     <constraint firstItem="S7j-TD-CO3" firstAttribute="leading" secondItem="FGQ-y1-oTy" secondAttribute="leadingMargin" constant="8" id="Rpj-Ci-Bny"/>
                     <constraint firstItem="zDP-Hd-y7z" firstAttribute="top" secondItem="FGQ-y1-oTy" secondAttribute="top" constant="8" id="TY1-FZ-tqb"/>
                     <constraint firstItem="zDP-Hd-y7z" firstAttribute="leading" secondItem="FGQ-y1-oTy" secondAttribute="leading" constant="8" id="gQa-vH-CaB"/>
+                    <constraint firstItem="OAP-rW-k05" firstAttribute="leading" secondItem="FGQ-y1-oTy" secondAttribute="leading" id="jBb-71-yRR"/>
+                    <constraint firstAttribute="bottom" secondItem="OAP-rW-k05" secondAttribute="bottom" id="pnC-d7-7pq"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
