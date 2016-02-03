@@ -40,6 +40,8 @@
 		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
 		FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12C1041C5185EE006F99FD /* FBAuthorization.swift */; };
 		FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2661C620ECE0058203F /* UIView+Effects.swift */; };
+		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
+		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD3B4A071C5BF87F00F0FC52 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD3B4A061C5BF87F00F0FC52 /* libBolts.a */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
@@ -116,6 +118,8 @@
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD12C1041C5185EE006F99FD /* FBAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthorization.swift; sourceTree = "<group>"; };
 		FD27A2661C620ECE0058203F /* UIView+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
+		FD27A2681C6249610058203F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */,
+				FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */,
 				FD3B4A071C5BF87F00F0FC52 /* libBolts.a in Frameworks */,
 				72E90D0CC3A1E19B4A1E73D1 /* libPods.a in Frameworks */,
 			);
@@ -174,6 +180,8 @@
 		468733C5E0D7CEB26FEA9271 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD27A26A1C62497F0058203F /* AVKit.framework */,
+				FD27A2681C6249610058203F /* AVFoundation.framework */,
 				FD3B4A061C5BF87F00F0FC52 /* libBolts.a */,
 				A04F06C86371F8045FB9A166 /* libPods.a */,
 			);

@@ -57,7 +57,6 @@ class PostDataSource: NSObject {
             }
             if let objects = objects {
                 self?.arrayOfPosts = objects
-                self?.tableView?.reloadData()
             }
             if let error = error {
                 handleError(error)
