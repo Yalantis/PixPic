@@ -15,6 +15,7 @@ class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
+    private var reachability: Reachability?
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -31,10 +32,16 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.makeToastActivity(CSToastPositionCenter)
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
-        view.makeToastActivity(CSToastPositionCenter)
+        setupReachability()
+
+        if reachability?.isReachable() == false {
+            setupPlaceholderForEmptyDataSet()
+            view.hideToastActivity()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -56,6 +63,15 @@ class FeedViewController: UIViewController {
     private func setupPlaceholderForEmptyDataSet() {
         tableView?.emptyDataSetDelegate = self
         tableView?.emptyDataSetSource = self
+    }
+    
+    private func setupReachability() {
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return
+        }
     }
     
     //MARK: - photo editor
@@ -109,22 +125,18 @@ class FeedViewController: UIViewController {
     //MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler {
-            [weak self] () -> () in
-            let reachability: Reachability
-            do {
-                reachability = try Reachability.reachabilityForInternetConnection()
-            } catch {
-                print("Unable to create Reachability")
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
+            guard let weakSelf = self else {
                 return
             }
-            
-            if !reachability.isReachable() {
-                let message = reachability.currentReachabilityStatus.description
+            if weakSelf.reachability?.isReachable() == false {
+                let message = weakSelf.reachability?.currentReachabilityStatus.description
                 AlertService.simpleAlert(message)
-                self?.tableView?.pullToRefreshView.stopAnimating()
+                weakSelf.tableView?.pullToRefreshView.stopAnimating()
+                weakSelf.view.hideToastActivity()
+                weakSelf.setupPlaceholderForEmptyDataSet()
             } else {
-                self?.postDataSource?.fetchData(nil)
+                weakSelf.postDataSource?.fetchData(nil)
             }
         }
         tableView.addInfiniteScrollingWithActionHandler {
