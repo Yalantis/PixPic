@@ -245,30 +245,9 @@ class EffectEditorView: UIView {
     }
     
     private func translateUsingTouchLocation(touchPoint: CGPoint) {
-        var newCenter = CGPointMake(center.x + touchPoint.x - touchStart!.x, center.y + touchPoint.y - touchStart!.y)
-        
-        let midPointX = CGRectGetMidX(bounds)
-        let midPointY = CGRectGetMidY(bounds)
-        
-        if let superview = superview {
-            if newCenter.x > superview.bounds.size.width - midPointX {
-                newCenter.x = superview.bounds.size.width - midPointX
-            }
-            
-            if newCenter.y > superview.bounds.size.height - midPointY {
-                newCenter.y = superview.bounds.size.height - midPointY
-            }
+        if var touchStart = touchStart {
+            center = CGPointMake(center.x + touchPoint.x - touchStart.x, center.y + touchPoint.y - touchStart.y)
         }
-        
-        if newCenter.x < midPointX {
-            newCenter.x = midPointX
-        }
-        
-        if newCenter.y < midPointY {
-            newCenter.y = midPointY
-        }
-        
-        center = newCenter
     }
     
     private func enableTranslucency(state: Bool) {
