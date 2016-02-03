@@ -31,10 +31,15 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.makeToastActivity(CSToastPositionCenter)
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
-        view.makeToastActivity(CSToastPositionCenter)
+        
+        if ReachabilityHelper.isInternetAccessAvailable() == false {
+            setupPlaceholderForEmptyDataSet()
+            view.hideToastActivity()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -84,7 +89,7 @@ class FeedViewController: UIViewController {
         postImageView.image = image
         let pictureData = UIImageJPEGRepresentation(image, 0.5)
         if let file = PFFile(name: "image", data: pictureData!) {
-            SaverService.saveAndUploadPost(file)
+            SaverService.saveAndUploadPost(file, comment: nil)
         }
     }
     
@@ -111,7 +116,6 @@ class FeedViewController: UIViewController {
         tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
             guard ReachabilityHelper.isInternetAccessAvailable() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
-                
                 return
             }
             self?.postDataSource?.fetchData(nil)
