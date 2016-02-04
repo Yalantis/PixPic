@@ -40,7 +40,7 @@ class PhotoEditorViewController: UIViewController {
     }
     
     @IBAction private func postEditedImage() {
-        guard ReachabilityHelper.isInternetAccessAvailable() else{
+        guard ReachabilityHelper.isInternetAccessAvailable(showNotification: false) else{
             suggestSaveToPhotoLibrary()
             
             return
