@@ -11,7 +11,7 @@ import UIKit
 extension UIImage {
     
     public class func appBackButton() -> UIImage? {
-        return UIImage(imageLiteral: "ic_back_arrow")
+        return UIImage(imageLiteral: "backArrow")
     }
     
     public class func placeholderImage() -> UIImage? {
@@ -19,7 +19,7 @@ extension UIImage {
     }
     
     public class func appAddPhotoButton() -> UIImage? {
-        return UIImage(imageLiteral: "icAddPhoto")
+        return UIImage(imageLiteral: "btnMakeAPhoto")
     }
     
     public class func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {

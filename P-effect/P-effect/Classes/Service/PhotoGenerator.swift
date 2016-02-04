@@ -99,14 +99,11 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         imagePickerController.allowsEditing = true
     }
     
-    
     private func checkCamera() {
         let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         switch authStatus {
         case .Authorized:
             callCamera()
-            break
-            
         case .Denied:
             askCameraAccessViaSettings()
         default:
