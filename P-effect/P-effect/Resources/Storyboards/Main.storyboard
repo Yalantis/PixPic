@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E33e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ch3-5m-z1m">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -200,17 +200,17 @@
                         <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="EOf-xt-MP4">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="224"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="238"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrS-9l-54S">
-                                    <rect key="frame" x="238" y="36" width="125" height="125"/>
+                                    <rect key="frame" x="205" y="10" width="190" height="190"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g37-PW-4gA">
-                                            <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="900" constant="125" id="8z4-yx-gJk"/>
-                                                <constraint firstAttribute="height" priority="900" constant="125" id="JFr-1e-akw"/>
+                                                <constraint firstAttribute="width" priority="900" constant="190" id="8z4-yx-gJk"/>
+                                                <constraint firstAttribute="height" priority="900" constant="190" id="JFr-1e-akw"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -233,7 +233,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GY0-1y-oJV">
-                                    <rect key="frame" x="201" y="169" width="200" height="21"/>
+                                    <rect key="frame" x="200" y="214" width="200" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -241,14 +241,15 @@
                             </subviews>
                             <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="QrS-9l-54S" firstAttribute="top" secondItem="EOf-xt-MP4" secondAttribute="top" constant="36" id="49l-RD-OFM"/>
-                                <constraint firstItem="GY0-1y-oJV" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="bottom" constant="8" symbolic="YES" id="Hf0-UZ-y6a"/>
+                                <constraint firstAttribute="bottom" secondItem="GY0-1y-oJV" secondAttribute="bottom" constant="3" id="1ck-HE-HSS"/>
+                                <constraint firstItem="QrS-9l-54S" firstAttribute="top" secondItem="EOf-xt-MP4" secondAttribute="top" constant="10" id="49l-RD-OFM"/>
+                                <constraint firstItem="GY0-1y-oJV" firstAttribute="top" secondItem="QrS-9l-54S" secondAttribute="bottom" constant="14" id="Hf0-UZ-y6a"/>
                                 <constraint firstItem="QrS-9l-54S" firstAttribute="centerX" secondItem="GY0-1y-oJV" secondAttribute="centerX" id="lqt-57-EbV"/>
                                 <constraint firstItem="QrS-9l-54S" firstAttribute="centerX" secondItem="EOf-xt-MP4" secondAttribute="centerX" id="tl1-Qh-yog"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="N6n-X4-hzl">
-                            <rect key="frame" x="0.0" y="224" width="600" height="350"/>
+                            <rect key="frame" x="0.0" y="238" width="600" height="350"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pB-Ac-M6a">
