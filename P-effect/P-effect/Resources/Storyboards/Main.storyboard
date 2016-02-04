@@ -204,20 +204,17 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QrS-9l-54S">
-                                    <rect key="frame" x="205" y="10" width="190" height="190"/>
+                                    <rect key="frame" x="205" y="10" width="191" height="191"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g37-PW-4gA">
-                                            <rect key="frame" x="0.0" y="0.0" width="190" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="191" height="191"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="900" constant="190" id="8z4-yx-gJk"/>
-                                                <constraint firstAttribute="height" priority="900" constant="190" id="JFr-1e-akw"/>
+                                                <constraint firstAttribute="width" priority="900" constant="191" id="8z4-yx-gJk"/>
+                                                <constraint firstAttribute="height" priority="900" constant="191" id="JFr-1e-akw"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" red="0.1113415948" green="0.1559536638" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <real key="value" value="0.0"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
@@ -233,7 +230,7 @@
                                     </constraints>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GY0-1y-oJV">
-                                    <rect key="frame" x="200" y="214" width="200" height="21"/>
+                                    <rect key="frame" x="200" y="215" width="200" height="20"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
