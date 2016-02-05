@@ -100,7 +100,19 @@ extension PostDataSource: UITableViewDataSource {
             forIndexPath: indexPath
             ) as! PostViewCell
         cell.delegate = self
-        cell.post = modelAtIndex(indexPath)
+        cell.configureWithPost(modelAtIndex(indexPath))
+        
+        cell.selectionClosure = {
+            [weak self] cell in
+            
+            if let path = tableView.indexPathForCell(cell) {
+                let model = self?.modelAtIndex(path)
+                if let user = model?.user {
+                    self?.delegate?.showUserProfile(user)
+                }
+            }
+        }
+        
         return cell
     }
     

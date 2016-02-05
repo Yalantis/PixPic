@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+import MHPrettyDate
 
 protocol PostViewCellDelegate: class {
     
@@ -20,25 +22,16 @@ class PostViewCell: UITableViewCell {
         return nib
     }
     
-    private var postImageURL: String?
-    private var avatarURL: String?
-    
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
     
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var profileLabel: UILabel!
     
+    var selectionClosure: ((cell: PostViewCell) -> Void)?
+    
     let imageLoader = ImageLoaderService()
     weak var delegate: PostViewCellDelegate?
-    
-    var post: Post? {
-        didSet {
-            setContent()
-            postImageURL = post?.image.url
-            avatarURL = post?.user?.avatar?.url
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,51 +44,32 @@ class PostViewCell: UITableViewCell {
         selectionStyle = .None
     }
     
-    private func setContent() {
-        dateLabel.text = MHPrettyDate.prettyDateFromDate(
-            post?.createdAt,
-            withFormat: MHPrettyDateShortRelativeTime
-        )
-        setPostImage()
-        setAvatarImage()
-    }
-    
-    private func setPostImage() {
-        if post?.image.url != postImageURL {
-            postImageView?.image = nil
-            imageLoader.getImageForContentItem(post?.image) { [weak self] image, error in
-                if let error = error {
-                    print("\(error)")
-                } else {
-                    self?.postImageView.image = image
-                }
-            }
-        }
-    }
-    
-    private func setAvatarImage() {
-        guard let user = post?.user else {
-            profileImageView.image = UIImage(named: "user_male_50")
+    func configureWithPost(post: Post?) {
+        guard let post = post else {
+            profileImageView.image = UIImage.placeholderImage()
+            profileImageView.image = UIImage.avatarPlaceholderImage()
             return
         }
-        profileLabel.text = user.username
-        if avatarURL != post?.user?.avatar?.url {
-            profileImageView.image = nil
-            imageLoader.getImageForContentItem(user.avatar) { [weak self] image, error in
-                if error == nil && image != nil {
-                    self?.profileImageView.layer.cornerRadius = (self?.profileImageView.frame.size.width)! / 2
-                    self?.profileImageView.image = image
-                } else if  error == nil && image == nil {
-                    self?.profileImageView.image = UIImage(named: "user_male_50")
-                } else  {
-                    print("\(error)")
-                }
-            }
-        }
+        profileLabel.text = post.user?.username
+        dateLabel.text = MHPrettyDate.prettyDateFromDate(
+            post.createdAt,
+            withFormat: MHPrettyDateShortRelativeTime
+        )
+        profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
+        postImageView.sd_setImageWithURL(
+            NSURL(string: post.image.url!),
+            placeholderImage: UIImage.placeholderImage(),
+            completed: nil
+        )
+        profileImageView.sd_setImageWithURL(
+            NSURL(string: post.image.url!),
+            placeholderImage: UIImage.avatarPlaceholderImage(),
+            completed: nil
+        )
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
-        delegate?.didChooseCellWithUser((post?.user)!)
+        selectionClosure?(cell: self)
     }
     
 }

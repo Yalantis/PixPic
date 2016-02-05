@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
+import Toast
+
 
 let kPostViewCellIdentifier = "PostViewCellIdentifier"
 let kTopCellBarHeight: CGFloat = 48.0

@@ -11,15 +11,19 @@ import UIKit
 extension UIImage {
     
     public class func appBackButton() -> UIImage? {
-        return UIImage(imageLiteral: "backArrow")
+        return UIImage(named: "backArrow")
     }
     
     public class func placeholderImage() -> UIImage? {
-        return UIImage(imageLiteral: "Placeholder")
+        return UIImage(named: "Placeholder")
+    }
+    
+    public class func avatarPlaceholderImage() -> UIImage? {
+        return UIImage(named: "profile_placeholder.png")
     }
     
     public class func appAddPhotoButton() -> UIImage? {
-        return UIImage(imageLiteral: "btnMakeAPhoto")
+        return UIImage(named: "btnMakeAPhoto")
     }
     
     public class func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {

@@ -71,11 +71,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         imagePickerController.cameraCaptureMode = .Photo
         imagePickerController.modalPresentationStyle = .FullScreen
         imagePickerController.allowsEditing = true
-        controller.presentViewController(
-            imagePickerController,
-            animated: true,
-            completion: nil
-        )
+        controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     private func noCamera() {

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Toast
+import ParseFacebookUtilsV4
 
 class AuthorizationViewController: UIViewController {
     

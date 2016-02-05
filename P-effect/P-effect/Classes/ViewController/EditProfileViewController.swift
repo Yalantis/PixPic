@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
@@ -240,17 +241,14 @@ class EditProfileViewController: UIViewController {
             User.currentUser()!,
             avatar: file,
             nickname: userName,
-            completion: { [weak self] success, error in
+            completion: { _, error in
                 if let error = error {
                     print(error)
-                    self?.view.hideToastActivity()
-                    self?.view.userInteractionEnabled = true
-                } else {
-                    
                 }
+                self.view.hideToastActivity()
+                self.view.userInteractionEnabled = true
             }
         )
-        view.hideToastActivity()
         navigationController!.popToRootViewControllerAnimated(true)
     }
     

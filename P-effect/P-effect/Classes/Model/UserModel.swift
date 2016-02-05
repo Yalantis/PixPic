@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ParseFacebookUtilsV4
+
 
 class UserModel: NSObject {
     
@@ -18,9 +20,16 @@ class UserModel: NSObject {
     }
     
     func checkIfUsernameExists(completion:(Bool) -> ()) {
-        let query = PFUser.query()?.whereKey("username", equalTo: user.username!)
-        query?.getFirstObjectInBackgroundWithBlock(
-            { object, error in
+        guard let username = user.username else {
+            completion(false)
+            return
+        }
+        guard let query = PFUser.query()?.whereKey("username", equalTo: username) else {
+            completion(false)
+            return
+        }
+        query.getFirstObjectInBackgroundWithBlock(
+            { object, _ in
                 if object != nil {
                     completion(true)
                     print("username exists")
@@ -32,9 +41,16 @@ class UserModel: NSObject {
     }
     
     func checkIfFacebookIdExists(completion:(Bool) -> ()) {
-        let query = User.query()?.whereKey("facebookId", equalTo: user.facebookId!)
-        query?.getFirstObjectInBackgroundWithBlock(
-            { object, error in
+        guard let facebookId = user.facebookId else {
+            completion(false)
+            return
+        }
+        guard let query = User.query()?.whereKey("facebookId", equalTo: facebookId) else {
+            completion(false)
+            return
+        }
+        query.getFirstObjectInBackgroundWithBlock(
+            { object, _ in
                 if object != nil {
                     completion(true)
                     print("facebookId exists")

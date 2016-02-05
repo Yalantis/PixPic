@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Parse
+import ParseFacebookUtilsV4
 
 class FBAuthorization {
     
