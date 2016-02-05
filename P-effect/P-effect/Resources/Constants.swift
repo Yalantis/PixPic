@@ -22,6 +22,11 @@ struct Constants {
 
     }
     
+    struct BaseDimentions {
+        static let ToolBarHeight: CGFloat = 49.0
+        static let NavBarWithStatusBarHeight: CGFloat = 64.0
+    }
+    
     struct Path {
         static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         static let Tmp = NSTemporaryDirectory()

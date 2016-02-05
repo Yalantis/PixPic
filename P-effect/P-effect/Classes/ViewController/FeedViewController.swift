@@ -10,14 +10,14 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-
 let kPostViewCellIdentifier = "PostViewCellIdentifier"
-let kTopCellBarHeight: CGFloat = 48.0
+let kTopCellBarHeight: CGFloat = 49.0
 
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
+    private var toolBar: FeedToolBar?
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -49,6 +49,56 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupToolBar()
+    }
+    
+    private func setupToolBar() {
+        
+        let toolBarNib = NSBundle.mainBundle().loadNibNamed("FeedToolBar", owner: self, options: nil)
+        toolBar = toolBarNib.last as? FeedToolBar
+        let pointY = UIScreen.mainScreen().bounds.height - Constants.BaseDimentions.ToolBarHeight -
+            Constants.BaseDimentions.NavBarWithStatusBarHeight
+        toolBar!.frame = CGRectMake(
+            0,
+            pointY,
+            UIScreen.mainScreen().bounds.width,
+            Constants.BaseDimentions.ToolBarHeight
+        )
+        view.addSubview(toolBar!)
+        toolBar?.bottonSpaceConstraint.constant = -kTopCellBarHeight
+        toolBar?.topSpaceConstraint.constant = kTopCellBarHeight
+        self.view.layoutIfNeeded()
+        toolBar?.bottonSpaceConstraint.constant = 0
+        toolBar?.topSpaceConstraint.constant = 0
+        UIView.animateWithDuration(
+            0.7,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.7,
+            options: .CurveEaseInOut,
+            animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            },
+            completion: nil
+        )
+        toolBar?.selectionClosure = {
+            [weak self] in
+            self?.choosePhoto(nil)
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let toolBar = toolBar {
+            toolBar.removeFromSuperview()
+        }
     }
     
     private func setupTableView() {
@@ -67,7 +117,7 @@ class FeedViewController: UIViewController {
     }
     
     //MARK: - photo editor
-    @IBAction func choosePhoto(sender: AnyObject) {
+    private func choosePhoto(sender: AnyObject?) {
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
@@ -85,7 +135,6 @@ class FeedViewController: UIViewController {
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
         navigationController!.pushViewController(viewController, animated: false)
-        //        setSelectedPhoto(image)
     }
     
     func setSelectedPhoto(image: UIImage) {
@@ -131,16 +180,7 @@ class FeedViewController: UIViewController {
     
 }
 
-
 extension FeedViewController: UITableViewDelegate {
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
-    }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         view.hideToastActivity()
