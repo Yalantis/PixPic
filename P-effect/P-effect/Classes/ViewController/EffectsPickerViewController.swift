@@ -35,11 +35,6 @@ class EffectsPickerViewController: UICollectionViewController {
             return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return UIEdgeInsetsMake(Constants.EffectsPicker.MagicalTopInsetsDestroyer, 0, 0, 0);
-    }
-    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let model = model
             else { return }
