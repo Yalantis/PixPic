@@ -96,15 +96,15 @@ class EditProfileViewController: UIViewController {
 
         let rightButton = UIBarButtonItem(
             title: "Save",
-            style: UIBarButtonItemStyle.Plain,
+            style: .Plain,
             target: self,
             action: "saveChangesAction:"
         )
         navigationItem.rightBarButtonItem = rightButton
         
         let leftButton = UIBarButtonItem(
-            image: UIImage(named: "ic_back_arrow"),
-            style: UIBarButtonItemStyle.Plain,
+            image: UIImage.appBackButton(),
+            style: .Plain,
             target: self,
             action: "handleBackButtonTap"
         )
