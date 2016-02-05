@@ -74,7 +74,7 @@ class EditProfileViewController: UIViewController {
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
-        navigationItem.rightBarButtonItem?.enabled = false
+        navigationItem.rightBarButtonItem!.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
         originalUserName = userName
@@ -143,9 +143,9 @@ class EditProfileViewController: UIViewController {
             saveChanges()
             return
         }
-        ValidationService.valdateUserName(userName!) { [weak self] completion in
+        ValidationService.valdateUserName(userName!) { completion in
             if completion {
-                self?.saveChanges()
+                self.saveChanges()
             }
         }
     }
@@ -204,7 +204,7 @@ class EditProfileViewController: UIViewController {
     
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
-        navigationItem.rightBarButtonItem?.enabled = true
+        navigationItem.rightBarButtonItem!.enabled = true
         someChangesMade = true
     }
     
@@ -271,7 +271,7 @@ class EditProfileViewController: UIViewController {
         let afterStr = sender.text
         if userName != afterStr {
             userName = afterStr
-            navigationItem.rightBarButtonItem?.enabled = true
+            navigationItem.rightBarButtonItem!.enabled = true
             someChangesMade = true
         }
     }
