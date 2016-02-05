@@ -12,7 +12,7 @@ class FeedToolBar: UIView {
     
     var selectionClosure: (() -> Void)?
 
-    @IBOutlet weak var bottonSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
     @IBAction func makePhotoButtonTapped(sender: AnyObject) {
         selectionClosure?()

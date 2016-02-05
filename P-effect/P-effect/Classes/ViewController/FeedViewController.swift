@@ -71,10 +71,10 @@ class FeedViewController: UIViewController {
             Constants.BaseDimentions.ToolBarHeight
         )
         view.addSubview(toolBar!)
-        toolBar?.bottonSpaceConstraint.constant = -kTopCellBarHeight
+        toolBar?.bottomSpaceConstraint.constant = -kTopCellBarHeight
         toolBar?.topSpaceConstraint.constant = kTopCellBarHeight
         self.view.layoutIfNeeded()
-        toolBar?.bottonSpaceConstraint.constant = 0
+        toolBar?.bottomSpaceConstraint.constant = 0
         toolBar?.topSpaceConstraint.constant = 0
         UIView.animateWithDuration(
             0.7,
