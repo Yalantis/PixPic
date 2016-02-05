@@ -159,7 +159,7 @@ class EditProfileViewController: UIViewController {
     }
     
     private func logout() {
-        guard ReachabilityHelper.isInternetAccessAvailable() else {
+        guard ReachabilityHelper.checkConnection() else {
             return
         }
         AuthService().logOut()

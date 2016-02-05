@@ -36,7 +36,7 @@ class FeedViewController: UIViewController {
         setupDataSource()
         setupLoadersCallback()
         
-        if ReachabilityHelper.isInternetAccessAvailable() == false {
+        if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
         }
@@ -114,7 +114,7 @@ class FeedViewController: UIViewController {
     
     private func setupLoadersCallback() {
         tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
-            guard ReachabilityHelper.isInternetAccessAvailable() else {
+            guard ReachabilityHelper.checkConnection() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
