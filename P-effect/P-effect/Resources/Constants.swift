@@ -37,7 +37,7 @@ struct Constants {
     
     
     struct Profile {
-        static let HeaderHeight = 238 as CGFloat
+        static let HeaderHeight: CGFloat = 238
         static let AvatarImageCornerRadius = 95.5 as CGFloat
         static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
         static let PossibleInsets = 45 as CGFloat

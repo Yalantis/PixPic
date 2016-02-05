@@ -185,9 +185,9 @@ class EditProfileViewController: UIViewController {
     }
     
     private func animateTextField(up: Bool) {
-        let movement = (up ? kbHeight : -kbHeight)
-        bottomConstraint.constant = (kbHidden ? movement / 2 : 0)
-        topConstraint.constant = (kbHidden ? -movement / 2 : 0)
+        let movement = up ? kbHeight : -kbHeight
+        bottomConstraint.constant = kbHidden ? movement / 2 : 0
+        topConstraint.constant = kbHidden ? -movement / 2 : 0
         view.needsUpdateConstraints()
         UIView.animateWithDuration(
             0.3,
