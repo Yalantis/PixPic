@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast
 
 class ProfileViewController: UITableViewController {
     
@@ -84,7 +85,7 @@ class ProfileViewController: UITableViewController {
     
     private func setupLoadersCallback() {
         tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
-            guard ReachabilityHelper.isInternetAccessAvailable() else {
+            guard ReachabilityHelper.checkConnection() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 
                 return

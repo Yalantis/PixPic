@@ -144,7 +144,7 @@ class LoaderService: NSObject {
                 completion?(objects: nil, error: nil)
                 return
         }
-        guard ReachabilityHelper.isInternetAccessAvailable() else {
+        guard ReachabilityHelper.checkConnection() else {
             completion?(objects: nil,error: nil)
             
             return

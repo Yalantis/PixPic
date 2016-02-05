@@ -14,9 +14,6 @@ class EffectEditorView: UIView {
     private var prevPoint: CGPoint?
     private var deltaAngle: CGFloat?
     
-    private var minWidth: CGFloat?
-    private var minHeight: CGFloat?
-    
     private var resizingControl: UIImageView!
     private var deleteControl: UIImageView!
     private var borderView: BorderView!
@@ -54,44 +51,27 @@ class EffectEditorView: UIView {
             Constants.EffectEditor.UserResizableViewGlobalInset)
         
         borderView = BorderView(frame: borderViewFrame)
-        
         addSubview(borderView)
         
-        let needUseDefaultMinSize = Constants.EffectEditor.UserResizableViewDefaultMinWidth > bounds.size.width / 2
-        
-        if needUseDefaultMinSize {
-            minWidth = Constants.EffectEditor.UserResizableViewDefaultMinWidth
-            minHeight =
-                bounds.size.height * (Constants.EffectEditor.UserResizableViewDefaultMinWidth / self.bounds.size.width)
-        } else {
-            minWidth = bounds.size.width / 2
-            minHeight = bounds.size.height / 2
-        }
         let deleteControlFrame = CGRectMake(0, 0,
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
-        
         let deleteControlImage = UIImage(named: "delete_50")
-        
         deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
         
         let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
         deleteControl.addGestureRecognizer(singleTap)
-        
         addSubview(deleteControl)
         
         let resizingControlFrame = CGRectMake(frame.size.width - Constants.EffectEditor.StickerViewControlSize,
             frame.size.height - Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
-        
         let resizingControlImage = UIImage(named: "resize_four_dir_50")
-        
         resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
         
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
         resizingControl.addGestureRecognizer(panResizeGesture)
-        
         addSubview(resizingControl)
         
         deltaAngle = atan2(frame.origin.y + frame.size.height - center.y, frame.origin.x + frame.size.width - center.x)
@@ -130,17 +110,10 @@ class EffectEditorView: UIView {
             enableTranslucency(true)
             prevPoint = recognizer.locationInView(self)
             setNeedsDisplay()
+            
         } else if recognizer.state == .Changed {
             enableTranslucency(true)
-            
-            let needResizing = bounds.size.width < minWidth || bounds.size.height < minHeight
-            
-            if needResizing {
-                changeInitialSizeView(recognizer)
-            } else {
-                resizeView(recognizer)
-            }
-            
+            resizeView(recognizer)
             rotateViewWithAngle(angle: deltaAngle, recognizer: recognizer)
             
         } else if recognizer.state == .Ended {
@@ -150,41 +123,17 @@ class EffectEditorView: UIView {
         }
     }
     
-    private func changeInitialSizeView(recognizer: UIPanGestureRecognizer) {
-        bounds = CGRectMake(bounds.origin.x, bounds.origin.y, minWidth! + 1, minHeight! + 1)
-        resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
-            bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
-        
-        deleteControl.frame = CGRectMake(0, 0,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
-        prevPoint = recognizer.locationInView(self)
-    }
-    
     private func resizeView(recognizer: UIPanGestureRecognizer) {
         let point = recognizer.locationInView(self)
         
         let wChange = point.x - prevPoint!.x
         let wRatioChange = wChange / bounds.size.width
-        
         let hChange = wRatioChange * bounds.size.height
-        
-        if abs(wChange) > 50.0 || abs(hChange) > 50.0 {
-            prevPoint = recognizer.locationOfTouch(0, inView: self)
-            return
-        }
-        let startBounds = bounds
         
         bounds = CGRectMake(bounds.origin.x,
             bounds.origin.y,
             bounds.size.width + wChange,
             bounds.size.height + hChange)
-        
-        if (!CGRectEqualToRect(CGRectIntersection(superview!.bounds, frame), frame)) {
-            bounds = startBounds
-        }
         
         resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
             bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
@@ -245,7 +194,7 @@ class EffectEditorView: UIView {
     }
     
     private func translateUsingTouchLocation(touchPoint: CGPoint) {
-        if var touchStart = touchStart {
+        if let touchStart = touchStart {
             center = CGPointMake(center.x + touchPoint.x - touchStart.x, center.y + touchPoint.y - touchStart.y)
         }
     }

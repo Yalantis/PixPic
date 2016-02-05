@@ -9,6 +9,9 @@
 import UIKit
 import Fabric
 import Crashlytics
+import Parse
+import ParseFacebookUtilsV4
+import Bolts
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Toast
+import AFDropdownNotification
 
 class AlertService: NSObject {
     
@@ -31,7 +33,10 @@ class AlertService: NSObject {
             }
         }
         
-        if let _ = topController as? UIAlertController {
+        let isControllersWaitingForResponse = (topController as? UIAlertController) != nil ||
+            (topController as? PhotoEditorViewController) != nil
+        
+        if isControllersWaitingForResponse {
             PushNotificationQueue.addObjectInQueue(message)
         } else {
             PushNotificationQueue.clearQueue()

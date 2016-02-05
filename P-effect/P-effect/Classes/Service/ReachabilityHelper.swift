@@ -12,9 +12,12 @@ class ReachabilityHelper {
     
     private static let reachability: Reachability? = try? Reachability.reachabilityForInternetConnection()
     
-    static func isInternetAccessAvailable() -> Bool {
+    static func checkConnection(showAlert showAlert: Bool = true) -> Bool {
         guard let reachability = ReachabilityHelper.reachability where reachability.isReachable() else {
-            AlertService.simpleAlert("No internet connection")
+            if showAlert {
+                AlertService.simpleAlert("No internet connection")
+            }
+            
             return false
         }
         
