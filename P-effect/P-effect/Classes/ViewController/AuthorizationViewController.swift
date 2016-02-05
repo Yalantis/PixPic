@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Toast
+import ParseFacebookUtilsV4
 
 class AuthorizationViewController: UIViewController {
     
@@ -86,7 +88,6 @@ class AuthorizationViewController: UIViewController {
     
     private func signIn(user: User) {
         let token = FBSDKAccessToken.currentAccessToken()
-        print(token)
         PFFacebookUtils.logInInBackgroundWithAccessToken(
             token,
             block: {

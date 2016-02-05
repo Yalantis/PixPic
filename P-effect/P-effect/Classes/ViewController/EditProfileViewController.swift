@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
@@ -25,7 +26,7 @@ class EditProfileViewController: UIViewController {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
-
+    
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var saveChangesButton: UIButton!
@@ -137,22 +138,26 @@ class EditProfileViewController: UIViewController {
     }
     
     dynamic private func logoutAction(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: nil,
+        let alertController = UIAlertController(
+            title: nil,
             message: logoutMessage,
             preferredStyle: .ActionSheet
         )
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {
-            action in
-            PushNotificationQueue.handleNotificationQueue()
-            alertController.dismissViewControllerAnimated(true, completion: nil)
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel
+            ) { _ in
+                PushNotificationQueue.handleNotificationQueue()
+                alertController.dismissViewControllerAnimated(true, completion: nil)
         }
         alertController.addAction(cancelAction)
         
-        let OKAction = UIAlertAction(title: "Logout me!", style: .Default) {
-            [weak self] action in
-            
-            self?.logout()
+        let OKAction = UIAlertAction(
+            title: "Logout me!",
+            style: .Default
+            ) { _ in
+                self.logout()
         }
         alertController.addAction(OKAction)
         presentViewController(alertController, animated: true) { }
@@ -164,8 +169,7 @@ class EditProfileViewController: UIViewController {
         }
         AuthService().logOut()
         AuthService().anonymousLogIn(
-            completion: {
-                object in
+            completion: { object in
                 Router.sharedRouter().showHome(animated: true)
             }, failure: { error in
                 if let error = error {
@@ -224,29 +228,27 @@ class EditProfileViewController: UIViewController {
     
     private func saveChanges() {
         someChangesMade = false
-        guard let image = image
-            else { return }
+        guard let image = image else {
+            return
+        }
         let pictureData = UIImageJPEGRepresentation(image, 1)
-        guard let file = PFFile(name: Constants.UserKey.Avatar, data: pictureData!)
-            else { return }
+        guard let file = PFFile(name: Constants.UserKey.Avatar, data: pictureData!) else {
+            return
+        }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
         SaverService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,
             nickname: userName,
-            completion: {
-                [weak self] (success, error) in
+            completion: { _, error in
                 if let error = error {
                     print(error)
-                    self?.view.hideToastActivity()
-                    self?.view.userInteractionEnabled = true
-                } else {
-
                 }
+                self.view.hideToastActivity()
+                self.view.userInteractionEnabled = true
             }
         )
-        view.hideToastActivity()
         navigationController!.popToRootViewControllerAnimated(true)
     }
     

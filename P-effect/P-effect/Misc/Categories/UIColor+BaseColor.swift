@@ -31,4 +31,8 @@ extension UIColor {
     public class func appBaseDarkColor() -> UIColor {
         return UIColor(hexString: "333333")
     }
+    
+    public class func appNavBarColor() -> UIColor {
+        return UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.65)
+    }
 }

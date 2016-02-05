@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ParseFacebookUtilsV4
+
 
 class UserModel: NSObject {
     
@@ -18,27 +20,39 @@ class UserModel: NSObject {
     }
     
     func checkIfUsernameExists(completion:(Bool) -> ()) {
-        let query = PFUser.query()?.whereKey("username", equalTo: user.username!)
-        query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
-            if object != nil {
-                completion(true)
-                print("username exists")
-            } else {
-                completion(false)
+        guard let username = user.username,
+            query = PFUser.query()?.whereKey("username", equalTo: username) else {
+            completion(false)
+            return
+        }
+        query.getFirstObjectInBackgroundWithBlock(
+            { object, _ in
+                if object != nil {
+                    completion(true)
+                    print("username exists")
+                } else {
+                    completion(false)
+                }
             }
-        })
+        )
     }
     
     func checkIfFacebookIdExists(completion:(Bool) -> ()) {
-        let query = User.query()?.whereKey("facebookId", equalTo: user.facebookId!)
-        query?.getFirstObjectInBackgroundWithBlock({ (object, error) -> Void in
-            if object != nil {
-                completion(true)
-                print("facebookId exists")
-            } else {
-                completion(false)
+        guard let facebookId = user.facebookId,
+            query = User.query()?.whereKey("facebookId", equalTo: facebookId) else {
+            completion(false)
+            return
+        }
+        query.getFirstObjectInBackgroundWithBlock(
+            { object, _ in
+                if object != nil {
+                    completion(true)
+                    print("facebookId exists")
+                } else {
+                    completion(false)
+                }
             }
-        })
+        )
     }
     
     func linkIfUnlinkFacebook(completion: (NSError?) -> ()) {
