@@ -18,10 +18,6 @@ struct Constants {
         static let NewPostUploaded = "NewPostUploaded"
     }
     
-    struct StoryBoardID {
-        static let PostViewCellIdentifier = "PostViewCellIdentifier"
-    }
-    
     struct BaseDimensions {
         static let ToolBarHeight: CGFloat = 49.0
         static let NavBarWithStatusBarHeight: CGFloat = 64.0

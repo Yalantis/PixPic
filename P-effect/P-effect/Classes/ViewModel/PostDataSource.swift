@@ -96,7 +96,7 @@ extension PostDataSource: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            Constants.StoryBoardID.PostViewCellIdentifier,
+            PostViewCell.Identifier,
             forIndexPath: indexPath
             ) as! PostViewCell
         cell.delegate = self
