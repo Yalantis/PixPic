@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E33e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,6 +16,9 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETf-vj-sis">
                     <rect key="frame" x="140" y="0.0" width="71" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ETf-vj-sis" secondAttribute="height" multiplier="71:49" id="Iqr-X9-XJy"/>
+                    </constraints>
                     <state key="normal" image="btnMakeAPhoto"/>
                     <connections>
                         <action selector="makePhotoButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="aai-HZ-t53"/>
@@ -23,13 +27,13 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="ETf-vj-sis" secondAttribute="trailing" constant="140" id="FzT-mG-sQn"/>
                 <constraint firstItem="Cbq-NT-J4B" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MMH-ov-Nsz"/>
                 <constraint firstAttribute="bottom" secondItem="ETf-vj-sis" secondAttribute="bottom" id="NWl-0x-7zh"/>
+                <constraint firstItem="ETf-vj-sis" firstAttribute="centerX" secondItem="Cbq-NT-J4B" secondAttribute="centerX" id="QBL-ux-g3n"/>
+                <constraint firstItem="ETf-vj-sis" firstAttribute="centerY" secondItem="Cbq-NT-J4B" secondAttribute="centerY" id="TPW-vN-zeI"/>
                 <constraint firstItem="Cbq-NT-J4B" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TcV-Cz-xXD"/>
                 <constraint firstItem="ETf-vj-sis" firstAttribute="top" secondItem="Cbq-NT-J4B" secondAttribute="top" id="rBk-yG-xIJ"/>
                 <constraint firstAttribute="trailing" secondItem="Cbq-NT-J4B" secondAttribute="trailing" id="s9l-ZP-l1h"/>
-                <constraint firstItem="ETf-vj-sis" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="140" id="skn-ef-pad"/>
                 <constraint firstAttribute="bottom" secondItem="Cbq-NT-J4B" secondAttribute="bottom" id="vDO-TX-X9P"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

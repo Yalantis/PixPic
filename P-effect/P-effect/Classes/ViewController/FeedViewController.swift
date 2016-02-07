@@ -51,20 +51,20 @@ class FeedViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
         view.addSubview(toolBar)
-        animateToolBar()
+       
+        toolBar.animateToolBar(true)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        toolBar.removeFromSuperview()
+        toolBar.animateToolBar(false)
     }
     
     private func setupToolBar() {
-        toolBar = FeedToolBar.loadFromNibNamed("FeedToolBar")
-        let pointY = UIScreen.mainScreen().bounds.height - Constants.BaseDimensions.ToolBarHeight -
+        toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
+        let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight -
             Constants.BaseDimensions.NavBarWithStatusBarHeight
         toolBar.frame = CGRectMake(
             0,
@@ -75,25 +75,6 @@ class FeedViewController: UIViewController {
         toolBar.selectionClosure = { [unowned self] in
             self.choosePhoto()
         }
-    }
-    
-    private func animateToolBar() {
-        toolBar.bottomSpaceConstraint.constant = -Constants.BaseDimensions.ToolBarHeight
-        toolBar.topSpaceConstraint.constant = Constants.BaseDimensions.ToolBarHeight
-        view.layoutIfNeeded()
-        toolBar.bottomSpaceConstraint.constant = 0
-        toolBar.topSpaceConstraint.constant = 0
-        UIView.animateWithDuration(
-            0.7,
-            delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 0.7,
-            options: .CurveEaseInOut,
-            animations: {
-                self.view.layoutIfNeeded()
-            },
-            completion: nil
-        )
     }
     
     private func setupTableView() {

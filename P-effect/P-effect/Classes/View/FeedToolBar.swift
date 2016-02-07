@@ -22,6 +22,25 @@ class FeedToolBar: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    
+    func animateToolBar(up: Bool) {
+        bottomSpaceConstraint.constant = up ? -Constants.BaseDimensions.ToolBarHeight : 0
+        topSpaceConstraint.constant = up ? Constants.BaseDimensions.ToolBarHeight : 0
+        layoutIfNeeded()
+        bottomSpaceConstraint.constant = up ? 0 : -Constants.BaseDimensions.ToolBarHeight
+        topSpaceConstraint.constant = up ? 0 : Constants.BaseDimensions.ToolBarHeight
+        UIView.animateWithDuration(
+            0.7,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.7,
+            options: .CurveEaseInOut,
+            animations: {
+                self.layoutIfNeeded()
+            },
+            completion: nil
+        )
+    }
 
     @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
