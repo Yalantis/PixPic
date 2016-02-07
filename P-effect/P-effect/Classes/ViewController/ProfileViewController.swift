@@ -38,7 +38,7 @@ class ProfileViewController: UITableViewController {
         dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: Constants.StoryBoardID.PostViewCellIdentifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()

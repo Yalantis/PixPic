@@ -17,7 +17,7 @@
                     <rect key="frame" x="140" y="0.0" width="71" height="49"/>
                     <state key="normal" image="btnMakeAPhoto"/>
                     <connections>
-                        <action selector="makePhotoButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="CcK-UY-dBE"/>
+                        <action selector="makePhotoButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="aai-HZ-t53"/>
                     </connections>
                 </button>
             </subviews>
@@ -35,7 +35,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bottonSpaceConstraint" destination="NWl-0x-7zh" id="iNG-OC-6PQ"/>
+                <outlet property="bottomSpaceConstraint" destination="NWl-0x-7zh" id="uWe-vA-UW9"/>
                 <outlet property="topSpaceConstraint" destination="rBk-yG-xIJ" id="6dH-HH-97m"/>
             </connections>
             <point key="canvasLocation" x="293.5" y="96.5"/>

@@ -10,14 +10,11 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-let kPostViewCellIdentifier = "PostViewCellIdentifier"
-let kTopCellBarHeight: CGFloat = 49.0
-
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
-    private var toolBar: FeedToolBar?
+    private var toolBar: FeedToolBar!
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -49,7 +46,6 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -58,52 +54,47 @@ class FeedViewController: UIViewController {
         setupToolBar()
     }
     
-    private func setupToolBar() {
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        let toolBarNib = NSBundle.mainBundle().loadNibNamed("FeedToolBar", owner: self, options: nil)
-        toolBar = toolBarNib.last as? FeedToolBar
-        let pointY = UIScreen.mainScreen().bounds.height - Constants.BaseDimentions.ToolBarHeight -
-            Constants.BaseDimentions.NavBarWithStatusBarHeight
-        toolBar!.frame = CGRectMake(
+        toolBar.removeFromSuperview()
+    }
+    
+    private func setupToolBar() {
+        toolBar = FeedToolBar.loadFromNibNamed("FeedToolBar")
+        let pointY = UIScreen.mainScreen().bounds.height - Constants.BaseDimensions.ToolBarHeight -
+            Constants.BaseDimensions.NavBarWithStatusBarHeight
+        toolBar.frame = CGRectMake(
             0,
             pointY,
             UIScreen.mainScreen().bounds.width,
-            Constants.BaseDimentions.ToolBarHeight
+            Constants.BaseDimensions.ToolBarHeight
         )
-        view.addSubview(toolBar!)
-        toolBar?.bottomSpaceConstraint.constant = -kTopCellBarHeight
-        toolBar?.topSpaceConstraint.constant = kTopCellBarHeight
-        self.view.layoutIfNeeded()
-        toolBar?.bottomSpaceConstraint.constant = 0
-        toolBar?.topSpaceConstraint.constant = 0
+        view.addSubview(toolBar)
+        toolBar.bottomSpaceConstraint.constant = -Constants.BaseDimensions.ToolBarHeight
+        toolBar.topSpaceConstraint.constant = Constants.BaseDimensions.ToolBarHeight
+        view.layoutIfNeeded()
+        toolBar.bottomSpaceConstraint.constant = 0
+        toolBar.topSpaceConstraint.constant = 0
         UIView.animateWithDuration(
             0.7,
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.7,
             options: .CurveEaseInOut,
-            animations: { () -> Void in
+            animations: {
                 self.view.layoutIfNeeded()
             },
             completion: nil
         )
-        toolBar?.selectionClosure = {
-            [weak self] in
-            self?.choosePhoto(nil)
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let toolBar = toolBar {
-            toolBar.removeFromSuperview()
+        toolBar.selectionClosure = { [unowned self] in
+            self.choosePhoto()
         }
     }
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: Constants.StoryBoardID.PostViewCellIdentifier)
     }
     
     private func setupDataSource() {
@@ -117,7 +108,7 @@ class FeedViewController: UIViewController {
     }
     
     //MARK: - photo editor
-    private func choosePhoto(sender: AnyObject?) {
+    private func choosePhoto() {
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)

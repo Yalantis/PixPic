@@ -12,9 +12,21 @@ class FeedToolBar: UIView {
     
     var selectionClosure: (() -> Void)?
 
+    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> FeedToolBar? {
+        return UINib(
+            nibName: nibNamed,
+            bundle: bundle
+            ).instantiateWithOwner(nil, options: nil)[0] as? FeedToolBar
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
     @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
-    @IBAction func makePhotoButtonTapped(sender: AnyObject) {
+    
+    @IBAction func makePhotoButtonTapped() {
         selectionClosure?()
     }
     
