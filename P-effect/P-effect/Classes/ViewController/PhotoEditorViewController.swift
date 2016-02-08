@@ -65,7 +65,7 @@ class PhotoEditorViewController: UIViewController {
             guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
                 throw Exception.CantApplyEffects
             }
-            let pictureData = UIImageJPEGRepresentation(image, 0.5)!
+            let pictureData = UIImageJPEGRepresentation(image, 0.9)!
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }
