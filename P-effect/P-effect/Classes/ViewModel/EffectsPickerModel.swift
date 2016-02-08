@@ -10,8 +10,8 @@ import UIKit
 
 class EffectsPickerModel: NSObject {
     
-    private var effectsGroups: [EffectsModel]?
-    var shownGroupNumber: Int?
+    private var effectsGroups: [EffectsModel]!
+    var currentGroupNumber: Int?
     
     override init() {
         super.init()
@@ -21,9 +21,9 @@ class EffectsPickerModel: NSObject {
     }
     
     func downloadEffects(completion: (Bool) -> ()) {
-        LoaderService.loadEffects { [weak self] objects, error in
+        LoaderService.loadEffects { [unowned self] objects, error in
             if let objects = objects {
-                self?.effectsGroups = objects
+                self.effectsGroups = objects
                 completion(true)
             } else {
                 completion(false)
@@ -32,7 +32,10 @@ class EffectsPickerModel: NSObject {
     }
     
     func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
-        let image = effectsGroups![shownGroupNumber!].effectsStickers[indexPath.row].image
+        guard let currentGroupNumber = currentGroupNumber else {
+            return
+        }
+        let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
         ImageLoaderService.getImageForContentItem(image) {
             image, error in
             if let error = error {
@@ -50,16 +53,16 @@ class EffectsPickerModel: NSObject {
 extension EffectsPickerModel: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if let _ = shownGroupNumber {
+        if currentGroupNumber != nil {
             return 1
         } else {
-            return effectsGroups?.count ?? 0
+            return effectsGroups.count ?? 0
         }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let shownGroupNumber = shownGroupNumber {
-            return effectsGroups![shownGroupNumber].effectsStickers.count
+        if let currentGroupNumber = currentGroupNumber {
+            return effectsGroups[currentGroupNumber].effectsStickers.count
         } else {
             return 0
         }
@@ -70,29 +73,22 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             Constants.EffectsPicker.EffectsPickerCellIdentifier,
             forIndexPath: indexPath
             ) as! EffectViewCell
-        guard let effectsGroups = effectsGroups else {
-            return cell
-        }
-        cell.setStickerContent(effectsGroups[shownGroupNumber!].effectsStickers[indexPath.row])
+        cell.setStickerContent(effectsGroups[currentGroupNumber!].effectsStickers[indexPath.row])
         
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        var reusableview: UICollectionReusableView = UICollectionReusableView()
+        var reusableview = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectViewHeader.identifier, forIndexPath: indexPath) as! EffectViewHeader
-            
-            guard let effectsGroups = effectsGroups else {
-                return reusableview
-            }
-            let group = effectsGroups[shownGroupNumber ?? indexPath.section]
-            headerView.setGroupContent(group.effectsGroup) {
-                if self.shownGroupNumber == nil {
-                    self.shownGroupNumber = indexPath.section
+            let group = effectsGroups[currentGroupNumber ?? indexPath.section]
+            headerView.configureWith(group: group.effectsGroup) {
+                if self.currentGroupNumber == nil {
+                    self.currentGroupNumber = indexPath.section
                 } else {
-                    self.shownGroupNumber = nil
+                    self.currentGroupNumber = nil
                 }
                 collectionView.reloadData()
             }

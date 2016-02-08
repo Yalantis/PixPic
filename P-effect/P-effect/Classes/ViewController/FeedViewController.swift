@@ -103,8 +103,8 @@ class FeedViewController: UIViewController {
             navigationController!.pushViewController(controller, animated: true)
             return
         }
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
-            self?.handlePhotoSelected(selectedImage)
+        photoGenerator.completionImageReceived = { [unowned self] selectedImage in
+            self.handlePhotoSelected(selectedImage)
         }
         photoGenerator.showInView(self)
     }
@@ -145,16 +145,16 @@ class FeedViewController: UIViewController {
     //MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [unowned self] () -> () in
             guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+                self.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            self?.postDataSource?.fetchData(nil)
+            self.postDataSource?.fetchData(nil)
         }
         tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
-            self?.postDataSource?.fetchPagedData(nil)
+            [unowned self]() -> () in
+            self.postDataSource?.fetchPagedData(nil)
         }
     }
     

@@ -17,11 +17,11 @@ class EffectViewCell: UICollectionViewCell {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderService.getImageForContentItem(file) { [weak self] image, error in
+        ImageLoaderService.getImageForContentItem(file) { image, error in
             if let error = error {
                 print("\(error)")
             } else {
-                self?.effectImage.image = image
+                self.effectImage.image = image
             }
         }
     }

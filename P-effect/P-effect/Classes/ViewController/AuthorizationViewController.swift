@@ -25,7 +25,7 @@ class AuthorizationViewController: UIViewController {
         FBAuthorization.signInWithFacebookInController(
             self,
             completion: {
-                [weak self] user, error in
+                [unowned self] user, error in
                 if let error = error {
                     handleError(error as NSError)
                 }
@@ -34,14 +34,14 @@ class AuthorizationViewController: UIViewController {
                         { exists in
                             if exists {
                                 user.passwordSet = false
-                                self?.signIn(user)
+                                self.signIn(user)
                             } else {
-                                self?.signUp(user)
+                                self.signUp(user)
                             }
                         }
                     )
                 } else {
-                    self?.proceedWithoutAuthorization()
+                    self.proceedWithoutAuthorization()
                 }
             }
         )
@@ -55,7 +55,7 @@ class AuthorizationViewController: UIViewController {
     private func signUp(user: User) {
         let userWithFB = user
         FBAuthorization.signInWithPermission(
-            { [weak self] user, error in
+            { [unowned self] user, error in
                 if let error = error {
                     handleError(error as NSError)
                 } else if let user = user {
@@ -81,7 +81,7 @@ class AuthorizationViewController: UIViewController {
                 } else {
                     print("unknown trouble while signing IN")
                 }
-                self?.view.hideToastActivity()
+                self.view.hideToastActivity()
             }
         )
     }
@@ -91,7 +91,7 @@ class AuthorizationViewController: UIViewController {
         PFFacebookUtils.logInInBackgroundWithAccessToken(
             token,
             block: {
-                [weak self] user, error in
+                [unowned self] user, error in
                 if let error = error {
                     handleError(error)
                 } else {
@@ -109,7 +109,7 @@ class AuthorizationViewController: UIViewController {
                         }
                     )
                 }
-                self?.view.hideToastActivity()
+                self.view.hideToastActivity()
                 Router.sharedRouter().showHome(animated: true)
             }
         )

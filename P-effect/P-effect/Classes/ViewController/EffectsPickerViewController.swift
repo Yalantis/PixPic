@@ -15,9 +15,9 @@ class EffectsPickerViewController: UICollectionViewController {
     var model: EffectsPickerModel? {
         didSet {
             collectionView?.dataSource = model
-            model?.downloadEffects{ [weak self] completion in
+            model?.downloadEffects{ [unowned self] completion in
                 if completion {
-                    self?.collectionView?.reloadData()
+                    self.collectionView?.reloadData()
                 }
             }
         }
@@ -35,15 +35,12 @@ class EffectsPickerViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let model = model else {
-            return
-        }
-        model.effectImageAtIndexPath(indexPath) { [weak self] image, error in
+        model!.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
             if error != nil {
                 return
             }
             if let image = image {
-                self?.delegate?.didChooseEffectFromPicket(image)
+                self.delegate?.didChooseEffectFromPicket(image)
             }
         }
     }

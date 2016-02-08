@@ -15,29 +15,29 @@ class EffectViewHeader: UICollectionReusableView {
     @IBOutlet private weak var image: UIImageView!
     @IBOutlet private weak var label: UILabel!
     
-    private var complition: (() -> Void)?
+    private var completion: (() -> Void)!
     
-    func setGroupContent(group: EffectsGroup, complition: (() -> Void)) {
+    func configureWith(group group: EffectsGroup, completion: (() -> Void)) {
         downloadImageFromFile(group.image)
         label.text = group.label
-        self.complition = complition
+        self.completion = completion
         
-        let singleFingerTap = UITapGestureRecognizer(target: self, action: "toggleGroup")
-        addGestureRecognizer(singleFingerTap)
+        let recognizer = UITapGestureRecognizer(target: self, action: "toggleGroup")
+        addGestureRecognizer(recognizer)
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderService.getImageForContentItem(file) { [weak self] image, error in
-            if let error = error {
-                print("\(error)")
+        ImageLoaderService.getImageForContentItem(file) { image, error in
+            if let image = image {
+                self.image.image = image
             } else {
-                self?.image.image = image
+                print("\(error)")
             }
         }
     }
     
     func toggleGroup() {
-        complition?()
+        completion()
     }
     
 }

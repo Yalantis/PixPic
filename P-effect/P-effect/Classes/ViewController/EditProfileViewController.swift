@@ -26,7 +26,7 @@ class EditProfileViewController: UIViewController {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
-
+    
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
@@ -70,29 +70,31 @@ class EditProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
-            self?.handlePhotoSelected(selectedImage)
+        photoGenerator.completionImageReceived = { [unowned self] selectedImage in
+            self.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
         navigationItem.rightBarButtonItem!.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
         originalUserName = userName
-        
-        ImageLoaderService.getImageForContentItem(User.currentUser()?.avatar) {
-            [weak self](image, error) -> () in
+        guard let avatar = User.currentUser()?.avatar else {
+            return
+        }
+        ImageLoaderService.getImageForContentItem(avatar) {
+            [unowned self](image, error) -> () in
             if let error = error {
                 print(error)
             } else {
-                self?.avatarImageView.image = image
-                self?.image = image
+                self.avatarImageView.image = image
+                self.image = image
             }
         }
     }
     
     private func makeNavigation() {
         navigationItem.title = "Edit profile"
-
+        
         let rightButton = UIBarButtonItem(
             title: "Save",
             style: .Plain,
@@ -117,16 +119,16 @@ class EditProfileViewController: UIViewController {
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
             let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
-                [weak self] action in
+                [unowned self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
-                self?.navigationController!.popViewControllerAnimated(true)
+                self.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(NOAction)
             
             let YESAction = UIAlertAction(title: "Save", style: .Default) {
-                [weak self] action in
-                self?.saveChangesAction()
+                [unowned self] action in
+                self.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(YESAction)
