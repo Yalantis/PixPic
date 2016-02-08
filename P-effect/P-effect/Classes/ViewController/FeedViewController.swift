@@ -10,14 +10,11 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-
-let kPostViewCellIdentifier = "PostViewCellIdentifier"
-let kTopCellBarHeight: CGFloat = 48.0
-
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postImageView = UIImageView()
+    private var toolBar: FeedToolBar!
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -38,6 +35,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupDataSource()
         setupLoadersCallback()
+        setupToolBar()
         
         if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
@@ -51,9 +49,40 @@ class FeedViewController: UIViewController {
         tableView.reloadData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        toolBar.animateButton(isLifting: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        toolBar.animateButton(isLifting: false)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
+        toolBar.frame = CGRectMake(
+            0,
+            pointY,
+            view.frame.width,
+            Constants.BaseDimensions.ToolBarHeight
+        )
+    }
+    
+    private func setupToolBar() {
+        toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
+        toolBar.selectionClosure = { [unowned self] in
+            self.choosePhoto()
+        }
+        view.addSubview(toolBar)
+    }
+    
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
     private func setupDataSource() {
@@ -67,8 +96,9 @@ class FeedViewController: UIViewController {
     }
     
     //MARK: - photo editor
-    @IBAction func choosePhoto(sender: AnyObject) {
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) {
+    private func choosePhoto() {
+        let isUserAbsent = PFUser.currentUser() == nil
+        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
             return
@@ -85,7 +115,6 @@ class FeedViewController: UIViewController {
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
         navigationController!.pushViewController(viewController, animated: false)
-        //        setSelectedPhoto(image)
     }
     
     func setSelectedPhoto(image: UIImage) {
@@ -131,15 +160,10 @@ class FeedViewController: UIViewController {
     
 }
 
-
 extension FeedViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
-    }
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.width + kTopCellBarHeight
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

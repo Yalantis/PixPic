@@ -18,8 +18,9 @@ struct Constants {
         static let NewPostUploaded = "NewPostUploaded"
     }
     
-    struct StoryBoardID {
-
+    struct BaseDimensions {
+        static let ToolBarHeight: CGFloat = 49.0
+        static let NavBarWithStatusBarHeight: CGFloat = 64.0
     }
     
     struct Path {
@@ -37,11 +38,12 @@ struct Constants {
     
     
     struct Profile {
-        static let HeaderHeight = 224 as CGFloat
-        static let AvatarImageCornerRadius = 62.5 as CGFloat
-        static let AvatarImagePlaceholderName = "profile_placeholder.png" as String
-        static let PossibleInsets = 45 as CGFloat
-        static let SettingsButtonImage = "settings" as String
+        static let HeaderHeight: CGFloat = 238
+        static let AvatarImageCornerRadius: CGFloat = 95.5
+        static let AvatarImagePlaceholderName = "profile_placeholder.png"
+        static let PossibleInsets: CGFloat = 45
+        static let SettingsButtonImage = "settings"
+        static let NavigationTitle = "Profile"
     }
     
     struct DataSource {

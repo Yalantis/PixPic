@@ -33,12 +33,12 @@ class ProfileViewController: UITableViewController {
         setupLoadersCallback()
     }
     
-    // MARK: - Inner func 
+    // MARK: - Inner func
     func setupController() {
         dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: kPostViewCellIdentifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
@@ -63,7 +63,7 @@ class ProfileViewController: UITableViewController {
     func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
-        navigationItem.title = model?.userName
+        navigationItem.title = Constants.Profile.NavigationTitle
         model?.userAvatar({[weak self] (image, error) -> () in
             if error == nil {
                 self?.userAvatar.image = image
@@ -104,6 +104,10 @@ class ProfileViewController: UITableViewController {
             tableView.tableFooterView = nil
             tableView.scrollEnabled = true
         }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
     // MARK: - IBActions

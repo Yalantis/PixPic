@@ -29,9 +29,8 @@
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
 		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
-		7720CAFF1C68BB910097F130 /* EffectViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */; };
+		7787919B1C693CEF00DFF8C9 /* EffectViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7787919A1C693CEF00DFF8C9 /* EffectViewHeader.swift */; };
 		77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */; };
-		77A73E0E1C69336A00177E5B /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */; };
@@ -45,6 +44,8 @@
 		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
 		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
 		FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */; };
+		FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD27A2721C64CFEC0058203F /* FeedToolBar.xib */; };
+		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
@@ -108,9 +109,8 @@
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
-		7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewHeader.swift; sourceTree = "<group>"; };
+		7787919A1C693CEF00DFF8C9 /* EffectViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewHeader.swift; sourceTree = "<group>"; };
 		77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
-		77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +126,8 @@
 		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+AppSettings.swift"; sourceTree = "<group>"; };
 		FD27A26E1C64A9080058203F /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "Pods/../build/Debug-iphoneos/libSDWebImage.a"; sourceTree = "<group>"; };
+		FD27A2721C64CFEC0058203F /* FeedToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedToolBar.xib; sourceTree = "<group>"; };
+		FD27A2741C64D09E0058203F /* FeedToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedToolBar.swift; sourceTree = "<group>"; };
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -211,9 +213,11 @@
 				49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */,
 				49FE57C51C4E63E500C4B30F /* PostViewCell.xib */,
 				492D17F61C5B9FE500D98404 /* EffectViewCell.swift */,
+				7787919A1C693CEF00DFF8C9 /* EffectViewHeader.swift */,
 				95E4A0711C58EA8700D52150 /* EffectEditorView.swift */,
 				95E4A0751C58F47D00D52150 /* BorderView.swift */,
-				7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */,
+				FD27A2721C64CFEC0058203F /* FeedToolBar.xib */,
+				FD27A2741C64D09E0058203F /* FeedToolBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,7 +379,6 @@
 				FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */,
 				FD27A2661C620ECE0058203F /* UIView+Effects.swift */,
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
-				77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
+				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
@@ -629,6 +633,7 @@
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
 				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
+				FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */,
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
@@ -645,11 +650,10 @@
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
+				7787919B1C693CEF00DFF8C9 /* EffectViewHeader.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
-				7720CAFF1C68BB910097F130 /* EffectViewHeader.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
-				77A73E0E1C69336A00177E5B /* UICollectionViewFlowLayout.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,

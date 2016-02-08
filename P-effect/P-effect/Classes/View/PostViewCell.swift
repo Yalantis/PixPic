@@ -17,6 +17,9 @@ protocol PostViewCellDelegate: class {
 
 class PostViewCell: UITableViewCell {
     
+    static let identifier = "PostViewCellIdentifier"
+    static let designedHeight: CGFloat = 76
+    
     static var nib: UINib? {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
@@ -61,11 +64,17 @@ class PostViewCell: UITableViewCell {
             placeholderImage: UIImage.placeholderImage(),
             completed: nil
         )
-        profileImageView.sd_setImageWithURL(
-            NSURL(string: post.image.url!),
-            placeholderImage: UIImage.avatarPlaceholderImage(),
-            completed: nil
-        )
+        guard let user = post.user else {
+            profileImageView.image = UIImage.avatarPlaceholderImage()
+            return
+        }
+        if let avatar = user.avatar?.url {
+            profileImageView.sd_setImageWithURL(
+                NSURL(string: avatar),
+                placeholderImage: UIImage.avatarPlaceholderImage(),
+                completed: nil
+            )
+        }
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
