@@ -37,6 +37,7 @@ class FeedViewController: UIViewController {
         setupLoadersCallback()
         setupToolBar()
         
+        
         if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -47,7 +48,6 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
-        view.addSubview(toolBar)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -62,19 +62,23 @@ class FeedViewController: UIViewController {
         toolBar.animateButton(isLifting: false)
     }
     
-    private func setupToolBar() {
-        toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
-        let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight -
-            Constants.BaseDimensions.NavBarWithStatusBarHeight
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
         toolBar.frame = CGRectMake(
             0,
             pointY,
             UIScreen.mainScreen().bounds.width,
             Constants.BaseDimensions.ToolBarHeight
         )
+    }
+    
+    private func setupToolBar() {
+        toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
         toolBar.selectionClosure = { [unowned self] in
             self.choosePhoto()
         }
+        view.addSubview(toolBar)
     }
     
     private func setupTableView() {

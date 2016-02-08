@@ -12,7 +12,7 @@ class FeedToolBar: UIView {
     
     var selectionClosure: (() -> Void)?
 
-    class func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> FeedToolBar? {
+    static func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> FeedToolBar? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle
@@ -23,10 +23,14 @@ class FeedToolBar: UIView {
         super.init(coder: aDecoder)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        bottomSpaceConstraint.constant = -Constants.BaseDimensions.ToolBarHeight
+        topSpaceConstraint.constant = Constants.BaseDimensions.ToolBarHeight
+    }
+    
     func animateButton(isLifting isLifting: Bool) {
-        bottomSpaceConstraint.constant = isLifting ? -Constants.BaseDimensions.ToolBarHeight : 0
-        topSpaceConstraint.constant = isLifting ? Constants.BaseDimensions.ToolBarHeight : 0
-        layoutIfNeeded()
         bottomSpaceConstraint.constant = isLifting ? 0 : -Constants.BaseDimensions.ToolBarHeight
         topSpaceConstraint.constant = isLifting ? 0 : Constants.BaseDimensions.ToolBarHeight
         UIView.animateWithDuration(
