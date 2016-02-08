@@ -23,12 +23,12 @@ class FeedToolBar: UIView {
         super.init(coder: aDecoder)
     }
     
-    func animateToolBar(up: Bool) {
-        bottomSpaceConstraint.constant = up ? -Constants.BaseDimensions.ToolBarHeight : 0
-        topSpaceConstraint.constant = up ? Constants.BaseDimensions.ToolBarHeight : 0
+    func animateButton(isLifting isLifting: Bool) {
+        bottomSpaceConstraint.constant = isLifting ? -Constants.BaseDimensions.ToolBarHeight : 0
+        topSpaceConstraint.constant = isLifting ? Constants.BaseDimensions.ToolBarHeight : 0
         layoutIfNeeded()
-        bottomSpaceConstraint.constant = up ? 0 : -Constants.BaseDimensions.ToolBarHeight
-        topSpaceConstraint.constant = up ? 0 : Constants.BaseDimensions.ToolBarHeight
+        bottomSpaceConstraint.constant = isLifting ? 0 : -Constants.BaseDimensions.ToolBarHeight
+        topSpaceConstraint.constant = isLifting ? 0 : Constants.BaseDimensions.ToolBarHeight
         UIView.animateWithDuration(
             0.7,
             delay: 0,

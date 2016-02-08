@@ -17,7 +17,7 @@ protocol PostViewCellDelegate: class {
 
 class PostViewCell: UITableViewCell {
     
-    static let Identifier = "PostViewCellIdentifier"
+    static let identifier = "PostViewCellIdentifier"
     
     static var nib: UINib? {
         let nib = UINib(nibName: String(self), bundle: nil)

@@ -47,19 +47,19 @@ class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+        view.addSubview(toolBar)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        view.addSubview(toolBar)
-       
-        toolBar.animateToolBar(true)
+        
+        toolBar.animateButton(isLifting: true)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        toolBar.animateToolBar(false)
+        toolBar.animateButton(isLifting: false)
     }
     
     private func setupToolBar() {
@@ -79,7 +79,7 @@ class FeedViewController: UIViewController {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.Identifier)
+        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
     private func setupDataSource() {
