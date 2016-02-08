@@ -23,7 +23,7 @@ class ProfileViewModel: NSObject {
     }
     
     func userAvatar(completion: LoadingImageCompletion) {
-        ImageLoaderService().getImageForContentItem(user.avatar) { (image, error) -> () in
+        ImageLoaderService.getImageForContentItem(user.avatar) { (image, error) -> () in
             completion(image: image, error: error)
         }
     }

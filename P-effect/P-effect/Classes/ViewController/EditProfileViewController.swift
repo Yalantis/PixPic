@@ -80,8 +80,7 @@ class EditProfileViewController: UIViewController {
         userName = User.currentUser()?.username
         originalUserName = userName
         
-        let imgFromPFFileRepresentator = ImageLoaderService()
-        imgFromPFFileRepresentator.getImageForContentItem(User.currentUser()?.avatar) {
+        ImageLoaderService.getImageForContentItem(User.currentUser()?.avatar) {
             [weak self](image, error) -> () in
             if let error = error {
                 print(error)

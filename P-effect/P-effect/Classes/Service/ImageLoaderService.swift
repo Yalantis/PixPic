@@ -12,7 +12,7 @@ typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> ()
 
 class ImageLoaderService {
     
-    func getImageForContentItem(content: PFFile?, completion: LoadingImageCompletion) {
+    static func getImageForContentItem(content: PFFile?, completion: LoadingImageCompletion) {
         if let content = content {
             content.getDataInBackgroundWithBlock { data, error in
                 if let data = data, let image = UIImage(data: data){

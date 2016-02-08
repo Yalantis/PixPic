@@ -29,7 +29,9 @@
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
 		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
+		7720CAFF1C68BB910097F130 /* EffectViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */; };
 		77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */; };
+		77A73E0E1C69336A00177E5B /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */; };
@@ -106,7 +108,9 @@
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewHeader.swift; sourceTree = "<group>"; };
 		77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
+		77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 				492D17F61C5B9FE500D98404 /* EffectViewCell.swift */,
 				95E4A0711C58EA8700D52150 /* EffectEditorView.swift */,
 				95E4A0751C58F47D00D52150 /* BorderView.swift */,
+				7720CAFE1C68BB910097F130 /* EffectViewHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */,
 				FD27A2661C620ECE0058203F /* UIView+Effects.swift */,
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
+				77A73E0D1C69336A00177E5B /* UICollectionViewFlowLayout.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -640,8 +646,10 @@
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
+				7720CAFF1C68BB910097F130 /* EffectViewHeader.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
+				77A73E0E1C69336A00177E5B /* UICollectionViewFlowLayout.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,

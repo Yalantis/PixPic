@@ -10,21 +10,20 @@ import UIKit
 
 class EffectsPickerModel: NSObject {
     
-    private var effects: [EffectsModel]?
-    var groupsShown: Bool?
+    private var effectsGroups: [EffectsModel]?
     var shownGroupNumber: Int?
     
     override init() {
-        
         super.init()
         
-        registerParseSubclasses()
+        EffectsGroup()
+        EffectsSticker()
     }
     
     func downloadEffects(completion: (Bool) -> ()) {
         LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
-                self?.effects = objects
+                self?.effectsGroups = objects
                 completion(true)
             } else {
                 completion(false)
@@ -32,15 +31,9 @@ class EffectsPickerModel: NSObject {
         }
     }
     
-    private func registerParseSubclasses() {
-        EffectsGroup()
-        EffectsSticker()
-    }
-    
     func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
-        let imageLoader = ImageLoaderService()
-        let image = effects![shownGroupNumber!].effectsStickers[indexPath.row - 1].image
-        imageLoader.getImageForContentItem(image) {
+        let image = effectsGroups![shownGroupNumber!].effectsStickers[indexPath.row].image
+        ImageLoaderService.getImageForContentItem(image) {
             image, error in
             if let error = error {
                 completion(nil, error)
@@ -54,42 +47,58 @@ class EffectsPickerModel: NSObject {
 }
 
 
-
 extension EffectsPickerModel: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        if let _ = shownGroupNumber {
+            return 1
+        } else {
+            return effectsGroups?.count ?? 0
+        }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let effects = effects
-            else { return 0 }
-        if groupsShown == true {
-            return effects.count
+        if let shownGroupNumber = shownGroupNumber {
+            return effectsGroups![shownGroupNumber].effectsStickers.count
         } else {
-            guard let shownGroupNumber = shownGroupNumber
-                else { return 0 }
-            return  effects[shownGroupNumber].effectsStickers.count + 1
+            return 0
         }
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            Constants.EffectsPicker.EffectsPickerCellIdentifier, forIndexPath: indexPath
+            Constants.EffectsPicker.EffectsPickerCellIdentifier,
+            forIndexPath: indexPath
             ) as! EffectViewCell
-        guard let groupsShown = groupsShown, let effects = effects
-            else {return cell}
-        if groupsShown == true {
-            cell.setGroupContent(effects[indexPath.row].effectsGroup)
-        } else {
-            if let shownGroupNumber = shownGroupNumber {
-                if indexPath.row == 0 {
-                    cell.setGroupContent(effects[shownGroupNumber].effectsGroup)
-                } else {
-                    cell.setStickerContent(effects[shownGroupNumber].effectsStickers[indexPath.row - 1])
-                }
-            }
+        guard let effectsGroups = effectsGroups else {
+            return cell
         }
+        cell.setStickerContent(effectsGroups[shownGroupNumber!].effectsStickers[indexPath.row])
+        
         return cell
     }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        var reusableview: UICollectionReusableView = UICollectionReusableView()
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectViewHeader.identifier, forIndexPath: indexPath) as! EffectViewHeader
+            
+            guard let effectsGroups = effectsGroups else {
+                return reusableview
+            }
+            let group = effectsGroups[shownGroupNumber ?? indexPath.section]
+            headerView.setGroupContent(group.effectsGroup) {
+                if self.shownGroupNumber == nil {
+                    self.shownGroupNumber = indexPath.section
+                } else {
+                    self.shownGroupNumber = nil
+                }
+                collectionView.reloadData()
+            }
+            reusableview = headerView
+        }
+        return reusableview
+    }
+    
 }

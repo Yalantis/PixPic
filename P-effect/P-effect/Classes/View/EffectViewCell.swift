@@ -10,20 +10,14 @@ import UIKit
 
 class EffectViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var effectImage: UIImageView!
-    
-    private let imageLoader = ImageLoaderService()
-    
-    func setGroupContent(group: EffectsGroup) {
-        downloadImageFromFile(group.image)
-    }
+    @IBOutlet private weak var effectImage: UIImageView!
     
     func setStickerContent(sticker: EffectsSticker) {
         downloadImageFromFile(sticker.image)
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        imageLoader.getImageForContentItem(file) { [weak self] image, error in
+        ImageLoaderService.getImageForContentItem(file) { [weak self] image, error in
             if let error = error {
                 print("\(error)")
             } else {
