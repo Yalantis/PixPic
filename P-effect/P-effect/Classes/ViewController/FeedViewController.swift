@@ -162,6 +162,16 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDelegate {
     
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return tableView.bounds.width + 48
+        return UIScreen.mainScreen().bounds.size.width + 76.0
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.width + 76.0
+    }
+    
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         view.hideToastActivity()
     }

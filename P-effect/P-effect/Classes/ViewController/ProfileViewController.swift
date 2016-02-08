@@ -33,7 +33,7 @@ class ProfileViewController: UITableViewController {
         setupLoadersCallback()
     }
     
-    // MARK: - Inner func 
+    // MARK: - Inner func
     func setupController() {
         dataSource = PostDataSource()
         showToast()
@@ -112,6 +112,15 @@ class ProfileViewController: UITableViewController {
         let controllerIdentifier = "EditProfileViewController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
+    }
+    
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        //        return tableView.bounds.width + 48
+        return UIScreen.mainScreen().bounds.size.width + 76.0
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.width + 76.0
     }
     
 }
