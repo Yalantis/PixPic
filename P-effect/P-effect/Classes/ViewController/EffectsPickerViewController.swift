@@ -15,9 +15,9 @@ class EffectsPickerViewController: UICollectionViewController {
     var model: EffectsPickerModel? {
         didSet {
             collectionView?.dataSource = model
-            model?.downloadEffects{ [unowned self] completion in
+            model?.downloadEffects{ [weak self] completion in
                 if completion {
-                    self.collectionView?.reloadData()
+                    self?.collectionView?.reloadData()
                 }
             }
         }

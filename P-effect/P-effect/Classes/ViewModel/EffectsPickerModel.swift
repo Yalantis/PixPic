@@ -21,9 +21,9 @@ class EffectsPickerModel: NSObject {
     }
     
     func downloadEffects(completion: (Bool) -> ()) {
-        LoaderService.loadEffects { [unowned self] objects, error in
+        LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
-                self.effectsGroups = objects
+                self?.effectsGroups = objects
                 completion(true)
             } else {
                 completion(false)

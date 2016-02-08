@@ -74,8 +74,8 @@ class FeedViewController: UIViewController {
     
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
-        toolBar.selectionClosure = { [unowned self] in
-            self.choosePhoto()
+        toolBar.selectionClosure = { [weak self] in
+            self?.choosePhoto()
         }
         view.addSubview(toolBar)
     }
@@ -103,8 +103,8 @@ class FeedViewController: UIViewController {
             navigationController!.pushViewController(controller, animated: true)
             return
         }
-        photoGenerator.completionImageReceived = { [unowned self] selectedImage in
-            self.handlePhotoSelected(selectedImage)
+        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+            self?.handlePhotoSelected(selectedImage)
         }
         photoGenerator.showInView(self)
     }
@@ -145,16 +145,16 @@ class FeedViewController: UIViewController {
     //MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [unowned self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
             guard ReachabilityHelper.checkConnection() else {
-                self.tableView?.pullToRefreshView.stopAnimating()
+                self?.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            self.postDataSource?.fetchData(nil)
+            self?.postDataSource?.fetchData(nil)
         }
         tableView.addInfiniteScrollingWithActionHandler {
-            [unowned self]() -> () in
-            self.postDataSource?.fetchPagedData(nil)
+            [weak self]() -> () in
+            self?.postDataSource?.fetchPagedData(nil)
         }
     }
     
