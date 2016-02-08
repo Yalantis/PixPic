@@ -106,21 +106,20 @@ class ProfileViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
+    }
+    
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
         let board = UIStoryboard(name: "Main", bundle: nil)
         let controllerIdentifier = "EditProfileViewController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
-    }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //        return tableView.bounds.width + 48
-        return UIScreen.mainScreen().bounds.size.width + 76.0
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + 76.0
     }
     
 }

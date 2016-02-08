@@ -18,6 +18,7 @@ protocol PostViewCellDelegate: class {
 class PostViewCell: UITableViewCell {
     
     static let identifier = "PostViewCellIdentifier"
+    static let designedHeight: CGFloat = 76
     
     static var nib: UINib? {
         let nib = UINib(nibName: String(self), bundle: nil)

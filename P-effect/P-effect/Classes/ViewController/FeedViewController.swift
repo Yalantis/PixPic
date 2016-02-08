@@ -37,7 +37,6 @@ class FeedViewController: UIViewController {
         setupLoadersCallback()
         setupToolBar()
         
-        
         if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -164,12 +163,11 @@ extension FeedViewController: UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return tableView.bounds.width + 48
-        return UIScreen.mainScreen().bounds.size.width + 76.0
+        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + 76.0
+        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
