@@ -64,7 +64,7 @@ class PostViewCell: UITableViewCell {
             placeholderImage: UIImage.placeholderImage(),
             completed: nil
         )
-        guard let user = post.user  else {
+        guard let user = post.user else {
             profileImageView.image = UIImage.avatarPlaceholderImage()
             return
         }

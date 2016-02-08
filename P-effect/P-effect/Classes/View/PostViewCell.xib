@@ -42,7 +42,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDP-Hd-y7z">
                                                 <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-T4-hJj" userLabel="Profile Photo Image View">
+                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mKW-T4-hJj" userLabel="Profile Photo Image View">
                                                         <rect key="frame" x="10" y="10" width="68" height="68"/>
                                                         <gestureRecognizers/>
                                                         <constraints>

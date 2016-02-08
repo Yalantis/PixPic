@@ -106,12 +106,8 @@ class ProfileViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
-    }
-    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
     // MARK: - IBActions

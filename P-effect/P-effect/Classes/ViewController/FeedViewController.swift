@@ -67,7 +67,7 @@ class FeedViewController: UIViewController {
         toolBar.frame = CGRectMake(
             0,
             pointY,
-            UIScreen.mainScreen().bounds.width,
+            view.frame.width,
             Constants.BaseDimensions.ToolBarHeight
         )
     }
@@ -162,13 +162,8 @@ class FeedViewController: UIViewController {
 
 extension FeedViewController: UITableViewDelegate {
     
-    
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
-    }
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width + PostViewCell.designedHeight
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
