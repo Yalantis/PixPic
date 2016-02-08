@@ -10,7 +10,7 @@ import UIKit
 
 class EffectsPickerModel: NSObject {
     
-    private var effectsGroups: [EffectsModel]!
+    private var effectsGroups: [EffectsModel]?
     var currentGroupNumber: Int?
     
     override init() {
@@ -35,7 +35,7 @@ class EffectsPickerModel: NSObject {
         guard let currentGroupNumber = currentGroupNumber else {
             return
         }
-        let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
+        let image = effectsGroups![currentGroupNumber].effectsStickers[indexPath.row].image
         ImageLoaderService.getImageForContentItem(image) {
             image, error in
             if let error = error {
@@ -56,13 +56,13 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         if currentGroupNumber != nil {
             return 1
         } else {
-            return effectsGroups.count ?? 0
+            return effectsGroups?.count ?? 0
         }
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let currentGroupNumber = currentGroupNumber {
-            return effectsGroups[currentGroupNumber].effectsStickers.count
+            return effectsGroups![currentGroupNumber].effectsStickers.count
         } else {
             return 0
         }
@@ -73,7 +73,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             Constants.EffectsPicker.EffectsPickerCellIdentifier,
             forIndexPath: indexPath
             ) as! EffectViewCell
-        cell.setStickerContent(effectsGroups[currentGroupNumber!].effectsStickers[indexPath.row])
+        cell.setStickerContent(effectsGroups![currentGroupNumber!].effectsStickers[indexPath.row])
         
         return cell
     }
@@ -83,6 +83,9 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectViewHeader.identifier, forIndexPath: indexPath) as! EffectViewHeader
+            guard let effectsGroups = effectsGroups else {
+                return reusableview
+            }
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
                 if self.currentGroupNumber == nil {
@@ -93,8 +96,10 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                 collectionView.reloadData()
             }
             reusableview = headerView
+            
         }
         return reusableview
     }
+    
     
 }
