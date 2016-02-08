@@ -357,7 +357,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="logoutAction:" destination="fkd-F7-BN1" eventType="touchUpInside" id="aP6-N3-fiS"/>
+                                            <action selector="logoutAction" destination="fkd-F7-BN1" eventType="touchUpInside" id="YuY-xw-Xc4"/>
                                         </connections>
                                     </button>
                                     <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l7B-ps-0Gz">

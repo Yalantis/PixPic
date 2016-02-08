@@ -98,7 +98,7 @@ class EditProfileViewController: UIViewController {
             title: "Save",
             style: .Plain,
             target: self,
-            action: "saveChangesAction:"
+            action: "saveChangesAction"
         )
         navigationItem.rightBarButtonItem = rightButton
         
@@ -127,7 +127,7 @@ class EditProfileViewController: UIViewController {
             
             let YESAction = UIAlertAction(title: "Save", style: .Default) {
                 [weak self] action in
-                self?.saveChangesAction(alertController)
+                self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(YESAction)
@@ -138,7 +138,7 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    dynamic private func saveChangesAction(sender: AnyObject) {
+    dynamic private func saveChangesAction() {
         if originalUserName == userName {
             saveChanges()
             return
@@ -243,7 +243,7 @@ class EditProfileViewController: UIViewController {
         photoGenerator.showInView(self)
     }
     
-    @IBAction func logoutAction(sender: AnyObject) {
+    @IBAction private func logoutAction() {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -259,7 +259,7 @@ class EditProfileViewController: UIViewController {
         }
         alertController.addAction(cancelAction)
         
-        let OKAction = UIAlertAction(
+        let okAction = UIAlertAction(
             title: "Logout me!",
             style: .Default
             ) { _ in
