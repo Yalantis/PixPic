@@ -64,11 +64,11 @@ class ProfileViewController: UITableViewController {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
         navigationItem.title = Constants.Profile.NavigationTitle
-        model?.userAvatar({[weak self] (image, error) -> () in
+        model?.userAvatar({[unowned self] (image, error) -> () in
             if error == nil {
-                self?.userAvatar.image = image
+                self.userAvatar.image = image
             } else {
-                self?.view.makeToast(error?.localizedDescription)
+                self.view.makeToast(error?.localizedDescription)
             }
             })
     }
@@ -78,23 +78,23 @@ class ProfileViewController: UITableViewController {
         activityShown = true
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.view.hideToastActivity()
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [unowned self] in
+            self.view.hideToastActivity()
         }
     }
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [unowned self] () -> () in
             guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+                self.tableView?.pullToRefreshView.stopAnimating()
                 
                 return
             }
-            self?.dataSource?.fetchData(self?.model.user)
+            self.dataSource?.fetchData(self.model.user)
         }
         tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
-            self?.dataSource?.fetchPagedData(self?.model.user)
+            [unowned self]() -> () in
+            self.dataSource?.fetchPagedData(self.model.user)
         }
     }
     // MARK: Delegate methods

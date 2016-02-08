@@ -48,15 +48,15 @@ class PostDataSource: NSObject {
     dynamic func fetchDataFromNotification() {
         fetchData(nil)
     }
-
+    
     func fetchData(user: User?) {
         loader.loadFreshData(user) {
-            [weak self] (objects: [Post]?, error: NSError?) in
-            if self?.shouldPullToRefreshHandle == true {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+            [unowned self] (objects: [Post]?, error: NSError?) in
+            if self.shouldPullToRefreshHandle == true {
+                self.tableView?.pullToRefreshView.stopAnimating()
             }
             if let objects = objects {
-                self?.arrayOfPosts = objects
+                self.arrayOfPosts = objects
             }
             if let error = error {
                 handleError(error)
@@ -66,10 +66,10 @@ class PostDataSource: NSObject {
     
     dynamic func fetchPagedData(user: User?) {
         loader.loadPagedData(user, leap: countOfModels()) {
-            [weak self] (objects: [Post]?, error: NSError?) in
+            [unowned self] (objects: [Post]?, error: NSError?) in
             if let objects = objects {
-                self?.tableView?.infiniteScrollingView.stopAnimating()
-                self?.arrayOfPosts.appendContentsOf(objects)
+                self.tableView?.infiniteScrollingView.stopAnimating()
+                self.arrayOfPosts.appendContentsOf(objects)
             }
             if let error = error {
                 handleError(error)
@@ -103,12 +103,12 @@ extension PostDataSource: UITableViewDataSource {
         cell.configureWithPost(modelAtIndex(indexPath))
         
         cell.selectionClosure = {
-            [weak self] cell in
+            [unowned self] cell in
             
             if let path = tableView.indexPathForCell(cell) {
-                let model = self?.modelAtIndex(path)
+                let model = self.modelAtIndex(path)
                 if let user = model?.user {
-                    self?.delegate?.showUserProfile(user)
+                    self.delegate?.showUserProfile(user)
                 }
             }
         }

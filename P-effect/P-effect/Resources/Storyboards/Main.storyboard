@@ -120,50 +120,42 @@
         <scene sceneID="QZ6-GV-vQi">
             <objects>
                 <collectionViewController storyboardIdentifier="EffectsPicker" autoresizesArchivedViewToFullSize="NO" id="sQo-iX-oiF" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="XbQ-2j-2Mn">
+                    <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="XbQ-2j-2Mn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="1" minimumInteritemSpacing="1" id="R52-vm-AFz">
                             <size key="itemSize" width="103" height="103"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="103" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="pin" value="YES"/>
+                            </userDefinedRuntimeAttributes>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="EffectsPickerCell" id="EBj-No-79Q" customClass="EffectViewCell" customModule="P_effect" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="1" width="103" height="103"/>
+                                <rect key="frame" x="103" y="1" width="103" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-jc-Ewc">
-                                            <rect key="frame" x="34" y="22" width="37" height="43"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fvh-jc-Ewc">
+                                            <rect key="frame" x="12" y="12" width="79" height="79"/>
                                             <color key="backgroundColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQ3-8q-W1U">
-                                            <rect key="frame" x="1" y="78" width="103" height="19"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="19" id="tzD-Zq-NlI"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="fvh-jc-Ewc" firstAttribute="leading" secondItem="EBj-No-79Q" secondAttribute="leading" constant="34" id="7eg-Qn-0An"/>
-                                    <constraint firstAttribute="bottom" secondItem="fvh-jc-Ewc" secondAttribute="bottom" constant="40" id="RQr-df-FOI"/>
+                                    <constraint firstItem="fvh-jc-Ewc" firstAttribute="leading" secondItem="EBj-No-79Q" secondAttribute="leading" constant="12" id="7eg-Qn-0An"/>
+                                    <constraint firstAttribute="bottom" secondItem="fvh-jc-Ewc" secondAttribute="bottom" constant="12" id="RQr-df-FOI"/>
                                     <constraint firstAttribute="bottom" secondItem="fvh-jc-Ewc" secondAttribute="bottom" id="W0X-Ha-5ci"/>
-                                    <constraint firstAttribute="trailing" secondItem="fvh-jc-Ewc" secondAttribute="trailing" constant="34" id="ZxC-b6-xFd"/>
-                                    <constraint firstAttribute="bottom" secondItem="BQ3-8q-W1U" secondAttribute="bottom" constant="8" id="brK-o1-qqL"/>
-                                    <constraint firstItem="BQ3-8q-W1U" firstAttribute="leading" secondItem="EBj-No-79Q" secondAttribute="leading" constant="1" id="pDB-6M-GR6"/>
-                                    <constraint firstItem="fvh-jc-Ewc" firstAttribute="top" secondItem="EBj-No-79Q" secondAttribute="top" constant="22" id="sBZ-5Q-8Dh"/>
-                                    <constraint firstAttribute="trailing" secondItem="BQ3-8q-W1U" secondAttribute="trailing" constant="1" id="sGe-Ph-AAS"/>
+                                    <constraint firstAttribute="trailing" secondItem="fvh-jc-Ewc" secondAttribute="trailing" constant="12" id="ZxC-b6-xFd"/>
+                                    <constraint firstItem="fvh-jc-Ewc" firstAttribute="top" secondItem="EBj-No-79Q" secondAttribute="top" constant="12" id="sBZ-5Q-8Dh"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -175,6 +167,37 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="EffectViewHeaderIdentifier" reuseIdentifier="EffectViewHeaderIdentifier" id="eFH-lr-5AR" customClass="EffectViewHeader" customModule="P_effect" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="103" height="105"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ufJ-wu-PED">
+                                    <rect key="frame" x="32" y="26" width="39" height="36.5"/>
+                                    <gestureRecognizers/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th5-8e-UQQ">
+                                    <rect key="frame" x="1" y="80.5" width="101" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <gestureRecognizers/>
+                            <constraints>
+                                <constraint firstItem="th5-8e-UQQ" firstAttribute="top" secondItem="ufJ-wu-PED" secondAttribute="bottom" constant="18" id="05d-6d-IS3"/>
+                                <constraint firstAttribute="trailing" secondItem="ufJ-wu-PED" secondAttribute="trailing" constant="32" id="Fsw-gu-6lr"/>
+                                <constraint firstAttribute="bottom" secondItem="th5-8e-UQQ" secondAttribute="bottom" constant="4" id="Hba-nb-ZXw"/>
+                                <constraint firstItem="th5-8e-UQQ" firstAttribute="leading" secondItem="eFH-lr-5AR" secondAttribute="leading" constant="1" id="aXw-Qb-by5"/>
+                                <constraint firstAttribute="trailing" secondItem="th5-8e-UQQ" secondAttribute="trailing" constant="1" id="akF-b4-2jk"/>
+                                <constraint firstItem="ufJ-wu-PED" firstAttribute="leading" secondItem="eFH-lr-5AR" secondAttribute="leading" constant="32" id="drZ-3p-PHd"/>
+                                <constraint firstItem="ufJ-wu-PED" firstAttribute="top" secondItem="eFH-lr-5AR" secondAttribute="top" constant="26" id="ss1-O8-GWM"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="image" destination="ufJ-wu-PED" id="FRA-Ev-txY"/>
+                                <outlet property="label" destination="th5-8e-UQQ" id="HBk-ME-M9E"/>
+                            </connections>
+                        </collectionReusableView>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -513,8 +536,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="404"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-Jc-E8P">
-                                <rect key="frame" x="12" y="-64" width="576" height="576"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sDn-Jc-E8P">
+                                <rect key="frame" x="12" y="-86" width="576" height="576"/>
+                                <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="sDn-Jc-E8P" secondAttribute="height" multiplier="1:1" id="e6z-sM-rCg"/>
                                 </constraints>
