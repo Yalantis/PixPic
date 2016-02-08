@@ -19,32 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="460" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-06-XZv">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iB2-ds-2xE">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="y2F-Bb-PXf"/>
-                                    <barButtonItem image="btnMakeAPhoto" style="plain" id="Xa5-e1-dLo">
-                                        <connections>
-                                            <action selector="choosePhoto:" destination="fm0-UY-D5k" id="uyT-z8-OHy"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="nDh-ZE-cuP"/>
-                                </items>
-                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="iB2-ds-2xE" secondAttribute="trailing" id="6vy-hL-kay"/>
-                            <constraint firstItem="iB2-ds-2xE" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="RTa-dF-NpR"/>
+                            <constraint firstItem="Ddw-06-XZv" firstAttribute="bottom" secondItem="vf9-Xn-rsh" secondAttribute="top" id="HFe-m0-CXl"/>
                             <constraint firstItem="Ddw-06-XZv" firstAttribute="leading" secondItem="SZq-Vy-ZEO" secondAttribute="leading" id="bCq-Sd-V9v"/>
-                            <constraint firstItem="iB2-ds-2xE" firstAttribute="top" secondItem="Ddw-06-XZv" secondAttribute="bottom" id="fY3-sd-EE4"/>
                             <constraint firstItem="Ddw-06-XZv" firstAttribute="top" secondItem="SZq-Vy-ZEO" secondAttribute="top" id="hjg-fq-5lK"/>
-                            <constraint firstItem="vf9-Xn-rsh" firstAttribute="top" secondItem="iB2-ds-2xE" secondAttribute="bottom" id="lUY-z1-nQr"/>
                             <constraint firstAttribute="trailing" secondItem="Ddw-06-XZv" secondAttribute="trailing" id="srK-vv-cys"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -130,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ev-mc-7MU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="331" y="1109"/>
+            <point key="canvasLocation" x="334" y="1274"/>
         </scene>
         <!--Effects Picker View Controller-->
         <scene sceneID="QZ6-GV-vQi">
@@ -559,7 +543,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="btnMakeAPhoto" width="66" height="49"/>
         <image name="facebook_icon" width="10" height="20"/>
         <image name="facebook_login_btn" width="242" height="46"/>
         <image name="facebook_login_btn_pressed" width="242" height="46"/>

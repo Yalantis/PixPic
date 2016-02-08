@@ -18,8 +18,9 @@ struct Constants {
         static let NewPostUploaded = "NewPostUploaded"
     }
     
-    struct StoryBoardID {
-
+    struct BaseDimensions {
+        static let ToolBarHeight: CGFloat = 49.0
+        static let NavBarWithStatusBarHeight: CGFloat = 64.0
     }
     
     struct Path {

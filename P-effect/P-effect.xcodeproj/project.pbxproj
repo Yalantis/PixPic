@@ -43,6 +43,8 @@
 		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
 		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
 		FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */; };
+		FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD27A2721C64CFEC0058203F /* FeedToolBar.xib */; };
+		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
@@ -122,6 +124,8 @@
 		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+AppSettings.swift"; sourceTree = "<group>"; };
 		FD27A26E1C64A9080058203F /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "Pods/../build/Debug-iphoneos/libSDWebImage.a"; sourceTree = "<group>"; };
+		FD27A2721C64CFEC0058203F /* FeedToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedToolBar.xib; sourceTree = "<group>"; };
+		FD27A2741C64D09E0058203F /* FeedToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedToolBar.swift; sourceTree = "<group>"; };
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 				492D17F61C5B9FE500D98404 /* EffectViewCell.swift */,
 				95E4A0711C58EA8700D52150 /* EffectEditorView.swift */,
 				95E4A0751C58F47D00D52150 /* BorderView.swift */,
+				FD27A2721C64CFEC0058203F /* FeedToolBar.xib */,
+				FD27A2741C64D09E0058203F /* FeedToolBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
+				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
@@ -623,6 +630,7 @@
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
 				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
+				FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */,
 				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
