@@ -19,9 +19,6 @@ class PhotoEditorViewController: UIViewController {
     
     @IBOutlet private weak var effectsPickerContainer: UIView!
     @IBOutlet private weak var imageContainer: UIView!
-    @IBOutlet private weak var leftToolbarButton: UIBarButtonItem!
-    @IBOutlet private weak var rightToolbarButton: UIBarButtonItem!
-    
     var model: PhotoEditorModel!
     var effectsPickerController: EffectsPickerViewController? {
         didSet {
@@ -35,8 +32,13 @@ class PhotoEditorViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "back")
-        navigationItem.leftBarButtonItem = newBackButton;
+        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "back")
+        navigationItem.leftBarButtonItem = newBackButton
+        
+        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")
+        navigationItem.rightBarButtonItem = saveButton
+        
+        navigationItem.title = "Edit"
     }
     
     @IBAction private func postEditedImage() {
@@ -48,7 +50,7 @@ class PhotoEditorViewController: UIViewController {
         postToTheNet()
     }
     
-    @IBAction private func saveToImageLibrary() {
+    func saveToImageLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
             ExceptionHandler.handle(Exception.CantApplyEffects)
             
@@ -131,8 +133,6 @@ class PhotoEditorViewController: UIViewController {
         size.height = effectsPickerContainer.frame.height
         effectsPickerContainer.bounds.size = size
         
-        leftToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
-        rightToolbarButton.width = UIScreen.mainScreen().bounds.width * 0.5
         view.superview?.layoutIfNeeded()
     }
     

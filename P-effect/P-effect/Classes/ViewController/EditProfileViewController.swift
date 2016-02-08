@@ -26,10 +26,9 @@ class EditProfileViewController: UIViewController {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
-    
+
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
-    @IBOutlet private weak var saveChangesButton: UIButton!
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     
@@ -75,7 +74,7 @@ class EditProfileViewController: UIViewController {
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
-        saveChangesButton.enabled = false
+        navigationItem.rightBarButtonItem!.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
         originalUserName = userName
@@ -94,16 +93,18 @@ class EditProfileViewController: UIViewController {
     
     private func makeNavigation() {
         navigationItem.title = "Edit profile"
+
         let rightButton = UIBarButtonItem(
-            title: "LogOut",
-            style: UIBarButtonItemStyle.Plain,
+            title: "Save",
+            style: .Plain,
             target: self,
-            action: "logoutAction:"
+            action: "saveChangesAction"
         )
         navigationItem.rightBarButtonItem = rightButton
+        
         let leftButton = UIBarButtonItem(
-            image: UIImage(named: "ic_back_arrow"),
-            style: UIBarButtonItemStyle.Plain,
+            image: UIImage.appBackButton(),
+            style: .Plain,
             target: self,
             action: "handleBackButtonTap"
         )
@@ -126,7 +127,7 @@ class EditProfileViewController: UIViewController {
             
             let YESAction = UIAlertAction(title: "Save", style: .Default) {
                 [weak self] action in
-                self?.saveChangesAction(alertController)
+                self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(YESAction)
@@ -137,30 +138,16 @@ class EditProfileViewController: UIViewController {
         }
     }
     
-    dynamic private func logoutAction(sender: UIBarButtonItem) {
-        let alertController = UIAlertController(
-            title: nil,
-            message: logoutMessage,
-            preferredStyle: .ActionSheet
-        )
-        
-        let cancelAction = UIAlertAction(
-            title: "Cancel",
-            style: .Cancel
-            ) { _ in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+    dynamic private func saveChangesAction() {
+        if originalUserName == userName {
+            saveChanges()
+            return
         }
-        alertController.addAction(cancelAction)
-        
-        let OKAction = UIAlertAction(
-            title: "Logout me!",
-            style: .Default
-            ) { _ in
-                self.logout()
+        ValidationService.valdateUserName(userName!) { completion in
+            if completion {
+                self.saveChanges()
+            }
         }
-        alertController.addAction(OKAction)
-        presentViewController(alertController, animated: true) { }
     }
     
     private func logout() {
@@ -198,9 +185,9 @@ class EditProfileViewController: UIViewController {
     }
     
     private func animateTextField(up: Bool) {
-        let movement = (up ? kbHeight : -kbHeight)
-        bottomConstraint.constant = (kbHidden ? movement : 0)
-        topConstraint.constant = (kbHidden ? -movement : 0)
+        let movement = up ? kbHeight : -kbHeight
+        bottomConstraint.constant = kbHidden ? movement / 2 : 0
+        topConstraint.constant = kbHidden ? -movement / 2 : 0
         view.needsUpdateConstraints()
         UIView.animateWithDuration(
             0.3,
@@ -217,7 +204,7 @@ class EditProfileViewController: UIViewController {
     
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
-        saveChangesButton.enabled = true
+        navigationItem.rightBarButtonItem!.enabled = true
         someChangesMade = true
     }
     
@@ -256,15 +243,27 @@ class EditProfileViewController: UIViewController {
         photoGenerator.showInView(self)
     }
     
-    @IBAction private func saveChangesAction(sender: AnyObject) {
-        if originalUserName == userName {
-            saveChanges()
-            return
+    @IBAction private func logoutAction() {
+        let alertController = UIAlertController(
+            title: nil,
+            message: logoutMessage,
+            preferredStyle: .ActionSheet
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel
+            ) { _ in
+                PushNotificationQueue.handleNotificationQueue()
+                alertController.dismissViewControllerAnimated(true, completion: nil)
         }
-        ValidationService.valdateUserName(userName!) { [weak self] completion in
-            if completion {
-                self?.saveChanges()
-            }
+        alertController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(
+            title: "Logout me!",
+            style: .Default
+            ) { _ in
+                self.logout()
         }
     }
     
@@ -272,10 +271,11 @@ class EditProfileViewController: UIViewController {
         let afterStr = sender.text
         if userName != afterStr {
             userName = afterStr
-            saveChangesButton.enabled = true
+            navigationItem.rightBarButtonItem!.enabled = true
             someChangesMade = true
         }
     }
+    
 }
 
 extension EditProfileViewController: UITextFieldDelegate {

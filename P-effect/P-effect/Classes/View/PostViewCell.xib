@@ -9,7 +9,7 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostViewCellIdentifier" id="wTx-Av-Y8L" customClass="PostViewCell" customModule="P_effect" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="451"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="center" tableViewCell="wTx-Av-Y8L" id="FGQ-y1-oTy">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wTx-Av-Y8L" id="FGQ-y1-oTy">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -29,7 +29,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-D1-QNP" userLabel="header view">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-D1-QNP" userLabel="header view">
                                         <rect key="frame" x="0.0" y="0.0" width="351" height="88"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rPN-n4-G12" userLabel="Profile Name Label">
@@ -96,6 +96,9 @@
                                             <constraint firstItem="0in-Qe-iir" firstAttribute="top" secondItem="gg0-D1-QNP" secondAttribute="top" id="vB7-zm-LyZ"/>
                                             <constraint firstItem="0in-Qe-iir" firstAttribute="leading" secondItem="rPN-n4-G12" secondAttribute="trailing" constant="10" id="z3a-CU-pPt"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,6 +127,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                                         <real key="value" value="100"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -144,7 +148,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.13725490868091583" green="0.13725490868091583" blue="0.13725490868091583" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="pYa-2x-KWW" firstAttribute="leading" secondItem="FGQ-y1-oTy" secondAttribute="leading" id="5dp-Ci-M5O"/>
                     <constraint firstAttribute="bottom" secondItem="pYa-2x-KWW" secondAttribute="bottom" id="98I-i0-xoh"/>
