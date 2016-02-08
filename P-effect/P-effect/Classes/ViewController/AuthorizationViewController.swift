@@ -92,8 +92,8 @@ class AuthorizationViewController: UIViewController {
             token,
             block: {
                 [weak self] user, error in
-                if let error = error {
-                    handleError(error)
+                if let _ = error {
+                    ExceptionHandler.handle(Exception.InvalidSessionToken)
                 } else {
                     let user = UserModel.init(aUser: user as! User)
                     user.linkIfUnlinkFacebook(

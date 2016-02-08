@@ -265,6 +265,8 @@ class EditProfileViewController: UIViewController {
             ) { _ in
                 self.logout()
         }
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true) { }
     }
     
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
