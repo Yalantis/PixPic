@@ -17,7 +17,6 @@ class EffectsPickerViewController: UICollectionViewController {
             collectionView?.dataSource = model
             model?.downloadEffects{ [weak self] completion in
                 if completion {
-                    self!.model?.groupsShown = true
                     self?.collectionView?.reloadData()
                 }
             }
@@ -36,25 +35,15 @@ class EffectsPickerViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let model = model
-            else { return }
-        if model.groupsShown == true {
-            model.shownGroupNumber = indexPath.row
-            model.groupsShown = false
-            collectionView.reloadData()
-        } else if indexPath.row == 0 {
-            model.shownGroupNumber = nil
-            model.groupsShown = true
-            collectionView.reloadData()
-        } else {
-            model.effectImageAtIndexPath(indexPath) { [weak self] image, error in
-                if error != nil {
-                    return
-                }
-                if let image = image {
-                    self?.delegate?.didChooseEffectFromPicket(image)
-                }
+        model!.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
+            if error != nil {
+                return
+            }
+            if let image = image {
+                self.delegate?.didChooseEffectFromPicket(image)
             }
         }
     }
+    
 }
+

@@ -54,7 +54,7 @@ class AuthorizationViewController: UIViewController {
     private func signUp(user: User) {
         let userWithFB = user
         FBAuthorization.signInWithPermission(
-            { [weak self] user, error in
+            { user, error in
                 if let error = error {
                     handleError(error as NSError)
                 } else if let user = user {
@@ -80,7 +80,7 @@ class AuthorizationViewController: UIViewController {
                 } else {
                     print("unknown trouble while signing IN")
                 }
-                self?.view.hideToastActivity()
+                self.view.hideToastActivity()
             }
         )
     }

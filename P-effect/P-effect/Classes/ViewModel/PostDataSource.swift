@@ -48,7 +48,7 @@ class PostDataSource: NSObject {
     dynamic func fetchDataFromNotification() {
         fetchData(nil)
     }
-
+    
     func fetchData(user: User?) {
         loader.loadFreshData(user) {
             [weak self] (objects: [Post]?, error: NSError?) in

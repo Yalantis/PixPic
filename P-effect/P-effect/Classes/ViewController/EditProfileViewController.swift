@@ -26,7 +26,7 @@ class EditProfileViewController: UIViewController {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
-
+    
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
@@ -78,9 +78,10 @@ class EditProfileViewController: UIViewController {
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
         originalUserName = userName
-        
-        let imgFromPFFileRepresentator = ImageLoaderService()
-        imgFromPFFileRepresentator.getImageForContentItem(User.currentUser()?.avatar) {
+        guard let avatar = User.currentUser()?.avatar else {
+            return
+        }
+        ImageLoaderService.getImageForContentItem(avatar) {
             [weak self](image, error) -> () in
             if let error = error {
                 print(error)
@@ -93,7 +94,7 @@ class EditProfileViewController: UIViewController {
     
     private func makeNavigation() {
         navigationItem.title = "Edit profile"
-
+        
         let rightButton = UIBarButtonItem(
             title: "Save",
             style: .Plain,

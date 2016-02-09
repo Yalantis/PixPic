@@ -74,8 +74,8 @@ class FeedViewController: UIViewController {
     
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
-        toolBar.selectionClosure = { [unowned self] in
-            self.choosePhoto()
+        toolBar.selectionClosure = { [weak self] in
+            self?.choosePhoto()
         }
         view.addSubview(toolBar)
     }
