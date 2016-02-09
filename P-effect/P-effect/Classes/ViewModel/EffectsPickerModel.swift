@@ -8,6 +8,8 @@
 
 import UIKit
 
+let animationDuration: Double = 0.5
+
 class EffectsPickerModel: NSObject {
     
     private var currentGroupNumber: Int?
@@ -90,137 +92,105 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
                 
-                
-                
                 if self.currentGroupNumber == nil {
                     UIView.animateWithDuration(
-                        0.7,
+                        animationDuration,
                         delay: 0,
-                        usingSpringWithDamping: 0.7,
-                        initialSpringVelocity: 0.7,
                         options: .CurveEaseInOut,
                         animations: {
-                            
-                            //                            print("headers === \(self.headers)")
                             for (_, header) in self.headers where header != headerView {
                                 var newFrame = header.frame
                                 newFrame.origin.y = headerView.frame.size.width
                                 header.frame = newFrame
-                                
-                                //                                header.alpha = 0
                             }
-                            
-                            
-                            var newFrame =   headerView.frame
-                            newFrame.origin = CGPoint(x: 0, y: 0)
-                            headerView.frame = newFrame
-                            
-                            
-                            
                         },
-                        completion: { answer in
-                            
-                            self.currentGroupNumber = indexPath.section
-                            collectionView.reloadData()
-                            
-                            
-                            
-                            let numberOfCells = self.collectionView(collectionView, numberOfItemsInSection: 0)
-                            //                            UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
-                            //                            for (var i = 0; i < numberOfCells; i++) {
-                            //                                let numberOfCells = self.collectionView(collectionView, numberOfItemsInSection: 0)
-                            //                                
-                            //                                UICollectionViewLayoutAttributes *layoutAttributes = [layout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-                            //                                CGRect cellFrame = layoutAttributes.frame;
-                            //                                NSLog(@"%i - %@", i, NSStringFromCGRect(cellFrame));
-                            //                            }
-                            //                            
-                            //                            
-                            
-                            for cell in collectionView.visibleCells() {
-                                
-                                var newFrame = cell.frame
-                                newFrame.origin.y = cell.frame.size.width
-                                cell.frame = newFrame
-                                
-                            }
-                            print("\(collectionView.visibleCells())")
-                            
-                            
-                            UIView.animateWithDuration(0.7,
-                                delay: 0.7,
+                        completion: { _ in
+                            UIView.animateWithDuration(0.3,
+                                delay: 0,
                                 options: .CurveEaseInOut,
-                                animations: { () -> Void in
-                                    
+                                animations: { Void in
+                                    var newFrame =   headerView.frame
+                                    newFrame.origin = CGPoint(x: 0, y: 0)
+                                    headerView.frame = newFrame
+                                },
+                                completion: { _ in
+                                    self.currentGroupNumber = indexPath.section
+                                    collectionView.reloadData()
                                     collectionView.layoutIfNeeded()
                                     
-                                    
-                                    print("\(collectionView.visibleCells())")
                                     for cell in collectionView.visibleCells() {
-                                        
                                         var newFrame = cell.frame
-                                        newFrame.origin.y = 0
+                                        newFrame.origin.y = cell.frame.size.height
                                         cell.frame = newFrame
-                                        
                                     }
-                                    
-                                    
-                                    
-                                    
-                                }, completion: nil)
-                            
-                            
-                            
+                                    UIView.animateWithDuration(0.3,
+                                        delay: 0,
+                                        options: .CurveEaseInOut,
+                                        animations: { Void in
+                                            for cell in collectionView.visibleCells() {
+                                                var newFrame = cell.frame
+                                                newFrame.origin.y = 0
+                                                cell.frame = newFrame
+                                            }
+                                        },
+                                        completion: nil)
+                            })                            
                     })
-                    
-                    
-                    
-                    
-                    
                 } else {
+                    let lastGroupNumber = self.currentGroupNumber!
                     UIView.animateWithDuration(
-                        0.7,
+                        animationDuration,
                         delay: 0,
-                        usingSpringWithDamping: 0.7,
-                        initialSpringVelocity: 0.7,
                         options: .CurveEaseInOut,
                         animations: {
+                            for cell in collectionView.visibleCells() {
+                                var newFrame = cell.frame
+                                newFrame.origin.y = cell.frame.size.height
+                                cell.frame = newFrame
+                            }
+                        },
+                        completion: { _ in
                             self.currentGroupNumber = nil
                             collectionView.reloadData()
-                            
                             collectionView.layoutIfNeeded()
-                            //                            var newFrame =   headerView.frame
-                            //                            newFrame.origin = CGPoint(x:  headerView.frame.size.width * CGFloat(self.currentGroupNumber!), y: 0)
+                            let currentHeader = self.headers[lastGroupNumber]!
                             
-                            //                            print("newFrame.origin === \(newFrame.origin)")
-                            //                            headerView.frame = newFrame
-                        },
-                        completion: { answer in
-                            print("\(collectionView.visibleCells())")
-                            //                            collectionView.reloadData()
+                            var newFrame = currentHeader.frame
+                            newFrame.origin.x = 0
+                            currentHeader.frame = newFrame
                             
+                            for (_, header) in self.headers where header != currentHeader {
+                                var newFrame = header.frame
+                                newFrame.origin.y = newFrame.size.height
+                                header.frame = newFrame
+                            }
+                            UIView.animateWithDuration(animationDuration,
+                                delay: 0,
+                                options: .CurveEaseInOut,
+                                animations: { Void in
+                                    var newFrame =   currentHeader.frame
+                                    newFrame.origin.x = currentHeader.frame.size.width * CGFloat(lastGroupNumber)
+                                    currentHeader.frame = newFrame
+                                }, completion: { _ in
+                                    UIView.animateWithDuration(animationDuration,
+                                        delay: 0,
+                                        options: .CurveEaseInOut,
+                                        animations: { Void in
+                                            for (_, header) in self.headers where header != currentHeader {
+                                                var newFrame = header.frame
+                                                newFrame.origin.y = 0
+                                                header.frame = newFrame
+                                            }
+                                        }, completion: nil)
+                            })
                     })
-                    
                 }
-                //                let newSectionIndexPath = NSIndexPath(forItem: 0, inSection: self.currentGroupNumber!)
-                
-                //                collectionView.scrollToItemAtIndexPath(newSectionIndexPath, atScrollPosition: .Right, animated: true)
-                //                //                collectionView.scroo
-                //                print("headerView1111 === \(headerView)")
-                //                
-                //                
-                //                
-                //                
-                //                print("headerView2222 === \(headerView)")
             }
             reusableview = headerView
             headers[indexPath.section] = headerView
-            
         }
         return reusableview
     }
     
-    
 }
-
 

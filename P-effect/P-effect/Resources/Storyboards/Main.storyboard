@@ -193,6 +193,14 @@
                                 <constraint firstItem="ufJ-wu-PED" firstAttribute="leading" secondItem="eFH-lr-5AR" secondAttribute="leading" constant="32" id="drZ-3p-PHd"/>
                                 <constraint firstItem="ufJ-wu-PED" firstAttribute="top" secondItem="eFH-lr-5AR" secondAttribute="top" constant="26" id="ss1-O8-GWM"/>
                             </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <outlet property="image" destination="ufJ-wu-PED" id="FRA-Ev-txY"/>
                                 <outlet property="label" destination="th5-8e-UQQ" id="HBk-ME-M9E"/>
