@@ -70,8 +70,8 @@ class EditProfileViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [unowned self] selectedImage in
-            self.handlePhotoSelected(selectedImage)
+        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+            self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
         navigationItem.rightBarButtonItem!.enabled = false
@@ -82,12 +82,12 @@ class EditProfileViewController: UIViewController {
             return
         }
         ImageLoaderService.getImageForContentItem(avatar) {
-            [unowned self](image, error) -> () in
+            [weak self](image, error) -> () in
             if let error = error {
                 print(error)
             } else {
-                self.avatarImageView.image = image
-                self.image = image
+                self?.avatarImageView.image = image
+                self?.image = image
             }
         }
     }
@@ -119,16 +119,16 @@ class EditProfileViewController: UIViewController {
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
             let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
-                [unowned self] action in
+                [weak self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
-                self.navigationController!.popViewControllerAnimated(true)
+                self?.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(NOAction)
             
             let YESAction = UIAlertAction(title: "Save", style: .Default) {
-                [unowned self] action in
-                self.saveChangesAction()
+                [weak self] action in
+                self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(YESAction)
