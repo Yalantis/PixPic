@@ -35,8 +35,8 @@ class Router {
             return
         }
         
-        AuthService().anonymousLogIn(completion: { [unowned self] object in
-                self.showHome(animated: true)
+        AuthService().anonymousLogIn(completion: { [weak self] object in
+                self?.showHome(animated: true)
             }, failure: { error in
                 if let error = error {
                     handleError(error)
