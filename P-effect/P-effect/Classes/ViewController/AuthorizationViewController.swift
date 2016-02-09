@@ -52,12 +52,12 @@ class AuthorizationViewController: UIViewController {
     private func signUp(user: User) {
         let userWithFB = user
         FBAuthorization.signInWithPermission(
-            { user, error in
+            { [weak self] user, error in
                 if let error = error {
                     handleError(error as NSError)
                 }
                 guard let user = user else {
-                    self.view.hideToastActivity()
+                    self?.view.hideToastActivity()
                     print("unknown trouble while signing IN")
                     return
                 }
@@ -77,6 +77,7 @@ class AuthorizationViewController: UIViewController {
                     }
                 }
                 print("SIGNING UP!!!  with ", userModel.user.username)
+                self?.view.hideToastActivity()
                 Router.sharedRouter().showHome(animated: true)
             }
         )
