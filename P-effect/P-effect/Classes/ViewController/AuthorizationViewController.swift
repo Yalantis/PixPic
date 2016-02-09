@@ -24,25 +24,24 @@ class AuthorizationViewController: UIViewController {
     private func signInWithFacebook() {
         FBAuthorization.signInWithFacebookInController(
             self,
-            completion: {
-                [weak self] user, error in
+            completion: { user, error in
                 if let error = error {
                     handleError(error as NSError)
                 }
-                if let user = user as User! {
-                    UserModel.init(aUser: user).checkIfFacebookIdExists(
-                        { exists in
-                            if exists {
-                                user.passwordSet = false
-                                self?.signIn(user)
-                            } else {
-                                self?.signUp(user)
-                            }
-                        }
-                    )
-                } else {
-                    self?.proceedWithoutAuthorization()
+                guard let user = user as User! else {
+                    self.proceedWithoutAuthorization()
+                    return
                 }
+                UserModel.init(aUser: user).checkIfFacebookIdExists(
+                    { exists in
+                        if exists {
+                            user.passwordSet = false
+                            self.signIn(user)
+                        } else {
+                            self.signUp(user)
+                        }
+                    }
+                )
             }
         )
     }
