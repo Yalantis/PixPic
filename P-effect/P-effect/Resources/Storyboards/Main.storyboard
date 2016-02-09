@@ -93,7 +93,6 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XDS-dl-en4" firstAttribute="top" secondItem="CSU-ye-LVh" secondAttribute="bottom" id="63C-Mr-hch"/>
                             <constraint firstAttribute="trailing" secondItem="XDS-dl-en4" secondAttribute="trailing" id="DCX-O3-AW5"/>

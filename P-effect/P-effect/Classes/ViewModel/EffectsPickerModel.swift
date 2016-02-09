@@ -8,13 +8,14 @@
 
 import UIKit
 
-let animationDuration: Double = 0.5
+let animationDuration: Double = 0.3
 
 class EffectsPickerModel: NSObject {
     
     private var currentGroupNumber: Int?
     private var effectsGroups: [EffectsModel]?
-    private var headers = [Int:UIView]()
+    private var headers = [Int: UIView]()
+    private var currentHeader: UIView?
     
     override init() {
         super.init()
@@ -51,7 +52,6 @@ class EffectsPickerModel: NSObject {
         }
     }
 }
-
 
 extension EffectsPickerModel: UICollectionViewDataSource {
     
@@ -91,50 +91,36 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             }
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
-                
+                self.currentHeader = headerView
                 if self.currentGroupNumber == nil {
                     UIView.animateWithDuration(
                         animationDuration,
                         delay: 0,
                         options: .CurveEaseInOut,
                         animations: {
-                            for (_, header) in self.headers where header != headerView {
-                                var newFrame = header.frame
-                                newFrame.origin.y = headerView.frame.size.width
-                                header.frame = newFrame
-                            }
+                            self.moveViewsTo(Array(self.headers.values))
                         },
                         completion: { _ in
                             UIView.animateWithDuration(0.3,
                                 delay: 0,
                                 options: .CurveEaseInOut,
                                 animations: { Void in
-                                    var newFrame =   headerView.frame
-                                    newFrame.origin = CGPoint(x: 0, y: 0)
-                                    headerView.frame = newFrame
+                                    headerView.moveTo(x: 0, y: 0)
                                 },
                                 completion: { _ in
                                     self.currentGroupNumber = indexPath.section
                                     collectionView.reloadData()
                                     collectionView.layoutIfNeeded()
                                     
-                                    for cell in collectionView.visibleCells() {
-                                        var newFrame = cell.frame
-                                        newFrame.origin.y = cell.frame.size.height
-                                        cell.frame = newFrame
-                                    }
+                                    self.moveViewsTo(collectionView.visibleCells())
                                     UIView.animateWithDuration(0.3,
                                         delay: 0,
                                         options: .CurveEaseInOut,
                                         animations: { Void in
-                                            for cell in collectionView.visibleCells() {
-                                                var newFrame = cell.frame
-                                                newFrame.origin.y = 0
-                                                cell.frame = newFrame
-                                            }
+                                            self.moveViewsTo(collectionView.visibleCells(), y: 0)
                                         },
                                         completion: nil)
-                            })                            
+                            })
                     })
                 } else {
                     let lastGroupNumber = self.currentGroupNumber!
@@ -143,44 +129,27 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         delay: 0,
                         options: .CurveEaseInOut,
                         animations: {
-                            for cell in collectionView.visibleCells() {
-                                var newFrame = cell.frame
-                                newFrame.origin.y = cell.frame.size.height
-                                cell.frame = newFrame
-                            }
+                            self.moveViewsTo(collectionView.visibleCells())
                         },
                         completion: { _ in
                             self.currentGroupNumber = nil
                             collectionView.reloadData()
                             collectionView.layoutIfNeeded()
-                            let currentHeader = self.headers[lastGroupNumber]!
+                            self.currentHeader = self.headers[lastGroupNumber]!
+                            self.currentHeader!.moveTo(x: 0)
+                            self.moveViewsTo(Array(self.headers.values))
                             
-                            var newFrame = currentHeader.frame
-                            newFrame.origin.x = 0
-                            currentHeader.frame = newFrame
-                            
-                            for (_, header) in self.headers where header != currentHeader {
-                                var newFrame = header.frame
-                                newFrame.origin.y = newFrame.size.height
-                                header.frame = newFrame
-                            }
                             UIView.animateWithDuration(animationDuration,
                                 delay: 0,
                                 options: .CurveEaseInOut,
                                 animations: { Void in
-                                    var newFrame =   currentHeader.frame
-                                    newFrame.origin.x = currentHeader.frame.size.width * CGFloat(lastGroupNumber)
-                                    currentHeader.frame = newFrame
+                                    self.currentHeader!.moveTo(x: self.currentHeader!.frame.size.width * CGFloat(lastGroupNumber))
                                 }, completion: { _ in
                                     UIView.animateWithDuration(animationDuration,
                                         delay: 0,
                                         options: .CurveEaseInOut,
                                         animations: { Void in
-                                            for (_, header) in self.headers where header != currentHeader {
-                                                var newFrame = header.frame
-                                                newFrame.origin.y = 0
-                                                header.frame = newFrame
-                                            }
+                                            self.moveViewsTo(Array(self.headers.values), y: 0)
                                         }, completion: nil)
                             })
                     })
@@ -192,5 +161,30 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         return reusableview
     }
     
+    private func moveViewsTo(views: [UIView], y: CGFloat? = nil) {
+        for view in views where view != currentHeader {
+            var newFrame = view.frame
+            newFrame.origin.y = y ?? newFrame.size.height
+            view.frame = newFrame
+        }
+    }
+    
 }
+
+extension UIView {
+    
+    func  moveTo(x x: CGFloat? = nil, y: CGFloat? = nil) {
+        var newFrame = frame
+        if let x = x {
+            newFrame.origin.x = x
+        }
+        if let y = y {
+            newFrame.origin.y = y
+        }
+        frame = newFrame
+    }
+    
+}
+
+
 
