@@ -140,14 +140,18 @@ class EditProfileViewController: UIViewController {
     }
     
     dynamic private func saveChangesAction() {
-        if originalUserName == userName {
-            saveChanges()
-            return
-        }
-        ValidationService.valdateUserName(userName!) { completion in
-            if completion {
-                self.saveChanges()
+        if ReachabilityHelper.checkConnection(showAlert: false) {
+            if originalUserName == userName {
+                saveChanges()
+                return
             }
+            ValidationService.valdateUserName(userName!) { completion in
+                if completion {
+                    self.saveChanges()
+                }
+            }
+        } else {
+            AlertService.simpleAlert("Internet connection is required to save changes in profile")
         }
     }
     

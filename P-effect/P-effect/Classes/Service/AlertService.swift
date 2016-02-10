@@ -33,8 +33,7 @@ class AlertService: NSObject {
             }
         }
         
-        let isControllersWaitingForResponse = (topController as? UIAlertController) != nil ||
-            (topController as? PhotoEditorViewController) != nil
+        let isControllersWaitingForResponse = (topController as? UIAlertController) != nil
         
         if isControllersWaitingForResponse {
             PushNotificationQueue.addObjectInQueue(message)
