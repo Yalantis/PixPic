@@ -15,7 +15,7 @@ extension UIImage {
     }
     
     public class func placeholderImage() -> UIImage? {
-        return UIImage(named: "Placeholder")
+        return UIImage(named: "photoPlaceholder")
     }
     
     public class func avatarPlaceholderImage() -> UIImage? {

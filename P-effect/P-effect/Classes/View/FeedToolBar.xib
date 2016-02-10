@@ -15,9 +15,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="351" height="49"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ETf-vj-sis">
-                    <rect key="frame" x="140" y="0.0" width="71" height="49"/>
+                    <rect key="frame" x="151" y="0.0" width="49" height="49"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="ETf-vj-sis" secondAttribute="height" multiplier="71:49" id="Iqr-X9-XJy"/>
+                        <constraint firstAttribute="width" secondItem="ETf-vj-sis" secondAttribute="height" multiplier="1:1" id="Iqr-X9-XJy"/>
                     </constraints>
                     <state key="normal" image="btnMakeAPhoto"/>
                     <connections>
@@ -46,7 +46,7 @@
         </view>
     </objects>
     <resources>
-        <image name="btnMakeAPhoto" width="66" height="49"/>
+        <image name="btnMakeAPhoto" width="65" height="65"/>
         <image name="tabBarTransp" width="375" height="49"/>
     </resources>
 </document>

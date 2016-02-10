@@ -20,6 +20,7 @@ class AppearanceConfigurator {
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().backIndicatorImage = UIImage.appBackButton()
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = UIImage.appBackButton()
     }
     
