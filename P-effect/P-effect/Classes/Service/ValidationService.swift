@@ -10,7 +10,7 @@ import UIKit
 
 class ValidationService: NSObject {
     
-    class func valdateUserName(userName: String, completion: (Bool) -> ()) {
+    class func validateUserName(userName: String, completion: (Bool) -> ()) {
         if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
             return

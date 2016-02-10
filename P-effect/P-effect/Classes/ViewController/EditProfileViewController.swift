@@ -141,13 +141,13 @@ class EditProfileViewController: UIViewController {
     
     dynamic private func saveChangesAction() {
         if ReachabilityHelper.checkConnection(showAlert: false) {
-            if originalUserName == userName {
+            guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 return
             }
-            ValidationService.valdateUserName(userName!) { completion in
+            ValidationService.validateUserName(userName) { [weak self] completion in
                 if completion {
-                    self.saveChanges()
+                    self?.saveChanges()
                 }
             }
         } else {

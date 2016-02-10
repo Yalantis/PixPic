@@ -12,6 +12,8 @@ import AFDropdownNotification
 
 class AlertService: NSObject {
     
+    static var allowToDisplay = true
+    
     class func simpleAlert(message: String?) {
         if let topController = AlertService().topController() {
             topController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
@@ -35,7 +37,7 @@ class AlertService: NSObject {
         
         let isControllersWaitingForResponse = (topController as? UIAlertController) != nil
         
-        if isControllersWaitingForResponse {
+        if isControllersWaitingForResponse || !allowToDisplay {
             PushNotificationQueue.addObjectInQueue(message)
         } else {
             PushNotificationQueue.clearQueue()

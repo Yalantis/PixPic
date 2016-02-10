@@ -91,6 +91,7 @@ class PostDataSource: NSObject {
         guard let tableView = tableView else {
             return
         }
+        
         let indexPath = NSIndexPath(forRow: 0, inSection: 0)
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
