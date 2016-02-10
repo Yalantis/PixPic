@@ -20,7 +20,7 @@ class EffectsPickerModel: NSObject {
         EffectsSticker()
     }
     
-    func downloadEffects(completion: (Bool) -> ()) {
+    func downloadEffects(completion: Bool -> Void) {
         LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
                 self?.effectsGroups = objects

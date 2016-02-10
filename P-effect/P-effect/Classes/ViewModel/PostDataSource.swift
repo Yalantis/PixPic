@@ -47,6 +47,7 @@ class PostDataSource: NSObject {
     
     dynamic func fetchDataFromNotification() {
         fetchData(nil)
+        scrollToFirstRow()
     }
     
     func fetchData(user: User?) {
@@ -86,6 +87,15 @@ class PostDataSource: NSObject {
         return model
     }
     
+    private func scrollToFirstRow() {
+        guard let tableView = tableView else {
+            return
+        }
+        
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+    }
+    
 }
 
 extension PostDataSource: UITableViewDataSource {
@@ -112,7 +122,6 @@ extension PostDataSource: UITableViewDataSource {
                 }
             }
         }
-        
         return cell
     }
     

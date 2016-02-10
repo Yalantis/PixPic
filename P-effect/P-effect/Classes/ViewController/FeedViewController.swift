@@ -119,7 +119,7 @@ class FeedViewController: UIViewController {
     
     func setSelectedPhoto(image: UIImage) {
         postImageView.image = image
-        let pictureData = UIImageJPEGRepresentation(image, 0.5)
+        let pictureData = UIImageJPEGRepresentation(image, 0.9)
         if let file = PFFile(name: "image", data: pictureData!) {
             SaverService.saveAndUploadPost(file, comment: nil)
         }

@@ -41,6 +41,19 @@ class PhotoEditorViewController: UIViewController {
         navigationItem.title = "Edit"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        AlertService.allowToDisplay = false
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AlertService.allowToDisplay = true
+        PushNotificationQueue.handleNotificationQueue()
+    }
+    
     @IBAction private func postEditedImage() {
         guard ReachabilityHelper.checkConnection(showAlert: false) else{
             suggestSaveToPhotoLibrary()
