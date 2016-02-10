@@ -19,7 +19,7 @@ class UserModel: NSObject {
         super.init()
     }
     
-    func checkIfUsernameExists(completion:(Bool) -> ()) {
+    func checkIfUsernameExists(completion: Bool -> Void) {
         guard let username = user.username,
             query = PFUser.query()?.whereKey("username", equalTo: username) else {
             completion(false)
@@ -37,7 +37,7 @@ class UserModel: NSObject {
         )
     }
     
-    func checkIfFacebookIdExists(completion:(Bool) -> ()) {
+    func checkIfFacebookIdExists(completion: Bool -> Void) {
         guard let facebookId = user.facebookId,
             query = User.query()?.whereKey("facebookId", equalTo: facebookId) else {
             completion(false)

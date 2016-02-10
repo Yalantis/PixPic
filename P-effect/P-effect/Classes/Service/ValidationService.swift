@@ -10,7 +10,7 @@ import UIKit
 
 class ValidationService: NSObject {
     
-    class func validateUserName(userName: String, completion: (Bool) -> ()) {
+    class func validateUserName(userName: String, completion: Bool -> Void) {
         if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
             return
@@ -34,7 +34,7 @@ class ValidationService: NSObject {
         }
     }
     
-    static func needToUpdateVersion(completion: (Bool) -> ()){
+    static func needToUpdateVersion(completion: Bool -> Void){
         var effectsVersion = EffectsVersion()
         let query = EffectsVersion.query()
         let queryFromLocal = EffectsVersion.query()
