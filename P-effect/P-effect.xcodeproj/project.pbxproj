@@ -48,6 +48,7 @@
 		FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD27A2721C64CFEC0058203F /* FeedToolBar.xib */; };
 		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
+		FD67592A1C6BF00400E5FDD2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6759291C6BF00400E5FDD2 /* FBSDKCoreKit.framework */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
 		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */; };
@@ -132,6 +133,7 @@
 		FD27A2741C64D09E0058203F /* FeedToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedToolBar.swift; sourceTree = "<group>"; };
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
+		FD6759291C6BF00400E5FDD2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../Library/Developer/Xcode/DerivedData/P-effect-ewbgwkazkckqlmdtkiukvfrarfyd/Build/Products/Debug-iphoneos/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD67592A1C6BF00400E5FDD2 /* FBSDKCoreKit.framework in Frameworks */,
 				FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */,
 				FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */,
 				E0823F80177EF1A11E426BBF /* Pods.framework in Frameworks */,
@@ -189,6 +192,7 @@
 		468733C5E0D7CEB26FEA9271 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD6759291C6BF00400E5FDD2 /* FBSDKCoreKit.framework */,
 				FD27A26E1C64A9080058203F /* libSDWebImage.a */,
 				FD27A26A1C62497F0058203F /* AVKit.framework */,
 				FD27A2681C6249610058203F /* AVFoundation.framework */,
@@ -705,6 +709,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -752,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
