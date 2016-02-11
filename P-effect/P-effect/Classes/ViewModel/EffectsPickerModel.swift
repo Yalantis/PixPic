@@ -8,10 +8,10 @@
 
 import UIKit
 
+private let animationDuration = 0.3
 
 class EffectsPickerModel: NSObject {
     
-    private let animationDuration = 0.3
     private var currentGroupNumber: Int?
     private var effectsGroups: [EffectsModel]?
     private var headers = [Int: UIView]()
@@ -125,17 +125,16 @@ extension EffectsPickerModel: UICollectionViewDataSource {
     
     private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
-        for i in 0 ..< effectsGroups![section].effectsStickers.count {
+        for i in 0..<effectsGroups![section].effectsStickers.count {
             cells.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
         return cells
-        
     }
     
     private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
         let sections = NSMutableIndexSet()
-        for i in 0 ..< effectsGroups!.count {
+        for i in 0..<effectsGroups!.count {
             if i != section {
                 sections.addIndexes(NSIndexSet(index: i))
             }
