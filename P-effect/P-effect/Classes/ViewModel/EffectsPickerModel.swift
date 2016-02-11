@@ -8,10 +8,10 @@
 
 import UIKit
 
-let animationDuration: Double = 0.3
 
 class EffectsPickerModel: NSObject {
     
+    private let animationDuration = 0.3
     private var currentGroupNumber: Int?
     private var effectsGroups: [EffectsModel]?
     private var headers = [Int: UIView]()
@@ -103,7 +103,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         
                         collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
                         collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
-                        }, completion: { (finished: Bool) in
+                        }, completion: { finished in
                             collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
                     })
                 } else {
@@ -113,7 +113,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         
                         collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
-                        }, completion: { (finished: Bool) in
+                        }, completion: { finished in
                     })
                 }
             }
@@ -134,10 +134,9 @@ extension EffectsPickerModel: UICollectionViewDataSource {
     }
     
     private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
-        
         let sections = NSMutableIndexSet()
         for i in 0 ..< effectsGroups!.count {
-            if i != section{
+            if i != section {
                 sections.addIndexes(NSIndexSet(index: i))
             }
         }
