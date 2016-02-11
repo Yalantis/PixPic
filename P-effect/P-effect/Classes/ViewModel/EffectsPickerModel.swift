@@ -8,10 +8,14 @@
 
 import UIKit
 
+private let animationDuration = 0.3
+
 class EffectsPickerModel: NSObject {
     
+    private var currentGroupNumber: Int?
     private var effectsGroups: [EffectsModel]?
-    var currentGroupNumber: Int?
+    private var headers = [Int: UIView]()
+    private var currentHeader: UIView?
     
     override init() {
         super.init()
@@ -23,7 +27,9 @@ class EffectsPickerModel: NSObject {
     func downloadEffects(completion: Bool -> Void) {
         LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
-                self?.effectsGroups = objects
+                self?.effectsGroups = objects.sort {
+                    $0.effectsGroup.label > $1.effectsGroup.label
+                }
                 completion(true)
             } else {
                 completion(false)
@@ -48,7 +54,6 @@ class EffectsPickerModel: NSObject {
         }
     }
 }
-
 
 extension EffectsPickerModel: UICollectionViewDataSource {
     
@@ -88,18 +93,55 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             }
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
+                
+                self.currentHeader = headerView
+                collectionView.bringSubviewToFront(self.currentHeader!)
+                
                 if self.currentGroupNumber == nil {
-                    self.currentGroupNumber = indexPath.section
+                    collectionView.performBatchUpdates({
+                        self.currentGroupNumber = indexPath.section
+                        
+                        collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
+                        collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        }, completion: { finished in
+                            collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
+                    })
                 } else {
-                    self.currentGroupNumber = nil
+                    let lastGroupNumber = self.currentGroupNumber!
+                    collectionView.performBatchUpdates({
+                        self.currentGroupNumber = nil
+                        
+                        collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
+                        }, completion: { finished in
+                    })
                 }
-                collectionView.reloadData()
             }
             reusableview = headerView
-            
+            headers[indexPath.section] = headerView
         }
         return reusableview
     }
     
+    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
+        var cells = [NSIndexPath]()
+        for i in 0..<effectsGroups![section].effectsStickers.count {
+            cells.append(NSIndexPath(forRow: i, inSection: 0))
+        }
+        
+        return cells
+    }
+    
+    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
+        let sections = NSMutableIndexSet()
+        for i in 0..<effectsGroups!.count {
+            if i != section {
+                sections.addIndexes(NSIndexSet(index: i))
+            }
+        }
+        
+        return sections
+    }
     
 }
+
