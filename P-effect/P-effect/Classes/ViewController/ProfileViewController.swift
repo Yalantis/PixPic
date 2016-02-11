@@ -45,6 +45,7 @@ class ProfileViewController: UITableViewController {
         if (model!.userIsCurrentUser()) {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
+            profileSettingsButton.tintColor = UIColor.whiteColor()
         }
     }
     

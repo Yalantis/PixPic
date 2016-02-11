@@ -36,7 +36,7 @@ class FeedToolBar: UIView {
         UIView.animateWithDuration(
             0.7,
             delay: 0,
-            usingSpringWithDamping: 0.7,
+            usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.7,
             options: .CurveEaseInOut,
             animations: {
