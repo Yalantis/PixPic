@@ -132,9 +132,9 @@ class FeedViewController: UIViewController {
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
-        } else {
+        } else if let currentUser = currentUser {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-            controller.model = ProfileViewModel(profileUser: currentUser!)
+            controller.model = ProfileViewModel(profileUser: currentUser)
             self.navigationController!.showViewController(controller, sender: self)
         }
     }
