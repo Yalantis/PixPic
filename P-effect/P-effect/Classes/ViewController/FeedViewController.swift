@@ -126,7 +126,7 @@ class FeedViewController: UIViewController {
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
-        let currentUser = PFUser.currentUser()
+        let currentUser = User.currentUser()
         let isUserAbsent = currentUser == nil
 
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
@@ -134,7 +134,7 @@ class FeedViewController: UIViewController {
             navigationController!.pushViewController(controller, animated: true)
         } else {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-            controller.model = ProfileViewModel.init(profileUser: currentUser as! User)
+            controller.model = ProfileViewModel(profileUser: currentUser!)
             self.navigationController!.showViewController(controller, sender: self)
         }
     }
