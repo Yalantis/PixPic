@@ -30,6 +30,8 @@ class EffectViewHeader: UICollectionReusableView {
         ImageLoaderService.getImageForContentItem(file) { image, error in
             if let image = image {
                 self.image.image = image
+                self.image.image = self.image.image?.imageWithRenderingMode(.AlwaysTemplate)
+                self.image.tintColor = UIColor.whiteColor()
             } else {
                 print("\(error)")
             }
@@ -37,6 +39,19 @@ class EffectViewHeader: UICollectionReusableView {
     }
     
     func toggleGroup() {
+        UIView.animateWithDuration(
+            0.2,
+            delay: 0,
+            options: .CurveLinear,
+            animations: {
+                if self.image.tintColor == UIColor.whiteColor() {
+                    self.image.tintColor = UIColor.appBlueColor()
+                } else {
+                    self.image.tintColor = UIColor.whiteColor()
+                }
+            },
+            completion: nil
+        )
         completion()
     }
     
