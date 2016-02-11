@@ -19,7 +19,7 @@ struct Constants {
     }
     
     struct BaseDimensions {
-        static let ToolBarHeight: CGFloat = 49.0
+        static let ToolBarHeight: CGFloat = 50.0
         static let NavBarWithStatusBarHeight: CGFloat = 64.0
     }
     

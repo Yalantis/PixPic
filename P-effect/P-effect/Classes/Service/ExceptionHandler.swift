@@ -13,6 +13,7 @@ enum Exception: String, ErrorType {
     case NoConnection = "There is no internet connection"
     case CantApplyEffects = "Can't apply effects to photo"
     case CantCreateParseFile = "Can't create parse file"
+    case InvalidSessionToken = "Can't get auth data from Facebook"
     
 }
 

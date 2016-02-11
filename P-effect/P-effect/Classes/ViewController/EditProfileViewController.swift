@@ -140,14 +140,18 @@ class EditProfileViewController: UIViewController {
     }
     
     dynamic private func saveChangesAction() {
-        if originalUserName == userName {
-            saveChanges()
-            return
-        }
-        ValidationService.valdateUserName(userName!) { completion in
-            if completion {
-                self.saveChanges()
+        if ReachabilityHelper.checkConnection(showAlert: false) {
+            guard let userName = userName where originalUserName != userName else {
+                saveChanges()
+                return
             }
+            ValidationService.validateUserName(userName) { [weak self] completion in
+                if completion {
+                    self?.saveChanges()
+                }
+            }
+        } else {
+            AlertService.simpleAlert("Internet connection is required to save changes in profile")
         }
     }
     
@@ -266,6 +270,8 @@ class EditProfileViewController: UIViewController {
             ) { _ in
                 self.logout()
         }
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {

@@ -41,6 +41,19 @@ class PhotoEditorViewController: UIViewController {
         navigationItem.title = "Edit"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        AlertService.allowToDisplay = false
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AlertService.allowToDisplay = true
+        PushNotificationQueue.handleNotificationQueue()
+    }
+    
     @IBAction private func postEditedImage() {
         guard ReachabilityHelper.checkConnection(showAlert: false) else{
             suggestSaveToPhotoLibrary()
@@ -65,7 +78,7 @@ class PhotoEditorViewController: UIViewController {
             guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
                 throw Exception.CantApplyEffects
             }
-            let pictureData = UIImageJPEGRepresentation(image, 0.5)!
+            let pictureData = UIImageJPEGRepresentation(image, 0.9)!
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }

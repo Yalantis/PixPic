@@ -24,10 +24,12 @@ class EffectsPickerModel: NSObject {
         EffectsSticker()
     }
     
-    func downloadEffects(completion: (Bool) -> ()) {
+    func downloadEffects(completion: Bool -> Void) {
         LoaderService.loadEffects { [weak self] objects, error in
             if let objects = objects {
-                self?.effectsGroups = objects
+                self?.effectsGroups = objects.sort {
+                    $0.effectsGroup.label > $1.effectsGroup.label
+                }
                 completion(true)
             } else {
                 completion(false)
@@ -91,67 +93,27 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             }
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
+                
                 self.currentHeader = headerView
+                collectionView.bringSubviewToFront(self.currentHeader!)
+                
                 if self.currentGroupNumber == nil {
-                    UIView.animateWithDuration(
-                        animationDuration,
-                        delay: 0,
-                        options: .CurveEaseInOut,
-                        animations: {
-                            self.moveViewsTo(Array(self.headers.values))
-                        },
-                        completion: { _ in
-                            UIView.animateWithDuration(0.3,
-                                delay: 0,
-                                options: .CurveEaseInOut,
-                                animations: { Void in
-                                    headerView.moveTo(x: 0, y: 0)
-                                },
-                                completion: { _ in
-                                    self.currentGroupNumber = indexPath.section
-                                    collectionView.reloadData()
-                                    collectionView.layoutIfNeeded()
-                                    
-                                    self.moveViewsTo(collectionView.visibleCells())
-                                    UIView.animateWithDuration(0.3,
-                                        delay: 0,
-                                        options: .CurveEaseInOut,
-                                        animations: { Void in
-                                            self.moveViewsTo(collectionView.visibleCells(), y: 0)
-                                        },
-                                        completion: nil)
-                            })
+                    collectionView.performBatchUpdates({
+                        self.currentGroupNumber = indexPath.section
+                        
+                        collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
+                        collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        }, completion: { (finished: Bool) in
+                            collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
                     })
                 } else {
                     let lastGroupNumber = self.currentGroupNumber!
-                    UIView.animateWithDuration(
-                        animationDuration,
-                        delay: 0,
-                        options: .CurveEaseInOut,
-                        animations: {
-                            self.moveViewsTo(collectionView.visibleCells())
-                        },
-                        completion: { _ in
-                            self.currentGroupNumber = nil
-                            collectionView.reloadData()
-                            collectionView.layoutIfNeeded()
-                            self.currentHeader = self.headers[lastGroupNumber]!
-                            self.currentHeader!.moveTo(x: 0)
-                            self.moveViewsTo(Array(self.headers.values))
-                            
-                            UIView.animateWithDuration(animationDuration,
-                                delay: 0,
-                                options: .CurveEaseInOut,
-                                animations: { Void in
-                                    self.currentHeader!.moveTo(x: self.currentHeader!.frame.size.width * CGFloat(lastGroupNumber))
-                                }, completion: { _ in
-                                    UIView.animateWithDuration(animationDuration,
-                                        delay: 0,
-                                        options: .CurveEaseInOut,
-                                        animations: { Void in
-                                            self.moveViewsTo(Array(self.headers.values), y: 0)
-                                        }, completion: nil)
-                            })
+                    collectionView.performBatchUpdates({
+                        self.currentGroupNumber = nil
+                        
+                        collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
+                        }, completion: { (finished: Bool) in
                     })
                 }
             }
@@ -161,30 +123,27 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         return reusableview
     }
     
-    private func moveViewsTo(views: [UIView], y: CGFloat? = nil) {
-        for view in views where view != currentHeader {
-            var newFrame = view.frame
-            newFrame.origin.y = y ?? newFrame.size.height
-            view.frame = newFrame
+    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
+        var cells = [NSIndexPath]()
+        for i in 0 ..< effectsGroups![section].effectsStickers.count {
+            cells.append(NSIndexPath(forRow: i, inSection: 0))
         }
+        
+        return cells
+        
+    }
+    
+    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
+        
+        let sections = NSMutableIndexSet()
+        for i in 0 ..< effectsGroups!.count {
+            if i != section{
+                sections.addIndexes(NSIndexSet(index: i))
+            }
+        }
+        
+        return sections
     }
     
 }
-
-extension UIView {
-    
-    func  moveTo(x x: CGFloat? = nil, y: CGFloat? = nil) {
-        var newFrame = frame
-        if let x = x {
-            newFrame.origin.x = x
-        }
-        if let y = y {
-            newFrame.origin.y = y
-        }
-        frame = newFrame
-    }
-    
-}
-
-
 
