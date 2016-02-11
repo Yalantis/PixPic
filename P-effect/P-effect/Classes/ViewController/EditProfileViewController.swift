@@ -45,6 +45,19 @@ class EditProfileViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self);
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        AlertService.allowToDisplay = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        AlertService.allowToDisplay = true
+        PushNotificationQueue.handleNotificationQueue()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
