@@ -91,7 +91,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             guard let effectsGroups = effectsGroups else {
                 return reusableview
             }
-            var currentScrollPosition: CGPoint?
+            var currentScrollPosition: CGPoint!
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
                 
