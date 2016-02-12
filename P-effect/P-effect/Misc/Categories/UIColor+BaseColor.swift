@@ -28,16 +28,10 @@ extension UIColor {
 extension UIColor {
     
     // MARK: - Base colors
-    public class func appBaseDarkColor() -> UIColor {
-        return UIColor(hexString: "333333")
-    }
+    @nonobjc static let appBaseDarkColor = UIColor(hexString: "333333")
     
-    public class func appNavBarColor() -> UIColor {
-        return UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.65)
-    }
+    @nonobjc static let appNavBarColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.65)
     
-    public class func appBlueColor() ->  UIColor{
-        return UIColor.init(red: 0/255, green: 97/255, blue: 221/255, alpha: 1)
-    }
+    @nonobjc static let appBlueColor = UIColor.init(red: 0/255, green: 97/255, blue: 221/255, alpha: 1)
     
 }

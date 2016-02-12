@@ -12,12 +12,12 @@ class EffectViewHeader: UICollectionReusableView {
     
     static let identifier = "EffectViewHeaderIdentifier"
     
-    @IBOutlet private weak var image: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
     
-    private var completion: (() -> Void)!
+    private var completion: (() -> Bool)!
     
-    func configureWith(group group: EffectsGroup, completion: (() -> Void)) {
+    func configureWith(group group: EffectsGroup, completion: (() -> Bool)) {
         downloadImageFromFile(group.image)
         label.text = group.label
         self.completion = completion
@@ -29,9 +29,8 @@ class EffectViewHeader: UICollectionReusableView {
     private func downloadImageFromFile(file: PFFile) {
         ImageLoaderService.getImageForContentItem(file) { image, error in
             if let image = image {
-                self.image.image = image
-                self.image.image = self.image.image?.imageWithRenderingMode(.AlwaysTemplate)
-                self.image.tintColor = UIColor.whiteColor()
+                self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
+                self.imageView.tintColor = UIColor.whiteColor()
             } else {
                 print("\(error)")
             }
@@ -39,20 +38,17 @@ class EffectViewHeader: UICollectionReusableView {
     }
     
     func toggleGroup() {
+        let isSelected = completion()
+        let color = isSelected ? UIColor.appBlueColor : UIColor.whiteColor()
         UIView.animateWithDuration(
             0.2,
             delay: 0,
-            options: .CurveLinear,
+            options: [.CurveLinear, .BeginFromCurrentState],
             animations: {
-                if self.image.tintColor == UIColor.whiteColor() {
-                    self.image.tintColor = UIColor.appBlueColor()
-                } else {
-                    self.image.tintColor = UIColor.whiteColor()
-                }
+                self.imageView.tintColor = color
             },
             completion: nil
         )
-        completion()
     }
     
 }

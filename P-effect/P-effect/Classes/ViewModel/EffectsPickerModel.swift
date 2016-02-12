@@ -106,6 +106,8 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         }, completion: { finished in
                             collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
                     })
+                    
+                    return true
                 } else {
                     let lastGroupNumber = self.currentGroupNumber!
                     collectionView.performBatchUpdates({
@@ -115,6 +117,8 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
                         }, completion: { finished in
                     })
+                    
+                    return false
                 }
             }
             reusableview = headerView
