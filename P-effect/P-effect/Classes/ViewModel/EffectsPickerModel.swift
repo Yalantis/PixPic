@@ -91,7 +91,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             guard let effectsGroups = effectsGroups else {
                 return reusableview
             }
-            var currentScrollPosition: CGPoint!
+            var currentContentOffset: CGPoint!
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
             headerView.configureWith(group: group.effectsGroup) {
                 
@@ -99,7 +99,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                 collectionView.bringSubviewToFront(self.currentHeader!)
                 
                 if self.currentGroupNumber == nil {
-                    currentScrollPosition = collectionView.contentOffset
+                    currentContentOffset = collectionView.contentOffset
                     collectionView.performBatchUpdates({
                         self.currentGroupNumber = indexPath.section
                         
@@ -119,7 +119,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
                         }, completion: { finished in
                     })
-                    collectionView.setContentOffset(currentScrollPosition!, animated: true)
+                    collectionView.setContentOffset(currentContentOffset!, animated: true)
                     
                     return false
                 }
