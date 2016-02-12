@@ -119,7 +119,7 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
                         }, completion: { finished in
                     })
-                    collectionView.setContentOffset(currentContentOffset!, animated: true)
+                    collectionView.setContentOffset(currentContentOffset, animated: true)
                     
                     return false
                 }
