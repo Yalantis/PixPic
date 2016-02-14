@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol PhotoEditorDelegate: class {
     
@@ -46,7 +47,7 @@ class PhotoEditorViewController: UIViewController {
         
         AlertService.allowToDisplay = false
     }
-
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -69,8 +70,19 @@ class PhotoEditorViewController: UIViewController {
             
             return
         }
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        AlertService.simpleAlert("Image saved to library")
+        
+        PHPhotoLibrary.requestAuthorization { status in
+            dispatch_async(dispatch_get_main_queue()) {
+                switch status {
+                case .Authorized:
+                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    AlertService.simpleAlert("Image saved to library")
+                    
+                default:
+                    AlertService.simpleAlert("No access to photo library")
+                }
+            }
+        }
     }
     
     private func postToTheNet() {
