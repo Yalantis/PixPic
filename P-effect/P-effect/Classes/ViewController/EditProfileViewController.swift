@@ -153,6 +153,7 @@ class EditProfileViewController: UIViewController {
     }
     
     dynamic private func saveChangesAction() {
+        navigationItem.rightBarButtonItem!.enabled = false
         if ReachabilityHelper.checkConnection(showAlert: false) {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
