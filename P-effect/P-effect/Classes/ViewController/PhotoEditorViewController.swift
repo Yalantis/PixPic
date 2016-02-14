@@ -71,12 +71,12 @@ class PhotoEditorViewController: UIViewController {
             return
         }
         PHPhotoLibrary.requestAuthorization { status in
-            dispatch_async(
-                dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue(), {
                     switch status {
                     case .Authorized:
                         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                         AlertService.simpleAlert("Image saved to library")
+                        
                     default:
                         AlertService.simpleAlert("No access to photo library")
                     }
