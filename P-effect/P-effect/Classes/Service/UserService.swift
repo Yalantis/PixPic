@@ -1,9 +1,9 @@
 //
-//  SaverService.swift
+//  UserService.swift
 //  P-effect
 //
-//  Created by Jack Lapin on 17.01.16.
-//  Copyright © 2016 Jack Lapin. All rights reserved.
+//  Created by Jack Lapin on 16.02.16.
+//  Copyright © 2016 Yalantis. All rights reserved.
 //
 
 import Foundation
@@ -12,21 +12,15 @@ private let messageDataSuccessfullyUpdated = "User data has been updated!"
 private let messageDataNotUpdated = "Troubles with the update! Check it out later"
 private let messageUsernameCanNotBeEmpty = "User name can not be empty"
 
-
-
-final class SaverService {
+class UserService {
     
-    init () {
-        
-    }
-    
-    static func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
+    func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
         if let avatar = avatar {
             avatar.saveInBackgroundWithBlock(
                 { succeeded, error in
                     if succeeded {
                         print("Avatar saved!")
-                        SaverService.uploadUserChanges(user, avatar: avatar, nickname: nickname)
+                        self.uploadUserChanges(user, avatar: avatar, nickname: nickname)
                     } else if let error = error {
                         print(error)
                     }
@@ -37,7 +31,7 @@ final class SaverService {
         }
     }
     
-    static func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
+    func uploadUserChanges(user: User, avatar: PFFile, nickname: String?, completion: ((Bool?, String?) -> ())? = nil) {
         user.avatar = avatar
         if let nickname = nickname {
             user.username = nickname
@@ -58,7 +52,4 @@ final class SaverService {
             completion?(false, messageUsernameCanNotBeEmpty)
         }
     }
-    
-
-    
 }

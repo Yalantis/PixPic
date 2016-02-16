@@ -26,7 +26,6 @@ class User: PFUser {
         return PFUser.currentUser() as? User
     }
     
-    
     override class func query() -> PFQuery? {
         let query = PFQuery(className: User.parseClassName())
         query.orderByDescending("updatedAt")
