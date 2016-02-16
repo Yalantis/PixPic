@@ -39,7 +39,7 @@ class EffectsGroupHeaderView: UICollectionReusableView {
     
     func toggleGroup() {
         let isSelected = completion()
-        let color = isSelected ? UIColor.grayColor() : UIColor.whiteColor()
+        let color = isSelected ? UIColor(colorLiteralRed: 0/255.0, green: 97/255.0, blue: 211/255.0, alpha: 1.0) : UIColor.whiteColor()
         UIView.animateWithDuration(
             0.2,
             delay: 0,
