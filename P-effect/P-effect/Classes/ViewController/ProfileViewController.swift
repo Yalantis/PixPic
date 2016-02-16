@@ -80,7 +80,7 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard ReachabilityHelper.checkConnection() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 
@@ -88,8 +88,7 @@ class ProfileViewController: UITableViewController {
             }
     //        self?.dataSource?.fetchData(self?.model.user)
         }
-        tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
       //      self?.dataSource?.fetchPagedData(self?.model.user)
         }
     }

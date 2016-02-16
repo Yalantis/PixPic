@@ -10,7 +10,7 @@ import Foundation
 
 private let messageUploadSuccessful = "Upload successful!"
 
-typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
+typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> ()
 
 class PostService {
     
@@ -58,7 +58,7 @@ class PostService {
                     object: nil
                 )
             } else {
-                if let error = error?.userInfo["error"] as? String {
+                if let error = error?.localizedDescription {
                     print(error)
                 }
             }
@@ -70,7 +70,7 @@ class PostService {
         
         if User.currentUser() == nil {
             print("No user signUP")
-            completion(objects: nil, error: nil)
+            completion(posts: nil, error: nil)
             return
         }
         
@@ -82,18 +82,18 @@ class PostService {
             query.whereKey("user", equalTo: user)
         }
         query.findObjectsInBackgroundWithBlock { objects, error -> Void in
-            if error == nil {
-                if let objects = objects {
-                    for object in objects {
-                        array.append(object as! Post)
-                        (object as! Post).saveEventually()
-                        (object as! Post).pinInBackground()
-                    }
+            if let objects = objects {
+                for object in objects {
+                    array.append(object as! Post)
+                    object.saveEventually()
+                    object.pinInBackground()
                 }
-                completion(objects: array, error: nil)
-            } else {
+                completion(posts: array, error: nil)
+            } else if error == nil {
                 print("Error: \(error!) \(error!.userInfo)")
-                completion(objects: nil, error: error)
+                completion(posts: nil, error: error)
+            } else {
+                completion(posts: nil, error: nil)
             }
         }
     }

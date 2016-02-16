@@ -32,7 +32,7 @@ class FeedViewController: UIViewController {
         setupAdapter()
         setupNotification()
         setupLoadersCallback()
-
+        
         if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -71,7 +71,7 @@ class FeedViewController: UIViewController {
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-
+    
     // MARK: - Setup methods
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
@@ -102,8 +102,12 @@ class FeedViewController: UIViewController {
         locator.registerService(PostService())
         
         let postService: PostService = locator.getService()
-        postService.loadPosts() { (objects, error) -> () in
-            self.postAdapter.posts.appendContentsOf(objects!)
+        postService.loadPosts() { objects, error in
+            if let objects = objects {
+                self.postAdapter.posts.appendContentsOf(objects)
+            } else if let error = error {
+                print(error)
+            }
         }
     }
     
@@ -136,8 +140,8 @@ class FeedViewController: UIViewController {
     
     // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
-        let postService: PostService = (locator.getService())
-        postService.loadPosts() {[weak self] (objects, error) -> () in
+        let postService: PostService = locator.getService()
+        postService.loadPosts() { [weak self] objects, error in
             self?.postAdapter.posts = objects!
             self?.tableView?.pullToRefreshView.stopAnimating()
             self?.scrollToFirstRow()
@@ -152,7 +156,7 @@ class FeedViewController: UIViewController {
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         let isUserAbsent = currentUser == nil
-
+        
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
@@ -167,18 +171,17 @@ class FeedViewController: UIViewController {
     
     private func setupLoadersCallback() {
         let postService: PostService = (locator.getService())
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard ReachabilityHelper.checkConnection() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            postService.loadPosts() { (objects, error) -> () in
+            postService.loadPosts() { objects, error in
                 self?.postAdapter.posts = objects!
                 self?.tableView?.pullToRefreshView.stopAnimating()
             }
         }
-        tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
             postService.loadPagedData(offset: (self?.postAdapter.countOfModels())!) { objects, error in
                 self?.postAdapter.posts.appendContentsOf(objects!)
             }
