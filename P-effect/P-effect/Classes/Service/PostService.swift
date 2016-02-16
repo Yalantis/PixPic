@@ -21,18 +21,18 @@ class PostService {
         loadPosts(user, query: query, completion: completion)
     }
     
-    func loadPagedData(user: User? = nil, offset: Int, completion: LoadingPostsCompletion) {
+    func loadPagedData(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery()
         query.limit = Constants.DataSource.QueryLimit
         query.skip = offset
         loadPosts(user, query: query, completion: completion)
     }
     
-    func savePost(file: PFFile, comment: String? = nil) {
-        file.saveInBackgroundWithBlock({ succeeded, error in
+    func savePost(avatar: PFFile, comment: String? = nil) {
+        avatar.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
                 print("Saved!")
-                self.uploadPost(file, comment: comment)
+                self.uploadPost(avatar, comment: comment)
             } else if let error = error {
                 print(error)
             }
@@ -44,17 +44,17 @@ class PostService {
     }
     
     // MARK: - Private methods
-    private func uploadPost(file: PFFile, comment: String?) {
+    private func uploadPost(avatar: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
             // Auth service
             return
         }
-        let post = PostModel(image: file, user: user, comment: comment).post
+        let post = PostModel(image: avatar, user: user, comment: comment).post
         post.saveInBackgroundWithBlock{ succeeded, error in
             if succeeded {
                 AlertService.simpleAlert(messageUploadSuccessful)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationKey.NewPostUploaded,
+                    Constants.NotificationName.NewPostUploaded,
                     object: nil
                 )
             } else {

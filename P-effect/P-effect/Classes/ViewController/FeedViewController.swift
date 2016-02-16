@@ -90,7 +90,7 @@ class FeedViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "fetchDataFromNotification",
-            name: Constants.NotificationKey.NewPostUploaded,
+            name: Constants.NotificationName.NewPostUploaded,
             object: nil
         )
     }
