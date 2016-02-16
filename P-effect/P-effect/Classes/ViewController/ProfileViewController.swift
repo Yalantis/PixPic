@@ -17,13 +17,8 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var tableViewFooter: UIView!
     
     private var activityShown: Bool?
-    private var dataSource: PostAdapter? {
-        didSet {
-//            dataSource?.tableView = tableView
-//            dataSource?.fetchData(model.user)
-//            dataSource?.shouldPullToRefreshHandle = true
-        }
-    }
+    private lazy var dataSource = PostAdapter()
+
     var model: ProfileViewModel!
     
     override func viewDidLoad() {

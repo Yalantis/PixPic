@@ -97,7 +97,7 @@ class PhotoEditorViewController: UIViewController {
                 throw Exception.CantCreateParseFile
             }
             let postService: PostService = (locator.getService())
-            postService.saveAndUploadPost(file)
+            postService.savePost(file)
             navigationController!.popViewControllerAnimated(true)
         } catch let exception {
             ExceptionHandler.handle(exception as! Exception)

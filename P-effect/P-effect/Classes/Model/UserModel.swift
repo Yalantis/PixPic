@@ -20,11 +20,11 @@ class UserModel: NSObject {
     }
     
     func checkIfUsernameExists(completion: Bool -> Void) {
-        guard let username = user.username,
-            query = PFUser.query()?.whereKey("username", equalTo: username) else {
+        guard let username = user.username else {
             completion(false)
             return
         }
+        let query = User.sortedQuery().whereKey("username", equalTo: username)
         query.getFirstObjectInBackgroundWithBlock(
             { object, _ in
                 if object != nil {
@@ -38,11 +38,11 @@ class UserModel: NSObject {
     }
     
     func checkIfFacebookIdExists(completion: Bool -> Void) {
-        guard let facebookId = user.facebookId,
-            query = User.query()?.whereKey("facebookId", equalTo: facebookId) else {
+        guard let facebookId = user.facebookId else {
             completion(false)
             return
         }
+        let query = User.sortedQuery().whereKey("facebookId", equalTo: facebookId)
         query.getFirstObjectInBackgroundWithBlock(
             { object, _ in
                 if object != nil {

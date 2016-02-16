@@ -179,7 +179,7 @@ class FeedViewController: UIViewController {
         }
         tableView.addInfiniteScrollingWithActionHandler {
             [weak self]() -> () in
-            postService.loadPagedData(leap: (self?.postAdapter.countOfModels())!) { objects, error in
+            postService.loadPagedData(offset: (self?.postAdapter.countOfModels())!) { objects, error in
                 self?.postAdapter.posts.appendContentsOf(objects!)
             }
         }
@@ -208,14 +208,14 @@ extension FeedViewController: PostAdapterDelegate {
     }
     
     func showPlaceholderForEmptyDataSet() {
-        if postAdapter.countOfModels() == 0 {
+        if postAdapter.isEmpty {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
             tableView.reloadData()
         }
     }
     
-    func postAdapterDidChangeContent(dataSource: PostAdapter) {
+    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
 }

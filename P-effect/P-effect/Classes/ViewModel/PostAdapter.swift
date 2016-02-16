@@ -12,16 +12,22 @@ protocol PostAdapterDelegate: class {
     
     func showUserProfile(user: User)
     func showPlaceholderForEmptyDataSet()
-    func postAdapterDidChangeContent(adapter: PostAdapter)
+    func postAdapterRequestedViewUpdate(adapter: PostAdapter)
     
 }
 
 class PostAdapter: NSObject {
     
+    var isEmpty: Bool {
+        get {
+            return self.countOfModels() == 0
+        }
+    }
+    
     var posts = [Post]() {
         didSet {
             delegate?.showPlaceholderForEmptyDataSet()
-            delegate?.postAdapterDidChangeContent(self)
+            delegate?.postAdapterRequestedViewUpdate(self)
         }
     }
     weak var delegate: PostAdapterDelegate?
@@ -50,7 +56,6 @@ extension PostAdapter: UITableViewDataSource {
             ) as! PostViewCell
         cell.delegate = self
         cell.configureWithPost(modelAtIndex(indexPath))
-        
         cell.selectionClosure = {
             [weak self] cell in
             if let path = tableView.indexPathForCell(cell) {

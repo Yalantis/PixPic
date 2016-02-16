@@ -19,7 +19,7 @@ class Post: PFObject {
         }
     }
     
-    override class func query() -> PFQuery? {
+    class func sortedQuery() -> PFQuery {
         let query = PFQuery(className: Post.parseClassName())
         query.includeKey("user")
         query.orderByDescending("updatedAt")
