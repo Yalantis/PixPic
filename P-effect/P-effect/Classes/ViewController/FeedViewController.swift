@@ -22,7 +22,7 @@ class FeedViewController: UIViewController {
     
     private lazy var postAdapter = PostAdapter()
     
-    //MARK: - Lifecycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +72,7 @@ class FeedViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
-    //MARK: - Setup methods
+    // MARK: - Setup methods
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
         toolBar.selectionClosure = { [weak self] in
@@ -102,7 +102,7 @@ class FeedViewController: UIViewController {
         locator.registerService(PostService())
         
         let postService: PostService = locator.getService()
-        postService.loadFreshData() { (objects, error) -> () in
+        postService.loadPosts() { (objects, error) -> () in
             self.postAdapter.posts.appendContentsOf(objects!)
         }
     }
@@ -112,7 +112,7 @@ class FeedViewController: UIViewController {
         tableView?.emptyDataSetSource = self
     }
     
-    //MARK: - photo editor
+    // MARK: - photo editor
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
@@ -134,10 +134,10 @@ class FeedViewController: UIViewController {
         navigationController!.pushViewController(viewController, animated: false)
     }
     
-    //MARK: - Notification handling
+    // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
         let postService: PostService = (locator.getService())
-        postService.loadFreshData() {[weak self] (objects, error) -> () in
+        postService.loadPosts() {[weak self] (objects, error) -> () in
             self?.postAdapter.posts = objects!
             self?.tableView?.pullToRefreshView.stopAnimating()
             self?.scrollToFirstRow()
@@ -163,7 +163,7 @@ class FeedViewController: UIViewController {
         }
     }
     
-    //MARK: - UserInteractive
+    // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
         let postService: PostService = (locator.getService())
@@ -172,7 +172,7 @@ class FeedViewController: UIViewController {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            postService.loadFreshData() { (objects, error) -> () in
+            postService.loadPosts() { (objects, error) -> () in
                 self?.postAdapter.posts = objects!
                 self?.tableView?.pullToRefreshView.stopAnimating()
             }

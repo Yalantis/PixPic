@@ -15,7 +15,7 @@ typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
 class PostService {
     
     // MARK: - Public methods
-    func loadFreshData(user: User? = nil, completion: LoadingPostsCompletion) {
+    func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery()
         query.limit = Constants.DataSource.QueryLimit
         loadPosts(user, query: query, completion: completion)
@@ -43,7 +43,7 @@ class PostService {
         )
     }
     
-    //MARK: - Private methods
+    // MARK: - Private methods
     private func uploadPost(file: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
             // Auth service
