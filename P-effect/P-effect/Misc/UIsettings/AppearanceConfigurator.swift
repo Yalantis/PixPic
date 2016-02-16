@@ -16,7 +16,7 @@ class AppearanceConfigurator {
     class func configurateNavigationBarAndStatusBar() {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
-        UINavigationBar.appearance().barTintColor = UIColor.appNavBarColor()
+        UINavigationBar.appearance().barTintColor = UIColor.appNavBarColor
         UINavigationBar.appearance().translucent = false
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().backIndicatorImage = UIImage.appBackButton()
