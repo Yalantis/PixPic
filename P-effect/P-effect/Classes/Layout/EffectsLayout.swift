@@ -8,9 +8,10 @@
 
 import Foundation
 
+private let cellSize = CGSize(width: 105, height: 105)
+
 class EffectsLayout: UICollectionViewFlowLayout {
     
-    private let cellSize = CGSize(width: 105, height: 105)
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,14 +31,14 @@ class EffectsLayout: UICollectionViewFlowLayout {
         var newFrame = CGRect(origin: attributes.frame.origin, size: attributes.frame.size)
         newFrame.origin.y = cellSize.height
         attributes.frame = newFrame
-        attributes.alpha = CGFloat(0)
+        attributes.alpha = 0
         
         return attributes
     }
     
     override func finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = super.finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath)!
-        attributes.alpha = CGFloat(0)
+        attributes.alpha = 0
         
         return attributes
     }

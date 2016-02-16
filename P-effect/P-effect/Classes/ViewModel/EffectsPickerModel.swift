@@ -81,7 +81,8 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             ) as! EffectViewCell
         
         if let effectsGroups = effectsGroups {
-            cell.setStickerContent(effectsGroups[currentGroupNumber ?? 0].effectsStickers[indexPath.row])
+            let sticker = effectsGroups[currentGroupNumber ?? 0].effectsStickers[indexPath.row]
+            cell.setStickerContent(sticker)
         }
         
         return cell
@@ -118,9 +119,6 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                     let lastGroupNumber = self.currentGroupNumber!
                     collectionView.performBatchUpdates({
                         self.currentGroupNumber = nil
-                        
-                        print(indexPath.section)
-                        print(indexPath.row)
                         
                         collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: lastGroupNumber))
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
