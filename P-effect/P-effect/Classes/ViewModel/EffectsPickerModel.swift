@@ -16,6 +16,7 @@ class EffectsPickerModel: NSObject {
     private var effectsGroups: [EffectsModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
+    private var currentContentOffset: CGPoint!
     
     override init() {
         super.init()
@@ -38,10 +39,10 @@ class EffectsPickerModel: NSObject {
     }
     
     func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
-        guard let currentGroupNumber = currentGroupNumber else {
+        guard let currentGroupNumber = currentGroupNumber, let effectsGroups = effectsGroups else {
             return
         }
-        let image = effectsGroups![currentGroupNumber].effectsStickers[indexPath.row].image
+        let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
         ImageLoaderService.getImageForContentItem(image) {
             image, error in
             if let error = error {
@@ -78,7 +79,11 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             Constants.EffectsPicker.EffectsPickerCellIdentifier,
             forIndexPath: indexPath
             ) as! EffectViewCell
-        cell.setStickerContent(effectsGroups![currentGroupNumber!].effectsStickers[indexPath.row])
+        
+        if let effectsGroups = effectsGroups {
+            let sticker = effectsGroups[currentGroupNumber ?? 0].effectsStickers[indexPath.row]
+            cell.setStickerContent(sticker)
+        }
         
         return cell
     }
@@ -87,26 +92,25 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         var reusableview = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectViewHeader.identifier, forIndexPath: indexPath) as! EffectViewHeader
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectsGroupHeaderView.identifier, forIndexPath: indexPath) as! EffectsGroupHeaderView
             guard let effectsGroups = effectsGroups else {
                 return reusableview
             }
-            var currentContentOffset: CGPoint!
             let group = effectsGroups[currentGroupNumber ?? indexPath.section]
+            
             headerView.configureWith(group: group.effectsGroup) {
-                
                 self.currentHeader = headerView
                 collectionView.bringSubviewToFront(self.currentHeader!)
                 
                 if self.currentGroupNumber == nil {
-                    currentContentOffset = collectionView.contentOffset
+                    self.currentContentOffset = collectionView.contentOffset
                     collectionView.performBatchUpdates({
                         self.currentGroupNumber = indexPath.section
                         
                         collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
-                        collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section, count: collectionView.numberOfItemsInSection(indexPath.section)))
                         }, completion: { finished in
-                            collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
+                            collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
                     })
                     
                     return true
@@ -115,22 +119,22 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                     collectionView.performBatchUpdates({
                         self.currentGroupNumber = nil
                         
-                        collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
+                        collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: lastGroupNumber))
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))
                         }, completion: { finished in
+                            collectionView.setContentOffset(self.currentContentOffset, animated: true)
                     })
-                    collectionView.setContentOffset(currentContentOffset, animated: true)
                     
                     return false
                 }
             }
             reusableview = headerView
-            headers[indexPath.section] = headerView
         }
+        
         return reusableview
     }
     
-    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
+    private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
         for i in 0..<effectsGroups![section].effectsStickers.count {
             cells.append(NSIndexPath(forRow: i, inSection: 0))
@@ -151,4 +155,3 @@ extension EffectsPickerModel: UICollectionViewDataSource {
     }
     
 }
-
