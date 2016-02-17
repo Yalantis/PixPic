@@ -26,7 +26,7 @@ class EffectsPickerViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView!.registerNib(EffectsGroupHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: EffectsGroupHeaderView.identifier)
+        collectionView!.registerNib(EffectsGroupHeaderView.cellNib(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: EffectsGroupHeaderView.identifier)
         
         collectionView!.collectionViewLayout = EffectsLayout()
     }
