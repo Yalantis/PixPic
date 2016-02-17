@@ -10,7 +10,7 @@ import UIKit
 
 private let animationDuration = 0.3
 
-class EffectsPickerModel: NSObject {
+class EffectsPickerAdapter: NSObject {
     
     private var currentGroupNumber: Int?
     var effectsGroups: [EffectsModel]?
@@ -23,19 +23,6 @@ class EffectsPickerModel: NSObject {
         
         EffectsGroup()
         EffectsSticker()
-    }
-    
-    func downloadEffects(completion: Bool -> Void) {
-        LoaderService.loadEffects { [weak self] objects, error in
-            if let objects = objects {
-                self?.effectsGroups = objects.sort {
-                    $0.effectsGroup.label > $1.effectsGroup.label
-                }
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
     }
     
     func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
@@ -79,7 +66,7 @@ class EffectsPickerModel: NSObject {
 }
 
 // MARK: - UICollectionViewDelegate
-extension EffectsPickerModel: UICollectionViewDelegate {
+extension EffectsPickerAdapter: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
@@ -88,7 +75,6 @@ extension EffectsPickerModel: UICollectionViewDelegate {
                 return
             }
             if let image = image {
-                
 //                self.delegate?.didChooseEffectFromPicket(image)
             }
         }
@@ -102,7 +88,7 @@ extension EffectsPickerModel: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDataSource
-extension EffectsPickerModel: UICollectionViewDataSource {
+extension EffectsPickerAdapter: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if currentGroupNumber != nil {

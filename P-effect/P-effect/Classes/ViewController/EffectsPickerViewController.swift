@@ -11,8 +11,7 @@ import UIKit
 class EffectsPickerViewController: UICollectionViewController {
     
     weak var delegate: PhotoEditorViewController?
-    lazy var effectsPickerAdapter = EffectsPickerModel()
-    
+    lazy var effectsPickerAdapter = EffectsPickerAdapter()
     lazy var locator = ServiceLocator()
     
     // MARK: - Lifecycle

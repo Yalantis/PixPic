@@ -172,7 +172,7 @@ class PhotoEditorViewController: UIViewController {
             delegate = imageController
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
-            effectsPickerController?.effectsPickerAdapter = EffectsPickerModel()
+            effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
         default:
             break
         }

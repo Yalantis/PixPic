@@ -34,44 +34,6 @@ class ValidationService: NSObject {
         }
     }
     
-    static func needToUpdateVersion(completion: Bool -> Void){
-        var effectsVersion = EffectsVersion()
-        let query = EffectsVersion.query()
-        let queryFromLocal = EffectsVersion.query()
-        queryFromLocal?.fromLocalDatastore()
-        
-        guard ReachabilityHelper.checkConnection() else {
-            completion(false)
-            
-            return
-        }
-        query?.getFirstObjectInBackgroundWithBlock { object, error in
-            if error != nil {
-                print("Error: \(error!) \(error!.userInfo)")
-                completion(false)
-                return
-            } else {
-                if let object = object {
-                    effectsVersion = object as! EffectsVersion
-                    queryFromLocal?.getFirstObjectInBackgroundWithBlock { localObject, error in
-                        if error != nil {
-                            print("Error: \(error!) \(error!.userInfo)")
-                            completion(true)
-                            return
-                        }
-                        if let localObject = localObject {
-                            if effectsVersion.version > (localObject as! EffectsVersion).version {
-                                completion(true)
-                            } else {
-                                completion (false)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
     private class func isUserNameContainsOnlyLetters(userName: String) -> Bool {
         if userName.characters.first == Constants.Validation.WhiteSpace {
             AlertService.simpleAlert(Constants.Validation.SpaceInBegining)

@@ -19,7 +19,7 @@
 		499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */; };
 		499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */; };
 		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
-		499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */; };
+		499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */; };
 		499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Main.storyboard */; };
 		499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
@@ -63,7 +63,6 @@
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertService.swift */; };
 		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
-		FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AF1C4E528700331799 /* LoaderService.swift */; };
 		FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */; };
 		FDD0F0B71C4E528700331799 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B11C4E528700331799 /* Router.swift */; };
 		FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */; };
@@ -107,7 +106,7 @@
 		499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
 		499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerViewController.swift; sourceTree = "<group>"; };
 		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerModel.swift; sourceTree = "<group>"; };
+		499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerAdapter.swift; sourceTree = "<group>"; };
 		499DD0541C57D2D300DABCD5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
@@ -159,7 +158,6 @@
 		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
 		FDD0F0AD1C4E528700331799 /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		FDD0F0AE1C4E528700331799 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		FDD0F0AF1C4E528700331799 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
 		FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
 		FDD0F0B11C4E528700331799 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAdapter.swift; sourceTree = "<group>"; };
@@ -355,12 +353,10 @@
 				77D5295D1C60D90900C8932C /* ExceptionHandler.swift */,
 				FD12C1041C5185EE006F99FD /* FBAuthorization.swift */,
 				95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */,
-				FDD0F0AF1C4E528700331799 /* LoaderService.swift */,
 				FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */,
 				FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */,
 				77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */,
 				FDD0F0B11C4E528700331799 /* Router.swift */,
-				FDD0F0B21C4E528700331799 /* SaverService.swift */,
 				4904A1B51C526EA200F26E05 /* ValidationService.swift */,
 				FDEA23121C7341E9009EE533 /* ServiceLocator.swift */,
 				FDEA23141C73434E009EE533 /* UserService.swift */,
@@ -389,7 +385,7 @@
 				FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */,
 				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
-				499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */,
+				499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */,
 				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
 			);
 			path = ViewModel;
@@ -654,7 +650,7 @@
 			files = (
 				FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */,
 				FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */,
-				499DD0531C579F1300DABCD5 /* EffectsPickerModel.swift in Sources */,
+				499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
@@ -672,9 +668,7 @@
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
 				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
 				FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */,
-				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */,
-				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
 				FDEA23171C734359009EE533 /* PostService.swift in Sources */,
 				FDEA23151C73434E009EE533 /* UserService.swift in Sources */,
