@@ -32,7 +32,7 @@ class AuthorizationViewController: UIViewController {
                     self?.proceedWithoutAuthorization()
                     return
                 }
-                user.checkIfFacebookIdExists { exists in
+                user.checkFacebookIdExistance { exists in
                     if exists {
                         user.passwordSet = false
                         self?.signIn(user)

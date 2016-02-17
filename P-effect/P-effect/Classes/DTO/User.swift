@@ -36,7 +36,7 @@ class User: PFUser {
 
 extension User {
     
-    func checkIfUsernameExists(completion: Bool -> Void) {
+    func checkUsernameExistance(completion: Bool -> Void) {
         guard let username = username else {
             completion(false)
             return
@@ -53,7 +53,7 @@ extension User {
         )
     }
     
-    func checkIfFacebookIdExists(completion: Bool -> Void) {
+    func checkFacebookIdExistance(completion: Bool -> Void) {
         guard let facebookId = facebookId else {
             completion(false)
             return
@@ -70,7 +70,7 @@ extension User {
         )
     }
     
-    func linkWithFacebook(completion: (NSError?) -> ()) {
+    func linkWithFacebook(completion: (NSError?) -> Void) {
         if PFFacebookUtils.isLinkedWithUser(self) {
             completion(nil)
         } else {

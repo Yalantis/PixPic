@@ -8,9 +8,9 @@
 
 import Foundation
 
-public enum UpdateType : Int {
-    case Reload
-    case LoadMore
+public enum UpdateType {
+    
+    case Reload, LoadMore
 }
 
 protocol PostAdapterDelegate: class {
@@ -49,8 +49,8 @@ class PostAdapter: NSObject {
     }
     
     func getPost(atIndexPath indexPath: NSIndexPath) -> Post {
-        let model = posts[indexPath.row]
-        return model
+        let post = posts[indexPath.row]
+        return post
     }
     
 }
@@ -67,7 +67,7 @@ extension PostAdapter: UITableViewDataSource {
             forIndexPath: indexPath
             ) as! PostViewCell
         cell.delegate = self
-        cell.configureWithPost(getPost(atIndexPath: indexPath))
+        cell.configure(withPost: getPost(atIndexPath: indexPath))
         cell.selectionClosure = {
             [weak self] cell in
             if let path = tableView.indexPathForCell(cell) {

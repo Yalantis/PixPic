@@ -11,12 +11,6 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-protocol FeedViewControllerDelegate {
-    
-    func retrieveData()
-    
-}
-
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -36,7 +30,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupToolBar()
         setupAdapter()
-        setupNotification()
+        setupObserver()
         setupLoadersCallback()
         
         if ReachabilityHelper.checkConnection() == false {
@@ -92,7 +86,7 @@ class FeedViewController: UIViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
-    private func setupNotification() {
+    private func setupObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "fetchDataFromNotification",
@@ -108,7 +102,7 @@ class FeedViewController: UIViewController {
         locator.registerService(PostService())
         
         let postService: PostService = locator.getService()
-        postService.loadPosts() { objects, error in
+        postService.loadPosts { objects, error in
             if let objects = objects {
                 self.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
@@ -147,7 +141,7 @@ class FeedViewController: UIViewController {
     // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
-        postService.loadPosts() { [weak self] objects, error in
+        postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
                 self?.scrollToFirstRow()
@@ -186,7 +180,7 @@ class FeedViewController: UIViewController {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            postService.loadPosts() { objects, error in
+            postService.loadPosts { objects, error in
                 if let objects = objects {
                     self?.postAdapter.update(withPosts: objects, action: .Reload)
                     self?.scrollToFirstRow()
