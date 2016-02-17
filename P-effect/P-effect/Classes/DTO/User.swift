@@ -70,7 +70,7 @@ extension User {
         )
     }
     
-    func linkIfUnlinkFacebook(completion: (NSError?) -> ()) {
+    func linkWithFacebook(completion: (NSError?) -> ()) {
         if PFFacebookUtils.isLinkedWithUser(self) {
             completion(nil)
         } else {

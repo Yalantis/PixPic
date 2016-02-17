@@ -93,7 +93,7 @@ class AuthorizationViewController: UIViewController {
                     Router.sharedRouter().showHome(animated: true)
                     return
                 }
-                user.linkIfUnlinkFacebook { error in
+                user.linkWithFacebook { error in
                     if let error = error {
                         handleError(error)
                     } else {
