@@ -18,6 +18,8 @@ protocol PhotoEditorDelegate: class {
 
 class PhotoEditorViewController: UIViewController {
     
+    lazy var locator = ServiceLocator()
+    
     @IBOutlet private weak var effectsPickerContainer: UIView!
     @IBOutlet private weak var imageContainer: UIView!
     var model: PhotoEditorModel!
@@ -94,7 +96,8 @@ class PhotoEditorViewController: UIViewController {
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }
-            SaverService.saveAndUploadPost(file)
+            let postService: PostService = (locator.getService())
+            postService.savePost(file)
             navigationController!.popViewControllerAnimated(true)
         } catch let exception {
             ExceptionHandler.handle(exception as! Exception)

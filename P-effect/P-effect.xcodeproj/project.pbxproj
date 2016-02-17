@@ -54,24 +54,25 @@
 		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
-		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */; };
 		FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */; };
 		FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */; };
 		FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
+		FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertService.swift */; };
 		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
 		FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AF1C4E528700331799 /* LoaderService.swift */; };
 		FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */; };
 		FDD0F0B71C4E528700331799 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B11C4E528700331799 /* Router.swift */; };
-		FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B21C4E528700331799 /* SaverService.swift */; };
-		FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */; };
+		FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */; };
 		FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BB1C4E52F300331799 /* Post.swift */; };
-		FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BD1C4E531000331799 /* PostModel.swift */; };
 		FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BF1C4E535900331799 /* Reachability.swift */; };
 		FDE508D41C49482F003C772B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE508D31C49482F003C772B /* User.swift */; };
+		FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23121C7341E9009EE533 /* ServiceLocator.swift */; };
+		FDEA23151C73434E009EE533 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23141C73434E009EE533 /* UserService.swift */; };
+		FDEA23171C734359009EE533 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23161C734359009EE533 /* PostService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,12 +144,12 @@
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
 		FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseColor.swift"; sourceTree = "<group>"; };
 		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
 		FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ErrorType.swift"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,12 +161,13 @@
 		FDD0F0AF1C4E528700331799 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
 		FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
 		FDD0F0B11C4E528700331799 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		FDD0F0B21C4E528700331799 /* SaverService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaverService.swift; sourceTree = "<group>"; };
-		FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
+		FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAdapter.swift; sourceTree = "<group>"; };
 		FDD0F0BB1C4E52F300331799 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		FDD0F0BD1C4E531000331799 /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		FDD0F0BF1C4E535900331799 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FDEA23121C7341E9009EE533 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		FDEA23141C73434E009EE533 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		FDEA23161C734359009EE533 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,8 +336,6 @@
 		FDAF46A31C49369E008060CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FD6C17C01C49540A00A01715 /* UserModel.swift */,
-				FDD0F0BD1C4E531000331799 /* PostModel.swift */,
 				492D17F41C5A186100D98404 /* EffectsModel.swift */,
 			);
 			path = Model;
@@ -350,13 +350,15 @@
 				FDD0F0AF1C4E528700331799 /* LoaderService.swift */,
 				FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */,
 				FDD0F0B11C4E528700331799 /* Router.swift */,
-				FDD0F0B21C4E528700331799 /* SaverService.swift */,
 				95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */,
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
 				4904A1B51C526EA200F26E05 /* ValidationService.swift */,
 				FD12C1041C5185EE006F99FD /* FBAuthorization.swift */,
 				FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */,
 				77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */,
+				FDEA23121C7341E9009EE533 /* ServiceLocator.swift */,
+				FDEA23141C73434E009EE533 /* UserService.swift */,
+				FDEA23161C734359009EE533 /* PostService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -378,7 +380,7 @@
 		FDAF46A61C49369E008060CD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */,
+				FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */,
 				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
 				499DD0521C579F1300DABCD5 /* EffectsPickerModel.swift */,
@@ -406,6 +408,7 @@
 				FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */,
 				FD27A2661C620ECE0058203F /* UIView+Effects.swift */,
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
+				FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -659,14 +662,15 @@
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
-				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
+				FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
 				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
 				FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */,
-				FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */,
 				FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */,
 				492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */,
+				FDEA23171C734359009EE533 /* PostService.swift in Sources */,
+				FDEA23151C73434E009EE533 /* UserService.swift in Sources */,
 				FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */,
 				492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
@@ -679,8 +683,8 @@
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
-				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
@@ -690,7 +694,7 @@
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
-				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,
+				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,

@@ -11,7 +11,7 @@ import Foundation
 private let messageDataSuccessfullyUpdated = "User data has been updated!"
 private let messageDataNotUpdated = "Troubles with the update! Check it out later"
 private let messageUsernameCanNotBeEmpty = "User name can not be empty"
-private let messageUploadSuccessful = "Upload successful!"
+
 
 
 final class SaverService {
@@ -19,23 +19,6 @@ final class SaverService {
     init () {
         
     }
-    
-    //MARK: - public
-    static func saveAndUploadPost(file: PFFile, comment: String? = nil) {
-        file.saveInBackgroundWithBlock(
-            { succeeded, error in
-                if succeeded {
-                    print("Saved!")
-                    SaverService.uploadPost(file, comment: comment)
-                } else if let error = error {
-                    print(error)
-                }
-            }, progressBlock: { percent in
-                print("Uploaded: \(percent)%")
-            }
-        )
-    }
-    
     
     static func saveAndUploadUserData(user: User, avatar: PFFile?, nickname: String?) {
         if let avatar = avatar {
@@ -76,27 +59,6 @@ final class SaverService {
         }
     }
     
-    //MARK: - private
-    
-    private static func uploadPost(file: PFFile, comment: String?) {
-        if let user = PFUser.currentUser() as? User {
-            let post = PostModel(image: file, user: user, comment: comment).post
-            post.saveInBackgroundWithBlock{ succeeded, error in
-                if succeeded {
-                    AlertService.simpleAlert(messageUploadSuccessful)
-                    NSNotificationCenter.defaultCenter().postNotificationName(
-                        Constants.NotificationKey.NewPostUploaded,
-                        object: nil
-                    )
-                } else {
-                    if let error = error?.userInfo["error"] as? String {
-                        print(error)
-                    }
-                }
-            }
-        } else {
-            // Auth service
-        }
-    }
+
     
 }
