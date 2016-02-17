@@ -8,10 +8,10 @@
 
 import Foundation
 
-class EffectsGroupHeaderView: UICollectionReusableView {
+class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
     
     static let identifier = "EffectsGroupHeaderViewIdentifier"
-    static let nib = UINib(nibName: "EffectsGroupHeaderView", bundle: nil)
+    //static let nib = UINib(nibName: String(self), bundle: nil)
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
@@ -50,6 +50,27 @@ class EffectsGroupHeaderView: UICollectionReusableView {
             },
             completion: nil
         )
+    }
+    
+}
+
+//TODO: move this protocol to file with protocols
+protocol CellInterface {
+    
+    static var id: String { get }
+    
+    static func cellNib() -> UINib
+    
+}
+
+extension CellInterface {
+    
+    static var id: String {
+        return String(Self)
+    }
+    
+    static func cellNib() -> UINib {
+        return UINib(nibName: id, bundle: nil)
     }
     
 }
