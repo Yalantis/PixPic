@@ -8,7 +8,7 @@
 
 extension NSError {
     
-    static func createAuthError(type: AuthError) -> NSError? {
+    static func createAuthError(type: AuthError) -> NSError {
         switch type {
         case .FacebookError:
             let error = NSError(
@@ -19,7 +19,11 @@ extension NSError {
             return error
             
         default:
-            return nil
+            return NSError(
+                domain: NSBundle.mainBundle().bundleIdentifier!,
+                code: 0,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Unsupported type", comment: "")]
+            )
         }
     }
     

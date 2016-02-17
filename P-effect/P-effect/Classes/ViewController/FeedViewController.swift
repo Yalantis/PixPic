@@ -102,9 +102,9 @@ class FeedViewController: UIViewController {
         locator.registerService(PostService())
         
         let postService: PostService = locator.getService()
-        postService.loadPosts { objects, error in
+        postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
-                self.postAdapter.update(withPosts: objects, action: .Reload)
+                self?.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
                 print(error)
             }
@@ -142,9 +142,12 @@ class FeedViewController: UIViewController {
     dynamic func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
             if let objects = objects {
-                self?.postAdapter.update(withPosts: objects, action: .Reload)
-                self?.scrollToFirstRow()
+                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.scrollToFirstRow()
             } else if let error = error {
                 print(error)
             }
@@ -176,25 +179,35 @@ class FeedViewController: UIViewController {
     private func setupLoadersCallback() {
         let postService: PostService = (locator.getService())
         tableView.addPullToRefreshWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
             guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
             postService.loadPosts { objects, error in
                 if let objects = objects {
-                    self?.postAdapter.update(withPosts: objects, action: .Reload)
-                    self?.scrollToFirstRow()
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                    this.scrollToFirstRow()
                 } else if let error = error {
                     print(error)
                 }
-                self?.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView?.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            postService.loadPagedPosts(offset: (self?.postAdapter.postQuantity)!) { objects, error in
+            guard let this = self else {
+                return
+            }
+            guard let offset = self?.postAdapter.postQuantity else {
+                this.tableView?.infiniteScrollingView.stopAnimating()
+                return
+            }
+            postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
-                    self?.postAdapter.update(withPosts: objects, action: .LoadMore)
-                    self?.scrollToFirstRow()
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                    this.scrollToFirstRow()
                 } else if let error = error {
                     print(error)
                 }

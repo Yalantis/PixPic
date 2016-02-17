@@ -39,7 +39,7 @@ class AuthService {
                 user.facebookId = facebookInfo["id"] as? String
                 if let firstname = facebookInfo["first_name"] as? String,
                     lastname = facebookInfo["last_name"] as? String {
-                        user.username = firstname + " " + lastname
+                        user.username = "\(firstname) \(lastname)"
                 }
                 completion(user, nil)
             } else {
