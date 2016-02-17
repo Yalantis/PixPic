@@ -22,26 +22,23 @@ class AuthorizationViewController: UIViewController {
     }
     
     private func signInWithFacebook() {
-        FBAuthorization.signInWithFacebookInController(
-            self,
-            completion: { [weak self] user, error in
-                if let error = error {
-                    handleError(error as NSError)
-                }
-                guard let user = user as User? else {
-                    self?.proceedWithoutAuthorization()
-                    return
-                }
-                user.checkFacebookIdExistance { exists in
-                    if exists {
-                        user.passwordSet = false
-                        self?.signIn(user)
-                    } else {
-                        self?.signUp(user)
-                    }
+        FBAuthorization.signInWithFacebookInController(self) { [weak self] user, error in
+            if let error = error {
+                handleError(error as NSError)
+            }
+            guard let user = user as User? else {
+                self?.proceedWithoutAuthorization()
+                return
+            }
+            user.checkFacebookIdExistance { exists in
+                if exists {
+                    user.passwordSet = false
+                    self?.signIn(user)
+                } else {
+                    self?.signUp(user)
                 }
             }
-        )
+        }
     }
     
     private func proceedWithoutAuthorization() {
@@ -68,7 +65,6 @@ class AuthorizationViewController: UIViewController {
                 if let error = error {
                     print(error)
                 } else {
-                    print("NEW DATAA FOR LINKED USER")
                     let installation = PFInstallation.currentInstallation()
                     installation["user"] = user
                     installation.saveInBackground()
@@ -82,31 +78,29 @@ class AuthorizationViewController: UIViewController {
     
     private func signIn(user: User) {
         let token = FBSDKAccessToken.currentAccessToken()
-        PFFacebookUtils.logInInBackgroundWithAccessToken(
-            token,
-            block: { [weak self] user, error in
-                if let _ = error {
-                    ExceptionHandler.handle(Exception.InvalidSessionToken)
-                }
-                guard let user = user as? User else {
+        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
+            if let _ = error {
+                ExceptionHandler.handle(Exception.InvalidSessionToken)
+            }
+            guard let user = user as? User else {
+                self?.view.hideToastActivity()
+                Router.sharedRouter().showHome(animated: true)
+                return
+            }
+            user.linkWithFacebook { error in
+                if let error = error {
+                    handleError(error)
+                } else {
+                    print("linked!")
+                    let installation = PFInstallation.currentInstallation()
+                    installation["user"] = user
+                    installation.saveInBackground()
                     self?.view.hideToastActivity()
                     Router.sharedRouter().showHome(animated: true)
-                    return
-                }
-                user.linkWithFacebook { error in
-                    if let error = error {
-                        handleError(error)
-                    } else {
-                        print("already linked!")
-                        let installation = PFInstallation.currentInstallation()
-                        installation["user"] = user
-                        installation.saveInBackground()
-                        self?.view.hideToastActivity()
-                        Router.sharedRouter().showHome(animated: true)
-                    }
                 }
             }
-        )
+            user.saveEventually()
+        }
     }
     
 }

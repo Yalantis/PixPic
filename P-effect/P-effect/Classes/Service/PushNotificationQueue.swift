@@ -30,7 +30,7 @@ class PushNotificationQueue: NSObject {
     }
     
     class func clearQueue() {
-        notificationQueue = []
+        notificationQueue.removeAll()
     }
     
     private func countOfNotificationsInQueue() -> Int {
