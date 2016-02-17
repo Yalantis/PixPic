@@ -124,11 +124,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
-                        <collectionViewLayout key="collectionViewLayout" id="Ruo-p3-xng">
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="pin" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                        </collectionViewLayout>
+                        <collectionViewLayout key="collectionViewLayout" id="Ruo-p3-xng"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="EffectsPickerCell" id="EBj-No-79Q" customClass="EffectViewCell" customModule="P_effect" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
