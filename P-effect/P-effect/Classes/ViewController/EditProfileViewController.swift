@@ -175,8 +175,8 @@ class EditProfileViewController: UIViewController {
         guard ReachabilityHelper.checkConnection() else {
             return
         }
-        AuthService().logOut()
-        AuthService().anonymousLogIn(
+        AuthService.logOut()
+        AuthService.anonymousLogIn(
             completion: { object in
                 Router.sharedRouter().showHome(animated: true)
             }, failure: { error in
@@ -245,11 +245,11 @@ class EditProfileViewController: UIViewController {
         }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
-        let userService: UserService = (locator.getService())
+        let userService: UserService = locator.getService()
         userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,
-            nickname: userName,
+            nickname: userName!,
             completion: { _, error in
                 if let error = error {
                     print(error)

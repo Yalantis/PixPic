@@ -53,7 +53,6 @@
 		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
-		FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17C01C49540A00A01715 /* UserModel.swift */; };
 		FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */; };
 		FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */; };
 		FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */; };
@@ -67,7 +66,6 @@
 		FDD0F0B71C4E528700331799 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B11C4E528700331799 /* Router.swift */; };
 		FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */; };
 		FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BB1C4E52F300331799 /* Post.swift */; };
-		FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BD1C4E531000331799 /* PostModel.swift */; };
 		FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BF1C4E535900331799 /* Reachability.swift */; };
 		FDE508D41C49482F003C772B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE508D31C49482F003C772B /* User.swift */; };
 		FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23121C7341E9009EE533 /* ServiceLocator.swift */; };
@@ -143,7 +141,6 @@
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FD6C17C01C49540A00A01715 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		FD7C43161C60AA65003E4072 /* AppearanceConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceConfigurator.swift; sourceTree = "<group>"; };
 		FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseColor.swift"; sourceTree = "<group>"; };
 		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
@@ -162,7 +159,6 @@
 		FDD0F0B11C4E528700331799 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAdapter.swift; sourceTree = "<group>"; };
 		FDD0F0BB1C4E52F300331799 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		FDD0F0BD1C4E531000331799 /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		FDD0F0BF1C4E535900331799 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FDEA23121C7341E9009EE533 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
@@ -336,8 +332,6 @@
 		FDAF46A31C49369E008060CD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FD6C17C01C49540A00A01715 /* UserModel.swift */,
-				FDD0F0BD1C4E531000331799 /* PostModel.swift */,
 				492D17F41C5A186100D98404 /* EffectsModel.swift */,
 			);
 			path = Model;
@@ -662,7 +656,6 @@
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
-				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
@@ -684,7 +677,6 @@
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
-				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,

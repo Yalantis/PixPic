@@ -28,11 +28,11 @@ class PostService {
         loadPosts(user, query: query, completion: completion)
     }
     
-    func savePost(avatar: PFFile, comment: String? = nil) {
-        avatar.saveInBackgroundWithBlock({ succeeded, error in
+    func savePost(image: PFFile, comment: String? = nil) {
+        image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
                 print("Saved!")
-                self.uploadPost(avatar, comment: comment)
+                self.uploadPost(image, comment: comment)
             } else if let error = error {
                 print(error)
             }
@@ -44,12 +44,12 @@ class PostService {
     }
     
     // MARK: - Private methods
-    private func uploadPost(avatar: PFFile, comment: String?) {
+    private func uploadPost(image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
             // Auth service
             return
         }
-        let post = PostModel(image: avatar, user: user, comment: comment).post
+        let post = Post(image: image, user: user, comment: comment)
         post.saveInBackgroundWithBlock{ succeeded, error in
             if succeeded {
                 AlertService.simpleAlert(messageUploadSuccessful)

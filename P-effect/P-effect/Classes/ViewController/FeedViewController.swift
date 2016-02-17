@@ -11,6 +11,12 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
+protocol FeedViewControllerDelegate {
+    
+    func retrieveData()
+    
+}
+
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -104,7 +110,7 @@ class FeedViewController: UIViewController {
         let postService: PostService = locator.getService()
         postService.loadPosts() { objects, error in
             if let objects = objects {
-                self.postAdapter.posts.appendContentsOf(objects)
+                self.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
                 print(error)
             }
@@ -142,9 +148,13 @@ class FeedViewController: UIViewController {
     dynamic func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
         postService.loadPosts() { [weak self] objects, error in
-            self?.postAdapter.posts = objects!
+            if let objects = objects {
+                self?.postAdapter.update(withPosts: objects, action: .Reload)
+                self?.scrollToFirstRow()
+            } else if let error = error {
+                print(error)
+            }
             self?.tableView?.pullToRefreshView.stopAnimating()
-            self?.scrollToFirstRow()
         }
     }
     
@@ -177,13 +187,23 @@ class FeedViewController: UIViewController {
                 return
             }
             postService.loadPosts() { objects, error in
-                self?.postAdapter.posts = objects!
+                if let objects = objects {
+                    self?.postAdapter.update(withPosts: objects, action: .Reload)
+                    self?.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
                 self?.tableView?.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            postService.loadPagedData(offset: (self?.postAdapter.countOfModels())!) { objects, error in
-                self?.postAdapter.posts.appendContentsOf(objects!)
+            postService.loadPagedData(offset: (self?.postAdapter.postQuantity)!) { objects, error in
+                if let objects = objects {
+                    self?.postAdapter.update(withPosts: objects, action: .LoadMore)
+                    self?.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
             }
         }
     }
@@ -211,7 +231,7 @@ extension FeedViewController: PostAdapterDelegate {
     }
     
     func showPlaceholderForEmptyDataSet() {
-        if postAdapter.isEmpty {
+        if postAdapter.postQuantity == 0 {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
             tableView.reloadData()

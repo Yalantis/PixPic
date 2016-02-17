@@ -26,6 +26,15 @@ class Post: PFObject {
         return query
     }
     
+    convenience init(image: PFFile, user: User, comment: String?) {
+        self.init()
+        self.image = image
+        self.user = user
+        if let comment = comment {
+            self.comment = comment
+        }
+    }
+    
 }
 
 extension Post: PFSubclassing {
