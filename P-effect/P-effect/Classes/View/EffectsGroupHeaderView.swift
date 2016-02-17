@@ -11,7 +11,10 @@ import Foundation
 class EffectsGroupHeaderView: UICollectionReusableView {
     
     static let identifier = "EffectsGroupHeaderViewIdentifier"
-    static let nib = UINib(nibName: String(self), bundle: nil)
+    static var nib: UINib? {
+        let nib = UINib(nibName: String(self), bundle: nil)
+        return nib
+    }
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
