@@ -81,7 +81,7 @@ class PostService {
         if let user = user {
             query.whereKey("user", equalTo: user)
         }
-        query.findObjectsInBackgroundWithBlock { objects, error -> Void in
+        query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {
                 for object in objects {
                     array.append(object as! Post)
@@ -89,8 +89,8 @@ class PostService {
                     object.pinInBackground()
                 }
                 completion(posts: array, error: nil)
-            } else if error == nil {
-                print("Error: \(error!) \(error!.userInfo)")
+            } else if let error = error {
+                print(error.localizedDescription)
                 completion(posts: nil, error: error)
             } else {
                 completion(posts: nil, error: nil)
