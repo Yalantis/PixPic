@@ -191,7 +191,7 @@ class FeedViewController: UIViewController {
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            postService.loadPagedData(offset: (self?.postAdapter.postQuantity)!) { objects, error in
+            postService.loadPagedPosts(offset: (self?.postAdapter.postQuantity)!) { objects, error in
                 if let objects = objects {
                     self?.postAdapter.update(withPosts: objects, action: .LoadMore)
                     self?.scrollToFirstRow()

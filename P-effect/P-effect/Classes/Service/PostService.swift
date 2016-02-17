@@ -10,7 +10,7 @@ import Foundation
 
 private let messageUploadSuccessful = "Upload successful!"
 
-typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> ()
+typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
     
@@ -21,7 +21,7 @@ class PostService {
         loadPosts(user, query: query, completion: completion)
     }
     
-    func loadPagedData(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
+    func loadPagedPosts(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery()
         query.limit = Constants.DataSource.QueryLimit
         query.skip = offset

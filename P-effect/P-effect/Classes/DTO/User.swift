@@ -42,15 +42,14 @@ extension User {
             return
         }
         let query = User.sortedQuery().whereKey("username", equalTo: username)
-        query.getFirstObjectInBackgroundWithBlock( { object, _ in
-                if object != nil {
-                    completion(true)
-                    print("username exists")
-                } else {
-                    completion(false)
-                }
+        query.getFirstObjectInBackgroundWithBlock { object, _ in
+            if object != nil {
+                completion(true)
+                print("username exists")
+            } else {
+                completion(false)
             }
-        )
+        }
     }
     
     func checkFacebookIdExistance(completion: Bool -> Void) {
@@ -59,28 +58,28 @@ extension User {
             return
         }
         let query = User.sortedQuery().whereKey("facebookId", equalTo: facebookId)
-        query.getFirstObjectInBackgroundWithBlock( { object, _ in
-                if object != nil {
-                    completion(true)
-                    print("facebookId exists")
-                } else {
-                    completion(false)
-                }
+        query.getFirstObjectInBackgroundWithBlock { object, _ in
+            if object != nil {
+                completion(true)
+                print("facebookId exists")
+            } else {
+                completion(false)
             }
-        )
+        }
     }
     
     func linkWithFacebook(completion: (NSError?) -> Void) {
         if PFFacebookUtils.isLinkedWithUser(self) {
             completion(nil)
         } else {
-            PFFacebookUtils.linkUserInBackground(
-                self,
-                withReadPermissions: ["public_profile", "email"],
-                block: { success, error in
-                    success ? completion(nil) : completion(error)
+            let permissions = ["public_profile", "email"]
+            PFFacebookUtils.linkUserInBackground(self, withReadPermissions: permissions) { success, error in
+                if let error = error {
+                    completion(error)
+                } else {
+                    completion(nil)
                 }
-            )
+            }
         }
     }
     

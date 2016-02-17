@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> ()
+typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> Void
 
 class LoaderService: NSObject {
     

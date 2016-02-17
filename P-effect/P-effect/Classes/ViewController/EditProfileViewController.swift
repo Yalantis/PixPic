@@ -97,7 +97,7 @@ class EditProfileViewController: UIViewController {
             return
         }
         ImageLoaderService.getImageForContentItem(avatar) {
-            [weak self](image, error) -> () in
+            [weak self](image, error) -> Void in
             if let error = error {
                 print(error)
             } else {

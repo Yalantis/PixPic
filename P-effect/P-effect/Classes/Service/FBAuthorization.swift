@@ -10,15 +10,21 @@ import Foundation
 import Parse
 import ParseFacebookUtilsV4
 
+enum AuthError: Int {
+    
+    case FacebookError = 701
+    
+}
+
 class FBAuthorization {
     
-    static func signInWithPermission(completion: (User?, ErrorType?) -> ()) {
+    static func signInWithPermission(completion: (User?, NSError?) -> Void) {
         let token = FBSDKAccessToken.currentAccessToken()
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
             if let user = user as? User {
                 print(PFUser.currentUser() ?? "No user")
                 if user.isNew {
-                    AuthService.updatePFUserDataFromFB(user) { user, error in
+                    AuthService.updateUserInfoViaFacebook(user) { user, error in
                         completion(user, nil)
                     }
                 }
@@ -26,18 +32,14 @@ class FBAuthorization {
             } else if let error = error {
                 completion(nil, error)
             } else {
-                let userError = NSError(
-                    domain: NSBundle.mainBundle().bundleIdentifier!,
-                    code: 701,
-                    userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
-                )
+                let userError = NSError.createAuthError(.FacebookError)
                 completion(nil, userError)
                 return
             }
         }
     }
     
-    static func signInWithFacebookInController(controller: UIViewController, completion: (User?, ErrorType?) -> ()) {
+    static func signInWithFacebookInController(controller: UIViewController, completion: (User?, ErrorType?) -> Void) {
         let loginManager = FBSDKLoginManager()
         let permissions = ["public_profile", "email"]
         
@@ -51,7 +53,7 @@ class FBAuthorization {
                 completion(nil, error)
             } else {
                 let user = User()
-                AuthService.updatePFUserDataFromFB(user) { user, error in
+                AuthService.updateUserInfoViaFacebook(user) { user, error in
                     if let error = error {
                         completion(nil, error)
                     } else {

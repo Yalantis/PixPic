@@ -11,17 +11,18 @@ import ParseFacebookUtilsV4
 
 class AuthService {
     
-    static func updatePFUserDataFromFB(user: User, completion: (User?, NSError?) -> ()) {
+    static func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
+        let parameters = ["fields": "id, name, first_name, last_name, picture.type(large), email"]
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
-            parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]
+            parameters: parameters
         )
         fbRequest.startWithCompletionHandler { _, result, error in
             if error == nil && result != nil {
-                guard let facebookInfo = result as? Dictionary<String, AnyObject>,
-                    let picture = facebookInfo["picture"],
-                    let data = picture["data"],
-                    let URL = data!["url"] as? String else {
+                guard let facebookInfo = result as? [String:AnyObject],
+                    picture = facebookInfo["picture"],
+                    data = picture["data"],
+                    URL = data?["url"] as? String else {
                         completion(nil, nil)
                         return
                 }
@@ -48,11 +49,11 @@ class AuthService {
         }
     }
     
-    static func anonymousLogIn(completion completion: (object: User?) -> (), failure: (error: NSError?) -> ()) {
+    static func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
                 failure(error: error)
-            } else if let user = user as? User{
+            } else if let user = user as? User {
                 completion(object: user)
                 PFInstallation.addPFUserToCurrentInstallation()
             }

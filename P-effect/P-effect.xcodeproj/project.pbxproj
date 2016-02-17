@@ -58,6 +58,7 @@
 		FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */; };
 		FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */; };
 		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
+		FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */; };
 		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
 		FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertService.swift */; };
 		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
@@ -146,6 +147,7 @@
 		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
 		FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
 		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ErrorType.swift"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -404,6 +406,7 @@
 				FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */,
 				FD27A2661C620ECE0058203F /* UIView+Effects.swift */,
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
+				FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,

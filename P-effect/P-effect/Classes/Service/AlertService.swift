@@ -25,9 +25,8 @@ class AlertService: NSObject {
             return
         }
         let title = "Notification"
-        if let aps = userInfo["aps"] as? Dictionary<String, String>,
-            let alert = aps["alert"] {
-                message = alert
+        if let aps = userInfo["aps"] as? [String:String] {
+            message = aps["alert"]
         }
         
         let isControllersWaitingForResponse = (topController as? UIAlertController) != nil
