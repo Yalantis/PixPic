@@ -22,11 +22,11 @@ class AuthService {
                 guard let facebookInfo = result as? [String:AnyObject],
                     picture = facebookInfo["picture"],
                     data = picture["data"],
-                    URL = data?["url"] as? String else {
+                    url = data?["url"] as? String else {
                         completion(nil, nil)
                         return
                 }
-                if let avatarURL = NSURL(string: URL) {
+                if let avatarURL = NSURL(string: url) {
                     let avatarFile = PFFile(
                         name: Constants.UserKey.Avatar,
                         data: NSData(contentsOfURL: avatarURL)!
@@ -37,10 +37,9 @@ class AuthService {
                     user.email = email
                 }
                 user.facebookId = facebookInfo["id"] as? String
-                if let firstname = facebookInfo["first_name"],
-                    lastname = facebookInfo["last_name"] {
-                        let nickname: String = String(firstname) + " " + String(lastname)
-                        user.username = nickname
+                if let firstname = facebookInfo["first_name"] as? String,
+                    lastname = facebookInfo["last_name"] as? String {
+                        user.username = firstname + " " + lastname
                 }
                 completion(user, nil)
             } else {
