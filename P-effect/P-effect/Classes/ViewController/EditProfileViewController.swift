@@ -249,7 +249,7 @@ class EditProfileViewController: UIViewController {
         userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,
-            nickname: userName,
+            nickname: userName!,
             completion: { _, error in
                 if let error = error {
                     print(error)

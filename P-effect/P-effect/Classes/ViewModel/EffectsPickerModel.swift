@@ -56,7 +56,7 @@ class EffectsPickerModel: NSObject {
     }
     
     // MARK: - Private methods
-    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
+    private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
         for i in 0..<effectsGroups![section].effectsStickers.count {
             cells.append(NSIndexPath(forRow: i, inSection: 0))
@@ -175,15 +175,6 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                 }
             }
             reusableview = headerView
-        }
-        
-        return reusableview
-    }
-    
-    private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
-        var cells = [NSIndexPath]()
-        for i in 0..<effectsGroups![section].effectsStickers.count {
-            cells.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
         return reusableview

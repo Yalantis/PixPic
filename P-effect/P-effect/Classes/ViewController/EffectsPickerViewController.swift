@@ -13,6 +13,8 @@ class EffectsPickerViewController: UICollectionViewController {
     weak var delegate: PhotoEditorViewController?
     lazy var effectsPickerAdapter = EffectsPickerModel()
     
+    lazy var locator = ServiceLocator()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,10 @@ class EffectsPickerViewController: UICollectionViewController {
         collectionView!.dataSource = effectsPickerAdapter
         collectionView!.delegate = effectsPickerAdapter
         
-        EffectsService().loadEffects() { [weak self] objects, error in
+        locator.registerService(EffectsService())
+        
+        let effectsService: EffectsService = locator.getService()
+        effectsService.loadEffects { [weak self] objects, error in
             if let objects = objects {
                 self?.effectsPickerAdapter.effectsGroups = objects.sort {
                     $0.effectsGroup.label > $1.effectsGroup.label

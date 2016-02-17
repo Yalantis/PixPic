@@ -8,8 +8,8 @@
 
 import Foundation
 
-typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
-typealias LoadingUserCompletion = (object: User?, error: NSError?) -> ()
+//typealias LoadingPostsCompletion = (objects: [Post]?, error: NSError?) -> ()
+//typealias LoadingUserCompletion = (object: User?, error: NSError?) -> ()
 //typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> ()
 
 class LoaderService: NSObject {
