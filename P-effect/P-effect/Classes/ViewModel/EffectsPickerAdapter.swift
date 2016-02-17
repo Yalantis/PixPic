@@ -65,28 +65,6 @@ class EffectsPickerAdapter: NSObject {
 
 }
 
-// MARK: - UICollectionViewDelegate
-extension EffectsPickerAdapter: UICollectionViewDelegate {
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        effectImageAtIndexPath(indexPath) { [unowned self] image, error in
-            if error != nil {
-                return
-            }
-            if let image = image {
-//                self.delegate?.didChooseEffectFromPicket(image)
-            }
-        }
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
-    }
-    
-}
-
 // MARK: - UICollectionViewDataSource
 extension EffectsPickerAdapter: UICollectionViewDataSource {
 

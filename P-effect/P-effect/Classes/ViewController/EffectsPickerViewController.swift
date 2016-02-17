@@ -27,7 +27,6 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - Private methods
     private func setupAdapter() {
         collectionView!.dataSource = effectsPickerAdapter
-        collectionView!.delegate = effectsPickerAdapter
         
         locator.registerService(EffectsService())
         
@@ -40,6 +39,25 @@ class EffectsPickerViewController: UICollectionViewController {
                 self?.collectionView!.reloadData()
             }
         }
+    }
+    
+    // MARK: - UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        effectsPickerAdapter.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
+            if error != nil {
+                return
+            }
+            if let image = image {
+                self.delegate?.didChooseEffectFromPicket(image)
+            }
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
     }
     
 }
