@@ -19,29 +19,25 @@ protocol PhotoEditorDelegate: class {
 class PhotoEditorViewController: UIViewController {
     
     lazy var locator = ServiceLocator()
-    
-    @IBOutlet private weak var effectsPickerContainer: UIView!
-    @IBOutlet private weak var imageContainer: UIView!
     var model: PhotoEditorModel!
-    var effectsPickerController: EffectsPickerViewController? {
+    weak var delegate: PhotoEditorDelegate?
+    
+    private var imageController: ImageViewController?
+    private var effectsPickerController: EffectsPickerViewController? {
         didSet {
             effectsPickerController?.delegate = self
         }
     }
-    var imageController: ImageViewController?
-    weak var delegate: PhotoEditorDelegate?
     
+    @IBOutlet private weak var effectsPickerContainer: UIView!
+    @IBOutlet private weak var imageContainer: UIView!
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "back")
-        navigationItem.leftBarButtonItem = newBackButton
-        
-        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")
-        navigationItem.rightBarButtonItem = saveButton
-        
-        navigationItem.title = "Edit"
+        setUpNavigavionBar()
+        locator.registerService(PostService())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -57,16 +53,76 @@ class PhotoEditorViewController: UIViewController {
         PushNotificationQueue.handleNotificationQueue()
     }
     
-    @IBAction private func postEditedImage() {
-        guard ReachabilityHelper.checkConnection(showAlert: false) else{
-            suggestSaveToPhotoLibrary()
-            
-            return
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case Constants.PhotoEditor.ImageViewControllerSegue:
+            imageController = segue.destinationViewController as? ImageViewController
+            imageController?.model = ImageViewModel(image: model.originalImage())
+            delegate = imageController
+        case Constants.PhotoEditor.EffectsPickerSegue:
+            effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
+            effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
+        default:
+            break
         }
-        postToTheNet()
+        
+        super.prepareForSegue(segue, sender: sender)
     }
     
-    func saveToImageLibrary() {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        var size = imageContainer.frame.size
+        size.width = UIScreen.mainScreen().bounds.width
+        size.height = size.width
+        imageContainer.bounds.size = size
+        size.height = effectsPickerContainer.frame.height
+        effectsPickerContainer.bounds.size = size
+        
+        view.superview?.layoutIfNeeded()
+    }
+    
+    func didChooseEffectFromPicket(effect: UIImage) {
+        delegate?.photoEditor(self, didChooseEffect: effect)
+    }
+    
+}
+
+// MARK: - Private methods
+extension PhotoEditorViewController {
+    
+    private func setUpNavigavionBar() {
+        navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "back")
+        navigationItem.leftBarButtonItem = newBackButton
+        
+        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")
+        navigationItem.rightBarButtonItem = saveButton
+        
+        navigationItem.title = "Edit"
+    }
+        
+    private dynamic func back() {
+        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
+        
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
+            self.saveToImageLibrary()
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(saveAction)
+        
+        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { _ in
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+        alertController.addAction(dontSaveAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    private dynamic func saveToImageLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
             ExceptionHandler.handle(Exception.CantApplyEffects)
             
@@ -96,7 +152,7 @@ class PhotoEditorViewController: UIViewController {
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }
-            let postService: PostService = (locator.getService())
+            let postService: PostService = locator.getService()
             postService.savePost(file)
             navigationController!.popViewControllerAnimated(true)
         } catch let exception {
@@ -126,57 +182,19 @@ class PhotoEditorViewController: UIViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
     }
+
+}
+
+// MARK: - IBActions
+extension PhotoEditorViewController {
     
-    func back() {
-        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
-            self.saveToImageLibrary()
-            self.navigationController!.popViewControllerAnimated(true)
+    @IBAction private func postEditedImage() {
+        guard ReachabilityHelper.checkConnection(showAlert: false) else {
+            suggestSaveToPhotoLibrary()
+            
+            return
         }
-        alertController.addAction(saveAction)
-        
-        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { _ in
-            self.navigationController!.popViewControllerAnimated(true)
-        }
-        alertController.addAction(dontSaveAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
+        postToTheNet()
     }
     
-    func didChooseEffectFromPicket(effect: UIImage) {
-        delegate?.photoEditor(self, didChooseEffect: effect)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        var size = imageContainer.frame.size
-        size.width = UIScreen.mainScreen().bounds.width
-        size.height = size.width
-        imageContainer.bounds.size = size
-        size.height = effectsPickerContainer.frame.height
-        effectsPickerContainer.bounds.size = size
-        
-        view.superview?.layoutIfNeeded()
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        switch segue.identifier! {
-        case Constants.PhotoEditor.ImageViewControllerSegue:
-            imageController = segue.destinationViewController as? ImageViewController
-            imageController?.model = ImageViewModel.init(image: model.originalImage())
-            delegate = imageController
-        case Constants.PhotoEditor.EffectsPickerSegue:
-            effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
-            effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
-        default:
-            break
-        }
-        
-        super.prepareForSegue(segue, sender: sender)
-    }
 }

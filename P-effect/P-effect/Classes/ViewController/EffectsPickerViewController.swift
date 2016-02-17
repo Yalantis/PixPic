@@ -10,9 +10,9 @@ import UIKit
 
 class EffectsPickerViewController: UICollectionViewController {
     
-    weak var delegate: PhotoEditorViewController?
     lazy var effectsPickerAdapter = EffectsPickerAdapter()
     lazy var locator = ServiceLocator()
+    weak var delegate: PhotoEditorViewController?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,7 +44,6 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
         effectsPickerAdapter.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
             if error != nil {
                 return
@@ -55,6 +54,10 @@ class EffectsPickerViewController: UICollectionViewController {
         }
     }
     
+}
+
+extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
