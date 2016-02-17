@@ -18,12 +18,9 @@ class EffectsPickerViewController: UICollectionViewController {
         super.viewDidLoad()
         
         setupAdapter()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        collectionView!.registerNib(EffectsGroupHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: EffectsGroupHeaderView.identifier)
         
-        collectionView!.superview?.layoutIfNeeded()
+        collectionView!.collectionViewLayout = EffectsLayout()
     }
     
     // MARK: - Private methods

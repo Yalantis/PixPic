@@ -14,7 +14,7 @@ struct Constants {
         static let ClientKey = "fJwIVMqkD8DlpYNzfyrESiKQTfqzVU6IrAJnTef3"
     }
     
-    struct NotificationKey {
+    struct NotificationName {
         static let NewPostUploaded = "NewPostUploaded"
     }
     

@@ -16,6 +16,8 @@ private let logoutWithoutConnectionAttempt = "Internet connection is required to
 
 class EditProfileViewController: UIViewController {
     
+    lazy var locator = ServiceLocator()
+    
     private lazy var photoGenerator = PhotoGenerator()
     
     private var image: UIImage?
@@ -243,7 +245,8 @@ class EditProfileViewController: UIViewController {
         }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
-        SaverService.uploadUserChanges(
+        let userService: UserService = (locator.getService())
+        userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,
             nickname: userName,
