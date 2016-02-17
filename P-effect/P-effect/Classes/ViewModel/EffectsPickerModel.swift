@@ -13,7 +13,7 @@ private let animationDuration = 0.3
 class EffectsPickerModel: NSObject {
     
     private var currentGroupNumber: Int?
-    private var effectsGroups: [EffectsModel]?
+    var effectsGroups: [EffectsModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
     
@@ -53,10 +53,56 @@ class EffectsPickerModel: NSObject {
             }
         }
     }
+    
+    // MARK: - Private methods
+    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
+        var cells = [NSIndexPath]()
+        for i in 0..<effectsGroups![section].effectsStickers.count {
+            cells.append(NSIndexPath(forRow: i, inSection: 0))
+        }
+        
+        return cells
+    }
+    
+    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
+        let sections = NSMutableIndexSet()
+        for i in 0..<effectsGroups!.count {
+            if i != section {
+                sections.addIndexes(NSIndexSet(index: i))
+            }
+        }
+        
+        return sections
+    }
+
 }
 
-extension EffectsPickerModel: UICollectionViewDataSource {
+// MARK: - UICollectionViewDelegate
+extension EffectsPickerModel: UICollectionViewDelegate {
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        effectImageAtIndexPath(indexPath) { [unowned self] image, error in
+            if error != nil {
+                return
+            }
+            if let image = image {
+                
+//                self.delegate?.didChooseEffectFromPicket(image)
+            }
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
+    }
+    
+}
+
+// MARK: - UICollectionViewDataSource
+extension EffectsPickerModel: UICollectionViewDataSource {
+
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if currentGroupNumber != nil {
             return 1
@@ -105,9 +151,15 @@ extension EffectsPickerModel: UICollectionViewDataSource {
                         
                         collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
                         collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section))
-                        }, completion: { finished in
-                            collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), atScrollPosition: .Right , animated: true)
-                    })
+                        },
+                        completion: { finished in
+                            collectionView.scrollToItemAtIndexPath(
+                                NSIndexPath(forRow: 0, inSection: 0),
+                                atScrollPosition: .Right,
+                                animated: true
+                            )
+                        }
+                    )
                     
                     return true
                 } else {
@@ -127,28 +179,8 @@ extension EffectsPickerModel: UICollectionViewDataSource {
             reusableview = headerView
             headers[indexPath.section] = headerView
         }
+        
         return reusableview
     }
     
-    private func calculateCellsIndexPath(section section: Int) -> [NSIndexPath] {
-        var cells = [NSIndexPath]()
-        for i in 0..<effectsGroups![section].effectsStickers.count {
-            cells.append(NSIndexPath(forRow: i, inSection: 0))
-        }
-        
-        return cells
-    }
-    
-    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
-        let sections = NSMutableIndexSet()
-        for i in 0..<effectsGroups!.count {
-            if i != section {
-                sections.addIndexes(NSIndexSet(index: i))
-            }
-        }
-        
-        return sections
-    }
-    
 }
-

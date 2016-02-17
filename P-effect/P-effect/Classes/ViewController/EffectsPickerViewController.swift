@@ -8,42 +8,37 @@
 
 import UIKit
 
-
 class EffectsPickerViewController: UICollectionViewController {
     
     weak var delegate: PhotoEditorViewController?
-    var model: EffectsPickerModel? {
-        didSet {
-            collectionView?.dataSource = model
-            model?.downloadEffects{ [weak self] completion in
-                if completion {
-                    self?.collectionView?.reloadData()
-                }
-            }
-        }
+    lazy var effectsPickerAdapter = EffectsPickerModel()
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupAdapter()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        collectionView?.superview?.layoutIfNeeded()
+        collectionView!.superview?.layoutIfNeeded()
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
-    }
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        model!.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
-            if error != nil {
-                return
-            }
-            if let image = image {
-                self.delegate?.didChooseEffectFromPicket(image)
+    // MARK: - Private methods
+    private func setupAdapter() {
+        collectionView!.dataSource = effectsPickerAdapter
+        collectionView!.delegate = effectsPickerAdapter
+        
+        EffectsService().loadEffects() { [weak self] objects, error in
+            if let objects = objects {
+                self?.effectsPickerAdapter.effectsGroups = objects.sort {
+                    $0.effectsGroup.label > $1.effectsGroup.label
+                }
+                self?.collectionView!.reloadData()
             }
         }
     }
     
 }
-
