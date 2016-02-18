@@ -27,7 +27,6 @@ extension PhotoEditorRouter: FeedPresenter {
         let photoEditorViewController = PhotoEditorViewController.create()
         photoEditorViewController.router = self
         currentViewController = photoEditorViewController
-        AlertService.topPresenter = self
         photoEditorViewController.model = PhotoEditorModel(image: image)
         context.navigationController!.pushViewController(photoEditorViewController, animated: false)
     }

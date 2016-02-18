@@ -48,6 +48,7 @@ final class PhotoEditorViewController: UIViewController, Creatable {
         super.viewWillAppear(animated)
         
         AlertService.allowToDisplay = false
+        AlertService.topPresenter = router
     }
     
     override func viewWillDisappear(animated: Bool) {

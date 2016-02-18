@@ -14,7 +14,7 @@ class FeedRouter: Router {
     
 }
 
-extension FeedRouter: ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter {
+extension FeedRouter: ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter {
     typealias Context = UIWindow
     
     func execute(context: UIWindow) {

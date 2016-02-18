@@ -33,7 +33,6 @@ extension EditProfileRouter: FeedPresenter {
         let editProfileController = EditProfileViewController.create()
         editProfileController.router = self
         currentViewController = editProfileController
-        AlertService.topPresenter = self
         context.navigationController!.showViewController(editProfileController, sender: self)
     }
     

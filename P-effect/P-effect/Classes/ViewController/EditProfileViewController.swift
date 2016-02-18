@@ -50,6 +50,7 @@ final class EditProfileViewController: UIViewController, Creatable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        AlertService.topPresenter = router
         AlertService.allowToDisplay = false
     }
     

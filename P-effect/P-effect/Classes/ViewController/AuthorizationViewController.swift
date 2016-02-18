@@ -18,6 +18,12 @@ final class AuthorizationViewController: UIViewController, Creatable {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertService.topPresenter = router
+    }
+    
     @IBAction private func logInWithFBButtonTapped() {
         view.makeToastActivity(CSToastPositionCenter)
         signInWithFacebook()

@@ -48,6 +48,7 @@ final class FeedViewController: UIViewController, Creatable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        AlertService.topPresenter = router
         tableView.reloadData()
     }
     

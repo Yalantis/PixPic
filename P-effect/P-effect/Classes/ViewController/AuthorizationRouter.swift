@@ -23,7 +23,6 @@ extension AuthorizationRouter: FeedPresenter {
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.router = self
         currentViewController = authorizationViewController
-        AlertService.topPresenter = self
         context.navigationController!.pushViewController(authorizationViewController, animated: true)
     }
     

@@ -35,6 +35,12 @@ final class ProfileViewController: UITableViewController, Creatable {
         setupLoadersCallback()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertService.topPresenter = router
+    }
+    
     // MARK: - Inner func
     func setupController() {
         dataSource = PostDataSource()
