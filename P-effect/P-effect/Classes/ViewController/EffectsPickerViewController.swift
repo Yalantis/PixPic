@@ -18,16 +18,23 @@ class EffectsPickerViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
         setupAdapter()
-        collectionView!.registerNib(EffectsGroupHeaderView.nib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: EffectsGroupHeaderView.identifier)
-        
-        collectionView!.collectionViewLayout = EffectsLayout()
     }
     
     // MARK: - Private methods
-    private func setupAdapter() {
-        collectionView!.dataSource = effectsPickerAdapter
+    private func setupCollectionView() {
+        collectionView!.registerNib(
+            EffectsGroupHeaderView.nib,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            withReuseIdentifier: EffectsGroupHeaderView.identifier
+        )
         
+        collectionView!.collectionViewLayout = EffectsLayout()
+        collectionView!.dataSource = effectsPickerAdapter
+    }
+    
+    private func setupAdapter() {
         locator.registerService(EffectsService())
         
         let effectsService: EffectsService = locator.getService()
@@ -42,20 +49,20 @@ class EffectsPickerViewController: UICollectionViewController {
     }
     
     // MARK: - UICollectionViewDelegate
-    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        effectsPickerAdapter.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
+        effectsPickerAdapter.effectImageAtIndexPath(indexPath) { [weak self] image, error in
             if error != nil {
                 return
             }
             if let image = image {
-                self.delegate?.didChooseEffectFromPicket(image)
+                self?.delegate?.didChooseEffectFromPicket(image)
             }
         }
     }
     
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,

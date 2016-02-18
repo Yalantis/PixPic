@@ -36,7 +36,7 @@ class PhotoEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavigavionBar()
+        setupNavigavionBar()
         locator.registerService(PostService())
     }
     
@@ -91,9 +91,9 @@ class PhotoEditorViewController: UIViewController {
 // MARK: - Private methods
 extension PhotoEditorViewController {
     
-    private func setUpNavigavionBar() {
+    private func setupNavigavionBar() {
         navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "back")
+        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "performBackNavigation")
         navigationItem.leftBarButtonItem = newBackButton
         
         let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")
@@ -102,8 +102,12 @@ extension PhotoEditorViewController {
         navigationItem.title = "Edit"
     }
         
-    private dynamic func back() {
-        let alertController = UIAlertController(title: "Results didn't saved", message: "Would you like to save results to the photo library?", preferredStyle: .ActionSheet)
+    private dynamic func performBackNavigation() {
+        let alertController = UIAlertController(
+            title: "Results didn't saved",
+            message: "Would you like to save results to the photo library?",
+            preferredStyle: .ActionSheet
+        )
         
         let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
             self.saveToImageLibrary()
