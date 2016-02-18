@@ -73,13 +73,13 @@ class PhotoEditorViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         var size = imageContainer.frame.size
-        size.width = UIScreen.mainScreen().bounds.width
+        size.width = view.bounds.width
         size.height = size.width
         imageContainer.bounds.size = size
         size.height = effectsPickerContainer.frame.height
         effectsPickerContainer.bounds.size = size
         
-        view.superview?.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
     
     func didChooseEffectFromPicket(effect: UIImage) {
@@ -93,7 +93,12 @@ extension PhotoEditorViewController {
     
     private func setupNavigavionBar() {
         navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(image: UIImage.appBackButton(), style: .Plain, target: self, action: "performBackNavigation")
+        let newBackButton = UIBarButtonItem(
+            image: UIImage.appBackButton(),
+            style: .Plain,
+            target: self,
+            action: "performBackNavigation"
+        )
         navigationItem.leftBarButtonItem = newBackButton
         
         let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")

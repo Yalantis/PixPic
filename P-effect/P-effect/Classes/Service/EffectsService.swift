@@ -19,30 +19,33 @@ class EffectsService {
         var effectsVersion = EffectsVersion()
         
         needToUpdateVersion { [weak self] needUpdate in
+            guard let this = self else {
+                return
+            }
             if !needUpdate {
                 query.fromLocalDatastore()
-                self?.isQueryFromLocalDataStoure = true
+                this.isQueryFromLocalDataStoure = true
             }
 
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
                     print(error.localizedDescription)
                     completion(objects: nil, error: error)
-                    
                     return
                 }
+                
                 guard let object = object else {
                     completion(objects: nil, error: nil)
-                    
                     return
                 }
+                
                 effectsVersion = object as! EffectsVersion
                 effectsVersion.saveEventually()
                 effectsVersion.pinInBackground()
                 
-                self?.loadEffectsGroups(effectsVersion, completion: { objects, error in
+                this.loadEffectsGroups(effectsVersion) { objects, error in
                     completion(objects: objects, error: error)
-                })
+                }
             }
         }
     }
@@ -53,28 +56,29 @@ class EffectsService {
         if isQueryFromLocalDataStoure {
             groupsRelationQuery.fromLocalDatastore()
         }
+        
         groupsRelationQuery.findObjectsInBackgroundWithBlock { [weak self] objects, error in
             if let error = error {
                 print(error.localizedDescription)
                 completion(objects: nil, error: error)
-                
                 return
             }
+            
             guard let objects = objects else {
                 completion(objects: nil, error: nil)
-                
                 return
             }
-            self?.loadEffectsStickers(objects as! [EffectsGroup], completion: { objects, error in
+            
+            self?.loadEffectsStickers(objects as! [EffectsGroup]) { objects, error in
                 completion(objects: objects, error: error)
-            })
+            }
         }
     }
     
     private func loadEffectsStickers(effectsGroups: [EffectsGroup], completion: LoadingEffectsCompletion) {
         var effects = [EffectsModel]()
         var stickers = [EffectsSticker]()
-        let countOfModels = effectsGroups.count
+        let groupsQuantity = effectsGroups.count
         
         for group in effectsGroups {
             group.saveEventually()
@@ -88,14 +92,14 @@ class EffectsService {
                 if let error = error {
                     print(error.localizedDescription)
                     completion(objects: nil, error: error)
-                    
                     return
                 }
+                
                 guard let objects = objects else {
                     completion(objects: nil, error: nil)
-                    
                     return
                 }
+                
                 stickers = objects as! [EffectsSticker]
                 let effect = EffectsModel()
                 effect.effectsGroup = group
@@ -105,9 +109,8 @@ class EffectsService {
                     sticker.saveEventually()
                     sticker.pinInBackground()
                 }
-                if countOfModels == effects.count {
+                if groupsQuantity == effects.count {
                     completion(objects: effects, error: nil)
-                    
                     return
                 }
             }
@@ -122,30 +125,36 @@ class EffectsService {
         
         guard ReachabilityHelper.checkConnection() else {
             completion(false)
-            
             return
         }
+        
         query.getFirstObjectInBackgroundWithBlock { object, error in
             if let error = error {
                 print(error.localizedDescription)
                 completion(false)
-                
                 return
-            } else if let object = object {
-                effectsVersion = object as! EffectsVersion
-                queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        completion(true)
-                        
-                        return
-                    } else if let localObject = localObject {
-                        if effectsVersion.version > (localObject as! EffectsVersion).version {
-                            completion(true)
-                        } else {
-                            completion (false)
-                        }
-                    }
+            }
+            
+            guard let object = object else {
+                return
+            }
+            
+            effectsVersion = object as! EffectsVersion
+            queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
+                if let error = error {
+                    print(error.localizedDescription)
+                    completion(true)
+                    return
+                }
+                
+                guard let localObject = localObject else {
+                    return
+                }
+                
+                if effectsVersion.version > (localObject as! EffectsVersion).version {
+                    completion(true)
+                } else {
+                    completion (false)
                 }
             }
         }

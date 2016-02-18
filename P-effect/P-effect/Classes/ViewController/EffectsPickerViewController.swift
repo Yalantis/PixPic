@@ -38,18 +38,21 @@ class EffectsPickerViewController: UICollectionViewController {
         
         let effectsService: EffectsService = locator.getService()
         effectsService.loadEffects { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
             if let objects = objects {
-                self?.effectsPickerAdapter.effectsGroups = objects.sort {
+                this.effectsPickerAdapter.effectsGroups = objects.sort {
                     $0.effectsGroup.label > $1.effectsGroup.label
                 }
-                self?.collectionView!.reloadData()
+                this.collectionView!.reloadData()
             }
         }
     }
     
     // MARK: - UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        effectsPickerAdapter.effectImageAtIndexPath(indexPath) { [weak self] image, error in
+        effectsPickerAdapter.effectImage(atIndexPath: indexPath) { [weak self] image, error in
             if error != nil {
                 return
             }
