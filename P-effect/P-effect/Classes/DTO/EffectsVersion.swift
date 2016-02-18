@@ -21,7 +21,7 @@ class EffectsVersion: PFObject {
         }
     }
     
-    override class func query() -> PFQuery? {
+    static func sortedQuery() -> PFQuery {
         let query = PFQuery(className: EffectsVersion.parseClassName())
         query.orderByDescending("version")
         return query
