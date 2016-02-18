@@ -12,17 +12,16 @@ import AFDropdownNotification
 
 class AlertService: NSObject {
     
+    static var topPresenter: FeedPresenter!
     static var allowToDisplay = true
     
     class func simpleAlert(message: String?) {
-        if let topController = AlertService().topController() {
-            topController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
-        }
+        topPresenter.currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
     }
     
     class func notificationAlert(userInfo: [NSObject : AnyObject] = [:], var message: String? = nil) {
         
-        guard let topController = AlertService().topController() else {
+        guard let topViewController = topPresenter.currentViewController else {
             return
         }
         let title = "Notification"
@@ -35,13 +34,13 @@ class AlertService: NSObject {
             }
         }
         
-        let isControllersWaitingForResponse = (topController as? UIAlertController) != nil
+        let isControllersWaitingForResponse = (topViewController as? UIAlertController) != nil
         
         if isControllersWaitingForResponse || !allowToDisplay {
             PushNotificationQueue.addObjectInQueue(message)
         } else {
             PushNotificationQueue.clearQueue()
-            topController.view.makeToast(
+            topViewController.view.makeToast(
                 message,
                 duration: 3.0,
                 position: CSToastPositionTop,
@@ -51,7 +50,7 @@ class AlertService: NSObject {
                 completion: {
                     (didTap: Bool) in
                     if didTap {
-                        Router.sharedRouter().showHome(animated: true)
+                        topPresenter.goToFeed()
                     }
                 }
             )
@@ -72,7 +71,7 @@ class AlertService: NSObject {
             switch event {
             case .TopButton:
                 notification.dismissWithGravityAnimation(true)
-                Router.sharedRouter().showHome(animated: true)
+                AlertService.topPresenter.goToFeed()
             case .BottomButton:
                 notification.dismissWithGravityAnimation(true)
             case .Tap:
@@ -81,17 +80,6 @@ class AlertService: NSObject {
         }
         return notification
     }
-    
-    private func topController() -> UIViewController? {
-        if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            return topController
-        }
-        return nil
-    }
-    
     
 }
 

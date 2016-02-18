@@ -16,10 +16,12 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-class PhotoEditorViewController: UIViewController {
+final class PhotoEditorViewController: UIViewController, Creatable {
     
     @IBOutlet private weak var effectsPickerContainer: UIView!
     @IBOutlet private weak var imageContainer: UIView!
+    
+    var router: PhotoEditorRouter!
     var model: PhotoEditorModel!
     var effectsPickerController: EffectsPickerViewController? {
         didSet {

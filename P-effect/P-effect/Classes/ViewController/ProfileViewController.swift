@@ -9,12 +9,14 @@
 import UIKit
 import Toast
 
-class ProfileViewController: UITableViewController {
+final class ProfileViewController: UITableViewController, Creatable {
     
     @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
+    
+    var router: ProfileRouter!
     
     private var activityShown: Bool?
     private var dataSource: PostDataSource? {
@@ -113,10 +115,7 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
-        let controllerIdentifier = "EditProfileViewController"
-        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
-        navigationController!.showViewController(viewController, sender: self)
+        router.goToEditProfile()
     }
     
 }

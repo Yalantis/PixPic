@@ -14,7 +14,9 @@ private let backWithChangesMessage = "If you go back now, your changes will be d
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
 
-class EditProfileViewController: UIViewController {
+final class EditProfileViewController: UIViewController, Creatable {
+    
+    var router: EditProfileRouter!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -176,7 +178,7 @@ class EditProfileViewController: UIViewController {
         AuthService().logOut()
         AuthService().anonymousLogIn(
             completion: { object in
-                Router.sharedRouter().showHome(animated: true)
+                self.router.goToFeed()
             }, failure: { error in
                 if let error = error {
                     handleError(error)

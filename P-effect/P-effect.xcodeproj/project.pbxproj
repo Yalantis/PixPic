@@ -35,6 +35,14 @@
 		77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */; };
 		77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* EffectsLayout.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
+		77F9C4321C74D046006D1271 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C4311C74D046006D1271 /* ProfileRouter.swift */; };
+		77F9C4341C74D230006D1271 /* Creatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C4331C74D230006D1271 /* Creatable.swift */; };
+		77F9C4361C74DB51006D1271 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C4351C74DB51006D1271 /* MainRouter.swift */; };
+		77F9C4381C750170006D1271 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C4371C750170006D1271 /* FeedRouter.swift */; };
+		77F9C43A1C7503FD006D1271 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C4391C7503FD006D1271 /* AuthorizationRouter.swift */; };
+		77F9C43C1C750421006D1271 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C43B1C750421006D1271 /* PhotoEditorRouter.swift */; };
+		77F9C43E1C750449006D1271 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9C43D1C750449006D1271 /* EditProfileRouter.swift */; };
+		77FF3B591C74A1FE007D1BF1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FF3B581C74A1FE007D1BF1 /* Router.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */; };
 		95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */; };
@@ -64,7 +72,6 @@
 		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
 		FDD0F0B51C4E528700331799 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AF1C4E528700331799 /* LoaderService.swift */; };
 		FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */; };
-		FDD0F0B71C4E528700331799 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B11C4E528700331799 /* Router.swift */; };
 		FDD0F0B81C4E528700331799 /* SaverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B21C4E528700331799 /* SaverService.swift */; };
 		FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */; };
 		FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BB1C4E52F300331799 /* Post.swift */; };
@@ -120,6 +127,14 @@
 		77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* EffectsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLayout.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
+		77F9C4311C74D046006D1271 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		77F9C4331C74D230006D1271 /* Creatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Creatable.swift; path = "P-effect/Classes/ViewController/Creatable.swift"; sourceTree = SOURCE_ROOT; };
+		77F9C4351C74DB51006D1271 /* MainRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainRouter.swift; path = "P-effect/Classes/ViewController/MainRouter.swift"; sourceTree = SOURCE_ROOT; };
+		77F9C4371C750170006D1271 /* FeedRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
+		77F9C4391C7503FD006D1271 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
+		77F9C43B1C750421006D1271 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
+		77F9C43D1C750449006D1271 /* EditProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
+		77FF3B581C74A1FE007D1BF1 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
@@ -157,7 +172,6 @@
 		FDD0F0AE1C4E528700331799 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		FDD0F0AF1C4E528700331799 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
 		FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
-		FDD0F0B11C4E528700331799 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FDD0F0B21C4E528700331799 /* SaverService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaverService.swift; sourceTree = "<group>"; };
 		FDD0F0B91C4E52DD00331799 /* PostDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostDataSource.swift; sourceTree = "<group>"; };
 		FDD0F0BB1C4E52F300331799 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -245,6 +259,14 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		77FF3B571C74A1FE007D1BF1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				77FF3B581C74A1FE007D1BF1 /* Router.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		F84ED9858785A5DACC7DD377 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +328,7 @@
 		FDAF46A11C49369E008060CD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				77FF3B571C74A1FE007D1BF1 /* Core */,
 				77B42D211C6B760D00C5A999 /* Layout */,
 				FDAF46A21C49369E008060CD /* DTO */,
 				FDAF46A31C49369E008060CD /* Model */,
@@ -347,7 +370,6 @@
 				FDD0F0AE1C4E528700331799 /* AuthService.swift */,
 				FDD0F0AF1C4E528700331799 /* LoaderService.swift */,
 				FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */,
-				FDD0F0B11C4E528700331799 /* Router.swift */,
 				FDD0F0B21C4E528700331799 /* SaverService.swift */,
 				95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */,
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
@@ -362,10 +384,15 @@
 		FDAF46A51C49369E008060CD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				77F9C43B1C750421006D1271 /* PhotoEditorRouter.swift */,
 				499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */,
+				77F9C4311C74D046006D1271 /* ProfileRouter.swift */,
 				497B87241C4D152C00A4A32B /* ProfileViewController.swift */,
+				77F9C4371C750170006D1271 /* FeedRouter.swift */,
 				95199AEA1C4CF6A00086D613 /* FeedViewController.swift */,
+				77F9C4391C7503FD006D1271 /* AuthorizationRouter.swift */,
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
+				77F9C43D1C750449006D1271 /* EditProfileRouter.swift */,
 				FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */,
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
@@ -411,6 +438,8 @@
 		FDAF46A91C49369E008060CD /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				77F9C4331C74D230006D1271 /* Creatable.swift */,
+				77F9C4351C74DB51006D1271 /* MainRouter.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -652,9 +681,11 @@
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
+				77FF3B591C74A1FE007D1BF1 /* Router.swift in Sources */,
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
-				FDD0F0B71C4E528700331799 /* Router.swift in Sources */,
+				77F9C43A1C7503FD006D1271 /* AuthorizationRouter.swift in Sources */,
+				77F9C4341C74D230006D1271 /* Creatable.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				FDD0F0BE1C4E531000331799 /* PostModel.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
@@ -667,6 +698,7 @@
 				FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */,
 				492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
+				77F9C4381C750170006D1271 /* FeedRouter.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertService.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */,
@@ -674,13 +706,16 @@
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
+				77F9C43E1C750449006D1271 /* EditProfileRouter.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				77F9C4361C74DB51006D1271 /* MainRouter.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				FD6C17C11C49540A00A01715 /* UserModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
+				77F9C4321C74D046006D1271 /* ProfileRouter.swift in Sources */,
 				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
@@ -688,6 +723,7 @@
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostDataSource.swift in Sources */,
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
+				77F9C43C1C750421006D1271 /* PhotoEditorRouter.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,

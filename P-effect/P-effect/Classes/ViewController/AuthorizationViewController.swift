@@ -10,7 +10,9 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-class AuthorizationViewController: UIViewController {
+final class AuthorizationViewController: UIViewController, Creatable {
+    
+    var router: AuthorizationRouter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,7 @@ class AuthorizationViewController: UIViewController {
     }
     
     private func proceedWithoutAuthorization() {
-        Router.sharedRouter().showHome(animated: true)
+        router.goToFeed()
         ReachabilityHelper.checkConnection()
     }
     
@@ -77,7 +79,7 @@ class AuthorizationViewController: UIViewController {
             }
             print("SIGNING UP!!!  with ", userModel.user.username)
             self?.view.hideToastActivity()
-            Router.sharedRouter().showHome(animated: true)
+            self!.router.goToFeed()
         }
     }
     
@@ -91,7 +93,7 @@ class AuthorizationViewController: UIViewController {
                 }
                 guard let user = user as? User else {
                     self?.view.hideToastActivity()
-                    Router.sharedRouter().showHome(animated: true)
+                    self!.router.goToFeed()
                     return
                 }
                 let userModel = UserModel(aUser: user)
@@ -104,7 +106,7 @@ class AuthorizationViewController: UIViewController {
                         installation["user"] = userModel.user
                         installation.saveInBackground()
                         self?.view.hideToastActivity()
-                        Router.sharedRouter().showHome(animated: true)
+                        self!.router.goToFeed()
                     }
                 }
             }

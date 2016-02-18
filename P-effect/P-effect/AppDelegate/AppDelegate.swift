@@ -1,4 +1,4 @@
-        //
+//
 //  AppDelegate.swift
 //  P-effect
 //
@@ -17,7 +17,8 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-   
+    private let router = MainRouter()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
             application,
@@ -42,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNotifications(application)
         setupUI()
         
-        Router.sharedRouter().onStart(true)
+        router.execute(window!)
         return true
     }
     
@@ -102,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            Router.sharedRouter().showHome(animated: true)
+            router.goToFeed()
         }
         
         if application.applicationState == .Active {
