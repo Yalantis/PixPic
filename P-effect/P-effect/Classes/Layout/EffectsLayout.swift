@@ -12,7 +12,6 @@ private let cellSize = CGSize(width: 105, height: 105)
 
 class EffectsLayout: UICollectionViewFlowLayout {
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -24,6 +23,8 @@ class EffectsLayout: UICollectionViewFlowLayout {
         headerReferenceSize = cellSize
         scrollDirection = UICollectionViewScrollDirection.Horizontal
         sectionHeadersPinToVisibleBounds = true
+        minimumLineSpacing = 0
+        minimumInteritemSpacing = 0
     }
     
     override func initialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {

@@ -30,7 +30,7 @@ class FeedViewController: UIViewController {
         setupTableView()
         setupToolBar()
         setupAdapter()
-        setupNotification()
+        setupObserver()
         setupLoadersCallback()
         
         if ReachabilityHelper.checkConnection() == false {
@@ -86,7 +86,7 @@ class FeedViewController: UIViewController {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
-    private func setupNotification() {
+    private func setupObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "fetchDataFromNotification",
@@ -102,9 +102,9 @@ class FeedViewController: UIViewController {
         locator.registerService(PostService())
         
         let postService: PostService = locator.getService()
-        postService.loadPosts() { objects, error in
+        postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
-                self.postAdapter.posts.appendContentsOf(objects)
+                self?.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
                 print(error)
             }
@@ -141,10 +141,17 @@ class FeedViewController: UIViewController {
     // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
-        postService.loadPosts() { [weak self] objects, error in
-            self?.postAdapter.posts = objects!
+        postService.loadPosts { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
+            if let objects = objects {
+                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.scrollToFirstRow()
+            } else if let error = error {
+                print(error)
+            }
             self?.tableView?.pullToRefreshView.stopAnimating()
-            self?.scrollToFirstRow()
         }
     }
     
@@ -172,18 +179,38 @@ class FeedViewController: UIViewController {
     private func setupLoadersCallback() {
         let postService: PostService = (locator.getService())
         tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+            guard let this = self else {
                 return
             }
-            postService.loadPosts() { objects, error in
-                self?.postAdapter.posts = objects!
-                self?.tableView?.pullToRefreshView.stopAnimating()
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView?.pullToRefreshView.stopAnimating()
+                return
+            }
+            postService.loadPosts { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                    this.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
+                this.tableView?.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            postService.loadPagedData(offset: (self?.postAdapter.countOfModels())!) { objects, error in
-                self?.postAdapter.posts.appendContentsOf(objects!)
+            guard let this = self else {
+                return
+            }
+            guard let offset = self?.postAdapter.postQuantity else {
+                this.tableView?.infiniteScrollingView.stopAnimating()
+                return
+            }
+            postService.loadPagedPosts(offset: offset) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                    this.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
             }
         }
     }
@@ -211,7 +238,7 @@ extension FeedViewController: PostAdapterDelegate {
     }
     
     func showPlaceholderForEmptyDataSet() {
-        if postAdapter.isEmpty {
+        if postAdapter.postQuantity == 0 {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
             tableView.reloadData()

@@ -28,8 +28,7 @@ class EffectsPickerViewController: UICollectionViewController {
             EffectsGroupHeaderView.nib,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
             withReuseIdentifier: EffectsGroupHeaderView.identifier
-        )
-        
+        )        
         collectionView!.collectionViewLayout = EffectsLayout()
         collectionView!.dataSource = effectsPickerAdapter
     }

@@ -10,7 +10,7 @@ import Foundation
 
 private let messageUploadSuccessful = "Upload successful!"
 
-typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> ()
+typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
     
@@ -21,18 +21,18 @@ class PostService {
         loadPosts(user, query: query, completion: completion)
     }
     
-    func loadPagedData(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
+    func loadPagedPosts(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery()
         query.limit = Constants.DataSource.QueryLimit
         query.skip = offset
         loadPosts(user, query: query, completion: completion)
     }
     
-    func savePost(avatar: PFFile, comment: String? = nil) {
-        avatar.saveInBackgroundWithBlock({ succeeded, error in
+    func savePost(image: PFFile, comment: String? = nil) {
+        image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
                 print("Saved!")
-                self.uploadPost(avatar, comment: comment)
+                self.uploadPost(image, comment: comment)
             } else if let error = error {
                 print(error)
             }
@@ -44,12 +44,12 @@ class PostService {
     }
     
     // MARK: - Private methods
-    private func uploadPost(avatar: PFFile, comment: String?) {
+    private func uploadPost(image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
             // Auth service
             return
         }
-        let post = PostModel(image: avatar, user: user, comment: comment).post
+        let post = Post(image: image, user: user, comment: comment)
         post.saveInBackgroundWithBlock{ succeeded, error in
             if succeeded {
                 AlertService.simpleAlert(messageUploadSuccessful)
@@ -81,7 +81,7 @@ class PostService {
         if let user = user {
             query.whereKey("user", equalTo: user)
         }
-        query.findObjectsInBackgroundWithBlock { objects, error -> Void in
+        query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {
                 for object in objects {
                     array.append(object as! Post)
@@ -89,8 +89,8 @@ class PostService {
                     object.pinInBackground()
                 }
                 completion(posts: array, error: nil)
-            } else if error == nil {
-                print("Error: \(error!) \(error!.userInfo)")
+            } else if let error = error {
+                print(error.localizedDescription)
                 completion(posts: nil, error: error)
             } else {
                 completion(posts: nil, error: nil)

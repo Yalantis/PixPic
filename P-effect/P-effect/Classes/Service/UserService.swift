@@ -8,14 +8,14 @@
 
 import Foundation
 
-typealias LoadingUserCompletion = (object: User?, error: NSError?) -> ()
+typealias LoadingUserCompletion = (object: User?, error: NSError?) -> Void
 
 private let messageDataSuccessfullyUpdated = "User data has been updated!"
 private let messageDataNotUpdated = "Troubles with the update! Check it out later"
 
 class UserService {
     
-    func uploadUserChanges(user: User, avatar: PFFile, nickname: String, completion: (Bool?, String?) -> ()) {
+    func uploadUserChanges(user: User, avatar: PFFile, nickname: String, completion: (Bool?, String?) -> Void) {
         user.avatar = avatar
         user.username = nickname
         user.saveInBackgroundWithBlock { succeeded, error in

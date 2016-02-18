@@ -8,13 +8,9 @@
 
 import Foundation
 
-class EffectsGroupHeaderView: UICollectionReusableView {
+class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
     
     static let identifier = "EffectsGroupHeaderViewIdentifier"
-    static var nib: UINib? {
-        let nib = UINib(nibName: String(self), bundle: nil)
-        return nib
-    }
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!

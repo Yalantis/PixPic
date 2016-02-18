@@ -8,7 +8,6 @@
 
 import UIKit
 import Toast
-import AFDropdownNotification
 
 class AlertService: NSObject {
     
@@ -26,13 +25,8 @@ class AlertService: NSObject {
             return
         }
         let title = "Notification"
-        if let _ = message {
-        } else {
-            if let aps = userInfo["aps"] as? NSDictionary {
-                if let alert = aps["alert"] as? NSString {
-                    message = alert as String
-                }
-            }
+        if let aps = userInfo["aps"] as? [String:String] {
+            message = aps["alert"]
         }
         
         let isControllersWaitingForResponse = (topController as? UIAlertController) != nil
@@ -56,30 +50,6 @@ class AlertService: NSObject {
                 }
             )
         }
-        
-    }
-    
-    private func configNotification(message: String) -> AFDropdownNotification {
-        let notification = AFDropdownNotification()
-        notification.titleText = "Some news"
-        notification.subtitleText = "New amazing photos appears by..."
-        notification.image = UIImage(named: "ic_notification")
-        notification.topButtonText = "Show";
-        notification.bottomButtonText = "Cancel";
-        
-        notification.listenEventsWithBlock {
-            event in
-            switch event {
-            case .TopButton:
-                notification.dismissWithGravityAnimation(true)
-                Router.sharedRouter().showHome(animated: true)
-            case .BottomButton:
-                notification.dismissWithGravityAnimation(true)
-            case .Tap:
-                notification.dismissWithGravityAnimation(true)
-            }
-        }
-        return notification
     }
     
     private func topController() -> UIViewController? {
