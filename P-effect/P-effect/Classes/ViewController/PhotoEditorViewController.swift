@@ -101,7 +101,7 @@ extension PhotoEditorViewController {
         )
         navigationItem.leftBarButtonItem = newBackButton
         
-        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveToImageLibrary")
+        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveImageToLibrary")
         navigationItem.rightBarButtonItem = saveButton
         
         navigationItem.title = "Edit"
@@ -115,7 +115,7 @@ extension PhotoEditorViewController {
         )
         
         let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
-            self.saveToImageLibrary()
+            self.saveImageToLibrary()
             self.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(saveAction)
@@ -131,7 +131,7 @@ extension PhotoEditorViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private dynamic func saveToImageLibrary() {
+    private dynamic func saveImageToLibrary() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
             ExceptionHandler.handle(Exception.CantApplyEffects)
             
@@ -177,7 +177,7 @@ extension PhotoEditorViewController {
         )
         
         let saveAction = UIAlertAction(title: "Save now", style: .Default) { _ in
-            self.saveToImageLibrary()
+            self.saveImageToLibrary()
         }
         alertController.addAction(saveAction)
         

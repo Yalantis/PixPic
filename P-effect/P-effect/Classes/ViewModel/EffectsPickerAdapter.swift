@@ -25,7 +25,7 @@ class EffectsPickerAdapter: NSObject {
         EffectsSticker()
     }
     
-    func effectImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
+    func effectImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
         guard let currentGroupNumber = currentGroupNumber, let effectsGroups = effectsGroups else {
             return
         }
