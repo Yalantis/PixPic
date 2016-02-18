@@ -72,13 +72,8 @@ class PhotoEditorViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        var size = imageContainer.frame.size
-        size.width = view.bounds.width
-        size.height = size.width
-        imageContainer.bounds.size = size
-        size.height = effectsPickerContainer.frame.height
-        effectsPickerContainer.bounds.size = size
-        
+        layoutImageContainer()
+        layoutEffectsPickerContainer()
         view.layoutIfNeeded()
     }
     
@@ -106,7 +101,20 @@ extension PhotoEditorViewController {
         
         navigationItem.title = "Edit"
     }
-        
+    
+    private func layoutImageContainer() {
+        var size = imageContainer.frame.size
+        size.width = view.bounds.width
+        size.height = size.width
+        imageContainer.bounds.size = size
+    }
+    
+    private func layoutEffectsPickerContainer() {
+        var size = effectsPickerContainer.frame.size
+        size.width = view.bounds.width
+        effectsPickerContainer.bounds.size = size
+    }
+    
     private dynamic func performBackNavigation() {
         let alertController = UIAlertController(
             title: "Results didn't saved",
