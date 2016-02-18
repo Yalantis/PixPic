@@ -19,11 +19,19 @@ class Post: PFObject {
         }
     }
     
-    override class func query() -> PFQuery? {
+    static func sortedQuery() -> PFQuery {
         let query = PFQuery(className: Post.parseClassName())
         query.includeKey("user")
         query.orderByDescending("updatedAt")
         return query
+    }
+    
+    convenience init(image: PFFile, user: User, comment: String?) {
+        self.init()
+        
+        self.image = image
+        self.user = user
+        self.comment = comment
     }
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> ()
+typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> Void
 
 class ImageLoaderService {
     

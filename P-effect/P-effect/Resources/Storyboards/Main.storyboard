@@ -148,6 +148,14 @@
                                     <constraint firstAttribute="trailing" secondItem="fvh-jc-Ewc" secondAttribute="trailing" constant="12" id="ZxC-b6-xFd"/>
                                     <constraint firstItem="fvh-jc-Ewc" firstAttribute="top" secondItem="EBj-No-79Q" secondAttribute="top" constant="12" id="sBZ-5Q-8Dh"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="W0X-Ha-5ci"/>

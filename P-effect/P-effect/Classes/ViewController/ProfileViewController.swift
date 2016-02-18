@@ -19,13 +19,8 @@ final class ProfileViewController: UITableViewController, Creatable {
     var router: ProfileRouter!
     
     private var activityShown: Bool?
-    private var dataSource: PostDataSource? {
-        didSet {
-            dataSource?.tableView = tableView
-            dataSource?.fetchData(model.user)
-            dataSource?.shouldPullToRefreshHandle = true
-        }
-    }
+    private lazy var dataSource = PostAdapter()
+
     var model: ProfileViewModel!
     
     override func viewDidLoad() {
@@ -43,7 +38,7 @@ final class ProfileViewController: UITableViewController, Creatable {
     
     // MARK: - Inner func
     func setupController() {
-        dataSource = PostDataSource()
+//        dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
@@ -73,13 +68,13 @@ final class ProfileViewController: UITableViewController, Creatable {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
         navigationItem.title = Constants.Profile.NavigationTitle
-        model?.userAvatar({[weak self] (image, error) -> () in
+        model?.userAvatar {[weak self] image, error -> Void in
             if error == nil {
                 self?.userAvatar.image = image
             } else {
                 self?.view.makeToast(error?.localizedDescription)
             }
-            })
+        }
     }
     
     func showToast() {
@@ -93,17 +88,16 @@ final class ProfileViewController: UITableViewController, Creatable {
     }
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard ReachabilityHelper.checkConnection() else {
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 
                 return
             }
-            self?.dataSource?.fetchData(self?.model.user)
+    //        self?.dataSource?.fetchData(self?.model.user)
         }
-        tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
-            self?.dataSource?.fetchPagedData(self?.model.user)
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
+      //      self?.dataSource?.fetchPagedData(self?.model.user)
         }
     }
     // MARK: Delegate methods

@@ -8,7 +8,6 @@
 
 import UIKit
 import Toast
-import AFDropdownNotification
 
 class AlertService: NSObject {
     
@@ -25,13 +24,8 @@ class AlertService: NSObject {
             return
         }
         let title = "Notification"
-        if let _ = message {
-        } else {
-            if let aps = userInfo["aps"] as? NSDictionary {
-                if let alert = aps["alert"] as? NSString {
-                    message = alert as String
-                }
-            }
+        if let aps = userInfo["aps"] as? [String:String] {
+            message = aps["alert"]
         }
         
         let isControllersWaitingForResponse = (topViewController as? UIAlertController) != nil
@@ -55,7 +49,6 @@ class AlertService: NSObject {
                 }
             )
         }
-        
     }
     
     private func configNotification(message: String) -> AFDropdownNotification {

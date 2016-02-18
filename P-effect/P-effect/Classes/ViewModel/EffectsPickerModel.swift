@@ -38,7 +38,7 @@ class EffectsPickerModel: NSObject {
         }
     }
     
-    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> ()) {
+    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
         guard let currentGroupNumber = currentGroupNumber, let effectsGroups = effectsGroups else {
             return
         }

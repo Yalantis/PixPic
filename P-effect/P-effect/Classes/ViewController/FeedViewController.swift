@@ -6,6 +6,7 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
@@ -15,29 +16,24 @@ final class FeedViewController: UIViewController, Creatable {
     var router: FeedRouter!
     
     private lazy var photoGenerator = PhotoGenerator()
-    private lazy var postImageView = UIImageView()
     private var toolBar: FeedToolBar!
+    
+    lazy var locator = ServiceLocator()
     
     @IBOutlet private weak var tableView: UITableView!
     
-    var postDataSource: PostDataSource? {
-        didSet {
-            postDataSource?.tableView = tableView
-            postDataSource?.fetchData(nil)
-            postDataSource?.delegate = self
-            postDataSource?.shouldPullToRefreshHandle = true
-        }
-    }
+    private lazy var postAdapter = PostAdapter()
     
-    //MARK: - Lifecycle
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.makeToastActivity(CSToastPositionCenter)
         setupTableView()
-        setupDataSource()
-        setupLoadersCallback()
         setupToolBar()
+        setupAdapter()
+        setupObserver()
+        setupLoadersCallback()
         
         if ReachabilityHelper.checkConnection() == false {
             setupPlaceholderForEmptyDataSet()
@@ -58,12 +54,6 @@ final class FeedViewController: UIViewController, Creatable {
         toolBar.animateButton(isLifting: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        toolBar.animateButton(isLifting: false)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
@@ -75,6 +65,17 @@ final class FeedViewController: UIViewController, Creatable {
         )
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        toolBar.animateButton(isLifting: false)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - Setup methods
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
         toolBar.selectionClosure = { [weak self] in
@@ -88,9 +89,29 @@ final class FeedViewController: UIViewController, Creatable {
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
-    private func setupDataSource() {
-        postDataSource = PostDataSource()
-        tableView.dataSource = postDataSource
+    private func setupObserver() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "fetchDataFromNotification",
+            name: Constants.NotificationName.NewPostUploaded,
+            object: nil
+        )
+    }
+    
+    private func setupAdapter() {
+        tableView.dataSource = postAdapter
+        postAdapter.delegate = self
+        
+        locator.registerService(PostService())
+        
+        let postService: PostService = locator.getService()
+        postService.loadPosts { [weak self] objects, error in
+            if let objects = objects {
+                self?.postAdapter.update(withPosts: objects, action: .Reload)
+            } else if let error = error {
+                print(error)
+            }
+        }
     }
     
     private func setupPlaceholderForEmptyDataSet() {
@@ -98,7 +119,7 @@ final class FeedViewController: UIViewController, Creatable {
         tableView?.emptyDataSetSource = self
     }
     
-    //MARK: - photo editor
+    // MARK: - photo editor
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
@@ -115,18 +136,32 @@ final class FeedViewController: UIViewController, Creatable {
         router.goToPhotoEditor(image)
     }
     
-    func setSelectedPhoto(image: UIImage) {
-        postImageView.image = image
-        let pictureData = UIImageJPEGRepresentation(image, 0.9)
-        if let file = PFFile(name: "image", data: pictureData!) {
-            SaverService.saveAndUploadPost(file, comment: nil)
+    // MARK: - Notification handling
+    dynamic func fetchDataFromNotification() {
+        let postService: PostService = locator.getService()
+        postService.loadPosts { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
+            if let objects = objects {
+                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.scrollToFirstRow()
+            } else if let error = error {
+                print(error)
+            }
+            self?.tableView?.pullToRefreshView.stopAnimating()
         }
+    }
+    
+    private func scrollToFirstRow() {
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         let isUserAbsent = currentUser == nil
-
+        
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
             router.goToAuthorization()
         } else if let currentUser = currentUser {
@@ -134,19 +169,44 @@ final class FeedViewController: UIViewController, Creatable {
         }
     }
     
-    //MARK: - UserInteractive
+    // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        tableView.addPullToRefreshWithActionHandler { [weak self] () -> () in
-            guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
+        let postService: PostService = (locator.getService())
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
+            guard let this = self else {
                 return
             }
-            self?.postDataSource?.fetchData(nil)
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView?.pullToRefreshView.stopAnimating()
+                return
+            }
+            postService.loadPosts { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                    this.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
+                this.tableView?.pullToRefreshView.stopAnimating()
+            }
         }
-        tableView.addInfiniteScrollingWithActionHandler {
-            [weak self]() -> () in
-            self?.postDataSource?.fetchPagedData(nil)
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
+            guard let offset = self?.postAdapter.postQuantity else {
+                this.tableView?.infiniteScrollingView.stopAnimating()
+                return
+            }
+            postService.loadPagedPosts(offset: offset) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                    this.scrollToFirstRow()
+                } else if let error = error {
+                    print(error)
+                }
+            }
         }
     }
     
@@ -164,18 +224,22 @@ extension FeedViewController: UITableViewDelegate {
     
 }
 
-extension FeedViewController: PostDataSourceDelegate {
+extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
         router.goToProfile(user)
     }
     
     func showPlaceholderForEmptyDataSet() {
-        if postDataSource?.countOfModels() == 0 {
+        if postAdapter.postQuantity == 0 {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
             tableView.reloadData()
         }
+    }
+    
+    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
+        tableView.reloadData()
     }
 }
 

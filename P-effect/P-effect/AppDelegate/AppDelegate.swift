@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         setupParse()
+        setupNotifications(application)
+        setupUI()
 
         Parse.setApplicationId(
             Constants.ParseApplicationId.AppID,
@@ -54,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupParse() {
         User.registerSubclass()
         Parse.enableLocalDatastore()
-
     }
     
     private func setupUI() {

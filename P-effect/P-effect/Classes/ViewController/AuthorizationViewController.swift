@@ -30,26 +30,23 @@ final class AuthorizationViewController: UIViewController, Creatable {
     }
     
     private func signInWithFacebook() {
-        FBAuthorization.signInWithFacebookInController(
-            self,
-            completion: { [weak self] user, error in
-                if let error = error {
-                    handleError(error as NSError)
-                }
-                guard let user = user as User? else {
-                    self?.proceedWithoutAuthorization()
-                    return
-                }
-                UserModel(aUser: user).checkIfFacebookIdExists { exists in
-                    if exists {
-                        user.passwordSet = false
-                        self?.signIn(user)
-                    } else {
-                        self?.signUp(user)
-                    }
+        FBAuthorization.signInWithFacebookInController(self) { [weak self] user, error in
+            if let error = error {
+                handleError(error as NSError)
+            }
+            guard let user = user as User? else {
+                self?.proceedWithoutAuthorization()
+                return
+            }
+            user.checkFacebookIdExistance { exists in
+                if exists {
+                    user.passwordSet = false
+                    self?.signIn(user)
+                } else {
+                    self?.signUp(user)
                 }
             }
-        )
+        }
     }
     
     private func proceedWithoutAuthorization() {
@@ -68,22 +65,20 @@ final class AuthorizationViewController: UIViewController, Creatable {
                 print("unknown trouble while signing IN")
                 return
             }
-            let userModel = UserModel(aUser: user)
-            userModel.user.facebookId = userWithFB.facebookId
-            userModel.user.username = userWithFB.username
-            userModel.user.email = userWithFB.email
-            userModel.user.avatar = userWithFB.avatar
-            userModel.user.saveInBackgroundWithBlock { _, error in
+            user.facebookId = userWithFB.facebookId
+            user.username = userWithFB.username
+            user.email = userWithFB.email
+            user.avatar = userWithFB.avatar
+            user.saveInBackgroundWithBlock { _, error in
                 if let error = error {
                     print(error)
                 } else {
-                    print("NEW DATAA FOR LINKED USER")
                     let installation = PFInstallation.currentInstallation()
-                    installation["user"] = userModel.user
+                    installation["user"] = user
                     installation.saveInBackground()
                 }
             }
-            print("SIGNING UP!!!  with ", userModel.user.username)
+            print("SIGNING UP!!!  with ", user.username)
             self?.view.hideToastActivity()
             self!.router.goToFeed()
         }
@@ -91,13 +86,23 @@ final class AuthorizationViewController: UIViewController, Creatable {
     
     private func signIn(user: User) {
         let token = FBSDKAccessToken.currentAccessToken()
-        PFFacebookUtils.logInInBackgroundWithAccessToken(
-            token,
-            block: { [weak self] user, error in
-                if let _ = error {
-                    ExceptionHandler.handle(Exception.InvalidSessionToken)
-                }
-                guard let user = user as? User else {
+        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
+            if let _ = error {
+                ExceptionHandler.handle(Exception.InvalidSessionToken)
+            }
+            guard let user = user as? User else {
+                self?.view.hideToastActivity()
+                Router.sharedRouter().showHome(animated: true)
+                return
+            }
+            user.linkWithFacebook { error in
+                if let error = error {
+                    handleError(error)
+                } else {
+                    print("linked!")
+                    let installation = PFInstallation.currentInstallation()
+                    installation["user"] = user
+                    installation.saveInBackground()
                     self?.view.hideToastActivity()
                     self!.router.goToFeed()
                     return
@@ -116,7 +121,8 @@ final class AuthorizationViewController: UIViewController, Creatable {
                     }
                 }
             }
-        )
+            user.saveEventually()
+        }
     }
     
 }

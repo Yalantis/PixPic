@@ -18,6 +18,8 @@ final class EditProfileViewController: UIViewController, Creatable {
     
     var router: EditProfileRouter!
     
+    lazy var locator = ServiceLocator()
+    
     private lazy var photoGenerator = PhotoGenerator()
     
     private var image: UIImage?
@@ -98,7 +100,7 @@ final class EditProfileViewController: UIViewController, Creatable {
             return
         }
         ImageLoaderService.getImageForContentItem(avatar) {
-            [weak self](image, error) -> () in
+            [weak self](image, error) -> Void in
             if let error = error {
                 print(error)
             } else {
@@ -176,8 +178,8 @@ final class EditProfileViewController: UIViewController, Creatable {
         guard ReachabilityHelper.checkConnection() else {
             return
         }
-        AuthService().logOut()
-        AuthService().anonymousLogIn(
+        AuthService.logOut()
+        AuthService.anonymousLogIn(
             completion: { object in
                 self.router.goToFeed()
             }, failure: { error in
@@ -246,10 +248,11 @@ final class EditProfileViewController: UIViewController, Creatable {
         }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
-        SaverService.uploadUserChanges(
+        let userService: UserService = locator.getService()
+        userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,
-            nickname: userName,
+            nickname: userName!,
             completion: { _, error in
                 if let error = error {
                     print(error)

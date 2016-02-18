@@ -47,7 +47,7 @@ class PostViewCell: UITableViewCell {
         selectionStyle = .None
     }
     
-    func configureWithPost(post: Post?) {
+    func configure(withPost post: Post?) {
         guard let post = post else {
             profileImageView.image = UIImage.placeholderImage()
             profileImageView.image = UIImage.avatarPlaceholderImage()
