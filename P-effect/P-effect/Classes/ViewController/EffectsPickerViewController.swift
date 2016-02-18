@@ -25,7 +25,7 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - Private methods
     private func setupCollectionView() {
         collectionView!.registerNib(
-            EffectsGroupHeaderView.nib,
+            EffectsGroupHeaderView.cellNib(),
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
             withReuseIdentifier: EffectsGroupHeaderView.identifier
         )        
