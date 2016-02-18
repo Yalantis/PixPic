@@ -19,7 +19,7 @@ class ProfileViewController: UITableViewController {
     private var activityShown: Bool?
     private lazy var dataSource = PostAdapter()
 
-    var model: ProfileViewModel!
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class ProfileViewController: UITableViewController {
     }
     
     // MARK: - Inner func
-    func setupController() {
+    private func setupController() {
 //        dataSource = PostDataSource()
         showToast()
         tableView.dataSource = dataSource
@@ -37,14 +37,14 @@ class ProfileViewController: UITableViewController {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
-        if (model!.userIsCurrentUser()) {
+        if (user!.userIsCurrentUser()) {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
             profileSettingsButton.tintColor = UIColor.whiteColor()
         }
     }
     
-    func setupTableViewFooter() {
+    private func setupTableViewFooter() {
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         var frame: CGRect = tableViewFooter.frame
         if let navigationController = navigationController {
@@ -56,11 +56,11 @@ class ProfileViewController: UITableViewController {
         tableView.tableFooterView = tableViewFooter;
     }
     
-    func applyUser() {
+    private func applyUser() {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
-        userName.text = model?.userName
+        userName.text = user?.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        model?.userAvatar {[weak self] image, error -> Void in
+        user?.userAvatar { [weak self] image, error in
             if error == nil {
                 self?.userAvatar.image = image
             } else {
@@ -69,14 +69,9 @@ class ProfileViewController: UITableViewController {
         }
     }
     
-    func showToast() {
-        self.view.makeToastActivity(CSToastPositionCenter)
+    private func showToast() {
+        view.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
         activityShown = true
-        
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.view.hideToastActivity()
-        }
     }
     
     private func setupLoadersCallback() {
@@ -92,7 +87,19 @@ class ProfileViewController: UITableViewController {
       //      self?.dataSource?.fetchPagedData(self?.model.user)
         }
     }
-    // MARK: Delegate methods
+    
+    // MARK: - IBActions
+    @IBAction func profileSettings(sender: AnyObject) {
+        let board = UIStoryboard(name: "Main", bundle: nil)
+        let controllerIdentifier = "EditProfileViewController"
+        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
+        navigationController!.showViewController(viewController, sender: self)
+    }
+    
+}
+
+extension ProfileViewController {
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         if (activityShown == true) {
             view.hideToastActivity()
@@ -103,14 +110,6 @@ class ProfileViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.size.width + PostViewCell.designedHeight
-    }
-    
-    // MARK: - IBActions
-    @IBAction func profileSettings(sender: AnyObject) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
-        let controllerIdentifier = "EditProfileViewController"
-        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
-        navigationController!.showViewController(viewController, sender: self)
     }
     
 }

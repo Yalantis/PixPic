@@ -83,6 +83,23 @@ extension User {
         }
     }
     
+    //MARK: - ProfileViewControllerMethods
+    func userAvatar(completion: LoadingImageCompletion) {
+        if let avatar = self.avatar {
+            ImageLoaderService.getImageForContentItem(avatar) { image, error in
+                completion(image: image, error: error)
+            }
+        }
+    }
+    
+    func userIsCurrentUser() -> Bool {
+        if let currentUser = User.currentUser() {
+            if ( currentUser.facebookId == self.facebookId ){
+                return true
+            }
+        }
+        return false
+    }
 }
 
 
