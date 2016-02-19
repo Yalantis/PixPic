@@ -120,7 +120,8 @@ class FeedViewController: UIViewController {
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
-            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            let board = UIStoryboard(name: "Authorization", bundle: nil)
+            let controller = board.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
             return
         }
@@ -131,7 +132,7 @@ class FeedViewController: UIViewController {
     }
     
     private func handlePhotoSelected(image: UIImage) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
+        let board = UIStoryboard(name: "PhotoEditor", bundle: nil)
         let controllerIdentifier = "PhotoEditorController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
         viewController.model = PhotoEditorModel.init(image: image)
@@ -165,10 +166,12 @@ class FeedViewController: UIViewController {
         let isUserAbsent = currentUser == nil
         
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
-            let controller = storyboard!.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            let board = UIStoryboard(name: "Authorization", bundle: nil)
+            let controller = board.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
         } else if let currentUser = currentUser {
-            let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            let board = UIStoryboard(name: "Profile", bundle: nil)
+            let controller = board.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
             controller.model = ProfileViewModel(profileUser: currentUser)
             self.navigationController!.showViewController(controller, sender: self)
         }
@@ -232,7 +235,8 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        let board = UIStoryboard(name: "Profile", bundle: nil)
+        let controller = board.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
         controller.model = ProfileViewModel.init(profileUser: user)
         self.navigationController!.showViewController(controller, sender: self)
     }
