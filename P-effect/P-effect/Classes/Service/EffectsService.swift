@@ -40,7 +40,6 @@ class EffectsService {
                 }
                 
                 effectsVersion = object
-                effectsVersion.saveEventually()
                 effectsVersion.pinInBackground()
                 
                 this.loadEffectsGroups(effectsVersion) { objects, error in
@@ -81,7 +80,6 @@ class EffectsService {
         let groupsQuantity = effectsGroups.count
         
         for group in effectsGroups {
-            group.saveEventually()
             group.pinInBackground()
 
             let stickersRelationQuery = group.stickersRelation.query()
@@ -105,7 +103,6 @@ class EffectsService {
                 effects.append(effect)
                 
                 for sticker in stickers {
-                    sticker.saveEventually()
                     sticker.pinInBackground()
                 }
                 
