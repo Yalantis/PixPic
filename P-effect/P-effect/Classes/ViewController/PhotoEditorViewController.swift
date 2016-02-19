@@ -66,8 +66,6 @@ class PhotoEditorViewController: UIViewController {
             
         default:
             super.prepareForSegue(segue, sender: sender)
-            
-            break
         }
     }
     

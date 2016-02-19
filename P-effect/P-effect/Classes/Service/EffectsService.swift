@@ -34,12 +34,12 @@ class EffectsService {
                     return
                 }
                 
-                guard let object = object else {
+                guard let object = object as? EffectsVersion  else {
                     completion(objects: nil, error: nil)
                     return
                 }
                 
-                effectsVersion = object as! EffectsVersion
+                effectsVersion = object
                 effectsVersion.saveEventually()
                 effectsVersion.pinInBackground()
                 
@@ -64,12 +64,12 @@ class EffectsService {
                 return
             }
             
-            guard let objects = objects else {
+            guard let objects = objects as? [EffectsGroup] else {
                 completion(objects: nil, error: nil)
                 return
             }
             
-            self?.loadEffectsStickers(objects as! [EffectsGroup]) { objects, error in
+            self?.loadEffectsStickers(objects) { objects, error in
                 completion(objects: objects, error: error)
             }
         }
@@ -95,20 +95,20 @@ class EffectsService {
                     return
                 }
                 
-                guard let objects = objects else {
+                guard let objects = objects as? [EffectsSticker] else {
                     completion(objects: nil, error: nil)
                     return
                 }
                 
-                stickers = objects as! [EffectsSticker]
-                let effect = EffectsModel()
-                effect.effectsGroup = group
-                effect.effectsStickers = stickers
+                stickers = objects
+                let effect = EffectsModel(effectsGroup: group, effectsStickers: stickers)
                 effects.append(effect)
+                
                 for sticker in stickers {
                     sticker.saveEventually()
                     sticker.pinInBackground()
                 }
+                
                 if groupsQuantity == effects.count {
                     completion(objects: effects, error: nil)
                     return
@@ -135,11 +135,11 @@ class EffectsService {
                 return
             }
             
-            guard let object = object else {
+            guard let object = object as? EffectsVersion else {
                 return
             }
             
-            effectsVersion = object as! EffectsVersion
+            effectsVersion = object
             queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
                 if let error = error {
                     print(error.localizedDescription)
@@ -147,11 +147,11 @@ class EffectsService {
                     return
                 }
                 
-                guard let localObject = localObject else {
+                guard let localObject = localObject as? EffectsVersion else {
                     return
                 }
                 
-                if effectsVersion.version > (localObject as! EffectsVersion).version {
+                if effectsVersion.version > localObject.version {
                     completion(true)
                 } else {
                     completion (false)

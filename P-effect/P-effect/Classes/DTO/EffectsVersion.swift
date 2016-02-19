@@ -9,7 +9,7 @@
 class EffectsVersion: PFObject {
     
     @NSManaged var version: Float
-    static var onceToken: dispatch_once_t = 0
+    private static var onceToken: dispatch_once_t = 0
     
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: EffectsVersion.parseClassName())
