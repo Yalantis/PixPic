@@ -9,7 +9,7 @@
 class EffectsSticker: PFObject {
     
     @NSManaged var image: PFFile
-    static var onceToken: dispatch_once_t = 0
+    private static var onceToken: dispatch_once_t = 0
 
     override class func initialize() {
         dispatch_once(&onceToken) {

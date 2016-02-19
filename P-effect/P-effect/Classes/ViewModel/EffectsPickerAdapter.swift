@@ -10,7 +10,7 @@ import UIKit
 
 private let animationDuration = 0.3
 
-class EffectsPickerModel: NSObject {
+class EffectsPickerAdapter: NSObject {
     
     private var currentGroupNumber: Int?
     private var effectsGroups: [EffectsModel]?
@@ -25,26 +25,12 @@ class EffectsPickerModel: NSObject {
         EffectsSticker()
     }
     
-    func downloadEffects(completion: Bool -> Void) {
-        LoaderService.loadEffects { [weak self] objects, error in
-            if let objects = objects {
-                self?.effectsGroups = objects.sort {
-                    $0.effectsGroup.label > $1.effectsGroup.label
-                }
-                completion(true)
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    func effectImageAtIndexPath(indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
+    func effectImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
         guard let currentGroupNumber = currentGroupNumber, let effectsGroups = effectsGroups else {
             return
         }
         let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
-        ImageLoaderService.getImageForContentItem(image) {
-            image, error in
+        ImageLoaderService.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
                 return
@@ -54,10 +40,49 @@ class EffectsPickerModel: NSObject {
             }
         }
     }
+    
+    func sortEffectsGroups(groups: [EffectsModel]) {
+        effectsGroups = groups.sort {
+            $0.effectsGroup.label > $1.effectsGroup.label
+        }
+    }
+    
+    // MARK: - Private methods
+    private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
+        var cells = [NSIndexPath]()
+        
+        guard let effectsGroups = effectsGroups else {
+            return cells
+        }
+                
+        for i in 0..<effectsGroups[section].effectsStickers.count {
+            cells.append(NSIndexPath(forRow: i, inSection: 0))
+        }
+        
+        return cells
+    }
+    
+    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
+        let sections = NSMutableIndexSet()
+        
+        guard let effectsGroups = effectsGroups else {
+            return sections
+        }
+        
+        for i in 0..<effectsGroups.count {
+            if i != section {
+                sections.addIndexes(NSIndexSet(index: i))
+            }
+        }
+        
+        return sections
+    }
+
 }
 
-extension EffectsPickerModel: UICollectionViewDataSource {
-    
+// MARK: - UICollectionViewDataSource
+extension EffectsPickerAdapter: UICollectionViewDataSource {
+
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         if currentGroupNumber != nil {
             return 1
@@ -92,7 +117,12 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         var reusableview = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectsGroupHeaderView.identifier, forIndexPath: indexPath) as! EffectsGroupHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
+                kind,
+                withReuseIdentifier: EffectsGroupHeaderView.identifier,
+                forIndexPath: indexPath
+                ) as! EffectsGroupHeaderView
+            
             guard let effectsGroups = effectsGroups else {
                 return reusableview
             }
@@ -132,26 +162,6 @@ extension EffectsPickerModel: UICollectionViewDataSource {
         }
         
         return reusableview
-    }
-    
-    private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
-        var cells = [NSIndexPath]()
-        for i in 0..<effectsGroups![section].effectsStickers.count {
-            cells.append(NSIndexPath(forRow: i, inSection: 0))
-        }
-        
-        return cells
-    }
-    
-    private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
-        let sections = NSMutableIndexSet()
-        for i in 0..<effectsGroups!.count {
-            if i != section {
-                sections.addIndexes(NSIndexSet(index: i))
-            }
-        }
-        
-        return sections
     }
     
 }

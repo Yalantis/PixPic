@@ -10,7 +10,7 @@ class EffectsGroup: PFObject {
     
     @NSManaged var image: PFFile
     @NSManaged var label: String
-    static var onceToken: dispatch_once_t = 0
+    private static var onceToken: dispatch_once_t = 0
     
     var stickersRelation: PFRelation! {
         return relationForKey("stickersRelation")
