@@ -36,15 +36,13 @@ class EffectsPickerViewController: UICollectionViewController {
     private func setupAdapter() {
         locator.registerService(EffectsService())
         
-        let effectsService: EffectsService = locator.getService()
+        let effectsService = locator.getService() as EffectsService
         effectsService.loadEffects { [weak self] objects, error in
             guard let this = self else {
                 return
             }
             if let objects = objects {
-                this.effectsPickerAdapter.effectsGroups = objects.sort {
-                    $0.effectsGroup.label > $1.effectsGroup.label
-                }
+                this.effectsPickerAdapter.sortEffectsGroups(objects)
                 this.collectionView!.reloadData()
             }
         }

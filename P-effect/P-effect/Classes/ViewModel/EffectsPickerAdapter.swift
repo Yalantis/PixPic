@@ -13,7 +13,7 @@ private let animationDuration = 0.3
 class EffectsPickerAdapter: NSObject {
     
     private var currentGroupNumber: Int?
-    var effectsGroups: [EffectsModel]?
+    private var effectsGroups: [EffectsModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
     private var currentContentOffset: CGPoint!
@@ -38,6 +38,12 @@ class EffectsPickerAdapter: NSObject {
             if let image = image {
                 completion(image, nil)
             }
+        }
+    }
+    
+    func sortEffectsGroups(groups: [EffectsModel]) {
+        effectsGroups = groups.sort {
+            $0.effectsGroup.label > $1.effectsGroup.label
         }
     }
     
