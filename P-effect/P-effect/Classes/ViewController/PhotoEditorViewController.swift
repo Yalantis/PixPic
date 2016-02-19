@@ -59,14 +59,16 @@ class PhotoEditorViewController: UIViewController {
             imageController = segue.destinationViewController as? ImageViewController
             imageController?.model = ImageViewModel(image: model.originalImage())
             delegate = imageController
+            
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
+            
         default:
+            super.prepareForSegue(segue, sender: sender)
+            
             break
         }
-        
-        super.prepareForSegue(segue, sender: sender)
     }
     
     override func viewWillLayoutSubviews() {
@@ -96,7 +98,12 @@ extension PhotoEditorViewController {
         )
         navigationItem.leftBarButtonItem = newBackButton
         
-        let saveButton = UIBarButtonItem(title: "Save", style: .Plain, target: self, action: "saveImageToLibrary")
+        let saveButton = UIBarButtonItem(
+            title: "Save",
+            style: .Plain,
+            target: self,
+            action: "saveImageToCameraRoll"
+        )
         navigationItem.rightBarButtonItem = saveButton
         
         navigationItem.title = "Edit"
@@ -117,19 +124,22 @@ extension PhotoEditorViewController {
     
     private dynamic func performBackNavigation() {
         let alertController = UIAlertController(
-            title: "Results didn't saved",
-            message: "Would you like to save results to the photo library?",
+            title: "Results wasn't saved",
+            message: "Do you want to save result to the photo library?",
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { _ in
-            self.saveImageToLibrary()
-            self.navigationController!.popViewControllerAnimated(true)
+        let saveAction = UIAlertAction(title: "Save", style: .Default) { [weak self] _ in
+            guard let this = self else {
+                return
+            }
+            this.saveImageToCameraRoll()
+            this.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(saveAction)
         
-        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { _ in
-            self.navigationController!.popViewControllerAnimated(true)
+        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { [weak self] _ in
+            self?.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(dontSaveAction)
         
@@ -139,7 +149,7 @@ extension PhotoEditorViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private dynamic func saveImageToLibrary() {
+    private dynamic func saveImageToCameraRoll() {
         guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
             ExceptionHandler.handle(Exception.CantApplyEffects)
             
@@ -160,7 +170,7 @@ extension PhotoEditorViewController {
         }
     }
     
-    private func postToTheNet() {
+    private func postToFeed() {
         do {
             guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
                 throw Exception.CantApplyEffects
@@ -177,20 +187,20 @@ extension PhotoEditorViewController {
         }
     }
     
-    private func suggestSaveToPhotoLibrary() {
+    private func suggestSaveToCameraRoll() {
         let alertController = UIAlertController(
             title: Exception.NoConnection.rawValue,
             message: "Would you like to save results to photo library or post after internet access appears?",
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save now", style: .Default) { _ in
-            self.saveImageToLibrary()
+        let saveAction = UIAlertAction(title: "Save now", style: .Default) { [weak self] _ in
+            self?.saveImageToCameraRoll()
         }
         alertController.addAction(saveAction)
         
-        let postAction = UIAlertAction(title: "Post with delay", style: .Default) { _ in
-            self.postToTheNet()
+        let postAction = UIAlertAction(title: "Post with delay", style: .Default) { [weak self] _ in
+            self?.postToFeed()
         }
         alertController.addAction(postAction)
         
@@ -207,11 +217,11 @@ extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
         guard ReachabilityHelper.checkConnection(showAlert: false) else {
-            suggestSaveToPhotoLibrary()
+            suggestSaveToCameraRoll()
             
             return
         }
-        postToTheNet()
+        postToFeed()
     }
     
 }

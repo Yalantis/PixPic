@@ -15,7 +15,7 @@ class EffectsService {
     private var isQueryFromLocalDataStoure = false
     
     func loadEffects(completion: LoadingEffectsCompletion) {
-        let query = EffectsVersion.sortedQuery()
+        let query = EffectsVersion.sortedQuery
         var effectsVersion = EffectsVersion()
         
         needToUpdateVersion { [weak self] needUpdate in
@@ -119,8 +119,8 @@ class EffectsService {
 
     private func needToUpdateVersion(completion: Bool -> Void) {
         var effectsVersion = EffectsVersion()
-        let query = EffectsVersion.sortedQuery()
-        let queryFromLocal = EffectsVersion.sortedQuery()
+        let query = EffectsVersion.sortedQuery
+        let queryFromLocal = EffectsVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
         
         guard ReachabilityHelper.checkConnection() else {

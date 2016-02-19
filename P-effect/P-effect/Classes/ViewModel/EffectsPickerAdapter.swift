@@ -30,8 +30,7 @@ class EffectsPickerAdapter: NSObject {
             return
         }
         let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
-        ImageLoaderService.getImageForContentItem(image) {
-            image, error in
+        ImageLoaderService.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
                 return
@@ -45,7 +44,12 @@ class EffectsPickerAdapter: NSObject {
     // MARK: - Private methods
     private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
-        for i in 0..<effectsGroups![section].effectsStickers.count {
+        
+        guard let effectsGroups = effectsGroups else {
+            return cells
+        }
+                
+        for i in 0..<effectsGroups[section].effectsStickers.count {
             cells.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
@@ -54,7 +58,12 @@ class EffectsPickerAdapter: NSObject {
     
     private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
         let sections = NSMutableIndexSet()
-        for i in 0..<effectsGroups!.count {
+        
+        guard let effectsGroups = effectsGroups else {
+            return sections
+        }
+        
+        for i in 0..<effectsGroups.count {
             if i != section {
                 sections.addIndexes(NSIndexSet(index: i))
             }
@@ -102,7 +111,12 @@ extension EffectsPickerAdapter: UICollectionViewDataSource {
         var reusableview = UICollectionReusableView()
         
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: EffectsGroupHeaderView.identifier, forIndexPath: indexPath) as! EffectsGroupHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
+                kind,
+                withReuseIdentifier: EffectsGroupHeaderView.identifier,
+                forIndexPath: indexPath
+                ) as! EffectsGroupHeaderView
+            
             guard let effectsGroups = effectsGroups else {
                 return reusableview
             }

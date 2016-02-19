@@ -10,6 +10,12 @@ class EffectsVersion: PFObject {
     
     @NSManaged var version: Float
     static var onceToken: dispatch_once_t = 0
+    
+    static var sortedQuery: PFQuery {
+        let query = PFQuery(className: EffectsVersion.parseClassName())
+        query.orderByDescending("version")
+        return query
+    }
 
     var groupsRelation: PFRelation! {
         return relationForKey("groupsRelation")
@@ -19,12 +25,6 @@ class EffectsVersion: PFObject {
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }
-    }
-    
-    static func sortedQuery() -> PFQuery {
-        let query = PFQuery(className: EffectsVersion.parseClassName())
-        query.orderByDescending("version")
-        return query
     }
     
 }

@@ -25,7 +25,7 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - Private methods
     private func setupCollectionView() {
         collectionView!.registerNib(
-            EffectsGroupHeaderView.cellNib(),
+            EffectsGroupHeaderView.cellNib,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
             withReuseIdentifier: EffectsGroupHeaderView.identifier
         )        
@@ -53,9 +53,6 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         effectsPickerAdapter.effectImage(atIndexPath: indexPath) { [weak self] image, error in
-            if error != nil {
-                return
-            }
             if let image = image {
                 self?.delegate?.didChooseEffectFromPicket(image)
             }
@@ -69,7 +66,8 @@ extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            return CGSizeMake(collectionView.bounds.size.height, collectionView.bounds.size.height)
+            let itemHeight = collectionView.bounds.size.height
+            return CGSize(width: itemHeight, height: itemHeight)
     }
     
 }
