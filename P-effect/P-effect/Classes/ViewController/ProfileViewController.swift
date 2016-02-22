@@ -44,9 +44,12 @@ class ProfileViewController: UITableViewController {
     private func loadUserPosts() {
         let postService: PostService = locator.getService()
         postService.loadPosts(user) { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
             if let objects = objects {
-                self?.postAdapter.update(withPosts: objects, action: .Reload)
-                self?.view.hideToastActivity()
+                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.view.hideToastActivity()
             } else if let error = error {
                 print(error)
             }
@@ -70,14 +73,14 @@ class ProfileViewController: UITableViewController {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = user?.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        user?.userAvatar { [weak self] image, error in
+        user?.loadUserAvatar { [weak self] image, error in
             if error == nil {
                 self?.userAvatar.image = image
             } else {
                 self?.view.makeToast(error?.localizedDescription)
             }
         }
-        if (user!.userIsCurrentUser()) {
+        if user!.userIsCurrentUser() {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
             profileSettingsButton.tintColor = UIColor.whiteColor()
@@ -91,13 +94,13 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
-        let postService: PostService = (locator.getService())
+        let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
             }
             guard ReachabilityHelper.checkConnection() else {
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
                 return
             }
             postService.loadPosts(this.user) { objects, error in
@@ -106,7 +109,7 @@ class ProfileViewController: UITableViewController {
                 } else if let error = error {
                     print(error)
                 }
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
@@ -114,13 +117,13 @@ class ProfileViewController: UITableViewController {
                 return
             }
             guard let offset = self?.postAdapter.postQuantity else {
-                this.tableView?.infiniteScrollingView.stopAnimating()
+                this.tableView.infiniteScrollingView.stopAnimating()
                 return
             }
             postService.loadPagedPosts(this.user, offset: offset) { objects, error in
                 if let objects = objects {
                     if objects.count == 0 {
-                        this.tableView?.infiniteScrollingView.stopAnimating()
+                        this.tableView.infiniteScrollingView.stopAnimating()
                         return
                     }
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
@@ -153,6 +156,7 @@ extension ProfileViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
+    
 }
 
 

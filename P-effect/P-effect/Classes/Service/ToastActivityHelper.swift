@@ -11,7 +11,7 @@ import Toast
 
 class ToastActivityHelper: NSObject {
 
-    func showToastActivityOn(view:UIView, duration: Double) {
+    func showToastActivityOn(view: UIView, duration: Double) {
         view.makeToastActivity(CSToastPositionCenter)
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))

@@ -180,13 +180,13 @@ class FeedViewController: UIViewController {
     // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        let postService: PostService = (locator.getService())
+        let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
             }
             guard ReachabilityHelper.checkConnection() else {
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
                 return
             }
             postService.loadPosts { objects, error in
@@ -196,7 +196,7 @@ class FeedViewController: UIViewController {
                 } else if let error = error {
                     print(error)
                 }
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
@@ -204,7 +204,7 @@ class FeedViewController: UIViewController {
                 return
             }
             guard let offset = self?.postAdapter.postQuantity else {
-                this.tableView?.infiniteScrollingView.stopAnimating()
+                this.tableView.infiniteScrollingView.stopAnimating()
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in

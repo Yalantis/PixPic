@@ -84,8 +84,8 @@ extension User {
     }
     
     //MARK: - ProfileViewControllerMethods
-    func userAvatar(completion: LoadingImageCompletion) {
-        if let avatar = self.avatar {
+    func loadUserAvatar(completion: LoadingImageCompletion) {
+        if let avatar = avatar {
             ImageLoaderService.getImageForContentItem(avatar) { image, error in
                 completion(image: image, error: error)
             }
@@ -93,10 +93,9 @@ extension User {
     }
     
     func userIsCurrentUser() -> Bool {
-        if let currentUser = User.currentUser() {
-            if ( currentUser.facebookId == self.facebookId ){
+        if let currentUser = User.currentUser() where currentUser.facebookId == self.facebookId {
                 return true
-            }
+            
         }
         return false
     }
