@@ -107,7 +107,7 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        let board = UIStoryboard(name: "Profile", bundle: nil)
+        let board = UIStoryboard(name: Constants.StoryboardName.Profile, bundle: nil)
         let controllerIdentifier = "EditProfileViewController"
         let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
