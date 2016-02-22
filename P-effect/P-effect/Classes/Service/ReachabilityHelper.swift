@@ -24,4 +24,12 @@ class ReachabilityHelper {
         return true
     }
     
+    func checkConnection() -> Bool {
+        guard let reachability = ReachabilityHelper.reachability where reachability.isReachable() else {
+            return false
+        }
+        
+        return true
+    }
+    
 }

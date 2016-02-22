@@ -214,7 +214,7 @@ extension PhotoEditorViewController {
 extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
-        guard ReachabilityHelper.checkConnection(showAlert: false) else {
+        guard ReachabilityHelper().checkConnection() else {
             suggestSaveToCameraRoll()
             
             return

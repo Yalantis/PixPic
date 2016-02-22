@@ -120,7 +120,7 @@ class EffectsService {
         let queryFromLocal = EffectsVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
         
-        guard ReachabilityHelper.checkConnection() else {
+        guard ReachabilityHelper().checkConnection() else {
             completion(false)
             return
         }

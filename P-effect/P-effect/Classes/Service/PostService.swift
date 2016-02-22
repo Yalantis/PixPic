@@ -74,7 +74,7 @@ class PostService {
             return
         }
         
-        if !ReachabilityHelper.checkConnection() {
+        if !ReachabilityHelper().checkConnection() {
             query.fromLocalDatastore()
         }
         

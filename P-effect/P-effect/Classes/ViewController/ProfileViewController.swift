@@ -81,7 +81,8 @@ class ProfileViewController: UITableViewController {
     
     private func setupLoadersCallback() {
         tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard ReachabilityHelper.checkConnection() else {
+            guard ReachabilityHelper().checkConnection() else {
+                AlertService.simpleAlert("No internet connection")
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 
                 return

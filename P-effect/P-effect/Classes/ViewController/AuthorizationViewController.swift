@@ -43,7 +43,9 @@ class AuthorizationViewController: UIViewController {
     
     private func proceedWithoutAuthorization() {
         Router.sharedRouter().showHome(animated: true)
-        ReachabilityHelper.checkConnection()
+        if !ReachabilityHelper().checkConnection() {
+            AlertService.simpleAlert("No internet connection")
+        }
     }
     
     private func signUp(user: User) {

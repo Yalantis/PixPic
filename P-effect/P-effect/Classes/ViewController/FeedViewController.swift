@@ -33,7 +33,8 @@ class FeedViewController: UIViewController {
         setupObserver()
         setupLoadersCallback()
         
-        if ReachabilityHelper.checkConnection() == false {
+        if ReachabilityHelper().checkConnection() == false {
+            AlertService.simpleAlert("No internet connection")
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
         }
@@ -182,8 +183,10 @@ class FeedViewController: UIViewController {
             guard let this = self else {
                 return
             }
-            guard ReachabilityHelper.checkConnection() else {
+            guard ReachabilityHelper().checkConnection() else {
+                AlertService.simpleAlert("No internet connection")
                 this.tableView?.pullToRefreshView.stopAnimating()
+                
                 return
             }
             postService.loadPosts { objects, error in
