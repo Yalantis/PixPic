@@ -123,8 +123,13 @@ final class FeedViewController: UIViewController, Creatable {
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
+<<<<<<< HEAD
             router.goToAuthorization()
+=======
+            let storyboard = UIStoryboard(name: Constants.Storyboard.Authorization, bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            navigationController!.pushViewController(controller, animated: true)
+>>>>>>> develop
             return
         }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
@@ -134,7 +139,15 @@ final class FeedViewController: UIViewController, Creatable {
     }
     
     private func handlePhotoSelected(image: UIImage) {
+<<<<<<< HEAD
         router.goToPhotoEditor(image)
+=======
+        let storyboard = UIStoryboard(name: Constants.Storyboard.PhotoEditor, bundle: nil)
+        let controllerIdentifier = "PhotoEditorController"
+        let viewController = storyboard.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
+        viewController.model = PhotoEditorModel.init(image: image)
+        navigationController!.pushViewController(viewController, animated: false)
+>>>>>>> develop
     }
     
     // MARK: - Notification handling
@@ -164,10 +177,20 @@ final class FeedViewController: UIViewController, Creatable {
         let isUserAbsent = currentUser == nil
         
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
+<<<<<<< HEAD
             router.goToAuthorization()
         } else if let currentUser = currentUser {
             router.goToProfile(currentUser)
+=======
+            let storyboard = UIStoryboard(name: Constants.Storyboard.Authorization, bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            navigationController!.pushViewController(controller, animated: true)
+        } else if let currentUser = currentUser {
+            let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            controller.model = ProfileViewModel(profileUser: currentUser)
+            self.navigationController!.showViewController(controller, sender: self)
+>>>>>>> develop
         }
     }
     
@@ -229,8 +252,14 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
+<<<<<<< HEAD
         router.goToProfile(user)
+=======
+        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
         let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        controller.model = ProfileViewModel.init(profileUser: user)
+        self.navigationController!.showViewController(controller, sender: self)
+>>>>>>> develop
     }
     
     func showPlaceholderForEmptyDataSet() {

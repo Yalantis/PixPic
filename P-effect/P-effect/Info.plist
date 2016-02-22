@@ -90,8 +90,12 @@
 	<array>
 		<string>Ribbon_V2_2011.otf</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Feed</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -109,9 +113,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
 </dict>
 </plist>

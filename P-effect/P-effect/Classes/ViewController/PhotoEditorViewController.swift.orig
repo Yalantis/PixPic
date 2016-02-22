@@ -19,8 +19,14 @@ protocol PhotoEditorDelegate: class {
 final class PhotoEditorViewController: UIViewController, Creatable {
     
     lazy var locator = ServiceLocator()
+<<<<<<< HEAD
+    
+    @IBOutlet private weak var effectsPickerContainer: UIView!
+    @IBOutlet private weak var imageContainer: UIView!
     
     var router: PhotoEditorRouter!
+=======
+>>>>>>> develop
     var model: PhotoEditorModel!
     weak var delegate: PhotoEditorDelegate?
     
