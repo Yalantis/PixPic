@@ -12,7 +12,7 @@ protocol CellInterface {
     
     static var id: String { get }
     
-    static func cellNib() -> UINib
+    static var cellNib: UINib { get }
     
 }
 
@@ -22,7 +22,7 @@ extension CellInterface {
         return String(Self)
     }
     
-    static func cellNib() -> UINib {
+    static var cellNib: UINib {
         return UINib(nibName: id, bundle: nil)
     }
     

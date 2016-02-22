@@ -8,9 +8,9 @@
 
 import UIKit
 
-class EffectsModel: NSObject {
+struct EffectsModel {
     
-    lazy var effectsGroup = EffectsGroup()
-    lazy var effectsStickers = [EffectsSticker]()
+    let effectsGroup: EffectsGroup
+    let effectsStickers: [EffectsSticker]
 
 }

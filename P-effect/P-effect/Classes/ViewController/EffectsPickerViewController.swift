@@ -8,39 +8,64 @@
 
 import UIKit
 
-
 class EffectsPickerViewController: UICollectionViewController {
     
+    lazy var effectsPickerAdapter = EffectsPickerAdapter()
+    lazy var locator = ServiceLocator()
     weak var delegate: PhotoEditorViewController?
-    var model: EffectsPickerModel? {
-        didSet {
-            collectionView?.dataSource = model
-            model?.downloadEffects{ [weak self] completion in
-                if completion {
-                    self?.collectionView?.reloadData()
-                }
+    
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupCollectionView()
+        setupAdapter()
+    }
+    
+    // MARK: - Private methods
+    private func setupCollectionView() {
+        collectionView!.registerNib(
+            EffectsGroupHeaderView.cellNib,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            withReuseIdentifier: EffectsGroupHeaderView.identifier
+        )        
+        collectionView!.collectionViewLayout = EffectsLayout()
+        collectionView!.dataSource = effectsPickerAdapter
+    }
+    
+    private func setupAdapter() {
+        locator.registerService(EffectsService())
+        
+        let effectsService = locator.getService() as EffectsService
+        effectsService.loadEffects { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
+            if let objects = objects {
+                this.effectsPickerAdapter.sortEffectsGroups(objects)
+                this.collectionView!.reloadData()
             }
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView!.registerNib(EffectsGroupHeaderView.cellNib(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: EffectsGroupHeaderView.identifier)
-        
-        collectionView!.collectionViewLayout = EffectsLayout()
-    }
-    
+    // MARK: - UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        model!.effectImageAtIndexPath(indexPath) { [unowned self] image, error in
-            if error != nil {
-                return
-            }
+        effectsPickerAdapter.effectImage(atIndexPath: indexPath) { [weak self] image, error in
             if let image = image {
-                self.delegate?.didChooseEffectFromPicket(image)
+                self?.delegate?.didChooseEffectFromPicket(image)
             }
         }
     }
     
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            let itemHeight = collectionView.bounds.size.height
+            return CGSize(width: itemHeight, height: itemHeight)
+    }
+    
+}
