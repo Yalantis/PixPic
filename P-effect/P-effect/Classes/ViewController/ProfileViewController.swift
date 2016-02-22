@@ -17,7 +17,8 @@ class ProfileViewController: UITableViewController {
     @IBOutlet private weak var tableViewFooter: UIView!
     
     private var activityShown: Bool?
-    private lazy var dataSource = PostAdapter()
+    private lazy var postAdapter = PostAdapter()
+    private lazy var locator = ServiceLocator()
 
     var user: User!
     
@@ -30,18 +31,14 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - Inner func
     private func setupController() {
-//        dataSource = PostDataSource()
+//        postAdapter = PostpostAdapter()
+        locator.registerService(PostService())
         showToast()
-        tableView.dataSource = dataSource
+        tableView.dataSource = postAdapter
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
-        if (user!.userIsCurrentUser()) {
-            profileSettingsButton.enabled = true
-            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
-            profileSettingsButton.tintColor = UIColor.whiteColor()
-        }
     }
     
     private func setupTableViewFooter() {
@@ -67,6 +64,11 @@ class ProfileViewController: UITableViewController {
                 self?.view.makeToast(error?.localizedDescription)
             }
         }
+        if (user!.userIsCurrentUser()) {
+            profileSettingsButton.enabled = true
+            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
+            profileSettingsButton.tintColor = UIColor.whiteColor()
+        }
     }
     
     private func showToast() {
@@ -75,16 +77,39 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupLoadersCallback() {
+        let postService: PostService = (locator.getService())
         tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
-                
+            guard let this = self else {
                 return
             }
-    //        self?.dataSource?.fetchData(self?.model.user)
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView?.pullToRefreshView.stopAnimating()
+                return
+            }
+            postService.loadPosts { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                } else if let error = error {
+                    print(error)
+                }
+                this.tableView?.pullToRefreshView.stopAnimating()
+            }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-      //      self?.dataSource?.fetchPagedData(self?.model.user)
+            guard let this = self else {
+                return
+            }
+            guard let offset = self?.postAdapter.postQuantity else {
+                this.tableView?.infiniteScrollingView.stopAnimating()
+                return
+            }
+            postService.loadPagedPosts(offset: offset) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                } else if let error = error {
+                    print(error)
+                }
+            }
         }
     }
     
@@ -97,6 +122,22 @@ class ProfileViewController: UITableViewController {
     }
     
 }
+
+extension ProfileViewController: PostAdapterDelegate {
+    
+    func showUserProfile(user: User) {
+        
+    }
+    
+    func showPlaceholderForEmptyDataSet() {
+        
+    }
+    
+    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
+        tableView.reloadData()
+    }
+}
+
 
 extension ProfileViewController {
     
