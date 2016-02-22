@@ -15,8 +15,15 @@ class User: PFUser {
     @NSManaged var appUsername: String?
     @NSManaged var passwordSet: Bool
     
+    private static var onceToken: dispatch_once_t = 0
+    
+    static var sortedQuery: PFQuery {
+        let query = PFQuery(className: User.parseClassName())
+        query.orderByDescending("updatedAt")
+        return query
+    }
+    
     override class func initialize() {
-        var onceToken: dispatch_once_t = 0;
         dispatch_once(&onceToken) {
             self.registerSubclass()
         }
@@ -24,12 +31,6 @@ class User: PFUser {
     
     override class func currentUser() -> User? {
         return PFUser.currentUser() as? User
-    }
-    
-    static func sortedQuery() -> PFQuery {
-        let query = PFQuery(className: User.parseClassName())
-        query.orderByDescending("updatedAt")
-        return query
     }
     
 }
@@ -41,7 +42,7 @@ extension User {
             completion(false)
             return
         }
-        let query = User.sortedQuery().whereKey("username", equalTo: username)
+        let query = User.sortedQuery.whereKey("username", equalTo: username)
         query.getFirstObjectInBackgroundWithBlock { object, _ in
             if object != nil {
                 completion(true)
@@ -57,7 +58,7 @@ extension User {
             completion(false)
             return
         }
-        let query = User.sortedQuery().whereKey("facebookId", equalTo: facebookId)
+        let query = User.sortedQuery.whereKey("facebookId", equalTo: facebookId)
         query.getFirstObjectInBackgroundWithBlock { object, _ in
             if object != nil {
                 completion(true)

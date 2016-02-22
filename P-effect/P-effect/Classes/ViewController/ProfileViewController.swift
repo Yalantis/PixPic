@@ -21,11 +21,15 @@ class ProfileViewController: UITableViewController {
 
     var model: ProfileViewModel!
     
+    lazy var locator = ServiceLocator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupController()
         setupLoadersCallback()
+        
+        locator.registerService(ReachabilityService())
     }
     
     // MARK: - Inner func
@@ -81,7 +85,8 @@ class ProfileViewController: UITableViewController {
     
     private func setupLoadersCallback() {
         tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard ReachabilityHelper().checkConnection() else {
+            let reachabilityService: ReachabilityService = (self?.locator.getService())!
+            guard reachabilityService.isReachable() else {
                 AlertService.simpleAlert("No internet connection")
                 self?.tableView?.pullToRefreshView.stopAnimating()
                 

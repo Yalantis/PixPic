@@ -17,13 +17,13 @@ class PostService {
     
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
-        let query = Post.sortedQuery()
+        let query = Post.sortedQuery
         query.limit = Constants.DataSource.QueryLimit
         loadPosts(user, query: query, completion: completion)
     }
     
     func loadPagedPosts(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
-        let query = Post.sortedQuery()
+        let query = Post.sortedQuery
         query.limit = Constants.DataSource.QueryLimit
         query.skip = offset
         loadPosts(user, query: query, completion: completion)
@@ -38,8 +38,8 @@ class PostService {
                 print(error)
             }
             },
-            progressBlock: { percent in
-                print("Uploaded: \(percent)%")
+            progressBlock: { progress in
+                print("Uploaded: \(progress)%")
             }
         )
     }

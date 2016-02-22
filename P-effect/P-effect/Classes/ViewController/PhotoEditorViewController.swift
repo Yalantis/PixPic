@@ -38,6 +38,7 @@ class PhotoEditorViewController: UIViewController {
         
         setupNavigavionBar()
         locator.registerService(PostService())
+        locator.registerService(ReachabilityService())
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -214,7 +215,8 @@ extension PhotoEditorViewController {
 extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
-        guard ReachabilityHelper().checkConnection() else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
             suggestSaveToCameraRoll()
             
             return

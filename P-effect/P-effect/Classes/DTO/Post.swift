@@ -12,18 +12,19 @@ class Post: PFObject {
     @NSManaged var user: User?
     @NSManaged var comment: String?
     
-    override class func initialize() {
-        var onceToken: dispatch_once_t = 0
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
-        }
-    }
+    private static var onceToken: dispatch_once_t = 0
     
-    static func sortedQuery() -> PFQuery {
+    static var sortedQuery: PFQuery {
         let query = PFQuery(className: Post.parseClassName())
         query.includeKey("user")
         query.orderByDescending("updatedAt")
         return query
+    }
+    
+    override class func initialize() {
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
     }
     
     convenience init(image: PFFile, user: User, comment: String?) {

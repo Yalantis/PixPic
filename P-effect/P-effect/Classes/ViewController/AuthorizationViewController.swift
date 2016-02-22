@@ -12,8 +12,12 @@ import ParseFacebookUtilsV4
 
 class AuthorizationViewController: UIViewController {
     
+    lazy var locator = ServiceLocator()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO: убрать, это будет происходить в роутере
+        locator.registerService(ReachabilityService())
     }
     
     @IBAction private func logInWithFBButtonTapped() {
@@ -43,7 +47,8 @@ class AuthorizationViewController: UIViewController {
     
     private func proceedWithoutAuthorization() {
         Router.sharedRouter().showHome(animated: true)
-        if !ReachabilityHelper().checkConnection() {
+        let reachabilityService: ReachabilityService = locator.getService()
+        if reachabilityService.isReachable() {
             AlertService.simpleAlert("No internet connection")
         }
     }

@@ -156,7 +156,8 @@ class EditProfileViewController: UIViewController {
     
     dynamic private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        if ReachabilityHelper().checkConnection() {
+        let reachabilityService: ReachabilityService = locator.getService()
+        if reachabilityService.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 return
@@ -172,7 +173,8 @@ class EditProfileViewController: UIViewController {
     }
     
     private func logout() {
-        guard ReachabilityHelper().checkConnection() else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
             AlertService.simpleAlert("No internet connection")
             
             return

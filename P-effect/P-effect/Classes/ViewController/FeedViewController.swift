@@ -33,7 +33,8 @@ class FeedViewController: UIViewController {
         setupObserver()
         setupLoadersCallback()
         
-        if ReachabilityHelper().checkConnection() == false {
+        let reachabilityService: ReachabilityService = locator.getService()
+        if !reachabilityService.isReachable() {
             AlertService.simpleAlert("No internet connection")
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -101,6 +102,7 @@ class FeedViewController: UIViewController {
         postAdapter.delegate = self
         
         locator.registerService(PostService())
+        locator.registerService(ReachabilityService())
         
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
@@ -179,14 +181,14 @@ class FeedViewController: UIViewController {
     }
     
     // MARK: - UserInteractive
-    
     private func setupLoadersCallback() {
         let postService: PostService = (locator.getService())
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
             }
-            guard ReachabilityHelper().checkConnection() else {
+            let reachabilityService: ReachabilityService = this.locator.getService()
+            guard reachabilityService.isReachable() else {
                 AlertService.simpleAlert("No internet connection")
                 this.tableView?.pullToRefreshView.stopAnimating()
                 
@@ -255,6 +257,7 @@ extension FeedViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
+    
 }
 
 extension FeedViewController: DZNEmptyDataSetDelegate {
