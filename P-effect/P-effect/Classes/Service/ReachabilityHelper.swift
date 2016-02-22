@@ -15,7 +15,7 @@ class ReachabilityHelper {
     static func checkConnection(showAlert showAlert: Bool = true) -> Bool {
         guard let reachability = ReachabilityHelper.reachability where reachability.isReachable() else {
             if showAlert {
-                AlertService.simpleAlert("No internet connection")
+                AlertService.sharedInstance.delegate?.showSimpleAlert(("No internet connection"))
             }
             
             return false

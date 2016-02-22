@@ -14,11 +14,11 @@ private let backWithChangesMessage = "If you go back now, your changes will be d
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
 
-final class EditProfileViewController: UIViewController, Creatable {
+final class EditProfileViewController: UIViewController, StoryboardInitable {
+    
+    internal static let storyboardName = "Profile"
     
     var router: EditProfileRouter!
-    
-    lazy var locator = ServiceLocator()
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -52,14 +52,12 @@ final class EditProfileViewController: UIViewController, Creatable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.topPresenter = router
-        AlertService.allowToDisplay = false
+        AlertService.sharedInstance.delegate = router
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AlertService.allowToDisplay = true
         PushNotificationQueue.handleNotificationQueue()
     }
     
@@ -99,13 +97,15 @@ final class EditProfileViewController: UIViewController, Creatable {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) {
-            [weak self](image, error) -> Void in
+        ImageLoaderService.getImageForContentItem(avatar) { [weak self](image, error) -> Void in
+            guard let this = self else {
+                return
+            }
             if let error = error {
                 print(error)
             } else {
-                self?.avatarImageView.image = image
-                self?.image = image
+                this.avatarImageView.image = image
+                this.image = image
             }
         }
     }
@@ -136,16 +136,14 @@ final class EditProfileViewController: UIViewController, Creatable {
                 title: "Save changes",
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
-                [weak self] action in
+            let NOAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self?.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(NOAction)
             
-            let YESAction = UIAlertAction(title: "Save", style: .Default) {
-                [weak self] action in
+            let YESAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
                 self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
@@ -170,7 +168,7 @@ final class EditProfileViewController: UIViewController, Creatable {
                 }
             }
         } else {
-            AlertService.simpleAlert("Internet connection is required to save changes in profile")
+            AlertService.sharedInstance.delegate?.showSimpleAlert("Internet connection is required to save changes in profile")
         }
     }
     
@@ -181,7 +179,7 @@ final class EditProfileViewController: UIViewController, Creatable {
         AuthService.logOut()
         AuthService.anonymousLogIn(
             completion: { object in
-                self.router.goToFeed()
+                self.router.showFeed()
             }, failure: { error in
                 if let error = error {
                     handleError(error)
@@ -248,7 +246,7 @@ final class EditProfileViewController: UIViewController, Creatable {
         }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
-        let userService: UserService = locator.getService()
+        let userService: UserService = router.locator.getService()
         userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,

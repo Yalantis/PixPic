@@ -9,32 +9,37 @@
 import UIKit
 import Toast
 
-class AlertService: NSObject {
+protocol AlertServiceDelegate: class {
     
-    static var topPresenter: FeedPresenter!
-    static var allowToDisplay = true
+    func showSimpleAlert(message: String?)
+    func showNotificationAlert(userInfo: [NSObject : AnyObject]?, var message: String?)
     
-    class func simpleAlert(message: String?) {
-        topPresenter.currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
+}
+
+extension AlertServiceDelegate where Self: FeedPresenter {
+    
+    func showSimpleAlert(message: String?) {
+        currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
     }
     
-    class func notificationAlert(userInfo: [NSObject : AnyObject] = [:], var message: String? = nil) {
+    func showNotificationAlert(userInfo: [NSObject : AnyObject]?, var message: String?) {
+        let title = "Notification"
         
-        guard let topViewController = topPresenter.currentViewController else {
+        guard let userInfo = userInfo else {
             return
         }
-        let title = "Notification"
-        if let aps = userInfo["aps"] as? [String:String] {
+        
+        if let aps = userInfo["aps"] as? [String:String]{
             message = aps["alert"]
         }
         
-        let isControllersWaitingForResponse = (topViewController as? UIAlertController) != nil
+        let isControllersWaitingForResponse = (currentViewController as? UIAlertController) != nil
         
-        if isControllersWaitingForResponse || !allowToDisplay {
+        if isControllersWaitingForResponse {
             PushNotificationQueue.addObjectInQueue(message)
         } else {
             PushNotificationQueue.clearQueue()
-            topViewController.view.makeToast(
+            currentViewController.view.makeToast(
                 message,
                 duration: 3.0,
                 position: CSToastPositionTop,
@@ -44,35 +49,26 @@ class AlertService: NSObject {
                 completion: {
                     (didTap: Bool) in
                     if didTap {
-                        topPresenter.goToFeed()
+                        self.showFeed()
                     }
                 }
             )
         }
     }
+}
+
+final class AlertService {
     
-    private func configNotification(message: String) -> AFDropdownNotification {
-        let notification = AFDropdownNotification()
-        notification.titleText = "Some news"
-        notification.subtitleText = "New amazing photos appears by..."
-        notification.image = UIImage(named: "ic_notification")
-        notification.topButtonText = "Show";
-        notification.bottomButtonText = "Cancel";
-        
-        notification.listenEventsWithBlock {
-            event in
-            switch event {
-            case .TopButton:
-                notification.dismissWithGravityAnimation(true)
-                AlertService.topPresenter.goToFeed()
-            case .BottomButton:
-                notification.dismissWithGravityAnimation(true)
-            case .Tap:
-                notification.dismissWithGravityAnimation(true)
-            }
-        }
-        return notification
+    static let instance = AlertService()
+    
+    weak var delegate: AlertServiceDelegate?
+    
+    private init() {
+        //Forbidden
+    }
+    
+    static var sharedInstance: AlertService {
+        return instance
     }
     
 }
-

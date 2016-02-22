@@ -21,9 +21,9 @@ class UserService {
         user.saveInBackgroundWithBlock { succeeded, error in
             if succeeded {
                 completion(true, nil)
-                AlertService.simpleAlert(messageDataSuccessfullyUpdated)
+                AlertService.sharedInstance.delegate?.showSimpleAlert(messageDataSuccessfullyUpdated)
             } else {
-                AlertService.simpleAlert(messageDataNotUpdated)
+                AlertService.sharedInstance.delegate?.showSimpleAlert(messageDataNotUpdated)
                 if let error = error?.localizedDescription {
                     completion(false, error)
                 }

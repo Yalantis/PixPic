@@ -24,17 +24,16 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
+    var selectionClosure: ((cell: PostViewCell) -> Void)?
+    
+    let imageLoader = ImageLoaderService()
+    weak var delegate: PostViewCellDelegate?
     
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
     
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var profileLabel: UILabel!
-    
-    var selectionClosure: ((cell: PostViewCell) -> Void)?
-    
-    let imageLoader = ImageLoaderService()
-    weak var delegate: PostViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

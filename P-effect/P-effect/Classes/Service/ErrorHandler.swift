@@ -59,6 +59,5 @@ func handleError(error: NSError) {
         }
         
     }
-
-    AlertService.simpleAlert(message)
+    AlertService.sharedInstance.delegate?.showSimpleAlert(message)
 }

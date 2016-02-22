@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileRouter {
+class ProfileRouter: AlertServiceDelegate {
     
     private(set) weak var currentViewController: UIViewController!
     private var user: User!
@@ -29,7 +29,6 @@ extension ProfileRouter: EditProfilePresenter, FeedPresenter {
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
-        
         let profileController = ProfileViewController.create()
         profileController.router = self
         currentViewController = profileController

@@ -26,8 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         setupParse()
         setupNotifications(application)
-        setupUI()
-
+        setupAppearance()
+        
         Parse.setApplicationId(
             Constants.ParseApplicationId.AppID,
             clientKey: Constants.ParseApplicationId.ClientKey
@@ -42,9 +42,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        setupNotifications(application)
-        setupUI()
-        
         router.execute(window!)
         return true
     }
@@ -58,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
     }
     
-    private func setupUI() {
+    private func setupAppearance() {
         let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
             buttonTitlePosition,
@@ -104,11 +101,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            router.goToFeed()
+            router.showFeed()
         }
         
         if application.applicationState == .Active {
-            AlertService.notificationAlert(userInfo)
+            AlertService.sharedInstance.delegate?.showNotificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         

@@ -11,18 +11,17 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-final class FeedViewController: UIViewController, Creatable {
+final class FeedViewController: UIViewController, StoryboardInitable {
+    
+    internal static let storyboardName = "Feed"
     
     var router: FeedRouter!
     
     private lazy var photoGenerator = PhotoGenerator()
+    private lazy var postAdapter = PostAdapter()
     private var toolBar: FeedToolBar!
     
-    lazy var locator = ServiceLocator()
-    
     @IBOutlet private weak var tableView: UITableView!
-    
-    private lazy var postAdapter = PostAdapter()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,7 +43,7 @@ final class FeedViewController: UIViewController, Creatable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.topPresenter = router
+        AlertService.sharedInstance.delegate = router
         tableView.reloadData()
     }
     
@@ -102,9 +101,7 @@ final class FeedViewController: UIViewController, Creatable {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         
-        locator.registerService(PostService())
-        
-        let postService: PostService = locator.getService()
+        let postService: PostService = router.locator.getService()
         postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
@@ -123,8 +120,8 @@ final class FeedViewController: UIViewController, Creatable {
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
-            router.goToAuthorization()
-            let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
+            router.showAuthorization()
+            
             return
         }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
@@ -134,12 +131,12 @@ final class FeedViewController: UIViewController, Creatable {
     }
     
     private func handlePhotoSelected(image: UIImage) {
-        router.goToPhotoEditor(image)
+        router.showPhotoEditor(image)
     }
     
     // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
-        let postService: PostService = locator.getService()
+        let postService: PostService = router.locator.getService()
         postService.loadPosts { [weak self] objects, error in
             guard let this = self else {
                 return
@@ -149,6 +146,7 @@ final class FeedViewController: UIViewController, Creatable {
                 this.scrollToFirstRow()
             } else if let error = error {
                 print(error)
+                return
             }
             self?.tableView?.pullToRefreshView.stopAnimating()
         }
@@ -164,17 +162,16 @@ final class FeedViewController: UIViewController, Creatable {
         let isUserAbsent = currentUser == nil
         
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
-            router.goToAuthorization()
+            router.showAuthorization()
         } else if let currentUser = currentUser {
-            router.goToProfile(currentUser)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+            router.showProfile(currentUser)
         }
     }
     
     // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        let postService: PostService = (locator.getService())
+        let postService: PostService = (router.locator.getService())
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
@@ -229,8 +226,7 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
-        router.goToProfile(user)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
+        router.showProfile(user)
     }
     
     func showPlaceholderForEmptyDataSet() {

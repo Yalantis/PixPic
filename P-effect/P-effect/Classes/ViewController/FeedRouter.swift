@@ -8,7 +8,9 @@
 
 import Foundation
 
-class FeedRouter: Router {
+class FeedRouter: Router, AlertServiceDelegate {
+    
+    lazy var locator = ServiceLocator()
     
     private(set) weak var currentViewController: UIViewController!
     
@@ -18,6 +20,7 @@ extension FeedRouter: ProfilePresenter, PhotoEditorPresenter, AuthorizationPrese
     typealias Context = UIWindow
     
     func execute(context: UIWindow) {
+        locator.registerService(PostService())
         
         let feedViewController = FeedViewController.create()
         feedViewController.router = self

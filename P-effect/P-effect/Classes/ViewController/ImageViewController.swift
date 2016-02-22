@@ -12,9 +12,9 @@ class ImageViewController: UIViewController {
     
     var model: ImageViewModel!
     
-    @IBOutlet private weak var rawImage: UIImageView!
-    
     private var effects = [EffectEditorView]()
+    
+    @IBOutlet private weak var rawImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,9 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-final class AuthorizationViewController: UIViewController, Creatable {
+final class AuthorizationViewController: UIViewController, StoryboardInitable {
+    
+    internal static let storyboardName = "Authorization"
     
     var router: AuthorizationRouter!
     
@@ -21,7 +23,7 @@ final class AuthorizationViewController: UIViewController, Creatable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.topPresenter = router
+        AlertService.sharedInstance.delegate = router
     }
     
     @IBAction private func logInWithFBButtonTapped() {
@@ -35,22 +37,28 @@ final class AuthorizationViewController: UIViewController, Creatable {
                 handleError(error as NSError)
             }
             guard let user = user as User? else {
-                self?.proceedWithoutAuthorization()
+                if let this = self {
+                    this.proceedWithoutAuthorization()
+                }
                 return
             }
             user.checkFacebookIdExistance { exists in
+                guard let this = self else {
+                    return
+                }
                 if exists {
                     user.passwordSet = false
-                    self?.signIn(user)
+                    this.signIn(user)
                 } else {
-                    self?.signUp(user)
+                    this.signUp(user)
+                    
                 }
             }
         }
     }
     
     private func proceedWithoutAuthorization() {
-        router.goToFeed()
+        router.showFeed()
         ReachabilityHelper.checkConnection()
     }
     
@@ -60,8 +68,11 @@ final class AuthorizationViewController: UIViewController, Creatable {
             if let error = error {
                 handleError(error as NSError)
             }
+            guard let this = self else {
+                return
+            }
             guard let user = user else {
-                self?.view.hideToastActivity()
+                this.view.hideToastActivity()
                 print("unknown trouble while signing IN")
                 return
             }
@@ -79,46 +90,40 @@ final class AuthorizationViewController: UIViewController, Creatable {
                 }
             }
             print("SIGNING UP!!!  with ", user.username)
-            self?.view.hideToastActivity()
-            self!.router.goToFeed()
+            this.view.hideToastActivity()
+            this.router.showFeed()
         }
     }
     
     private func signIn(user: User) {
         let token = FBSDKAccessToken.currentAccessToken()
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
-            if let _ = error {
+            if error != nil {
                 ExceptionHandler.handle(Exception.InvalidSessionToken)
             }
-            guard let user = user as? User else {
-                self?.view.hideToastActivity()
-                Router.sharedRouter().showHome(animated: true)
+            guard let this = self else {
                 return
             }
+            guard let user = user as? User else {
+                this.view.hideToastActivity()
+                this.router.showFeed()
+                
+                return
+            }
+            
             user.linkWithFacebook { error in
                 if let error = error {
                     handleError(error)
                 } else {
+                    guard let this = self else {
+                        return
+                    }
                     print("linked!")
                     let installation = PFInstallation.currentInstallation()
                     installation["user"] = user
                     installation.saveInBackground()
-                    self?.view.hideToastActivity()
-                    self!.router.goToFeed()
-                    return
-                }
-                let userModel = UserModel(aUser: user)
-                userModel.linkIfUnlinkFacebook { error in
-                    if let error = error {
-                        handleError(error)
-                    } else {
-                        print("already linked!")
-                        let installation = PFInstallation.currentInstallation()
-                        installation["user"] = userModel.user
-                        installation.saveInBackground()
-                        self?.view.hideToastActivity()
-                        self!.router.goToFeed()
-                    }
+                    this.view.hideToastActivity()
+                    this.router.showFeed()
                 }
             }
             user.saveEventually()

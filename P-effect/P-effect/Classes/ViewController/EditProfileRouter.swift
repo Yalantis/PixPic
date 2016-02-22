@@ -8,8 +8,9 @@
 
 import Foundation
 
-class EditProfileRouter {
+class EditProfileRouter: AlertServiceDelegate {
     
+    lazy var locator = ServiceLocator()
     private(set) weak var currentViewController: UIViewController!
     private var user: User!
     
@@ -29,7 +30,6 @@ extension EditProfileRouter: FeedPresenter {
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
-        
         let editProfileController = EditProfileViewController.create()
         editProfileController.router = self
         currentViewController = editProfileController

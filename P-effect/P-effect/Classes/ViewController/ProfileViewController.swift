@@ -9,19 +9,20 @@
 import UIKit
 import Toast
 
-final class ProfileViewController: UITableViewController, Creatable {
+final class ProfileViewController: UITableViewController, StoryboardInitable {
+    
+    internal static let storyboardName = "Profile"
+    
+    var model: ProfileViewModel!
+    var router: ProfileRouter!
+    
+    private var activityShown: Bool?
+    private lazy var dataSource = PostAdapter()
     
     @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
-    
-    var router: ProfileRouter!
-    
-    private var activityShown: Bool?
-    private lazy var dataSource = PostAdapter()
-
-    var model: ProfileViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +34,12 @@ final class ProfileViewController: UITableViewController, Creatable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.topPresenter = router
+        AlertService.sharedInstance.delegate = router
     }
     
     // MARK: - Inner func
     func setupController() {
-//        dataSource = PostDataSource()
+        
         showToast()
         tableView.dataSource = dataSource
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
@@ -69,10 +70,13 @@ final class ProfileViewController: UITableViewController, Creatable {
         userName.text = model?.userName
         navigationItem.title = Constants.Profile.NavigationTitle
         model?.userAvatar {[weak self] image, error -> Void in
+            guard let this = self else {
+                return
+            }
             if error == nil {
-                self?.userAvatar.image = image
+                this.userAvatar.image = image
             } else {
-                self?.view.makeToast(error?.localizedDescription)
+                this.view.makeToast(error?.localizedDescription)
             }
         }
     }
@@ -94,10 +98,11 @@ final class ProfileViewController: UITableViewController, Creatable {
                 
                 return
             }
-    //        self?.dataSource?.fetchData(self?.model.user)
+            //TODO: figure out this commented code
+            //        self?.dataSource?.fetchData(self?.model.user)
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-      //      self?.dataSource?.fetchPagedData(self?.model.user)
+            //      self?.dataSource?.fetchPagedData(self?.model.user)
         }
     }
     // MARK: Delegate methods
@@ -115,7 +120,7 @@ final class ProfileViewController: UITableViewController, Creatable {
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        router.goToEditProfile()
+        router.showEditProfile()
     }
     
 }

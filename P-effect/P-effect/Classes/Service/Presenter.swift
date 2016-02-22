@@ -1,12 +1,17 @@
 //
 //  Router.swift
-//  TaggedImagesSwift
+//  P-effect
 //
-//  Created by Rumata on 1/30/16.
-//  Copyright © 2016 AndrewPetrov. All rights reserved.
+//  Created by anna on 1/18/16.
+//  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+private let appRouterAnimationDelay = 0.3
+private let appRouterAnimationDuration = 0.45
+
+typealias ShowFeedHandler = () -> Void
 
 protocol Router: class {
     
@@ -24,26 +29,34 @@ protocol Presenter: class {
 
 protocol FeedPresenter: Presenter {
     
-    func goToFeed()
+    var showFeedAction: ShowFeedHandler { get }
+    
+    func showFeed()
     
 }
 
 extension FeedPresenter {
     
-    func goToFeed() {
-        currentViewController.navigationController!.popViewControllerAnimated(true)
+    var showFeedAction: ShowFeedHandler {
+        return  {
+            self.showFeed()
+        }
+    }
+    
+    func showFeed() {
+        currentViewController.navigationController!.popToRootViewControllerAnimated(true)
     }
 }
 
 protocol ProfilePresenter: Presenter {
     
-    func goToProfile(user: User)
+    func showProfile(user: User)
     
 }
 
 extension ProfilePresenter {
     
-    func goToProfile(user: User) {
+    func showProfile(user: User) {
         let profileRouter = ProfileRouter(user: user)
         profileRouter.execute(currentViewController)
     }
@@ -52,13 +65,13 @@ extension ProfilePresenter {
 
 protocol EditProfilePresenter: Presenter {
     
-    func goToEditProfile()
+    func showEditProfile()
     
 }
 
 extension EditProfilePresenter {
     
-    func goToEditProfile() {
+    func showEditProfile() {
         let editProfileRouter = EditProfileRouter()
         editProfileRouter.execute(currentViewController)
     }
@@ -67,13 +80,13 @@ extension EditProfilePresenter {
 
 protocol AuthorizationPresenter: Presenter {
     
-    func goToAuthorization()
+    func showAuthorization()
     
 }
 
 extension AuthorizationPresenter {
     
-    func goToAuthorization() {
+    func showAuthorization() {
         let authorizationRouter = AuthorizationRouter()
         authorizationRouter.execute(currentViewController)
     }
@@ -82,13 +95,13 @@ extension AuthorizationPresenter {
 
 protocol PhotoEditorPresenter: Presenter {
     
-    func goToPhotoEditor(image: UIImage)
+    func showPhotoEditor(image: UIImage)
     
 }
 
 extension PhotoEditorPresenter {
     
-    func goToPhotoEditor(image: UIImage) {
+    func showPhotoEditor(image: UIImage) {
         let photoEditorRouter = PhotoEditorRouter(image: image)
         photoEditorRouter.execute(currentViewController)
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthorizationRouter {
+class AuthorizationRouter: AlertServiceDelegate {
     
     private(set) weak var currentViewController: UIViewController!
     
@@ -19,7 +19,6 @@ extension AuthorizationRouter: FeedPresenter {
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
-        
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.router = self
         currentViewController = authorizationViewController

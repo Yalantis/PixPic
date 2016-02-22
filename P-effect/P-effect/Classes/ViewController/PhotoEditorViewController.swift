@@ -16,12 +16,13 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-final class PhotoEditorViewController: UIViewController, Creatable {
+final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
-    lazy var locator = ServiceLocator()
+    internal static let storyboardName = "PhotoEditor"
+    
+    var model: PhotoEditorModel!
     
     var router: PhotoEditorRouter!
-    var model: PhotoEditorModel!
     weak var delegate: PhotoEditorDelegate?
     
     private var imageController: ImageViewController?
@@ -39,20 +40,17 @@ final class PhotoEditorViewController: UIViewController, Creatable {
         super.viewDidLoad()
         
         setupNavigavionBar()
-        locator.registerService(PostService())
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        AlertService.allowToDisplay = false
-        AlertService.topPresenter = router
+
+        AlertService.sharedInstance.delegate = router
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AlertService.allowToDisplay = true
         PushNotificationQueue.handleNotificationQueue()
     }
     
@@ -162,10 +160,10 @@ extension PhotoEditorViewController {
                 switch status {
                 case .Authorized:
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    AlertService.simpleAlert("Image saved to library")
+                    AlertService.sharedInstance.delegate?.showSimpleAlert("Image saved to library")
                     
                 default:
-                    AlertService.simpleAlert("No access to photo library")
+                    AlertService.sharedInstance.delegate?.showSimpleAlert("No access to photo library")
                 }
             }
         }
@@ -180,7 +178,7 @@ extension PhotoEditorViewController {
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }
-            let postService: PostService = locator.getService()
+            let postService: PostService = router.locator.getService()
             postService.savePost(file)
             navigationController!.popViewControllerAnimated(true)
         } catch let exception {
