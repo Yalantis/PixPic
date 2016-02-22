@@ -45,7 +45,7 @@ struct Constants {
     
     
     struct Profile {
-        static let ToastActivityDuration = 2.0
+        static let ToastActivityDuration = 5.0
         static let HeaderHeight: CGFloat = 238
         static let AvatarImageCornerRadius: CGFloat = 95.5
         static let AvatarImagePlaceholderName = "profile_placeholder.png"
@@ -92,4 +92,7 @@ struct Constants {
         static let StickerViewControlSize: CGFloat =  36.0
     }
     
+    struct EditProfile {
+        static let EditProfileControllerIdentifier = "EditProfileViewController"
+    }
 }

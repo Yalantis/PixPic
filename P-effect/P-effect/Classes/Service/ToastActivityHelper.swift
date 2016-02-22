@@ -1,16 +1,16 @@
 //
-//  UIView + ToastActivity.swift
+//  ToastActivityHelper.swift
 //  P-effect
 //
-//  Created by Illya on 2/18/16.
+//  Created by Illya on 2/22/16.
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
 import UIKit
 import Toast
 
-extension UIView {
-    
+class ToastActivityHelper: NSObject {
+
     func showToastActivityOn(view:UIView, duration: Double) {
         view.makeToastActivity(CSToastPositionCenter)
         

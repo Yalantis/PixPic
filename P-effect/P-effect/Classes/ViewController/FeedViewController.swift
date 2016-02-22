@@ -171,6 +171,7 @@ class FeedViewController: UIViewController {
             navigationController!.pushViewController(controller, animated: true)
         } else if let currentUser = currentUser {
             let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
+            let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
             controller.user = currentUser
             self.navigationController!.showViewController(controller, sender: self)
         }
@@ -209,7 +210,6 @@ class FeedViewController: UIViewController {
             postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
-                    this.scrollToFirstRow()
                 } else if let error = error {
                     print(error)
                 }
@@ -235,6 +235,7 @@ extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
+        let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
         controller.user = user
         self.navigationController!.showViewController(controller, sender: self)
     }

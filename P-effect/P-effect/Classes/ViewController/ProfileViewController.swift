@@ -31,14 +31,26 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - Inner func
     private func setupController() {
-//        postAdapter = PostpostAdapter()
         locator.registerService(PostService())
         showToast()
         tableView.dataSource = postAdapter
+        postAdapter.delegate = self
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
-        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
+        loadUserPosts()
+    }
+    
+    private func loadUserPosts() {
+        let postService: PostService = locator.getService()
+        postService.loadPosts(user) { [weak self] objects, error in
+            if let objects = objects {
+                self?.postAdapter.update(withPosts: objects, action: .Reload)
+                self?.view.hideToastActivity()
+            } else if let error = error {
+                print(error)
+            }
+        }
     }
     
     private func setupTableViewFooter() {
@@ -54,6 +66,7 @@ class ProfileViewController: UITableViewController {
     }
     
     private func applyUser() {
+        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = user?.username
         navigationItem.title = Constants.Profile.NavigationTitle
@@ -72,7 +85,8 @@ class ProfileViewController: UITableViewController {
     }
     
     private func showToast() {
-        view.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
+        let toastActivityHelper = ToastActivityHelper()
+        toastActivityHelper.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
         activityShown = true
     }
     
@@ -86,7 +100,7 @@ class ProfileViewController: UITableViewController {
                 this.tableView?.pullToRefreshView.stopAnimating()
                 return
             }
-            postService.loadPosts { objects, error in
+            postService.loadPosts(this.user) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                 } else if let error = error {
@@ -103,8 +117,12 @@ class ProfileViewController: UITableViewController {
                 this.tableView?.infiniteScrollingView.stopAnimating()
                 return
             }
-            postService.loadPagedPosts(offset: offset) { objects, error in
+            postService.loadPagedPosts(this.user, offset: offset) { objects, error in
                 if let objects = objects {
+                    if objects.count == 0 {
+                        this.tableView?.infiniteScrollingView.stopAnimating()
+                        return
+                    }
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
                     print(error)
@@ -115,9 +133,8 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction func profileSettings(sender: AnyObject) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
-        let controllerIdentifier = "EditProfileViewController"
-        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
+        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
+        let viewController = storyboard.instantiateViewControllerWithIdentifier(Constants.EditProfile.EditProfileControllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
     }
     
@@ -130,7 +147,7 @@ extension ProfileViewController: PostAdapterDelegate {
     }
     
     func showPlaceholderForEmptyDataSet() {
-        
+        tableView.reloadData()
     }
     
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
