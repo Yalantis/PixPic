@@ -12,6 +12,7 @@ typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?)
 
 class EffectsService {
     
+    lazy var reachabilityService = ReachabilityService()
     private var isQueryFromLocalDataStoure = false
     
     func loadEffects(completion: LoadingEffectsCompletion) {
@@ -120,7 +121,7 @@ class EffectsService {
         let queryFromLocal = EffectsVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
         
-        guard ReachabilityHelper().checkConnection() else {
+        guard reachabilityService.isReachable() else {
             completion(false)
             return
         }

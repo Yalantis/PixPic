@@ -13,6 +13,7 @@ private let messageUploadSuccessful = "Upload successful!"
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
+    lazy var reachabilityService = ReachabilityService()
     
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
@@ -74,7 +75,7 @@ class PostService {
             return
         }
         
-        if !ReachabilityHelper().checkConnection() {
+        if !reachabilityService.isReachable() {
             query.fromLocalDatastore()
         }
         
