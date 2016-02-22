@@ -45,7 +45,7 @@ class Router {
         }
     
     func showLogin(animated animated:Bool) {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryboard = UIStoryboard(name: Constants.Storyboard.Feed, bundle: nil)
         let controllerIdentifier = ViewControllerIDs.Login.rawValue
         let viewController = mainStoryboard.instantiateViewControllerWithIdentifier(controllerIdentifier) as! AuthorizationViewController
         let viewControllerTo: UIViewController = UINavigationController.init(rootViewController: viewController)
@@ -54,9 +54,9 @@ class Router {
     }
     
     func showHome(animated animated:Bool) {
-        let board = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: Constants.Storyboard.Feed, bundle: nil)
         let controllerIdentifier = ViewControllerIDs.Feed.rawValue
-        let viewController = board.instantiateViewControllerWithIdentifier(controllerIdentifier)
+        let viewController = storyboard.instantiateViewControllerWithIdentifier(controllerIdentifier)
         show(viewController, animated: animated)
     }
     
