@@ -28,6 +28,13 @@ struct Constants {
         static let Tmp = NSTemporaryDirectory()
     }
     
+    struct Storyboard {
+        static let Authorization = "Authorization"
+        static let Feed = "Feed"
+        static let PhotoEditor = "PhotoEditor"
+        static let Profile = "Profile"
+    }
+    
     struct UserDefaultsKeys {
 
     }
@@ -84,4 +91,5 @@ struct Constants {
         static let UserResizableViewInteractiveBorderSize: CGFloat =  10.0
         static let StickerViewControlSize: CGFloat =  36.0
     }
+    
 }

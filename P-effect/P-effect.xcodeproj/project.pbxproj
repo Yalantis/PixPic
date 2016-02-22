@@ -20,7 +20,7 @@
 		499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */; };
 		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
 		499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */; };
-		499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Main.storyboard */; };
+		499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Feed.storyboard */; };
 		499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */; };
 		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
 		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
@@ -38,6 +38,9 @@
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
+		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
+		95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA41C776477007F1B6A /* Profile.storyboard */; };
+		95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */; };
 		95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */; };
 		95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */; };
 		95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7B21C50998D004E2145 /* ErrorHandler.swift */; };
@@ -107,7 +110,7 @@
 		499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerViewController.swift; sourceTree = "<group>"; };
 		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsPickerAdapter.swift; sourceTree = "<group>"; };
-		499DD0541C57D2D300DABCD5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		499DD0541C57D2D300DABCD5 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
 		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
@@ -125,6 +128,9 @@
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
+		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
+		95D57EA41C776477007F1B6A /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoEditor.storyboard; sourceTree = "<group>"; };
 		95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderService.swift; sourceTree = "<group>"; };
 		95D6D7B21C50998D004E2145 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
@@ -452,7 +458,10 @@
 		FDAF46AF1C4936CA008060CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				499DD0541C57D2D300DABCD5 /* Main.storyboard */,
+				499DD0541C57D2D300DABCD5 /* Feed.storyboard */,
+				95D57EA41C776477007F1B6A /* Profile.storyboard */,
+				95D57EA01C77636C007F1B6A /* Authorization.storyboard */,
+				95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -567,12 +576,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				499DD0551C57D2D300DABCD5 /* Main.storyboard in Resources */,
+				499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */,
 				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
+				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
+				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
+				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
 				771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */,
