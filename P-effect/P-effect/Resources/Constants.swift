@@ -28,7 +28,7 @@ struct Constants {
         static let Tmp = NSTemporaryDirectory()
     }
     
-    struct StoryboardName {
+    struct Storyboard {
         static let Authorization = "Authorization"
         static let Feed = "Feed"
         static let PhotoEditor = "PhotoEditor"
