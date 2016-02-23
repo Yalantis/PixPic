@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904A1B51C526EA200F26E05 /* ValidationService.swift */; };
-		49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089CA41C4FA09C00027191 /* ProfileViewModel.swift */; };
 		492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */; };
 		492D17F11C5A024E00D98404 /* EffectsVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F01C5A024E00D98404 /* EffectsVersion.swift */; };
 		492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* EffectsSticker.swift */; };
 		492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* EffectsModel.swift */; };
 		492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F61C5B9FE500D98404 /* EffectViewCell.swift */; };
+		497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497954631C7B497E0003B960 /* ToastActivityHelper.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
 		499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */; };
@@ -99,12 +99,12 @@
 /* Begin PBXFileReference section */
 		417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4904A1B51C526EA200F26E05 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
-		49089CA41C4FA09C00027191 /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsGroup.swift; sourceTree = "<group>"; };
 		492D17F01C5A024E00D98404 /* EffectsVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsVersion.swift; sourceTree = "<group>"; };
 		492D17F21C5A027D00D98404 /* EffectsSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsSticker.swift; sourceTree = "<group>"; };
 		492D17F41C5A186100D98404 /* EffectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsModel.swift; sourceTree = "<group>"; };
 		492D17F61C5B9FE500D98404 /* EffectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewCell.swift; sourceTree = "<group>"; };
+		497954631C7B497E0003B960 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
 		499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
@@ -367,6 +367,7 @@
 				FDEA23121C7341E9009EE533 /* ServiceLocator.swift */,
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
+				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -389,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */,
-				49089CA41C4FA09C00027191 /* ProfileViewModel.swift */,
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
 				499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */,
 				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
@@ -705,12 +705,12 @@
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
-				49089CA51C4FA09C00027191 /* ProfileViewModel.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
+				497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */,
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,

@@ -175,23 +175,24 @@ class FeedViewController: UIViewController, ApplicationAppearance {
             navigationController!.pushViewController(controller, animated: true)
         } else if let currentUser = currentUser {
             let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-            controller.model = ProfileViewModel(profileUser: currentUser)
+            let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
+            controller.user = currentUser
             self.navigationController!.showViewController(controller, sender: self)
         }
     }
     
     // MARK: - UserInteractive
     private func setupLoadersCallback() {
-        let postService: PostService = (locator.getService())
+        let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
             }
+
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
                 AlertService.simpleAlert("No internet connection")
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
             }
@@ -202,7 +203,7 @@ class FeedViewController: UIViewController, ApplicationAppearance {
                 } else if let error = error {
                     print(error)
                 }
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
@@ -210,13 +211,12 @@ class FeedViewController: UIViewController, ApplicationAppearance {
                 return
             }
             guard let offset = self?.postAdapter.postQuantity else {
-                this.tableView?.infiniteScrollingView.stopAnimating()
+                this.tableView.infiniteScrollingView.stopAnimating()
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
-                    this.scrollToFirstRow()
                 } else if let error = error {
                     print(error)
                 }
@@ -242,8 +242,8 @@ extension FeedViewController: PostAdapterDelegate {
     
     func showUserProfile(user: User) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("ProfileViewController") as! ProfileViewController
-        controller.model = ProfileViewModel.init(profileUser: user)
+        let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
+        controller.user = user
         self.navigationController!.showViewController(controller, sender: self)
     }
     

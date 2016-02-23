@@ -37,6 +37,15 @@ class User: PFUser {
 
 extension User {
     
+    var isCurrentUser: Bool {
+        get {
+            if let currentUser = User.currentUser() where currentUser.facebookId == self.facebookId {
+                return true
+            }
+            return false
+        }
+    }
+    
     func checkUsernameExistance(completion: Bool -> Void) {
         guard let username = username else {
             completion(false)
@@ -84,6 +93,15 @@ extension User {
         }
     }
     
+    //MARK: - ProfileViewControllerMethods
+    func loadUserAvatar(completion: LoadingImageCompletion) {
+        if let avatar = avatar {
+            ImageLoaderService.getImageForContentItem(avatar) { image, error in
+                completion(image: image, error: error)
+            }
+        }
+    }
+
 }
 
 
