@@ -12,7 +12,7 @@ import ParseFacebookUtilsV4
 
 final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = "Authorization"
+    internal static let storyboardName = Constants.Storyboard.Authorization
     
     var router: AuthorizationRouter!
     

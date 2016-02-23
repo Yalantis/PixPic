@@ -29,7 +29,7 @@ extension AlertServiceDelegate where Self: FeedPresenter {
             return
         }
         
-        if let aps = userInfo["aps"] as? [String:String]{
+        if let aps = userInfo["aps"] as? [String: String] {
             message = aps["alert"]
         }
         

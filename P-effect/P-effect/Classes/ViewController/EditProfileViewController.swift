@@ -16,7 +16,7 @@ private let logoutWithoutConnectionAttempt = "Internet connection is required to
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = "Profile"
+    internal static let storyboardName = Constants.Storyboard.Profile
     
     var router: EditProfileRouter!
     
@@ -97,7 +97,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) { [weak self](image, error) -> Void in
+        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }

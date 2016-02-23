@@ -18,8 +18,8 @@ protocol PhotoEditorDelegate: class {
 
 final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = "PhotoEditor"
-    
+    internal static let storyboardName = Constants.Storyboard.PhotoEditor
+
     var model: PhotoEditorModel!
     
     var router: PhotoEditorRouter!

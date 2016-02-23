@@ -32,7 +32,7 @@
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
 		771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
-		77752C961C7B2AD500DCED81 /* Creatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* Creatable.swift */; };
+		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
 		77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */; };
 		77752C9F1C7B396800DCED81 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C991C7B396800DCED81 /* MainRouter.swift */; };
@@ -129,7 +129,7 @@
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsGroupHeaderView.xib; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
-		77752C951C7B2AD500DCED81 /* Creatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Creatable.swift; sourceTree = "<group>"; };
+		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
 		77752C991C7B396800DCED81 /* MainRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				771E3E7F1C74CB22000608EF /* CellInterface.swift */,
-				77752C951C7B2AD500DCED81 /* Creatable.swift */,
+				77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -699,7 +699,7 @@
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
 				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
-				77752C961C7B2AD500DCED81 /* Creatable.swift in Sources */,
+				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
 				FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */,
 				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,

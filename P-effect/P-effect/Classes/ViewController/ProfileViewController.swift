@@ -11,7 +11,7 @@ import Toast
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
-    internal static let storyboardName = "Profile"
+    internal static let storyboardName = Constants.Storyboard.Profile
     
     var model: ProfileViewModel!
     var router: ProfileRouter!
@@ -69,7 +69,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = model?.userName
         navigationItem.title = Constants.Profile.NavigationTitle
-        model?.userAvatar {[weak self] image, error -> Void in
+        model?.userAvatar {[weak self] image, error in
             guard let this = self else {
                 return
             }

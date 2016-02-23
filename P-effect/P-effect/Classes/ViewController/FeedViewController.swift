@@ -13,7 +13,7 @@ import Toast
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = "Feed"
+    internal static let storyboardName = Constants.Storyboard.Feed
     
     var router: FeedRouter!
     
@@ -171,7 +171,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        let postService: PostService = (router.locator.getService())
+        let postService: PostService = router.locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return
