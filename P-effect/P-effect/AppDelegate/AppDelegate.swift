@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         setupParse()
         setupNotifications(application)
-        setupUI()
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
 
         Parse.setApplicationId(
             Constants.ParseApplicationId.AppID,
@@ -52,15 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupParse() {
         User.registerSubclass()
         Parse.enableLocalDatastore()
-    }
-    
-    private func setupUI() {
-        let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
-            buttonTitlePosition,
-            forBarMetrics: .Default
-        )
-        AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
     private func setupNotifications(application: UIApplication) {

@@ -14,7 +14,7 @@ private let backWithChangesMessage = "If you go back now, your changes will be d
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, ApplicationAppearance {
     
     lazy var locator = ServiceLocator()
     
@@ -37,6 +37,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configurateNavigationBar()
         makeNavigation()
         view.layoutIfNeeded()
         configureImagesAndText()

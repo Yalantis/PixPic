@@ -16,7 +16,7 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-class PhotoEditorViewController: UIViewController {
+class PhotoEditorViewController: UIViewController, ApplicationAppearance {
     
     lazy var locator = ServiceLocator()
     var model: PhotoEditorModel!
@@ -36,6 +36,7 @@ class PhotoEditorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configurateNavigationBar()
         setupNavigavionBar()
         locator.registerService(PostService())
         locator.registerService(ReachabilityService())

@@ -38,6 +38,7 @@
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
+		95C096AA1C7C545A008742E8 /* ApplicationAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */; };
 		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
 		95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA41C776477007F1B6A /* Profile.storyboard */; };
 		95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */; };
@@ -128,6 +129,7 @@
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
+		95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAppearance.swift; sourceTree = "<group>"; };
 		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		95D57EA41C776477007F1B6A /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoEditor.storyboard; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				771E3E7F1C74CB22000608EF /* CellInterface.swift */,
+				95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
+				95C096AA1C7C545A008742E8 /* ApplicationAppearance.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-class ProfileViewController: UITableViewController {
+class ProfileViewController: UITableViewController, ApplicationAppearance {
     
     @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -26,9 +26,9 @@ class ProfileViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configurateNavigationBar()
         setupController()
         setupLoadersCallback()
-        
         locator.registerService(ReachabilityService())
     }
     

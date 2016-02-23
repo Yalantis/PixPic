@@ -11,7 +11,7 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-class FeedViewController: UIViewController {
+class FeedViewController: UIViewController, ApplicationAppearance {
     
     private lazy var photoGenerator = PhotoGenerator()
     private var toolBar: FeedToolBar!
@@ -26,6 +26,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configurateNavigationBar()
         view.makeToastActivity(CSToastPositionCenter)
         setupTableView()
         setupToolBar()
