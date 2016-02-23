@@ -57,8 +57,8 @@ class ProfileViewController: UITableViewController {
     }
     
     private func setupTableViewFooter() {
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        var frame: CGRect = tableViewFooter.frame
+        let screenSize = view.bounds
+        var frame = tableViewFooter.frame
         if let navigationController = navigationController {
             frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
         } else {
@@ -71,19 +71,19 @@ class ProfileViewController: UITableViewController {
     private func applyUser() {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
-        userName.text = user?.username
+        userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        user?.loadUserAvatar { [weak self] image, error in
+        user.loadUserAvatar { [weak self] image, error in
             if error == nil {
                 self?.userAvatar.image = image
             } else {
                 self?.view.makeToast(error?.localizedDescription)
             }
         }
-        if user!.userIsCurrentUser() {
+        if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
-            profileSettingsButton.tintColor = UIColor.whiteColor()
+            profileSettingsButton.tintColor = .whiteColor()
         }
     }
     
@@ -116,11 +116,7 @@ class ProfileViewController: UITableViewController {
             guard let this = self else {
                 return
             }
-            guard let offset = self?.postAdapter.postQuantity else {
-                this.tableView.infiniteScrollingView.stopAnimating()
-                return
-            }
-            postService.loadPagedPosts(this.user, offset: offset) { objects, error in
+            postService.loadPagedPosts(this.user, offset: this.postAdapter.postQuantity) { objects, error in
                 if let objects = objects {
                     if objects.count == 0 {
                         this.tableView.infiniteScrollingView.stopAnimating()
@@ -128,6 +124,7 @@ class ProfileViewController: UITableViewController {
                     }
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
+                    this.tableView.infiniteScrollingView.stopAnimating()
                     print(error)
                 }
             }
@@ -135,7 +132,7 @@ class ProfileViewController: UITableViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func profileSettings(sender: AnyObject) {
+    @IBAction private func profileSettings() {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
         let viewController = storyboard.instantiateViewControllerWithIdentifier(Constants.EditProfile.EditProfileControllerIdentifier)
         navigationController!.showViewController(viewController, sender: self)
@@ -163,7 +160,7 @@ extension ProfileViewController: PostAdapterDelegate {
 extension ProfileViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (activityShown == true) {
+        if activityShown == true {
             view.hideToastActivity()
             tableView.tableFooterView = nil
             tableView.scrollEnabled = true
