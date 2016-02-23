@@ -100,7 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings" id="xc4-g0-tKg">
                             <color key="tintColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="profileSettings:" destination="Lav-xa-cbI" id="5Du-Sq-a6v"/>
+                                <action selector="profileSettings" destination="Lav-xa-cbI" id="Caf-qv-gcK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
