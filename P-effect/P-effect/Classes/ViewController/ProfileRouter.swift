@@ -32,7 +32,7 @@ extension ProfileRouter: EditProfilePresenter, FeedPresenter {
         let profileController = ProfileViewController.create()
         profileController.router = self
         currentViewController = profileController
-        profileController.model = ProfileViewModel(profileUser: user)
+        profileController.user = user
         context.navigationController!.showViewController(profileController, sender: self)
     }
     

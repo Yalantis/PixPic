@@ -177,7 +177,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 return
             }
             guard ReachabilityHelper.checkConnection() else {
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
                 return
             }
             postService.loadPosts { objects, error in
@@ -187,7 +187,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 } else if let error = error {
                     print(error)
                 }
-                this.tableView?.pullToRefreshView.stopAnimating()
+                this.tableView.pullToRefreshView.stopAnimating()
             }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
@@ -195,13 +195,12 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 return
             }
             guard let offset = self?.postAdapter.postQuantity else {
-                this.tableView?.infiniteScrollingView.stopAnimating()
+                this.tableView.infiniteScrollingView.stopAnimating()
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
-                    this.scrollToFirstRow()
                 } else if let error = error {
                     print(error)
                 }

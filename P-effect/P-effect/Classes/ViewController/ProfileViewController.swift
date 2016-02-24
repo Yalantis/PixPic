@@ -13,11 +13,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     internal static let storyboardName = Constants.Storyboard.Profile
     
-    var model: ProfileViewModel!
     var router: ProfileRouter!
+    var user: User!
     
     private var activityShown: Bool?
-    private lazy var dataSource = PostAdapter()
+    private lazy var postAdapter = PostAdapter()
+    private lazy var locator = ServiceLocator()
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -38,24 +39,35 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     // MARK: - Inner func
-    func setupController() {
-        
+    private func setupController() {
+        locator.registerService(PostService())
         showToast()
-        tableView.dataSource = dataSource
+        tableView.dataSource = postAdapter
+        postAdapter.delegate = self
         tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
-        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         setupTableViewFooter()
         applyUser()
-        if (model!.userIsCurrentUser()) {
-            profileSettingsButton.enabled = true
-            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
-            profileSettingsButton.tintColor = UIColor.whiteColor()
+        loadUserPosts()
+    }
+    
+    private func loadUserPosts() {
+        let postService: PostService = locator.getService()
+        postService.loadPosts(user) { [weak self] objects, error in
+            guard let this = self else {
+                return
+            }
+            if let objects = objects {
+                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.view.hideToastActivity()
+            } else if let error = error {
+                print(error)
+            }
         }
     }
     
-    func setupTableViewFooter() {
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        var frame: CGRect = tableViewFooter.frame
+    private func setupTableViewFooter() {
+        let screenSize = view.bounds
+        var frame = tableViewFooter.frame
         if let navigationController = navigationController {
             frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
         } else {
@@ -65,11 +77,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         tableView.tableFooterView = tableViewFooter;
     }
     
-    func applyUser() {
+    private func applyUser() {
+        userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
-        userName.text = model?.userName
+        userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        model?.userAvatar {[weak self] image, error in
+        user.loadUserAvatar {[weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -79,35 +92,87 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 this.view.makeToast(error?.localizedDescription)
             }
         }
+        if user.isCurrentUser {
+            profileSettingsButton.enabled = true
+            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
+            profileSettingsButton.tintColor = .whiteColor()
+        }
     }
     
-    func showToast() {
-        self.view.makeToastActivity(CSToastPositionCenter)
+    private func showToast() {
+        let toastActivityHelper = ToastActivityHelper()
+        toastActivityHelper.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
         activityShown = true
-        
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.view.hideToastActivity()
-        }
     }
     
     private func setupLoadersCallback() {
+        let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard ReachabilityHelper.checkConnection() else {
-                self?.tableView?.pullToRefreshView.stopAnimating()
-                
+            guard let this = self else {
                 return
             }
-            //TODO: figure out this commented code
-            //        self?.dataSource?.fetchData(self?.model.user)
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView.pullToRefreshView.stopAnimating()
+                return
+            }
+            postService.loadPosts(this.user) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                } else if let error = error {
+                    print(error)
+                }
+                this.tableView.pullToRefreshView.stopAnimating()
+            }
         }
         tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            //      self?.dataSource?.fetchPagedData(self?.model.user)
+            guard let this = self else {
+                return
+            }
+            postService.loadPagedPosts(this.user, offset: this.postAdapter.postQuantity) { objects, error in
+                if let objects = objects {
+                    if objects.count == 0 {
+                        this.tableView.infiniteScrollingView.stopAnimating()
+                        return
+                    }
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                } else if let error = error {
+                    this.tableView.infiniteScrollingView.stopAnimating()
+                    print(error)
+                }
+            }
         }
     }
-    // MARK: Delegate methods
+    
+    // MARK: - IBActions
+    @IBAction private func profileSettings() {
+        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
+        let viewController = storyboard.instantiateViewControllerWithIdentifier(Constants.EditProfile.EditProfileControllerIdentifier)
+        navigationController!.showViewController(viewController, sender: self)
+    }
+    
+}
+
+extension ProfileViewController: PostAdapterDelegate {
+    
+    func showUserProfile(user: User) {
+        
+    }
+    
+    func showPlaceholderForEmptyDataSet() {
+        tableView.reloadData()
+    }
+    
+    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
+        tableView.reloadData()
+    }
+    
+}
+
+
+extension ProfileViewController {
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (activityShown == true) {
+        if activityShown == true {
             view.hideToastActivity()
             tableView.tableFooterView = nil
             tableView.scrollEnabled = true
@@ -116,11 +181,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.size.width + PostViewCell.designedHeight
-    }
-    
-    // MARK: - IBActions
-    @IBAction func profileSettings(sender: AnyObject) {
-        router.showEditProfile()
     }
     
 }
