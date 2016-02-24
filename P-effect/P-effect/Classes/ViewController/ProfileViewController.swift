@@ -19,7 +19,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var activityShown: Bool?
     private lazy var dataSource = PostAdapter()
     
-    @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
+    @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!

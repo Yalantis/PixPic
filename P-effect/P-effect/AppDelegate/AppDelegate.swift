@@ -17,7 +17,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private let router = MainRouter()
+    private lazy var router = MainRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
