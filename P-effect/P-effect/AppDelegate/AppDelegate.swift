@@ -24,19 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         setupParse()
-        setupNotifications(application)
+        setupRemoteNotifications(application)
         setupUI()
-
-        Parse.setApplicationId(
-            Constants.ParseApplicationId.AppID,
-            clientKey: Constants.ParseApplicationId.ClientKey
-        )
+        
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         Fabric.with([Crashlytics.self])
         
         if application.applicationState != UIApplicationState.Background {
-            let oldPushHandlerOnly = !self.respondsToSelector(Selector("application:didReceiveRemoteNotification:fetchCompletionHandler:"))
-            let noPushPayload: AnyObject? = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
+            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+            let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
             if oldPushHandlerOnly || noPushPayload != nil {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
@@ -45,13 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
     private func setupParse() {
         User.registerSubclass()
         Parse.enableLocalDatastore()
+        Parse.setApplicationId(
+            Constants.ParseApplicationId.AppID,
+            clientKey: Constants.ParseApplicationId.ClientKey
+        )
     }
     
     private func setupUI() {
@@ -63,13 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
-    private func setupNotifications(application: UIApplication) {
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "onTokenUpdated:",
-            name:FBSDKAccessTokenDidChangeNotification,
-            object: nil
-        )
+    private func setupRemoteNotifications(application: UIApplication) {
         let settings = UIUserNotificationSettings(
             forTypes: [.Alert, .Badge, .Sound],
             categories: nil
@@ -108,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         
-        if PFUser.currentUser() != nil {
+        if User.currentUser() != nil {
             completionHandler(UIBackgroundFetchResult.NewData)
         } else {
             completionHandler(UIBackgroundFetchResult.NoData)
@@ -126,10 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
         currentInstallation.saveEventually()
-    }
-    
-    func onTokenUpdated(notification: NSNotification) {
-        print(notification)
     }
     
 }
