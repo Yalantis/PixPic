@@ -22,7 +22,7 @@ class FBAuthorization {
         let token = FBSDKAccessToken.currentAccessToken()
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
             if let user = user as? User {
-                print(PFUser.currentUser() ?? "No user")
+                print(User.currentUser() ?? "No user")
                 if user.isNew {
                     AuthService.updateUserInfoViaFacebook(user) { user, error in
                         completion(user, nil)

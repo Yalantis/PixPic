@@ -122,8 +122,8 @@ class FeedViewController: UIViewController, ApplicationAppearance {
     
     // MARK: - photo editor
     private func choosePhoto() {
-        let isUserAbsent = PFUser.currentUser() == nil
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
+        let isUserAbsent = User.currentUser() == nil
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || isUserAbsent {
             let storyboard = UIStoryboard(name: Constants.Storyboard.Authorization, bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
             navigationController!.pushViewController(controller, animated: true)
