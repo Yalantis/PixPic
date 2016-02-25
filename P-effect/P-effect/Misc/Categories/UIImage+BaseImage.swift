@@ -15,15 +15,15 @@ extension UIImage {
     }
     
     public class func placeholderImage() -> UIImage? {
-        return UIImage(named: "photoPlaceholder")
+        return UIImage(named: "photo_placeholder")
     }
     
     public class func avatarPlaceholderImage() -> UIImage? {
-        return UIImage(named: "profile_placeholder.png")
+        return UIImage(named: "profile_placeholder")
     }
     
     public class func appAddPhotoButton() -> UIImage? {
-        return UIImage(named: "btnMakeAPhoto")
+        return UIImage(named: "btn_make_photo")
     }
     
     public class func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
