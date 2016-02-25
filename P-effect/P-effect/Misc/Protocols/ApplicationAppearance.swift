@@ -17,13 +17,13 @@ protocol ApplicationAppearance {
 extension ApplicationAppearance where Self: UIViewController {
     
     func configurateNavigationBar() {
-        self.navigationController!.navigationBar.barTintColor = UIColor.appNavBarColor
-        self.navigationController!.navigationBar.translucent = false
-        self.navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        self.navigationController!.navigationBar.backIndicatorImage = UIImage.appBackButton()
-        self.navigationController!.navigationBar.backIndicatorTransitionMaskImage = UIImage.appBackButton()
-        self.navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController!.navigationBar.topItem!.title = ""
+        navigationController?.navigationBar.barTintColor = UIColor.appNavBarColor
+        navigationController?.navigationBar.translucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.appWhiteColor]
+        navigationController?.navigationBar.backIndicatorImage = UIImage.appBackButton()
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage.appBackButton()
+        navigationController?.navigationBar.tintColor = UIColor.appWhiteColor
+        navigationController?.navigationBar.topItem!.title = ""
     }
 
 }

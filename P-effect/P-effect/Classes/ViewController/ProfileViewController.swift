@@ -34,7 +34,6 @@ class ProfileViewController: UITableViewController, ApplicationAppearance {
     // MARK: - Inner func
     private func setupController() {
         locator.registerService(PostService())
-        locator.registerService(ReachabilityService())
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
@@ -103,7 +102,7 @@ class ProfileViewController: UITableViewController, ApplicationAppearance {
                 return
             }
             
-            let reachabilityService: ReachabilityService = (this.locator.getService())!
+            let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
                 AlertService.simpleAlert("No internet connection")
                 this.tableView.pullToRefreshView.stopAnimating()

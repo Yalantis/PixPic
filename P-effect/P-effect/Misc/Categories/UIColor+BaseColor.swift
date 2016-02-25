@@ -34,4 +34,6 @@ extension UIColor {
     
     @nonobjc static let appBlueColor = UIColor.init(red: 0/255, green: 97/255, blue: 221/255, alpha: 1)
     
+    @nonobjc static let appWhiteColor = UIColor.whiteColor()
+    
 }
