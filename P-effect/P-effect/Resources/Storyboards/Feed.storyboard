@@ -35,7 +35,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="P-effect" id="P4x-GP-BLW">
                         <barButtonItem key="rightBarButtonItem" image="ic_profile" id="eed-Oc-yJB">
-                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
                             </connections>
