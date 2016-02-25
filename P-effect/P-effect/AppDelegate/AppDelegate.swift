@@ -17,7 +17,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private lazy var router = MainRouter()
+    private lazy var router = FeedRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if application.applicationState == .Active {
-            AlertService.sharedInstance.delegate?.showNotificationAlert(userInfo, message: nil)
+            AlertService.sharedInstance.showNotificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         

@@ -11,7 +11,7 @@ import UIKit
 private let appRouterAnimationDelay = 0.3
 private let appRouterAnimationDuration = 0.45
 
-typealias ShowFeedHandler = () -> Void
+typealias Handler = () -> Void
 
 protocol Router: class {
     
@@ -23,13 +23,15 @@ protocol Router: class {
 
 protocol Presenter: class {
     
+    weak var locator: ServiceLocator! { get set }
+    
     weak var currentViewController: UIViewController! { get }
     
 }
 
 protocol FeedPresenter: Presenter {
     
-    var showFeedAction: ShowFeedHandler { get }
+    var showFeedAction: Handler { get }
     
     func showFeed()
     
@@ -37,7 +39,7 @@ protocol FeedPresenter: Presenter {
 
 extension FeedPresenter {
     
-    var showFeedAction: ShowFeedHandler {
+    var showFeedAction: Handler {
         return  {
             self.showFeed()
         }
@@ -58,6 +60,7 @@ extension ProfilePresenter {
     
     func showProfile(user: User) {
         let profileRouter = ProfileRouter(user: user)
+        profileRouter.locator = locator
         profileRouter.execute(currentViewController)
     }
     
@@ -73,6 +76,7 @@ extension EditProfilePresenter {
     
     func showEditProfile() {
         let editProfileRouter = EditProfileRouter()
+        editProfileRouter.locator = locator
         editProfileRouter.execute(currentViewController)
     }
     
@@ -88,6 +92,7 @@ extension AuthorizationPresenter {
     
     func showAuthorization() {
         let authorizationRouter = AuthorizationRouter()
+        authorizationRouter.locator = locator
         authorizationRouter.execute(currentViewController)
     }
     
@@ -103,6 +108,7 @@ extension PhotoEditorPresenter {
     
     func showPhotoEditor(image: UIImage) {
         let photoEditorRouter = PhotoEditorRouter(image: image)
+        photoEditorRouter.locator = locator
         photoEditorRouter.execute(currentViewController)
     }
     

@@ -16,9 +16,9 @@ class ValidationService: NSObject {
             return
         }
         
-        if userName.characters.count < Constants.Validation.MinUserName ||
-            userName.characters.count > Constants.Validation.MaxUserName {
-                AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.WrongLenght)
+        if userName.characters.count < Constants.ValidationErrors.MinUserName ||
+            userName.characters.count > Constants.ValidationErrors.MaxUserName {
+                AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.WrongLenght)
                 completion(false)
                 
                 return
@@ -27,7 +27,7 @@ class ValidationService: NSObject {
         let query = PFUser.query()?.whereKey("username", equalTo: userName)
         query?.getFirstObjectInBackgroundWithBlock { object, error in
             if object != nil {
-                AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.AlreadyExist)
+                AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.AlreadyExist)
                 completion(false)
             } else {
                 completion(true)
@@ -36,28 +36,28 @@ class ValidationService: NSObject {
     }
     
     private class func isUserNameContainsOnlyLetters(userName: String) -> Bool {
-        if userName.characters.first == Constants.Validation.WhiteSpace {
-            AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.SpaceInBegining)
+        if userName.characters.first == Constants.ValidationErrors.WhiteSpace {
+            AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.SpaceInBegining)
             
             return false
         }
-        let invalidCharacterSet = NSCharacterSet(charactersInString: Constants.Validation.CharacterSet).invertedSet
+        let invalidCharacterSet = NSCharacterSet(charactersInString: Constants.ValidationErrors.CharacterSet).invertedSet
         if let containsInvalidSymbols = userName.rangeOfCharacterFromSet(invalidCharacterSet) {
-            AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.NumbersAndSymbolsInUsername)
+            AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.NumbersAndSymbolsInUsername)
             
             return false
         } else {
-            var previousChar = Constants.Validation.WhiteSpace as Character
+            var previousChar = Constants.ValidationErrors.WhiteSpace as Character
             for char in userName.characters {
-                if previousChar == Constants.Validation.WhiteSpace && char == Constants.Validation.WhiteSpace {
-                    AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.TwoSpacesInRow)
+                if previousChar == Constants.ValidationErrors.WhiteSpace && char == Constants.ValidationErrors.WhiteSpace {
+                    AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.TwoSpacesInRow)
                     
                     return false
                 }
                 previousChar = char
             }
-            if userName.characters.last == Constants.Validation.WhiteSpace {
-                AlertService.sharedInstance.delegate?.showSimpleAlert(Constants.Validation.SpaceInEnd)
+            if userName.characters.last == Constants.ValidationErrors.WhiteSpace {
+                AlertService.sharedInstance.showSimpleAlert(Constants.ValidationErrors.SpaceInEnd)
                 
                 return false
             }

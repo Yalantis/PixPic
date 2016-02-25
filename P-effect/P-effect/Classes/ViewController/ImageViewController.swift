@@ -11,15 +11,16 @@ import UIKit
 class ImageViewController: UIViewController {
     
     var model: ImageViewModel!
+    weak var locator: ServiceLocator!
     
     private var effects = [EffectEditorView]()
     
-    @IBOutlet private weak var rawImage: UIImageView!
+    @IBOutlet private weak var rawImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        rawImage.image = model.originalImage()
+        rawImageView.image = model.originalImage()
         // Do any additional setup after loading the view.
     }
     
@@ -29,23 +30,23 @@ extension ImageViewController: PhotoEditorDelegate {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
         let userResizableView = EffectEditorView(image: didChooseEffect)
-        userResizableView.center = rawImage.center
-        rawImage.addSubview(userResizableView)
+        userResizableView.center = rawImageView.center
+        rawImageView.addSubview(userResizableView)
         effects.append(userResizableView)
     }
     
     func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage {
         guard withEffects else {
-            return rawImage.image!
+            return rawImageView.image!
         }
         
         for effect in effects {
             effect.switchControls(toState: false)
         }
-        let rect = rawImage.bounds
+        let rect = rawImageView.bounds
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()!
-        rawImage.layer.renderInContext(context)
+        rawImageView.layer.renderInContext(context)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         for effect in effects {
             effect.switchControls(toState: true)

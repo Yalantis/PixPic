@@ -24,7 +24,7 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
-    var selectionClosure: ((cell: PostViewCell) -> Void)?
+    var didSelectUser: ((cell: PostViewCell) -> Void)?
     
     let imageLoader = ImageLoaderService()
     weak var delegate: PostViewCellDelegate?
@@ -77,7 +77,7 @@ class PostViewCell: UITableViewCell {
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
-        selectionClosure?(cell: self)
+        didSelectUser?(cell: self)
     }
     
 }

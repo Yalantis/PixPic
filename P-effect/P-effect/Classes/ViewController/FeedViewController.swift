@@ -13,9 +13,10 @@ import Toast
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = Constants.Storyboard.Feed
+    static let storyboardName = Constants.Storyboard.Feed
     
-    var router: FeedRouter!
+    var router: protocol<AlertServiceDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
+    weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postAdapter = PostAdapter()
@@ -43,7 +44,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.sharedInstance.delegate = router
+        AlertService.sharedInstance.registerAlertListener(router)
         tableView.reloadData()
     }
     
@@ -77,7 +78,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     // MARK: - Setup methods
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
-        toolBar.selectionClosure = { [weak self] in
+        toolBar.didSelectPhoto = { [weak self] in
             self?.choosePhoto()
         }
         view.addSubview(toolBar)

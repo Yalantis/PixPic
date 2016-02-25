@@ -12,9 +12,10 @@ import ParseFacebookUtilsV4
 
 final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = Constants.Storyboard.Authorization
+    static let storyboardName = Constants.Storyboard.Authorization
     
-    var router: AuthorizationRouter!
+    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    weak var locator: ServiceLocator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.sharedInstance.delegate = router
+        AlertService.sharedInstance.registerAlertListener(router)
     }
     
     @IBAction private func logInWithFBButtonTapped() {
@@ -32,7 +33,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     }
     
     private func signInWithFacebook() {
-        FBAuthorization.signInWithFacebookInController(self) { [weak self] user, error in
+        (locator.getService() as AuthService).signInWithFacebookInController(self) { [weak self] user, error in
             if let error = error {
                 handleError(error as NSError)
             }
@@ -64,7 +65,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
     private func signUp(user: User) {
         let userWithFB = user
-        FBAuthorization.signInWithPermission { [weak self] user, error in
+        (locator.getService() as AuthService).signInWithPermission { [weak self] user, error in
             if let error = error {
                 handleError(error as NSError)
             }

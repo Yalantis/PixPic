@@ -177,7 +177,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
-                        <outlet property="rawImage" destination="VUI-BL-gPN" id="IZF-0J-mgy"/>
+                        <outlet property="rawImageView" destination="VUI-BL-gPN" id="ese-rA-vET"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFh-3H-Zdt" userLabel="First Responder" sceneMemberID="firstResponder"/>

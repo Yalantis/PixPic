@@ -10,7 +10,8 @@ import Foundation
 
 class PhotoEditorRouter: AlertServiceDelegate {
     
-    lazy var locator = ServiceLocator()
+    weak var locator: ServiceLocator!
+    
     private(set) weak var currentViewController: UIViewController!
     private var image: UIImage!
     
@@ -24,9 +25,9 @@ extension PhotoEditorRouter: FeedPresenter {
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
-        locator.registerService(PostService())
         let photoEditorViewController = PhotoEditorViewController.create()
         photoEditorViewController.router = self
+        photoEditorViewController.locator = locator
         currentViewController = photoEditorViewController
         photoEditorViewController.model = PhotoEditorModel(image: image)
         context.navigationController!.pushViewController(photoEditorViewController, animated: false)

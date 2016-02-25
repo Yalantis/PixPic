@@ -62,7 +62,7 @@ struct Constants {
         static let HideTitlePosition = UIOffsetMake(0, -70)
     }
     
-    struct Validation {
+    struct ValidationErrors {
         static let WrongLenght = "Lenght of the username have to be more then 3 and less then 30 characters long" as String
         static let AlreadyExist = "Username already exist" as String
         static let SpaceInBegining = "Username can't start with spaces" as String

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 func handleError(error: NSError) {
     
     var message: String?
@@ -59,5 +58,5 @@ func handleError(error: NSError) {
         }
         
     }
-    AlertService.sharedInstance.delegate?.showSimpleAlert(message)
+    AlertService.sharedInstance.showSimpleAlert(message!)
 }

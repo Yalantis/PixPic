@@ -16,9 +16,10 @@ private let logoutWithoutConnectionAttempt = "Internet connection is required to
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = Constants.Storyboard.Profile
+    static let storyboardName = Constants.Storyboard.Profile
     
-    var router: EditProfileRouter!
+    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -52,7 +53,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.sharedInstance.delegate = router
+        AlertService.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -136,18 +137,18 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
                 title: "Save changes",
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let NOAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
+            let noAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self?.navigationController!.popViewControllerAnimated(true)
             }
-            alertController.addAction(NOAction)
+            alertController.addAction(noAction)
             
-            let YESAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
+            let yesAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
                 self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
-            alertController.addAction(YESAction)
+            alertController.addAction(yesAction)
             
             self.presentViewController(alertController, animated: true) {}
         } else {
@@ -168,7 +169,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
                 }
             }
         } else {
-            AlertService.sharedInstance.delegate?.showSimpleAlert("Internet connection is required to save changes in profile")
+            AlertService.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
         }
     }
     
@@ -176,8 +177,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         guard ReachabilityHelper.checkConnection() else {
             return
         }
-        AuthService.logOut()
-        AuthService.anonymousLogIn(
+        let authService: AuthService = locator.getService()
+        authService.logOut()
+        authService.anonymousLogIn(
             completion: { object in
                 self.router.showFeed()
             }, failure: { error in

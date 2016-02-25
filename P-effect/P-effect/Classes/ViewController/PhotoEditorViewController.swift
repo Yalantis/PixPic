@@ -18,11 +18,12 @@ protocol PhotoEditorDelegate: class {
 
 final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
-    internal static let storyboardName = Constants.Storyboard.PhotoEditor
-
+    static let storyboardName = Constants.Storyboard.PhotoEditor
+    
     var model: PhotoEditorModel!
     
-    var router: PhotoEditorRouter!
+    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    weak var locator: ServiceLocator!
     weak var delegate: PhotoEditorDelegate?
     
     private var imageController: ImageViewController?
@@ -44,8 +45,8 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-
-        AlertService.sharedInstance.delegate = router
+        
+        AlertService.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -59,11 +60,14 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
             imageController?.model = ImageViewModel(image: model.originalImage())
+            imageController?.locator = locator
             delegate = imageController
+            
             
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
+            effectsPickerController?.locator = locator
             
         default:
             super.prepareForSegue(segue, sender: sender)
@@ -160,10 +164,10 @@ extension PhotoEditorViewController {
                 switch status {
                 case .Authorized:
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    AlertService.sharedInstance.delegate?.showSimpleAlert("Image saved to library")
+                    AlertService.sharedInstance.showSimpleAlert("Image saved to library")
                     
                 default:
-                    AlertService.sharedInstance.delegate?.showSimpleAlert("No access to photo library")
+                    AlertService.sharedInstance.showSimpleAlert("No access to photo library")
                 }
             }
         }
@@ -208,7 +212,7 @@ extension PhotoEditorViewController {
         
         presentViewController(alertController, animated: true, completion: nil)
     }
-
+    
 }
 
 // MARK: - IBActions

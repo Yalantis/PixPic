@@ -10,6 +10,8 @@ import Foundation
 
 class AuthorizationRouter: AlertServiceDelegate {
     
+    weak var locator: ServiceLocator!
+    
     private(set) weak var currentViewController: UIViewController!
     
 }
@@ -21,6 +23,7 @@ extension AuthorizationRouter: FeedPresenter {
     func execute(context: UIViewController) {
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.router = self
+        authorizationViewController.locator = locator
         currentViewController = authorizationViewController
         context.navigationController!.pushViewController(authorizationViewController, animated: true)
     }

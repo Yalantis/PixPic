@@ -11,14 +11,14 @@ import Toast
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
-    internal static let storyboardName = Constants.Storyboard.Profile
+    static let storyboardName = Constants.Storyboard.Profile
     
-    var router: ProfileRouter!
+    var router: protocol<EditProfilePresenter, FeedPresenter, AlertServiceDelegate>!
     var user: User!
     
+    weak var locator: ServiceLocator!
     private var activityShown: Bool?
     private lazy var postAdapter = PostAdapter()
-    private lazy var locator = ServiceLocator()
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -35,12 +35,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.sharedInstance.delegate = router
+        AlertService.sharedInstance.registerAlertListener(router)
     }
     
     // MARK: - Inner func
     private func setupController() {
-        locator.registerService(PostService())
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
@@ -145,9 +144,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func profileSettings() {
-        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(Constants.EditProfile.EditProfileControllerIdentifier)
-        navigationController!.showViewController(viewController, sender: self)
+        router.showEditProfile()
     }
     
 }

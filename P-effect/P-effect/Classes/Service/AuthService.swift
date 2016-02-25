@@ -9,9 +9,15 @@
 import UIKit
 import ParseFacebookUtilsV4
 
+enum AuthError: Int {
+    
+    case FacebookError = 701
+    
+}
+
 class AuthService {
     
-    static func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
+    func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
         let parameters = ["fields": "id, name, first_name, last_name, picture.type(large), email"]
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
@@ -48,7 +54,7 @@ class AuthService {
         }
     }
     
-    static func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
+    func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
                 failure(error: error)
@@ -59,10 +65,58 @@ class AuthService {
         }
     }
     
-    static func logOut() {
+    func logOut() {
         PFFacebookUtils.unlinkUserInBackground(User.currentUser()!)
         User.logOut()
         FBSDKLoginManager().logOut()
+    }
+    
+    
+    
+    func signInWithPermission(completion: (User?, NSError?) -> Void) {
+        let token = FBSDKAccessToken.currentAccessToken()
+        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
+            if let user = user as? User {
+                print(PFUser.currentUser() ?? "No user")
+                if user.isNew {
+                    self.updateUserInfoViaFacebook(user) { user, error in
+                        completion(user, nil)
+                    }
+                }
+                completion(user, nil)
+            } else if let error = error {
+                completion(nil, error)
+            } else {
+                let userError = NSError.createAuthError(.FacebookError)
+                completion(nil, userError)
+                return
+            }
+        }
+    }
+    
+    func signInWithFacebookInController(controller: UIViewController, completion: (User?, ErrorType?) -> Void) {
+        let loginManager = FBSDKLoginManager()
+        let permissions = ["public_profile", "email"]
+        
+        loginManager.loginBehavior = .Native
+        loginManager.logInWithReadPermissions(permissions, fromViewController: controller) { result, error in
+            if let error = error {
+                FBSDKLoginManager().logOut()
+                completion(nil, error)
+            } else if result.isCancelled {
+                FBSDKLoginManager().logOut()
+                completion(nil, error)
+            } else {
+                let user = User()
+                self.updateUserInfoViaFacebook(user) { user, error in
+                    if let error = error {
+                        completion(nil, error)
+                    } else {
+                        completion(user, nil)
+                    }
+                }
+            }
+        }
     }
     
 }

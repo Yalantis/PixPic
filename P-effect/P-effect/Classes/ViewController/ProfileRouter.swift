@@ -10,14 +10,10 @@ import Foundation
 
 class ProfileRouter: AlertServiceDelegate {
     
+    weak var locator: ServiceLocator!
+    
     private(set) weak var currentViewController: UIViewController!
     private var user: User!
-    
-    convenience init(user: User = User.currentUser()!, currentViewController: UIViewController) {
-        self.init(user: user)
-        
-        self.currentViewController = currentViewController
-    }
     
     init(user: User = User.currentUser()!) {
         self.user = user
@@ -31,6 +27,7 @@ extension ProfileRouter: EditProfilePresenter, FeedPresenter {
     func execute(context: UIViewController) {
         let profileController = ProfileViewController.create()
         profileController.router = self
+        profileController.locator = locator
         currentViewController = profileController
         profileController.user = user
         context.navigationController!.showViewController(profileController, sender: self)

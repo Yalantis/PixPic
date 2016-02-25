@@ -9,33 +9,31 @@
 import UIKit
 import Toast
 
+private let notification = "Notification"
+
 protocol AlertServiceDelegate: class {
     
-    func showSimpleAlert(message: String?)
-    func showNotificationAlert(userInfo: [NSObject : AnyObject]?, var message: String?)
+    func showSimpleAlert(message: String)
+    func showNotificationAlert(userInfo: [NSObject : AnyObject]?, message: String?)
     
 }
 
 extension AlertServiceDelegate where Self: FeedPresenter {
     
-    func showSimpleAlert(message: String?) {
+    func showSimpleAlert(message: String) {
         currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
     }
     
     func showNotificationAlert(userInfo: [NSObject : AnyObject]?, var message: String?) {
-        let title = "Notification"
+        let title = notification
         
-        guard let userInfo = userInfo else {
-            return
-        }
-        
-        if let aps = userInfo["aps"] as? [String: String] {
+        if let aps = userInfo?["aps"] as? [String: String] {
             message = aps["alert"]
         }
         
-        let isControllersWaitingForResponse = (currentViewController as? UIAlertController) != nil
+        let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
         
-        if isControllersWaitingForResponse {
+        if isControllerWaitingForResponse {
             PushNotificationQueue.addObjectInQueue(message)
         } else {
             PushNotificationQueue.clearQueue()
@@ -61,14 +59,25 @@ final class AlertService {
     
     static let instance = AlertService()
     
-    weak var delegate: AlertServiceDelegate?
+    private weak var delegate: AlertServiceDelegate?
     
     private init() {
-        //Forbidden
     }
     
     static var sharedInstance: AlertService {
         return instance
+    }
+    
+    func registerAlertListener(listener: AlertServiceDelegate) {
+        delegate = listener
+    }
+    
+    func showSimpleAlert(message: String) {
+        delegate?.showSimpleAlert(message)
+    }
+    
+    func showNotificationAlert(userInfo: [NSObject : AnyObject]?, message: String?) {
+        delegate?.showNotificationAlert(userInfo, message: message)
     }
     
 }
