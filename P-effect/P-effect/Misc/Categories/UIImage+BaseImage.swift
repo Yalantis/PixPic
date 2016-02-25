@@ -11,7 +11,7 @@ import UIKit
 extension UIImage {
     
     public class func appBackButton() -> UIImage? {
-        return UIImage(named: "backArrow")
+        return UIImage(named: "back_arrow")
     }
     
     public class func placeholderImage() -> UIImage? {
