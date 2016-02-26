@@ -210,7 +210,7 @@ class EffectEditorView: UIView {
     private func createControlWithFrame(frame: CGRect, image: UIImage?) -> UIImageView {
         let control = UIImageView(frame: frame)
         control.layer.cornerRadius = control.frame.size.width / 2
-        control.backgroundColor = UIColor.whiteColor()
+        control.backgroundColor = UIColor.appWhiteColor
         if let image = image {
             control.image = image
         }
