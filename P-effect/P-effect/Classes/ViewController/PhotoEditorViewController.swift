@@ -173,8 +173,11 @@ extension PhotoEditorViewController {
             guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
                 throw Exception.CantApplyEffects
             }
-            let pictureData = UIImageJPEGRepresentation(image, 0.9)!
-            guard let file = PFFile(name: "image", data: pictureData) else {
+            var pictureData = UIImageJPEGRepresentation(image, 1.0)
+            for var i = 1.0; (pictureData?.length)! > Constants.FileSize.MaxUploadSizeBytes; i = i - 0.1 {
+                pictureData = UIImageJPEGRepresentation(image, CGFloat(i))
+            }
+            guard let file = PFFile(name: "image", data: pictureData!) else {
                 throw Exception.CantCreateParseFile
             }
             let postService: PostService = locator.getService()

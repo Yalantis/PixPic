@@ -100,8 +100,10 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         switch authStatus {
         case .Authorized:
             callCamera()
+            
         case .Denied:
             askCameraAccessViaSettings()
+            
         default:
             askCameraAccess()
         }
