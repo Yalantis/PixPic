@@ -56,7 +56,7 @@ class EffectEditorView: UIView {
         let deleteControlFrame = CGRectMake(0, 0,
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
-        let deleteControlImage = UIImage(named: "delete_50")
+        let deleteControlImage = UIImage(named: "delete_control")
         deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
         
         let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
@@ -67,7 +67,7 @@ class EffectEditorView: UIView {
             frame.size.height - Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize,
             Constants.EffectEditor.StickerViewControlSize)
-        let resizingControlImage = UIImage(named: "resize_four_dir_50")
+        let resizingControlImage = UIImage(named: "resize_control")
         resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
         
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
