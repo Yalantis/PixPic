@@ -10,7 +10,7 @@ import Foundation
 
 class FeedRouter: Router, AlertManagerDelegate {
     
-    weak var locator: ServiceLocator!
+    var locator: ServiceLocator!
     
     private(set) weak var currentViewController: UIViewController!
     
