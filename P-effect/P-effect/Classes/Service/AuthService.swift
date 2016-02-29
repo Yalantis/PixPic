@@ -22,11 +22,14 @@ class AuthService {
     static func signInWithPermission(completion: (User?, NSError?) -> Void) {
         let token = FBSDKAccessToken.currentAccessToken()
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
-            if let user = user as? User where user.isNew {
-                AuthService.updateUserInfoViaFacebook(user) { user, error in
+            if let user = user as? User {
+                if user.isNew {
+                    AuthService.updateUserInfoViaFacebook(user) { user, error in
+                        completion(user, nil)
+                    }
+                } else {
                     completion(user, nil)
                 }
-                completion(user, nil)
             } else if let error = error {
                 completion(nil, error)
             } else {
