@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FeedRouter: Router, AlertServiceDelegate {
+class FeedRouter: Router, AlertManagerDelegate {
     
     weak var locator: ServiceLocator!
     

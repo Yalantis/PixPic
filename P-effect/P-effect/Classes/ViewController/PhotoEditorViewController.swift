@@ -22,7 +22,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
     var model: PhotoEditorModel!
     
-    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
     weak var locator: ServiceLocator!
     weak var delegate: PhotoEditorDelegate?
     
@@ -46,7 +46,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -164,10 +164,10 @@ extension PhotoEditorViewController {
                 switch status {
                 case .Authorized:
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    AlertService.sharedInstance.showSimpleAlert("Image saved to library")
+                    AlertManager.sharedInstance.showSimpleAlert("Image saved to library")
                     
                 default:
-                    AlertService.sharedInstance.showSimpleAlert("No access to photo library")
+                    AlertManager.sharedInstance.showSimpleAlert("No access to photo library")
                 }
             }
         }

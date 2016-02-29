@@ -58,5 +58,5 @@ func handleError(error: NSError) {
         }
         
     }
-    AlertService.sharedInstance.showSimpleAlert(message!)
+    AlertManager.sharedInstance.showSimpleAlert(message!)
 }

@@ -13,7 +13,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<EditProfilePresenter, FeedPresenter, AlertServiceDelegate>!
+    var router: protocol<EditProfilePresenter, FeedPresenter, AlertManagerDelegate>!
     var user: User!
     
     weak var locator: ServiceLocator!
@@ -35,7 +35,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     // MARK: - Inner func

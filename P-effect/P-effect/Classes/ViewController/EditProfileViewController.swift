@@ -18,7 +18,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
     weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -53,7 +53,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -169,7 +169,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
                 }
             }
         } else {
-            AlertService.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
+            AlertManager.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
         }
     }
     

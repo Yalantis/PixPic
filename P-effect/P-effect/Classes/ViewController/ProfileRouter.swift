@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileRouter: AlertServiceDelegate {
+class ProfileRouter: AlertManagerDelegate {
     
     weak var locator: ServiceLocator!
     

@@ -98,17 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        if application.applicationState == .Inactive {
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            router.showFeed()
-        }
-        
-        if application.applicationState == .Active {
-            AlertService.sharedInstance.showNotificationAlert(userInfo, message: nil)
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-        }
-        
+        PushManager.handlePush(userInfo, router: router)
         if PFUser.currentUser() != nil {
             completionHandler(UIBackgroundFetchResult.NewData)
         } else {

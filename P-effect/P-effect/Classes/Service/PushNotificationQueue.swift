@@ -39,10 +39,10 @@ class PushNotificationQueue: NSObject {
     
     class func showNotificationFromQueue() {
         if notificationQueue.count == 1 {
-            AlertService.sharedInstance.showNotificationAlert(nil, message: notificationQueue.first)
+            AlertManager.sharedInstance.showNotificationAlert(nil, message: notificationQueue.first)
         } else if notificationQueue.count > 1 {
             let message = String(notificationQueue.count) + " new amazing posts!"
-            AlertService.sharedInstance.showNotificationAlert(nil, message: message)
+            AlertManager.sharedInstance.showNotificationAlert(nil, message: message)
             
         }
     }

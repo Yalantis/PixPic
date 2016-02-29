@@ -14,7 +14,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
-    var router: protocol<FeedPresenter, AlertServiceDelegate>!
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
     weak var locator: ServiceLocator!
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertService.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     @IBAction private func logInWithFBButtonTapped() {

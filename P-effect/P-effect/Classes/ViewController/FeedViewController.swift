@@ -15,7 +15,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    var router: protocol<AlertServiceDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
+    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
     weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -44,7 +44,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.registerAlertListener(router)
         tableView.reloadData()
     }
     

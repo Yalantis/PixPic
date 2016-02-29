@@ -1,5 +1,5 @@
 //
-//  AlertService.swift
+//  AlertManager.swift
 //  P-effect
 //
 //  Created by Jack Lapin on 17.01.16.
@@ -11,14 +11,14 @@ import Toast
 
 private let notification = "Notification"
 
-protocol AlertServiceDelegate: class {
+protocol AlertManagerDelegate: class {
     
     func showSimpleAlert(message: String)
     func showNotificationAlert(userInfo: [NSObject : AnyObject]?, message: String?)
     
 }
 
-extension AlertServiceDelegate where Self: FeedPresenter {
+extension AlertManagerDelegate where Self: FeedPresenter {
     
     func showSimpleAlert(message: String) {
         currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
@@ -55,20 +55,20 @@ extension AlertServiceDelegate where Self: FeedPresenter {
     }
 }
 
-final class AlertService {
+final class AlertManager {
     
-    static let instance = AlertService()
+    static let instance = AlertManager()
     
-    private weak var delegate: AlertServiceDelegate?
+    private weak var delegate: AlertManagerDelegate?
     
     private init() {
     }
     
-    static var sharedInstance: AlertService {
+    static var sharedInstance: AlertManager {
         return instance
     }
     
-    func registerAlertListener(listener: AlertServiceDelegate) {
+    func registerAlertListener(listener: AlertManagerDelegate) {
         delegate = listener
     }
     

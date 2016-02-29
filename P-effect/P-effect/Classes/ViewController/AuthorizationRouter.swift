@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthorizationRouter: AlertServiceDelegate {
+class AuthorizationRouter: AlertManagerDelegate {
     
     weak var locator: ServiceLocator!
     

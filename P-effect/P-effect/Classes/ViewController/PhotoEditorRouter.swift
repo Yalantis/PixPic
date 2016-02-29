@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PhotoEditorRouter: AlertServiceDelegate {
+class PhotoEditorRouter: AlertManagerDelegate {
     
     weak var locator: ServiceLocator!
     
