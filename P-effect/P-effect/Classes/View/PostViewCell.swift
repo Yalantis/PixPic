@@ -60,16 +60,11 @@ class PostViewCell: UITableViewCell {
         )
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         
-        let downloadActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
-        downloadActivityIndicator.center = CGPointMake(postImageView.frame.size.height/2, postImageView.frame.size.width/2)
-        downloadActivityIndicator.hidesWhenStopped = true
-        postImageView.addSubview(downloadActivityIndicator)
-        downloadActivityIndicator.startAnimating()
-        
+        let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
         postImageView.sd_setImageWithURL(
             NSURL(string: post.image.url!),
             placeholderImage: UIImage.placeholderImage()) { _, _, _, _ -> Void in
-                downloadActivityIndicator.removeFromSuperview()
+                indicator.removeFromSuperview()
             }
 
         guard let user = post.user else {

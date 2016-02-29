@@ -22,11 +22,9 @@ class AuthService {
     static func signInWithPermission(completion: (User?, NSError?) -> Void) {
         let token = FBSDKAccessToken.currentAccessToken()
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
-            if let user = user as? User {
-                if user.isNew {
-                    AuthService.updateUserInfoViaFacebook(user) { user, error in
-                        completion(user, nil)
-                    }
+            if let user = user as? User where user.isNew {
+                AuthService.updateUserInfoViaFacebook(user) { user, error in
+                    completion(user, nil)
                 }
                 completion(user, nil)
             } else if let error = error {
@@ -45,11 +43,8 @@ class AuthService {
         
         loginManager.loginBehavior = .Native
         loginManager.logInWithReadPermissions(permissions, fromViewController: controller) { result, error in
-            if let error = error {
-                FBSDKLoginManager().logOut()
-                completion(nil, error)
-            } else if result.isCancelled {
-                FBSDKLoginManager().logOut()
+            if error != nil || result.isCancelled {
+                loginManager.logOut()
                 completion(nil, error)
             } else {
                 completion(result, nil)

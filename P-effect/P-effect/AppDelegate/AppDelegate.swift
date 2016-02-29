@@ -44,10 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupParse() {
         User.registerSubclass()
         Parse.enableLocalDatastore()
-        Parse.setApplicationId(
-            Constants.ParseApplicationId.AppID,
-            clientKey: Constants.ParseApplicationId.ClientKey
-        )
+        Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
     }
     
     private func setupUI() {
@@ -99,9 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if User.currentUser() != nil {
-            completionHandler(UIBackgroundFetchResult.NewData)
+            completionHandler(.NewData)
         } else {
-            completionHandler(UIBackgroundFetchResult.NoData)
+            completionHandler(.NoData)
         }
     }
 

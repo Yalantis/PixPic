@@ -174,7 +174,9 @@ extension PhotoEditorViewController {
                 throw Exception.CantApplyEffects
             }
             var pictureData = UIImageJPEGRepresentation(image, 1.0)
-            for var i = 1.0; (pictureData?.length)! > Constants.FileSize.MaxUploadSizeBytes; i = i - 0.1 {
+            var i = 1.0
+            while pictureData?.length > Constants.FileSize.MaxUploadSizeBytes {
+                i = i - 0.1
                 pictureData = UIImageJPEGRepresentation(image, CGFloat(i))
             }
             guard let file = PFFile(name: "image", data: pictureData!) else {

@@ -102,14 +102,14 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             callCamera()
             
         case .Denied:
-            askCameraAccessViaSettings()
+            askForCameraAccessViaSettings()
             
         default:
-            askCameraAccess()
+            presentCameraAccessDialog()
         }
     }
     
-    private func askCameraAccessViaSettings() {
+    private func askForCameraAccessViaSettings() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Camera access required",
@@ -131,23 +131,20 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func askCameraAccess() {
+    func presentCameraAccessDialog() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Please allow camera access",
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: "Dismiss",
-            style: .Cancel
-            ) { _ in
-                if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.checkCamera()
-                        }
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel) { _ in
+            if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
+                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.checkCamera()
                     }
                 }
+            }
             }
         )
         controller.presentViewController(alert, animated: true, completion: nil)
