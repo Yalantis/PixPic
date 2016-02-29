@@ -61,38 +61,7 @@ extension User {
         }
     }
     
-    func checkFacebookIdExistance(completion: Bool -> Void) {
-        guard let facebookId = facebookId else {
-            completion(false)
-            return
-        }
-        let query = User.sortedQuery().whereKey("facebookId", equalTo: facebookId)
-        query.getFirstObjectInBackgroundWithBlock { object, _ in
-            if object != nil {
-                completion(true)
-                print("facebookId exists")
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    func linkWithFacebook(completion: (NSError?) -> Void) {
-        if PFFacebookUtils.isLinkedWithUser(self) {
-            completion(nil)
-        } else {
-            let permissions = ["public_profile", "email"]
-            PFFacebookUtils.linkUserInBackground(self, withReadPermissions: permissions) { success, error in
-                if let error = error {
-                    completion(error)
-                } else {
-                    completion(nil)
-                }
-            }
-        }
-    }
-    
-    //MARK: - ProfileViewControllerMethods
+    // MARK: - ProfileViewControllerMethods
     func loadUserAvatar(completion: LoadingImageCompletion) {
         if let avatar = avatar {
             ImageLoaderService.getImageForContentItem(avatar) { image, error in

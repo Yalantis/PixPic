@@ -43,9 +43,9 @@ extension ImageViewController: PhotoEditorDelegate {
             effect.switchControls(toState: false)
         }
         let rect = rawImage.bounds
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        rawImage.layer.renderInContext(context)
+        UIGraphicsBeginImageContextWithOptions(rect.size, view.opaque, 0.0)
+        rawImage.drawViewHierarchyInRect(rect, afterScreenUpdates: true)
+
         let image = UIGraphicsGetImageFromCurrentImageContext()
         for effect in effects {
             effect.switchControls(toState: true)
