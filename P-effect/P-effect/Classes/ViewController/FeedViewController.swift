@@ -220,6 +220,7 @@ class FeedViewController: UIViewController, ApplicationAppearance {
                 } else if let error = error {
                     print(error)
                 }
+                this.tableView.infiniteScrollingView.stopAnimating()
             }
         }
     }
