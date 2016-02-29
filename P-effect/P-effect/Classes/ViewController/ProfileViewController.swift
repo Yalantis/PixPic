@@ -118,15 +118,11 @@ class ProfileViewController: UITableViewController {
             }
             postService.loadPagedPosts(this.user, offset: this.postAdapter.postQuantity) { objects, error in
                 if let objects = objects {
-                    if objects.count == 0 {
-                        this.tableView.infiniteScrollingView.stopAnimating()
-                        return
-                    }
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    this.tableView.infiniteScrollingView.stopAnimating()
                     print(error)
                 }
+                this.tableView.infiniteScrollingView.stopAnimating()
             }
         }
     }
