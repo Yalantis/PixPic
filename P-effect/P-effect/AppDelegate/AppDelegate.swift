@@ -38,10 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        if window == nil {
-            window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            window?.hidden = false
-        }
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.hidden = false
+        window!.makeKeyAndVisible()
+        
         router.execute(window!)
         return true
     }
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        AlertManager.sharedInstance.handlePush(userInfo, router: router)
+        AlertManager.sharedInstance.handlePush(userInfo)
         if PFUser.currentUser() != nil {
             completionHandler(.NewData)
         } else {

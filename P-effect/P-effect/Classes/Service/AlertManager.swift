@@ -80,7 +80,7 @@ final class AlertManager {
         delegate?.showNotificationAlert(userInfo, message: message)
     }
     
-    func handlePush(userInfo: [NSObject: AnyObject], router: FeedPresenter){
+    func handlePush(userInfo: [NSObject: AnyObject]) {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
