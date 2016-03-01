@@ -42,6 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
+        if window == nil {
+            window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window?.hidden = false
+        }
         router.execute(window!)
         return true
     }
@@ -90,15 +94,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.saveEventually()
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
         if application.applicationState == .Inactive  {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         PFPush.handlePush(userInfo)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        PushManager.handlePush(userInfo, router: router)
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        AlertManager.sharedInstance.handlePush(userInfo, router: router)
         if PFUser.currentUser() != nil {
             completionHandler(UIBackgroundFetchResult.NewData)
         } else {

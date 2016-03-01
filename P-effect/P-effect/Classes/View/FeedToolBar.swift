@@ -15,7 +15,7 @@ class FeedToolBar: UIView {
     @IBOutlet private weak var bottomSpaceConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topSpaceConstraint: NSLayoutConstraint!
     
-    static func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> FeedToolBar? {
+    static func loadFromNibNamed(nibNamed: String, bundle: NSBundle? = nil) -> FeedToolBar? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle

@@ -8,15 +8,14 @@
 
 import Foundation
 
-class FeedRouter: Router, AlertManagerDelegate {
+class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter {
     
-    var locator: ServiceLocator!
-    
+    private(set) var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
     
 }
 
-extension FeedRouter: ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter {
+extension FeedRouter: Router {
     
     typealias Context = UIWindow
     
@@ -31,18 +30,24 @@ extension FeedRouter: ProfilePresenter, PhotoEditorPresenter, AuthorizationPrese
         
         if User.currentUser() == nil {
             (locator.getService() as AuthService).anonymousLogIn(
-                completion: { _ in
+                completion: { [weak self] _  in
+                    self?.presentFeed(context)
                 },
                 failure: { error in
                     if let error = error {
                         handleError(error)
                     }
             })
+        } else {
+            presentFeed(context)
         }
+    }
+    
+    private func presentFeed(context: UIWindow) {
         let feedViewController = FeedViewController.create()
         feedViewController.router = self
-        feedViewController.locator = locator
-        currentViewController = feedViewController
+        feedViewController.setLocator(locator)
+        self.currentViewController = feedViewController
         let navigationController = UINavigationController(rootViewController: feedViewController)
         context.rootViewController = navigationController
     }

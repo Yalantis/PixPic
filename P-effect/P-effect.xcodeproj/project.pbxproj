@@ -31,7 +31,6 @@
 		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
 		771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */; };
-		771D89C11C8475500030F3CF /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771D89C01C8475500030F3CF /* PushManager.swift */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
@@ -127,7 +126,6 @@
 		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsGroupHeaderView.xib; sourceTree = "<group>"; };
-		771D89C01C8475500030F3CF /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
-				771D89C01C8475500030F3CF /* PushManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -717,7 +714,6 @@
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
-				771D89C11C8475500030F3CF /* PushManager.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,

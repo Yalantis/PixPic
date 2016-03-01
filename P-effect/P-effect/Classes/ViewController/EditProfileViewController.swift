@@ -19,7 +19,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Profile
     
     var router: protocol<FeedPresenter, AlertManagerDelegate>!
-    weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -31,6 +30,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
+    private weak var locator: ServiceLocator!
     
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
@@ -81,6 +81,10 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             name: UIKeyboardWillHideNotification,
             object: nil
         )
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
     private func configureImagesAndText() {
@@ -248,7 +252,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
         view.makeToastActivity(CSToastPositionCenter)
         view.userInteractionEnabled = false
-        let userService: UserService = router.locator.getService()
+        let userService: UserService = locator.getService()
         userService.uploadUserChanges(
             User.currentUser()!,
             avatar: file,

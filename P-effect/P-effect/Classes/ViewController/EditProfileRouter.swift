@@ -8,26 +8,27 @@
 
 import Foundation
 
-class EditProfileRouter: AlertManagerDelegate {
+class EditProfileRouter: AlertManagerDelegate, FeedPresenter {
     
-    weak var locator: ServiceLocator!
-    
-    private(set) weak var currentViewController: UIViewController!
     private var user: User!
+    private(set) weak var locator: ServiceLocator!
+    private(set) weak var currentViewController: UIViewController!
     
-    init(user: User = User.currentUser()!) {
+    init(user: User = User.currentUser()!, locator: ServiceLocator) {
         self.user = user
+        self.locator = locator
     }
     
 }
 
-extension EditProfileRouter: FeedPresenter {
+extension EditProfileRouter: Router {
+    
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
         let editProfileController = EditProfileViewController.create()
         editProfileController.router = self
-        editProfileController.locator = locator
+        editProfileController.setLocator(locator)
         currentViewController = editProfileController
         context.navigationController!.showViewController(editProfileController, sender: self)
     }

@@ -23,8 +23,7 @@ protocol Router: class {
 
 protocol Presenter: class {
     
-    weak var locator: ServiceLocator! { get set }
-    
+    weak var locator: ServiceLocator! { get }
     weak var currentViewController: UIViewController! { get }
     
 }
@@ -59,8 +58,7 @@ protocol ProfilePresenter: Presenter {
 extension ProfilePresenter {
     
     func showProfile(user: User) {
-        let profileRouter = ProfileRouter(user: user)
-        profileRouter.locator = locator
+        let profileRouter = ProfileRouter(user: user, locator: locator)
         profileRouter.execute(currentViewController)
     }
     
@@ -75,8 +73,7 @@ protocol EditProfilePresenter: Presenter {
 extension EditProfilePresenter {
     
     func showEditProfile() {
-        let editProfileRouter = EditProfileRouter()
-        editProfileRouter.locator = locator
+        let editProfileRouter = EditProfileRouter(locator: locator)
         editProfileRouter.execute(currentViewController)
     }
     
@@ -91,8 +88,7 @@ protocol AuthorizationPresenter: Presenter {
 extension AuthorizationPresenter {
     
     func showAuthorization() {
-        let authorizationRouter = AuthorizationRouter()
-        authorizationRouter.locator = locator
+        let authorizationRouter = AuthorizationRouter(locator: locator)
         authorizationRouter.execute(currentViewController)
     }
     
@@ -107,8 +103,7 @@ protocol PhotoEditorPresenter: Presenter {
 extension PhotoEditorPresenter {
     
     func showPhotoEditor(image: UIImage) {
-        let photoEditorRouter = PhotoEditorRouter(image: image)
-        photoEditorRouter.locator = locator
+        let photoEditorRouter = PhotoEditorRouter(image: image, locator: locator)
         photoEditorRouter.execute(currentViewController)
     }
     

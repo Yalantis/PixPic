@@ -11,8 +11,8 @@ import UIKit
 class ImageViewController: UIViewController {
     
     var model: ImageViewModel!
-    weak var locator: ServiceLocator!
     
+    private weak var locator: ServiceLocator!
     private var effects = [EffectEditorView]()
     
     @IBOutlet private weak var rawImageView: UIImageView!
@@ -22,6 +22,10 @@ class ImageViewController: UIViewController {
         
         rawImageView.image = model.originalImage()
         // Do any additional setup after loading the view.
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
 }

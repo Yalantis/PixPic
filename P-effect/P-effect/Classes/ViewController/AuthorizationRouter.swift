@@ -8,22 +8,25 @@
 
 import Foundation
 
-class AuthorizationRouter: AlertManagerDelegate {
+class AuthorizationRouter: AlertManagerDelegate, FeedPresenter {
     
-    weak var locator: ServiceLocator!
-    
+    private(set) weak var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
+    
+    init(locator: ServiceLocator) {
+        self.locator = locator
+    }
     
 }
 
-extension AuthorizationRouter: FeedPresenter {
+extension AuthorizationRouter: Router {
     
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.router = self
-        authorizationViewController.locator = locator
+        authorizationViewController.setLocator(locator)
         currentViewController = authorizationViewController
         context.navigationController!.pushViewController(authorizationViewController, animated: true)
     }

@@ -8,26 +8,23 @@
 
 import Foundation
 
-class PhotoEditorRouter: AlertManagerDelegate {
+class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
     
-    weak var locator: ServiceLocator!
-    
-    private(set) weak var currentViewController: UIViewController!
-    private var image: UIImage!
-    
-    init(image: UIImage) {
-        self.image = image
-    }
-    
-}
-
-extension PhotoEditorRouter: FeedPresenter {
     typealias Context = UIViewController
+    
+    private var image: UIImage!
+    private(set) weak var locator: ServiceLocator!
+    private(set) weak var currentViewController: UIViewController!
+    
+    init(image: UIImage, locator: ServiceLocator) {
+        self.image = image
+        self.locator = locator
+    }
     
     func execute(context: UIViewController) {
         let photoEditorViewController = PhotoEditorViewController.create()
         photoEditorViewController.router = self
-        photoEditorViewController.locator = locator
+        photoEditorViewController.setLocator(locator)
         currentViewController = photoEditorViewController
         photoEditorViewController.model = PhotoEditorModel(image: image)
         context.navigationController!.pushViewController(photoEditorViewController, animated: false)

@@ -16,7 +16,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     var router: protocol<EditProfilePresenter, FeedPresenter, AlertManagerDelegate>!
     var user: User!
     
-    weak var locator: ServiceLocator!
+    private weak var locator: ServiceLocator!
     private var activityShown: Bool?
     private lazy var postAdapter = PostAdapter()
     
@@ -39,6 +39,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     // MARK: - Inner func
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func setupController() {
         showToast()
         tableView.dataSource = postAdapter

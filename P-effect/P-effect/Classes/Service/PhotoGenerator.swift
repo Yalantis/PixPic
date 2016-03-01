@@ -155,7 +155,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
-    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         controller.dismissViewControllerAnimated(true, completion: nil)
         completionImageReceived?(selectedImage)

@@ -23,9 +23,8 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     var model: PhotoEditorModel!
     
     var router: protocol<FeedPresenter, AlertManagerDelegate>!
-    weak var locator: ServiceLocator!
     weak var delegate: PhotoEditorDelegate?
-    
+    private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
     private var effectsPickerController: EffectsPickerViewController? {
         didSet {
@@ -60,14 +59,14 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
             imageController?.model = ImageViewModel(image: model.originalImage())
-            imageController?.locator = locator
+            imageController?.setLocator(locator)
             delegate = imageController
             
             
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
-            effectsPickerController?.locator = locator
+            effectsPickerController?.setLocator(locator)
             
         default:
             super.prepareForSegue(segue, sender: sender)
@@ -84,6 +83,10 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
     func didChooseEffectFromPicket(effect: UIImage) {
         delegate?.photoEditor(self, didChooseEffect: effect)
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
 }
@@ -182,7 +185,7 @@ extension PhotoEditorViewController {
             guard let file = PFFile(name: "image", data: pictureData) else {
                 throw Exception.CantCreateParseFile
             }
-            let postService: PostService = router.locator.getService()
+            let postService: PostService = locator.getService()
             postService.savePost(file)
             navigationController!.popViewControllerAnimated(true)
         } catch let exception {

@@ -16,7 +16,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Feed
     
     var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
-    weak var locator: ServiceLocator!
+    
+    private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
     private lazy var postAdapter = PostAdapter()
@@ -76,6 +77,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
     // MARK: - Setup methods
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
         toolBar.didSelectPhoto = { [weak self] in
@@ -102,7 +107,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         
-        let postService: PostService = router.locator.getService()
+        let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
@@ -137,7 +142,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     // MARK: - Notification handling
     dynamic func fetchDataFromNotification() {
-        let postService: PostService = router.locator.getService()
+        let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             guard let this = self else {
                 return
@@ -172,7 +177,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     // MARK: - UserInteractive
     
     private func setupLoadersCallback() {
-        let postService: PostService = router.locator.getService()
+        let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
                 return

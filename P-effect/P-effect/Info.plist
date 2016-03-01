@@ -94,8 +94,6 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
-	<key>UIMainStoryboardFile</key>
-	<string>Feed</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
