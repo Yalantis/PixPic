@@ -39,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.hidden = false
         window!.makeKeyAndVisible()
         
         router.execute(window!)
