@@ -223,7 +223,7 @@ class FeedViewController: UIViewController {
 extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight
+        return tableView.bounds.size.width + PostViewCell.designedHeight + 48
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -233,6 +233,40 @@ extension FeedViewController: UITableViewDelegate {
 }
 
 extension FeedViewController: PostAdapterDelegate {
+    
+    func showAlertt(post: Post) {
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .Alert
+        )
+        
+        if post.user == User.currentUser() {
+            let saveAction = UIAlertAction(title: "Save", style: .Default) {  _ in
+
+                print("saveAction")
+                let s: PostService = self.locator.getService()
+                s.removePost(post)
+                                
+            }
+            alertController.addAction(saveAction)
+        }
+        
+        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) {  _ in
+            print("dontSaveAction")
+            
+        }
+        alertController.addAction(dontSaveAction)
+        
+        let cancelAction = UIAlertAction(title: "Don't save", style: .Default) {  _ in
+            print("cancelAction")
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
     
     func showUserProfile(user: User) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)

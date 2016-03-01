@@ -398,8 +398,8 @@
 		FDAF46A71C49369E008060CD /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				FD7C43151C60AA4A003E4072 /* UIsettings */,
 				FDAF46A81C49369E008060CD /* Categories */,
+				FD7C43151C60AA4A003E4072 /* UIsettings */,
 				FDAF46A91C49369E008060CD /* Protocols */,
 			);
 			path = Misc;

@@ -18,6 +18,7 @@ protocol PostAdapterDelegate: class {
     func showUserProfile(user: User)
     func showPlaceholderForEmptyDataSet()
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
+    func showAlertt(post: Post)
     
 }
 
@@ -76,6 +77,19 @@ extension PostAdapter: UITableViewDataSource {
                     self?.delegate?.showUserProfile(user)
                 }
             }
+        }
+        
+        cell.selectionClosure2 = {
+            [weak self] cell in
+            if let path = tableView.indexPathForCell(cell) {
+                let model = self?.getPost(atIndexPath: path)
+                self?.delegate?.showAlertt(model!)
+                
+                        
+
+                print("remove")
+            }
+            
         }
         return cell
     }

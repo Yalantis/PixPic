@@ -138,6 +138,10 @@ class ProfileViewController: UITableViewController {
 
 extension ProfileViewController: PostAdapterDelegate {
     
+    func showAlertt(post: Post) {
+        
+    }
+    
     func showUserProfile(user: User) {
         
     }
