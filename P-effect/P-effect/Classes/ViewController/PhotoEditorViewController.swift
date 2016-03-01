@@ -13,7 +13,7 @@ protocol PhotoEditorDelegate: class {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage)
     func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage
-    func removeAllEffects()
+    func removeAllEffects(photoEditor: PhotoEditorViewController)
     
 }
 
@@ -211,7 +211,7 @@ extension PhotoEditorViewController {
 
     //TODO: link this func with button after implementing design
     @IBAction private func removeAllEffects() {
-        delegate?.removeAllEffects()
+        delegate?.removeAllEffects(self)
     }
     
 }
