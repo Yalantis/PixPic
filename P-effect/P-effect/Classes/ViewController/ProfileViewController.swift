@@ -138,8 +138,29 @@ class ProfileViewController: UITableViewController {
 
 extension ProfileViewController: PostAdapterDelegate {
     
-    func showAlertt(post: Post) {
+    func showSettingsMenu(post: Post, index: Int) {
+        let settingsMenu = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .ActionSheet
+        )
         
+        if post.user == User.currentUser() {
+            let removeAction = UIAlertAction(title: "Remove post", style: .Default) {  _ in
+                let postService: PostService = self.locator.getService()
+                postService.removePost(post)
+                self.postAdapter.removePost(atIndex: index)
+                self.tableView.reloadData()
+            }
+            settingsMenu.addAction(removeAction)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {  _ in
+            print("cancelAction")
+        }
+        settingsMenu.addAction(cancelAction)
+        
+        presentViewController(settingsMenu, animated: true, completion: nil)
     }
     
     func showUserProfile(user: User) {
@@ -168,7 +189,7 @@ extension ProfileViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight
+        return tableView.bounds.size.width + PostViewCell.designedHeight + 48
     }
     
 }

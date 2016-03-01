@@ -162,7 +162,7 @@
                         <rect key="frame" x="319" y="460" width="46" height="30"/>
                         <state key="normal" title="Button"/>
                         <connections>
-                            <action selector="jjjjj:" destination="wTx-Av-Y8L" eventType="touchUpInside" id="Lde-bV-Ci8"/>
+                            <action selector="settingsTapped:" destination="wTx-Av-Y8L" eventType="touchUpInside" id="gAM-fc-6l7"/>
                         </connections>
                     </button>
                 </subviews>

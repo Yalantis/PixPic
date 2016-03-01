@@ -18,7 +18,7 @@ protocol PostAdapterDelegate: class {
     func showUserProfile(user: User)
     func showPlaceholderForEmptyDataSet()
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
-    func showAlertt(post: Post)
+    func showSettingsMenu(post: Post, index: Int)
     
 }
 
@@ -54,6 +54,10 @@ class PostAdapter: NSObject {
         return post
     }
     
+    func removePost(atIndex index: Int) {
+        posts.removeAtIndex(index)
+    }
+    
 }
 
 extension PostAdapter: UITableViewDataSource {
@@ -69,6 +73,7 @@ extension PostAdapter: UITableViewDataSource {
             ) as! PostViewCell
         cell.delegate = self
         cell.configure(withPost: getPost(atIndexPath: indexPath))
+        
         cell.selectionClosure = {
             [weak self] cell in
             if let path = tableView.indexPathForCell(cell) {
@@ -79,18 +84,17 @@ extension PostAdapter: UITableViewDataSource {
             }
         }
         
-        cell.selectionClosure2 = {
-            [weak self] cell in
+        cell.didSelectSettings = { [weak self] cell in
+            guard let this = self else {
+                return
+            }
             if let path = tableView.indexPathForCell(cell) {
-                let model = self?.getPost(atIndexPath: path)
-                self?.delegate?.showAlertt(model!)
-                
-                        
-
-                print("remove")
+                let model = this.getPost(atIndexPath: path)
+                this.delegate?.showSettingsMenu(model, index: path.row)
             }
             
         }
+        
         return cell
     }
     

@@ -99,12 +99,14 @@ class PostService {
     }
     
     func removePost(post: Post) {
-        post.deleteInBackgroundWithBlock { (ff, err) -> Void in
-            if ff {
-                print("deldel")
-            }
-            if let err = err {
-                print(err.description)
+        post.deleteInBackgroundWithBlock { succeeded, error in
+            if succeeded {
+                
+                print("removePost")
+            } else {
+                if let error = error?.localizedDescription {
+                    print(error)
+                }
             }
         }
     }

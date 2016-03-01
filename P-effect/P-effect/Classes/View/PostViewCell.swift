@@ -33,7 +33,7 @@ class PostViewCell: UITableViewCell {
     
     var selectionClosure: ((cell: PostViewCell) -> Void)?
     
-    var selectionClosure2: ((cell: PostViewCell) -> Void)?
+    var didSelectSettings: ((cell: PostViewCell) -> Void)?
 
     
     let imageLoader = ImageLoaderService()
@@ -87,34 +87,8 @@ class PostViewCell: UITableViewCell {
         selectionClosure?(cell: self)
     }
     
-    @IBAction func jjjjj(sender: AnyObject) {
-        selectionClosure2?(cell: self)
-
-//        let alertController = UIAlertController(
-//            title: "Results wasn't saved",
-//            message: "Do you want to save result to the photo library?",
-//            preferredStyle: .ActionSheet
-//        )
-//        
-//        let saveAction = UIAlertAction(title: "Save", style: .Default) { [weak self] _ in
-//            guard let this = self else {
-//                return
-//            }
-//            print("saveAction")
-//        }
-//        alertController.addAction(saveAction)
-//        
-//        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { [weak self] _ in
-//            print("saveAction")
-//
-//        }
-//        alertController.addAction(dontSaveAction)
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-//        alertController.addAction(cancelAction)
-//        
-//        self.superview.presentViewController(alertController, animated: true, completion: nil)
-
+    @IBAction func settingsTapped(sender: AnyObject) {
+        didSelectSettings?(cell: self)
     }
     
 }

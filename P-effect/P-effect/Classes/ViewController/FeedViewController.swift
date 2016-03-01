@@ -234,38 +234,29 @@ extension FeedViewController: UITableViewDelegate {
 
 extension FeedViewController: PostAdapterDelegate {
     
-    func showAlertt(post: Post) {
-        let alertController = UIAlertController(
+    func showSettingsMenu(post: Post, index: Int) {
+        let settingsMenu = UIAlertController(
             title: nil,
             message: nil,
-            preferredStyle: .Alert
+            preferredStyle: .ActionSheet
         )
         
         if post.user == User.currentUser() {
-            let saveAction = UIAlertAction(title: "Save", style: .Default) {  _ in
-
-                print("saveAction")
-                let s: PostService = self.locator.getService()
-                s.removePost(post)
-                                
+            let removeAction = UIAlertAction(title: "Remove post", style: .Default) {  _ in
+                let postService: PostService = self.locator.getService()
+                postService.removePost(post)
+                self.postAdapter.removePost(atIndex: index)
+                self.tableView.reloadData()
             }
-            alertController.addAction(saveAction)
+            settingsMenu.addAction(removeAction)
         }
         
-        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) {  _ in
-            print("dontSaveAction")
-            
-        }
-        alertController.addAction(dontSaveAction)
-        
-        let cancelAction = UIAlertAction(title: "Don't save", style: .Default) {  _ in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {  _ in
             print("cancelAction")
-            
         }
+        settingsMenu.addAction(cancelAction)
         
-        alertController.addAction(cancelAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
+        presentViewController(settingsMenu, animated: true, completion: nil)
     }
     
     func showUserProfile(user: User) {
