@@ -67,7 +67,7 @@ class PostService {
     }
     
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
-        var array = [Post]()
+        var posts = [Post]()
         
         if User.currentUser() == nil {
             print("No user signUP")
@@ -85,11 +85,11 @@ class PostService {
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {
                 for object in objects {
-                    array.append(object as! Post)
+                    posts.append(object as! Post)
                     object.saveEventually()
                     object.pinInBackground()
                 }
-                completion(posts: array, error: nil)
+                completion(posts: posts, error: nil)
             } else if let error = error {
                 print(error.localizedDescription)
                 completion(posts: nil, error: error)

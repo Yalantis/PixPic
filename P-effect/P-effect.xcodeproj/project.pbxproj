@@ -48,9 +48,9 @@
 		95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0711C58EA8700D52150 /* EffectEditorView.swift */; };
 		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
 		E0823F80177EF1A11E426BBF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */; };
+		FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */; };
 		FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */; };
 		FD0658FE1C7125A100743AF1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FD1C7125A100743AF1 /* Photos.framework */; };
-		FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12C1041C5185EE006F99FD /* FBAuthorization.swift */; };
 		FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2661C620ECE0058203F /* UIView+Effects.swift */; };
 		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
 		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
@@ -139,9 +139,9 @@
 		95E4A0751C58F47D00D52150 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView + UIView.swift"; sourceTree = "<group>"; };
 		FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		FD0658FD1C7125A100743AF1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		FD12C1041C5185EE006F99FD /* FBAuthorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAuthorization.swift; sourceTree = "<group>"; };
 		FD27A2661C620ECE0058203F /* UIView+Effects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Effects.swift"; sourceTree = "<group>"; };
 		FD27A2681C6249610058203F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -347,7 +347,6 @@
 				9521D01A1C735DF200683F87 /* EffectsService.swift */,
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
 				77D5295D1C60D90900C8932C /* ExceptionHandler.swift */,
-				FD12C1041C5185EE006F99FD /* FBAuthorization.swift */,
 				95D6D7AE1C4E9036004E2145 /* ImageLoaderService.swift */,
 				FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */,
 				FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */,
@@ -406,6 +405,7 @@
 				FD27A2661C620ECE0058203F /* UIView+Effects.swift */,
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
 				FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */,
+				FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -652,7 +652,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD12C1051C5185EE006F99FD /* FBAuthorization.swift in Sources */,
 				FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */,
 				499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
@@ -693,6 +692,7 @@
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
 				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
+				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,

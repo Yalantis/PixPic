@@ -42,6 +42,7 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
         view.layoutIfNeeded()
         configureImagesAndText()
         subscribeOnNotifications()
+        locator.registerService(UserService())
     }
     
     deinit {
