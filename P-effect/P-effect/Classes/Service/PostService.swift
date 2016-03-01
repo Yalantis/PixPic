@@ -43,6 +43,12 @@ class PostService {
         )
     }
     
+    func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
+        post.deleteInBackgroundWithBlock { succeeded, error in
+            completion(succeeded, error)
+        }
+    }
+    
     // MARK: - Private methods
     private func uploadPost(image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
@@ -95,12 +101,6 @@ class PostService {
             } else {
                 completion(posts: nil, error: nil)
             }
-        }
-    }
-    
-    func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
-        post.deleteInBackgroundWithBlock { succeeded, error in
-            completion(succeeded, error)
         }
     }
     
