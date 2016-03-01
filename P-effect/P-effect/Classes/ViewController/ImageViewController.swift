@@ -54,4 +54,10 @@ extension ImageViewController: PhotoEditorDelegate {
         return image
     }
     
+    func removeAllEffects(photoEditor: PhotoEditorViewController) {
+        for effect in effects {
+            effect.removeFromSuperview()
+        }
+    }
+    
 }
