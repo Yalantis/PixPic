@@ -31,8 +31,9 @@ class PostViewCell: UITableViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var profileLabel: UILabel!
     
-    var selectionClosure: ((cell: PostViewCell) -> Void)?
+    @IBOutlet private weak var settingsButton: UIButton!
     
+    var selectionClosure: ((cell: PostViewCell) -> Void)?
     var didSelectSettings: ((cell: PostViewCell) -> Void)?
 
     
@@ -63,11 +64,13 @@ class PostViewCell: UITableViewCell {
         )
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         
+        settingsButton.enabled = false
         let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
         postImageView.sd_setImageWithURL(
             NSURL(string: post.image.url!),
-            placeholderImage: UIImage.placeholderImage()) { _, _, _, _ -> Void in
+            placeholderImage: UIImage.placeholderImage()) { [weak self] _, _, _, _ -> Void in
                 indicator.removeFromSuperview()
+                self?.settingsButton.enabled = true
             }
 
         guard let user = post.user else {
@@ -87,7 +90,7 @@ class PostViewCell: UITableViewCell {
         selectionClosure?(cell: self)
     }
     
-    @IBAction func settingsTapped(sender: AnyObject) {
+    @IBAction private func settingsTapped(sender: AnyObject) {
         didSelectSettings?(cell: self)
     }
     

@@ -92,7 +92,6 @@ extension PostAdapter: UITableViewDataSource {
                 let model = this.getPost(atIndexPath: path)
                 this.delegate?.showSettingsMenu(model, index: path.row)
             }
-            
         }
         
         return cell

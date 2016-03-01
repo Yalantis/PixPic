@@ -158,7 +158,7 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
                         <rect key="frame" x="319" y="460" width="46" height="30"/>
                         <state key="normal" title="Button"/>
                         <connections>
@@ -188,6 +188,7 @@
                 <outlet property="postImageView" destination="S7j-TD-CO3" id="1Jr-0T-kVp"/>
                 <outlet property="profileImageView" destination="mKW-T4-hJj" id="uNZ-mk-umz"/>
                 <outlet property="profileLabel" destination="rPN-n4-G12" id="942-30-RQj"/>
+                <outlet property="settingsButton" destination="8uy-cf-7cD" id="XoM-UO-1xK"/>
             </connections>
             <point key="canvasLocation" x="299.5" y="739.5"/>
         </tableViewCell>

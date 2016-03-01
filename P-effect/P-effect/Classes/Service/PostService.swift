@@ -98,16 +98,9 @@ class PostService {
         }
     }
     
-    func removePost(post: Post) {
+    func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
         post.deleteInBackgroundWithBlock { succeeded, error in
-            if succeeded {
-                
-                print("removePost")
-            } else {
-                if let error = error?.localizedDescription {
-                    print(error)
-                }
-            }
+            completion(succeeded, error)
         }
     }
     

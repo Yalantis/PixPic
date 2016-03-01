@@ -235,28 +235,41 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(post: Post, index: Int) {
-        let settingsMenu = UIAlertController(
-            title: nil,
-            message: nil,
-            preferredStyle: .ActionSheet
-        )
-        
-        if post.user == User.currentUser() {
-            let removeAction = UIAlertAction(title: "Remove post", style: .Default) {  _ in
-                let postService: PostService = self.locator.getService()
-                postService.removePost(post)
-                self.postAdapter.removePost(atIndex: index)
-                self.tableView.reloadData()
+        if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
+            
+            let settingsMenu = UIAlertController(
+                title: nil,
+                message: nil,
+                preferredStyle: .ActionSheet
+            )
+            
+            let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                guard let this = self else {
+                    return
+                }
+                let postService: PostService = this.locator.getService()
+                postService.removePost(post) { succeeded, error in
+                    if succeeded {
+                        this.postAdapter.removePost(atIndex: index)
+                        this.tableView.reloadData()
+
+                        print("removePost")
+                    } else {
+                        if let error = error?.localizedDescription {
+                            print(error)
+                        }
+                    }
+                }
             }
             settingsMenu.addAction(removeAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {  _ in
+                print("cancelAction")
+            }
+            settingsMenu.addAction(cancelAction)
+            
+            presentViewController(settingsMenu, animated: true, completion: nil)
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {  _ in
-            print("cancelAction")
-        }
-        settingsMenu.addAction(cancelAction)
-        
-        presentViewController(settingsMenu, animated: true, completion: nil)
     }
     
     func showUserProfile(user: User) {
