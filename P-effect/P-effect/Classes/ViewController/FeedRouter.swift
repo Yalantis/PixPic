@@ -13,13 +13,7 @@ class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, 
     private(set) var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
     
-}
-
-extension FeedRouter: Router {
-    
-    typealias Context = UIWindow
-    
-    func execute(context: UIWindow) {
+    init() {
         locator = ServiceLocator()
         locator.registerService(PostService())
         locator.registerService(EffectsService())
@@ -27,7 +21,14 @@ extension FeedRouter: Router {
         locator.registerService(ValidationService())
         locator.registerService(AuthService())
         locator.registerService(ImageLoaderService())
-        
+    }
+}
+
+extension FeedRouter: Router {
+    
+    typealias Context = UIWindow
+    
+    func execute(context: UIWindow) {
         if User.currentUser() == nil {
             (locator.getService() as AuthService).anonymousLogIn(
                 completion: { [weak self] _  in
