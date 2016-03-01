@@ -18,6 +18,14 @@ extension NSError {
             )
             return error
             
+        case .ParseError:
+            let error = NSError(
+                domain: NSBundle.mainBundle().bundleIdentifier!,
+                code: 702,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parce error", comment: "")]
+            )
+            return error
+            
         default:
             return NSError(
                 domain: NSBundle.mainBundle().bundleIdentifier!,

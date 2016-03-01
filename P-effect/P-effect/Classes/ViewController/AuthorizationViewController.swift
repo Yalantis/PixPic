@@ -37,27 +37,21 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     }
     
     private func signInWithFacebook() {
-        (locator.getService() as AuthService).signInWithFacebookInController(self) { [weak self] user, error in
+        let authService: AuthService = locator.getService()
+        authService.signInWithFacebookInController(self) { [weak self] _, error in
             if let error = error {
-                handleError(error as NSError)
-            }
-            guard let user = user as User? else {
-                if let this = self {
-                    this.proceedWithoutAuthorization()
+                handleError(error)
+                self?.proceedWithoutAuthorization()
+            } else {
+                authService.signInWithPermission { _, error -> Void in
+                    if let error = error {
+                        handleError(error)
+                    } else {
+                        PFInstallation.addPFUserToCurrentInstallation()
+                    }
                 }
-                return
-            }
-            user.checkFacebookIdExistance { exists in
-                guard let this = self else {
-                    return
-                }
-                if exists {
-                    user.passwordSet = false
-                    this.signIn(user)
-                } else {
-                    this.signUp(user)
-                    
-                }
+                self?.view.hideToastActivity()
+                self?.router.showFeed()
             }
         }
     }
@@ -65,74 +59,6 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     private func proceedWithoutAuthorization() {
         router.showFeed()
         ReachabilityHelper.checkConnection()
-    }
-    
-    private func signUp(user: User) {
-        let userWithFB = user
-        (locator.getService() as AuthService).signInWithPermission { [weak self] user, error in
-            if let error = error {
-                handleError(error as NSError)
-            }
-            guard let this = self else {
-                return
-            }
-            guard let user = user else {
-                this.view.hideToastActivity()
-                print("unknown trouble while signing IN")
-                return
-            }
-            user.facebookId = userWithFB.facebookId
-            user.username = userWithFB.username
-            user.email = userWithFB.email
-            user.avatar = userWithFB.avatar
-            user.saveInBackgroundWithBlock { _, error in
-                if let error = error {
-                    print(error)
-                } else {
-                    let installation = PFInstallation.currentInstallation()
-                    installation["user"] = user
-                    installation.saveInBackground()
-                }
-            }
-            print("SIGNING UP!!!  with ", user.username)
-            this.view.hideToastActivity()
-            this.router.showFeed()
-        }
-    }
-    
-    private func signIn(user: User) {
-        let token = FBSDKAccessToken.currentAccessToken()
-        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
-            if error != nil {
-                ExceptionHandler.handle(Exception.InvalidSessionToken)
-            }
-            guard let this = self else {
-                return
-            }
-            guard let user = user as? User else {
-                this.view.hideToastActivity()
-                this.router.showFeed()
-                
-                return
-            }
-            
-            user.linkWithFacebook { error in
-                if let error = error {
-                    handleError(error)
-                } else {
-                    guard let this = self else {
-                        return
-                    }
-                    print("linked!")
-                    let installation = PFInstallation.currentInstallation()
-                    installation["user"] = user
-                    installation.saveInBackground()
-                    this.view.hideToastActivity()
-                    this.router.showFeed()
-                }
-            }
-            user.saveEventually()
-        }
     }
     
 }

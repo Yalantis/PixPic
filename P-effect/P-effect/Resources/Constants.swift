@@ -23,6 +23,10 @@ struct Constants {
         static let NavBarWithStatusBarHeight: CGFloat = 64.0
     }
     
+    struct FileSize {
+        static let MaxUploadSizeBytes = 10485760
+    }
+    
     struct Path {
         static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         static let Tmp = NSTemporaryDirectory()

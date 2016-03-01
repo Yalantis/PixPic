@@ -44,6 +44,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         view.layoutIfNeeded()
         configureImagesAndText()
         subscribeOnNotifications()
+        locator.registerService(UserService())
     }
     
     deinit {

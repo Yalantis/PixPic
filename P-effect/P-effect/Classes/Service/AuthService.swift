@@ -6,16 +6,54 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import Parse
 import ParseFacebookUtilsV4
 
 enum AuthError: Int {
     
     case FacebookError = 701
+    case ParseError = 702
     
 }
 
 class AuthService {
+    
+    func signInWithPermission(completion: (User?, NSError?) -> Void) {
+        let token = FBSDKAccessToken.currentAccessToken()
+        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
+            if let user = user as? User {
+                if user.isNew {
+                    self?.updateUserInfoViaFacebook(user) { user, error in
+                        completion(user, nil)
+                    }
+                } else {
+                    completion(user, nil)
+                }
+            } else if let error = error {
+                completion(nil, error)
+            } else {
+                let userError = NSError.createAuthError(.FacebookError)
+                completion(nil, userError)
+                return
+            }
+        }
+    }
+    
+    func signInWithFacebookInController(controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
+        let loginManager = FBSDKLoginManager()
+        let permissions = ["public_profile", "email"]
+        
+        loginManager.loginBehavior = .Native
+        loginManager.logInWithReadPermissions(permissions, fromViewController: controller) { result, error in
+            if error != nil || result.isCancelled {
+                loginManager.logOut()
+                completion(nil, error)
+            } else {
+                completion(result, nil)
+            }
+        }
+    }
     
     func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
         let parameters = ["fields": "id, name, first_name, last_name, picture.type(large), email"]
@@ -61,62 +99,14 @@ class AuthService {
             } else if let user = user as? User {
                 completion(object: user)
                 PFInstallation.addPFUserToCurrentInstallation()
+                print(user)
             }
         }
     }
     
     func logOut() {
-        PFFacebookUtils.unlinkUserInBackground(User.currentUser()!)
         User.logOut()
         FBSDKLoginManager().logOut()
-    }
-    
-    
-    
-    func signInWithPermission(completion: (User?, NSError?) -> Void) {
-        let token = FBSDKAccessToken.currentAccessToken()
-        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
-            if let user = user as? User {
-                print(PFUser.currentUser() ?? "No user")
-                if user.isNew {
-                    self.updateUserInfoViaFacebook(user) { user, error in
-                        completion(user, nil)
-                    }
-                }
-                completion(user, nil)
-            } else if let error = error {
-                completion(nil, error)
-            } else {
-                let userError = NSError.createAuthError(.FacebookError)
-                completion(nil, userError)
-                return
-            }
-        }
-    }
-    
-    func signInWithFacebookInController(controller: UIViewController, completion: (User?, ErrorType?) -> Void) {
-        let loginManager = FBSDKLoginManager()
-        let permissions = ["public_profile", "email"]
-        
-        loginManager.loginBehavior = .Native
-        loginManager.logInWithReadPermissions(permissions, fromViewController: controller) { result, error in
-            if let error = error {
-                FBSDKLoginManager().logOut()
-                completion(nil, error)
-            } else if result.isCancelled {
-                FBSDKLoginManager().logOut()
-                completion(nil, error)
-            } else {
-                let user = User()
-                self.updateUserInfoViaFacebook(user) { user, error in
-                    if let error = error {
-                        completion(nil, error)
-                    } else {
-                        completion(user, nil)
-                    }
-                }
-            }
-        }
     }
     
 }

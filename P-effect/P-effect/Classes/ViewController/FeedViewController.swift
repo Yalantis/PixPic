@@ -210,6 +210,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 } else if let error = error {
                     print(error)
                 }
+                this.tableView.infiniteScrollingView.stopAnimating()
             }
         }
     }
