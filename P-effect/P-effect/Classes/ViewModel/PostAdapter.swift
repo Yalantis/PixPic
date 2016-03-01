@@ -71,7 +71,7 @@ extension PostAdapter: UITableViewDataSource {
             PostViewCell.identifier,
             forIndexPath: indexPath
             ) as! PostViewCell
-        cell.delegate = self
+        
         cell.configure(withPost: getPost(atIndexPath: indexPath))
         
         cell.selectionClosure = {
@@ -95,14 +95,6 @@ extension PostAdapter: UITableViewDataSource {
         }
         
         return cell
-    }
-    
-}
-
-extension PostAdapter: PostViewCellDelegate {
-    
-    func didChooseCellWithUser(user: User) {
-        delegate?.showUserProfile(user)
     }
     
 }

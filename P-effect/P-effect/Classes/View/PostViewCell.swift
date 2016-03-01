@@ -10,11 +10,6 @@ import UIKit
 import SDWebImage
 import MHPrettyDate
 
-protocol PostViewCellDelegate: class {
-    
-    func didChooseCellWithUser(user: User)
-}
-
 class PostViewCell: UITableViewCell {
     
     static let identifier = "PostViewCellIdentifier"
@@ -36,9 +31,7 @@ class PostViewCell: UITableViewCell {
     var selectionClosure: ((cell: PostViewCell) -> Void)?
     var didSelectSettings: ((cell: PostViewCell) -> Void)?
 
-    
     let imageLoader = ImageLoaderService()
-    weak var delegate: PostViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
