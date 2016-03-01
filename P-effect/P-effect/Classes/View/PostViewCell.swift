@@ -26,7 +26,6 @@ class PostViewCell: UITableViewCell {
     }
     var didSelectUser: ((cell: PostViewCell) -> Void)?
     
-    let imageLoader = ImageLoaderService()
     weak var delegate: PostViewCellDelegate?
     
     @IBOutlet private weak var postImageView: UIImageView!
@@ -64,8 +63,7 @@ class PostViewCell: UITableViewCell {
             NSURL(string: post.image.url!),
             placeholderImage: UIImage.placeholderImage()) { _, _, _, _ -> Void in
                 indicator.removeFromSuperview()
-            }
-
+        }
         guard let user = post.user else {
             profileImageView.image = UIImage.avatarPlaceholderImage()
             return
