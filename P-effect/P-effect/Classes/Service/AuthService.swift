@@ -19,12 +19,12 @@ enum AuthError: Int {
 
 class AuthService {
     
-    static func signInWithPermission(completion: (User?, NSError?) -> Void) {
+    func signInWithPermission(completion: (User?, NSError?) -> Void) {
         let token = FBSDKAccessToken.currentAccessToken()
-        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { user, error in
+        PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
             if let user = user as? User {
                 if user.isNew {
-                    AuthService.updateUserInfoViaFacebook(user) { user, error in
+                    self?.updateUserInfoViaFacebook(user) { user, error in
                         completion(user, nil)
                     }
                 } else {
@@ -40,7 +40,7 @@ class AuthService {
         }
     }
     
-    static func signInWithFacebookInController(controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
+    func signInWithFacebookInController(controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
         let loginManager = FBSDKLoginManager()
         let permissions = ["public_profile", "email"]
         
@@ -55,7 +55,7 @@ class AuthService {
         }
     }
     
-    static func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
+    func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
         let parameters = ["fields": "id, name, first_name, last_name, picture.type(large), email"]
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
@@ -92,7 +92,7 @@ class AuthService {
         }
     }
     
-    static func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
+    func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
                 failure(error: error)
@@ -104,7 +104,7 @@ class AuthService {
         }
     }
     
-    static func logOut() {
+    func logOut() {
         User.logOut()
         FBSDKLoginManager().logOut()
     }

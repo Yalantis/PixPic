@@ -19,7 +19,9 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
-    
+    var didSelectUser: ((cell: PostViewCell) -> Void)?
+    var didSelectSettings: ((cell: PostViewCell) -> Void)?
+
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
     
@@ -27,11 +29,6 @@ class PostViewCell: UITableViewCell {
     @IBOutlet private weak var profileLabel: UILabel!
     
     @IBOutlet private weak var settingsButton: UIButton!
-    
-    var selectionClosure: ((cell: PostViewCell) -> Void)?
-    var didSelectSettings: ((cell: PostViewCell) -> Void)?
-
-    let imageLoader = ImageLoaderService()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,7 +77,7 @@ class PostViewCell: UITableViewCell {
     }
     
     dynamic private func didTapProfile(recognizer: UIGestureRecognizer) {
-        selectionClosure?(cell: self)
+        didSelectUser?(cell: self)
     }
     
     @IBAction private func didTapSettingsButton() {

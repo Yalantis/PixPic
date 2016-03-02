@@ -13,16 +13,19 @@ import Toast
 
 private let removePostMessage = "This photo will be deleted from P-effect"
 
-class FeedViewController: UIViewController {
+final class FeedViewController: UIViewController, StoryboardInitable {
+    
+    static let storyboardName = Constants.Storyboard.Feed
+    
+    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
+    
+    private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
+    private lazy var postAdapter = PostAdapter()
     private var toolBar: FeedToolBar!
     
-    lazy var locator = ServiceLocator()
-    
     @IBOutlet private weak var tableView: UITableView!
-    
-    private lazy var postAdapter = PostAdapter()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -44,6 +47,7 @@ class FeedViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        AlertManager.sharedInstance.registerAlertListener(router)
         tableView.reloadData()
     }
     
@@ -75,9 +79,13 @@ class FeedViewController: UIViewController {
     }
     
     // MARK: - Setup methods
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
-        toolBar.selectionClosure = { [weak self] in
+        toolBar.didSelectPhoto = { [weak self] in
             self?.choosePhoto()
         }
         view.addSubview(toolBar)
@@ -101,8 +109,6 @@ class FeedViewController: UIViewController {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         
-        locator.registerService(PostService())
-        
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
@@ -122,9 +128,8 @@ class FeedViewController: UIViewController {
     private func choosePhoto() {
         let isUserAbsent = PFUser.currentUser() == nil
         if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
-            let storyboard = UIStoryboard(name: Constants.Storyboard.Authorization, bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-            navigationController!.pushViewController(controller, animated: true)
+            router.showAuthorization()
+            
             return
         }
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
@@ -134,11 +139,7 @@ class FeedViewController: UIViewController {
     }
     
     private func handlePhotoSelected(image: UIImage) {
-        let storyboard = UIStoryboard(name: Constants.Storyboard.PhotoEditor, bundle: nil)
-        let controllerIdentifier = "PhotoEditorController"
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(controllerIdentifier) as! PhotoEditorViewController
-        viewController.model = PhotoEditorModel.init(image: image)
-        navigationController!.pushViewController(viewController, animated: false)
+        router.showPhotoEditor(image)
     }
     
     // MARK: - Notification handling
@@ -153,6 +154,7 @@ class FeedViewController: UIViewController {
                 this.scrollToFirstRow()
             } else if let error = error {
                 print(error)
+                return
             }
             self?.tableView?.pullToRefreshView.stopAnimating()
         }
@@ -168,14 +170,9 @@ class FeedViewController: UIViewController {
         let isUserAbsent = currentUser == nil
         
         if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
-            let storyboard = UIStoryboard(name: Constants.Storyboard.Authorization, bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("AuthorizationViewController") as! AuthorizationViewController
-            navigationController!.pushViewController(controller, animated: true)
+            router.showAuthorization()
         } else if let currentUser = currentUser {
-            let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-            let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
-            controller.user = currentUser
-            self.navigationController!.showViewController(controller, sender: self)
+            router.showProfile(currentUser)
         }
     }
     
@@ -270,10 +267,7 @@ extension FeedViewController: PostAdapterDelegate {
     }
     
     func showUserProfile(adapter: PostAdapter, user: User) {
-        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-        let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
-        controller.user = user
-        self.navigationController!.showViewController(controller, sender: self)
+         router.showProfile(user)
     }
     
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {

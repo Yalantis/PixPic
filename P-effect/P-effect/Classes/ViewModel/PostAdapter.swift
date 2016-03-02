@@ -74,8 +74,8 @@ extension PostAdapter: UITableViewDataSource {
             ) as! PostViewCell
         
         cell.configure(withPost: getPost(atIndexPath: indexPath))
-        
-        cell.selectionClosure = { [weak self] cell in
+
+        cell.didSelectUser = { [weak self] cell in
             guard let this = self else {
                 return
             }

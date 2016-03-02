@@ -7,7 +7,7 @@
         <!--P-effect-->
         <scene sceneID="See-yb-Ljy">
             <objects>
-                <viewController id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eiC-e1-lIt"/>
                         <viewControllerLayoutGuide type="bottom" id="vf9-Xn-rsh"/>
