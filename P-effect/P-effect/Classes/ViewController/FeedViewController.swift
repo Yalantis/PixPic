@@ -11,6 +11,8 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
+private let removePostMessage = "This photo will be deleted from P-effect"
+
 class FeedViewController: UIViewController {
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -234,52 +236,47 @@ extension FeedViewController: UITableViewDelegate {
 
 extension FeedViewController: PostAdapterDelegate {
     
-    func showSettingsMenu(post: Post, index: Int) {
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
         if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
             
-            let settingsMenu = UIAlertController(
-                title: nil,
-                message: nil,
-                preferredStyle: .ActionSheet
-            )
-            
-            let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+            let actions = ["Remove post"]
+            UIAlertController.showAlert(inViewController: self, actions: actions) { [weak self] alertAction in
+                if alertAction.title == "Remove post" {
+                    self?.removePost(post, atIndex: index)
+                }
+            }
+        }
+    }
+    
+    private func removePost(post: Post, atIndex index: Int) {
+        let actions = ["Ok"]
+        UIAlertController.showAlert(inViewController: self, message: removePostMessage, actions: actions) { [weak self] alertAction in
+            if alertAction.title == "Ok" {
                 guard let this = self else {
                     return
                 }
+                
                 let postService: PostService = this.locator.getService()
                 postService.removePost(post) { succeeded, error in
                     if succeeded {
                         this.postAdapter.removePost(atIndex: index)
                         this.tableView.reloadData()
-
-                        print("removePost")
-                    } else {
-                        if let error = error?.localizedDescription {
-                            print(error)
-                        }
+                    } else if let error = error?.localizedDescription {
+                        print(error)
                     }
                 }
             }
-            settingsMenu.addAction(removeAction)
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) {  _ in
-                print("cancelAction")
-            }
-            settingsMenu.addAction(cancelAction)
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
         }
     }
     
-    func showUserProfile(user: User) {
+    func showUserProfile(adapter: PostAdapter, user: User) {
         let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
         let controller = storyboard.instantiateInitialViewController() as! ProfileViewController
         controller.user = user
         self.navigationController!.showViewController(controller, sender: self)
     }
     
-    func showPlaceholderForEmptyDataSet() {
+    func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
         if postAdapter.postQuantity == 0 {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -290,6 +287,7 @@ extension FeedViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
+    
 }
 
 extension FeedViewController: DZNEmptyDataSetDelegate {

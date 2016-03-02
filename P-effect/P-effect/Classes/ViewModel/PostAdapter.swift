@@ -11,14 +11,15 @@ import Foundation
 public enum UpdateType {
     
     case Reload, LoadMore
+    
 }
 
 protocol PostAdapterDelegate: class {
     
-    func showUserProfile(user: User)
-    func showPlaceholderForEmptyDataSet()
+    func showUserProfile(adapter: PostAdapter,user: User)
+    func showPlaceholderForEmptyDataSet(adapter: PostAdapter)
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
-    func showSettingsMenu(post: Post, index: Int)
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int)
     
 }
 
@@ -26,7 +27,7 @@ class PostAdapter: NSObject {
     
     private var posts = [Post]() {
         didSet {
-            delegate?.showPlaceholderForEmptyDataSet()
+            delegate?.showPlaceholderForEmptyDataSet(self)
             delegate?.postAdapterRequestedViewUpdate(self)
         }
     }
@@ -74,12 +75,14 @@ extension PostAdapter: UITableViewDataSource {
         
         cell.configure(withPost: getPost(atIndexPath: indexPath))
         
-        cell.selectionClosure = {
-            [weak self] cell in
+        cell.selectionClosure = { [weak self] cell in
+            guard let this = self else {
+                return
+            }
             if let path = tableView.indexPathForCell(cell) {
-                let model = self?.getPost(atIndexPath: path)
-                if let user = model?.user {
-                    self?.delegate?.showUserProfile(user)
+                let post = this.getPost(atIndexPath: path)
+                if let user = post.user {
+                    this.delegate?.showUserProfile(this, user: user)
                 }
             }
         }
@@ -89,8 +92,8 @@ extension PostAdapter: UITableViewDataSource {
                 return
             }
             if let path = tableView.indexPathForCell(cell) {
-                let model = this.getPost(atIndexPath: path)
-                this.delegate?.showSettingsMenu(model, index: path.row)
+                let post = this.getPost(atIndexPath: path)
+                this.delegate?.showSettingsMenu(this, post: post, index: path.row)
             }
         }
         
