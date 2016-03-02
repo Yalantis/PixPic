@@ -44,7 +44,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
         view.layoutIfNeeded()
         configureImagesAndText()
         subscribeOnNotifications()
-        locator.registerService(UserService())
     }
     
     deinit {
@@ -182,7 +181,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
     private func logout() {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertService.simpleAlert("No internet connection")
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
             
             return
         }

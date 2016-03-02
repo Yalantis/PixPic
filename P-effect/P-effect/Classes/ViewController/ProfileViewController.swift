@@ -31,7 +31,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
         configurateNavigationBar()
         setupController()
         setupLoadersCallback()
-        locator.registerService(ReachabilityService())
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -119,7 +118,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
             
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
-                AlertService.simpleAlert("No internet connection")
+                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
                 this.tableView.pullToRefreshView.stopAnimating()
 
                 return

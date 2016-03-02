@@ -17,14 +17,6 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     
-    lazy var locator = ServiceLocator()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // TODO: убрать, это будет происходить в роутере
-        locator.registerService(ReachabilityService())
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -64,7 +56,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
         router.showFeed()
 	let reachabilityService: ReachabilityService = locator.getService()
         if reachabilityService.isReachable() {
-            AlertService.simpleAlert("No internet connection")
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
         }
     }
     

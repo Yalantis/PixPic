@@ -21,6 +21,8 @@ class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, 
         locator.registerService(ValidationService())
         locator.registerService(AuthService())
         locator.registerService(ImageLoaderService())
+        locator.registerService(ReachabilityService())
+
     }
 }
 
