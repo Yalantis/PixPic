@@ -10,10 +10,21 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-class AuthorizationViewController: UIViewController {
+final class AuthorizationViewController: UIViewController, StoryboardInitable {
+    
+    static let storyboardName = Constants.Storyboard.Authorization
+    
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private weak var locator: ServiceLocator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     @IBAction private func logInWithFBButtonTapped() {
@@ -21,13 +32,18 @@ class AuthorizationViewController: UIViewController {
         signInWithFacebook()
     }
     
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func signInWithFacebook() {
-        AuthService.signInWithFacebookInController(self) { [weak self] _, error in
+        let authService: AuthService = locator.getService()
+        authService.signInWithFacebookInController(self) { [weak self] _, error in
             if let error = error {
                 handleError(error)
                 self?.proceedWithoutAuthorization()
             } else {
-                AuthService.signInWithPermission { _, error -> Void in
+                authService.signInWithPermission { _, error -> Void in
                     if let error = error {
                         handleError(error)
                     } else {
@@ -35,13 +51,13 @@ class AuthorizationViewController: UIViewController {
                     }
                 }
                 self?.view.hideToastActivity()
-                Router().showHome(animated: true)
+                self?.router.showFeed()
             }
         }
     }
     
     private func proceedWithoutAuthorization() {
-        Router.sharedRouter().showHome(animated: true)
+        router.showFeed()
         ReachabilityHelper.checkConnection()
     }
     

@@ -9,18 +9,21 @@
 import UIKit
 import Toast
 
-class ProfileViewController: UITableViewController {
+final class ProfileViewController: UITableViewController, StoryboardInitable {
     
-    @IBOutlet weak var profileSettingsButton: UIBarButtonItem!
+    static let storyboardName = Constants.Storyboard.Profile
+    
+    var router: protocol<EditProfilePresenter, FeedPresenter, AlertManagerDelegate>!
+    var user: User!
+    
+    private weak var locator: ServiceLocator!
+    private var activityShown: Bool?
+    private lazy var postAdapter = PostAdapter()
+    
+    @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
-    
-    private var activityShown: Bool?
-    private lazy var postAdapter = PostAdapter()
-    private lazy var locator = ServiceLocator()
-
-    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +32,18 @@ class ProfileViewController: UITableViewController {
         setupLoadersCallback()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertManager.sharedInstance.registerAlertListener(router)
+    }
+    
     // MARK: - Inner func
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func setupController() {
-        locator.registerService(PostService())
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
@@ -73,11 +85,14 @@ class ProfileViewController: UITableViewController {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
         userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        user.loadUserAvatar { [weak self] image, error in
+        user.loadUserAvatar {[weak self] image, error in
+            guard let this = self else {
+                return
+            }
             if error == nil {
-                self?.userAvatar.image = image
+                this.userAvatar.image = image
             } else {
-                self?.view.makeToast(error?.localizedDescription)
+                this.view.makeToast(error?.localizedDescription)
             }
         }
         if user.isCurrentUser {
@@ -129,9 +144,7 @@ class ProfileViewController: UITableViewController {
     
     // MARK: - IBActions
     @IBAction private func profileSettings() {
-        let storyboard = UIStoryboard(name: Constants.Storyboard.Profile, bundle: nil)
-        let viewController = storyboard.instantiateViewControllerWithIdentifier(Constants.EditProfile.EditProfileControllerIdentifier)
-        navigationController!.showViewController(viewController, sender: self)
+        router.showEditProfile()
     }
     
 }

@@ -17,12 +17,15 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-class PhotoEditorViewController: UIViewController {
+final class PhotoEditorViewController: UIViewController, StoryboardInitable {
     
-    lazy var locator = ServiceLocator()
+    static let storyboardName = Constants.Storyboard.PhotoEditor
+    
     var model: PhotoEditorModel!
-    weak var delegate: PhotoEditorDelegate?
     
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    weak var delegate: PhotoEditorDelegate?
+    private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
     private var effectsPickerController: EffectsPickerViewController? {
         didSet {
@@ -38,19 +41,17 @@ class PhotoEditorViewController: UIViewController {
         super.viewDidLoad()
         
         setupNavigavionBar()
-        locator.registerService(PostService())
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.allowToDisplay = false
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AlertService.allowToDisplay = true
         PushNotificationQueue.handleNotificationQueue()
     }
     
@@ -59,11 +60,14 @@ class PhotoEditorViewController: UIViewController {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
             imageController?.model = ImageViewModel(image: model.originalImage())
+            imageController?.setLocator(locator)
             delegate = imageController
+            
             
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
+            effectsPickerController?.setLocator(locator)
             
         default:
             super.prepareForSegue(segue, sender: sender)
@@ -80,6 +84,10 @@ class PhotoEditorViewController: UIViewController {
     
     func didChooseEffectFromPicket(effect: UIImage) {
         delegate?.photoEditor(self, didChooseEffect: effect)
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
 }
@@ -160,10 +168,10 @@ extension PhotoEditorViewController {
                 switch status {
                 case .Authorized:
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    AlertService.simpleAlert("Image saved to library")
+                    AlertManager.sharedInstance.showSimpleAlert("Image saved to library")
                     
                 default:
-                    AlertService.simpleAlert("No access to photo library")
+                    AlertManager.sharedInstance.showSimpleAlert("No access to photo library")
                 }
             }
         }
