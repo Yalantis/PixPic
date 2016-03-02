@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+import Kingfisher
 import MHPrettyDate
 
 class PostViewCell: UITableViewCell {
@@ -36,10 +36,10 @@ class PostViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
+        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapProfile:")
         profileImageView.addGestureRecognizer(imageGestureRecognizer)
         
-        let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "profileTapped:")
+        let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapProfile:")
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
         selectionStyle = .None
     }
@@ -59,31 +59,31 @@ class PostViewCell: UITableViewCell {
         
         settingsButton.enabled = false
         let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
-        postImageView.sd_setImageWithURL(
-            NSURL(string: post.image.url!),
-            placeholderImage: UIImage.placeholderImage()) { [weak self] _, _, _, _ -> Void in
+        postImageView.kf_setImageWithURL(
+            NSURL(string: post.image.url!)!,
+            placeholderImage: UIImage.placeholderImage(),
+            optionsInfo: nil) { [weak self] _, _, _, _ in
                 indicator.removeFromSuperview()
                 self?.settingsButton.enabled = true
-            }
+        }
 
         guard let user = post.user else {
             profileImageView.image = UIImage.avatarPlaceholderImage()
             return
         }
         if let avatar = user.avatar?.url {
-            profileImageView.sd_setImageWithURL(
-                NSURL(string: avatar),
-                placeholderImage: UIImage.avatarPlaceholderImage(),
-                completed: nil
+            profileImageView.kf_setImageWithURL(
+                NSURL(string: avatar)!,
+                placeholderImage: UIImage.avatarPlaceholderImage()
             )
         }
     }
     
-    dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
+    dynamic private func didTapProfile(recognizer: UIGestureRecognizer) {
         selectionClosure?(cell: self)
     }
     
-    @IBAction private func settingsTapped(sender: AnyObject) {
+    @IBAction private func didTapSettingsButton() {
         didSelectSettings?(cell: self)
     }
     
