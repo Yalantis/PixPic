@@ -12,10 +12,10 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
     
     static let identifier = "EffectsGroupHeaderViewIdentifier"
     
+    private var completion: (() -> Bool)!
+    
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
-    
-    private var completion: (() -> Bool)!
     
     func configureWith(group group: EffectsGroup, completion: (() -> Bool)) {
         downloadImageFromFile(group.image)

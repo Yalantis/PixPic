@@ -11,8 +11,8 @@ import UIKit
 class EffectsPickerViewController: UICollectionViewController {
     
     lazy var effectsPickerAdapter = EffectsPickerAdapter()
-    lazy var locator = ServiceLocator()
     weak var delegate: PhotoEditorViewController?
+    private weak var locator: ServiceLocator!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -20,6 +20,10 @@ class EffectsPickerViewController: UICollectionViewController {
         
         setupCollectionView()
         setupAdapter()
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
     // MARK: - Private methods
@@ -34,7 +38,6 @@ class EffectsPickerViewController: UICollectionViewController {
     }
     
     private func setupAdapter() {
-        locator.registerService(EffectsService())
         
         let effectsService = locator.getService() as EffectsService
         effectsService.loadEffects { [weak self] objects, error in

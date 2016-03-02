@@ -20,7 +20,7 @@ enum Exception: String, ErrorType {
 class ExceptionHandler {
     
     static func handle(exception: Exception) {
-        AlertService.simpleAlert(exception.rawValue)
+        AlertManager.sharedInstance.showSimpleAlert(exception.rawValue)
     }
     
 }

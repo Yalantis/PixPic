@@ -1,4 +1,4 @@
-        //
+//
 //  AppDelegate.swift
 //  P-effect
 //
@@ -17,7 +17,8 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-   
+    private lazy var router = FeedRouter()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
             application,
@@ -39,7 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        Router.sharedRouter().onStart(true)
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.makeKeyAndVisible()
+        
+        router.execute(window!)
         return true
     }
     
@@ -69,26 +73,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation.saveEventually()
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
         if application.applicationState == .Inactive  {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         PFPush.handlePush(userInfo)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        if application.applicationState == .Inactive {
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            Router.sharedRouter().showHome(animated: true)
-        }
-        
-        if application.applicationState == .Active {
-            AlertService.notificationAlert(userInfo)
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-        }
-        
-        if User.currentUser() != nil {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        AlertManager.sharedInstance.handlePush(userInfo)
+        if PFUser.currentUser() != nil {
             completionHandler(.NewData)
         } else {
             completionHandler(.NoData)

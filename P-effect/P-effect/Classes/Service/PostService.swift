@@ -53,7 +53,7 @@ class PostService {
         let post = Post(image: image, user: user, comment: comment)
         post.saveInBackgroundWithBlock{ succeeded, error in
             if succeeded {
-                AlertService.simpleAlert(messageUploadSuccessful)
+                AlertManager.sharedInstance.showSimpleAlert(messageUploadSuccessful)
                 NSNotificationCenter.defaultCenter().postNotificationName(
                     Constants.NotificationName.NewPostUploaded,
                     object: nil

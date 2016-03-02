@@ -24,17 +24,15 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
+    var didSelectUser: ((cell: PostViewCell) -> Void)?
+    
+    weak var delegate: PostViewCellDelegate?
     
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
     
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var profileLabel: UILabel!
-    
-    var selectionClosure: ((cell: PostViewCell) -> Void)?
-    
-    let imageLoader = ImageLoaderService()
-    weak var delegate: PostViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,8 +63,7 @@ class PostViewCell: UITableViewCell {
             NSURL(string: post.image.url!),
             placeholderImage: UIImage.placeholderImage()) { _, _, _, _ -> Void in
                 indicator.removeFromSuperview()
-            }
-
+        }
         guard let user = post.user else {
             profileImageView.image = UIImage.avatarPlaceholderImage()
             return
@@ -81,7 +78,7 @@ class PostViewCell: UITableViewCell {
     }
     
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
-        selectionClosure?(cell: self)
+        didSelectUser?(cell: self)
     }
     
 }

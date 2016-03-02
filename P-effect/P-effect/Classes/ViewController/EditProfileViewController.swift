@@ -13,10 +13,11 @@ private let logoutMessage = "This will logout you. And you will not be able to s
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
-
-class EditProfileViewController: UIViewController, ApplicationAppearance {
+final class EditProfileViewController: UIViewController, StoryboardInitable, ApplicationAppearance {
     
-    lazy var locator = ServiceLocator()
+    static let storyboardName = Constants.Storyboard.Profile
+    
+    var router: protocol<FeedPresenter, AlertManagerDelegate>!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -28,6 +29,7 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
+    private weak var locator: ServiceLocator!
     
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
@@ -52,13 +54,12 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertService.allowToDisplay = false
+        AlertManager.sharedInstance.registerAlertListener(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        AlertService.allowToDisplay = true
         PushNotificationQueue.handleNotificationQueue()
     }
     
@@ -83,6 +84,10 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
         )
     }
     
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
     private func configureImagesAndText() {
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
@@ -98,13 +103,15 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) {
-            [weak self](image, error) -> Void in
+        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
+            guard let this = self else {
+                return
+            }
             if let error = error {
                 print(error)
             } else {
-                self?.avatarImageView.image = image
-                self?.image = image
+                this.avatarImageView.image = image
+                this.image = image
             }
         }
     }
@@ -135,20 +142,18 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
                 title: "Save changes",
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let NOAction = UIAlertAction(title: "Ok", style: .Cancel) {
-                [weak self] action in
+            let noAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
                 PushNotificationQueue.handleNotificationQueue()
                 alertController.dismissViewControllerAnimated(true, completion: nil)
                 self?.navigationController!.popViewControllerAnimated(true)
             }
-            alertController.addAction(NOAction)
+            alertController.addAction(noAction)
             
-            let YESAction = UIAlertAction(title: "Save", style: .Default) {
-                [weak self] action in
+            let yesAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
                 self?.saveChangesAction()
                 PushNotificationQueue.handleNotificationQueue()
             }
-            alertController.addAction(YESAction)
+            alertController.addAction(yesAction)
             
             self.presentViewController(alertController, animated: true) {}
         } else {
@@ -170,7 +175,7 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
                 }
             }
         } else {
-            AlertService.simpleAlert("Internet connection is required to save changes in profile")
+            AlertManager.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
         }
     }
     
@@ -181,10 +186,11 @@ class EditProfileViewController: UIViewController, ApplicationAppearance {
             
             return
         }
-        AuthService.logOut()
-        AuthService.anonymousLogIn(
+        let authService: AuthService = locator.getService()
+        authService.logOut()
+        authService.anonymousLogIn(
             completion: { object in
-                Router.sharedRouter().showHome(animated: true)
+                self.router.showFeed()
             }, failure: { error in
                 if let error = error {
                     handleError(error)

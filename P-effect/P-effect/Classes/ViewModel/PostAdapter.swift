@@ -68,12 +68,14 @@ extension PostAdapter: UITableViewDataSource {
             ) as! PostViewCell
         cell.delegate = self
         cell.configure(withPost: getPost(atIndexPath: indexPath))
-        cell.selectionClosure = {
-            [weak self] cell in
+        cell.didSelectUser = { [weak self] cell in
+            guard let this = self else {
+                return
+            }
             if let path = tableView.indexPathForCell(cell) {
-                let model = self?.getPost(atIndexPath: path)
-                if let user = model?.user {
-                    self?.delegate?.showUserProfile(user)
+                let model = this.getPost(atIndexPath: path)
+                if let user = model.user {
+                    this.delegate?.showUserProfile(user)
                 }
             }
         }

@@ -8,7 +8,7 @@
         <!--Photo Editor View Controller-->
         <scene sceneID="ddc-j7-oyG">
             <objects>
-                <viewController storyboardIdentifier="PhotoEditorController" id="0Ku-Rq-LyC" customClass="PhotoEditorViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoEditorViewController" id="0Ku-Rq-LyC" customClass="PhotoEditorViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k85-Jg-USM"/>
                         <viewControllerLayoutGuide type="bottom" id="Ig8-qO-GqX"/>
@@ -72,7 +72,7 @@
         <!--Effects Picker View Controller-->
         <scene sceneID="akr-CG-0B1">
             <objects>
-                <collectionViewController storyboardIdentifier="EffectsPicker" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EffectsPickerViewController" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Vwq-mq-bPe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +146,7 @@
         <!--Image View Controller-->
         <scene sceneID="Yd8-ec-jAf">
             <objects>
-                <viewController storyboardIdentifier="ImageController" id="wxA-8C-VyA" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" id="wxA-8C-VyA" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YEr-66-wtS"/>
                         <viewControllerLayoutGuide type="bottom" id="LDz-xm-pR0"/>
@@ -177,7 +177,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
-                        <outlet property="rawImage" destination="VUI-BL-gPN" id="IZF-0J-mgy"/>
+                        <outlet property="rawImageView" destination="VUI-BL-gPN" id="ese-rA-vET"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFh-3H-Zdt" userLabel="First Responder" sceneMemberID="firstResponder"/>

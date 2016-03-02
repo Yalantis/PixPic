@@ -10,9 +10,12 @@ import UIKit
 
 class FeedToolBar: UIView {
     
-    var selectionClosure: (() -> Void)?
+    var didSelectPhoto: (() -> Void)?
 
-    static func loadFromNibNamed(nibNamed: String, bundle : NSBundle? = nil) -> FeedToolBar? {
+    @IBOutlet private weak var bottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var topSpaceConstraint: NSLayoutConstraint!
+    
+    static func loadFromNibNamed(nibNamed: String, bundle: NSBundle? = nil) -> FeedToolBar? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle
@@ -45,12 +48,9 @@ class FeedToolBar: UIView {
             completion: nil
         )
     }
-
-    @IBOutlet weak var bottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
     
     @IBAction func makePhotoButtonTapped() {
-        selectionClosure?()
+        didSelectPhoto?()
     }
     
 }
