@@ -213,7 +213,7 @@ extension ProfileViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight + 48
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
 }

@@ -222,7 +222,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
 extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight + 48
+        return tableView.bounds.size.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
