@@ -25,6 +25,8 @@ class FollowerViewCell: UITableViewCell, CellInterface {
                 placeholderImage: UIImage.avatarPlaceholderImage(),
                 completed: nil
             )
+        } else {
+            profileImageView.image = UIImage.avatarPlaceholderImage()
         }
     }
 

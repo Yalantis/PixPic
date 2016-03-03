@@ -37,6 +37,8 @@ final class FollowersViewController: UIViewController, StoryboardInitable {
     
     private func setupAdapter() {
         tableView.dataSource = followerAdapter
+        followerAdapter.follovers = [User.currentUser()!]
+
     }
     
 }
