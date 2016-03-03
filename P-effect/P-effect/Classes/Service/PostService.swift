@@ -44,6 +44,10 @@ class PostService {
         )
     }
     
+    func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
+        post.deleteInBackgroundWithBlock(completion)
+    }
+    
     // MARK: - Private methods
     private func uploadPost(image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
