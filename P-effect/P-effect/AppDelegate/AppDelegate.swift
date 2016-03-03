@@ -17,7 +17,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private lazy var router = FeedRouter()
+    private lazy var router = LaunchRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
@@ -41,14 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.makeKeyAndVisible()
         
-        setupRootViewController()
         router.execute(window!)
         
         return true
-    }
-    
-    private func setupRootViewController() {
-        window!.rootViewController = LaunchViewController.create()
     }
     
     private func setupParse() {

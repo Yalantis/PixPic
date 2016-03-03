@@ -12,4 +12,6 @@ final class LaunchViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.LaunchScreen
     
+    var router: protocol<AlertManagerDelegate, FeedPresenter>!
+
 }
