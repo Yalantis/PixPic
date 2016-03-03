@@ -15,11 +15,11 @@ class FollowerViewCell: UITableViewCell, CellInterface {
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var profileLabel: UILabel!
     
-    func configure(withUser user: User) {
-        profileLabel.text = user.username
+    func configure(withFollower follower: User) {
+        profileLabel.text = follower.username
         
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
-        if let avatar = user.avatar?.url {
+        if let avatar = follower.avatar?.url {
             profileImageView.sd_setImageWithURL(
                 NSURL(string: avatar),
                 placeholderImage: UIImage.avatarPlaceholderImage(),
