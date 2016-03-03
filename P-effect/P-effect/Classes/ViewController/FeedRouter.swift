@@ -16,7 +16,7 @@ class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, 
     init() {
         locator = ServiceLocator()
         locator.registerService(PostService())
-        locator.registerService(EffectsService())
+        locator.registerService(EffectsLoaderService())
         locator.registerService(UserService())
         locator.registerService(ValidationService())
         locator.registerService(AuthService())

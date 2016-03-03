@@ -10,7 +10,7 @@ import Foundation
 
 typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> Void
 
-class EffectsService {
+class EffectsLoaderService {
     
     lazy var reachabilityService = ReachabilityService()
     private var isQueryFromLocalDataStoure = false
