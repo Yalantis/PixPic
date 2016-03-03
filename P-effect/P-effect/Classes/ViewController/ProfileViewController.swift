@@ -160,7 +160,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
-        if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
+        let reachabilityService: ReachabilityService = locator.getService()
+        if post.user == User.currentUser() && reachabilityService.isReachable() {
             
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
