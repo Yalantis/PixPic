@@ -101,13 +101,25 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRh-nO-0bS">
+                                        <rect key="frame" x="303" y="400" width="40" height="30"/>
+                                        <state key="normal" title="Share">
+                                            <color key="titleColor" red="1" green="0.39743500279999999" blue="0.26240261349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" red="0.60774964080000005" green="1" blue="0.63056752869999999" alpha="0.60009419330000002" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="share:" destination="wTx-Av-Y8L" eventType="touchUpInside" id="YWH-kA-EHS"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="top" secondItem="gg0-D1-QNP" secondAttribute="bottom" id="3z7-hB-4S4"/>
                                     <constraint firstAttribute="trailing" secondItem="S7j-TD-CO3" secondAttribute="trailing" id="65T-de-bhs"/>
+                                    <constraint firstAttribute="bottom" secondItem="fRh-nO-0bS" secondAttribute="bottom" constant="8" id="UXy-dz-F1x"/>
                                     <constraint firstAttribute="bottom" secondItem="S7j-TD-CO3" secondAttribute="bottom" id="Wys-4U-ZmW"/>
                                     <constraint firstItem="gg0-D1-QNP" firstAttribute="leading" secondItem="OAP-rW-k05" secondAttribute="leading" id="aiK-Cm-1oS"/>
+                                    <constraint firstAttribute="trailing" secondItem="fRh-nO-0bS" secondAttribute="trailing" constant="8" id="dqL-1D-v8v"/>
                                     <constraint firstAttribute="trailing" secondItem="gg0-D1-QNP" secondAttribute="trailing" id="rJq-jz-Zos"/>
                                     <constraint firstItem="gg0-D1-QNP" firstAttribute="top" secondItem="OAP-rW-k05" secondAttribute="top" id="y4b-3Y-fYA"/>
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="leading" secondItem="OAP-rW-k05" secondAttribute="leading" id="zzL-GB-GDW"/>

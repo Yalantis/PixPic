@@ -18,6 +18,7 @@ protocol PostAdapterDelegate: class {
     func showUserProfile(user: User)
     func showPlaceholderForEmptyDataSet()
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
+    func showActivityController(items: [AnyObject])
     
 }
 
@@ -88,6 +89,10 @@ extension PostAdapter: PostViewCellDelegate {
     
     func didChooseCellWithUser(user: User) {
         delegate?.showUserProfile(user)
+    }
+    
+    func didChooseCellToShare(items: [AnyObject]) {
+        delegate?.showActivityController(items)
     }
     
 }

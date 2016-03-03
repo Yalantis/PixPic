@@ -13,6 +13,7 @@ import MHPrettyDate
 protocol PostViewCellDelegate: class {
     
     func didChooseCellWithUser(user: User)
+    func didChooseCellToShare(items: [AnyObject])
 }
 
 class PostViewCell: UITableViewCell {
@@ -27,6 +28,7 @@ class PostViewCell: UITableViewCell {
     var didSelectUser: ((cell: PostViewCell) -> Void)?
     
     weak var delegate: PostViewCellDelegate?
+    weak var post = Post?()
     
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -51,6 +53,7 @@ class PostViewCell: UITableViewCell {
             profileImageView.image = UIImage.avatarPlaceholderImage()
             return
         }
+        self.post = post
         profileLabel.text = post.user?.username
         dateLabel.text = MHPrettyDate.prettyDateFromDate(
             post.createdAt,
@@ -80,5 +83,27 @@ class PostViewCell: UITableViewCell {
     dynamic private func profileTapped(recognizer: UIGestureRecognizer) {
         didSelectUser?(cell: self)
     }
+    
+    @IBAction func share(sender: AnyObject) {
+        guard let username = profileLabel.text,
+            url = NSURL(string: (post?.image.url)!),
+            key = SDWebImageManager.sharedManager().cacheKeyForURL(url),
+            cachedImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key) else {
+                return
+        }
+        let message = "Created by " + username + " with P-Effect app."
+        let items = [cachedImage, message]
+        delegate?.didChooseCellToShare(items)
+        
+        
+        //        let imgData = NSData(contentsOfURL: url)
+        //        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        //        let documentDirectory = paths.first
+        //        let filePath = documentDirectory! + "/" + "image.jpg"
+        //        let localImgData = NSData(contentsOfFile: filePath
+        //        imgData?.writeToFile(filePath, atomically: true)
+        //        let img1 = UIImage(named: "438016_421338")!
+    }
+    
     
 }
