@@ -10,10 +10,13 @@ import UIKit
 import Kingfisher
 import MHPrettyDate
 
+private let headerViewHeight: CGFloat = 78
+private let footerViewHeight: CGFloat = 48
+
 class PostViewCell: UITableViewCell {
     
     static let identifier = "PostViewCellIdentifier"
-    static let designedHeight: CGFloat = 78 + 48
+    static let designedHeight = headerViewHeight + footerViewHeight
     
     static var nib: UINib? {
         let nib = UINib(nibName: String(self), bundle: nil)
@@ -55,13 +58,17 @@ class PostViewCell: UITableViewCell {
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         
         settingsButton.enabled = false
-        let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
-        postImageView.kf_setImageWithURL(
-            NSURL(string: post.image.url!)!,
-            placeholderImage: UIImage.placeholderImage(),
-            optionsInfo: nil) { [weak self] _, _, _, _ in
-                indicator.removeFromSuperview()
-                self?.settingsButton.enabled = true
+        if let urlString = post.image.url {
+            let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
+
+            let url = NSURL(string: urlString)
+            postImageView.kf_setImageWithURL(
+                url!,
+                placeholderImage: UIImage.placeholderImage(),
+                optionsInfo: nil) { [weak self] _, _, _, _ in
+                    indicator.removeFromSuperview()
+                    self?.settingsButton.enabled = true
+            }
         }
 
         guard let user = post.user else {

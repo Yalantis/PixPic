@@ -44,9 +44,7 @@ class PostService {
     }
     
     func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
-        post.deleteInBackgroundWithBlock { succeeded, error in
-            completion(succeeded, error)
-        }
+        post.deleteInBackgroundWithBlock(completion)
     }
     
     // MARK: - Private methods
