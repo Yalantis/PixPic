@@ -9,6 +9,8 @@
 import UIKit
 import Toast
 
+private let removePostMessage = "This photo will be deleted from P-effect"
+
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
@@ -147,15 +149,52 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         router.showEditProfile()
     }
     
+       
 }
 
 extension ProfileViewController: PostAdapterDelegate {
     
-    func showUserProfile(user: User) {
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
+        if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
+            
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                self?.removePost(post, atIndex: index)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
+            
+            settingsMenu.addAction(okAction)
+            settingsMenu.addAction(cancelAction)
+            
+            presentViewController(settingsMenu, animated: true, completion: nil)
+        }
+    }
+    
+    private func removePost(post: Post, atIndex index: Int) {
+        UIAlertController.showAlert(
+            inViewController: self,
+            message: removePostMessage) { [weak self] _ in
+                guard let this = self else {
+                    return
+                }
+                
+                let postService: PostService = this.locator.getService()
+                postService.removePost(post) { succeeded, error in
+                    if succeeded {
+                        this.postAdapter.removePost(atIndex: index)
+                        this.tableView.reloadData()
+                    } else if let error = error?.localizedDescription {
+                        print(error)
+                    }
+                }
+        }
+    }
+
+    func showUserProfile(adapter: PostAdapter, user: User) {
         
     }
     
-    func showPlaceholderForEmptyDataSet() {
+    func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
         tableView.reloadData()
     }
     
