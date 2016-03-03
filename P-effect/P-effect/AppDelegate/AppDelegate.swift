@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
-        if !SettingsHelper.notificationsState {
+        if !SettingsHelper.notificationsState! {
             return
         }
         if application.applicationState == .Inactive  {
@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if !SettingsHelper.notificationsState {
+        if !SettingsHelper.notificationsState! {
             return
         }
         AlertManager.sharedInstance.handlePush(userInfo)

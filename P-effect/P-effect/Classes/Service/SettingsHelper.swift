@@ -15,8 +15,7 @@ class SettingsHelper {
     }
     
     static var notificationsState: Bool? {
-        return true
-        //return NSUserDefaults.standardUserDefaults().objectForKey(Constants.UserDefaultsKeys.Notifications) as? Bool
+        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.UserDefaultsKeys.Notifications) as? Bool
     }
     
 }
