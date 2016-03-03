@@ -25,11 +25,15 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     
+    @IBOutlet weak var followersQuantity: UILabel!
+    @IBOutlet weak var followingQuantity: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupController()
         setupLoadersCallback()
+        setupGestureRecognizers()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -80,6 +84,14 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         tableView.tableFooterView = tableViewFooter;
     }
     
+    private func setupGestureRecognizers() {
+        let followersGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowersLabel:")
+        followersQuantity.addGestureRecognizer(followersGestureRecognizer)
+        
+        let followingGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowingLabel:")
+        followingQuantity.addGestureRecognizer(followingGestureRecognizer)
+    }
+    
     private func applyUser() {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
@@ -95,6 +107,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 this.view.makeToast(error?.localizedDescription)
             }
         }
+        
+        followingQuantity.text = "10000 following"
+        followersQuantity.text = "200 followers"
+        
         if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
@@ -145,6 +161,18 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     // MARK: - IBActions
     @IBAction private func profileSettings() {
         router.showEditProfile()
+    }
+    
+    func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+        
+        print("router.showFollovers  didTapFollowersLabel")
+        router.showFollowersList()
+    }
+    
+    dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+        
+        print("router.showFollovers  didTapFollowingLabel")
+        router.showFollowersList()
     }
     
 }

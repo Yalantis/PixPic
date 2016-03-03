@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowerViewCellIdentifier" rowHeight="25" id="dAn-mv-m3V">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowerViewCellIdentifier" rowHeight="25" id="dAn-mv-m3V" customClass="FollowerViewCell" customModule="P_effect" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="430" height="86"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAn-mv-m3V" id="Rhq-uL-AfJ">
@@ -64,6 +64,10 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="profileImageView" destination="chN-ct-0Jf" id="2Gk-f1-RPj"/>
+                <outlet property="profileLabel" destination="L3l-zw-dbR" id="Hcv-AQ-Xpp"/>
+            </connections>
             <point key="canvasLocation" x="222" y="126"/>
         </tableViewCell>
     </objects>

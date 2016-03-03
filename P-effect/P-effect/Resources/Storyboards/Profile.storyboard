@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E49a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -52,22 +52,37 @@
                                         </mask>
                                     </variation>
                                 </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
-                                    <rect key="frame" x="196" y="260" width="209" height="38"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
+                                    <rect key="frame" x="199" y="211" width="204" height="25"/>
+                                    <subviews>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
+                                            <rect key="frame" x="0.0" y="4" width="84" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
+                                            <rect key="frame" x="121" y="4" width="83" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="bsh-Xb-JtV" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" constant="4" id="2aN-bW-Qyu"/>
+                                        <constraint firstItem="bsh-Xb-JtV" firstAttribute="leading" secondItem="wMO-2N-lNa" secondAttribute="trailing" constant="37" id="Ca7-Rj-2mZ"/>
+                                        <constraint firstItem="wMO-2N-lNa" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" constant="4" id="Nlf-tt-KET"/>
+                                        <constraint firstAttribute="bottom" secondItem="bsh-Xb-JtV" secondAttribute="bottom" id="Tzg-cA-H98"/>
+                                        <constraint firstAttribute="bottom" secondItem="wMO-2N-lNa" secondAttribute="bottom" id="nFc-Xp-YZh"/>
+                                        <constraint firstItem="wMO-2N-lNa" firstAttribute="leading" secondItem="Nye-UC-bFD" secondAttribute="leading" id="pst-jP-aZy"/>
+                                        <constraint firstAttribute="trailing" secondItem="bsh-Xb-JtV" secondAttribute="trailing" id="sDu-Eg-305"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
+                                    <rect key="frame" x="196" y="244" width="209" height="54"/>
                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgn-tI-x74">
-                                    <rect key="frame" x="196" y="225" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yt4-R6-d1m">
-                                    <rect key="frame" x="363" y="225" width="42" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -75,7 +90,10 @@
                             <constraints>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="top" secondItem="3W9-Wv-xaN" secondAttribute="top" constant="12" id="0S9-mo-TKl"/>
                                 <constraint firstItem="Lrk-fZ-kCM" firstAttribute="width" secondItem="3W9-Wv-xaN" secondAttribute="height" multiplier="191:238" id="0eS-Wv-dU7"/>
+                                <constraint firstItem="ASI-e7-emX" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="bottom" constant="8" id="2BU-zt-Ncd"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="ASI-e7-emX" secondAttribute="centerX" id="74s-cv-yzE"/>
+                                <constraint firstItem="Nye-UC-bFD" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="bottom" constant="8" id="75q-Wa-wSP"/>
+                                <constraint firstItem="Nye-UC-bFD" firstAttribute="centerX" secondItem="NK7-AM-JLQ" secondAttribute="centerX" id="RLh-S4-f7l"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="3W9-Wv-xaN" secondAttribute="centerX" id="SM2-1i-jsq"/>
                                 <constraint firstAttribute="bottom" secondItem="ASI-e7-emX" secondAttribute="bottom" constant="3" id="kWC-49-ycn"/>
                                 <constraint firstItem="ASI-e7-emX" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="bottom" constant="14" id="sQ6-nm-WCI"/>
@@ -83,6 +101,7 @@
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="0eS-Wv-dU7"/>
+                                    <exclude reference="sQ6-nm-WCI"/>
                                 </mask>
                             </variation>
                         </view>
@@ -117,6 +136,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="followersQuantity" destination="wMO-2N-lNa" id="qfj-42-b26"/>
+                        <outlet property="followingQuantity" destination="bsh-Xb-JtV" id="VPw-WG-LcA"/>
                         <outlet property="profileSettingsButton" destination="xc4-g0-tKg" id="1F4-Rw-7oh"/>
                         <outlet property="tableViewFooter" destination="RWA-d4-3KE" id="65t-jj-0Ow"/>
                         <outlet property="userAvatar" destination="Lrk-fZ-kCM" id="FWi-c5-QN3"/>
@@ -130,7 +151,7 @@
         <!--Followers View Controller-->
         <scene sceneID="ubq-ru-dgC">
             <objects>
-                <viewController id="l49-gn-m9K" customClass="FollowersViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FollowersViewController" id="l49-gn-m9K" customClass="FollowersViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fX5-2a-pKm"/>
                         <viewControllerLayoutGuide type="bottom" id="EC8-Da-UjJ"/>
