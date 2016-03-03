@@ -13,7 +13,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<EditProfilePresenter, FeedPresenter, AlertManagerDelegate>!
+    var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
     var user: User!
     
     private weak var locator: ServiceLocator!

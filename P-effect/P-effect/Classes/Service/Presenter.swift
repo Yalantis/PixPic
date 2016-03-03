@@ -108,3 +108,18 @@ extension PhotoEditorPresenter {
     }
     
 }
+
+protocol FollowersListPresenter: Presenter {
+    
+    func showFollowersList()
+    
+}
+
+extension FollowersListPresenter {
+    
+    func showFollowersList() {
+        let followersListRouter = FollowersListRouter(locator: locator)
+        followersListRouter.execute(currentViewController)
+    }
+    
+}

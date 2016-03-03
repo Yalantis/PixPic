@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter {
+class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter {
     
     private var user: User!
     private(set) weak var currentViewController: UIViewController!

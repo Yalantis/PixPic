@@ -8,10 +8,14 @@
 
 import UIKit
 
-class FollowersViewController: UIViewController {
+final class FollowersViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
+
+    var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    
     private lazy var followerAdapter = FollowerAdapter()
+    private weak var locator: ServiceLocator!
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -20,6 +24,10 @@ class FollowersViewController: UIViewController {
         
         setupTableView()
         setupAdapter()
+    }
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
     }
     
     private func setupTableView() {
