@@ -10,15 +10,12 @@ import UIKit
 
 extension UIAlertController {
     
-    static func showAlert(inViewController viewController: UIViewController, title: String? = nil, message: String? = nil, actions: [String] ,confimAction: (alertAction: UIAlertAction) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
-        
-        for actionTitle in actions {
-            let action = UIAlertAction(title: actionTitle, style: .Default, handler: confimAction)
-            alert.addAction(action)
-        }
-        
+    static func showAlert(inViewController viewController: UIViewController, title: String? = nil, message: String? = nil, confimAction: (alertAction: UIAlertAction) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: confimAction)
         let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
+        
+        alert.addAction(okAction)
         alert.addAction(cancelAction)
         
         viewController.presentViewController(alert, animated: true, completion: nil)

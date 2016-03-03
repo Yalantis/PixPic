@@ -157,19 +157,23 @@ extension ProfileViewController: PostAdapterDelegate {
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
         if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
             
-            let actions = ["Remove post"]
-            UIAlertController.showAlert(inViewController: self, actions: actions) { [weak self] alertAction in
-                if alertAction.title == "Remove post" {
-                    self?.removePost(post, atIndex: index)
-                }
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                self?.removePost(post, atIndex: index)
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
+            
+            settingsMenu.addAction(okAction)
+            settingsMenu.addAction(cancelAction)
+            
+            presentViewController(settingsMenu, animated: true, completion: nil)
         }
     }
     
     private func removePost(post: Post, atIndex index: Int) {
-        let actions = ["Ok"]
-        UIAlertController.showAlert(inViewController: self, message: removePostMessage, actions: actions) { [weak self] alertAction in
-            if alertAction.title == "Ok" {
+        UIAlertController.showAlert(
+            inViewController: self,
+            message: removePostMessage) { [weak self] _ in
                 guard let this = self else {
                     return
                 }
@@ -183,7 +187,6 @@ extension ProfileViewController: PostAdapterDelegate {
                         print(error)
                     }
                 }
-            }
         }
     }
 
