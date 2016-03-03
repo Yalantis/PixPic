@@ -1,4 +1,4 @@
-//
+ //
 //  FeedViewController.swift
 //  P-effect
 //
@@ -284,7 +284,12 @@ extension FeedViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
-    
+
+    func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+
 }
 
 extension FeedViewController: DZNEmptyDataSetDelegate {

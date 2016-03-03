@@ -202,6 +202,11 @@ extension ProfileViewController: PostAdapterDelegate {
         tableView.reloadData()
     }
     
+    func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
 }
 
 
