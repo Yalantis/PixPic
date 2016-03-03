@@ -41,7 +41,7 @@ struct Constants {
     }
     
     struct UserDefaultsKeys {
-        static let Notifications = "Notifications"
+        static let RemoteNotifications = "RemoteNotifications"
     }
     
     struct UserKey {

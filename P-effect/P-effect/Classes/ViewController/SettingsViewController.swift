@@ -32,7 +32,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         
         navigationItem.title = title
         
-        notificationSwitch.on = SettingsHelper.notificationsState!
+        notificationSwitch.on = SettingsHelper.remoteNotificationsState!
         
         let currentUser = User.currentUser()
         let isUserAbsent = currentUser == nil
@@ -46,7 +46,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     }
     
     @IBAction private func enableNotifications(sender: AnyObject) {
-        SettingsHelper.switchNotofications(toState: notificationSwitch.on)
+        SettingsHelper.remoteNotificationsState = notificationSwitch.on
     }
     
     @IBAction private func enableOnlyFollowedNotifications(sender: AnyObject) {

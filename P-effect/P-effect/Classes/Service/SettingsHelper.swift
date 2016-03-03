@@ -10,12 +10,15 @@ import Foundation
 
 class SettingsHelper {
     
-    static func switchNotofications(toState state: Bool) {
-        NSUserDefaults.standardUserDefaults().setBool(state, forKey: Constants.UserDefaultsKeys.Notifications)
-    }
-    
-    static var notificationsState: Bool? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(Constants.UserDefaultsKeys.Notifications) as? Bool
+    static var remoteNotificationsState: Bool? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey(Constants.UserDefaultsKeys.RemoteNotifications) as? Bool
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setBool(newValue!, forKey: Constants.UserDefaultsKeys.RemoteNotifications)
+            RemoteNotificationManager.switchNotofications(toState: newValue!)
+        }
     }
     
 }
+
