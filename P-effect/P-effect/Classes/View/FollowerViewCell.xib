@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FollowerViewCellIdentifier" rowHeight="25" id="dAn-mv-m3V">
+            <rect key="frame" x="0.0" y="0.0" width="430" height="86"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dAn-mv-m3V" id="Rhq-uL-AfJ">
+                <rect key="frame" x="0.0" y="0.0" width="430" height="85"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="chN-ct-0Jf" userLabel="Profile Photo Image View">
+                        <rect key="frame" x="10" y="8" width="68" height="68"/>
+                        <color key="backgroundColor" red="0.13725490870000001" green="0.13725490870000001" blue="0.13725490870000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="68" id="a1Y-fp-oIL"/>
+                            <constraint firstAttribute="height" constant="68" id="u4Y-V6-Ocr"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L3l-zw-dbR" userLabel="Profile Name Label">
+                        <rect key="frame" x="88" y="8" width="334" height="69"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="333" id="cW4-pV-h5n"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cW4-pV-h5n"/>
+                            </mask>
+                        </variation>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="L3l-zw-dbR" firstAttribute="top" secondItem="Rhq-uL-AfJ" secondAttribute="top" constant="8" id="Tuq-wK-bcv"/>
+                    <constraint firstAttribute="bottom" secondItem="L3l-zw-dbR" secondAttribute="bottom" constant="8" id="USt-Zt-Wz7"/>
+                    <constraint firstItem="L3l-zw-dbR" firstAttribute="trailing" secondItem="Rhq-uL-AfJ" secondAttribute="trailingMargin" id="WZx-7l-ayE"/>
+                    <constraint firstItem="L3l-zw-dbR" firstAttribute="top" secondItem="chN-ct-0Jf" secondAttribute="top" id="eio-j9-a6T"/>
+                    <constraint firstItem="chN-ct-0Jf" firstAttribute="centerY" secondItem="Rhq-uL-AfJ" secondAttribute="centerY" id="fwl-7z-3v3"/>
+                    <constraint firstItem="chN-ct-0Jf" firstAttribute="leading" secondItem="Rhq-uL-AfJ" secondAttribute="leading" constant="10" id="nOT-SO-aNy"/>
+                    <constraint firstItem="L3l-zw-dbR" firstAttribute="leading" secondItem="chN-ct-0Jf" secondAttribute="trailing" constant="10" id="rD7-IE-2Oh"/>
+                    <constraint firstItem="L3l-zw-dbR" firstAttribute="bottom" secondItem="chN-ct-0Jf" secondAttribute="bottom" id="zhy-1A-Quz"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="eio-j9-a6T"/>
+                        <exclude reference="zhy-1A-Quz"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="222" y="126"/>
+        </tableViewCell>
+    </objects>
+</document>
