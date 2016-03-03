@@ -75,7 +75,7 @@ extension PostAdapter: UITableViewDataSource {
             ) as! PostViewCell
         
         cell.configure(withPost: getPost(atIndexPath: indexPath))
-
+        cell.delegate = self
         cell.didSelectUser = { [weak self] cell in
             guard let this = self else {
                 return
@@ -102,12 +102,11 @@ extension PostAdapter: UITableViewDataSource {
     }
     
 }
-<<<<<<< HEAD
 
 extension PostAdapter: PostViewCellDelegate {
     
     func didChooseCellWithUser(user: User) {
-        delegate?.showUserProfile(user)
+        delegate?.showUserProfile(self, user: user)
     }
     
     func didChooseCellToShare(items: [AnyObject]) {
@@ -115,5 +114,4 @@ extension PostAdapter: PostViewCellDelegate {
     }
     
 }
-=======
->>>>>>> 03d296fd6323d8e3e89681ec0ae75ddb59b9fc1c
+

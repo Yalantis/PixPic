@@ -68,12 +68,10 @@ class PostViewCell: UITableViewCell {
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         
         settingsButton.enabled = false
-        if let urlString = post.image.url {
+        if let url = NSURL(string: (post.image.url)!) {
             let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
-
-            let url = NSURL(string: urlString)
             postImageView.kf_setImageWithURL(
-                url!,
+                url,
                 placeholderImage: UIImage.placeholderImage(),
                 optionsInfo: nil) { [weak self] _, _, _, _ in
                     indicator.removeFromSuperview()
@@ -96,30 +94,22 @@ class PostViewCell: UITableViewCell {
     dynamic private func didTapProfile(recognizer: UIGestureRecognizer) {
         didSelectUser?(cell: self)
     }
+
+    
+    @IBAction private func didTapSettingsButton() {
+        didSelectSettings?(cell: self)
+    }
     
     @IBAction func share(sender: AnyObject) {
+        let cache = KingfisherManager.sharedManager.cache
         guard let username = profileLabel.text,
-            url = NSURL(string: (post?.image.url)!),
-            key = SDWebImageManager.sharedManager().cacheKeyForURL(url),
-            cachedImage = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(key) else {
+            url = post?.image.url!,
+            cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
                 return
         }
         let message = "Created by " + username + " with P-Effect app."
         let items = [cachedImage, message]
         delegate?.didChooseCellToShare(items)
-        
-        
-        //        let imgData = NSData(contentsOfURL: url)
-        //        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        //        let documentDirectory = paths.first
-        //        let filePath = documentDirectory! + "/" + "image.jpg"
-        //        let localImgData = NSData(contentsOfFile: filePath
-        //        imgData?.writeToFile(filePath, atomically: true)
-        //        let img1 = UIImage(named: "438016_421338")!
-    }
-    
-    @IBAction private func didTapSettingsButton() {
-        didSelectSettings?(cell: self)
     }
 
 }
