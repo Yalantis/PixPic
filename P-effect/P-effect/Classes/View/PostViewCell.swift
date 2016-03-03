@@ -68,7 +68,7 @@ class PostViewCell: UITableViewCell {
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         
         settingsButton.enabled = false
-        if let url = NSURL(string: (post.image.url)!) {
+        if let urlString = post.image.url, url = NSURL(string: urlString) {
             let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
             postImageView.kf_setImageWithURL(
                 url,
@@ -103,7 +103,7 @@ class PostViewCell: UITableViewCell {
     @IBAction func share(sender: AnyObject) {
         let cache = KingfisherManager.sharedManager.cache
         guard let username = profileLabel.text,
-            url = post?.image.url!,
+            url = post?.image.url,
             cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
                 return
         }
