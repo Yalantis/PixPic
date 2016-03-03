@@ -18,26 +18,26 @@ class ActivityViewController: UIActivityViewController {
     private let doneMessage = "Shared!"
     
     static func initWith(items: [AnyObject]) -> ActivityViewController {
-        let activityVC = ActivityViewController(activityItems: items, applicationActivities: nil)
-        activityVC.excludedActivityTypes = [
+        let activityViewController = ActivityViewController(activityItems: items, applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [
             UIActivityTypePostToTencentWeibo,
             UIActivityTypePostToWeibo,
             UIActivityTypePrint,
             UIActivityTypeOpenInIBooks
         ]
-        activityVC.completionWithItemsHandler = { activity, success, items, error in
+        activityViewController.completionWithItemsHandler = { activity, success, items, error in
             if let error = error {
                 print(error)
             }
-            if success {
-                let message = activityVC.activityViewController(
-                    activityVC,
-                    itemForActivityType: activity!
+            if let activity = activity where success  {
+                let message = activityViewController.activityViewController(
+                    activityViewController,
+                    itemForActivityType: activity
                     ) as? String
                 AlertManager.sharedInstance.showSimpleAlert(message!)
             }
         }
-        return activityVC
+        return activityViewController
     }
     
 }
