@@ -20,7 +20,10 @@ enum AuthError: Int {
 class AuthService {
     
     func signInWithPermission(completion: (User?, NSError?) -> Void) {
-        let token = FBSDKAccessToken.currentAccessToken()
+        guard let token = FBSDKAccessToken.currentAccessToken() else {
+            completion(nil, nil)
+            return
+        }
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
             if let user = user as? User {
                 if user.isNew {

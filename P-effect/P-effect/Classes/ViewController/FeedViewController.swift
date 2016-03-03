@@ -15,7 +15,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
+    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter>!
     
     private weak var locator: ServiceLocator!
     
@@ -172,6 +172,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         } else if let currentUser = currentUser {
             router.showProfile(currentUser)
         }
+    }
+    
+    @IBAction func presentSettings(sender: AnyObject) {
+        router.showSettings()
     }
     
     // MARK: - UserInteractive

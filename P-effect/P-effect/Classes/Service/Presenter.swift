@@ -108,3 +108,33 @@ extension PhotoEditorPresenter {
     }
     
 }
+
+protocol SettingsPresenter: Presenter {
+    
+    func showSettings()
+    
+}
+
+extension SettingsPresenter {
+    
+    func showSettings() {
+        let settingsRouter = SettingsRouter(locator: locator)
+        settingsRouter.execute(currentViewController)
+    }
+    
+}
+
+protocol CredentialsPresenter: Presenter {
+    
+    func showCredentials()
+    
+}
+
+extension CredentialsPresenter {
+    
+    func showCredentials() {
+        let credentialsRouter = CredentialsRouter(locator: locator)
+        credentialsRouter.execute(currentViewController)
+    }
+    
+}

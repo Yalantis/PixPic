@@ -37,10 +37,11 @@ struct Constants {
         static let Feed = "Feed"
         static let PhotoEditor = "PhotoEditor"
         static let Profile = "Profile"
+        static let Settings = "Settings"
     }
     
     struct UserDefaultsKeys {
-
+        static let Notifications = "Notifications"
     }
     
     struct UserKey {

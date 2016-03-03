@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter {
+class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter {
     
     private(set) var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
@@ -30,7 +30,8 @@ extension FeedRouter: Router {
     
     func execute(context: UIWindow) {
         if User.currentUser() == nil {
-            (locator.getService() as AuthService).anonymousLogIn(
+            let service: AuthService = locator.getService()
+            service.anonymousLogIn(
                 completion: { [weak self] _  in
                     self?.presentFeed(context)
                 },

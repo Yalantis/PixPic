@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         router.execute(window!)
+        
         return true
     }
     
@@ -61,6 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupRemoteNotifications(application: UIApplication) {
+        if SettingsHelper.notificationsState == nil {
+            SettingsHelper.switchNotofications(toState: true)
+        }
         let settings = UIUserNotificationSettings(
             forTypes: [.Alert, .Badge, .Sound],
             categories: nil
@@ -81,6 +85,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+        if !SettingsHelper.notificationsState {
+            return
+        }
         if application.applicationState == .Inactive  {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
@@ -88,6 +95,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if !SettingsHelper.notificationsState {
+            return
+        }
         AlertManager.sharedInstance.handlePush(userInfo)
         if PFUser.currentUser() != nil {
             completionHandler(.NewData)
