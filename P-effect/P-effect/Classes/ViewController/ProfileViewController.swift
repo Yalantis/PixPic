@@ -157,7 +157,7 @@ extension ProfileViewController: PostAdapterDelegate {
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
         if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
             
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
                 self?.removePost(post, atIndex: index)
             }

@@ -42,7 +42,6 @@ extension FeedRouter: Router {
         } else {
             presentFeed(context)
         }
-        presentFeed(context)
     }
     
     private func presentFeed(context: UIWindow) {

@@ -52,7 +52,7 @@
 		95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7B21C50998D004E2145 /* ErrorHandler.swift */; };
 		95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0711C58EA8700D52150 /* EffectEditorView.swift */; };
 		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
-		95F7802A1C86F0520037D36E /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F780291C86F0520037D36E /* UIAlertController.swift */; };
+		95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */; };
 		E0823F80177EF1A11E426BBF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */; };
 		FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */; };
 		FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */; };
@@ -149,7 +149,7 @@
 		95D6D7B21C50998D004E2145 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		95E4A0711C58EA8700D52150 /* EffectEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectEditorView.swift; sourceTree = "<group>"; };
 		95E4A0751C58F47D00D52150 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
-		95F780291C86F0520037D36E /* UIAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConfimAction.swift"; sourceTree = "<group>"; };
 		BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView + UIView.swift"; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 				FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */,
 				FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */,
 				FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */,
-				95F780291C86F0520037D36E /* UIAlertController.swift */,
+				95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -718,7 +718,7 @@
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				77752CA11C7B396800DCED81 /* EditProfileRouter.swift in Sources */,
 				FD7C43171C60AA65003E4072 /* AppearanceConfigurator.swift in Sources */,
-				95F7802A1C86F0520037D36E /* UIAlertController.swift in Sources */,
+				95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
