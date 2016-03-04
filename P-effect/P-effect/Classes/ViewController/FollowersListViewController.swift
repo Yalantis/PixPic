@@ -8,21 +8,24 @@
 
 import UIKit
 
-final class FollowersViewController: UIViewController, StoryboardInitable {
+final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
 
     var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    var user: User!
+    var followType: FollowType!
     
     private lazy var followerAdapter = FollowerAdapter()
     private weak var locator: ServiceLocator!
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
+        setupNavigavionBar()
         setupAdapter()
     }
     
@@ -35,17 +38,25 @@ final class FollowersViewController: UIViewController, StoryboardInitable {
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
     }
     
+    private func setupNavigavionBar() {
+        if followType == FollowType.Followers {
+            navigationItem.title = "Followers"
+        } else {
+            navigationItem.title = "Following"
+        }
+    }
+    
     private func setupAdapter() {
         tableView.dataSource = followerAdapter
-        followerAdapter.follovers = [User.currentUser()!]
-
     }
     
 }
 
-extension FollowersViewController: UITableViewDelegate {
+extension FollowersListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        let follower = followerAdapter.getFollover(atIndexPath: indexPath)
+        router.showProfile(follower)
     }
+    
 }

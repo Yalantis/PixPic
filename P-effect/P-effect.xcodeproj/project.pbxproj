@@ -46,7 +46,7 @@
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
 		95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221931C8850E90004A3EF /* FollowerViewCell.swift */; };
 		95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D221951C8851020004A3EF /* FollowerViewCell.xib */; };
-		95D221981C885CBB0004A3EF /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221971C885CBB0004A3EF /* FollowersViewController.swift */; };
+		95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221971C885CBB0004A3EF /* FollowersListViewController.swift */; };
 		95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221991C8869E70004A3EF /* FollowerAdapter.swift */; };
 		95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */; };
 		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
@@ -149,7 +149,7 @@
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
 		95D221931C8850E90004A3EF /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
 		95D221951C8851020004A3EF /* FollowerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerViewCell.xib; sourceTree = "<group>"; };
-		95D221971C885CBB0004A3EF /* FollowersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
+		95D221971C885CBB0004A3EF /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
 		95D221991C8869E70004A3EF /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
 		95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListRouter.swift; sourceTree = "<group>"; };
 		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
@@ -413,7 +413,7 @@
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
 				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
-				95D221971C885CBB0004A3EF /* FollowersViewController.swift */,
+				95D221971C885CBB0004A3EF /* FollowersListViewController.swift */,
 				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
 			);
 			path = ViewController;
@@ -713,7 +713,7 @@
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
-				95D221981C885CBB0004A3EF /* FollowersViewController.swift in Sources */,
+				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,

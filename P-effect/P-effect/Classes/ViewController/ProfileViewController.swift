@@ -9,6 +9,11 @@
 import UIKit
 import Toast
 
+enum FollowType {
+    case Followers
+    case Following
+}
+
 private let removePostMessage = "This photo will be deleted from P-effect"
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
@@ -110,9 +115,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
         }
         
-        followingQuantity.text = "10000 following"
-        followersQuantity.text = "200 followers"
-        
         if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
@@ -166,15 +168,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
-        
-        print("router.showFollovers  didTapFollowersLabel")
-        router.showFollowersList()
+        router.showFollowersList(user, followType: .Followers)
     }
     
     dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
-        
-        print("router.showFollovers  didTapFollowingLabel")
-        router.showFollowersList()
+        router.showFollowersList(user, followType: .Following)
     }
     
 }
@@ -185,7 +183,7 @@ extension ProfileViewController: PostAdapterDelegate {
         if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
             
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+            let okAction = UIAlertAction(title: "Delete post", style: .Default) { [weak self] _ in
                 self?.removePost(post, atIndex: index)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)

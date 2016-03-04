@@ -19,6 +19,8 @@ protocol PostViewCellDelegate: class {
 private let headerViewHeight: CGFloat = 78
 private let footerViewHeight: CGFloat = 48
 
+private let actionByTapProfile = Selector("didTapProfile:")
+
 class PostViewCell: UITableViewCell {
     
     static let identifier = "PostViewCellIdentifier"
@@ -45,10 +47,10 @@ class PostViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapProfile:")
+        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: actionByTapProfile)
         profileImageView.addGestureRecognizer(imageGestureRecognizer)
         
-        let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapProfile:")
+        let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: actionByTapProfile)
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
         selectionStyle = .None
     }

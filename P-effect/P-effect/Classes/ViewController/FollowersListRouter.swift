@@ -11,11 +11,13 @@ import Foundation
 class FollowersListRouter: AlertManagerDelegate, ProfilePresenter {
     
     private var user: User!
+    private let followType: FollowType!
     private(set) weak var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
     
-    init(user: User = User.currentUser()!, locator: ServiceLocator) {
+    init(user: User = User.currentUser()!, followType: FollowType, locator: ServiceLocator) {
         self.user = user
+        self.followType = followType
         self.locator = locator
     }
     
@@ -26,11 +28,13 @@ extension FollowersListRouter: Router {
     typealias Context = UIViewController
     
     func execute(context: UIViewController) {
-        let editProfileController = FollowersViewController.create()
-        editProfileController.router = self
-        editProfileController.setLocator(locator)
-        currentViewController = editProfileController
-        context.navigationController!.showViewController(editProfileController, sender: self)
+        let followersController = FollowersListViewController.create()
+        followersController.router = self
+        followersController.setLocator(locator)
+        currentViewController = followersController
+        followersController.user = user
+        followersController.followType = followType
+        context.navigationController!.showViewController(followersController, sender: self)
     }
     
 }
