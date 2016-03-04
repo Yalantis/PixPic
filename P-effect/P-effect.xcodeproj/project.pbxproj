@@ -13,6 +13,8 @@
 		492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* EffectsSticker.swift */; };
 		492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* EffectsModel.swift */; };
 		492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F61C5B9FE500D98404 /* EffectViewCell.swift */; };
+		496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D261C89BB7C00DED33F /* Complaint.swift */; };
+		496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D281C89BB8900DED33F /* ComplaintService.swift */; };
 		497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497954631C7B497E0003B960 /* ToastActivityHelper.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
@@ -111,6 +113,8 @@
 		492D17F21C5A027D00D98404 /* EffectsSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsSticker.swift; sourceTree = "<group>"; };
 		492D17F41C5A186100D98404 /* EffectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsModel.swift; sourceTree = "<group>"; };
 		492D17F61C5B9FE500D98404 /* EffectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewCell.swift; sourceTree = "<group>"; };
+		496B6D261C89BB7C00DED33F /* Complaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complaint.swift; sourceTree = "<group>"; };
+		496B6D281C89BB8900DED33F /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
 		497954631C7B497E0003B960 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 		FDAF46A21C49369E008060CD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				496B6D261C89BB7C00DED33F /* Complaint.swift */,
 				FDD0F0BB1C4E52F300331799 /* Post.swift */,
 				FDE508D31C49482F003C772B /* User.swift */,
 				492D17F21C5A027D00D98404 /* EffectsSticker.swift */,
@@ -381,6 +386,7 @@
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
+				496B6D281C89BB8900DED33F /* ComplaintService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
+				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
@@ -734,6 +741,7 @@
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
+				496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
