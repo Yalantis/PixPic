@@ -136,7 +136,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     }
     
     dynamic private func handleBackButtonTap() {
-        //TODO: figure out why does not work
         if someChangesMade {
             let alertController = UIAlertController(
                 title: "Save changes",
