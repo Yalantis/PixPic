@@ -88,6 +88,7 @@
 		FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23121C7341E9009EE533 /* ServiceLocator.swift */; };
 		FDEA23151C73434E009EE533 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23141C73434E009EE533 /* UserService.swift */; };
 		FDEA23171C734359009EE533 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23161C734359009EE533 /* PostService.swift */; };
+		FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +199,7 @@
 		FDEA23121C7341E9009EE533 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		FDEA23141C73434E009EE533 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FDEA23161C734359009EE533 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +414,7 @@
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
 				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
 				95D221971C885CBB0004A3EF /* FollowersViewController.swift */,
+				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
 				95D221981C885CBB0004A3EF /* FollowersViewController.swift in Sources */,
+				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
 				95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */,
