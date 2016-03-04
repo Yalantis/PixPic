@@ -4,7 +4,6 @@ inhibit_all_warnings!
 
 pod 'Parse', '~> 1.12'
 
-pod 'SDWebImage', '~>3.7'
 pod 'SVPullToRefresh'
 pod 'Toast', '~> 3.0'
 pod 'Fabric'
@@ -18,5 +17,7 @@ pod 'MHPrettyDate', '~> 1.1'
 pod 'DZNEmptyDataSet', '~> 1.7'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'AFDropdownNotification', '~> 1.0'
+
+pod 'Kingfisher', '~> 2.0'
 
 use_frameworks!
