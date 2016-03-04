@@ -35,11 +35,10 @@ extension LaunchRouter: Router {
         let navigationController = UINavigationController(rootViewController: launchViewController)
         context.rootViewController = navigationController
         
-        let feedRouter = FeedRouter(locator: locator)
         if User.currentUser() == nil {
             (locator.getService() as AuthService).anonymousLogIn(
-                completion: { _  in
-                    feedRouter.execute(context)
+                completion: { [weak self] _ in
+                    self?.presentFeed(context)
                 },
                 failure: { error in
                     if let error = error {
@@ -47,8 +46,13 @@ extension LaunchRouter: Router {
                     }
             })
         } else {
-            feedRouter.execute(context)
+            presentFeed(context)
         }
+    }
+    
+    private func presentFeed(context: UIWindow) {
+        let feedRouter = FeedRouter(locator: locator)
+        feedRouter.execute(context)
     }
     
 }
