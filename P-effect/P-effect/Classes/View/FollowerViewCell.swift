@@ -20,10 +20,9 @@ class FollowerViewCell: UITableViewCell, CellInterface {
         
         profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
         if let avatar = follower.avatar?.url {
-            profileImageView.sd_setImageWithURL(
-                NSURL(string: avatar),
-                placeholderImage: UIImage.avatarPlaceholderImage(),
-                completed: nil
+            profileImageView.kf_setImageWithURL(
+                NSURL(string: avatar)!,
+                placeholderImage: UIImage.avatarPlaceholderImage()
             )
         } else {
             profileImageView.image = UIImage.avatarPlaceholderImage()

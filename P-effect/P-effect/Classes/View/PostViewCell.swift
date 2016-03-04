@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import MHPrettyDate
 
-private let headerViewHeight: CGFloat = 78
+private let headerViewHeight: CGFloat = 88
 private let footerViewHeight: CGFloat = 48
 
 class PostViewCell: UITableViewCell {
