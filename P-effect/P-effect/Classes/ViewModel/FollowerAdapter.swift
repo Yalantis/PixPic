@@ -10,9 +10,7 @@ import Foundation
 
 class FollowerAdapter: NSObject {
     
-//    private var follovers = [User]()
-
-    var follovers = [User]()
+    private var follovers = [User]()
     
     var folloversQuantity: Int {
         return follovers.count
