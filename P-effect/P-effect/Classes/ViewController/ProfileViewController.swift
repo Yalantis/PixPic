@@ -9,6 +9,11 @@
 import UIKit
 import Toast
 
+protocol ProfileViewControllerDelegate: class {
+    
+    func didTapActivityButton(user: User, activity: Activity)
+}
+
 private let removePostMessage = "This photo will be deleted from P-effect"
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
@@ -32,6 +37,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         
         setupController()
         setupLoadersCallback()
+        setupFollowButton()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,6 +59,24 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
+    }
+    
+    private func setupFollowButton() {
+        followButton.selected = false
+        let attributes: [NSObject: AnyObject]? = AttributesCache.sharedCache.attributesForUser(user)
+        if attributes != nil {
+            followButton.selected = AttributesCache.sharedCache.followStatusForUser(user)
+        } else {
+            let isFollowingQuery = PFQuery(className: Activity.parseClassName())
+            isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+            isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
+            isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
+                print(number)
+                AttributesCache.sharedCache.setFollowStatus((error == nil && number > 0), user: self.user)
+                self.followButton.selected = (error == nil && number > 0)
+            }
+        }
     }
     
     private func loadUserPosts() {
@@ -149,7 +173,34 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         router.showEditProfile()
     }
     
-       
+    @IBAction func followSomeone(sender: AnyObject) {
+        // followButton.selected = !followButton.selected
+        shouldToggleFollowFriend()
+        
+    }
+    
+    func shouldToggleFollowFriend() {
+        let activitySrvc = ActivityService()
+        if followButton.selected {
+            // Unfollow
+                followButton.selected = false
+            activitySrvc.unfollowUserEventually(user)
+            
+        } else {
+            // Follow
+            followButton.selected = true
+            activitySrvc.followUserEventually(user) { (succeeded, error) in
+                if error == nil {
+                    print("Attempt to follow was \(succeeded) ")
+                    self.followButton.selected = true
+                } else {
+                    self.followButton.selected = false
+                }
+            }
+        }
+    }
+    
+    @IBOutlet weak var followButton: UIButton!
 }
 
 extension ProfileViewController: PostAdapterDelegate {
@@ -189,7 +240,7 @@ extension ProfileViewController: PostAdapterDelegate {
                 }
         }
     }
-
+    
     func showUserProfile(adapter: PostAdapter, user: User) {
         
     }

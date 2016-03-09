@@ -99,4 +99,22 @@ struct Constants {
     struct EditProfile {
         static let EditProfileControllerIdentifier = "EditProfileViewController"
     }
+    
+    struct Attributes {
+        static let PostsCount = "postsCount"
+        static let IsFollowedByCurrentUser = "isFollowedByCurrentUser"
+        static let IsLikedByCurrentUser = "isLikedByCurrentUser"
+        static let PhotoCount = "photoCount"
+        static let LikeCount = "likeCount"
+        static let Likers = "likers"
+        static let Followers = "followes"
+        static let FollowedBy = "followedBy"
+    }
+    
+    struct ActivityKey {
+        static let FromUser = "fromUser"
+        static let ToUser = "toUser"
+        static let Type = "type"
+        static let Content = "content"
+    }
 }

@@ -84,6 +84,9 @@
 		FDEA23151C73434E009EE533 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23141C73434E009EE533 /* UserService.swift */; };
 		FDEA23171C734359009EE533 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23161C734359009EE533 /* PostService.swift */; };
 		FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */; };
+		FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757261C89E6FB00D9ED68 /* Activity.swift */; };
+		FDF757291C89EDC100D9ED68 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757281C89EDC100D9ED68 /* ActivityService.swift */; };
+		FDF7572D1C89F8F100D9ED68 /* AttributesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -190,6 +193,9 @@
 		FDEA23141C73434E009EE533 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FDEA23161C734359009EE533 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		FDF757261C89E6FB00D9ED68 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		FDF757281C89EDC100D9ED68 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
+		FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +357,7 @@
 				492D17F21C5A027D00D98404 /* EffectsSticker.swift */,
 				492D17EE1C5A00EE00D98404 /* EffectsGroup.swift */,
 				492D17F01C5A024E00D98404 /* EffectsVersion.swift */,
+				FDF757261C89E6FB00D9ED68 /* Activity.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -381,6 +388,7 @@
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
+				FDF757281C89EDC100D9ED68 /* ActivityService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -466,6 +474,7 @@
 		FDAF46AB1C49369E008060CD /* ThirdPartyLibs */ = {
 			isa = PBXGroup;
 			children = (
+				FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */,
 				FDD0F0BF1C4E535900331799 /* Reachability.swift */,
 			);
 			path = ThirdPartyLibs;
@@ -718,6 +727,7 @@
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
 				77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */,
+				FDF757291C89EDC100D9ED68 /* ActivityService.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
 				95D6D7AF1C4E9036004E2145 /* ImageLoaderService.swift in Sources */,
 				77752CA11C7B396800DCED81 /* EditProfileRouter.swift in Sources */,
@@ -727,6 +737,7 @@
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
+				FDF7572D1C89F8F100D9ED68 /* AttributesCache.swift in Sources */,
 				7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */,
 				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
 				492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */,
@@ -743,6 +754,7 @@
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,
+				FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

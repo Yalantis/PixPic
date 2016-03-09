@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E49a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -58,15 +58,38 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTP-6l-I6C">
+                                    <rect key="frame" x="406" y="10" width="52" height="34"/>
+                                    <state key="normal" title="Follow"/>
+                                    <state key="selected" title="Following">
+                                        <color key="titleColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="followSomeone:" destination="Lav-xa-cbI" eventType="touchUpInside" id="AZm-l8-uSU"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="top" secondItem="3W9-Wv-xaN" secondAttribute="top" constant="12" id="0S9-mo-TKl"/>
                                 <constraint firstItem="Lrk-fZ-kCM" firstAttribute="width" secondItem="3W9-Wv-xaN" secondAttribute="height" multiplier="191:238" id="0eS-Wv-dU7"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="ASI-e7-emX" secondAttribute="centerX" id="74s-cv-yzE"/>
+                                <constraint firstItem="RTP-6l-I6C" firstAttribute="leading" secondItem="NK7-AM-JLQ" secondAttribute="trailing" constant="10" id="Hor-7F-p8v"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="3W9-Wv-xaN" secondAttribute="centerX" id="SM2-1i-jsq"/>
                                 <constraint firstAttribute="bottom" secondItem="ASI-e7-emX" secondAttribute="bottom" constant="3" id="kWC-49-ycn"/>
                                 <constraint firstItem="ASI-e7-emX" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="bottom" constant="14" id="sQ6-nm-WCI"/>
+                                <constraint firstItem="RTP-6l-I6C" firstAttribute="top" secondItem="3W9-Wv-xaN" secondAttribute="top" constant="10" id="vut-eI-cLh"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -105,6 +128,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="followButton" destination="RTP-6l-I6C" id="dgC-FF-aGl"/>
                         <outlet property="profileSettingsButton" destination="xc4-g0-tKg" id="1F4-Rw-7oh"/>
                         <outlet property="tableViewFooter" destination="RWA-d4-3KE" id="65t-jj-0Ow"/>
                         <outlet property="userAvatar" destination="Lrk-fZ-kCM" id="FWi-c5-QN3"/>
