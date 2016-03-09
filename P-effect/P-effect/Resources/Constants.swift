@@ -38,6 +38,7 @@ struct Constants {
         static let PhotoEditor = "PhotoEditor"
         static let Profile = "Profile"
         static let Settings = "Settings"
+        static let LaunchScreen = "LaunchScreen"
     }
     
     struct UserDefaultsKeys {

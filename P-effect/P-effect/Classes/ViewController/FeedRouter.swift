@@ -10,18 +10,13 @@ import Foundation
 
 class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter {
     
-    private(set) var locator: ServiceLocator!
+    private(set) weak var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
     
-    init() {
-        locator = ServiceLocator()
-        locator.registerService(PostService())
-        locator.registerService(EffectsService())
-        locator.registerService(UserService())
-        locator.registerService(ValidationService())
-        locator.registerService(AuthService())
-        locator.registerService(ImageLoaderService())
+    init(locator: ServiceLocator) {
+        self.locator = locator
     }
+    
 }
 
 extension FeedRouter: Router {
@@ -29,23 +24,6 @@ extension FeedRouter: Router {
     typealias Context = UIWindow
     
     func execute(context: UIWindow) {
-        if User.currentUser() == nil {
-            let service: AuthService = locator.getService()
-            service.anonymousLogIn(
-                completion: { [weak self] _  in
-                    self?.presentFeed(context)
-                },
-                failure: { error in
-                    if let error = error {
-                        handleError(error)
-                    }
-            })
-        } else {
-            presentFeed(context)
-        }
-    }
-    
-    private func presentFeed(context: UIWindow) {
         let feedViewController = FeedViewController.create()
         feedViewController.router = self
         feedViewController.setLocator(locator)

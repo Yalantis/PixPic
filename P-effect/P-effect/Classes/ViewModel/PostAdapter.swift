@@ -11,13 +11,16 @@ import Foundation
 public enum UpdateType {
     
     case Reload, LoadMore
+    
 }
 
 protocol PostAdapterDelegate: class {
     
-    func showUserProfile(user: User)
-    func showPlaceholderForEmptyDataSet()
+    func showUserProfile(adapter: PostAdapter,user: User)
+    func showPlaceholderForEmptyDataSet(adapter: PostAdapter)
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
+    func showActivityController(items: [AnyObject])
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int)
     
 }
 
@@ -25,7 +28,7 @@ class PostAdapter: NSObject {
     
     private var posts = [Post]() {
         didSet {
-            delegate?.showPlaceholderForEmptyDataSet()
+            delegate?.showPlaceholderForEmptyDataSet(self)
             delegate?.postAdapterRequestedViewUpdate(self)
         }
     }
@@ -53,6 +56,10 @@ class PostAdapter: NSObject {
         return post
     }
     
+    func removePost(atIndex index: Int) {
+        posts.removeAtIndex(index)
+    }
+    
 }
 
 extension PostAdapter: UITableViewDataSource {
@@ -66,19 +73,31 @@ extension PostAdapter: UITableViewDataSource {
             PostViewCell.identifier,
             forIndexPath: indexPath
             ) as! PostViewCell
-        cell.delegate = self
+        
         cell.configure(withPost: getPost(atIndexPath: indexPath))
+        cell.delegate = self
         cell.didSelectUser = { [weak self] cell in
             guard let this = self else {
                 return
             }
             if let path = tableView.indexPathForCell(cell) {
-                let model = this.getPost(atIndexPath: path)
-                if let user = model.user {
-                    this.delegate?.showUserProfile(user)
+                let post = this.getPost(atIndexPath: path)
+                if let user = post.user {
+                    this.delegate?.showUserProfile(this, user: user)
                 }
             }
         }
+        
+        cell.didSelectSettings = { [weak self] cell in
+            guard let this = self else {
+                return
+            }
+            if let path = tableView.indexPathForCell(cell) {
+                let post = this.getPost(atIndexPath: path)
+                this.delegate?.showSettingsMenu(this, post: post, index: path.row)
+            }
+        }
+        
         return cell
     }
     
@@ -87,7 +106,12 @@ extension PostAdapter: UITableViewDataSource {
 extension PostAdapter: PostViewCellDelegate {
     
     func didChooseCellWithUser(user: User) {
-        delegate?.showUserProfile(user)
+        delegate?.showUserProfile(self, user: user)
+    }
+    
+    func didChooseCellToShare(items: [AnyObject]) {
+        delegate?.showActivityController(items)
     }
     
 }
+
