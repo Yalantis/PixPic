@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter {
+class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter {
     
     private var user: User!
     private(set) weak var currentViewController: UIViewController!
@@ -27,10 +27,10 @@ extension ProfileRouter: Router {
     
     func execute(context: UIViewController) {
         let profileController = ProfileViewController.create()
-        profileController.router = self
+        profileController.setRouter(self)
         profileController.setLocator(locator)
         currentViewController = profileController
-        profileController.user = user
+        profileController.setUser(user)
         context.navigationController!.showViewController(profileController, sender: self)
     }
     

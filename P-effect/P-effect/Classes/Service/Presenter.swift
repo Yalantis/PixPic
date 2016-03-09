@@ -21,14 +21,14 @@ protocol Router: class {
     
 }
 
-protocol Presenter: class {
+protocol PresenterType: class {
     
     weak var locator: ServiceLocator! { get }
     weak var currentViewController: UIViewController! { get }
     
 }
 
-protocol FeedPresenter: Presenter {
+protocol FeedPresenter: PresenterType {
     
     var showFeedAction: Handler { get }
     
@@ -49,7 +49,7 @@ extension FeedPresenter {
     }
 }
 
-protocol ProfilePresenter: Presenter {
+protocol ProfilePresenter: PresenterType {
     
     func showProfile(user: User)
     
@@ -64,7 +64,7 @@ extension ProfilePresenter {
     
 }
 
-protocol EditProfilePresenter: Presenter {
+protocol EditProfilePresenter: PresenterType {
     
     func showEditProfile()
     
@@ -79,7 +79,7 @@ extension EditProfilePresenter {
     
 }
 
-protocol AuthorizationPresenter: Presenter {
+protocol AuthorizationPresenter: PresenterType {
     
     func showAuthorization()
     
@@ -94,7 +94,7 @@ extension AuthorizationPresenter {
     
 }
 
-protocol PhotoEditorPresenter: Presenter {
+protocol PhotoEditorPresenter: PresenterType {
     
     func showPhotoEditor(image: UIImage)
     
@@ -109,7 +109,7 @@ extension PhotoEditorPresenter {
     
 }
 
-protocol SettingsPresenter: Presenter {
+protocol SettingsPresenter: PresenterType {
     
     func showSettings()
     
@@ -124,7 +124,7 @@ extension SettingsPresenter {
     
 }
 
-protocol CredentialsPresenter: Presenter {
+protocol CredentialsPresenter: PresenterType {
     
     func showCredentials()
     
@@ -135,6 +135,20 @@ extension CredentialsPresenter {
     func showCredentials() {
         let credentialsRouter = CredentialsRouter(locator: locator)
         credentialsRouter.execute(currentViewController)
+    }
+    
+}
+protocol FollowersListPresenter: PresenterType {
+    
+    func showFollowersList(user: User, followType: FollowType)
+    
+}
+
+extension FollowersListPresenter {
+    
+    func showFollowersList(user: User, followType: FollowType) {
+        let followersListRouter = FollowersListRouter(user: user, followType: followType, locator: locator)
+        followersListRouter.execute(currentViewController)
     }
     
 }
