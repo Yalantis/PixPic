@@ -39,11 +39,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     }
     
     private func setupNavigavionBar() {
-        if followType == FollowType.Followers {
-            navigationItem.title = "Followers"
-        } else {
-            navigationItem.title = "Following"
-        }
+        navigationItem.title = followType.rawValue
     }
     
     private func setupAdapter() {
@@ -55,7 +51,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
 extension FollowersListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let follower = followerAdapter.getFollover(atIndexPath: indexPath)
+        let follower = followerAdapter.getFollower(atIndexPath: indexPath)
         router.showProfile(follower)
     }
     

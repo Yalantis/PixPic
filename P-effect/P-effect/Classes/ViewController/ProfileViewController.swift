@@ -9,9 +9,9 @@
 import UIKit
 import Toast
 
-enum FollowType {
-    case Followers
-    case Following
+enum FollowType: String {
+    case Followers = "Followers"
+    case Following = "Following"
 }
 
 private let removePostMessage = "This photo will be deleted from P-effect"
