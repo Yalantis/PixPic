@@ -67,7 +67,7 @@ class PostViewCell: UITableViewCell {
             post.createdAt,
             withFormat: MHPrettyDateShortRelativeTime
         )
-        profileImageView.layer.cornerRadius = (profileImageView.frame.size.width) / 2
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         settingsButton.enabled = false
         if let urlString = post.image.url, url = NSURL(string: urlString) {

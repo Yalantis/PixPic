@@ -12,9 +12,10 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
 
-    var router: protocol<ProfilePresenter, AlertManagerDelegate>!
-    var user: User!
-    var followType: FollowType!
+    private var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    
+    private var user: User!
+    private var followType: FollowType!
     
     private lazy var followerAdapter = FollowerAdapter()
     private weak var locator: ServiceLocator!
@@ -33,17 +34,25 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
+    func setUser(user: User) {
+        self.user = user
+    }
+    
+    func setFollowType(type: FollowType) {
+        self.followType = type
+    }
+    
+    func setRouter(router: FollowersListRouter) {
+        self.router = router
+    }
+    
     private func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
     }
     
     private func setupNavigavionBar() {
-        if followType == FollowType.Followers {
-            navigationItem.title = "Followers"
-        } else {
-            navigationItem.title = "Following"
-        }
+        navigationItem.title = followType.rawValue
     }
     
     private func setupAdapter() {
@@ -55,7 +64,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
 extension FollowersListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let follower = followerAdapter.getFollover(atIndexPath: indexPath)
+        let follower = followerAdapter.getFollower(atIndexPath: indexPath)
         router.showProfile(follower)
     }
     

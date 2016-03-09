@@ -10,15 +10,14 @@ import Foundation
 
 class FollowerAdapter: NSObject {
     
-    private var follovers = [User]()
+    private var followers = [User]()
     
-    var folloversQuantity: Int {
-        return follovers.count
+    var followersQuantity: Int {
+        return followers.count
     }
         
-    func getFollover(atIndexPath indexPath: NSIndexPath) -> User {
-        let follover = follovers[indexPath.row]
-        return follover
+    func getFollower(atIndexPath indexPath: NSIndexPath) -> User {
+        return followers[indexPath.row]
     }
 
 }
@@ -26,7 +25,7 @@ class FollowerAdapter: NSObject {
 extension FollowerAdapter: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return folloversQuantity
+        return followersQuantity
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -34,7 +33,8 @@ extension FollowerAdapter: UITableViewDataSource {
             FollowerViewCell.identifier,
             forIndexPath: indexPath
             ) as! FollowerViewCell
-        cell.configure(withFollower: getFollover(atIndexPath: indexPath))
+        let follower = getFollower(atIndexPath: indexPath)
+        cell.configure(withFollower: follower)
         
         return cell
     }

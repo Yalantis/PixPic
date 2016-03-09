@@ -27,10 +27,10 @@ extension ProfileRouter: Router {
     
     func execute(context: UIViewController) {
         let profileController = ProfileViewController.create()
-        profileController.router = self
+        profileController.setRouter(self)
         profileController.setLocator(locator)
         currentViewController = profileController
-        profileController.user = user
+        profileController.setUser(user)
         context.navigationController!.showViewController(profileController, sender: self)
     }
     

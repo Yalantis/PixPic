@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-enum FollowType {
+enum FollowType: String {
     case Followers
     case Following
 }
@@ -20,8 +20,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
-    var user: User!
+    private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
+    private var user: User!
     
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
@@ -56,6 +56,14 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     // MARK: - Inner func
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setUser(user: User) {
+        self.user = user
+    }
+    
+    func setRouter(router: ProfileRouter) {
+        self.router = router
     }
     
     private func setupController() {

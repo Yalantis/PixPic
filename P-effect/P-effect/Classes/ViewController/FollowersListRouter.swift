@@ -29,11 +29,11 @@ extension FollowersListRouter: Router {
     
     func execute(context: UIViewController) {
         let followersController = FollowersListViewController.create()
-        followersController.router = self
+        followersController.setRouter(self)
         followersController.setLocator(locator)
         currentViewController = followersController
-        followersController.user = user
-        followersController.followType = followType
+        followersController.setUser(user)
+        followersController.setFollowType(followType)
         context.navigationController!.showViewController(followersController, sender: self)
     }
     
