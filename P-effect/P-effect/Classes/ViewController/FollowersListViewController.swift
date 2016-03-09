@@ -14,9 +14,8 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
 
     var router: protocol<ProfilePresenter, AlertManagerDelegate>!
     
-    //TODO: replace "var user: User!" to "var followers: [User]"
-    var user: User!
-    var followType: FollowType!
+    private var user: User!
+    private var followType: FollowType!
     
     private lazy var followerAdapter = FollowerAdapter()
     private weak var locator: ServiceLocator!
@@ -33,6 +32,14 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setUser(user: User) {
+        self.user = user
+    }
+    
+    func setFollowType(type: FollowType) {
+        self.followType = type
     }
     
     private func setupTableView() {

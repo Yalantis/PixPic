@@ -10,8 +10,8 @@ import UIKit
 import Toast
 
 enum FollowType: String {
-    case Followers = "Followers"
-    case Following = "Following"
+    case Followers
+    case Following
 }
 
 private let removePostMessage = "This photo will be deleted from P-effect"
@@ -21,7 +21,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Profile
     
     var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
-    var user: User!
+    private var user: User!
     
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
@@ -32,8 +32,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     
-    @IBOutlet weak var followersQuantity: UILabel!
-    @IBOutlet weak var followingQuantity: UILabel!
+    @IBOutlet private weak var followersQuantity: UILabel!
+    @IBOutlet private weak var followingQuantity: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     // MARK: - Inner func
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setUser(user: User) {
+        self.user = user
     }
     
     private func setupController() {

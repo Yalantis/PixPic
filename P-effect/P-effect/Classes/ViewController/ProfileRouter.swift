@@ -30,7 +30,7 @@ extension ProfileRouter: Router {
         profileController.router = self
         profileController.setLocator(locator)
         currentViewController = profileController
-        profileController.user = user
+        profileController.setUser(user)
         context.navigationController!.showViewController(profileController, sender: self)
     }
     

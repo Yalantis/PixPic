@@ -17,8 +17,7 @@ class FollowerAdapter: NSObject {
     }
         
     func getFollower(atIndexPath indexPath: NSIndexPath) -> User {
-        let follower = followers[indexPath.row]
-        return follower
+        return followers[indexPath.row]
     }
 
 }
@@ -34,7 +33,8 @@ extension FollowerAdapter: UITableViewDataSource {
             FollowerViewCell.identifier,
             forIndexPath: indexPath
             ) as! FollowerViewCell
-        cell.configure(withFollower: getFollower(atIndexPath: indexPath))
+        let follower = getFollower(atIndexPath: indexPath)
+        cell.configure(withFollower: follower)
         
         return cell
     }
