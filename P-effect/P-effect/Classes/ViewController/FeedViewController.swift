@@ -17,8 +17,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
-    
+    private var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
     private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -81,6 +80,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setRouter(router: FeedRouter) {
+        self.router = router
     }
     
     private func setupToolBar() {

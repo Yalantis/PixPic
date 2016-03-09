@@ -23,10 +23,10 @@ class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
     
     func execute(context: UIViewController) {
         let photoEditorViewController = PhotoEditorViewController.create()
-        photoEditorViewController.router = self
+        photoEditorViewController.setRouter(self)
         photoEditorViewController.setLocator(locator)
         currentViewController = photoEditorViewController
-        photoEditorViewController.model = PhotoEditorModel(image: image)
+        photoEditorViewController.setModel(PhotoEditorModel(image: image))
         context.navigationController!.pushViewController(photoEditorViewController, animated: false)
     }
     
