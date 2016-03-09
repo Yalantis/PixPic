@@ -13,7 +13,7 @@ class Complaint: PFObject {
     @NSManaged var complainer: User
     @NSManaged var complaintReason: String
     @NSManaged var suspectedUser: User
-    @NSManaged var suspectedPost: Post
+    @NSManaged var suspectedPost: Post?
     private static var onceToken: dispatch_once_t = 0
 
     override class func initialize() {
@@ -41,7 +41,8 @@ class Complaint: PFObject {
         let query = PFQuery(className: Complaint.parseClassName())
         query.orderByDescending("updatedAt")
         query.whereKey("complainer", equalTo: complainer)
-        query.whereKey("suspectedPost", equalTo: suspectedPost)
+        // query is called only when suspectedPost != nil
+        query.whereKey("suspectedPost", equalTo: suspectedPost!)
         query.whereKey("suspectedUser", equalTo: suspectedUser)
 
         return query
