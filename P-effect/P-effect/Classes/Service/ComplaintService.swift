@@ -95,11 +95,8 @@ class ComplaintService: NSObject {
             
             return false
         }
-        guard ReachabilityHelper.checkConnection() else {
-            return false
-        }
         
-        return true
+        return ReachabilityHelper.checkConnection()
     }
     
     private func sendComplaint(complaint: Complaint, completion: ComplainCompletion) {
