@@ -9,14 +9,19 @@
 import UIKit
 import Toast
 
+enum FollowType: String {
+    case Followers
+    case Following
+}
+
 private let removePostMessage = "This photo will be deleted from P-effect"
 
 final class ProfileViewController: UITableViewController, StoryboardInitable, ApplicationAppearance {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<EditProfilePresenter, FeedPresenter, AlertManagerDelegate>!
-    var user: User!
+    private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
+    private var user: User!
     
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
@@ -27,12 +32,16 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     
+    @IBOutlet private weak var followersQuantity: UILabel!
+    @IBOutlet private weak var followingQuantity: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configurateNavigationBar()
         setupController()
         setupLoadersCallback()
+        setupGestureRecognizers()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +53,14 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
     // MARK: - Inner func
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setUser(user: User) {
+        self.user = user
+    }
+    
+    func setRouter(router: ProfileRouter) {
+        self.router = router
     }
     
     private func setupController() {
@@ -83,6 +100,14 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
         tableView.tableFooterView = tableViewFooter;
     }
     
+    private func setupGestureRecognizers() {
+        let followersGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowersLabel:")
+        followersQuantity.addGestureRecognizer(followersGestureRecognizer)
+        
+        let followingGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowingLabel:")
+        followingQuantity.addGestureRecognizer(followingGestureRecognizer)
+    }
+    
     private func applyUser() {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
@@ -98,6 +123,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
                 this.view.makeToast(error?.localizedDescription)
             }
         }
+        
         if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
@@ -155,6 +181,14 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
         router.showEditProfile()
     }
     
+    dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+        router.showFollowersList(user, followType: .Followers)
+    }
+    
+    dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+        router.showFollowersList(user, followType: .Following)
+    }
+    
 }
 
 extension ProfileViewController: PostAdapterDelegate {
@@ -164,7 +198,7 @@ extension ProfileViewController: PostAdapterDelegate {
         if post.user == User.currentUser() && reachabilityService.isReachable() {
             
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+            let okAction = UIAlertAction(title: "Delete post", style: .Default) { [weak self] _ in
                 self?.removePost(post, atIndex: index)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
@@ -206,6 +240,11 @@ extension ProfileViewController: PostAdapterDelegate {
     
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
+    }
+    
+    func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
 }

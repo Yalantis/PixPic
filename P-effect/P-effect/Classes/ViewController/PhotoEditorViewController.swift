@@ -21,10 +21,11 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, App
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
     
-    var model: PhotoEditorModel!
-    
-    var router: protocol<FeedPresenter, AlertManagerDelegate>!
     weak var delegate: PhotoEditorDelegate?
+
+    private var model: PhotoEditorModel!
+    
+    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
     private var effectsPickerController: EffectsPickerViewController? {
@@ -89,6 +90,14 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, App
     
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setRouter(router: PhotoEditorRouter) {
+        self.router = router
+    }
+    
+    func setModel(model: PhotoEditorModel) {
+        self.model = model
     }
     
 }

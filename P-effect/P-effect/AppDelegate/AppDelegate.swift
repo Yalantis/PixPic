@@ -17,7 +17,7 @@ import Bolts
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private lazy var router = FeedRouter()
+    private lazy var router = LaunchRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         Fabric.with([Crashlytics.self])
         
-        if application.applicationState != UIApplicationState.Background {
+        if application.applicationState != .Background {
             let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
             let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
             if oldPushHandlerOnly || noPushPayload != nil {
@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         router.execute(window!)
+        
         return true
     }
     

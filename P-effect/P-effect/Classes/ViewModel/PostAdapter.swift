@@ -19,6 +19,7 @@ protocol PostAdapterDelegate: class {
     func showUserProfile(adapter: PostAdapter,user: User)
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter)
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
+    func showActivityController(items: [AnyObject])
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int)
     
 }
@@ -72,9 +73,10 @@ extension PostAdapter: UITableViewDataSource {
             PostViewCell.identifier,
             forIndexPath: indexPath
             ) as! PostViewCell
+        let post = getPost(atIndexPath: indexPath)
+        cell.configure(withPost: post)
         
-        cell.configure(withPost: getPost(atIndexPath: indexPath))
-
+        cell.delegate = self
         cell.didSelectUser = { [weak self] cell in
             guard let this = self else {
                 return
@@ -101,3 +103,16 @@ extension PostAdapter: UITableViewDataSource {
     }
     
 }
+
+extension PostAdapter: PostViewCellDelegate {
+    
+    func didChooseCellWithUser(user: User) {
+        delegate?.showUserProfile(self, user: user)
+    }
+    
+    func didChooseCellToShare(items: [AnyObject]) {
+        delegate?.showActivityController(items)
+    }
+    
+}
+

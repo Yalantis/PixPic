@@ -1,4 +1,4 @@
-//
+ //
 //  FeedViewController.swift
 //  P-effect
 //
@@ -17,8 +17,7 @@ final class FeedViewController: UIViewController, StoryboardInitable, Applicatio
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
-    
+    private var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter>!
     private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -84,6 +83,10 @@ final class FeedViewController: UIViewController, StoryboardInitable, Applicatio
     // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
+    }
+    
+    func setRouter(router: FeedRouter) {
+        self.router = router
     }
     
     private func setupToolBar() {
@@ -291,7 +294,12 @@ extension FeedViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
-    
+
+    func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+
 }
 
 extension FeedViewController: DZNEmptyDataSetDelegate {

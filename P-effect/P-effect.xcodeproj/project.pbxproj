@@ -13,6 +13,8 @@
 		492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* EffectsSticker.swift */; };
 		492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* EffectsModel.swift */; };
 		492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F61C5B9FE500D98404 /* EffectViewCell.swift */; };
+		496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D261C89BB7C00DED33F /* Complaint.swift */; };
+		496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D281C89BB8900DED33F /* ComplaintService.swift */; };
 		497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497954631C7B497E0003B960 /* ToastActivityHelper.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
@@ -32,6 +34,7 @@
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
 		771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
+		7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE701C889EAA00ECC707 /* LaunchRouter.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
 		77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */; };
@@ -41,10 +44,17 @@
 		7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7787919A1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift */; };
 		77A3620A1C6239FD0095B0B5 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityService.swift */; };
 		77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* EffectsLayout.swift */; };
+		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
+		77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0A4471C883C3A007852A0 /* LaunchViewController.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */; };
 		95C096AA1C7C545A008742E8 /* ApplicationAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */; };
+		95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221931C8850E90004A3EF /* FollowerViewCell.swift */; };
+		95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D221951C8851020004A3EF /* FollowerViewCell.xib */; };
+		95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221971C885CBB0004A3EF /* FollowersListViewController.swift */; };
+		95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221991C8869E70004A3EF /* FollowerAdapter.swift */; };
+		95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */; };
 		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
 		95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA41C776477007F1B6A /* Profile.storyboard */; };
 		95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */; };
@@ -83,6 +93,7 @@
 		FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23121C7341E9009EE533 /* ServiceLocator.swift */; };
 		FDEA23151C73434E009EE533 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23141C73434E009EE533 /* UserService.swift */; };
 		FDEA23171C734359009EE533 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23161C734359009EE533 /* PostService.swift */; };
+		FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +121,8 @@
 		492D17F21C5A027D00D98404 /* EffectsSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsSticker.swift; sourceTree = "<group>"; };
 		492D17F41C5A186100D98404 /* EffectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsModel.swift; sourceTree = "<group>"; };
 		492D17F61C5B9FE500D98404 /* EffectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewCell.swift; sourceTree = "<group>"; };
+		496B6D261C89BB7C00DED33F /* Complaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complaint.swift; sourceTree = "<group>"; };
+		496B6D281C89BB8900DED33F /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
 		497954631C7B497E0003B960 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +142,7 @@
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsGroupHeaderView.xib; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
+		7729BE701C889EAA00ECC707 /* LaunchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
@@ -138,10 +152,17 @@
 		7787919A1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsGroupHeaderView.swift; sourceTree = "<group>"; };
 		77A362091C6239FD0095B0B5 /* ReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* EffectsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLayout.swift; sourceTree = "<group>"; };
+		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		77C0A4471C883C3A007852A0 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLoaderService.swift; sourceTree = "<group>"; };
 		95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAppearance.swift; sourceTree = "<group>"; };
+		95D221931C8850E90004A3EF /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
+		95D221951C8851020004A3EF /* FollowerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerViewCell.xib; sourceTree = "<group>"; };
+		95D221971C885CBB0004A3EF /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		95D221991C8869E70004A3EF /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
+		95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListRouter.swift; sourceTree = "<group>"; };
 		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		95D57EA41C776477007F1B6A /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoEditor.storyboard; sourceTree = "<group>"; };
@@ -188,6 +209,7 @@
 		FDEA23121C7341E9009EE533 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		FDEA23141C73434E009EE533 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FDEA23161C734359009EE533 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +279,8 @@
 				95E4A0751C58F47D00D52150 /* BorderView.swift */,
 				FD27A2721C64CFEC0058203F /* FeedToolBar.xib */,
 				FD27A2741C64D09E0058203F /* FeedToolBar.swift */,
+				95D221931C8850E90004A3EF /* FollowerViewCell.swift */,
+				95D221951C8851020004A3EF /* FollowerViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -336,6 +360,7 @@
 		FDAF46A21C49369E008060CD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				496B6D261C89BB7C00DED33F /* Complaint.swift */,
 				FDD0F0BB1C4E52F300331799 /* Post.swift */,
 				FDE508D31C49482F003C772B /* User.swift */,
 				492D17F21C5A027D00D98404 /* EffectsSticker.swift */,
@@ -371,6 +396,7 @@
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
+				496B6D281C89BB8900DED33F /* ComplaintService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -390,6 +416,11 @@
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
+				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
+				95D221971C885CBB0004A3EF /* FollowersListViewController.swift */,
+				7729BE701C889EAA00ECC707 /* LaunchRouter.swift */,
+				77C0A4471C883C3A007852A0 /* LaunchViewController.swift */,
+				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -401,6 +432,7 @@
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
 				499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */,
 				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
+				95D221991C8869E70004A3EF /* FollowerAdapter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -471,6 +503,7 @@
 		FDAF46AF1C4936CA008060CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */,
 				499DD0541C57D2D300DABCD5 /* Feed.storyboard */,
 				95D57EA41C776477007F1B6A /* Profile.storyboard */,
 				95D57EA01C77636C007F1B6A /* Authorization.storyboard */,
@@ -595,7 +628,9 @@
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
+				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
+				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
@@ -677,6 +712,7 @@
 				499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
+				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
 				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
@@ -684,9 +720,14 @@
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
+				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
+				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
+				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
+				95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */,
+				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
@@ -704,6 +745,7 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
+				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
 				77A3620A1C6239FD0095B0B5 /* ReachabilityService.swift in Sources */,
 				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
@@ -722,6 +764,7 @@
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
+				496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
@@ -730,6 +773,7 @@
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
+				7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
 			);
@@ -860,7 +904,6 @@
 			baseConfigurationReference = F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
@@ -889,7 +932,6 @@
 			baseConfigurationReference = 417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";

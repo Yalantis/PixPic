@@ -17,7 +17,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -68,6 +68,14 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
     }
     
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
+    func setRouter(router: EditProfileRouter) {
+        self.router = router
+    }
+    
     private func subscribeOnNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -81,10 +89,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
             name: UIKeyboardWillHideNotification,
             object: nil
         )
-    }
-    
-    func setLocator(locator: ServiceLocator) {
-        self.locator = locator
     }
     
     private func configureImagesAndText() {
