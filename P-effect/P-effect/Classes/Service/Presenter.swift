@@ -21,14 +21,14 @@ protocol Router: class {
     
 }
 
-protocol Presenter: class {
+protocol PresenterType: class {
     
     weak var locator: ServiceLocator! { get }
     weak var currentViewController: UIViewController! { get }
     
 }
 
-protocol FeedPresenter: Presenter {
+protocol FeedPresenter: PresenterType {
     
     var showFeedAction: Handler { get }
     
@@ -49,7 +49,7 @@ extension FeedPresenter {
     }
 }
 
-protocol ProfilePresenter: Presenter {
+protocol ProfilePresenter: PresenterType {
     
     func showProfile(user: User)
     
@@ -64,7 +64,7 @@ extension ProfilePresenter {
     
 }
 
-protocol EditProfilePresenter: Presenter {
+protocol EditProfilePresenter: PresenterType {
     
     func showEditProfile()
     
@@ -79,7 +79,7 @@ extension EditProfilePresenter {
     
 }
 
-protocol AuthorizationPresenter: Presenter {
+protocol AuthorizationPresenter: PresenterType {
     
     func showAuthorization()
     
@@ -94,7 +94,7 @@ extension AuthorizationPresenter {
     
 }
 
-protocol PhotoEditorPresenter: Presenter {
+protocol PhotoEditorPresenter: PresenterType {
     
     func showPhotoEditor(image: UIImage)
     
@@ -109,7 +109,7 @@ extension PhotoEditorPresenter {
     
 }
 
-protocol FollowersListPresenter: Presenter {
+protocol FollowersListPresenter: PresenterType {
     
     func showFollowersList(user: User, followType: FollowType)
     
