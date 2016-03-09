@@ -14,7 +14,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
-    var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     
     override func viewDidLoad() {
@@ -27,15 +27,19 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
         AlertManager.sharedInstance.registerAlertListener(router)
     }
     
-    @IBAction private func logInWithFBButtonTapped() {
-        view.makeToastActivity(CSToastPositionCenter)
-        signInWithFacebook()
-    }
-    
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
     
+    func setRouter(router: AuthorizationRouter) {
+        self.router = router
+    }
+    
+    @IBAction private func logInWithFBButtonTapped() {
+        view.makeToastActivity(CSToastPositionCenter)
+        signInWithFacebook()
+    }
+
     private func signInWithFacebook() {
         let authService: AuthService = locator.getService()
         authService.signInWithFacebookInController(self) { [weak self] _, error in

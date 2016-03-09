@@ -27,7 +27,7 @@ extension EditProfileRouter: Router {
     
     func execute(context: UIViewController) {
         let editProfileController = EditProfileViewController.create()
-        editProfileController.router = self
+        editProfileController.setRouter(self)
         editProfileController.setLocator(locator)
         currentViewController = editProfileController
         context.navigationController!.showViewController(editProfileController, sender: self)

@@ -27,7 +27,7 @@ extension ProfileRouter: Router {
     
     func execute(context: UIViewController) {
         let profileController = ProfileViewController.create()
-        profileController.router = self
+        profileController.setRouter(self)
         profileController.setLocator(locator)
         currentViewController = profileController
         profileController.setUser(user)

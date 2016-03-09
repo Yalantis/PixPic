@@ -12,7 +12,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
 
-    var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    private var router: protocol<ProfilePresenter, AlertManagerDelegate>!
     
     private var user: User!
     private var followType: FollowType!
@@ -40,6 +40,10 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     func setFollowType(type: FollowType) {
         self.followType = type
+    }
+    
+    func setRouter(router: FollowersListRouter) {
+        self.router = router
     }
     
     private func setupTableView() {
