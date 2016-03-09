@@ -8,21 +8,21 @@
 
 import UIKit
 
-private let ComplaintSuccessfull = "Thank you for complaint"
-private let NilUserInPost = "Nil user in post"
-private let NoObjectsFoundErrorCode = 101
+private let complaintSuccessfull = "Thank you for complaint"
+private let nilUserInPost = "Nil user in post"
+private let noObjectsFoundErrorCode = 101
 
 typealias ComplainCompletion = (Bool, NSError?) -> Void
 
 enum ComplaintReason: String {
     case UserAvatar = "User Avatar"
     case PostImage = "Post Image"
-    case Userame = "Username"
+    case Username = "Username"
 }
 
 enum ComplaintRejectReason: String {
-    case SelfComplaint = "You can't make a complaint on yourself",
-    AlreadyComplainedPost = "You already make a complaint on this post"
+    case SelfComplaint = "You can't make a complaint on yourself"
+    case AlreadyComplainedPost = "You already make a complaint on this post"
 }
 
 class ComplaintService: NSObject {
@@ -31,7 +31,7 @@ class ComplaintService: NSObject {
         if !shouldContinueExecutionWith(user) {
             return
         }
-        let complaint = Complaint.init(user: user, post: post, reason: ComplaintReason.Userame)
+        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.Username)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
@@ -41,7 +41,7 @@ class ComplaintService: NSObject {
         if !shouldContinueExecutionWith(user) {
             return
         }
-        let complaint = Complaint.init(user: user, post: post, reason: ComplaintReason.UserAvatar)
+        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.UserAvatar)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
@@ -49,13 +49,14 @@ class ComplaintService: NSObject {
     
     func complaintPost(post: Post, completion: ComplainCompletion) {
         guard let user = post.user else {
-            print(NilUserInPost)
+            print(nilUserInPost)
+            
             return
         }
         if !shouldContinueExecutionWith(user) {
             return
         }
-        let complaint = Complaint.init(user: user, post: post, reason: ComplaintReason.PostImage)
+        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.PostImage)
         performIfComplaintExsist(complaint) { [weak self] existence in
             guard let this = self else {
                 return
@@ -73,14 +74,16 @@ class ComplaintService: NSObject {
     // You should check reachability befor using this method
     func performIfComplaintExsist(complaint: Complaint, existence: Bool -> Void)  {
         complaint.postQuery().getFirstObjectInBackgroundWithBlock { object, error in
-            if let object = object {
+            if object != nil {
                 existence(true)
+                
                 return
             }
-            guard let error = error where error.code == NoObjectsFoundErrorCode else {
+            guard let error = error where error.code == noObjectsFoundErrorCode else {
                 return
             }
             existence(false)
+            
             return
         }
     }
@@ -89,18 +92,20 @@ class ComplaintService: NSObject {
     private func shouldContinueExecutionWith(user:User) -> Bool {
         if user.isCurrentUser {
             AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.SelfComplaint.rawValue)
+            
             return false
         }
         guard ReachabilityHelper.checkConnection() else {
             return false
         }
+        
         return true
     }
     
     private func sendComplaint(complaint: Complaint, completion: ComplainCompletion) {
         complaint.saveInBackgroundWithBlock { succeeded, error in
             if succeeded {
-                AlertManager.sharedInstance.showSimpleAlert(ComplaintSuccessfull)
+                AlertManager.sharedInstance.showSimpleAlert(complaintSuccessfull)
                 completion(true, nil)
             } else {
                 completion(false, error)
