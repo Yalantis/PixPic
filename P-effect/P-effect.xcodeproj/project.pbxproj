@@ -32,6 +32,7 @@
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
 		771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
+		7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE701C889EAA00ECC707 /* LaunchRouter.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
 		77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */; };
@@ -41,6 +42,8 @@
 		7787919B1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7787919A1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift */; };
 		77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */; };
 		77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* EffectsLayout.swift */; };
+		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
+		77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0A4471C883C3A007852A0 /* LaunchViewController.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
@@ -130,6 +133,7 @@
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsGroupHeaderView.xib; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
+		7729BE701C889EAA00ECC707 /* LaunchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 		7787919A1C693CEF00DFF8C9 /* EffectsGroupHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsGroupHeaderView.swift; sourceTree = "<group>"; };
 		77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* EffectsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLayout.swift; sourceTree = "<group>"; };
+		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		77C0A4471C883C3A007852A0 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
@@ -400,6 +406,8 @@
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
+				7729BE701C889EAA00ECC707 /* LaunchRouter.swift */,
+				77C0A4471C883C3A007852A0 /* LaunchViewController.swift */,
 				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
 			);
 			path = ViewController;
@@ -482,6 +490,7 @@
 		FDAF46AF1C4936CA008060CD /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */,
 				499DD0541C57D2D300DABCD5 /* Feed.storyboard */,
 				95D57EA41C776477007F1B6A /* Profile.storyboard */,
 				95D57EA01C77636C007F1B6A /* Authorization.storyboard */,
@@ -607,6 +616,7 @@
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
+				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
@@ -695,6 +705,7 @@
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
+				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
@@ -742,6 +753,7 @@
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */,
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
+				7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
 			);
@@ -872,7 +884,6 @@
 			baseConfigurationReference = F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
@@ -901,7 +912,6 @@
 			baseConfigurationReference = 417C7F0BA78FEA4860422B08 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
