@@ -10,6 +10,7 @@ import Foundation
 
 class FollowersListRouter: AlertManagerDelegate, ProfilePresenter {
     
+    //TODO: replace "var user: User!" to "var followers: [User]"
     private var user: User!
     private let followType: FollowType!
     private(set) weak var locator: ServiceLocator!
@@ -32,6 +33,7 @@ extension FollowersListRouter: Router {
         followersController.router = self
         followersController.setLocator(locator)
         currentViewController = followersController
+        //TODO: replace "followersController.user = user" to "followersController.followers = followers"
         followersController.user = user
         followersController.followType = followType
         context.navigationController!.showViewController(followersController, sender: self)

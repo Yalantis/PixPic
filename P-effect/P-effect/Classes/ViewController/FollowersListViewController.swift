@@ -13,6 +13,8 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Profile
 
     var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    
+    //TODO: replace "var user: User!" to "var followers: [User]"
     var user: User!
     var followType: FollowType!
     
