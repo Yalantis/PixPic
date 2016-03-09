@@ -32,8 +32,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
     
-    @IBOutlet weak var followersQuantity: UILabel!
-    @IBOutlet weak var followingQuantity: UILabel!
+    @IBOutlet private weak var followersQuantity: UILabel!
+    @IBOutlet private weak var followingQuantity: UILabel!
+    @IBOutlet private weak var followButton: UIButton!
+    
+    @IBOutlet weak var followButtonHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         setupController()
         setupLoadersCallback()
         setupGestureRecognizers()
+        followButton.selected
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -84,10 +88,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         var frame = tableViewFooter.frame
         if let navigationController = navigationController {
             frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
+            print("\(screenSize.height) - \(Constants.Profile.HeaderHeight) - \(navigationController.navigationBar.frame.size.height)")
         } else {
             frame.size.height = Constants.Profile.PossibleInsets
         }
         tableViewFooter.frame = frame
+        print(tableViewFooter.frame)
         tableView.tableFooterView = tableViewFooter;
     }
     
@@ -119,6 +125,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
             profileSettingsButton.tintColor = .whiteColor()
+           
+            followButton.hidden = true
+            followButtonHeight.constant = 0.1
+            
+            print(followButtonHeight)
         }
     }
     
