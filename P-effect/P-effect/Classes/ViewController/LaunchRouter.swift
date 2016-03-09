@@ -31,7 +31,7 @@ extension LaunchRouter: Router {
     func execute(context: UIWindow) {
         let launchViewController = LaunchViewController.create()
         launchViewController.router = self
-        self.currentViewController = launchViewController
+        currentViewController = launchViewController
         let navigationController = UINavigationController(rootViewController: launchViewController)
         context.rootViewController = navigationController
         
