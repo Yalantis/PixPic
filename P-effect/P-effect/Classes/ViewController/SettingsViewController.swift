@@ -31,9 +31,11 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         super.viewDidLoad()
         
         navigationItem.title = title
-        
         notificationSwitch.on = SettingsHelper.remoteNotificationsState!
-        
+        setupAvailableSettings()
+    }
+    
+    private func setupAvailableSettings() {
         let currentUser = User.currentUser()
         let isUserAbsent = currentUser == nil
         
@@ -94,7 +96,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         let authService: AuthService = locator.getService()
         authService.logOut()
         authService.anonymousLogIn(
-            completion: { object in
+            completion: { _ in
                 self.router.showFeed()
             }, failure: { error in
                 if let error = error {
