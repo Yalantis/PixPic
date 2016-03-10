@@ -83,22 +83,16 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mza-2S-LBW">
                                     <rect key="frame" x="206" y="239" width="190" height="55"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhm-c2-hmO">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhm-c2-hmO">
                                             <rect key="frame" x="0.0" y="10" width="190" height="35"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <state key="normal" title="Follow"/>
+                                            <state key="normal" image="btn_follow"/>
                                             <state key="selected" title="Following">
                                                 <color key="titleShadowColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="17"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="1"/>
+                                                    <real key="value" value="0.0"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </button>
@@ -150,7 +144,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QXO-7N-2az">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="settings" id="xc4-g0-tKg">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="edit_icon" id="xc4-g0-tKg">
                             <color key="tintColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="profileSettings" destination="Lav-xa-cbI" id="jit-0F-JSQ"/>
@@ -341,6 +335,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="settings" width="25" height="25"/>
+        <image name="btn_follow" width="129" height="35"/>
+        <image name="edit_icon" width="28" height="28"/>
     </resources>
 </document>

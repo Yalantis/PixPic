@@ -105,9 +105,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
-                                        <rect key="frame" x="302" y="448" width="39" height="30"/>
-                                        <state key="normal" title="Menu"/>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
+                                        <rect key="frame" x="313" y="448" width="28" height="22"/>
+                                        <state key="normal" image="more_icon"/>
                                         <connections>
                                             <action selector="didTapSettingsButton" destination="wTx-Av-Y8L" eventType="touchUpInside" id="KDQ-VB-JSF"/>
                                         </connections>
@@ -186,4 +186,7 @@
             <point key="canvasLocation" x="299.5" y="739.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="more_icon" width="28" height="6"/>
+    </resources>
 </document>
