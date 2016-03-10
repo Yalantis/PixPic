@@ -108,9 +108,9 @@ struct Constants {
         static let PhotoCount = "photoCount"
         static let LikeCount = "likeCount"
         static let Likers = "likers"
-        static let Followers = "followes"
+        static let Followers = "followers"
         static let Following = "following"
-        static let FollowersCount = "followesCount"
+        static let FollowersCount = "followersCount"
         static let FollowingCount = "followingCount"
     }
     
