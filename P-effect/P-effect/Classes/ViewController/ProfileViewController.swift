@@ -197,19 +197,34 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
 
 extension ProfileViewController: PostAdapterDelegate {
     
-    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
-        if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+        if ReachabilityHelper.checkConnection() {
             
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let okAction = UIAlertAction(title: "Delete post", style: .Default) { [weak self] _ in
-                self?.removePost(post, atIndex: index)
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
-            
-            settingsMenu.addAction(okAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             settingsMenu.addAction(cancelAction)
             
+            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                self?.showActivityController(items)
+            }
+            settingsMenu.addAction(shareAction)
+            
+            
+            if post.user == User.currentUser() {
+                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                    self?.removePost(post, atIndex: index)
+                }
+                settingsMenu.addAction(removeAction)
+                
+            } else {
+                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                    self?.complaintToPost(post)
+                }
+                settingsMenu.addAction(complaintAction)
+            }
+            
             presentViewController(settingsMenu, animated: true, completion: nil)
+            
         }
     }
     
@@ -232,6 +247,44 @@ extension ProfileViewController: PostAdapterDelegate {
                 }
         }
     }
+    
+    private func complaintToPost(post: Post) {
+        let complaintMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        complaintMenu.addAction(cancelAction)
+        
+        let complaintService: ComplaintService = router.locator.getService()
+        
+        let complaintUsernameAction = UIAlertAction(title: "Complaint to username", style: .Default) { _ in
+            complaintService.complaintUsername(post.user!) { _, error in
+                print(error)
+            }
+        }
+        
+        let complaintUserAvatarAction = UIAlertAction(title: "Complaint to user avatar", style: .Default) { _ in
+            complaintService.complaintUserAvatar(post.user!) { _, error in
+                print(error)
+            }
+        }
+        
+        let complaintPostAction = UIAlertAction(title: "Complaint to post", style: .Default) { _ in
+            complaintService.complaintPost(post) { _, error in
+                print(error)
+            }
+        }
+        
+        complaintMenu.addAction(complaintUsernameAction)
+        complaintMenu.addAction(complaintUserAvatarAction)
+        complaintMenu.addAction(complaintPostAction)
+        
+        presentViewController(complaintMenu, animated: true, completion: nil)
+        
+    }
+    
+    private func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
 
     func showUserProfile(adapter: PostAdapter, user: User) {
         
@@ -243,11 +296,6 @@ extension ProfileViewController: PostAdapterDelegate {
     
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
-    }
-    
-    func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
 }

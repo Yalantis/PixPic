@@ -10,12 +10,6 @@ import UIKit
 import Kingfisher
 import MHPrettyDate
 
-protocol PostViewCellDelegate: class {
-    
-    func didChooseCellWithUser(user: User)
-    func didChooseCellToShare(items: [AnyObject])
-}
-
 private let headerViewHeight: CGFloat = 78
 private let footerViewHeight: CGFloat = 48
 
@@ -31,10 +25,9 @@ class PostViewCell: UITableViewCell {
         return nib
     }
     var didSelectUser: ((cell: PostViewCell) -> Void)?
-    weak var delegate: PostViewCellDelegate?
     weak var post = Post?()
     
-    var didSelectSettings: ((cell: PostViewCell) -> Void)?
+    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)?
 
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -99,10 +92,6 @@ class PostViewCell: UITableViewCell {
 
     
     @IBAction private func didTapSettingsButton() {
-        didSelectSettings?(cell: self)
-    }
-    
-    @IBAction func share(sender: AnyObject) {
         let cache = KingfisherManager.sharedManager.cache
         guard let username = profileLabel.text,
             url = post?.image.url,
@@ -111,7 +100,8 @@ class PostViewCell: UITableViewCell {
         }
         let message = "Created by " + username + " with P-Effect app."
         let items = [cachedImage, message]
-        delegate?.didChooseCellToShare(items)
+        
+        didSelectSettings?(cell: self, items: items)
     }
 
 }

@@ -236,12 +236,18 @@ extension FeedViewController: UITableViewDelegate {
 
 extension FeedViewController: PostAdapterDelegate {
     
-    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         if ReachabilityHelper.checkConnection() {
             
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             settingsMenu.addAction(cancelAction)
+            
+            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                self?.showActivityController(items)
+            }
+            settingsMenu.addAction(shareAction)
+            
         
             if post.user == User.currentUser() {
                 let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
@@ -314,6 +320,11 @@ extension FeedViewController: PostAdapterDelegate {
 
     }
     
+    private func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+
     func showUserProfile(adapter: PostAdapter, user: User) {
          router.showProfile(user)
     }
@@ -328,11 +339,6 @@ extension FeedViewController: PostAdapterDelegate {
     
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
-    }
-
-    func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 }
