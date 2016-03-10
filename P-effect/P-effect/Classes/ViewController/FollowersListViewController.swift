@@ -65,7 +65,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         case .Followers :
             guard let attributes = cache.attributesForUser(user),
                 cachedFollowers = attributes[Constants.Attributes.Followers] as? [User] else {
-                    activityService.fetchFollowers(forUser: user) { [weak self] followers, error in
+                    activityService.fetchFollowers(forUser: user) { [weak self] followers, _ in
                         if let followers = followers {
                             self?.followerAdapter.update(withFollowers: followers, action: .Reload)
                         }
@@ -77,7 +77,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         case .Following :
             guard let attributes = cache.attributesForUser(user),
                 cachedFollowing = attributes[Constants.Attributes.Following] as? [User] else {
-                    activityService.fetchFollowing(forUser: user) { [weak self] following, error in
+                    activityService.fetchFollowing(forUser: user) { [weak self] following, _ in
                         if let following = following {
                             self?.followerAdapter.update(withFollowers: following, action: .Reload)
                         }

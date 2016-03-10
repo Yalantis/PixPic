@@ -21,7 +21,6 @@ protocol FollowerAdapterDelegate: class {
     
 }
 
-
 class FollowerAdapter: NSObject {
     
     weak var delegate: FollowerAdapterDelegate?
