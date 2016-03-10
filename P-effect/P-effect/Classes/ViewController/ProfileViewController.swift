@@ -44,7 +44,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         setupController()
         setupLoadersCallback()
         setupGestureRecognizers()
-        followButton.selected
     }
     
     override func viewDidAppear(animated: Bool) {
