@@ -11,55 +11,32 @@ import Foundation
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
 private let title = "Settings"
 
+enum SettingsState {
+    
+    case Common,
+    LoggedIn,
+    LoggedOut
+    
+}
+
 final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
-    
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
-    private weak var locator: ServiceLocator!
     
-    @IBOutlet private weak var logOutView: UIView!
-    @IBOutlet private weak var logInView: UIView!
-    @IBOutlet private weak var showFollowedPostsView: UIView!
-    @IBOutlet private weak var notificationSwitch: UISwitch!
-    
-    func setLocator(locator: ServiceLocator) {
-        self.locator = locator
+    private lazy var credentials: UIView = TextView.instanceFromNib("Credentials/Policies") {
+        self.router.showCredentials()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.title = title
-        notificationSwitch.on = SettingsHelper.remoteNotificationsState!
-        setupAvailableSettings()
+    private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
+        SettingsHelper.isRemoteNotificationsEnabled = on
     }
-    
-    private func setupAvailableSettings() {
-        let currentUser = User.currentUser()
-        let isUserAbsent = currentUser == nil
-        
-        if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
-            logOutView.removeFromSuperview()
-            showFollowedPostsView.removeFromSuperview()
-        } else if currentUser != nil {
-            logInView.removeFromSuperview()
-        }
-    }
-    
-    @IBAction private func enableNotifications(sender: AnyObject) {
-        SettingsHelper.remoteNotificationsState = notificationSwitch.on
-    }
-    
-    @IBAction private func enableOnlyFollowedNotifications(sender: AnyObject) {
+    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts") { on in
         //TODO: implement logic here
     }
-    
-    @IBAction private func loginAction() {
-        router.showAuthorization()
+    private lazy var logIn: UIView = ButtonView.instanceFromNib("Log In") {
+        self.router.showAuthorization()
     }
-    
-    @IBAction private func logoutAction() {
+    private lazy var logOut: UIView = ButtonView.instanceFromNib("Log Out") {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -82,11 +59,42 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
                 self.logout()
         }
         alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    @IBAction private func showCredentials(sender: AnyObject) {
-        router.showCredentials()
+    private var settings = [SettingsState: [UIView]]()
+    private weak var locator: ServiceLocator!
+    
+    @IBOutlet private weak var settingsStack: UIStackView!
+    
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.title = title
+        setupAvailableSettings()
+    }
+    
+    private func setupAvailableSettings() {
+        settings[.Common] = [credentials, enableNotifications]
+        for view in settings[.Common]! {
+            settingsStack.addArrangedSubview(view)
+        }
+        let currentUser = User.currentUser()
+        if PFAnonymousUtils.isLinkedWithUser(currentUser) || currentUser == nil {
+            settings[.LoggedOut] = [logIn]
+            for view in settings[.LoggedOut]! {
+                settingsStack.addArrangedSubview(view)
+            }
+        } else if currentUser != nil {
+            settings[.LoggedIn] = [followedPosts, logOut]
+            for view in settings[.LoggedIn]! {
+                settingsStack.addArrangedSubview(view)
+            }
+        }
     }
     
     private func logout() {

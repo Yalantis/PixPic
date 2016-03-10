@@ -10,9 +10,9 @@ import Foundation
 
 class RemoteNotificationManager {
     
-    static func switchNotofications(toState state: Bool) {
+    static func switchNotificationAvailbilityState(to enabled: Bool) {
         let application = UIApplication.sharedApplication()
-        if state {
+        if enabled {
             let settings = UIUserNotificationSettings(
                 forTypes: [.Alert, .Badge, .Sound],
                 categories: nil
