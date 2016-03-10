@@ -13,6 +13,8 @@
 		492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* EffectsSticker.swift */; };
 		492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* EffectsModel.swift */; };
 		492D17F71C5B9FE500D98404 /* EffectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F61C5B9FE500D98404 /* EffectViewCell.swift */; };
+		496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D261C89BB7C00DED33F /* Complaint.swift */; };
+		496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D281C89BB8900DED33F /* ComplaintService.swift */; };
 		497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497954631C7B497E0003B960 /* ToastActivityHelper.swift */; };
 		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
 		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
@@ -47,6 +49,11 @@
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
+		95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221931C8850E90004A3EF /* FollowerViewCell.swift */; };
+		95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D221951C8851020004A3EF /* FollowerViewCell.xib */; };
+		95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221971C885CBB0004A3EF /* FollowersListViewController.swift */; };
+		95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221991C8869E70004A3EF /* FollowerAdapter.swift */; };
+		95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */; };
 		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
 		95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA41C776477007F1B6A /* Profile.storyboard */; };
 		95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */; };
@@ -117,6 +124,8 @@
 		492D17F21C5A027D00D98404 /* EffectsSticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsSticker.swift; sourceTree = "<group>"; };
 		492D17F41C5A186100D98404 /* EffectsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsModel.swift; sourceTree = "<group>"; };
 		492D17F61C5B9FE500D98404 /* EffectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectViewCell.swift; sourceTree = "<group>"; };
+		496B6D261C89BB7C00DED33F /* Complaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complaint.swift; sourceTree = "<group>"; };
+		496B6D281C89BB8900DED33F /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
 		497954631C7B497E0003B960 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
 		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +160,11 @@
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
+		95D221931C8850E90004A3EF /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
+		95D221951C8851020004A3EF /* FollowerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerViewCell.xib; sourceTree = "<group>"; };
+		95D221971C885CBB0004A3EF /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		95D221991C8869E70004A3EF /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
+		95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListRouter.swift; sourceTree = "<group>"; };
 		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		95D57EA41C776477007F1B6A /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoEditor.storyboard; sourceTree = "<group>"; };
@@ -271,6 +285,8 @@
 				95E4A0751C58F47D00D52150 /* BorderView.swift */,
 				FD27A2721C64CFEC0058203F /* FeedToolBar.xib */,
 				FD27A2741C64D09E0058203F /* FeedToolBar.swift */,
+				95D221931C8850E90004A3EF /* FollowerViewCell.swift */,
+				95D221951C8851020004A3EF /* FollowerViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -358,6 +374,7 @@
 		FDAF46A21C49369E008060CD /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				496B6D261C89BB7C00DED33F /* Complaint.swift */,
 				FDD0F0BB1C4E52F300331799 /* Post.swift */,
 				FDE508D31C49482F003C772B /* User.swift */,
 				492D17F21C5A027D00D98404 /* EffectsSticker.swift */,
@@ -395,6 +412,7 @@
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
 				FDF757281C89EDC100D9ED68 /* ActivityService.swift */,
+				496B6D281C89BB8900DED33F /* ComplaintService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -414,6 +432,8 @@
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
+				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
+				95D221971C885CBB0004A3EF /* FollowersListViewController.swift */,
 				7729BE701C889EAA00ECC707 /* LaunchRouter.swift */,
 				77C0A4471C883C3A007852A0 /* LaunchViewController.swift */,
 				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
@@ -428,6 +448,7 @@
 				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
 				499DD0521C579F1300DABCD5 /* EffectsPickerAdapter.swift */,
 				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
+				95D221991C8869E70004A3EF /* FollowerAdapter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -624,6 +645,7 @@
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
+				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
@@ -707,6 +729,7 @@
 				499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
+				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
 				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
@@ -716,9 +739,12 @@
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
 				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
+				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
+				95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */,
+				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
@@ -736,6 +762,7 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
+				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
 				77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */,
 				FDF757291C89EDC100D9ED68 /* ActivityService.swift in Sources */,
@@ -756,6 +783,7 @@
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
 				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
+				496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,

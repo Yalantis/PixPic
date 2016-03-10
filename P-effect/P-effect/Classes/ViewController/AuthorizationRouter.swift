@@ -25,7 +25,7 @@ extension AuthorizationRouter: Router {
     
     func execute(context: UIViewController) {
         let authorizationViewController = AuthorizationViewController.create()
-        authorizationViewController.router = self
+        authorizationViewController.setRouter(self)
         authorizationViewController.setLocator(locator)
         currentViewController = authorizationViewController
         context.navigationController!.pushViewController(authorizationViewController, animated: true)
