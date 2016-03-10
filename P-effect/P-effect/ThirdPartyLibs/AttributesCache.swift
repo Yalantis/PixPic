@@ -32,31 +32,53 @@ final class AttributesCache {
         setAttributes(attributes as! [String : AnyObject], forPost: post)
     }
     
-    func setAttributesForUser(user: User, followers: [User], followedBy: [User]) {
+    func setAttributesForUser(user: User, followers: [User]) {
         let attributes = [
             Constants.Attributes.Followers: followers,
-            Constants.Attributes.FollowedBy: followedBy,
+            Constants.Attributes.FollowersCount: followers.count
         ]
-       // setAttributes(attributes as! [String : AnyObject], forUser: user)
+        setAttributes(attributes as! [String : AnyObject], forUser: user)
+    }
+    
+    func setAttributesForUser(user: User, following: [User]) {
+        let attributes = [
+            Constants.Attributes.Following: following,
+            Constants.Attributes.FollowingCount: following.count
+        ]
+        setAttributes(attributes as! [String : AnyObject], forUser: user)
+    }
+    
+    func setAttributesForUser(user: User, followersCount: Int, followingCount: Int) {
+        let attributes = [
+            Constants.Attributes.FollowersCount: followersCount,
+            Constants.Attributes.FollowingCount: followingCount
+        ]
+        setAttributes(attributes, forUser: user)
     }
     
     func attributesForPost(post: Post) -> [String:AnyObject]? {
-        let key: String = self.keyForPost(post)
+        let key = keyForPost(post)
         return cache.objectForKey(key) as? [String:AnyObject]
     }
     
     func likeCountForPost(post: Post) -> Int {
-        let attributes: [NSObject:AnyObject]? = self.attributesForPost(post)
-        if attributes != nil {
-            return attributes![Constants.Attributes.LikeCount] as! Int
+        if let attributes = attributesForPost(post) {
+            if attributes.isEmpty {
+                return 0
+            } else {
+                return attributes[Constants.Attributes.LikeCount] as! Int
+            }
         }
         return 0
     }
     
     func likersForPost(post: Post) -> [User] {
-        let attributes = attributesForPost(post)
-        if attributes != nil {
-            return attributes![Constants.Attributes.Likers] as! [User]
+        if let attributes = attributesForPost(post) {
+            if attributes.isEmpty {
+                return [User]()
+            } else {
+                return attributes[Constants.Attributes.Likers] as! [User]
+            }
         }
         return [User]()
     }
@@ -68,9 +90,12 @@ final class AttributesCache {
     }
     
     func isPostLikedByCurrentUser(post: Post) -> Bool {
-        let attributes = attributesForPost(post)
-        if attributes != nil {
-            return attributes![Constants.Attributes.IsLikedByCurrentUser] as! Bool
+        if let attributes = attributesForPost(post) {
+            if attributes.isEmpty {
+                return false
+            } else {
+                return attributes[Constants.Attributes.IsLikedByCurrentUser] as! Bool
+            }
         }
         return false
     }
@@ -113,12 +138,12 @@ final class AttributesCache {
         return 0
     }
     
-    func followStatusForUser(user: User) -> Bool {
-        if let attributes = attributesForUser(user),
-            followStatus = attributes[Constants.Attributes.IsFollowedByCurrentUser] as? Bool {
-                return followStatus
+    func followStatusForUser(user: User) -> Bool? {
+        if let attributes = attributesForUser(user) {
+            let followStatus = attributes[Constants.Attributes.IsFollowedByCurrentUser] as? Bool
+            return followStatus
         }
-        return false
+        return nil
     }
     
     func setPostCount(count: Int,  user: User) {
@@ -137,7 +162,7 @@ final class AttributesCache {
     
     // MARK:- private methods
     
-   private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
+    private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
         let key: String = self.keyForPost(post)
         cache.setObject(attributes, forKey: key)
     }

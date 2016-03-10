@@ -9,80 +9,140 @@
 import Foundation
 import Parse
 
-typealias FetchingActivitiesCompletion = (activities: [Activity]?, error: NSError?) -> Void
+typealias FetchingFollowersCompletion = (followers: [User]?, error: NSError?) -> Void
 
 class ActivityService: NSObject {
     
-    func fetchFollowers(forUser user: User, completion: FetchingActivitiesCompletion) {
+    func fetchFollowers(forUser user: User, completion: FetchingFollowersCompletion) {
+        var followers = [User]()
         let query = PFQuery(className: Activity.parseClassName())
         query.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
         query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+        
         query.findObjectsInBackgroundWithBlock { followActivities, error in
             if let error = error {
-                completion(activities: nil, error: error)
+                completion(followers: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
-                completion(activities: activities, error: nil)
+                followers = activities.map({$0.fromUser})
+                let userQuery = User.sortedQuery()
+                var userIds = [String]()
+                for user in followers {
+                    if let userId = user.objectId {
+                        userIds.append(userId)
+                    }
+                }
+                userQuery.whereKey(Constants.UserKey.Id, containedIn: userIds)
+                userQuery.findObjectsInBackgroundWithBlock { objects, error in
+                    
+                    if let objects = objects as? [User] {
+                        followers = objects
+                    }
+                    let realFollowers = Set(followers)
+                    let followers = Array(realFollowers)
+                    AttributesCache.sharedCache.setAttributesForUser(user, followers: followers)
+                    completion(followers: followers, error: nil)
+                }
             }
         }
     }
     
-    func fetchFollowedBy(forUser user: User, completion: FetchingActivitiesCompletion) {
+    func fetchFollowing(forUser user: User, completion: FetchingFollowersCompletion) {
+        var following = [User]()
         let query = PFQuery(className: Activity.parseClassName())
         query.whereKey(Constants.ActivityKey.FromUser, equalTo: user)
         query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+        
         query.findObjectsInBackgroundWithBlock { followActivities, error in
             if let error = error {
-                completion(activities: nil, error: error)
+                completion(followers: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
-                completion(activities: activities, error: nil)
+                following = activities.map({$0.toUser})
+                let userQuery = User.sortedQuery()
+                var userIds = [String]()
+                for user in following {
+                    if let userId = user.objectId {
+                        userIds.append(userId)
+                    }
+                }
+                userQuery.whereKey(Constants.UserKey.Id, containedIn: userIds)
+                
+                userQuery.findObjectsInBackgroundWithBlock { objects, error in
+                    if let objects = objects as? [User] {
+                        following = objects
+                    }
+                    let realFollowing = Set(following)
+                    following = Array(realFollowing)
+                    AttributesCache.sharedCache.setAttributesForUser(user, following: following)
+                    completion(followers: following, error: nil)
+                }
             }
         }
     }
     
-//    func checkIsFollowing() {
-//        
-//        let isFollowingQuery = PFQuery(className: Activity.parseClassName())
-//        isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
-//        isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
-//        isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
-//        isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
-//            print(number)
-//            AttributesCache.sharedCache.setFollowStatus((error == nil && number > 0), user: self.user)
-//            self.followButton.selected = (error == nil && number > 0)
-//        }
-//    }
+    func fetchFollowersQuantity(user: User, completion:(followersCount: Int, followingCount: Int) -> Void) {
+        var followersCount = 0
+        var followingCount = 0
+        fetchFollowers(forUser: user) { [weak self] activities, error -> Void in
+            if let activities = activities {
+                followersCount = activities.count
+                self?.fetchFollowing(forUser: user) { activities, error -> Void in
+                    if let activities = activities {
+                        followingCount = activities.count
+                        completion(followersCount: followersCount, followingCount: followingCount)
+                        AttributesCache.sharedCache.setAttributesForUser(
+                            user,
+                            followersCount: followersCount,
+                            followingCount: followingCount
+                        )
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func checkIsFollowing(user: User, completion: (Bool) -> Void) {
+        let isFollowingQuery = PFQuery(className: Activity.parseClassName())
+        isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+        isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+        isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
+        isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
+            AttributesCache.sharedCache.setFollowStatus((error == nil && number > 0), user: user)
+            completion(error == nil && number > 0)
+        }
+    }
     
     func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
-        if user.objectId == User.currentUser()!.objectId {
-            completionBlock!(succeeded: false, error: nil)
+        guard let currentUser = User.currentUser() else {
+            completionBlock?(succeeded: false, error: nil)
+            return
+        }
+        if user.objectId == currentUser {
+            completionBlock?(succeeded: false, error: nil)
             return
         }
         let followActivity = Activity()
         followActivity.type = ActivityType.Follow.rawValue
-        followActivity.fromUser = User.currentUser()!
+        followActivity.fromUser = currentUser
         followActivity.toUser = user
-        
-        let followACL = PFACL(user: User.currentUser()!)
-        followACL.setReadAccess(true, forUser: user)
-        followActivity.ACL = followACL
-        
         followActivity.saveEventually(completionBlock)
         AttributesCache.sharedCache.setFollowStatus(true, user: user)
     }
     
-    func unfollowUserEventually(user: User) {
+    func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+        guard let currentUser = User.currentUser() else {
+            return
+        }
         let query = PFQuery(className: Activity.parseClassName())
-        query.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+        query.whereKey(Constants.ActivityKey.FromUser, equalTo: currentUser)
         query.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
         query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
         query.findObjectsInBackgroundWithBlock { followActivities, error in
             if let error = error {
                 print(error)
-            }
-            if let followActivities = followActivities {
-                print(followActivities.count)
-                for followActivity: PFObject in followActivities as [PFObject]! {
-                    followActivity.deleteEventually()
+            } else if let followActivities = followActivities {
+                for followActivity in followActivities {
+                    followActivity.deleteInBackgroundWithBlock(completionBlock)
                 }
             }
         }

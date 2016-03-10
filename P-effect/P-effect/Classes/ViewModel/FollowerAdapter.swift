@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum FollowType: String {
+    
+    case Followers = "Followers"
+    case Following = "Following"
+    
+}
+
 protocol FollowerAdapterDelegate: class {
     
     func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter)

@@ -46,8 +46,8 @@ struct Constants {
     
     struct UserKey {
         static let Avatar = "avatar"
+        static let Id = "objectId"
     }
-    
     
     struct Profile {
         static let ToastActivityDuration = 5.0
@@ -109,7 +109,9 @@ struct Constants {
         static let LikeCount = "likeCount"
         static let Likers = "likers"
         static let Followers = "followes"
-        static let FollowedBy = "followedBy"
+        static let Following = "following"
+        static let FollowersCount = "followesCount"
+        static let FollowingCount = "followingCount"
     }
     
     struct ActivityKey {
