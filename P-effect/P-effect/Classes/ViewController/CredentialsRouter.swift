@@ -21,14 +21,14 @@ class CredentialsRouter: AlertManagerDelegate, SettingsPresenter {
 
 extension CredentialsRouter: Router {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let credentialsController = CredentialsViewController.create()
         credentialsController.router = self
         credentialsController.setLocator(locator)
         currentViewController = credentialsController
-        context.navigationController!.showViewController(credentialsController, sender: self)
+        context.showViewController(credentialsController, sender: self)
     }
     
 }

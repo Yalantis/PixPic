@@ -21,14 +21,14 @@ class SettingsRouter: AlertManagerDelegate, FeedPresenter, CredentialsPresenter,
 
 extension SettingsRouter: Router {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let settingsController = SettingsViewController.create()
         settingsController.router = self
         settingsController.setLocator(locator)
         currentViewController = settingsController
-        context.navigationController!.showViewController(settingsController, sender: self)
+        context.showViewController(settingsController, sender: self)
     }
     
 }
