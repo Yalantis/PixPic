@@ -21,6 +21,7 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
         locator.registerService(ValidationService())
         locator.registerService(AuthService())
         locator.registerService(ImageLoaderService())
+        locator.registerService(ActivityService())
     }
 }
 

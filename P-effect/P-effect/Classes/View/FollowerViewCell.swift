@@ -16,7 +16,9 @@ class FollowerViewCell: UITableViewCell, CellInterface {
     @IBOutlet private weak var profileLabel: UILabel!
     
     func configure(withFollower follower: User) {
-        profileLabel.text = follower.username
+        if let username = follower.username {
+            profileLabel.text = username
+        }
         
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         if let avatar = follower.avatar?.url, let url = NSURL(string: avatar) {

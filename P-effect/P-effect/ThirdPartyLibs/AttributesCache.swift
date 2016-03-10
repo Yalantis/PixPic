@@ -1,3 +1,11 @@
+//
+//  AttributesCache.swift
+//  P-effect
+//
+//  Created by Jack Lapin on 07.03.16.
+//  Copyright © 2016 Yalantis. All rights reserved.
+//
+
 import Foundation
 
 final class AttributesCache {
@@ -29,7 +37,7 @@ final class AttributesCache {
             Constants.Attributes.Followers: followers,
             Constants.Attributes.FollowedBy: followedBy,
         ]
-        setAttributes(attributes as! [String : AnyObject], forUser: user)
+       // setAttributes(attributes as! [String : AnyObject], forUser: user)
     }
     
     func attributesForPost(post: Post) -> [String:AnyObject]? {
@@ -127,23 +135,23 @@ final class AttributesCache {
         }
     }
     
-    // MARK:- ()
+    // MARK:- private methods
     
-    func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
+   private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
         let key: String = self.keyForPost(post)
         cache.setObject(attributes, forKey: key)
     }
     
-    func setAttributes(attributes: [String:AnyObject], forUser user: User) {
+    private func setAttributes(attributes: [String:AnyObject], forUser user: User) {
         let key: String = self.keyForUser(user)
         cache.setObject(attributes, forKey: key)
     }
     
-    func keyForPost(post: Post) -> String {
+    private func keyForPost(post: Post) -> String {
         return "post_\(post.objectId)"
     }
     
-    func keyForUser(user: User) -> String {
+    private func keyForUser(user: User) -> String {
         return "user_\(user.objectId)"
     }
 }

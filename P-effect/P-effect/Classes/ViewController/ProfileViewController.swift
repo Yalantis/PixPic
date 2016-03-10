@@ -9,13 +9,17 @@
 import UIKit
 import Toast
 
+enum FollowType: String {
+    
+    case Followers
+    case Following
+    
+}
+
 protocol ProfileViewControllerDelegate: class {
     
     func didTapActivityButton(user: User, activity: Activity)
-
-enum FollowType: String {
-    case Followers
-    case Following
+    
 }
 
 private let removePostMessage = "This photo will be deleted from P-effect"
@@ -208,13 +212,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         let activitySrvc = ActivityService()
         if followButton.selected {
             // Unfollow
-                followButton.selected = false
+            followButton.selected = false
             activitySrvc.unfollowUserEventually(user)
             
         } else {
             // Follow
             followButton.selected = true
-            activitySrvc.followUserEventually(user) { (succeeded, error) in
+            activitySrvc.followUserEventually(user) { succeeded, error in
                 if error == nil {
                     print("Attempt to follow was \(succeeded) ")
                     self.followButton.selected = true
@@ -226,7 +230,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     @IBOutlet weak var followButton: UIButton!
-
+    
     dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         router.showFollowersList(user, followType: .Followers)
     }

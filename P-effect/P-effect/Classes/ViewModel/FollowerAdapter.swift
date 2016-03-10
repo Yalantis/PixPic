@@ -8,9 +8,22 @@
 
 import Foundation
 
+protocol FollowerAdapterDelegate: class {
+    
+    func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter)
+    
+}
+
+
 class FollowerAdapter: NSObject {
     
-    private var followers = [User]()
+    weak var delegate: FollowerAdapterDelegate?
+    
+    private var followers = [User]() {
+        didSet {
+            delegate?.followerAdapterRequestedViewUpdate(self)
+        }
+    }
     
     var followersQuantity: Int {
         return followers.count
@@ -18,6 +31,18 @@ class FollowerAdapter: NSObject {
         
     func getFollower(atIndexPath indexPath: NSIndexPath) -> User {
         return followers[indexPath.row]
+    }
+    
+    func update(withFollowers followers: [User], action: UpdateType) {
+        switch action {
+        case .Reload:
+            self.followers.removeAll()
+            
+        default:
+            break
+        }
+        
+        self.followers.appendContentsOf(followers)
     }
 
 }

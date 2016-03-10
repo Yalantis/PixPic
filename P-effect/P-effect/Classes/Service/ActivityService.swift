@@ -13,9 +13,44 @@ typealias FetchingActivitiesCompletion = (activities: [Activity]?, error: NSErro
 
 class ActivityService: NSObject {
     
-    func fetchActivities(forUser: User, withType: ActivityType, completion: FetchingActivitiesCompletion) {
-        
+    func fetchFollowers(forUser user: User, completion: FetchingActivitiesCompletion) {
+        let query = PFQuery(className: Activity.parseClassName())
+        query.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
+        query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+        query.findObjectsInBackgroundWithBlock { followActivities, error in
+            if let error = error {
+                completion(activities: nil, error: error)
+            } else if let activities = followActivities as? [Activity] {
+                completion(activities: activities, error: nil)
+            }
+        }
     }
+    
+    func fetchFollowedBy(forUser user: User, completion: FetchingActivitiesCompletion) {
+        let query = PFQuery(className: Activity.parseClassName())
+        query.whereKey(Constants.ActivityKey.FromUser, equalTo: user)
+        query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+        query.findObjectsInBackgroundWithBlock { followActivities, error in
+            if let error = error {
+                completion(activities: nil, error: error)
+            } else if let activities = followActivities as? [Activity] {
+                completion(activities: activities, error: nil)
+            }
+        }
+    }
+    
+//    func checkIsFollowing() {
+//        
+//        let isFollowingQuery = PFQuery(className: Activity.parseClassName())
+//        isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+//        isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+//        isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
+//        isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
+//            print(number)
+//            AttributesCache.sharedCache.setFollowStatus((error == nil && number > 0), user: self.user)
+//            self.followButton.selected = (error == nil && number > 0)
+//        }
+//    }
     
     func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         if user.objectId == User.currentUser()!.objectId {
@@ -53,5 +88,5 @@ class ActivityService: NSObject {
         }
         AttributesCache.sharedCache.setFollowStatus(false, user: user)
     }
-
+    
 }
