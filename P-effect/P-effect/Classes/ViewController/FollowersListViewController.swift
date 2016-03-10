@@ -28,6 +28,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         setupTableView()
         setupNavigavionBar()
         setupAdapter()
+        setupLoadersCallback()
     }
     
     func setLocator(locator: ServiceLocator) {
@@ -59,6 +60,31 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         tableView.dataSource = followerAdapter
     }
     
+    private func setupLoadersCallback() {
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView.pullToRefreshView.stopAnimating()
+                return
+            }
+
+            this.tableView.pullToRefreshView.stopAnimating()
+        }
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
+            guard let offset = self?.followerAdapter.followersQuantity else {
+                this.tableView.infiniteScrollingView.stopAnimating()
+                return
+            }
+
+            this.tableView.infiniteScrollingView.stopAnimating()
+        }
+    }
+
 }
 
 extension FollowersListViewController: UITableViewDelegate {
