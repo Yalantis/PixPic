@@ -59,7 +59,7 @@ extension ProfilePresenter {
     
     func showProfile(user: User) {
         let profileRouter = ProfileRouter(user: user, locator: locator)
-        profileRouter.execute(currentViewController)
+        profileRouter.execute(currentViewController.navigationController!)
     }
     
 }
@@ -74,7 +74,7 @@ extension EditProfilePresenter {
     
     func showEditProfile() {
         let editProfileRouter = EditProfileRouter(locator: locator)
-        editProfileRouter.execute(currentViewController)
+        editProfileRouter.execute(currentViewController.navigationController!)
     }
     
 }
@@ -89,7 +89,7 @@ extension AuthorizationPresenter {
     
     func showAuthorization() {
         let authorizationRouter = AuthorizationRouter(locator: locator)
-        authorizationRouter.execute(currentViewController)
+        authorizationRouter.execute(currentViewController.navigationController!)
     }
     
 }
@@ -104,11 +104,40 @@ extension PhotoEditorPresenter {
     
     func showPhotoEditor(image: UIImage) {
         let photoEditorRouter = PhotoEditorRouter(image: image, locator: locator)
-        photoEditorRouter.execute(currentViewController)
+        photoEditorRouter.execute(currentViewController.navigationController!)
     }
     
 }
 
+protocol SettingsPresenter: PresenterType {
+    
+    func showSettings()
+    
+}
+
+extension SettingsPresenter {
+    
+    func showSettings() {
+        let settingsRouter = SettingsRouter(locator: locator)
+        settingsRouter.execute(currentViewController.navigationController!)
+    }
+    
+}
+
+protocol CredentialsPresenter: PresenterType {
+    
+    func showCredentials()
+    
+}
+
+extension CredentialsPresenter {
+    
+    func showCredentials() {
+        let credentialsRouter = CredentialsRouter(locator: locator)
+        credentialsRouter.execute(currentViewController.navigationController!)
+    }
+    
+}
 protocol FollowersListPresenter: PresenterType {
     
     func showFollowersList(user: User, followType: FollowType)
@@ -119,7 +148,7 @@ extension FollowersListPresenter {
     
     func showFollowersList(user: User, followType: FollowType) {
         let followersListRouter = FollowersListRouter(user: user, followType: followType, locator: locator)
-        followersListRouter.execute(currentViewController)
+        followersListRouter.execute(currentViewController.navigationController!)
     }
     
 }

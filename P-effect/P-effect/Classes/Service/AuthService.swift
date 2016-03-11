@@ -15,12 +15,19 @@ enum AuthError: Int {
     case FacebookError = 701
     case ParseError = 702
     case CurrentUserError = 703
+    case AccessTokenError = 704
+
 }
 
 class AuthService {
     
-    func signInWithPermission(completion: (User?, NSError?) -> Void) {
-        let token = FBSDKAccessToken.currentAccessToken()
+    func signInWithPermission(completion: (User!, NSError?) -> Void) {
+        guard let token = FBSDKAccessToken.currentAccessToken() else {
+            let accessTokenError = NSError.createAuthError(.AccessTokenError)
+            completion(nil, accessTokenError)
+            
+            return
+        }
         PFFacebookUtils.logInInBackgroundWithAccessToken(token) { [weak self] user, error in
             if let user = user as? User {
                 if user.isNew {
@@ -35,6 +42,7 @@ class AuthService {
             } else {
                 let userError = NSError.createAuthError(.FacebookError)
                 completion(nil, userError)
+                
                 return
             }
         }
@@ -68,6 +76,7 @@ class AuthService {
                     data = picture["data"],
                     url = data?["url"] as? String else {
                         completion(nil, nil)
+                        
                         return
                 }
                 if let avatarURL = NSURL(string: url) {

@@ -10,7 +10,7 @@ import Foundation
 
 class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
     private var image: UIImage!
     private(set) weak var locator: ServiceLocator!
@@ -21,13 +21,13 @@ class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
         self.locator = locator
     }
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let photoEditorViewController = PhotoEditorViewController.create()
         photoEditorViewController.setRouter(self)
         photoEditorViewController.setLocator(locator)
         currentViewController = photoEditorViewController
         photoEditorViewController.setModel(PhotoEditorModel(image: image))
-        context.navigationController!.pushViewController(photoEditorViewController, animated: false)
+        context.pushViewController(photoEditorViewController, animated: false)
     }
     
 }

@@ -33,6 +33,14 @@ extension NSError {
                 userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parse current user not exist", comment: "")]
             )
             return error
+            
+        case .AccessTokenError:
+            let error = NSError(
+                domain: NSBundle.mainBundle().bundleIdentifier!,
+                code: 704,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Access token error", comment: "")]
+            )
+            return error
         
         default:
             return NSError(

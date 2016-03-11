@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mkH-pW-enh">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Launch View Controller-->
@@ -16,15 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_notification" translatesAutoresizingMaskIntoConstraints="NO" id="YgT-JJ-ROh">
-                                <rect key="frame" x="285" y="285" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Lyh-1L-8lJ"/>
-                                    <constraint firstAttribute="width" constant="30" id="iZD-Al-Bcc"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bG" translatesAutoresizingMaskIntoConstraints="NO" id="YgT-JJ-ROh">
+                                <rect key="frame" x="75" y="-33.5" width="450" height="667"/>
                             </imageView>
                         </subviews>
+                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="YgT-JJ-ROh" firstAttribute="width" secondItem="8Hu-CG-jmD" secondAttribute="width" multiplier="0.75" id="aXh-bG-7OO"/>
                             <constraint firstItem="YgT-JJ-ROh" firstAttribute="centerX" secondItem="8Hu-CG-jmD" secondAttribute="centerX" id="hJs-hb-3em"/>
                             <constraint firstItem="YgT-JJ-ROh" firstAttribute="centerY" secondItem="8Hu-CG-jmD" secondAttribute="centerY" id="kfv-sg-50r"/>
                         </constraints>
@@ -36,6 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_notification" width="42" height="38"/>
+        <image name="bG" width="375" height="667"/>
     </resources>
 </document>
