@@ -180,6 +180,50 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
+    @IBAction func followSomeone() {
+        shouldToggleFollowFriend()
+    }
+    
+    private func shouldToggleFollowFriend() {
+//        let activitySrvc = ActivityService()
+        if followButton.selected {
+            // Unfollow
+            let alertController = UIAlertController(
+                title: "Unfollowing",
+                message: "bla bla", preferredStyle: .ActionSheet
+            )
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            let unfollowAction = UIAlertAction(title: "Unfollow", style: .Default) { [weak self] action in
+//                activitySrvc.unfollowUserEventually(user)
+                print("Unfollow!!!!")
+                self?.followButton.selected = false
+            }
+            alertController.addAction(unfollowAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Follow
+            
+//            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+//            indicator.center = followButton.center
+//            indicator.hidesWhenStopped = true
+//            indicator.startAnimating()
+//            followButton.addSubview(indicator)
+//
+//            
+//            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+//            dispatch_after(delayTime, dispatch_get_main_queue()) {
+//                self.followButton.selected = true
+//                indicator.removeFromSuperview()
+//            }
+
+//            followButton.selected = true
+//            indicator.removeFromSuperview()
+        }
+    }
+
     // MARK: - IBActions
     @IBAction private func profileSettings() {
         router.showEditProfile()
