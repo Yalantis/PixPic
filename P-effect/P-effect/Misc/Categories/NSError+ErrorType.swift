@@ -26,6 +26,22 @@ extension NSError {
             )
             return error
             
+        case .CurrentUserError:
+            let error = NSError(
+                domain: NSBundle.mainBundle().bundleIdentifier!,
+                code: 703,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parse current user not exist", comment: "")]
+            )
+            return error
+            
+        case .AccessTokenError:
+            let error = NSError(
+                domain: NSBundle.mainBundle().bundleIdentifier!,
+                code: 704,
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Access token error", comment: "")]
+            )
+            return error
+        
         default:
             return NSError(
                 domain: NSBundle.mainBundle().bundleIdentifier!,

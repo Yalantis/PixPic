@@ -14,8 +14,9 @@ enum AuthError: Int {
     
     case FacebookError = 701
     case ParseError = 702
-    case AccessTokenError = 703
-    
+    case CurrentUserError = 703
+    case AccessTokenError = 704
+
 }
 
 class AuthService {
