@@ -23,14 +23,14 @@ class EditProfileRouter: AlertManagerDelegate, FeedPresenter {
 
 extension EditProfileRouter: Router {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let editProfileController = EditProfileViewController.create()
         editProfileController.setRouter(self)
         editProfileController.setLocator(locator)
         currentViewController = editProfileController
-        context.navigationController!.showViewController(editProfileController, sender: self)
+        context.showViewController(editProfileController, sender: self)
     }
     
 }

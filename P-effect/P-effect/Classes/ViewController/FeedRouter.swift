@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter {
+class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter {
     
     private(set) weak var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!
