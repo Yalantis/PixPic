@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         setupParse()
         setupAppearance()
-        setupRemoteNotifications(application)
         
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         Fabric.with([Crashlytics.self])
@@ -61,15 +60,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
-    private func setupRemoteNotifications(application: UIApplication) {
-        let settings = UIUserNotificationSettings(
-            forTypes: [.Alert, .Badge, .Sound],
-            categories: nil
-        )
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-    }
-
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }

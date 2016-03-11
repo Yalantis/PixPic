@@ -25,16 +25,16 @@ class FollowersListRouter: AlertManagerDelegate, ProfilePresenter {
 
 extension FollowersListRouter: Router {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let followersController = FollowersListViewController.create()
         followersController.setRouter(self)
         followersController.setLocator(locator)
         currentViewController = followersController
         followersController.setUser(user)
         followersController.setFollowType(followType)
-        context.navigationController!.showViewController(followersController, sender: self)
+        context.showViewController(followersController, sender: self)
     }
     
 }

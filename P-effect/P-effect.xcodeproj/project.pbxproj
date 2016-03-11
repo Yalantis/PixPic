@@ -32,9 +32,18 @@
 		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
 		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
+		7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */; };
 		771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
+		7729BE6F1C888A7E00ECC707 /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */; };
 		7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE701C889EAA00ECC707 /* LaunchRouter.swift */; };
+		7734892D1C8752B700034B66 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7734892C1C8752B700034B66 /* SettingsHelper.swift */; };
+		775635931C9184420069EA4F /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635921C9184420069EA4F /* TextView.xib */; };
+		775635951C91848B0069EA4F /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635941C91848B0069EA4F /* SwitchView.xib */; };
+		775635991C9185920069EA4F /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635981C9185920069EA4F /* ButtonView.xib */; };
+		7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756359E1C9195D50069EA4F /* SwitchView.swift */; };
+		775635A11C91A1AF0069EA4F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775635A01C91A1AF0069EA4F /* ButtonView.swift */; };
+		775635A31C91A2D50069EA4F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775635A21C91A2D50069EA4F /* TextView.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
 		77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */; };
@@ -46,6 +55,10 @@
 		77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* EffectsLayout.swift */; };
 		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
 		77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0A4471C883C3A007852A0 /* LaunchViewController.swift */; };
+		77C580641C85E93D00345124 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580631C85E93D00345124 /* SettingsViewController.swift */; };
+		77C580661C85E96900345124 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580651C85E96900345124 /* SettingsRouter.swift */; };
+		77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580671C85F14800345124 /* CredentialsRouter.swift */; };
+		77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580691C85F1ED00345124 /* CredentialsViewController.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsService.swift */; };
@@ -140,9 +153,18 @@
 		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		771CD2311C6BB10F00383B41 /* EffectsGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EffectsGroupHeaderView.xib; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
+		7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
 		7729BE701C889EAA00ECC707 /* LaunchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
+		7734892C1C8752B700034B66 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
+		775635921C9184420069EA4F /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		775635941C91848B0069EA4F /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
+		775635981C9185920069EA4F /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
+		7756359E1C9195D50069EA4F /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
+		775635A01C91A1AF0069EA4F /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		775635A21C91A2D50069EA4F /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
@@ -154,6 +176,10 @@
 		77B42D221C6B762B00C5A999 /* EffectsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLayout.swift; sourceTree = "<group>"; };
 		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77C0A4471C883C3A007852A0 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		77C580631C85E93D00345124 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		77C580651C85E96900345124 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		77C580671C85F14800345124 /* CredentialsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsRouter.swift; sourceTree = "<group>"; };
+		77C580691C85F1ED00345124 /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsService.swift; sourceTree = "<group>"; };
@@ -270,6 +296,7 @@
 		49FE57C31C4E63E500C4B30F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7756358D1C9183EF0069EA4F /* SettingsViews */,
 				49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */,
 				49FE57C51C4E63E500C4B30F /* PostViewCell.xib */,
 				492D17F61C5B9FE500D98404 /* EffectViewCell.swift */,
@@ -283,6 +310,19 @@
 				95D221951C8851020004A3EF /* FollowerViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7756358D1C9183EF0069EA4F /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				775635A01C91A1AF0069EA4F /* ButtonView.swift */,
+				775635981C9185920069EA4F /* ButtonView.xib */,
+				775635921C9184420069EA4F /* TextView.xib */,
+				775635A21C91A2D50069EA4F /* TextView.swift */,
+				7756359E1C9195D50069EA4F /* SwitchView.swift */,
+				775635941C91848B0069EA4F /* SwitchView.xib */,
+			);
+			name = SettingsViews;
 			sourceTree = "<group>";
 		};
 		77B42D211C6B760D00C5A999 /* Layout */ = {
@@ -390,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD0F0AD1C4E528700331799 /* AlertManager.swift */,
+				7734892C1C8752B700034B66 /* SettingsHelper.swift */,
 				FDD0F0AE1C4E528700331799 /* AuthService.swift */,
 				9521D01A1C735DF200683F87 /* EffectsService.swift */,
 				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
@@ -404,6 +445,7 @@
 				FDEA23141C73434E009EE533 /* UserService.swift */,
 				FDEA23161C734359009EE533 /* PostService.swift */,
 				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
+				7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */,
 				496B6D281C89BB8900DED33F /* ComplaintService.swift */,
 			);
 			path = Service;
@@ -424,6 +466,10 @@
 				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
 				499DD04E1C579D3100DABCD5 /* EffectsPickerViewController.swift */,
 				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
+				77C580651C85E96900345124 /* SettingsRouter.swift */,
+				77C580631C85E93D00345124 /* SettingsViewController.swift */,
+				77C580671C85F14800345124 /* CredentialsRouter.swift */,
+				77C580691C85F1ED00345124 /* CredentialsViewController.swift */,
 				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
 				95D221971C885CBB0004A3EF /* FollowersListViewController.swift */,
 				7729BE701C889EAA00ECC707 /* LaunchRouter.swift */,
@@ -516,6 +562,7 @@
 				95D57EA41C776477007F1B6A /* Profile.storyboard */,
 				95D57EA01C77636C007F1B6A /* Authorization.storyboard */,
 				95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */,
+				7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -635,14 +682,18 @@
 				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
+				775635991C9185920069EA4F /* ButtonView.xib in Resources */,
 				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
+				775635951C91848B0069EA4F /* SwitchView.xib in Resources */,
+				775635931C9184420069EA4F /* TextView.xib in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
+				7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */,
 				771CD2321C6BB10F00383B41 /* EffectsGroupHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,17 +770,22 @@
 				FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */,
 				499DD0531C579F1300DABCD5 /* EffectsPickerAdapter.swift in Sources */,
 				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
+				775635A31C91A2D50069EA4F /* TextView.swift in Sources */,
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
 				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
 				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
+				775635A11C91A1AF0069EA4F /* ButtonView.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
+				7729BE6F1C888A7E00ECC707 /* RemoteNotificationManager.swift in Sources */,
 				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
+				77C580661C85E96900345124 /* SettingsRouter.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
 				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
 				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
+				77C580641C85E93D00345124 /* SettingsViewController.swift in Sources */,
 				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
@@ -737,6 +793,7 @@
 				95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */,
 				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
+				7734892D1C8752B700034B66 /* SettingsHelper.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
@@ -751,6 +808,7 @@
 				FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */,
 				492D17F31C5A027D00D98404 /* EffectsSticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
+				7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
@@ -774,7 +832,9 @@
 				492D17EF1C5A00EE00D98404 /* EffectsGroup.swift in Sources */,
 				496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
+				77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */,
 				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
+				77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */,
 				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
 				77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */,
 				497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */,
