@@ -9,12 +9,6 @@
 import UIKit
 import Toast
 
-protocol ProfileViewControllerDelegate: class {
-    
-    func didTapActivityButton(user: User, activity: Activity)
-    
-}
-
 private let removePostMessage = "This photo will be deleted from P-effect"
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {

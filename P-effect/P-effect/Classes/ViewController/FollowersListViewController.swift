@@ -61,33 +61,20 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         let cache = AttributesCache.sharedCache
         let activityService: ActivityService = router.locator.getService()
         
-        switch followType {
-        case .Followers :
-            guard let attributes = cache.attributesForUser(user),
-                cachedFollowers = attributes[Constants.Attributes.Followers] as? [User] else {
-                    activityService.fetchFollowers(forUser: user) { [weak self] followers, _ in
-                        if let followers = followers {
-                            self?.followerAdapter.update(withFollowers: followers, action: .Reload)
-                        }
+        let isFollowers = (followType == .Followers)
+        let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
+        
+        guard let attributes = cache.attributesForUser(user),
+            cachedUsers = attributes[key] as? [User] else {
+                activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
+                    if let users = users {
+                        self?.followerAdapter.update(withFollowers: users, action: .Reload)
                     }
-                    break
-            }
-            self.followerAdapter.update(withFollowers: cachedFollowers, action: .Reload)
-            
-        case .Following :
-            guard let attributes = cache.attributesForUser(user),
-                cachedFollowing = attributes[Constants.Attributes.Following] as? [User] else {
-                    activityService.fetchFollowing(forUser: user) { [weak self] following, _ in
-                        if let following = following {
-                            self?.followerAdapter.update(withFollowers: following, action: .Reload)
-                        }
-                    }
-                    break
-            }
-            self.followerAdapter.update(withFollowers: cachedFollowing, action: .Reload)
+                }
+                return
         }
+        self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
     }
-    
 }
 
 extension FollowersListViewController: FollowerAdapterDelegate {

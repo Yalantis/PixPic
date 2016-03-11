@@ -9,57 +9,26 @@
 import Foundation
 import Parse
 
-typealias FetchingFollowersCompletion = ((followers: [User]?, error: NSError?) -> Void)?
+typealias FetchingUsersCompletion = ((users: [User]?, error: NSError?) -> Void)?
 
 class ActivityService: NSObject {
     
-    func fetchFollowers(forUser user: User, completion: FetchingFollowersCompletion) {
+    func fetchUsers(type: FollowType, forUser user: User, completion: FetchingUsersCompletion) {
+        let isFollowers = (type == .Followers)
+        let key = isFollowers ? Constants.ActivityKey.ToUser : Constants.ActivityKey.FromUser
+        
         let query = PFQuery(className: Activity.parseClassName())
-        query.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
+        query.whereKey(key, equalTo: user)
         query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
         
         query.findObjectsInBackgroundWithBlock { followActivities, error in
             if let error = error {
-                completion?(followers: nil, error: error)
+                completion?(users: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
-                var followers = activities.map{$0.fromUser}
+                var users = isFollowers ? activities.map{$0.fromUser} : activities.map{$0.toUser}
                 let userQuery = User.sortedQuery()
                 var userIds = [String]()
-                for user in followers {
-                    if let userId = user.objectId {
-                        userIds.append(userId)
-                    }
-                }
-                userQuery.whereKey(Constants.UserKey.Id, containedIn: userIds)
-               
-                userQuery.findObjectsInBackgroundWithBlock { objects, error in
-                    if let objects = objects as? [User] {
-                        followers = objects
-                        let realFollowers = Set(followers)
-                        let followers = Array(realFollowers)
-                        AttributesCache.sharedCache.setAttributesForUser(user, followers: followers)
-                        completion?(followers: followers, error: nil)
-                    } else if let error = error {
-                        completion?(followers: nil, error: error)
-                    }
-                }
-            }
-        }
-    }
-    
-    func fetchFollowing(forUser user: User, completion: FetchingFollowersCompletion) {
-        let query = PFQuery(className: Activity.parseClassName())
-        query.whereKey(Constants.ActivityKey.FromUser, equalTo: user)
-        query.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
-        
-        query.findObjectsInBackgroundWithBlock { followActivities, error in
-            if let error = error {
-                completion?(followers: nil, error: error)
-            } else if let activities = followActivities as? [Activity] {
-                var following = activities.map{$0.toUser}
-                let userQuery = User.sortedQuery()
-                var userIds = [String]()
-                for user in following {
+                for user in users {
                     if let userId = user.objectId {
                         userIds.append(userId)
                     }
@@ -68,13 +37,17 @@ class ActivityService: NSObject {
                 
                 userQuery.findObjectsInBackgroundWithBlock { objects, error in
                     if let objects = objects as? [User] {
-                        following = objects
-                        let realFollowing = Set(following)
-                        following = Array(realFollowing)
-                        AttributesCache.sharedCache.setAttributesForUser(user, following: following)
-                        completion?(followers: following, error: nil)
+                        users = objects
+                        let realFollowers = Set(users)
+                        users = Array(realFollowers)
+                        if isFollowers {
+                            AttributesCache.sharedCache.setAttributesForUser(user, followers: users)
+                        } else {
+                            AttributesCache.sharedCache.setAttributesForUser(user, following: users)
+                        }
+                        completion?(users: users, error: nil)
                     } else if let error = error {
-                        completion?(followers: nil, error: error)
+                        completion?(users: nil, error: error)
                     }
                 }
             }
@@ -84,10 +57,10 @@ class ActivityService: NSObject {
     func fetchFollowersQuantity(user: User, completion:((followersCount: Int, followingCount: Int) -> Void)?) {
         var followersCount = 0
         var followingCount = 0
-        fetchFollowers(forUser: user) { [weak self] activities, error -> Void in
+        fetchUsers(.Followers, forUser: user) { [weak self] activities, error -> Void in
             if let activities = activities {
                 followersCount = activities.count
-                self?.fetchFollowing(forUser: user) { activities, error -> Void in
+                self?.fetchUsers(.Following, forUser: user) { activities, error -> Void in
                     if let activities = activities {
                         followingCount = activities.count
                         completion?(followersCount: followersCount, followingCount: followingCount)
@@ -116,7 +89,8 @@ class ActivityService: NSObject {
     
     func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            completionBlock?(succeeded: false, error: nil)
+            let userError = NSError.createAuthError(.CurrentUserError)
+            completionBlock?(succeeded: false, error: userError)
             return
         }
         if user.objectId == currentUser.objectId {
@@ -133,7 +107,8 @@ class ActivityService: NSObject {
     
     func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            completionBlock?(succeeded: false, error: nil)
+            let userError = NSError.createAuthError(.CurrentUserError)
+            completionBlock?(succeeded: false, error: userError)
             return
         }
         let query = PFQuery(className: Activity.parseClassName())
