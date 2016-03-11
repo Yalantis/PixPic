@@ -185,6 +185,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func shouldToggleFollowFriend() {
+        //check connection
+        
 //        let activitySrvc = ActivityService()
         if followButton.selected {
             // Unfollow
