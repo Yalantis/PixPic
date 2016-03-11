@@ -13,9 +13,7 @@ private let title = "Settings"
 
 enum SettingsState {
     
-    case Common,
-    LoggedIn,
-    LoggedOut
+    case Common, LoggedIn, LoggedOut
     
 }
 

@@ -16,8 +16,11 @@ class SettingsHelper {
         get {
             if NSUserDefaults.standardUserDefaults().objectForKey(remoteNotificationsKey) == nil {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: remoteNotificationsKey)
+        
+                return true
+            } else {
+                return NSUserDefaults.standardUserDefaults().boolForKey(remoteNotificationsKey)
             }
-        return NSUserDefaults.standardUserDefaults().boolForKey(remoteNotificationsKey)
         }
         set {
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: remoteNotificationsKey)
