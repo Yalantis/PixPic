@@ -21,14 +21,14 @@ class AuthorizationRouter: AlertManagerDelegate, FeedPresenter {
 
 extension AuthorizationRouter: Router {
     
-    typealias Context = UIViewController
+    typealias Context = UINavigationController
     
-    func execute(context: UIViewController) {
+    func execute(context: UINavigationController) {
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.setRouter(self)
         authorizationViewController.setLocator(locator)
         currentViewController = authorizationViewController
-        context.navigationController!.pushViewController(authorizationViewController, animated: true)
+        context.pushViewController(authorizationViewController, animated: true)
     }
     
 }
