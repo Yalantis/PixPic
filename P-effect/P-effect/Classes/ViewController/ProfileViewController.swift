@@ -128,7 +128,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
         }
         
-        if user.isCurrentUser {
+        let currentUser = User.currentUser()
+        let isUserAbsent = currentUser == nil
+        
+        if user.isCurrentUser || PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent  {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
             profileSettingsButton.tintColor = .whiteColor()
@@ -208,18 +211,17 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         } else {
             // Follow
             
-//            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-//            indicator.center = followButton.center
-//            indicator.hidesWhenStopped = true
-//            indicator.startAnimating()
-//            followButton.addSubview(indicator)
-//
-//            
-//            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-//            dispatch_after(delayTime, dispatch_get_main_queue()) {
-//                self.followButton.selected = true
-//                indicator.removeFromSuperview()
-//            }
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            indicator.center = followButton.center
+            indicator.hidesWhenStopped = true
+            indicator.startAnimating()
+            followButton.addSubview(indicator)
+            
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) {
+                self.followButton.selected = true
+                indicator.removeFromSuperview()
+            }
 
 //            followButton.selected = true
 //            indicator.removeFromSuperview()
