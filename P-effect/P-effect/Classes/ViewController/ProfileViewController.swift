@@ -185,13 +185,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
-    private func shouldToggleFollowFriend() {
-        let activitySrvc: ActivityService = router.locator.getService()
+    private func toggleFollowFriend() {
+        let activityService: ActivityService = router.locator.getService()
         if followButton.selected {
             // Unfollow
             followButton.selected = false
             followButton.enabled = false
-            activitySrvc.unfollowUserEventually(user) { [weak self] success, error in
+            activityService.unfollowUserEventually(user) { [weak self] success, error in
                 if success {
                     self?.followButton.enabled = true
                     // TODO: add indicator
@@ -201,7 +201,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         } else {
             // Follow
             followButton.selected = true
-            activitySrvc.followUserEventually(user) { succeeded, error in
+            activityService.followUserEventually(user) { succeeded, error in
                 if error == nil {
                     print("Attempt to follow was \(succeeded) ")
                     self.followButton.selected = true
@@ -218,15 +218,15 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     @IBAction func followSomeone(sender: AnyObject) {
-        shouldToggleFollowFriend()
+        toggleFollowFriend()
     }
     
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
         guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
             folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
-                let activitySrvc: ActivityService = router.locator.getService()
-                activitySrvc.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
+                let activityService: ActivityService = router.locator.getService()
+                activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
                     if let this = self {
                         this.followersQuantity.text = String(followersCount) + " followers"
                         this.followingQuantity.text = String(followingCount) + " following"
