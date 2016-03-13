@@ -43,7 +43,6 @@ struct Constants {
     
     struct UserDefaultsKeys {
         static let RemoteNotifications = "RemoteNotifications"
-        static let isFirstTimeAppLaunched = "isFirstTimeAppLaunched"
     }
     
     struct UserKey {
