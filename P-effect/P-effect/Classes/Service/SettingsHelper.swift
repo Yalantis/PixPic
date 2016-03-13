@@ -11,20 +11,22 @@ import Foundation
 class SettingsHelper {
     
     private static let remoteNotificationsKey = Constants.UserDefaultsKeys.RemoteNotifications
+    private static let isFirstTimeAppLaunchedKey = Constants.UserDefaultsKeys.isFirstTimeAppLaunched
     
     static var isRemoteNotificationsEnabled: Bool {
         get {
-            if NSUserDefaults.standardUserDefaults().objectForKey(remoteNotificationsKey) == nil {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: remoteNotificationsKey)
-        
-                return true
-            } else {
-                return NSUserDefaults.standardUserDefaults().boolForKey(remoteNotificationsKey)
-            }
+            return NSUserDefaults.standardUserDefaults().boolForKey(remoteNotificationsKey)
         }
         set {
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: remoteNotificationsKey)
             RemoteNotificationManager.switchNotificationAvailbilityState(to: newValue)
+        }
+    }
+    
+    static func setupDefaultValues() {
+        if NSUserDefaults.standardUserDefaults().objectForKey(isFirstTimeAppLaunchedKey) == nil {
+            isRemoteNotificationsEnabled = true
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: isFirstTimeAppLaunchedKey)
         }
     }
     
