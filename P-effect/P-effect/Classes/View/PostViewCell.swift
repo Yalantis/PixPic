@@ -24,10 +24,10 @@ class PostViewCell: UITableViewCell {
         let nib = UINib(nibName: String(self), bundle: nil)
         return nib
     }
-    var didSelectUser: ((cell: PostViewCell) -> Void)?
+    var didSelectUser: ((cell: PostViewCell) -> Void)!
     weak var post = Post?()
     
-    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)?
+    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)!
 
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!

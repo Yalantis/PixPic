@@ -45,6 +45,12 @@ extension User {
         }
     }
     
+    static var isUserAbsent: Bool {
+        get {
+            return User.currentUser() == nil
+        }
+    }
+    
     func checkUsernameExistance(completion: Bool -> Void) {
         guard let username = username else {
             completion(false)

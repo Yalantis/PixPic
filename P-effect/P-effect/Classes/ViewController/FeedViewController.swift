@@ -129,8 +129,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     // MARK: - photo editor
     private func choosePhoto() {
-        let isUserAbsent = PFUser.currentUser() == nil
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
+        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || User.isUserAbsent {
             router.showAuthorization()
             
             return
@@ -170,9 +169,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
-        let isUserAbsent = currentUser == nil
         
-        if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
+        if PFAnonymousUtils.isLinkedWithUser(currentUser) || User.isUserAbsent {
             router.showAuthorization()
         } else if let currentUser = currentUser {
             router.showProfile(currentUser)
@@ -253,13 +251,11 @@ extension FeedViewController: PostAdapterDelegate {
             }
             settingsMenu.addAction(shareAction)
             
-        
             if post.user == User.currentUser() {
                 let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
                     self?.removePost(post, atIndex: index)
                 }
                 settingsMenu.addAction(removeAction)
-                
             } else {
                 let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
                     self?.complaintToPost(post)
@@ -268,7 +264,6 @@ extension FeedViewController: PostAdapterDelegate {
             }
             
             presentViewController(settingsMenu, animated: true, completion: nil)
-
         }
     }
     
@@ -293,25 +288,25 @@ extension FeedViewController: PostAdapterDelegate {
     }
     
     private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let complaintMenu = UIAlertController(title: "Complaint about", message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         complaintMenu.addAction(cancelAction)
         
         let complaintService: ComplaintService = router.locator.getService()
         
-        let complaintUsernameAction = UIAlertAction(title: "Complaint to username", style: .Default) { _ in
+        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintUserAvatarAction = UIAlertAction(title: "Complaint to user avatar", style: .Default) { _ in
+        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
             complaintService.complaintUserAvatar(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintPostAction = UIAlertAction(title: "Complaint to post", style: .Default) { _ in
+        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
             complaintService.complaintPost(post) { _, error in
                 print(error)
             }
@@ -322,7 +317,6 @@ extension FeedViewController: PostAdapterDelegate {
         complaintMenu.addAction(complaintPostAction)
         
         presentViewController(complaintMenu, animated: true, completion: nil)
-
     }
     
     private func showActivityController(items: [AnyObject]) {

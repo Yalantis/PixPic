@@ -106,7 +106,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         var frame = tableViewFooter.frame
         if let navigationController = navigationController {
             frame.size.height = (screenSize.height - Constants.Profile.HeaderHeight - navigationController.navigationBar.frame.size.height)
-            print("\(screenSize.height) - \(Constants.Profile.HeaderHeight) - \(navigationController.navigationBar.frame.size.height)")
         } else {
             frame.size.height = Constants.Profile.PossibleInsets
         }
@@ -161,10 +160,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBAction func followSomeone() {
         if ReachabilityHelper.checkConnection() {
             
-            let currentUser = User.currentUser()
-            let isUserAbsent = currentUser == nil
-            
-            if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
+            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || User.isUserAbsent {
                 let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
                 
@@ -318,25 +314,24 @@ extension ProfileViewController: PostAdapterDelegate {
     }
     
     private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let complaintMenu = UIAlertController(title: "Complain about", message: nil, preferredStyle: .ActionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         complaintMenu.addAction(cancelAction)
         
         let complaintService: ComplaintService = router.locator.getService()
-        
-        let complaintUsernameAction = UIAlertAction(title: "Complain about username", style: .Default) { _ in
+        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintUserAvatarAction = UIAlertAction(title: "Complain about user avatar", style: .Default) { _ in
+        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
             complaintService.complaintUserAvatar(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintPostAction = UIAlertAction(title: "Complain about post", style: .Default) { _ in
+        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
             complaintService.complaintPost(post) { _, error in
                 print(error)
             }
