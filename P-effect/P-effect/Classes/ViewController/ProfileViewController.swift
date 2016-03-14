@@ -171,21 +171,30 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         let activityService: ActivityService = router.locator.getService()
         if followButton.selected {
             // Unfollow
-            followButton.selected = false
             followButton.enabled = false
             
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            indicator.center = followButton.center
-            indicator.hidesWhenStopped = true
-            indicator.startAnimating()
-            followButton.addSubview(indicator)
-
-            activityService.unfollowUserEventually(user) { [weak self] success, error in
-                if success {
-                    self?.followButton.enabled = true
-                    indicator.removeFromSuperview()
+            let alertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow?", preferredStyle: .ActionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
+                self?.followButton.enabled = true
+            }
+            
+            let unfollowAction = UIAlertAction(title: "Yes", style: .Default) { [weak self] _ in
+                guard let this = self else {
+                    return
+                }
+                
+                activityService.unfollowUserEventually(this.user) { [weak self] success, error in
+                    if success {
+                        self?.followButton.selected = false
+                        self?.followButton.enabled = true
+                    }
                 }
             }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(unfollowAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
             
         } else {
             // Follow
