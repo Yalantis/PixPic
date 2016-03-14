@@ -96,7 +96,8 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     }
     
     private func logout() {
-        guard ReachabilityHelper.checkConnection() else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
             return
         }
         let authService: AuthService = locator.getService()

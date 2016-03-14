@@ -27,6 +27,8 @@ enum ComplaintRejectReason: String {
 
 class ComplaintService: NSObject {
     
+    let reachabilityService = ReachabilityService()
+    
     func complaintUsername(user: User, post: Post? = nil, completion: ComplainCompletion) {
         if !shouldContinueExecutionWith(user) {
             return
@@ -96,7 +98,7 @@ class ComplaintService: NSObject {
             return false
         }
         
-        return ReachabilityHelper.checkConnection()
+        return reachabilityService.isReachable()
     }
     
     private func sendComplaint(complaint: Complaint, completion: ComplainCompletion) {

@@ -16,11 +16,12 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
     init() {
         locator = ServiceLocator()
         locator.registerService(PostService())
-        locator.registerService(EffectsService())
+        locator.registerService(EffectsLoaderService())
         locator.registerService(UserService())
         locator.registerService(ValidationService())
         locator.registerService(AuthService())
         locator.registerService(ImageLoaderService())
+        locator.registerService(ReachabilityService())
     }
 }
 

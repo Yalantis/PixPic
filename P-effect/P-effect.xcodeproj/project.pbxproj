@@ -60,6 +60,8 @@
 		77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580671C85F14800345124 /* CredentialsRouter.swift */; };
 		77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580691C85F1ED00345124 /* CredentialsViewController.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
+		950B694D1C930FF100925AA3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B694C1C930FF100925AA3 /* Appearance.swift */; };
+		950B694F1C93121800925AA3 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */; };
 		95C096AA1C7C545A008742E8 /* ApplicationAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */; };
@@ -181,6 +183,8 @@
 		77C580671C85F14800345124 /* CredentialsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsRouter.swift; sourceTree = "<group>"; };
 		77C580691C85F1ED00345124 /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
+		950B694C1C930FF100925AA3 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLoaderService.swift; sourceTree = "<group>"; };
 		95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationAppearance.swift; sourceTree = "<group>"; };
@@ -514,6 +518,8 @@
 				771E3E7F1C74CB22000608EF /* CellInterface.swift */,
 				95C096A91C7C545A008742E8 /* ApplicationAppearance.swift */,
 				77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */,
+				950B694C1C930FF100925AA3 /* Appearance.swift */,
+				950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -802,6 +808,7 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
+				950B694D1C930FF100925AA3 /* Appearance.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
@@ -836,6 +843,7 @@
 				7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
+				950B694F1C93121800925AA3 /* AppearanceApplyingStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

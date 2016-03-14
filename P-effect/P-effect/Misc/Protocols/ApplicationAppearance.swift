@@ -27,3 +27,4 @@ extension ApplicationAppearance where Self: UIViewController {
     }
 
 }
+
