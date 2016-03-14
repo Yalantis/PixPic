@@ -204,6 +204,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     this.scrollToFirstRow()
+                    AttributesCache.sharedCache.clear()
                 } else if let error = error {
                     print(error)
                 }

@@ -14,6 +14,7 @@ protocol PostViewCellDelegate: class {
     
     func didChooseCellWithUser(user: User)
     func didChooseCellToShare(items: [AnyObject])
+    
 }
 
 private let headerViewHeight: CGFloat = 78
