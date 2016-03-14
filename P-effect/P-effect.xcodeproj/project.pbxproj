@@ -60,8 +60,6 @@
 		77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580671C85F14800345124 /* CredentialsRouter.swift */; };
 		77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580691C85F1ED00345124 /* CredentialsViewController.swift */; };
 		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
-		950B694D1C930FF100925AA3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B694C1C930FF100925AA3 /* Appearance.swift */; };
-		950B694F1C93121800925AA3 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */; };
 		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
 		9521D01B1C735DF200683F87 /* EffectsLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */; };
 		95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221931C8850E90004A3EF /* FollowerViewCell.swift */; };
@@ -77,8 +75,10 @@
 		95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7B21C50998D004E2145 /* ErrorHandler.swift */; };
 		95E4A0721C58EA8700D52150 /* EffectEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0711C58EA8700D52150 /* EffectEditorView.swift */; };
 		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
-		95EDD8991C96D91F006FB001 /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8981C96D91F006FB001 /* AppearanceNavigationController.swift */; };
-		95EDD89B1C96E9A4006FB001 /* NavigationControllerAppearanceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD89A1C96E9A4006FB001 /* NavigationControllerAppearanceContext.swift */; };
+		95EDD8A41C96FA4D006FB001 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A01C96FA4D006FB001 /* Appearance.swift */; };
+		95EDD8A51C96FA4D006FB001 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */; };
+		95EDD8A61C96FA4D006FB001 /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */; };
+		95EDD8A71C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */; };
 		95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */; };
 		E0823F80177EF1A11E426BBF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */; };
 		FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */; };
@@ -184,8 +184,6 @@
 		77C580671C85F14800345124 /* CredentialsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsRouter.swift; sourceTree = "<group>"; };
 		77C580691C85F1ED00345124 /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
 		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
-		950B694C1C930FF100925AA3 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appearance.swift; path = ../../Misc/Protocols/Appearance.swift; sourceTree = "<group>"; };
-		950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppearanceApplyingStrategy.swift; path = ../../Misc/Protocols/AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
 		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		9521D01A1C735DF200683F87 /* EffectsLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectsLoaderService.swift; sourceTree = "<group>"; };
 		95D221931C8850E90004A3EF /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
@@ -201,8 +199,10 @@
 		95D6D7B21C50998D004E2145 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		95E4A0711C58EA8700D52150 /* EffectEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EffectEditorView.swift; sourceTree = "<group>"; };
 		95E4A0751C58F47D00D52150 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
-		95EDD8981C96D91F006FB001 /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
-		95EDD89A1C96E9A4006FB001 /* NavigationControllerAppearanceContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAppearanceContext.swift; sourceTree = "<group>"; };
+		95EDD8A01C96FA4D006FB001 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
+		95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
+		95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAppearanceContext.swift; sourceTree = "<group>"; };
 		95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConfimAction.swift"; sourceTree = "<group>"; };
 		BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6ED9BB31320F4166A4FFF3C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -339,15 +339,15 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		95EDD89E1C96F0EA006FB001 /* AppearanceNavigationController */ = {
+		95EDD89F1C96FA4D006FB001 /* AppearanceNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				95EDD8981C96D91F006FB001 /* AppearanceNavigationController.swift */,
-				95EDD89A1C96E9A4006FB001 /* NavigationControllerAppearanceContext.swift */,
-				950B694C1C930FF100925AA3 /* Appearance.swift */,
-				950B694E1C93121800925AA3 /* AppearanceApplyingStrategy.swift */,
+				95EDD8A01C96FA4D006FB001 /* Appearance.swift */,
+				95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */,
+				95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */,
+				95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */,
 			);
-			name = AppearanceNavigationController;
+			path = AppearanceNavigationController;
 			sourceTree = "<group>";
 		};
 		F84ED9858785A5DACC7DD377 /* Pods */ = {
@@ -463,7 +463,7 @@
 		FDAF46A51C49369E008060CD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				95EDD89E1C96F0EA006FB001 /* AppearanceNavigationController */,
+				95EDD89F1C96FA4D006FB001 /* AppearanceNavigationController */,
 				77752C971C7B396800DCED81 /* ProfileRouter.swift */,
 				497B87241C4D152C00A4A32B /* ProfileViewController.swift */,
 				77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */,
@@ -784,7 +784,6 @@
 				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
 				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
 				775635A11C91A1AF0069EA4F /* ButtonView.swift in Sources */,
-				95EDD89B1C96E9A4006FB001 /* NavigationControllerAppearanceContext.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
@@ -796,8 +795,9 @@
 				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
 				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
 				77C580641C85E93D00345124 /* SettingsViewController.swift in Sources */,
-				95EDD8991C96D91F006FB001 /* AppearanceNavigationController.swift in Sources */,
 				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
+				95EDD8A51C96FA4D006FB001 /* AppearanceApplyingStrategy.swift in Sources */,
+				95EDD8A71C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift in Sources */,
 				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
 				499DD04F1C579D3100DABCD5 /* EffectsPickerViewController.swift in Sources */,
 				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
@@ -821,7 +821,6 @@
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
 				7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */,
 				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
-				950B694D1C930FF100925AA3 /* Appearance.swift in Sources */,
 				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
 				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
@@ -831,6 +830,7 @@
 				77752CA11C7B396800DCED81 /* EditProfileRouter.swift in Sources */,
 				95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
+				95EDD8A41C96FA4D006FB001 /* Appearance.swift in Sources */,
 				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* EffectsModel.swift in Sources */,
@@ -854,8 +854,8 @@
 				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
 				7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* EffectsLayout.swift in Sources */,
+				95EDD8A61C96FA4D006FB001 /* AppearanceNavigationController.swift in Sources */,
 				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
-				950B694F1C93121800925AA3 /* AppearanceApplyingStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
