@@ -26,7 +26,7 @@ class ActivityService: NSObject {
                 completion?(users: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
                 var users = isFollowers ? activities.map{$0.fromUser} : activities.map{$0.toUser}
-                let userQuery = User.sortedQuery()
+                let userQuery = User.sortedQuery
                 var userIds = [String]()
                 for user in users {
                     if let userId = user.objectId {
