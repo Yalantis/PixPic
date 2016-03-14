@@ -11,11 +11,11 @@ import UIKit
 final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
-
+    
     private var router: protocol<ProfilePresenter, AlertManagerDelegate>!
     
     private var user: User!
-    private var followType: FollowType!
+    private var followType: FollowType = .Followers
     
     private lazy var followerAdapter = FollowerAdapter()
     private weak var locator: ServiceLocator!
@@ -58,6 +58,30 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     private func setupAdapter() {
         tableView.dataSource = followerAdapter
+        followerAdapter.delegate = self
+        let cache = AttributesCache.sharedCache
+        let activityService: ActivityService = router.locator.getService()
+        
+        let isFollowers = (followType == .Followers)
+        let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
+        
+        guard let attributes = cache.attributesForUser(user),
+            cachedUsers = attributes[key] as? [User] else {
+                activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
+                    if let users = users {
+                        self?.followerAdapter.update(withFollowers: users, action: .Reload)
+                    }
+                }
+                return
+        }
+        self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
+    }
+}
+
+extension FollowersListViewController: FollowerAdapterDelegate {
+    
+    func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter) {
+        tableView.reloadData()
     }
     
     private func setupLoadersCallback() {

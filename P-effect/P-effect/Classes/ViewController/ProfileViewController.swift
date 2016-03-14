@@ -9,11 +9,6 @@
 import UIKit
 import Toast
 
-enum FollowType: String {
-    case Followers
-    case Following
-}
-
 private let removePostMessage = "This photo will be deleted from P-effect"
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
@@ -31,6 +26,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
+    @IBOutlet private weak var followButton: UIButton!
     
     @IBOutlet private weak var followersQuantity: UILabel!
     @IBOutlet private weak var followingQuantity: UILabel!
@@ -43,6 +39,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         
         setupController()
         setupLoadersCallback()
+        setupFollowButton()
         setupGestureRecognizers()
     }
     
@@ -73,6 +70,22 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
+    }
+    
+    private func setupFollowButton() {
+        followButton.selected = false
+        followButton.enabled = false
+        let cache = AttributesCache.sharedCache
+        if let followStatus = cache.followStatusForUser(user) {
+            followButton.selected = followStatus
+            followButton.enabled = true
+        } else {
+            let activityService: ActivityService = router.locator.getService()
+            activityService.checkIsFollowing(user) { [weak self] follow in
+                self?.followButton.selected = follow
+                self?.followButton.enabled = true
+            }
+        }
     }
     
     private func loadUserPosts() {
@@ -141,6 +154,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             
             print(followButtonHeight)
         }
+        fillFollowersQuantity(user)
     }
     
     private func showToast() {
@@ -162,6 +176,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             postService.loadPosts(this.user) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
+                    AttributesCache.sharedCache.clear()
                 } else if let error = error {
                     print(error)
                 }
@@ -228,10 +243,59 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
 
+    private func toggleFollowFriend() {
+        let activityService: ActivityService = router.locator.getService()
+        if followButton.selected {
+            // Unfollow
+            followButton.selected = false
+            followButton.enabled = false
+            activityService.unfollowUserEventually(user) { [weak self] success, error in
+                if success {
+                    self?.followButton.enabled = true
+                    // TODO: add indicator
+                }
+            }
+            
+        } else {
+            // Follow
+            followButton.selected = true
+            activityService.followUserEventually(user) { succeeded, error in
+                if error == nil {
+                    print("Attempt to follow was \(succeeded) ")
+                    self.followButton.selected = true
+                } else {
+                    self.followButton.selected = false
+                }
+            }
+        }
+    }
+    
     // MARK: - IBActions
     @IBAction private func profileSettings() {
         router.showEditProfile()
     }
+    
+    @IBAction func followSomeone(sender: AnyObject) {
+        toggleFollowFriend()
+    }
+    
+    private func fillFollowersQuantity(user: User) {
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
+            folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
+                let activityService: ActivityService = router.locator.getService()
+                activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
+                    if let this = self {
+                        this.followersQuantity.text = String(followersCount) + " followers"
+                        this.followingQuantity.text = String(followingCount) + " following"
+                    }
+                }
+                return
+        }
+        followersQuantity.text = String(followersQt) + " followers"
+        followingQuantity.text = String(folowingQt) + " following"
+    }
+    
     
     dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         router.showFollowersList(user, followType: .Followers)

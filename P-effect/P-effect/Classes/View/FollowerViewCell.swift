@@ -16,8 +16,7 @@ class FollowerViewCell: UITableViewCell, CellInterface {
     @IBOutlet private weak var profileLabel: UILabel!
     
     func configure(withFollower follower: User) {
-        profileLabel.text = follower.username
-        
+        profileLabel.text = follower.username ?? ""
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         if let avatar = follower.avatar?.url, let url = NSURL(string: avatar) {
             profileImageView.kf_setImageWithURL(
@@ -28,5 +27,5 @@ class FollowerViewCell: UITableViewCell, CellInterface {
             profileImageView.image = UIImage.avatarPlaceholderImage()
         }
     }
-
+    
 }

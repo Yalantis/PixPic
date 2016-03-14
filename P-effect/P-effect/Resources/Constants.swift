@@ -47,8 +47,8 @@ struct Constants {
     
     struct UserKey {
         static let Avatar = "avatar"
+        static let Id = "objectId"
     }
-    
     
     struct Profile {
         static let ToastActivityDuration = 5.0
@@ -100,5 +100,25 @@ struct Constants {
     
     struct EditProfile {
         static let EditProfileControllerIdentifier = "EditProfileViewController"
+    }
+    
+    struct Attributes {
+        static let PostsCount = "postsCount"
+        static let IsFollowedByCurrentUser = "isFollowedByCurrentUser"
+        static let IsLikedByCurrentUser = "isLikedByCurrentUser"
+        static let PhotoCount = "photoCount"
+        static let LikeCount = "likeCount"
+        static let Likers = "likers"
+        static let Followers = "followers"
+        static let Following = "following"
+        static let FollowersCount = "followersCount"
+        static let FollowingCount = "followingCount"
+    }
+    
+    struct ActivityKey {
+        static let FromUser = "fromUser"
+        static let ToUser = "toUser"
+        static let Type = "type"
+        static let Content = "content"
     }
 }
