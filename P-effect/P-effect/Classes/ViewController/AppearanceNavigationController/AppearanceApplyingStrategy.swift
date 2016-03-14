@@ -6,9 +6,9 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-public class AppearanceApplyingStrategy {
+class AppearanceApplyingStrategy {
     
-    public func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, navigationItem:  UINavigationItem?, animated: Bool) {
+    func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, navigationItem:  UINavigationItem?, animated: Bool) {
         if let appearance = appearance {
             let navigationBar = navigationController.navigationBar
             

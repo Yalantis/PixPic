@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FollowersListViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -92,4 +92,12 @@ extension FollowersListViewController: UITableViewDelegate {
         router.showProfile(follower)
     }
     
+}
+
+extension FollowersListViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+//        (self.navigationController as! AppearanceNavigationController).appearanceApplyingStrategy
+        return Appearance()
+    }
 }

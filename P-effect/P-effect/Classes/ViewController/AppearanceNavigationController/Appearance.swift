@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct Appearance: Equatable {
+struct Appearance: Equatable {
     
-    public struct Bar: Equatable {
+    struct Bar: Equatable {
         
         var barTintColor = UIColor.appNavBarColor
         var translucent = false
@@ -27,7 +27,7 @@ public struct Appearance: Equatable {
     
 }
 
-public func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
+func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
     return lhs.barTintColor == rhs.barTintColor &&
         lhs.translucent == rhs.translucent &&
         lhs.titleTextAttributes == rhs.titleTextAttributes &&
@@ -37,7 +37,7 @@ public func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
         lhs.topItemTitle == rhs.topItemTitle
 }
 
-public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
+func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     return lhs.statusBarStyle == rhs.statusBarStyle &&
         lhs.navigationBar == rhs.navigationBar
 }

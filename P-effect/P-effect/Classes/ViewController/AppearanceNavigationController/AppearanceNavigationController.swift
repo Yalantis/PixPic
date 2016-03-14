@@ -10,36 +10,32 @@
 import Foundation
 import UIKit
 
-public class AppearanceNavigationController: UINavigationController, UINavigationControllerDelegate, UINavigationBarDelegate {
+class AppearanceNavigationController: UINavigationController, UINavigationControllerDelegate, UINavigationBarDelegate {
     
-    public required init?(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }
     
-    override public init(rootViewController: UIViewController) {
+    override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }
     
-    public convenience init() {
+    convenience init() {
         self.init(nibName: nil, bundle: nil)
     }
     
     // MARK: - UINavigationControllerDelegate
-    
-    public func navigationController(
-        navigationController: UINavigationController,
-        willShowViewController viewController: UIViewController, animated: Bool
-        ) {
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
             guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
                 return
             }
@@ -69,8 +65,7 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
                 let key = UITransitionContextFromViewControllerKey
                 if context.isCancelled(),
                     let viewController = context.viewControllerForKey(key),
-                    from = viewController as? NavigationControllerAppearanceContext
-                {
+                    from = viewController as? NavigationControllerAppearanceContext {
                     // changing navigation bar & toolbar appearance within animate completion will result into UI glitch
                     self.applyAppearance(
                         from.preferredNavigationControllerAppearance(self),
@@ -82,11 +77,11 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
     }
     
     // MARK: - Appearance Applying
-    
     private var appliedAppearance: Appearance?
     
     private func applyAppearance(appearance: Appearance?, navigationItem: UINavigationItem?, animated: Bool) {
-        if appearance != nil && appliedAppearance != appearance {
+//        if appearance != nil && appliedAppearance != appearance {
+        if appearance != nil {
             appliedAppearance = appearance
             
             appearanceApplyingStrategy.apply(appearance, toNavigationController: self, navigationItem:  navigationItem, animated: animated)
@@ -94,20 +89,16 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
     }
     
-    public var appearanceApplyingStrategy = AppearanceApplyingStrategy() {
+    var appearanceApplyingStrategy = AppearanceApplyingStrategy() {
         didSet {
             applyAppearance(appliedAppearance, navigationItem: topViewController?.navigationItem, animated: false)
         }
     }
     
     // MARK: - Apperanace Update
-    
     func updateAppearanceForViewController(viewController: UIViewController) {
-        if let
-            context = viewController as? NavigationControllerAppearanceContext
-            where
-            viewController == topViewController && transitionCoordinator() == nil
-        {
+        if let context = viewController as? NavigationControllerAppearanceContext
+            where viewController == topViewController && transitionCoordinator() == nil {
             setNavigationBarHidden(context.prefersNavigationControllerBarHidden(self), animated: true)
             setToolbarHidden(context.prefersNavigationControllerToolbarHidden(self), animated: true)
             applyAppearance(
@@ -118,18 +109,12 @@ public class AppearanceNavigationController: UINavigationController, UINavigatio
         }
     }
     
-    public func updateAppearance() {
-        if let top = topViewController {
-            updateAppearanceForViewController(top)
-        }
-    }
-    
-    override public func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return appliedAppearance?.statusBarStyle ?? self.topViewController?.preferredStatusBarStyle()
             ?? super.preferredStatusBarStyle()
     }
     
-    override public func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
         return appliedAppearance != nil ? .Fade : super.preferredStatusBarUpdateAnimation()
     }
     
