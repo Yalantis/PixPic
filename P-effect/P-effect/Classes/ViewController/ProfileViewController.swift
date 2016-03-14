@@ -15,7 +15,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
+    private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
     private var user: User!
     
     private weak var locator: ServiceLocator!
@@ -139,10 +139,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
         }
         
-        let currentUser = User.currentUser()
-        let isUserAbsent = currentUser == nil
-        
-        if user.isCurrentUser || PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent  {
+        if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
             profileSettingsButton.tintColor = .whiteColor()
@@ -163,7 +160,25 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     @IBAction func followSomeone() {
         if ReachabilityHelper.checkConnection() {
-            toggleFollowFriend()
+            
+            let currentUser = User.currentUser()
+            let isUserAbsent = currentUser == nil
+            
+            if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
+                let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                
+                let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+                    self?.router.showAuthorization()
+                }
+                
+                alertController.addAction(cancelAction)
+                alertController.addAction(registerAction)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                toggleFollowFriend()
+            }
         }
     }
 
