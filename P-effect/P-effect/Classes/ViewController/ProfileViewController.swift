@@ -26,7 +26,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var userAvatar: UIImageView!
     @IBOutlet private weak var userName: UILabel!
     @IBOutlet private weak var tableViewFooter: UIView!
-    @IBOutlet private weak var followButton: UIButton!
     
     @IBOutlet private weak var followersQuantity: UILabel!
     @IBOutlet private weak var followingQuantity: UILabel!
@@ -38,7 +37,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         super.viewDidLoad()
         
         setupController()
-        setupLoadersCallback()
         setupFollowButton()
         setupGestureRecognizers()
     }
@@ -163,83 +161,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         activityShown = true
     }
     
-    private func setupLoadersCallback() {
-        let postService: PostService = locator.getService()
-        tableView.addPullToRefreshWithActionHandler { [weak self] in
-            guard let this = self else {
-                return
-            }
-            guard ReachabilityHelper.checkConnection() else {
-                this.tableView.pullToRefreshView.stopAnimating()
-                return
-            }
-            postService.loadPosts(this.user) { objects, error in
-                if let objects = objects {
-                    this.postAdapter.update(withPosts: objects, action: .Reload)
-                    AttributesCache.sharedCache.clear()
-                } else if let error = error {
-                    print(error)
-                }
-                this.tableView.pullToRefreshView.stopAnimating()
-            }
-        }
-        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
-            guard let this = self else {
-                return
-            }
-            postService.loadPagedPosts(this.user, offset: this.postAdapter.postQuantity) { objects, error in
-                if let objects = objects {
-                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
-                } else if let error = error {
-                    print(error)
-                }
-                this.tableView.infiniteScrollingView.stopAnimating()
-            }
-        }
-    }
-    
     @IBAction func followSomeone() {
-        shouldToggleFollowFriend()
-    }
-    
-    private func shouldToggleFollowFriend() {
-        //check connection
-        
-//        let activitySrvc = ActivityService()
-        if followButton.selected {
-            // Unfollow
-            let alertController = UIAlertController(
-                title: "Unfollowing",
-                message: "bla bla", preferredStyle: .ActionSheet
-            )
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            
-            let unfollowAction = UIAlertAction(title: "Unfollow", style: .Default) { [weak self] action in
-//                activitySrvc.unfollowUserEventually(user)
-                print("Unfollow!!!!")
-                self?.followButton.selected = false
-            }
-            alertController.addAction(unfollowAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            // Follow
-            
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-            indicator.center = followButton.center
-            indicator.hidesWhenStopped = true
-            indicator.startAnimating()
-            followButton.addSubview(indicator)
-            
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.followButton.selected = true
-                indicator.removeFromSuperview()
-            }
-
-//            followButton.selected = true
-//            indicator.removeFromSuperview()
+        if ReachabilityHelper.checkConnection() {
+            toggleFollowFriend()
         }
     }
 
@@ -249,16 +173,28 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             // Unfollow
             followButton.selected = false
             followButton.enabled = false
+            
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            indicator.center = followButton.center
+            indicator.hidesWhenStopped = true
+            indicator.startAnimating()
+            followButton.addSubview(indicator)
+
             activityService.unfollowUserEventually(user) { [weak self] success, error in
                 if success {
                     self?.followButton.enabled = true
-                    // TODO: add indicator
+                    indicator.removeFromSuperview()
                 }
             }
             
         } else {
             // Follow
             followButton.selected = true
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            indicator.center = followButton.center
+            indicator.hidesWhenStopped = true
+            indicator.startAnimating()
+            followButton.addSubview(indicator)
             activityService.followUserEventually(user) { succeeded, error in
                 if error == nil {
                     print("Attempt to follow was \(succeeded) ")
@@ -266,6 +202,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 } else {
                     self.followButton.selected = false
                 }
+                indicator.removeFromSuperview()
             }
         }
     }
@@ -273,10 +210,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     // MARK: - IBActions
     @IBAction private func profileSettings() {
         router.showEditProfile()
-    }
-    
-    @IBAction func followSomeone(sender: AnyObject) {
-        toggleFollowFriend()
     }
     
     private func fillFollowersQuantity(user: User) {
@@ -367,19 +300,19 @@ extension ProfileViewController: PostAdapterDelegate {
         
         let complaintService: ComplaintService = router.locator.getService()
         
-        let complaintUsernameAction = UIAlertAction(title: "Complaint to username", style: .Default) { _ in
+        let complaintUsernameAction = UIAlertAction(title: "Complain about username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintUserAvatarAction = UIAlertAction(title: "Complaint to user avatar", style: .Default) { _ in
+        let complaintUserAvatarAction = UIAlertAction(title: "Complain about user avatar", style: .Default) { _ in
             complaintService.complaintUserAvatar(post.user!) { _, error in
                 print(error)
             }
         }
         
-        let complaintPostAction = UIAlertAction(title: "Complaint to post", style: .Default) { _ in
+        let complaintPostAction = UIAlertAction(title: "Complain about post", style: .Default) { _ in
             complaintService.complaintPost(post) { _, error in
                 print(error)
             }
