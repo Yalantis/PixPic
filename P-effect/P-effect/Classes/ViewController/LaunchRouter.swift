@@ -33,7 +33,7 @@ extension LaunchRouter: Router {
         let launchViewController = LaunchViewController.create()
         launchViewController.setRouter(self)
         currentViewController = launchViewController
-        let navigationController = UINavigationController(rootViewController: launchViewController)
+        let navigationController = AppearanceNavigationController(rootViewController: launchViewController)
         context.rootViewController = navigationController
         
         if User.currentUser() == nil {

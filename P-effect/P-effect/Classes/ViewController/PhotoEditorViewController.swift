@@ -17,7 +17,7 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-final class PhotoEditorViewController: UIViewController, StoryboardInitable, ApplicationAppearance {
+final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
     
@@ -41,7 +41,6 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, App
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurateNavigationBar()
         setupNavigavionBar()
     }
     

@@ -13,7 +13,7 @@ import Toast
 
 private let removePostMessage = "This photo will be deleted from P-effect"
 
-final class FeedViewController: UIViewController, StoryboardInitable, ApplicationAppearance {
+final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
@@ -30,7 +30,6 @@ final class FeedViewController: UIViewController, StoryboardInitable, Applicatio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurateNavigationBar()
         view.makeToastActivity(CSToastPositionCenter)
         setupTableView()
         setupToolBar()
@@ -339,4 +338,12 @@ extension FeedViewController: DZNEmptyDataSetSource {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+}
+ 
+extension FeedViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        return Appearance()
+    }
+
 }

@@ -16,7 +16,7 @@ enum FollowType: String {
 
 private let removePostMessage = "This photo will be deleted from P-effect"
 
-final class ProfileViewController: UITableViewController, StoryboardInitable, ApplicationAppearance {
+final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -38,7 +38,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Ap
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurateNavigationBar()
         setupController()
         setupLoadersCallback()
         setupGestureRecognizers()

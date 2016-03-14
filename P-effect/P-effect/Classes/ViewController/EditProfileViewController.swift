@@ -13,7 +13,7 @@ private let logoutMessage = "This will logout you. And you will not be able to s
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
-final class EditProfileViewController: UIViewController, StoryboardInitable, ApplicationAppearance {
+final class EditProfileViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -39,7 +39,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, App
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurateNavigationBar()
         makeNavigation()
         view.layoutIfNeeded()
         configureImagesAndText()

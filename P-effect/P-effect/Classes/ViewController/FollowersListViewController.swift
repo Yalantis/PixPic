@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FollowersListViewController: UIViewController, StoryboardInitable {
+final class FollowersListViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
 

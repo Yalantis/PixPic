@@ -8,7 +8,7 @@
 
 public class AppearanceApplyingStrategy {
     
-    public func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, animated: Bool) {
+    public func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, navigationItem:  UINavigationItem?, animated: Bool) {
         if let appearance = appearance {
             let navigationBar = navigationController.navigationBar
             

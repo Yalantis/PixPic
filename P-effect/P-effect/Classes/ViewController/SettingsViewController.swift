@@ -17,7 +17,7 @@ enum SettingsState {
     
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable {
+final class SettingsViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!

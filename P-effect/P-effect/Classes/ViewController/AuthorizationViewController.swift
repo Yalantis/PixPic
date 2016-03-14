@@ -10,7 +10,7 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-final class AuthorizationViewController: UIViewController, StoryboardInitable {
+final class AuthorizationViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
