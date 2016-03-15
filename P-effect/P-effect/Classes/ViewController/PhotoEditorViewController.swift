@@ -114,22 +114,22 @@ extension PhotoEditorViewController {
         )
         navigationItem.leftBarButtonItem = newBackButton
         
-        let saveButton = UIBarButtonItem(
+        let savingButton = UIBarButtonItem(
             image: UIImage(named: "save"),
             style: .Plain,
             target: self,
             action: "saveImageToCameraRoll"
         )
         
-        let deleteAllEffectsButton = UIBarButtonItem(
+        let allEffectsRemovingButton = UIBarButtonItem(
             image: UIImage(named: "remove"),
             style: .Plain,
             target: self,
             action: "removeAllEffects"
         )
-        deleteAllEffectsButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
+        allEffectsRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
 
-        navigationItem.rightBarButtonItems = [saveButton, deleteAllEffectsButton]
+        navigationItem.rightBarButtonItems = [savingButton, allEffectsRemovingButton]
         navigationItem.title = "Edit"
     }
     
