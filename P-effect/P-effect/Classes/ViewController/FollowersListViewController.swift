@@ -30,6 +30,12 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         setupAdapter()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertManager.sharedInstance.registerAlertListener(router)
+    }
+    
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
