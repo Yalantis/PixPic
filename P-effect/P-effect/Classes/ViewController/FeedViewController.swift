@@ -246,33 +246,36 @@ extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         let reachabilityService: ReachabilityService = locator.getService()
-        if reachabilityService.isReachable() {
-            if User.notAuthorized {
-                suggestLogin()
-            } else {
-                let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                settingsMenu.addAction(cancelAction)
-                
-                let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                    self?.showActivityController(items)
-                }
-                settingsMenu.addAction(shareAction)
-                
-                if post.user == User.currentUser() {
-                    let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                        self?.removePost(post, atIndex: index)
-                    }
-                    settingsMenu.addAction(removeAction)
-                } else {
-                    let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                        self?.complaintToPost(post)
-                    }
-                    settingsMenu.addAction(complaintAction)
-                }
-                
-                presentViewController(settingsMenu, animated: true, completion: nil)
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+
+            return
+        }
+        if User.notAuthorized {
+            suggestLogin()
+        } else {
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            settingsMenu.addAction(cancelAction)
+            
+            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                self?.showActivityController(items)
             }
+            settingsMenu.addAction(shareAction)
+            
+            if post.user == User.currentUser() {
+                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                    self?.removePost(post, atIndex: index)
+                }
+                settingsMenu.addAction(removeAction)
+            } else {
+                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                    self?.complaintToPost(post)
+                }
+                settingsMenu.addAction(complaintAction)
+            }
+            
+            presentViewController(settingsMenu, animated: true, completion: nil)
         }
     }
     
