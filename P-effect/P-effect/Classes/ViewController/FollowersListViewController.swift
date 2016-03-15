@@ -82,7 +82,7 @@ extension FollowersListViewController: FollowerAdapterDelegate {
     func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter) {
         tableView.reloadData()
     }
-    
+
 }
 
 extension FollowersListViewController: UITableViewDelegate {

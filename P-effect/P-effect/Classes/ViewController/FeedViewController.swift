@@ -129,8 +129,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     // MARK: - photo editor
     private func choosePhoto() {
-        let isUserAbsent = PFUser.currentUser() == nil
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || isUserAbsent {
+        if User.notAuthorized {
             router.showAuthorization()
             
             return
@@ -170,9 +169,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
-        let isUserAbsent = currentUser == nil
         
-        if PFAnonymousUtils.isLinkedWithUser(currentUser) || isUserAbsent {
+        if User.notAuthorized {
             router.showAuthorization()
         } else if let currentUser = currentUser {
             router.showProfile(currentUser)
@@ -241,20 +239,49 @@ extension FeedViewController: UITableViewDelegate {
 
 extension FeedViewController: PostAdapterDelegate {
     
-    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int) {
-        if post.user == User.currentUser() && ReachabilityHelper.checkConnection() {
-            
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let okAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                self?.removePost(post, atIndex: index)
+    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+        if ReachabilityHelper.checkConnection() {
+            if User.notAuthorized {
+                suggestLogin()
+            } else {
+                let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                settingsMenu.addAction(cancelAction)
+                
+                let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                    self?.showActivityController(items)
+                }
+                settingsMenu.addAction(shareAction)
+                
+                if post.user == User.currentUser() {
+                    let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                        self?.removePost(post, atIndex: index)
+                    }
+                    settingsMenu.addAction(removeAction)
+                } else {
+                    let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                        self?.complaintToPost(post)
+                    }
+                    settingsMenu.addAction(complaintAction)
+                }
+                
+                presentViewController(settingsMenu, animated: true, completion: nil)
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style:  .Cancel, handler: nil)
-            
-            settingsMenu.addAction(okAction)
-            settingsMenu.addAction(cancelAction)
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
         }
+    }
+    
+    private func suggestLogin() {
+        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+            self?.router.showAuthorization()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func removePost(post: Post, atIndex index: Int) {
@@ -277,6 +304,43 @@ extension FeedViewController: PostAdapterDelegate {
         }
     }
     
+    private func complaintToPost(post: Post) {
+        let complaintMenu = UIAlertController(title: "Complaint about", message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        complaintMenu.addAction(cancelAction)
+        
+        let complaintService: ComplaintService = locator.getService()
+        
+        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
+            complaintService.complaintUsername(post.user!) { _, error in
+                print(error)
+            }
+        }
+        
+        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
+            complaintService.complaintUserAvatar(post.user!) { _, error in
+                print(error)
+            }
+        }
+        
+        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
+            complaintService.complaintPost(post) { _, error in
+                print(error)
+            }
+        }
+        
+        complaintMenu.addAction(complaintUsernameAction)
+        complaintMenu.addAction(complaintUserAvatarAction)
+        complaintMenu.addAction(complaintPostAction)
+        
+        presentViewController(complaintMenu, animated: true, completion: nil)
+    }
+    
+    private func showActivityController(items: [AnyObject]) {
+        let activityViewController = ActivityViewController.initWith(items)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+
     func showUserProfile(adapter: PostAdapter, user: User) {
          router.showProfile(user)
     }
@@ -291,11 +355,6 @@ extension FeedViewController: PostAdapterDelegate {
     
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
-    }
-
-    func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 }

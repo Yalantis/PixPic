@@ -23,6 +23,7 @@ enum ComplaintReason: String {
 enum ComplaintRejectReason: String {
     case SelfComplaint = "You can't make a complaint on yourself"
     case AlreadyComplainedPost = "You already make a complaint on this post"
+    case AnonymousComlaint = "You can't make a complaint without registration"
 }
 
 class ComplaintService: NSObject {
@@ -92,6 +93,13 @@ class ComplaintService: NSObject {
     private func shouldContinueExecutionWith(user:User) -> Bool {
         if user.isCurrentUser {
             AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.SelfComplaint.rawValue)
+            
+            return false
+        }
+        
+        
+        if User.notAuthorized {
+            AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.AnonymousComlaint.rawValue)
             
             return false
         }
