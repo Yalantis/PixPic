@@ -82,7 +82,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
             settingsStack.addArrangedSubview(view)
         }
         let currentUser = User.currentUser()
-        if PFAnonymousUtils.isLinkedWithUser(currentUser) || currentUser == nil {
+        if User.notAuthorized {
             settings[.LoggedOut] = [logIn]
             for view in settings[.LoggedOut]! {
                 settingsStack.addArrangedSubview(view)

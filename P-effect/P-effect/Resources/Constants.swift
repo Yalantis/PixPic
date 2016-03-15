@@ -52,11 +52,11 @@ struct Constants {
     
     struct Profile {
         static let ToastActivityDuration = 5.0
-        static let HeaderHeight: CGFloat = 238
+        static let HeaderHeight: CGFloat = 322
         static let AvatarImageCornerRadius: CGFloat = 95.5
         static let AvatarImagePlaceholderName = "profile_placeholder.png"
         static let PossibleInsets: CGFloat = 45
-        static let SettingsButtonImage = "settings"
+        static let SettingsButtonImage = "edit_icon"
         static let NavigationTitle = "Profile"
     }
     
