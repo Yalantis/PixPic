@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter {
+class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter {
     
     private var user: User?
     private var userId: String?

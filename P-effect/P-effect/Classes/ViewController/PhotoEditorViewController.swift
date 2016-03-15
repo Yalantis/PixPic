@@ -114,14 +114,22 @@ extension PhotoEditorViewController {
         )
         navigationItem.leftBarButtonItem = newBackButton
         
-        let saveButton = UIBarButtonItem(
-            title: "Save",
+        let savingButton = UIBarButtonItem(
+            image: UIImage(named: "save"),
             style: .Plain,
             target: self,
             action: "saveImageToCameraRoll"
         )
-        navigationItem.rightBarButtonItem = saveButton
         
+        let allEffectsRemovingButton = UIBarButtonItem(
+            image: UIImage(named: "remove"),
+            style: .Plain,
+            target: self,
+            action: "removeAllEffects"
+        )
+        allEffectsRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
+
+        navigationItem.rightBarButtonItems = [savingButton, allEffectsRemovingButton]
         navigationItem.title = "Edit"
     }
     
@@ -232,7 +240,7 @@ extension PhotoEditorViewController {
     }
 
     //TODO: link this func with button after implementing design
-    @IBAction private func removeAllEffects() {
+    private dynamic func removeAllEffects() {
         delegate?.removeAllEffects(self)
     }
     
