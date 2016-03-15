@@ -45,9 +45,15 @@ extension User {
         }
     }
     
-    static var isUserAbsent: Bool {
+    static var isAbsent: Bool {
         get {
             return User.currentUser() == nil
+        }
+    }
+    
+    static var notAuthorized: Bool {
+        get {
+            return PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || User.isAbsent
         }
     }
     

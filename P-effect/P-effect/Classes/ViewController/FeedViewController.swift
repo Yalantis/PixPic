@@ -129,7 +129,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     // MARK: - photo editor
     private func choosePhoto() {
-        if PFAnonymousUtils.isLinkedWithUser(PFUser.currentUser()) || User.isUserAbsent {
+        if User.notAuthorized {
             router.showAuthorization()
             
             return
@@ -170,7 +170,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         
-        if PFAnonymousUtils.isLinkedWithUser(currentUser) || User.isUserAbsent {
+        if User.notAuthorized {
             router.showAuthorization()
         } else if let currentUser = currentUser {
             router.showProfile(currentUser)
@@ -241,30 +241,47 @@ extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         if ReachabilityHelper.checkConnection() {
-            
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
+            if User.notAuthorized {
+                suggestLogin()
             } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
+                let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                settingsMenu.addAction(cancelAction)
+                
+                let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                    self?.showActivityController(items)
                 }
-                settingsMenu.addAction(complaintAction)
+                settingsMenu.addAction(shareAction)
+                
+                if post.user == User.currentUser() {
+                    let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                        self?.removePost(post, atIndex: index)
+                    }
+                    settingsMenu.addAction(removeAction)
+                } else {
+                    let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                        self?.complaintToPost(post)
+                    }
+                    settingsMenu.addAction(complaintAction)
+                }
+                
+                presentViewController(settingsMenu, animated: true, completion: nil)
             }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
         }
+    }
+    
+    private func suggestLogin() {
+        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+            self?.router.showAuthorization()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func removePost(post: Post, atIndex index: Int) {
@@ -292,7 +309,7 @@ extension FeedViewController: PostAdapterDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         complaintMenu.addAction(cancelAction)
         
-        let complaintService: ComplaintService = router.locator.getService()
+        let complaintService: ComplaintService = locator.getService()
         
         let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in

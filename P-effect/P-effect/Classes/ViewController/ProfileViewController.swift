@@ -31,12 +31,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBOutlet private weak var followingQuantity: UILabel!
     @IBOutlet private weak var followButton: UIButton!
     
-    @IBOutlet weak var followButtonHeight: NSLayoutConstraint!
+    @IBOutlet private weak var followButtonHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupController()
+        setupLoadersCallback()
         setupFollowButton()
         setupGestureRecognizers()
     }
@@ -78,7 +79,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             followButton.selected = followStatus
             followButton.enabled = true
         } else {
-            let activityService: ActivityService = router.locator.getService()
+            let activityService: ActivityService = locator.getService()
             activityService.checkIsFollowing(user) { [weak self] follow in
                 self?.followButton.selected = follow
                 self?.followButton.enabled = true
@@ -157,29 +158,43 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         activityShown = true
     }
     
-    @IBAction func followSomeone() {
-        if ReachabilityHelper.checkConnection() {
-            
-            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || User.isUserAbsent {
-                let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                
-                let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
-                    self?.router.showAuthorization()
+    private func setupLoadersCallback() {
+        let postService: PostService = locator.getService()
+        tableView.addPullToRefreshWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
+            guard ReachabilityHelper.checkConnection() else {
+                this.tableView.pullToRefreshView.stopAnimating()
+                return
+            }
+            postService.loadPosts(this.user) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .Reload)
+                    AttributesCache.sharedCache.clear()
+                } else if let error = error {
+                    print(error)
                 }
-                
-                alertController.addAction(cancelAction)
-                alertController.addAction(registerAction)
-                
-                presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                toggleFollowFriend()
+                this.tableView.pullToRefreshView.stopAnimating()
+            }
+        }
+        tableView.addInfiniteScrollingWithActionHandler { [weak self] in
+            guard let this = self else {
+                return
+            }
+            postService.loadPagedPosts(this.user, offset: this.postAdapter.postQuantity) { objects, error in
+                if let objects = objects {
+                    this.postAdapter.update(withPosts: objects, action: .LoadMore)
+                } else if let error = error {
+                    print(error)
+                }
+                this.tableView.infiniteScrollingView.stopAnimating()
             }
         }
     }
-
+    
     private func toggleFollowFriend() {
-        let activityService: ActivityService = router.locator.getService()
+        let activityService: ActivityService = locator.getService()
         if followButton.selected {
             // Unfollow
             followButton.enabled = false
@@ -227,16 +242,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
-    // MARK: - IBActions
-    @IBAction private func profileSettings() {
-        router.showEditProfile()
-    }
-    
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
         guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
             folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
-                let activityService: ActivityService = router.locator.getService()
+                let activityService: ActivityService = locator.getService()
                 activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
                     if let this = self {
                         this.followersQuantity.text = String(followersCount) + " followers"
@@ -249,7 +259,31 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         followingQuantity.text = String(folowingQt) + " following"
     }
     
+    // MARK: - IBActions
+    @IBAction private func followSomeone() {
+        if ReachabilityHelper.checkConnection() {
+            if User.notAuthorized {
+                let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                
+                let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+                    self?.router.showAuthorization()
+                }
+                
+                alertController.addAction(cancelAction)
+                alertController.addAction(registerAction)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                toggleFollowFriend()
+            }
+        }
+    }
     
+    @IBAction private func profileSettings() {
+        router.showEditProfile()
+    }
+
     dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         router.showFollowersList(user, followType: .Followers)
     }
@@ -264,35 +298,51 @@ extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         if ReachabilityHelper.checkConnection() {
-            
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
-                
+            if User.notAuthorized {
+                suggestLogin()
             } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
+                let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                settingsMenu.addAction(cancelAction)
+                
+                let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                    self?.showActivityController(items)
                 }
-                settingsMenu.addAction(complaintAction)
+                settingsMenu.addAction(shareAction)
+                
+                
+                if post.user == User.currentUser() {
+                    let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                        self?.removePost(post, atIndex: index)
+                    }
+                    settingsMenu.addAction(removeAction)
+                    
+                } else {
+                    let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                        self?.complaintToPost(post)
+                    }
+                    settingsMenu.addAction(complaintAction)
+                }
+                
+                presentViewController(settingsMenu, animated: true, completion: nil)
             }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
-            
         }
     }
     
+    private func suggestLogin() {
+        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+            self?.router.showAuthorization()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+
     private func removePost(post: Post, atIndex index: Int) {
         UIAlertController.showAlert(
             inViewController: self,
@@ -318,7 +368,7 @@ extension ProfileViewController: PostAdapterDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         complaintMenu.addAction(cancelAction)
         
-        let complaintService: ComplaintService = router.locator.getService()
+        let complaintService: ComplaintService = locator.getService()
         let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
                 print(error)
