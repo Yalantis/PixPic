@@ -36,51 +36,23 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     
     // MARK: - UINavigationControllerDelegate
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-            guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
-                return
-            }
-            
-            setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(self), animated: animated)
-            setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
-            applyAppearance(
-                appearanceContext.preferredNavigationControllerAppearance(self),
-                navigationItem: viewController.navigationItem,
-                animated: animated
-            )
-            
-            // interactive gesture requires more complex logic.
-            guard let coordinator = viewController.transitionCoordinator() where coordinator.isInteractive() else {
-                return
-            }
-            
-            coordinator.animateAlongsideTransition({ _ in }, completion: { context in
-                if context.isCancelled(), let appearanceContext = self.topViewController as? NavigationControllerAppearanceContext {
-                    // hiding navigation bar & toolbar within interaction completion will result into inconsistent UI state
-                    self.setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(self), animated: animated)
-                    self.setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
-                }
-            })
-            
-            coordinator.notifyWhenInteractionEndsUsingBlock { context in
-                let key = UITransitionContextFromViewControllerKey
-                if context.isCancelled(),
-                    let viewController = context.viewControllerForKey(key),
-                    from = viewController as? NavigationControllerAppearanceContext {
-                    // changing navigation bar & toolbar appearance within animate completion will result into UI glitch
-                    self.applyAppearance(
-                        from.preferredNavigationControllerAppearance(self),
-                        navigationItem: viewController.navigationItem,
-                        animated: true
-                    )
-                }
-            }
+        guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
+            return
+        }
+        
+        setNavigationBarHidden(appearanceContext.prefersNavigationControllerBarHidden(self), animated: animated)
+        setToolbarHidden(appearanceContext.prefersNavigationControllerToolbarHidden(self), animated: animated)
+        applyAppearance(
+            appearanceContext.preferredNavigationControllerAppearance(self),
+            navigationItem: viewController.navigationItem,
+            animated: animated
+        )
     }
     
     // MARK: - Appearance Applying
     private var appliedAppearance: Appearance?
     
     private func applyAppearance(appearance: Appearance?, navigationItem: UINavigationItem?, animated: Bool) {
-//        if appearance != nil && appliedAppearance != appearance {
         if appearance != nil {
             appliedAppearance = appearance
             
