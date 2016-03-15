@@ -16,7 +16,7 @@ public enum UpdateType {
 
 protocol PostAdapterDelegate: class {
     
-    func showUserProfile(adapter: PostAdapter,user: User)
+    func showUserProfile(adapter: PostAdapter, user: User)
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter)
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
     func showActivityController(items: [AnyObject])

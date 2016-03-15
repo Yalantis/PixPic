@@ -16,7 +16,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Profile
     
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AlertManagerDelegate>!
-    private var user: User!
+    private var user: User? {
+        didSet {
+            update()
+        }
+    }
+    private var userId: String?
     
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
@@ -33,6 +38,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         setupController()
         setupLoadersCallback()
@@ -55,8 +61,25 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         self.user = user
     }
     
+    func setUserId(userId: String) {
+        self.userId = userId
+        let userService: UserService = router.locator.getService()
+        userService.fetchUser(userId) { [weak self] user, error in
+            if let error = error {
+                print(error)
+            } else if let user = user {
+                self?.setUser(user)
+            }
+        }
+    }
+    
     func setRouter(router: ProfileRouter) {
         self.router = router
+    }
+    
+    private func update() {
+        setupFollowButton()
+        setupController()
     }
     
     private func setupController() {
@@ -70,22 +93,28 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func setupFollowButton() {
-        followButton.selected = false
-        followButton.enabled = false
+        guard let user = user else {
+            return
+        }
+        followButton?.selected = false
+        followButton?.enabled = false
         let cache = AttributesCache.sharedCache
         if let followStatus = cache.followStatusForUser(user) {
-            followButton.selected = followStatus
-            followButton.enabled = true
+            followButton?.selected = followStatus
+            followButton?.enabled = true
         } else {
             let activityService: ActivityService = router.locator.getService()
             activityService.checkIsFollowing(user) { [weak self] follow in
-                self?.followButton.selected = follow
-                self?.followButton.enabled = true
+                self?.followButton?.selected = follow
+                self?.followButton?.enabled = true
             }
         }
     }
     
     private func loadUserPosts() {
+        guard let user = user else {
+            return
+        }
         let postService: PostService = locator.getService()
         postService.loadPosts(user) { [weak self] objects, error in
             guard let this = self else {
@@ -123,6 +152,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private func applyUser() {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
+        guard let user = user else {
+            return
+        }
         userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
         user.loadUserAvatar {[weak self] image, error in
@@ -186,6 +218,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func toggleFollowFriend() {
+        guard let user = user else {
+            return
+        }
         let activityService: ActivityService = router.locator.getService()
         if followButton.selected {
             // Unfollow
@@ -240,10 +275,16 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     
     dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+        guard let user = user else {
+            return
+        }
         router.showFollowersList(user, followType: .Followers)
     }
     
     dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+        guard let user = user else {
+            return
+        }
         router.showFollowersList(user, followType: .Following)
     }
     

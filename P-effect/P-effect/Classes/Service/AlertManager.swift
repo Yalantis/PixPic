@@ -11,7 +11,7 @@ import Toast
 
 private let notification = "Notification"
 
-protocol AlertManagerDelegate: FeedPresenter {
+protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
     
     func showSimpleAlert(message: String)
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?)
@@ -25,10 +25,12 @@ extension AlertManagerDelegate {
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
+        print(userInfo)
         let title = notification
-        
-        if let aps = userInfo?["aps"] as? [String: String] {
-            message = aps["alert"]
+        var followerId = String?()
+        if let info = RemoteNotificationParcer.parce(userInfo) {
+            message = info[.NewPost]
+            followerId = info[.NewFollower]
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
@@ -44,15 +46,19 @@ extension AlertManagerDelegate {
                 title: title,
                 image: UIImage(named: "ic_notification"),
                 style: nil,
-                completion: {
-                    (didTap: Bool) in
+                completion: { [weak self] didTap in
                     if didTap {
-                        self.showFeed()
+                        if let userId = followerId {
+                            self?.showProfile(userId)
+                        } else {
+                            self?.showFeed()
+                        }
                     }
                 }
             )
         }
     }
+    
 }
 
 final class AlertManager {
@@ -84,13 +90,16 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            delegate?.showFeed()
+            if let info = RemoteNotificationParcer.parce(userInfo), userId = info[.NewFollower] {
+                delegate?.showProfile(userId)
+            } else {
+                delegate?.showFeed()
+            }
         }
         if application.applicationState == .Active {
             showNotificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
-    
     
 }

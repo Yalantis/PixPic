@@ -10,12 +10,18 @@ import Foundation
 
 class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter {
     
-    private var user: User!
+    private var user: User?
+    private var userId: String?
     private(set) weak var currentViewController: UIViewController!
     private(set) weak var locator: ServiceLocator!
     
     init(user: User = User.currentUser()!, locator: ServiceLocator) {
         self.user = user
+        self.locator = locator
+    }
+    
+    init(userId: String, locator: ServiceLocator) {
+        self.userId = userId
         self.locator = locator
     }
     
@@ -30,7 +36,11 @@ extension ProfileRouter: Router {
         profileController.setRouter(self)
         profileController.setLocator(locator)
         currentViewController = profileController
-        profileController.setUser(user)
+        if let user = user {
+            profileController.setUser(user)
+        } else if let userId = userId {
+            profileController.setUserId(userId)
+        }
         context.showViewController(profileController, sender: self)
     }
     
