@@ -41,7 +41,7 @@ final class RemoteNotificationHelper {
             return result
             
         default:
-            return nil
+            return result
         }
     }
 
