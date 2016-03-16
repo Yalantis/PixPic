@@ -31,14 +31,14 @@ class UserService {
         }
     }
     
-    func fetchUser(userId: String, completion: ((user: User?, error: NSError?) -> Void)?) {
+    func fetchUser(userId: String, completion: (user: User!, error: NSError?) -> Void) {
         let query = User.sortedQuery()
         query.whereKey(Constants.UserKey.Id, equalTo: userId)
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let error = error {
-                completion?(user: nil, error: error)
+                completion(user: nil, error: error)
             } else if let user = objects?.first as? User {
-                completion?(user: user, error: nil)
+                completion(user: user, error: nil)
             }
         }
     }

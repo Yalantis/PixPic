@@ -17,7 +17,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
     private var user: User? {
         didSet {
-            update()
+            updateSelf()
         }
     }
     private var userId: String?
@@ -39,7 +39,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         setupController()
         setupLoadersCallback()
@@ -68,7 +67,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         userService.fetchUser(userId) { [weak self] user, error in
             if let error = error {
                 print(error)
-            } else if let user = user {
+            } else {
                 self?.setUser(user)
             }
         }
@@ -78,7 +77,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         self.router = router
     }
     
-    private func update() {
+    private func updateSelf() {
         setupFollowButton()
         setupController()
     }

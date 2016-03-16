@@ -25,12 +25,11 @@ extension AlertManagerDelegate {
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
-        print(userInfo)
         let title = notification
-        var followerId = String?()
-        if let info = RemoteNotificationParcer.parce(userInfo) {
-            message = info[.NewPost]
-            followerId = info[.NewFollower]
+        var followerId: String?
+        if let info = RemoteNotificationHelper.parse(userInfo) {
+            message = info.message
+            followerId = info.followerId
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
@@ -90,7 +89,7 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            if let info = RemoteNotificationParcer.parce(userInfo), userId = info[.NewFollower] {
+            if let info = RemoteNotificationHelper.parse(userInfo), userId = info.followerId {
                 delegate?.showProfile(userId)
             } else {
                 delegate?.showFeed()
