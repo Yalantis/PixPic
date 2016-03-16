@@ -103,7 +103,6 @@ extension FollowersListViewController: UITableViewDelegate {
 extension FollowersListViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-//        (self.navigationController as! AppearanceNavigationController).appearanceApplyingStrategy
         return Appearance()
     }
 }
