@@ -31,11 +31,9 @@ extension AlertManagerDelegate {
         switch notificationObject {
         case .NewPost(let alert, _):
             message = alert
-            break
             
         case .NewFollower(let alert, _):
             message = alert
-            break
             
         default:
             break
