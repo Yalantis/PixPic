@@ -26,10 +26,19 @@ extension AlertManagerDelegate {
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
         let title = notification
-        var followerId: String?
-        if let info = RemoteNotificationHelper.parse(userInfo) {
-            message = info.message
-            followerId = info.followerId
+        let notificationObject = RemoteNotificationHelper.parse(userInfo)
+        
+        switch notificationObject {
+        case .NewPost(let alert, _):
+            message = alert
+            break
+            
+        case .NewFollower(let alert, _):
+            message = alert
+            break
+            
+        default:
+            break
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
@@ -47,10 +56,14 @@ extension AlertManagerDelegate {
                 style: nil,
                 completion: { [weak self] didTap in
                     if didTap {
-                        if let userId = followerId {
+                        switch notificationObject {
+                        case .NewFollower(_, let userId):
                             self?.showProfile(userId)
-                        } else {
+                            break
+                            
+                        default:
                             self?.showFeed()
+                            break
                         }
                     }
                 }
@@ -89,10 +102,16 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            if let info = RemoteNotificationHelper.parse(userInfo), userId = info.followerId {
+            let notificationObject = RemoteNotificationHelper.parse(userInfo)
+            
+            switch notificationObject {
+            case .NewFollower(_, let userId):
                 delegate?.showProfile(userId)
-            } else {
+                break
+                
+            default:
                 delegate?.showFeed()
+                break
             }
         }
         if application.applicationState == .Active {

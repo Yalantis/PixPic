@@ -8,35 +8,33 @@
 
 import Foundation
 
-struct RemoteNotificationContent {
+enum RemoteNotificationObject {
     
-    internal private(set) var message: String = "No message"
-    internal private(set) var postId: String?
-    internal private(set) var followerId: String?
+    case NewPost(message: String, postId: String)
+    case NewFollower(message: String, followerId: String)
+    case None
     
 }
 
 final class RemoteNotificationHelper {
     
-    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationContent? {
+    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject {
+        var result = RemoteNotificationObject.None
         guard let type = userInfo?["t"] as? String,
             aps = userInfo?["aps"],
             message = aps["alert"] as? String else {
-                return nil
+                return result
         }
-        var result = RemoteNotificationContent()
-        result.message = message
-        
         switch type {
         case "p":
             if let postId = userInfo?["postid"] as? String {
-                result.postId = postId
+                result = RemoteNotificationObject.NewPost(message: message, postId: postId)
             }
             return result
             
         case "f":
             if let followerId = userInfo?["fromUserId"] as? String {
-                result.followerId = followerId
+                result = RemoteNotificationObject.NewFollower(message: message, followerId: followerId)
             }
             return result
             
@@ -44,5 +42,7 @@ final class RemoteNotificationHelper {
             return result
         }
     }
-
+    
 }
+
+
