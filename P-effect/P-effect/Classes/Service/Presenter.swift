@@ -62,6 +62,11 @@ extension ProfilePresenter {
         profileRouter.execute(currentViewController.navigationController!)
     }
     
+    func showProfile(userId: String) {
+        let profileRouter = ProfileRouter(userId: userId, locator: locator)
+        profileRouter.execute(currentViewController.navigationController!)
+    }
+    
 }
 
 protocol EditProfilePresenter: PresenterType {

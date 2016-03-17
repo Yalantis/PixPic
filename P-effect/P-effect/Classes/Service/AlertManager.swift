@@ -11,7 +11,7 @@ import Toast
 
 private let notification = "Notification"
 
-protocol AlertManagerDelegate: FeedPresenter {
+protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
     
     func showSimpleAlert(message: String)
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?)
@@ -26,9 +26,16 @@ extension AlertManagerDelegate {
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
         let title = notification
+        guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
+            return
+        }
         
-        if let aps = userInfo?["aps"] as? [String: String] {
-            message = aps["alert"]
+        switch notificationObject {
+        case .NewPost(let alert, _):
+            message = alert
+            
+        case .NewFollower(let alert, _):
+            message = alert
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
@@ -44,15 +51,23 @@ extension AlertManagerDelegate {
                 title: title,
                 image: UIImage(named: "ic_notification"),
                 style: nil,
-                completion: {
-                    (didTap: Bool) in
+                completion: { [weak self] didTap in
                     if didTap {
-                        self.showFeed()
+                        switch notificationObject {
+                        case .NewFollower(_, let userId):
+                            self?.showProfile(userId)
+                            break
+                            
+                        default:
+                            self?.showFeed()
+                            break
+                        }
                     }
                 }
             )
         }
     }
+    
 }
 
 final class AlertManager {
@@ -84,13 +99,20 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            delegate?.showFeed()
+            if let notificationObject = RemoteNotificationHelper.parse(userInfo) {
+                switch notificationObject {
+                case .NewFollower(_, let userId):
+                    delegate?.showProfile(userId)
+                    
+                default:
+                    delegate?.showFeed()
+                }
+            }
         }
         if application.applicationState == .Active {
             showNotificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
     }
-    
     
 }
