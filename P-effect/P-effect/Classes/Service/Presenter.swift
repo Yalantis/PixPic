@@ -72,7 +72,8 @@ extension ProfilePresenter {
         guard let navigationController = appearanceController else {
             return
         }
-        profileRouter.execute(navigationController)    }
+        profileRouter.execute(navigationController)
+    }
     
 }
 
