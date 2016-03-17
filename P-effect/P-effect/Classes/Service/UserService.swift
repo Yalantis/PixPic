@@ -32,7 +32,7 @@ class UserService {
     }
     
     func fetchUser(userId: String, completion: (user: User!, error: NSError?) -> Void) {
-        let query = User.sortedQuery()
+        let query = User.sortedQuery
         query.whereKey(Constants.UserKey.Id, equalTo: userId)
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let error = error {

@@ -68,8 +68,11 @@ extension ProfilePresenter {
     
     func showProfile(userId: String) {
         let profileRouter = ProfileRouter(userId: userId, locator: locator)
-        profileRouter.execute(currentViewController.navigationController!)
-    }
+        let appearanceController = currentViewController.navigationController as? AppearanceNavigationController
+        guard let navigationController = appearanceController else {
+            return
+        }
+        profileRouter.execute(navigationController)    }
     
 }
 
