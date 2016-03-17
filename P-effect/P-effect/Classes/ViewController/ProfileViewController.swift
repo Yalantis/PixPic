@@ -11,7 +11,7 @@ import Toast
 
 private let removePostMessage = "This photo will be deleted from P-effect"
 
-final class ProfileViewController: UITableViewController, StoryboardInitable {
+final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
@@ -138,8 +138,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             frame.size.height = Constants.Profile.PossibleInsets
         }
         tableViewFooter.frame = frame
-        print(tableViewFooter.frame)
-        tableView.tableFooterView = tableViewFooter;
+        tableView.tableFooterView = tableViewFooter
     }
     
     private func setupGestureRecognizers() {
@@ -172,12 +171,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         if user.isCurrentUser {
             profileSettingsButton.enabled = true
             profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
-            profileSettingsButton.tintColor = .whiteColor()
-           
+            profileSettingsButton.tintColor = UIColor.appWhiteColor
+
             followButton.hidden = true
             followButtonHeight.constant = 0.1
-            
-            print(followButtonHeight)
         }
         fillFollowersQuantity(user)
     }
@@ -194,10 +191,15 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             guard let this = self else {
                 return
             }
-            guard ReachabilityHelper.checkConnection() else {
+            
+            let reachabilityService: ReachabilityService = this.locator.getService()
+            guard reachabilityService.isReachable() else {
+                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
                 this.tableView.pullToRefreshView.stopAnimating()
+
                 return
             }
+                
             postService.loadPosts(this.user) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
@@ -293,22 +295,26 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
-        if ReachabilityHelper.checkConnection() {
-            if User.notAuthorized {
-                let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                
-                let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
-                    self?.router.showAuthorization()
-                }
-                
-                alertController.addAction(cancelAction)
-                alertController.addAction(registerAction)
-                
-                presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                toggleFollowFriend()
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            
+            return
+        }
+        if User.notAuthorized {
+            let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            
+            let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+                self?.router.showAuthorization()
             }
+            
+            alertController.addAction(cancelAction)
+            alertController.addAction(registerAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            toggleFollowFriend()
         }
     }
     
@@ -335,35 +341,39 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        if ReachabilityHelper.checkConnection() {
-            if User.notAuthorized {
-                suggestLogin()
-            } else {
-                let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                settingsMenu.addAction(cancelAction)
-                
-                let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                    self?.showActivityController(items)
-                }
-                settingsMenu.addAction(shareAction)
-                
-                
-                if post.user == User.currentUser() {
-                    let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                        self?.removePost(post, atIndex: index)
-                    }
-                    settingsMenu.addAction(removeAction)
-                    
-                } else {
-                    let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                        self?.complaintToPost(post)
-                    }
-                    settingsMenu.addAction(complaintAction)
-                }
-                
-                presentViewController(settingsMenu, animated: true, completion: nil)
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            
+            return
+        }
+        if User.notAuthorized {
+            suggestLogin()
+        } else {
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            settingsMenu.addAction(cancelAction)
+            
+            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
+                self?.showActivityController(items)
             }
+            settingsMenu.addAction(shareAction)
+            
+            
+            if post.user == User.currentUser() {
+                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
+                    self?.removePost(post, atIndex: index)
+                }
+                settingsMenu.addAction(removeAction)
+                
+            } else {
+                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
+                    self?.complaintToPost(post)
+                }
+                settingsMenu.addAction(complaintAction)
+            }
+            
+            presentViewController(settingsMenu, animated: true, completion: nil)
         }
     }
     

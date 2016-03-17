@@ -13,8 +13,7 @@ private let logoutMessage = "This will logout you. And you will not be able to s
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
-
-final class EditProfileViewController: UIViewController, StoryboardInitable {
+final class EditProfileViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -166,7 +165,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     dynamic private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        if ReachabilityHelper.checkConnection(showAlert: false) {
+        let reachabilityService: ReachabilityService = locator.getService()
+        if reachabilityService.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 return
@@ -182,7 +182,10 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     }
     
     private func logout() {
-        guard ReachabilityHelper.checkConnection() else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            
             return
         }
         let authService: AuthService = locator.getService()

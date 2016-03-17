@@ -21,9 +21,9 @@ class AuthorizationRouter: AlertManagerDelegate, FeedPresenter {
 
 extension AuthorizationRouter: Router {
     
-    typealias Context = UINavigationController
+    typealias Context = AppearanceNavigationController
     
-    func execute(context: UINavigationController) {
+    func execute(context: AppearanceNavigationController) {
         let authorizationViewController = AuthorizationViewController.create()
         authorizationViewController.setRouter(self)
         authorizationViewController.setLocator(locator)

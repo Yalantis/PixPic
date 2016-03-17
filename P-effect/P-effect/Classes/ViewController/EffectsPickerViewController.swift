@@ -39,7 +39,7 @@ class EffectsPickerViewController: UICollectionViewController {
     
     private func setupAdapter() {
         
-        let effectsService = locator.getService() as EffectsService
+        let effectsService: EffectsLoaderService = locator.getService()
         effectsService.loadEffects { [weak self] objects, error in
             guard let this = self else {
                 return

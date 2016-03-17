@@ -13,16 +13,17 @@ private let messageUploadSuccessful = "Upload successful!"
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
+    lazy var reachabilityService = ReachabilityService()
     
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
-        let query = Post.sortedQuery()
+        let query = Post.sortedQuery
         query.limit = Constants.DataSource.QueryLimit
         loadPosts(user, query: query, completion: completion)
     }
     
     func loadPagedPosts(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
-        let query = Post.sortedQuery()
+        let query = Post.sortedQuery
         query.limit = Constants.DataSource.QueryLimit
         query.skip = offset
         loadPosts(user, query: query, completion: completion)
@@ -37,8 +38,8 @@ class PostService {
                 print(error)
             }
             },
-            progressBlock: { percent in
-                print("Uploaded: \(percent)%")
+            progressBlock: { progress in
+                print("Uploaded: \(progress)%")
             }
         )
     }
@@ -78,7 +79,7 @@ class PostService {
             return
         }
         
-        if !ReachabilityHelper.checkConnection() {
+        if !reachabilityService.isReachable() {
             query.fromLocalDatastore()
         }
         

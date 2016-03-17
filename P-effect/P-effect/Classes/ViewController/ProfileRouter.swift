@@ -29,9 +29,9 @@ class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, 
 
 extension ProfileRouter: Router {
     
-    typealias Context = UINavigationController
+    typealias Context = AppearanceNavigationController
     
-    func execute(context: UINavigationController) {
+    func execute(context: AppearanceNavigationController) {
         let profileController = ProfileViewController.create()
         profileController.setRouter(self)
         profileController.setLocator(locator)

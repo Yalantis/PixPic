@@ -28,7 +28,7 @@ extension FeedRouter: Router {
         feedViewController.setRouter(self)
         feedViewController.setLocator(locator)
         self.currentViewController = feedViewController
-        let navigationController = UINavigationController(rootViewController: feedViewController)
+        let navigationController = AppearanceNavigationController(rootViewController: feedViewController)
         context.rootViewController = navigationController
     }
     

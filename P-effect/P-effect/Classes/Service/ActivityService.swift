@@ -26,14 +26,14 @@ class ActivityService: NSObject {
                 completion?(users: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
                 var users = isFollowers ? activities.map{$0.fromUser} : activities.map{$0.toUser}
-                let userQuery = User.sortedQuery()
-                var userIds = [String]()
+                let userQuery = User.sortedQuery
+                var usersIds = [String]()
                 for user in users {
                     if let userId = user.objectId {
-                        userIds.append(userId)
+                        usersIds.append(userId)
                     }
                 }
-                userQuery.whereKey(Constants.UserKey.Id, containedIn: userIds)
+                userQuery.whereKey(Constants.UserKey.Id, containedIn: usersIds)
                 
                 userQuery.findObjectsInBackgroundWithBlock { objects, error in
                     if let objects = objects as? [User] {

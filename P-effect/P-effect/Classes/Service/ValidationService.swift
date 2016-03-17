@@ -24,7 +24,7 @@ class ValidationService: NSObject {
                 return
         }
         
-        let query = PFUser.query()?.whereKey("username", equalTo: userName)
+        let query = User.query()?.whereKey("username", equalTo: userName)
         query?.getFirstObjectInBackgroundWithBlock { object, error in
             if object != nil {
                 AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.AlreadyExist)

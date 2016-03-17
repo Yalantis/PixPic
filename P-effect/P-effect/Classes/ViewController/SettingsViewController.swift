@@ -17,7 +17,7 @@ enum SettingsState {
     
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable {
+final class SettingsViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
@@ -96,7 +96,10 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     }
     
     private func logout() {
-        guard ReachabilityHelper.checkConnection() else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+                
             return
         }
         let authService: AuthService = locator.getService()

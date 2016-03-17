@@ -10,16 +10,12 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-final class AuthorizationViewController: UIViewController, StoryboardInitable {
+final class AuthorizationViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -62,7 +58,12 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
     private func proceedWithoutAuthorization() {
         router.showFeed()
-        ReachabilityHelper.checkConnection()
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
+            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            
+            return
+        }
     }
     
 }

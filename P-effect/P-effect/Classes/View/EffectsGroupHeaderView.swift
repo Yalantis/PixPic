@@ -30,7 +30,7 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
         ImageLoaderService.getImageForContentItem(file) { image, error in
             if let image = image {
                 self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
-                self.imageView.tintColor = UIColor.whiteColor()
+                self.imageView.tintColor = UIColor.appWhiteColor
             } else {
                 print("\(error)")
             }
@@ -39,7 +39,7 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
     
     func toggleGroup() {
         let isSelected = completion()
-        let color = isSelected ? UIColor.appBlueColor : UIColor.whiteColor()
+        let color = isSelected ? UIColor.appBlueColor : UIColor.appWhiteColor
         UIView.animateWithDuration(
             0.2,
             delay: 0,

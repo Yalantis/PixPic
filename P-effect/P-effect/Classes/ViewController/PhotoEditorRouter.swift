@@ -21,7 +21,7 @@ class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
         self.locator = locator
     }
     
-    func execute(context: UINavigationController) {
+    func execute(context: AppearanceNavigationController) {
         let photoEditorViewController = PhotoEditorViewController.create()
         photoEditorViewController.setRouter(self)
         photoEditorViewController.setLocator(locator)

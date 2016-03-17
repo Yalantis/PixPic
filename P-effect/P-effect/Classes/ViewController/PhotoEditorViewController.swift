@@ -17,7 +17,7 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-final class PhotoEditorViewController: UIViewController, StoryboardInitable {
+final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
     
@@ -250,7 +250,8 @@ extension PhotoEditorViewController {
 extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
-        guard ReachabilityHelper.checkConnection(showAlert: false) else {
+        let reachabilityService: ReachabilityService = locator.getService()
+        guard reachabilityService.isReachable() else {
             suggestSaveToCameraRoll()
             
             return

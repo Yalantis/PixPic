@@ -25,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             didFinishLaunchingWithOptions: launchOptions
         )
         setupParse()
-        setupAppearance()
-        
+
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         Fabric.with([Crashlytics.self])
         
@@ -50,15 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
-    }
-    
-    private func setupAppearance() {
-        let buttonTitlePosition = Constants.BackButtonTitle.HideTitlePosition
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(
-            buttonTitlePosition,
-            forBarMetrics: .Default
-        )
-        AppearanceConfigurator.configurateNavigationBarAndStatusBar()
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {

@@ -30,6 +30,12 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         setupAdapter()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AlertManager.sharedInstance.registerAlertListener(router)
+    }
+    
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -92,4 +98,11 @@ extension FollowersListViewController: UITableViewDelegate {
         router.showProfile(follower)
     }
     
+}
+
+extension FollowersListViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        return Appearance()
+    }
 }

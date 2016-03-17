@@ -10,7 +10,7 @@ import Foundation
 
 private let title = "Credentials and Policies"
 
-final class CredentialsViewController: UIViewController, StoryboardInitable {
+final class CredentialsViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Settings
     
