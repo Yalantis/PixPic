@@ -36,9 +36,6 @@ extension AlertManagerDelegate {
             
         case .NewFollower(let alert, _):
             message = alert
-            
-        default:
-            break
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
@@ -102,14 +99,14 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            let notificationObject = RemoteNotificationHelper.parse(userInfo)
-            
-            switch notificationObject {
-            case .NewFollower(_, let userId):
-                delegate?.showProfile(userId)
-                
-            default:
-                delegate?.showFeed()
+            if let notificationObject = RemoteNotificationHelper.parse(userInfo) {
+                switch notificationObject {
+                case .NewFollower(_, let userId):
+                    delegate?.showProfile(userId)
+                    
+                default:
+                    delegate?.showFeed()
+                }
             }
         }
         if application.applicationState == .Active {
