@@ -26,7 +26,9 @@ extension AlertManagerDelegate {
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
         let title = notification
-        let notificationObject = RemoteNotificationHelper.parse(userInfo)
+        guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
+            return
+        }
         
         switch notificationObject {
         case .NewPost(let alert, _):
@@ -105,11 +107,9 @@ final class AlertManager {
             switch notificationObject {
             case .NewFollower(_, let userId):
                 delegate?.showProfile(userId)
-                break
                 
             default:
                 delegate?.showFeed()
-                break
             }
         }
         if application.applicationState == .Active {

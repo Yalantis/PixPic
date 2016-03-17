@@ -12,35 +12,34 @@ enum RemoteNotificationObject {
     
     case NewPost(message: String, postId: String)
     case NewFollower(message: String, followerId: String)
-    case None
     
 }
 
 final class RemoteNotificationHelper {
     
-    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject {
-        var result = RemoteNotificationObject.None
+    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject? {
         guard let type = userInfo?["t"] as? String,
             aps = userInfo?["aps"],
             message = aps["alert"] as? String else {
-                return result
+                return nil
         }
+        
         switch type {
         case "p":
             if let postId = userInfo?["postid"] as? String {
-                result = RemoteNotificationObject.NewPost(message: message, postId: postId)
+                return RemoteNotificationObject.NewPost(message: message, postId: postId)
             }
-            return result
             
         case "f":
             if let followerId = userInfo?["fromUserId"] as? String {
-                result = RemoteNotificationObject.NewFollower(message: message, followerId: followerId)
+                return RemoteNotificationObject.NewFollower(message: message, followerId: followerId)
             }
-            return result
             
         default:
-            return result
+            break
         }
+        
+        return nil
     }
     
 }
