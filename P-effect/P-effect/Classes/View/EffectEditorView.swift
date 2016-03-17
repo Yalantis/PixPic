@@ -74,7 +74,7 @@ class EffectEditorView: UIView {
         resizingControl.addGestureRecognizer(panResizeGesture)
         addSubview(resizingControl)
         
-        deltaAngle = atan2(frame.origin.y + frame.size.height - center.y, frame.origin.x + frame.size.width - center.x)
+        deltaAngle = atan2(frame.origin.y + frame.height - center.y, frame.origin.x + frame.width - center.x)
     }
     
     private func setupContentView(content: UIView) {
@@ -93,7 +93,7 @@ class EffectEditorView: UIView {
         addSubview(contentView)
         
         for subview in contentView.subviews {
-            subview.frame = CGRectMake(0, 0, contentView.frame.size.width, contentView.frame.size.height)
+            subview.frame = CGRectMake(0, 0, contentView.frame.width, contentView.frame.height)
             subview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
     }
@@ -209,7 +209,7 @@ class EffectEditorView: UIView {
     
     private func createControlWithFrame(frame: CGRect, image: UIImage?) -> UIImageView {
         let control = UIImageView(frame: frame)
-        control.layer.cornerRadius = control.frame.size.width / 2
+        control.layer.cornerRadius = control.frame.width / 2
         control.backgroundColor = UIColor.appWhiteColor
         if let image = image {
             control.image = image

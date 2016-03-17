@@ -138,7 +138,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             frame.size.height = Constants.Profile.PossibleInsets
         }
         tableViewFooter.frame = frame
-        tableView.tableFooterView = tableViewFooter;
+        tableView.tableFooterView = tableViewFooter
     }
     
     private func setupGestureRecognizers() {

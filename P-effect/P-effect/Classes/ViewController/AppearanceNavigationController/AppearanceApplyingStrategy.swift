@@ -8,20 +8,18 @@
 
 class AppearanceApplyingStrategy {
     
-    func apply(appearance: Appearance?, toNavigationController navigationController: UINavigationController, navigationItem:  UINavigationItem?, animated: Bool) {
-        if let appearance = appearance {
-            let navigationBar = navigationController.navigationBar
-            
-            if !navigationController.navigationBarHidden {
-                navigationBar.barTintColor = appearance.navigationBar.barTintColor
-                navigationBar.translucent = appearance.navigationBar.translucent
-                navigationBar.titleTextAttributes = appearance.navigationBar.titleTextAttributes
-                navigationBar.backIndicatorImage = appearance.navigationBar.backIndicatorImage
-                navigationBar.backIndicatorTransitionMaskImage =
-                    appearance.navigationBar.backIndicatorTransitionMaskImage
-                navigationBar.tintColor = appearance.navigationBar.tintColor
-                navigationBar.topItem!.title = appearance.navigationBar.topItemTitle
-            }
+    func apply(appearance: Appearance, toNavigationController navigationController: UINavigationController, navigationItem:  UINavigationItem?, animated: Bool) {
+        let navigationBar = navigationController.navigationBar
+        
+        if !navigationController.navigationBarHidden {
+            navigationBar.barTintColor = appearance.navigationBar.barTintColor
+            navigationBar.translucent = appearance.navigationBar.translucent
+            navigationBar.titleTextAttributes = appearance.navigationBar.titleTextAttributes
+            navigationBar.backIndicatorImage = appearance.navigationBar.backIndicatorImage
+            navigationBar.backIndicatorTransitionMaskImage =
+                appearance.navigationBar.backIndicatorTransitionMaskImage
+            navigationBar.tintColor = appearance.navigationBar.tintColor
+            navigationBar.topItem!.title = appearance.navigationBar.topItemTitle
         }
     }
     
