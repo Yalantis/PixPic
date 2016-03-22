@@ -60,22 +60,6 @@ extension User {
         }
     }
     
-    func checkUsernameExistance(completion: Bool -> Void) {
-        guard let username = username else {
-            completion(false)
-            return
-        }
-        let query = User.sortedQuery.whereKey("username", equalTo: username)
-        query.getFirstObjectInBackgroundWithBlock { object, _ in
-            if object != nil {
-                completion(true)
-                print("username exists")
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
     // MARK: - ProfileViewControllerMethods
     func loadUserAvatar(completion: LoadingImageCompletion) {
         if let avatar = avatar {
