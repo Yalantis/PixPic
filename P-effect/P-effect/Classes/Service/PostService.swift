@@ -74,7 +74,7 @@ class PostService {
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
         var posts = [Post]()
         
-        if User.currentUser() == nil {
+        if User.isAbsent {
             print("No user signUP")
             completion(posts: nil, error: nil)
             

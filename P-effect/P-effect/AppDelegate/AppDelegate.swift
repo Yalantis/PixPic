@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         AlertManager.sharedInstance.handlePush(userInfo)
-        if PFUser.currentUser() != nil {
+        if !User.isAbsent {
             completionHandler(.NewData)
         } else {
             completionHandler(.NoData)
