@@ -11,7 +11,7 @@ import Parse
 
 typealias FetchingUsersCompletion = ((users: [User]?, error: NSError?) -> Void)?
 
-class ActivityService: NSObject {
+class ActivityService {
     
     func fetchUsers(type: FollowType, forUser user: User, completion: FetchingUsersCompletion) {
         let isFollowers = (type == .Followers)

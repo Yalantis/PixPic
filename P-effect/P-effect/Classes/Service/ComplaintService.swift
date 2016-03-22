@@ -26,7 +26,7 @@ enum ComplaintRejectReason: String {
     case AnonymousComlaint = "You can't make a complaint without registration"
 }
 
-class ComplaintService: NSObject {
+class ComplaintService {
     
     let reachabilityService = ReachabilityService()
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ValidationService: NSObject {
+class ValidationService {
     
     class func validateUserName(userName: String, completion: Bool -> Void) {
         if !isUserNameContainsOnlyLetters(userName) {
