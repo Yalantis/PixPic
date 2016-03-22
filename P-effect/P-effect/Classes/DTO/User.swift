@@ -20,6 +20,7 @@ class User: PFUser {
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: User.parseClassName())
         query.orderByDescending("updatedAt")
+        
         return query
     }
     
@@ -42,6 +43,7 @@ extension User {
             if let currentUser = User.currentUser() where currentUser.facebookId == self.facebookId {
                 return true
             }
+            
             return false
         }
     }
@@ -84,5 +86,3 @@ extension User {
     }
 
 }
-
-

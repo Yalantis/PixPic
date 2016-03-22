@@ -27,16 +27,17 @@ class EffectsLoaderService {
                 query.fromLocalDatastore()
                 this.isQueryFromLocalDataStoure = true
             }
-
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
                     print(error.localizedDescription)
                     completion(objects: nil, error: error)
+                    
                     return
                 }
                 
                 guard let object = object as? EffectsVersion  else {
                     completion(objects: nil, error: nil)
+                    
                     return
                 }
                 
@@ -61,11 +62,13 @@ class EffectsLoaderService {
             if let error = error {
                 print(error.localizedDescription)
                 completion(objects: nil, error: error)
+                
                 return
             }
             
             guard let objects = objects as? [EffectsGroup] else {
                 completion(objects: nil, error: nil)
+                
                 return
             }
             
@@ -91,11 +94,13 @@ class EffectsLoaderService {
                 if let error = error {
                     print(error.localizedDescription)
                     completion(objects: nil, error: error)
+                    
                     return
                 }
                 
                 guard let objects = objects as? [EffectsSticker] else {
                     completion(objects: nil, error: nil)
+                    
                     return
                 }
                 
@@ -109,6 +114,7 @@ class EffectsLoaderService {
                 
                 if groupsQuantity == effects.count {
                     completion(objects: effects, error: nil)
+                    
                     return
                 }
             }
@@ -123,6 +129,7 @@ class EffectsLoaderService {
         
         guard reachabilityService.isReachable() else {
             completion(false)
+            
             return
         }
         
@@ -130,6 +137,7 @@ class EffectsLoaderService {
             if let error = error {
                 print(error.localizedDescription)
                 completion(false)
+                
                 return
             }
             
@@ -142,6 +150,7 @@ class EffectsLoaderService {
                 if let error = error {
                     print(error.localizedDescription)
                     completion(true)
+                    
                     return
                 }
                 

@@ -77,6 +77,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
                         self?.followerAdapter.update(withFollowers: users, action: .Reload)
                     }
                 }
+                
                 return
         }
         self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)

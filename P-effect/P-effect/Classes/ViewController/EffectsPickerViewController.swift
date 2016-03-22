@@ -38,7 +38,6 @@ class EffectsPickerViewController: UICollectionViewController {
     }
     
     private func setupAdapter() {
-        
         let effectsService: EffectsLoaderService = locator.getService()
         effectsService.loadEffects { [weak self] objects, error in
             guard let this = self else {
@@ -68,6 +67,7 @@ extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
             let itemHeight = collectionView.bounds.size.height
+            
             return CGSize(width: itemHeight, height: itemHeight)
     }
     

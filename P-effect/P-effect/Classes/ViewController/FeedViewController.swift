@@ -60,6 +60,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
         toolBar.frame = CGRectMake(
             0,
@@ -158,6 +159,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 this.scrollToFirstRow()
             } else if let error = error {
                 print(error)
+                
                 return
             }
             self?.tableView?.pullToRefreshView.stopAnimating()
@@ -215,6 +217,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             }
             guard let offset = self?.postAdapter.postQuantity else {
                 this.tableView.infiniteScrollingView.stopAnimating()
+                
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in

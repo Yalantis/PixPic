@@ -121,4 +121,5 @@ struct Constants {
         static let Type = "type"
         static let Content = "content"
     }
+    
 }

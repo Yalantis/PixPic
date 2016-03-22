@@ -64,7 +64,6 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
             imageController?.setLocator(locator)
             delegate = imageController
             
-            
         case Constants.PhotoEditor.EffectsPickerSegue:
             effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
             effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()

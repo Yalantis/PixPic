@@ -255,7 +255,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             alertController.addAction(unfollowAction)
             
             presentViewController(alertController, animated: true, completion: nil)
-            
         } else {
             // Follow
             followButton.selected = true
@@ -287,6 +286,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                         this.followingQuantity.text = String(followingCount) + " following"
                     }
                 }
+                
                 return
         }
         followersQuantity.text = String(followersQt) + " followers"
@@ -359,13 +359,11 @@ extension ProfileViewController: PostAdapterDelegate {
             }
             settingsMenu.addAction(shareAction)
             
-            
             if post.user == User.currentUser() {
                 let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
                     self?.removePost(post, atIndex: index)
                 }
                 settingsMenu.addAction(removeAction)
-                
             } else {
                 let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
                     self?.complaintToPost(post)
@@ -461,7 +459,6 @@ extension ProfileViewController: PostAdapterDelegate {
     }
     
 }
-
 
 extension ProfileViewController {
     

@@ -52,6 +52,7 @@ class PostAdapter: NSObject {
     
     func getPost(atIndexPath indexPath: NSIndexPath) -> Post {
         let post = posts[indexPath.row]
+        
         return post
     }
     

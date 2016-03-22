@@ -13,6 +13,7 @@ private let messageUploadSuccessful = "Upload successful!"
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
+    
     lazy var reachabilityService = ReachabilityService()
     
     // MARK: - Public methods
@@ -76,6 +77,7 @@ class PostService {
         if User.currentUser() == nil {
             print("No user signUP")
             completion(posts: nil, error: nil)
+            
             return
         }
         

@@ -14,18 +14,21 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
+        
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }
     
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
+        
         interactivePopGestureRecognizer?.enabled = false
         delegate = self
     }

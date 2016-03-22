@@ -19,8 +19,10 @@ func handleError(error: NSError) {
         switch errorCode {
         case FBSDKErrorCode.NetworkErrorCode.rawValue:
             message = "A request failed due to a network error"
+            
         case FBSDKErrorCode.UnknownErrorCode.rawValue:
             message = "The error code for unknown errors"
+            
         default:
             message = error.localizedDescription
             break
@@ -31,12 +33,14 @@ func handleError(error: NSError) {
         switch (error.domain, error.code) {
         case (NSURLErrorDomain, NSURLErrorCancelled):
             return
+            
         case (NSURLErrorDomain, NSURLErrorCannotFindHost),
         (NSURLErrorDomain, NSURLErrorDNSLookupFailed),
         (NSURLErrorDomain, NSURLErrorCannotConnectToHost),
         (NSURLErrorDomain, NSURLErrorNetworkConnectionLost),
         (NSURLErrorDomain, NSURLErrorNotConnectedToInternet):
             message = "The Internet connection appears to be offline"
+            
         default:
             message = error.localizedDescription
         }
@@ -46,12 +50,16 @@ func handleError(error: NSError) {
         switch errorCode {
         case PFErrorCode.ErrorConnectionFailed.rawValue:
             message = "Connection Failed"
+            
         case PFErrorCode.ErrorFacebookIdMissing.rawValue:
             message = "Facebook id missing from request"
+            
         case PFErrorCode.ErrorObjectNotFound.rawValue:
             message = "Object Not Found"
+            
         case PFErrorCode.ErrorFacebookInvalidSession.rawValue:
             message = "Invalid Facebook session"
+            
         default:
             message = error.localizedDescription
             break

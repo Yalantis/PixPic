@@ -14,6 +14,7 @@ class EffectsVersion: PFObject {
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: EffectsVersion.parseClassName())
         query.orderByDescending("version")
+        
         return query
     }
 

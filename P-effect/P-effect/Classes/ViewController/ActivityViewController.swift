@@ -37,6 +37,7 @@ class ActivityViewController: UIActivityViewController {
                 AlertManager.sharedInstance.showSimpleAlert(message!)
             }
         }
+        
         return activityViewController
     }
     

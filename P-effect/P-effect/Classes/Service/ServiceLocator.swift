@@ -19,6 +19,7 @@ public class ServiceLocator {
     
     public func getService<T>() -> T! {
         let key = "\(T.self)"
+        
         return registry[key] as! T
     }
     

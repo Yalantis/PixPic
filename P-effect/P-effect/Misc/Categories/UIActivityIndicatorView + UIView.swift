@@ -16,6 +16,7 @@ extension UIActivityIndicatorView {
         indicator.hidesWhenStopped = true
         indicator.startAnimating()
         view.addSubview(indicator)
+        
         return indicator
     }
     

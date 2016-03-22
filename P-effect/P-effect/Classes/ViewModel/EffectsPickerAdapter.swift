@@ -33,6 +33,7 @@ class EffectsPickerAdapter: NSObject {
         ImageLoaderService.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
+                
                 return
             }
             if let image = image {

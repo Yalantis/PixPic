@@ -13,9 +13,9 @@ class ValidationService: NSObject {
     class func validateUserName(userName: String, completion: Bool -> Void) {
         if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
+            
             return
         }
-        
         if userName.characters.count < Constants.ValidationErrors.MinUserName ||
             userName.characters.count > Constants.ValidationErrors.MaxUserName {
                 AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.WrongLenght)
@@ -65,6 +65,5 @@ class ValidationService: NSObject {
         
         return true
     }
-    
     
 }

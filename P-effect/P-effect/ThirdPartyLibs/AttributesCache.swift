@@ -12,7 +12,6 @@ final class AttributesCache {
     private var cache: NSCache
     
     // MARK:- Initialization
-    
     static let sharedCache = AttributesCache()
     
     private init() {
@@ -58,6 +57,7 @@ final class AttributesCache {
     
     func attributesForPost(post: Post) -> [String:AnyObject]? {
         let key = keyForPost(post)
+        
         return cache.objectForKey(key) as? [String:AnyObject]
     }
     
@@ -69,6 +69,7 @@ final class AttributesCache {
                 return likesCount
             }
         }
+        
         return 0
     }
     
@@ -80,6 +81,7 @@ final class AttributesCache {
                 return likers
             }
         }
+        
         return [User]()
     }
     
@@ -98,6 +100,7 @@ final class AttributesCache {
                 return isLikedByUser
             }
         }
+        
         return false
     }
     
@@ -130,6 +133,7 @@ final class AttributesCache {
     
     func attributesForUser(user: User) -> [String:AnyObject]? {
         let key = keyForUser(user)
+        
         return cache.objectForKey(key) as? [String:AnyObject]
     }
     
@@ -138,14 +142,17 @@ final class AttributesCache {
             postCount = attributes[Constants.Attributes.PostsCount] as? Int {
                 return postCount
         }
+        
         return 0
     }
     
     func followStatusForUser(user: User) -> Bool? {
         if let attributes = attributesForUser(user) {
             let followStatus = attributes[Constants.Attributes.IsFollowedByCurrentUser] as? Bool
+            
             return followStatus
         }
+        
         return nil
     }
     
@@ -163,8 +170,7 @@ final class AttributesCache {
         }
     }
     
-    // MARK:- private methods
-    
+    // MARK: - Private methods
     private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
         let key: String = self.keyForPost(post)
         cache.setObject(attributes, forKey: key)

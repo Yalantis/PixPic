@@ -47,6 +47,7 @@ extension FeedPresenter {
     func showFeed() {
         currentViewController.navigationController!.popToRootViewControllerAnimated(true)
     }
+    
 }
 
 protocol ProfilePresenter: PresenterType {
@@ -171,6 +172,7 @@ extension CredentialsPresenter {
     }
     
 }
+
 protocol FollowersListPresenter: PresenterType {
     
     func showFollowersList(user: User, followType: FollowType)

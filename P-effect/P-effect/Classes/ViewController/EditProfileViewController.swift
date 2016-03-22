@@ -169,6 +169,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         if reachabilityService.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
+                
                 return
             }
             ValidationService.validateUserName(userName) { [weak self] completion in
@@ -320,6 +321,7 @@ extension EditProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return false
     }
 }
