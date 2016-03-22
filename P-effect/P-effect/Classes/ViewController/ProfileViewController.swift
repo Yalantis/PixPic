@@ -63,7 +63,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     func setUserId(userId: String) {
         self.userId = userId
-        let userService: UserService = router.locator.getService()
+        let userService: UserService = locator.getService()
         userService.fetchUser(userId) { [weak self] user, error in
             if let error = error {
                 print(error)

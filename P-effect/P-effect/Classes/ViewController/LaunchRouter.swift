@@ -39,7 +39,8 @@ extension LaunchRouter: Router {
         context.rootViewController = navigationController
         
         if User.currentUser() == nil {
-            (locator.getService() as AuthService).anonymousLogIn(
+            let authService: AuthService = locator.getService()
+            authService.anonymousLogIn(
                 completion: { [weak self] _ in
                     self?.presentFeed(context)
                 },
