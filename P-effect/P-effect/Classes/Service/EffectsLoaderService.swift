@@ -12,7 +12,7 @@ typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?)
 
 class EffectsLoaderService {
     
-    lazy var reachabilityService = ReachabilityService()
+    private lazy var reachabilityService = ReachabilityService()
     private var isQueryFromLocalDataStoure = false
     
     func loadEffects(completion: LoadingEffectsCompletion) {

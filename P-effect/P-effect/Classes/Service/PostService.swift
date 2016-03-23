@@ -14,7 +14,7 @@ typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
     
-    lazy var reachabilityService = ReachabilityService()
+    private lazy var reachabilityService = ReachabilityService()
     
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {

@@ -28,7 +28,7 @@ enum ComplaintRejectReason: String {
 
 class ComplaintService {
     
-    let reachabilityService = ReachabilityService()
+    private lazy var reachabilityService = ReachabilityService()
     
     func complaintUsername(user: User, post: Post? = nil, completion: ComplainCompletion) {
         if !shouldContinueExecutionWith(user) {
