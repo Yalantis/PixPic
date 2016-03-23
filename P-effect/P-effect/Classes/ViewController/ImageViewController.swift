@@ -21,7 +21,6 @@ class ImageViewController: UIViewController {
         super.viewDidLoad()
         
         rawImageView.image = model.originalImage()
-        // Do any additional setup after loading the view.
     }
     
     func setLocator(locator: ServiceLocator) {

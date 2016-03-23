@@ -21,8 +21,8 @@ class EffectsPickerAdapter: NSObject {
     override init() {
         super.init()
         
-        EffectsGroup()
-        EffectsSticker()
+        _ = EffectsGroup()
+        _ = EffectsSticker()
     }
     
     func effectImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
