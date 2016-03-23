@@ -27,7 +27,7 @@ class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
         photoEditorViewController.setLocator(locator)
         currentViewController = photoEditorViewController
         photoEditorViewController.setModel(PhotoEditorModel(image: image))
-        context.pushViewController(photoEditorViewController, animated: false)
+        context.pushViewController(photoEditorViewController, animated: true)
     }
     
 }

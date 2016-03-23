@@ -29,7 +29,7 @@ class EffectsLoaderService {
             }
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(objects: nil, error: error)
                     
                     return
@@ -60,7 +60,7 @@ class EffectsLoaderService {
         
         groupsRelationQuery.findObjectsInBackgroundWithBlock { [weak self] objects, error in
             if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(objects: nil, error: error)
                 
                 return
@@ -92,7 +92,7 @@ class EffectsLoaderService {
             }
             stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(objects: nil, error: error)
                     
                     return
@@ -135,7 +135,7 @@ class EffectsLoaderService {
         
         query.getFirstObjectInBackgroundWithBlock { object, error in
             if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(false)
                 
                 return
@@ -148,7 +148,7 @@ class EffectsLoaderService {
             effectsVersion = object
             queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(true)
                     
                     return

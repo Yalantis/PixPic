@@ -29,7 +29,8 @@ class Complaint: PFObject {
             suspectedPost = post
         }
         guard let complainer = User.currentUser() else {
-            print("Nil current user")
+            log.debug("Nil current user")
+
             
             return
         }

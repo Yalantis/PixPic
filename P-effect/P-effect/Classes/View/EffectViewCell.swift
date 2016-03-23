@@ -19,7 +19,7 @@ class EffectViewCell: UICollectionViewCell {
     private func downloadImageFromFile(file: PFFile) {
         ImageLoaderService.getImageForContentItem(file) { image, error in
             if let error = error {
-                print("\(error)")
+                log.debug(error.localizedDescription)
             } else {
                 self.effectImage.image = image
             }

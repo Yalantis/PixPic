@@ -27,7 +27,7 @@ class ActivityViewController: UIActivityViewController {
         ]
         activityViewController.completionWithItemsHandler = { activity, success, items, error in
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
             if let activity = activity where success  {
                 let message = activityViewController.activityViewController(

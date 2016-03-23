@@ -33,14 +33,14 @@ class PostService {
     func savePost(image: PFFile, comment: String? = nil) {
         image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
-                print("Saved!")
+                log.debug("Saved!")
                 self.uploadPost(image, comment: comment)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
             },
             progressBlock: { progress in
-                print("Uploaded: \(progress)%")
+                log.debug("Uploaded: \(progress)%")
             }
         )
     }
@@ -65,7 +65,7 @@ class PostService {
                 )
             } else {
                 if let error = error?.localizedDescription {
-                    print(error)
+                    log.debug(error)
                 }
             }
         }
@@ -75,7 +75,7 @@ class PostService {
         var posts = [Post]()
         
         if User.isAbsent {
-            print("No user signUP")
+            log.debug("No user signUP")
             completion(posts: nil, error: nil)
             
             return
@@ -97,7 +97,7 @@ class PostService {
                 }
                 completion(posts: posts, error: nil)
             } else if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(posts: nil, error: error)
             } else {
                 completion(posts: nil, error: nil)

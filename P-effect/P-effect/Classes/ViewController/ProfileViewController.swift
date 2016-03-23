@@ -66,7 +66,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         let userService: UserService = locator.getService()
         userService.fetchUser(userId) { [weak self] user, error in
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             } else {
                 self?.setUser(user)
             }
@@ -124,7 +124,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.view.hideToastActivity()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -205,7 +205,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -218,7 +218,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -265,7 +265,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             followButton.addSubview(indicator)
             activityService.followUserEventually(user) { succeeded, error in
                 if error == nil {
-                    print("Attempt to follow was \(succeeded) ")
+                    log.debug("Attempt to follow was \(succeeded) ")
                     self.followButton.selected = true
                 } else {
                     self.followButton.selected = false
@@ -403,7 +403,7 @@ extension ProfileViewController: PostAdapterDelegate {
                         this.postAdapter.removePost(atIndex: index)
                         this.tableView.reloadData()
                     } else if let error = error?.localizedDescription {
-                        print(error)
+                        log.debug(error)
                     }
                 }
         }
@@ -417,19 +417,19 @@ extension ProfileViewController: PostAdapterDelegate {
         let complaintService: ComplaintService = locator.getService()
         let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         
         let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
             complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         
         let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
             complaintService.complaintPost(post) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         

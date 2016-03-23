@@ -52,7 +52,7 @@ class ComplaintService {
     
     func complaintPost(post: Post, completion: ComplainCompletion) {
         guard let user = post.user else {
-            print(nilUserInPost)
+            log.debug(nilUserInPost)
             
             return
         }

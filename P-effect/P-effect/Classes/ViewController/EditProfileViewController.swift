@@ -110,7 +110,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
                 return
             }
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             } else {
                 this.avatarImageView.image = image
                 this.image = image
@@ -267,7 +267,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
             nickname: userName!,
             completion: { _, error in
                 if let error = error {
-                    print(error)
+                    log.debug(error)
                 }
                 self.view.hideToastActivity()
                 self.view.userInteractionEnabled = true

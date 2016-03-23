@@ -120,7 +120,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -158,7 +158,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.scrollToFirstRow()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
                 
                 return
             }
@@ -206,7 +206,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                     this.scrollToFirstRow()
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -224,7 +224,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -310,7 +310,7 @@ extension FeedViewController: PostAdapterDelegate {
                         this.postAdapter.removePost(atIndex: index)
                         this.tableView.reloadData()
                     } else if let error = error?.localizedDescription {
-                        print(error)
+                        log.debug(error)
                     }
                 }
         }
@@ -325,19 +325,19 @@ extension FeedViewController: PostAdapterDelegate {
         
         let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         
         let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
             complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         
         let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
             complaintService.complaintPost(post) { _, error in
-                print(error)
+                log.debug(error?.localizedDescription)
             }
         }
         
