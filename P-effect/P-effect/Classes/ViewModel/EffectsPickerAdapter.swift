@@ -85,11 +85,9 @@ class EffectsPickerAdapter: NSObject {
 extension EffectsPickerAdapter: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if currentGroupNumber != nil {
-            return 1
-        } else {
-            return effectsGroups?.count ?? 0
-        }
+        let isGroupSelected = currentGroupNumber != nil
+        let effectsGroupsQuantity = effectsGroups?.count ?? 0
+        return isGroupSelected ? 1 : effectsGroupsQuantity
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
