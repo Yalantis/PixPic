@@ -23,6 +23,14 @@ protocol PostAdapterDelegate: class {
     
 }
 
+extension PostAdapterDelegate {
+    
+    func showUserProfile(adapter: PostAdapter, user: User) {
+        
+    }
+
+}
+
 class PostAdapter: NSObject {
     
     private var posts = [Post]() {

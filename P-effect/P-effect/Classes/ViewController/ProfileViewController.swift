@@ -194,7 +194,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
                 return
@@ -297,7 +297,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     @IBAction private func followSomeone() {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }
@@ -343,7 +343,7 @@ extension ProfileViewController: PostAdapterDelegate {
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }
@@ -444,10 +444,6 @@ extension ProfileViewController: PostAdapterDelegate {
     private func showActivityController(items: [AnyObject]) {
         let activityViewController = ActivityViewController.initWith(items)
         self.presentViewController(activityViewController, animated: true, completion: nil)
-    }
-
-    func showUserProfile(adapter: PostAdapter, user: User) {
-        
     }
     
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {

@@ -25,18 +25,7 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
         let recognizer = UITapGestureRecognizer(target: self, action: "toggleGroup")
         addGestureRecognizer(recognizer)
     }
-    
-    private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderService.getImageForContentItem(file) { image, error in
-            if let image = image {
-                self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
-                self.imageView.tintColor = UIColor.appWhiteColor
-            } else {
-                print("\(error)")
-            }
-        }
-    }
-    
+        
     func toggleGroup() {
         let isSelected = completion()
         let color = isSelected ? UIColor.appBlueColor : UIColor.appWhiteColor
@@ -49,6 +38,17 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
             },
             completion: nil
         )
+    }
+    
+    private func downloadImageFromFile(file: PFFile) {
+        ImageLoaderService.getImageForContentItem(file) { image, error in
+            if let image = image {
+                self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
+                self.imageView.tintColor = UIColor.appWhiteColor
+            } else {
+                log.debug(error?.localizedDescription)
+            }
+        }
     }
     
 }

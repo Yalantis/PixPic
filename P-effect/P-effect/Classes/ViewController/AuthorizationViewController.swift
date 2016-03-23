@@ -60,7 +60,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
         router.showFeed()
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }

@@ -9,13 +9,13 @@
 import UIKit
 import AVFoundation
 
-public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
+class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
     var completionImageReceived:(UIImage -> Void)?
     
-    public func showInView(controller: UIViewController) {
+    func showInView(controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
@@ -56,13 +56,12 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExist: Bool = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let cameraExist = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
         if cameraExist {
             imagePickerController.sourceType = .Camera
             checkCamera()
-        }
-        else {
+        } else {
             noCamera()
         }
     }
@@ -154,13 +153,13 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
-    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         controller.dismissViewControllerAnimated(true, completion: nil)
         completionImageReceived?(selectedImage)
     }
     
-    public func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     

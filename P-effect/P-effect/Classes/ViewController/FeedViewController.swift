@@ -39,7 +39,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         
         let reachabilityService: ReachabilityService = locator.getService()
         if !reachabilityService.isReachable() {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
         }
@@ -195,7 +195,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
 
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
@@ -250,7 +250,7 @@ extension FeedViewController: PostAdapterDelegate {
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
 
             return
         }

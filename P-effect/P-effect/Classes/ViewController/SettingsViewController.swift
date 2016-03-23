@@ -98,8 +98,8 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     private func logout() {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-                
+            ExceptionHandler.handle(Exception.NoConnection)
+            
             return
         }
         let authService: AuthService = locator.getService()
