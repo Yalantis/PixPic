@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PushNotificationQueue {
+class PushNotificationQueue: NSObject {
     
     static var notificationQueue = [String]()
     

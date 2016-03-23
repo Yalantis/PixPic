@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="top" axis="vertical" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-NS-pkb">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-NS-pkb">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                             </stackView>
                         </subviews>
@@ -50,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5u-hD-9AV">
-                                <rect key="frame" x="283.5" y="20" width="33.5" height="21"/>
+                                <rect key="frame" x="283" y="20" width="34" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="PTn-VQ-i0f"/>
                                 </constraints>
@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our app is just the best " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTQ-PH-ncl">
-                                <rect key="frame" x="20" y="40.5" width="560" height="559.5"/>
+                                <rect key="frame" x="20" y="41" width="560" height="559"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
