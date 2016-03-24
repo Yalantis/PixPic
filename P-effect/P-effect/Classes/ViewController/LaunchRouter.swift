@@ -28,9 +28,7 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
 }
 
 extension LaunchRouter: Router {
-    
-    typealias Context = UIWindow
-    
+        
     func execute(context: UIWindow) {
         let launchViewController = LaunchViewController.create()
         launchViewController.setRouter(self)

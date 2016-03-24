@@ -24,9 +24,7 @@ class FollowersListRouter: AlertManagerDelegate, ProfilePresenter {
 }
 
 extension FollowersListRouter: Router {
-    
-    typealias Context = AppearanceNavigationController
-    
+        
     func execute(context: AppearanceNavigationController) {
         let followersController = FollowersListViewController.create()
         followersController.setRouter(self)

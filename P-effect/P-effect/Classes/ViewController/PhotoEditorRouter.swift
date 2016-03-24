@@ -9,9 +9,7 @@
 import Foundation
 
 class PhotoEditorRouter: AlertManagerDelegate, FeedPresenter {
-    
-    typealias Context = UINavigationController
-    
+        
     private var image: UIImage!
     private(set) weak var locator: ServiceLocator!
     private(set) weak var currentViewController: UIViewController!

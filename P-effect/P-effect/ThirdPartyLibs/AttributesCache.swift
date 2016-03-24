@@ -172,12 +172,12 @@ final class AttributesCache {
     
     // MARK: - Private methods
     private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
-        let key: String = self.keyForPost(post)
+        let key = keyForPost(post)
         cache.setObject(attributes, forKey: key)
     }
     
     private func setAttributes(attributes: [String:AnyObject], forUser user: User) {
-        let key: String = self.keyForUser(user)
+        let key = keyForUser(user)
         cache.setObject(attributes, forKey: key)
     }
     

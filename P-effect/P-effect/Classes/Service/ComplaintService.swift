@@ -61,11 +61,8 @@ class ComplaintService {
         }
         let complaint = Complaint(user: user, post: post, reason: ComplaintReason.PostImage)
         performIfComplaintExsist(complaint) { [weak self] existence in
-            guard let this = self else {
-                return
-            }
             if !existence {
-                this.sendComplaint(complaint) { result, error in
+                self?.sendComplaint(complaint) { result, error in
                     completion(result, error)
                 }
             } else {
