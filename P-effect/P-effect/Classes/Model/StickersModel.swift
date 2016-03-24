@@ -8,9 +8,9 @@
 
 import UIKit
 
-struct EffectsModel {
+struct StickersModel {
     
-    let effectsGroup: EffectsGroup
-    let effectsStickers: [EffectsSticker]
+    let stickersGroup: StickersGroup
+    let stickers: [Sticker]
 
 }

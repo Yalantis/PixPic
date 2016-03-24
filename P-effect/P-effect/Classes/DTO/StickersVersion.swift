@@ -6,13 +6,13 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-class EffectsVersion: PFObject {
+class StickersVersion: PFObject {
     
     @NSManaged var version: Float
     private static var onceToken: dispatch_once_t = 0
     
     static var sortedQuery: PFQuery {
-        let query = PFQuery(className: EffectsVersion.parseClassName())
+        let query = PFQuery(className: StickersVersion.parseClassName())
         query.orderByDescending("version")
         
         return query
@@ -30,7 +30,7 @@ class EffectsVersion: PFObject {
     
 }
 
-extension EffectsVersion: PFSubclassing {
+extension StickersVersion: PFSubclassing {
     
     class func parseClassName() -> String {
         return "EffectsVersion"

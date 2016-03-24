@@ -8,9 +8,9 @@
 
 import UIKit
 
-class EffectsPickerViewController: UICollectionViewController {
+class StickersPickerViewController: UICollectionViewController {
     
-    lazy var effectsPickerAdapter = EffectsPickerAdapter()
+    lazy var stickersPickerAdapter = StickersPickerAdapter()
     weak var delegate: PhotoEditorViewController?
     private weak var locator: ServiceLocator!
     
@@ -29,22 +29,22 @@ class EffectsPickerViewController: UICollectionViewController {
     // MARK: - Private methods
     private func setupCollectionView() {
         collectionView!.registerNib(
-            EffectsGroupHeaderView.cellNib,
+            StickersGroupHeaderView.cellNib,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-            withReuseIdentifier: EffectsGroupHeaderView.identifier
+            withReuseIdentifier: StickersGroupHeaderView.identifier
         )        
-        collectionView!.collectionViewLayout = EffectsLayout()
-        collectionView!.dataSource = effectsPickerAdapter
+        collectionView!.collectionViewLayout = StickersLayout()
+        collectionView!.dataSource = stickersPickerAdapter
     }
     
     private func setupAdapter() {
-        let effectsService: EffectsLoaderService = locator.getService()
-        effectsService.loadEffects { [weak self] objects, error in
+        let stickersService: StickersLoaderService = locator.getService()
+        stickersService.loadStickers() { [weak self] objects, error in
             guard let this = self else {
                 return
             }
             if let objects = objects {
-                this.effectsPickerAdapter.sortEffectsGroups(objects)
+                this.stickersPickerAdapter.sortStickersGroups(objects)
                 this.collectionView!.reloadData()
             }
         }
@@ -52,9 +52,9 @@ class EffectsPickerViewController: UICollectionViewController {
     
     // MARK: - UICollectionViewDelegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        effectsPickerAdapter.effectImage(atIndexPath: indexPath) { [weak self] image, error in
+        stickersPickerAdapter.stickerImage(atIndexPath: indexPath) { [weak self] image, error in
             if let image = image {
-                self?.delegate?.didChooseEffectFromPicket(image)
+                self?.delegate?.didChooseStickerFromPicket(image)
             }
         }
     }
@@ -62,7 +62,7 @@ class EffectsPickerViewController: UICollectionViewController {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
-extension EffectsPickerViewController: UICollectionViewDelegateFlowLayout {
+extension StickersPickerViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {

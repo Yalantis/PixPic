@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Ku-Rq-LyC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Ku-Rq-LyC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -23,7 +23,7 @@
                                     <constraint firstAttribute="height" constant="105" id="01I-hn-AuT"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="yyD-Hu-4ME" kind="embed" identifier="EffectsPickerSegue" id="XAM-Px-amC"/>
+                                    <segue destination="yyD-Hu-4ME" kind="embed" identifier="StickersPickerSegue" id="XAM-Px-amC"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBH-Uk-Eae">
@@ -61,18 +61,18 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="effectsPickerContainer" destination="BiL-1J-hH1" id="mSh-P6-Q4j"/>
                         <outlet property="imageContainer" destination="iAG-LE-Z91" id="lWr-hG-5BJ"/>
+                        <outlet property="stickerPickerContainer" destination="BiL-1J-hH1" id="iGf-eH-mn2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6uj-7L-tfi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="334" y="1274"/>
         </scene>
-        <!--Effects Picker View Controller-->
+        <!--Stickers Picker View Controller-->
         <scene sceneID="akr-CG-0B1">
             <objects>
-                <collectionViewController storyboardIdentifier="EffectsPickerViewController" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="EffectsPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EffectsPickerViewController" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="StickersPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Vwq-mq-bPe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +80,7 @@
                         <gestureRecognizers/>
                         <collectionViewLayout key="collectionViewLayout" id="0uH-cm-fCd"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="EffectsPickerCell" id="6Yd-Sn-MA1" customClass="EffectViewCell" customModule="P_effect" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="StickerPickerCell" id="6Yd-Sn-MA1" customClass="StickerViewCell" customModule="P_effect" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -116,7 +116,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <outlet property="effectImage" destination="ggR-Ef-bIK" id="3uK-G2-vRR"/>
+                                    <outlet property="stickerImage" destination="ggR-Ef-bIK" id="KQh-Pw-gls"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

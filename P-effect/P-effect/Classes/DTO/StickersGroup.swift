@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-class EffectsGroup: PFObject {
+class StickersGroup: PFObject {
     
     @NSManaged var image: PFFile
     @NSManaged var label: String
@@ -24,7 +24,7 @@ class EffectsGroup: PFObject {
     
 }
 
-extension EffectsGroup: PFSubclassing {
+extension StickersGroup: PFSubclassing {
     
     class func parseClassName() -> String {
         return "EffectsGroup"

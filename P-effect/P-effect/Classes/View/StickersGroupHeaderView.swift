@@ -8,16 +8,16 @@
 
 import Foundation
 
-class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
+class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     
-    static let identifier = "EffectsGroupHeaderViewIdentifier"
+    static let identifier = "StickersGroupHeaderViewIdentifier"
     
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
     
-    func configureWith(group group: EffectsGroup, completion: (() -> Bool)) {
+    func configureWith(group group: StickersGroup, completion: (() -> Bool)) {
         downloadImageFromFile(group.image)
         label.text = group.label
         self.completion = completion
