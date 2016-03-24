@@ -9,6 +9,10 @@
 import UIKit
 import AVFoundation
 
+private let takePhotoActionTitle = "Take photo"
+private let selectFromLibraryActionTitle = "Choose photo from library"
+private let cancelActionTitle = "Cancel"
+
 class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
@@ -25,7 +29,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             preferredStyle: .ActionSheet
         )
         let takePhotoAction = UIAlertAction(
-            title: "Take photo",
+            title: takePhotoActionTitle,
             style: .Default,
             handler: { _ in
                 self.takePhoto()
@@ -33,16 +37,15 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             }
         )
         let selectFromLibraryAction = UIAlertAction(
-            title: "Choose photo from library",
+            title: selectFromLibraryActionTitle,
             style: .Default,
             handler: { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
             }
         )
-        
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel,
             handler: { _ in
                 PushNotificationQueue.handleNotificationQueue()

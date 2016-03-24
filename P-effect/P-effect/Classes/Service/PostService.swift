@@ -38,11 +38,9 @@ class PostService {
             } else if let error = error {
                 log.debug(error.localizedDescription)
             }
-            },
-            progressBlock: { progress in
-                log.debug("Uploaded: \(progress)%")
-            }
-        )
+        }, progressBlock: { progress in
+            log.debug("Uploaded: \(progress)%")
+        })
     }
     
     func removePost(post: Post, completion: (Bool, NSError?) -> Void) {

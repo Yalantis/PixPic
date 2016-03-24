@@ -30,7 +30,6 @@ class Complaint: PFObject {
         }
         guard let complainer = User.currentUser() else {
             log.debug("Nil current user")
-
             
             return
         }

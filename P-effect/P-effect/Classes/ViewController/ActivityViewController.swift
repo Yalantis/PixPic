@@ -17,6 +17,8 @@ class ActivityViewController: UIActivityViewController {
     private let applyToContactMessage = "Applied to contact!"
     private let doneMessage = "Shared!"
     
+    private let activityTypePostToVK = "com.vk.vkclient.shareextension"
+    
     static func initWith(items: [AnyObject]) -> ActivityViewController {
         let activityViewController = ActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [
@@ -63,7 +65,7 @@ extension ActivityViewController: UIActivityItemSource {
         case UIActivityTypeAssignToContact:
             return applyToContactMessage
             
-        case "com.vk.vkclient.shareextension":
+        case activityTypePostToVK:
             return vkMessage
             
         default:

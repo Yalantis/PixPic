@@ -326,14 +326,24 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Followers)
+        guard let followersQuantity = followersQuantity.text else {
+            return
+        }
+        if followersQuantity[followersQuantity.startIndex] != "0" {
+            router.showFollowersList(user, followType: .Followers)
+        }
     }
     
     dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Following)
+        guard let followingQuantity = followingQuantity.text else {
+            return
+        }
+        if followingQuantity[followingQuantity.startIndex] != "0" {
+            router.showFollowersList(user, followType: .Following)
+        }
     }
     
 }
