@@ -13,6 +13,10 @@ private let logoutMessage = "This will logout you. And you will not be able to s
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
 
+private let saveActionTitle = "Save"
+private let logoutActionTitle = "Logout me!"
+private let cancelActionTitle = "Cancel"
+
 final class EditProfileViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
@@ -122,7 +126,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         navigationItem.title = "Edit profile"
         
         let rightButton = UIBarButtonItem(
-            title: "Save",
+            title: saveActionTitle,
             style: .Plain,
             target: self,
             action: "saveChangesAction"
@@ -144,16 +148,22 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
                 title: "Save changes",
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let noAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-                self?.navigationController!.popViewControllerAnimated(true)
+            let noAction = UIAlertAction(
+                title: "Ok",
+                style: .Cancel
+                ) { [weak self] action in
+                    PushNotificationQueue.handleNotificationQueue()
+                    alertController.dismissViewControllerAnimated(true, completion: nil)
+                    self?.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(noAction)
             
-            let yesAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
-                self?.saveChangesAction()
-                PushNotificationQueue.handleNotificationQueue()
+            let yesAction = UIAlertAction(
+                title: saveActionTitle,
+                style: .Default
+                ) { [weak self] action in
+                    self?.saveChangesAction()
+                    PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(yesAction)
             
@@ -196,7 +206,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
                 self.router.showFeed()
             }, failure: { error in
                 if let error = error {
-                    handleError(error)
+                    ErrorHandler.handle(error)
                 }
             }
         )
@@ -288,7 +298,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         )
         
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
@@ -297,7 +307,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         alertController.addAction(cancelAction)
         
         let okAction = UIAlertAction(
-            title: "Logout me!",
+            title: logoutActionTitle,
             style: .Default
             ) { _ in
                 self.logout()

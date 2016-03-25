@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
+ 
+private let titleForEmptyData = "No data is currently available"
+private let descriptionForEmptyData = "Please pull down to refresh"
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
@@ -98,7 +101,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
     private func setupObserver() {
@@ -287,17 +290,13 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data is currently available"
-        
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please pull down to refresh"
-        
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
@@ -306,7 +305,7 @@ extension FeedViewController: DZNEmptyDataSetSource {
             NSForegroundColorAttributeName: UIColor.lightGrayColor(),
             NSParagraphStyleAttributeName: paragraph]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: descriptionForEmptyData, attributes: attributes)
     }
     
 }

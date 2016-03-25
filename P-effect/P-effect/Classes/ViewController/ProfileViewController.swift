@@ -9,6 +9,14 @@
 import UIKit
 import Toast
 
+private let unfollowMessage = "Are you sure you want to unfollow?"
+private let unfollowTitle = "Unfollow"
+private let unfollowActionTitle = "Yes"
+
+private let suggestLoginMessage = "You can't follow someone without registration"
+private let registerActionTitle = "Register"
+private let cancelActionTitle = "Cancel"
+
 final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
@@ -85,7 +93,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
@@ -233,21 +241,30 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             // Unfollow
             followButton.enabled = false
             
-            let alertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow?", preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
-                self?.followButton.enabled = true
+            let alertController = UIAlertController(
+                title: unfollowTitle,
+                message: unfollowMessage,
+                preferredStyle: .ActionSheet
+            )
+            let cancelAction = UIAlertAction(
+                title: cancelActionTitle,
+                style: .Cancel
+                ) { [weak self] _ in
+                    self?.followButton.enabled = true
             }
-            
-            let unfollowAction = UIAlertAction(title: "Yes", style: .Default) { [weak self] _ in
-                guard let this = self, user = this.user else {
-                    return
-                }
-                activityService.unfollowUserEventually(user) { [weak self] success, error in
-                    if success {
-                        self?.followButton.selected = false
-                        self?.followButton.enabled = true
+            let unfollowAction = UIAlertAction(
+                title: unfollowActionTitle,
+                style: .Default
+                ) { [weak self] _ in
+                    guard let this = self, user = this.user else {
+                        return
                     }
-                }
+                    activityService.unfollowUserEventually(user) { [weak self] success, error in
+                        if success {
+                            self?.followButton.selected = false
+                            self?.followButton.enabled = true
+                        }
+                    }
             }
             
             alertController.addAction(cancelAction)
@@ -292,6 +309,26 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         followingQuantity.text = String(folowingQt) + " following"
     }
     
+    private func suggestLogin() {
+        let alertController = UIAlertController(title: suggestLoginMessage, message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
+        
+        let registerAction = UIAlertAction(
+            title: registerActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.router.showAuthorization()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - IBActions
     @IBAction private func followSomeone() {
         let reachabilityService: ReachabilityService = locator.getService()
@@ -301,17 +338,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             return
         }
         if User.notAuthorized {
-            let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            
-            let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
-                self?.router.showAuthorization()
-            }
-            
-            alertController.addAction(cancelAction)
-            alertController.addAction(registerAction)
-            
-            presentViewController(alertController, animated: true, completion: nil)
+            suggestLogin()
         } else {
             toggleFollowFriend()
         }

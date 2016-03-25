@@ -17,6 +17,14 @@ protocol PhotoEditorDelegate: class {
     
 }
 
+private let cancelActionTitle = "Cancel"
+private let postActionTitle = "Post with delay"
+private let saveActionTitle = "Save"
+private let dontSaveActionTitle = "Don't save"
+
+private let suggestSaveToCameraRollMessage = "Would you like to save results to photo library or post after internet access appears?"
+
+
 final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
@@ -152,21 +160,30 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { [weak self] _ in
-            guard let this = self else {
-                return
-            }
-            this.saveImageToCameraRoll()
-            this.navigationController!.popViewControllerAnimated(true)
+        let saveAction = UIAlertAction(
+            title: saveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                guard let this = self else {
+                    return
+                }
+                this.saveImageToCameraRoll()
+                this.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(saveAction)
         
-        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { [weak self] _ in
-            self?.navigationController!.popViewControllerAnimated(true)
+        let dontSaveAction = UIAlertAction(
+            title: dontSaveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(dontSaveAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
         alertController.addAction(cancelAction)
         
         presentViewController(alertController, animated: true, completion: nil)
@@ -218,27 +235,35 @@ extension PhotoEditorViewController {
     private func suggestSaveToCameraRoll() {
         let alertController = UIAlertController(
             title: Exception.NoConnection.rawValue,
-            message: "Would you like to save results to photo library or post after internet access appears?",
+            message: suggestSaveToCameraRollMessage,
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save now", style: .Default) { [weak self] _ in
-            self?.saveImageToCameraRoll()
+        let saveAction = UIAlertAction(
+            title: saveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.saveImageToCameraRoll()
         }
         alertController.addAction(saveAction)
         
-        let postAction = UIAlertAction(title: "Post with delay", style: .Default) { [weak self] _ in
+        let postAction = UIAlertAction(
+            title: postActionTitle,
+            style: .Default
+            ) { [weak self] _ in
             self?.postToFeed()
         }
         alertController.addAction(postAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
         alertController.addAction(cancelAction)
         
         presentViewController(alertController, animated: true, completion: nil)
     }
 
-    //TODO: link this func with button after implementing design
     private dynamic func removeAllStickers() {
         delegate?.removeAllStickers(self)
     }
