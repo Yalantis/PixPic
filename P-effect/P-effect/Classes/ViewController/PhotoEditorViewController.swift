@@ -24,7 +24,6 @@ private let dontSaveActionTitle = "Don't save"
 
 private let suggestSaveToCameraRollMessage = "Would you like to save results to photo library or post after internet access appears?"
 
-
 final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor

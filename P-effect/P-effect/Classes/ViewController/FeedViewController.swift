@@ -313,7 +313,9 @@ extension FeedViewController: DZNEmptyDataSetSource {
 extension FeedViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        return Appearance()
+        var appearance = Appearance()
+        appearance.title = "P-effect"
+        return appearance
     }
 
 }

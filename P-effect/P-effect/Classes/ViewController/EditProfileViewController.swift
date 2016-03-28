@@ -17,7 +17,7 @@ private let saveActionTitle = "Save"
 private let logoutActionTitle = "Logout me!"
 private let cancelActionTitle = "Cancel"
 
-final class EditProfileViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -123,8 +123,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     private func makeNavigation() {
-        navigationItem.title = "Edit profile"
-        
         let rightButton = UIBarButtonItem(
             title: saveActionTitle,
             style: .Plain,
@@ -334,4 +332,14 @@ extension EditProfileViewController: UITextFieldDelegate {
         
         return false
     }
+}
+
+extension EditProfileViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = Constants.EditProfile.NavigationTitle
+        return appearance
+    }
+    
 }

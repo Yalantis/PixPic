@@ -96,6 +96,7 @@ struct Constants {
     
     struct EditProfile {
         static let EditProfileControllerIdentifier = "EditProfileViewController"
+        static let NavigationTitle = "Edit Profile"
     }
     
     struct Attributes {

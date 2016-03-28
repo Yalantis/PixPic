@@ -17,7 +17,7 @@ private let suggestLoginMessage = "You can't follow someone without registration
 private let registerActionTitle = "Register"
 private let cancelActionTitle = "Cancel"
 
-final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
@@ -163,8 +163,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             return
         }
         userName.text = user.username
-        navigationItem.title = Constants.Profile.NavigationTitle
-        user.loadUserAvatar {[weak self] image, error in
+        user.loadUserAvatar { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -261,8 +260,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                     }
                     activityService.unfollowUserEventually(user) { [weak self] success, error in
                         if success {
-                            self?.followButton.selected = false
-                            self?.followButton.enabled = true
+                            guard let this = self else {
+                                return
+                            }
+                            this.followButton.selected = false
+                            this.followButton.enabled = true
+                            this.fillFollowersQuantity(user)
                         }
                     }
             }
@@ -279,34 +282,38 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             indicator.hidesWhenStopped = true
             indicator.startAnimating()
             followButton.addSubview(indicator)
-            activityService.followUserEventually(user) { succeeded, error in
+            activityService.followUserEventually(user) { [weak self] succeeded, error in
+                guard let this = self else {
+                    return
+                }
                 if error == nil {
                     log.debug("Attempt to follow was \(succeeded) ")
-                    self.followButton.selected = true
+                    this.followButton.selected = true
                 } else {
-                    self.followButton.selected = false
+                    this.followButton.selected = false
                 }
                 indicator.removeFromSuperview()
+                this.fillFollowersQuantity(user)
             }
         }
     }
     
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
-        guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
-            folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
-                let activityService: ActivityService = locator.getService()
-                activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
-                    if let this = self {
-                        this.followersQuantity.text = String(followersCount) + " followers"
-                        this.followingQuantity.text = String(followingCount) + " following"
-                    }
-                }
-                
-                return
+        if let followersQt = attributes?[Constants.Attributes.FollowersCount],
+            folowingQt = attributes?[Constants.Attributes.FollowingCount] {
+                followersQuantity.text = String(followersQt) + " followers"
+                followingQuantity.text = String(folowingQt) + " following"
         }
-        followersQuantity.text = String(followersQt) + " followers"
-        followingQuantity.text = String(folowingQt) + " following"
+
+        let activityService: ActivityService = locator.getService()
+        activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
+            if let this = self {
+                this.followersQuantity.text = String(followersCount) + " followers"
+                this.followingQuantity.text = String(followingCount) + " following"
+            }
+        }
+
     }
     
     private func suggestLogin() {
@@ -413,3 +420,14 @@ extension ProfileViewController {
     }
     
 }
+
+extension ProfileViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = Constants.Profile.NavigationTitle
+        return appearance
+    }
+    
+}
+

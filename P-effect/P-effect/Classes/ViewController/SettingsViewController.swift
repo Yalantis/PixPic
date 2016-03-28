@@ -9,7 +9,6 @@
 import Foundation
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let title = "Settings"
 
 enum SettingsState {
     
@@ -17,7 +16,7 @@ enum SettingsState {
     
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
@@ -72,7 +71,6 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = title
         setupAvailableSettings()
     }
     
@@ -116,3 +114,14 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     }
     
 }
+
+extension SettingsViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = "Notification policies"
+        return appearance
+    }
+    
+}
+

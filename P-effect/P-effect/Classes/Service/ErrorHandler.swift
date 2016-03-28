@@ -11,7 +11,7 @@ import Foundation
 class ErrorHandler {
 
     static func handle(error: NSError) {
-        var message: String?
+        var message: String
         let errorCode = error.code
 
         if error.domain == FBSDKErrorDomain {
@@ -60,7 +60,12 @@ class ErrorHandler {
                 message = error.localizedDescription
                 break
             }
+        } else if error.domain == NSBundle.mainBundle().bundleIdentifier {
+
+            message = error.localizedDescription
         }
-        AlertManager.sharedInstance.showSimpleAlert(message!)
+        message = error.localizedDescription
+
+        AlertManager.sharedInstance.showSimpleAlert(message)
     }
 }

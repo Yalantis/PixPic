@@ -26,7 +26,6 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         super.viewDidLoad()
         
         setupTableView()
-        setupNavigavionBar()
         setupAdapter()
     }
     
@@ -55,10 +54,6 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     private func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
-    }
-    
-    private func setupNavigavionBar() {
-        navigationItem.title = followType.rawValue
     }
     
     private func setupAdapter() {
@@ -104,6 +99,10 @@ extension FollowersListViewController: UITableViewDelegate {
 extension FollowersListViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        return Appearance()
+        var appearance = Appearance()
+        appearance.title = followType.rawValue
+        return appearance
     }
+    
 }
+
