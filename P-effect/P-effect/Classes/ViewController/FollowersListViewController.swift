@@ -22,6 +22,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,6 +36,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         AlertManager.sharedInstance.registerAlertListener(router)
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -51,6 +53,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         self.router = router
     }
     
+    // MARK: - Private methods
     private func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
@@ -79,6 +82,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     }
 }
 
+// MARK: - FollowerAdapterDelegate methods
 extension FollowersListViewController: FollowerAdapterDelegate {
     
     func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter) {
@@ -87,6 +91,7 @@ extension FollowersListViewController: FollowerAdapterDelegate {
 
 }
 
+// MARK: - UITableViewDelegate methods
 extension FollowersListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -96,6 +101,7 @@ extension FollowersListViewController: UITableViewDelegate {
     
 }
 
+// MARK: - NavigationControllerAppearanceContext methods
 extension FollowersListViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
@@ -105,4 +111,3 @@ extension FollowersListViewController: NavigationControllerAppearanceContext {
     }
     
 }
-

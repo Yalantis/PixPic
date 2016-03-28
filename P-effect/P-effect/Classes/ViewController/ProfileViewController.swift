@@ -44,6 +44,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     @IBOutlet private weak var followButtonHeight: NSLayoutConstraint!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +60,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         AlertManager.sharedInstance.registerAlertListener(router)
     }
     
-    // MARK: - Inner func
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -84,6 +85,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         self.router = router
     }
     
+    // MARK: - Private methods
     private func updateSelf() {
         setupFollowButton()
         setupController()
@@ -381,6 +383,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
 }
 
+// MARK: - PostAdapterDelegate methods
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
@@ -405,6 +408,7 @@ extension ProfileViewController: PostAdapterDelegate {
     
 }
 
+// MARK: - UITableViewDelegate methods
 extension ProfileViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -421,6 +425,7 @@ extension ProfileViewController {
     
 }
 
+// MARK: - NavigationControllerAppearanceContext methods
 extension ProfileViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {

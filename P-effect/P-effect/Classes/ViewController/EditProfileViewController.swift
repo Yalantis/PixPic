@@ -9,13 +9,15 @@
 import UIKit
 import Toast
 
-private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let backWithChangesMessage = "If you go back now, your changes will be discarded"
-private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
-
-private let saveActionTitle = "Save"
-private let logoutActionTitle = "Logout me!"
-private let cancelActionTitle = "Cancel"
+private let saveChangesWithoutConnectionMessage =  "Internet connection is required to save changes in profile"
+private let logoutMessage =                        "This will logout you. And you will not be able to share your amazing photos..("
+private let backWithChangesMessage =               "If you go back now, your changes will be discarded"
+private let logoutWithoutConnectionAttempt =       "Internet connection is required to logout"
+private let backWithChangesTitle =                 "Save changes"
+private let saveActionTitle =                      "Save"
+private let logoutActionTitle =                    "Logout me!"
+private let cancelActionTitle =                    "Cancel"
+private let okActionTitle =                        "Ok"
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
@@ -39,7 +41,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-    
+   
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,6 +74,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -79,6 +83,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         self.router = router
     }
     
+    // MARK: - Private methods
     private func subscribeOnNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -143,11 +148,11 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     dynamic private func handleBackButtonTap() {
         if someChangesMade {
             let alertController = UIAlertController(
-                title: "Save changes",
+                title: backWithChangesTitle,
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
             let noAction = UIAlertAction(
-                title: "Ok",
+                title: okActionTitle,
                 style: .Cancel
                 ) { [weak self] action in
                     PushNotificationQueue.handleNotificationQueue()
@@ -186,7 +191,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
                 }
             }
         } else {
-            AlertManager.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
+            AlertManager.sharedInstance.showSimpleAlert(saveChangesWithoutConnectionMessage)
         }
     }
     
@@ -284,6 +289,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         navigationController!.popToRootViewControllerAnimated(true)
     }
     
+    // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
         photoGenerator.showInView(self)
     }
@@ -325,6 +331,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
 }
 
+// MARK: - UITextFieldDelegate methods
 extension EditProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -334,6 +341,7 @@ extension EditProfileViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - NavigationControllerAppearanceContext methods
 extension EditProfileViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {

@@ -93,6 +93,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         delegate?.photoEditor(self, didChooseSticker: sticker)
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }

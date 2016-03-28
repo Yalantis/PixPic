@@ -119,4 +119,8 @@ struct Constants {
         static let Content = "content"
     }
     
+    struct Feed {
+        static let NavigationTitle = "P-effect"
+    }
+    
 }

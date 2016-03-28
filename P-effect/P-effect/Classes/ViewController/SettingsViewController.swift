@@ -64,16 +64,19 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     
     @IBOutlet private weak var settingsStack: UIStackView!
     
-    func setLocator(locator: ServiceLocator) {
-        self.locator = locator
-    }
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupAvailableSettings()
     }
     
+    // MARK: - Setup methods
+    func setLocator(locator: ServiceLocator) {
+        self.locator = locator
+    }
+    
+    // MARK: - Private methods
     private func setupAvailableSettings() {
         settings[.Common] = [credentials, enableNotifications]
         for view in settings[.Common]! {
@@ -115,6 +118,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     
 }
 
+// MARK: - NavigationControllerAppearanceContext methods
 extension SettingsViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {

@@ -173,6 +173,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
+    // MARK: - IBActions
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         
@@ -234,7 +235,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
 }
-
+ 
+// MARK: - UITableViewDelegate methods
 extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -247,6 +249,7 @@ extension FeedViewController: UITableViewDelegate {
     
 }
 
+// MARK: - PostAdapterDelegate methods
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
@@ -278,7 +281,8 @@ extension FeedViewController: PostAdapterDelegate {
     }
 
 }
-
+ 
+// MARK: - DZNEmptyDataSetDelegate methods
 extension FeedViewController: DZNEmptyDataSetDelegate {
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
@@ -286,7 +290,8 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
     }
     
 }
-
+ 
+// MARK: - DZNEmptyDataSetSource methods
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
@@ -309,12 +314,13 @@ extension FeedViewController: DZNEmptyDataSetSource {
     }
     
 }
- 
+
+// MARK: - NavigationControllerAppearanceContext methods
 extension FeedViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
-        appearance.title = "P-effect"
+        appearance.title = Constants.Feed.NavigationTitle
         return appearance
     }
 
