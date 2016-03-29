@@ -16,6 +16,7 @@ struct Constants {
     
     struct NotificationName {
         static let NewPostUploaded = "NewPostUploaded"
+        static let FollowersListUpdated = "FollowersListUpdated"
     }
     
     struct BaseDimensions {
@@ -91,7 +92,7 @@ struct Constants {
         static let UserResizableViewGlobalInset: CGFloat =  5.0
         static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
         
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  10.0
+        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
         static let StickerViewControlSize: CGFloat =  36.0
     }
     

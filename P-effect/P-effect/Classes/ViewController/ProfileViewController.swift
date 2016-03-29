@@ -58,6 +58,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         super.viewDidAppear(animated)
         
         AlertManager.sharedInstance.registerAlertListener(router)
+        fillFollowersQuantity(user!)
     }
     
     // MARK: - Setup methods
@@ -268,6 +269,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                             this.followButton.selected = false
                             this.followButton.enabled = true
                             this.fillFollowersQuantity(user)
+                            NSNotificationCenter.defaultCenter().postNotificationName(
+                                Constants.NotificationName.FollowersListUpdated,
+                                object: nil
+                            )
                         }
                     }
             }
@@ -296,6 +301,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 }
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
+                NSNotificationCenter.defaultCenter().postNotificationName(
+                    Constants.NotificationName.FollowersListUpdated,
+                    object: nil
+                )
             }
         }
     }

@@ -84,9 +84,9 @@ class StickerEditorView: UIView {
         
         contentView.frame = CGRectInset(bounds,
             Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize / 2,
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
             Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize / 2)
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
         
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         

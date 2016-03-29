@@ -28,12 +28,17 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         
         setupTableView()
         setupAdapter()
+        setupObserver()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         AlertManager.sharedInstance.registerAlertListener(router)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     // MARK: - Setup methods
@@ -68,17 +73,28 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         let isFollowers = (followType == .Followers)
         let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
         
-        guard let attributes = cache.attributesForUser(user),
-            cachedUsers = attributes[key] as? [User] else {
-                activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
-                    if let users = users {
-                        self?.followerAdapter.update(withFollowers: users, action: .Reload)
-                    }
-                }
-                
-                return
+        if let attributes = cache.attributesForUser(user), cachedUsers = attributes[key] as? [User] {
+            self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
         }
-        self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
+        
+        activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
+            if let users = users {
+                self?.followerAdapter.update(withFollowers: users, action: .Reload)
+            }
+        }
+    }
+    
+    private func setupObserver() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "updateData",
+            name: Constants.NotificationName.FollowersListUpdated,
+            object: nil
+        )
+    }
+    
+    dynamic private func updateData() {
+        setupAdapter()
     }
 }
 
