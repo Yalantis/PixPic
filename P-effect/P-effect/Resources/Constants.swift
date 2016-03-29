@@ -43,6 +43,7 @@ struct Constants {
     
     struct UserDefaultsKeys {
         static let RemoteNotifications = "RemoteNotifications"
+        static let FollowedPosts = "FollowedPosts"
     }
     
     struct UserKey {

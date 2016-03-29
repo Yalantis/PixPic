@@ -27,8 +27,12 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
-    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts") { on in
-        //TODO: implement logic here
+    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts", initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
+        SettingsHelper.isShownOnlyFollowingUsersPosts = on
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            Constants.NotificationName.NewPostUploaded,
+            object: nil
+        )
     }
     private lazy var logIn: UIView = ButtonView.instanceFromNib("Log In") {
         self.router.showAuthorization()
