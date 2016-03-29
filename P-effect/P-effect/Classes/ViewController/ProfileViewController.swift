@@ -156,7 +156,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         }
         userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        user.loadUserAvatar {[weak self] image, error in
+        
+        guard let avatar = user.avatar else {
+            return
+        }
+        
+        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -350,7 +355,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        settingsMenu.showInView(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
         settingsMenu.completionAuthorizeUser = { [weak self] in
             self?.router.showAuthorization()
         }

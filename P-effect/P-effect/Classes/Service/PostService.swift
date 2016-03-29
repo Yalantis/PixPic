@@ -73,7 +73,7 @@ class PostService {
         var posts = [Post]()
         
         if User.isAbsent {
-            log.debug("No user signUP")
+            log.debug("No user is signed up")
             completion(posts: nil, error: nil)
             
             return

@@ -139,7 +139,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
-        photoGenerator.showInView(self)
+        photoGenerator.showInViewController(self)
     }
     
     private func handlePhotoSelected(image: UIImage) {
@@ -247,7 +247,7 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        settingsMenu.showInView(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
         settingsMenu.completionAuthorizeUser = { [weak self] in
             self?.router.showAuthorization()
         }

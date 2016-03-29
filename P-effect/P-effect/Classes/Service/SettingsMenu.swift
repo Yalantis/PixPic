@@ -16,7 +16,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
     var completionAuthorizeUser:(() -> Void)!
     var completionRemovePost:((atIndex: Int) -> Void)!
     
-    func showInView(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
+    func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         self.controller = controller
 
         let reachabilityService =  ReachabilityService()

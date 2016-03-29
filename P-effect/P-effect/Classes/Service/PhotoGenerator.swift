@@ -19,7 +19,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     private lazy var imagePickerController = UIImagePickerController()
     var completionImageReceived:(UIImage -> Void)?
     
-    func showInView(controller: UIViewController) {
+    func showInViewController(controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
@@ -59,13 +59,13 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExist = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let cameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if cameraExist {
+        if cameraExists {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
-            noCamera()
+            showWarningAboutAbsenceCamera()
         }
     }
     
@@ -76,7 +76,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func noCamera() {
+    private func showWarningAboutAbsenceCamera() {
         let alertVC = UIAlertController(
             title: "No Camera",
             message: "Sorry, this device has no camera",
@@ -133,7 +133,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func presentCameraAccessDialog() {
+    private func presentCameraAccessDialog() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Please allow camera access",
