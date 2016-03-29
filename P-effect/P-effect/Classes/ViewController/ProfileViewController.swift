@@ -356,8 +356,11 @@ extension ProfileViewController: PostAdapterDelegate {
         }
         
         settingsMenu.completionRemovePost = { [weak self] index in
-            self?.postAdapter.removePost(atIndex: index)
-            self?.tableView.reloadData()
+            guard let this = self else {
+                return
+            }
+            this.postAdapter.removePost(atIndex: index)
+            this.tableView.reloadData()
         }
     }
     
