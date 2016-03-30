@@ -23,10 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var router = LaunchRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        FBSDKApplicationDelegate.sharedInstance().application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         setupParse()
 
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
@@ -41,14 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
+        log.setup()
+
         SettingsHelper.setupDefaultValues()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.makeKeyAndVisible()
-        
-        log.setup()
-        
         router.execute(window!)
-        
+                
         return true
     }
     

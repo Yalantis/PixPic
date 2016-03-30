@@ -15,6 +15,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
     private var controller: UIViewController!
     var completionAuthorizeUser: (() -> Void)!
     var completionRemovePost: ((atIndex: Int) -> Void)!
+    private lazy var postService = PostService()
     
     func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         self.controller = controller
@@ -74,8 +75,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                     return
                 }
                 
-                let postService = PostService()
-                postService.removePost(post) { succeeded, error in
+                this.postService.removePost(post) { succeeded, error in
                     if succeeded {
                         this.completionRemovePost(atIndex: index)
                     } else if let error = error?.localizedDescription {
