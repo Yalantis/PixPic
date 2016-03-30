@@ -25,12 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         setupParse()
-
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+
         Fabric.with([Crashlytics.self])
-        
+
         if application.applicationState != .Background {
             let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
             let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
@@ -38,12 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        log.setup()
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
 
+        log.setup()
         SettingsHelper.setupDefaultValues()
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.makeKeyAndVisible()
-        router.execute(window!)
+        setupRouter()
                 
         return true
     }
@@ -52,6 +49,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
+    }
+    
+    private func setupRouter() {
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.makeKeyAndVisible()
+        router.execute(window!)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
