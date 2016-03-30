@@ -30,11 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         if application.applicationState != .Background {
-            let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
-            let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
-            if oldPushHandlerOnly || noPushPayload != nil {
-                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-            }
+            sutupParseAnalyticsWithLaunchOptions(launchOptions)
         }
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
@@ -49,6 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
+    }
+    
+    private func sutupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
+        let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+        let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
+        if oldPushHandlerOnly || noPushPayload != nil {
+            PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        }
     }
     
     private func setupRouter() {
