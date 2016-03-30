@@ -59,7 +59,7 @@ class EffectEditorView: UIView {
         let deleteControlImage = UIImage(named: "delete_control")
         deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
         
-        let singleTap = UITapGestureRecognizer(target: self, action: "singleTap:")
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(EffectEditorView.singleTap(_:)))
         deleteControl.addGestureRecognizer(singleTap)
         addSubview(deleteControl)
         
@@ -70,7 +70,7 @@ class EffectEditorView: UIView {
         let resizingControlImage = UIImage(named: "resize_control")
         resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
         
-        let panResizeGesture = UIPanGestureRecognizer(target: self, action: "resizeTranslate:")
+        let panResizeGesture = UIPanGestureRecognizer(target: self, action: #selector(EffectEditorView.resizeTranslate(_:)))
         resizingControl.addGestureRecognizer(panResizeGesture)
         addSubview(resizingControl)
         

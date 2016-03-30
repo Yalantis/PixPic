@@ -15,7 +15,7 @@ typealias Handler = () -> Void
 
 protocol Router: class {
     
-    typealias Context
+    associatedtype Context
     
     func execute(context: Context)
     

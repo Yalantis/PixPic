@@ -142,10 +142,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     }
     
     private func setupGestureRecognizers() {
-        let followersGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowersLabel:")
+        let followersGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapFollowersLabel(_:)))
         followersQuantity.addGestureRecognizer(followersGestureRecognizer)
         
-        let followingGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapFollowingLabel:")
+        let followingGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapFollowingLabel(_:)))
         followingQuantity.addGestureRecognizer(followingGestureRecognizer)
     }
     

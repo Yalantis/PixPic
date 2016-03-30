@@ -104,7 +104,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     private func setupObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "fetchDataFromNotification",
+            selector: #selector(FeedViewController.fetchDataFromNotification),
             name: Constants.NotificationName.NewPostUploaded,
             object: nil
         )

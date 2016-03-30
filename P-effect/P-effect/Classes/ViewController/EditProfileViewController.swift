@@ -78,20 +78,20 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     private func subscribeOnNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "keyboardWillShow:",
+            selector: #selector(keyboardWillShow(_:)),
             name: UIKeyboardWillShowNotification,
             object: nil
         )
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "keyboardWillHide:",
+            selector: #selector(keyboardWillHide(_:)),
             name: UIKeyboardWillHideNotification,
             object: nil
         )
     }
     
     private func configureImagesAndText() {
-        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         photoGenerator.completionImageReceived = { [weak self] selectedImage in
@@ -125,7 +125,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
             title: "Save",
             style: .Plain,
             target: self,
-            action: "saveChangesAction"
+            action: #selector(saveChangesAction)
         )
         navigationItem.rightBarButtonItem = rightButton
         
@@ -133,7 +133,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
             image: UIImage.appBackButton(),
             style: .Plain,
             target: self,
-            action: "handleBackButtonTap"
+            action: #selector(handleBackButtonTap)
         )
         navigationItem.leftBarButtonItem = leftButton
     }

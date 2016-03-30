@@ -22,7 +22,7 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
         label.text = group.label
         self.completion = completion
         
-        let recognizer = UITapGestureRecognizer(target: self, action: "toggleGroup")
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGroup))
         addGestureRecognizer(recognizer)
     }
     

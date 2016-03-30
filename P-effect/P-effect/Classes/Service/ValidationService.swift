@@ -42,7 +42,7 @@ class ValidationService: NSObject {
             return false
         }
         let invalidCharacterSet = NSCharacterSet(charactersInString: Constants.ValidationErrors.CharacterSet).invertedSet
-        if let containsInvalidSymbols = userName.rangeOfCharacterFromSet(invalidCharacterSet) {
+        if userName.rangeOfCharacterFromSet(invalidCharacterSet) != nil {
             AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.NumbersAndSymbolsInUsername)
             
             return false

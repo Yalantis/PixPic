@@ -24,28 +24,29 @@ extension AlertManagerDelegate {
         currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
     }
     
-    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
+    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
         let title = notification
+        var messageToShow = message
         guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
             return
         }
         
         switch notificationObject {
         case .NewPost(let alert, _):
-            message = alert
+            messageToShow = alert
             
         case .NewFollower(let alert, _):
-            message = alert
+            messageToShow = alert
         }
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
         
         if isControllerWaitingForResponse {
-            PushNotificationQueue.addObjectInQueue(message)
+            PushNotificationQueue.addObjectInQueue(messageToShow)
         } else {
             PushNotificationQueue.clearQueue()
             currentViewController.view.makeToast(
-                message,
+                messageToShow,
                 duration: 3.0,
                 position: CSToastPositionTop,
                 title: title,

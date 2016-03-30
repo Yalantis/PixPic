@@ -73,8 +73,8 @@ class AuthService {
             if error == nil && result != nil {
                 guard let facebookInfo = result as? [String:AnyObject],
                     picture = facebookInfo["picture"],
-                    data = picture["data"],
-                    url = data?["url"] as? String else {
+                    data = picture.valueForKey("data"),
+                    url = data.valueForKey("url") as? String else {
                         completion(nil, nil)
                         
                         return
