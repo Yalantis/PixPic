@@ -17,7 +17,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
-    var completionImageReceived:(UIImage -> Void)?
+    var completionImageReceived: (UIImage -> Void)?
     
     func showInViewController(controller: UIViewController) {
         self.controller = controller
@@ -157,9 +157,10 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        completionImageReceived?(selectedImage)
+        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            completionImageReceived?(selectedImage)
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

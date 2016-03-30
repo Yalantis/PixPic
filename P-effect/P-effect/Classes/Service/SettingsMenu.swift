@@ -13,8 +13,8 @@ private let removePostMessage = "This photo will be deleted from P-effect"
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
-    var completionAuthorizeUser:(() -> Void)!
-    var completionRemovePost:((atIndex: Int) -> Void)!
+    var completionAuthorizeUser: (() -> Void)!
+    var completionRemovePost: ((atIndex: Int) -> Void)!
     
     func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         self.controller = controller
@@ -33,7 +33,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             settingsMenu.addAction(cancelAction)
             
             let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
+                self?.showActivityController(withItems: items)
             }
             settingsMenu.addAction(shareAction)
             
@@ -117,7 +117,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(complaintMenu, animated: true, completion: nil)
     }
     
-    private func showActivityController(items: [AnyObject]) {
+    private func showActivityController(withItems items: [AnyObject]) {
         let activityViewController = ActivityViewController.initWith(items)
         controller.presentViewController(activityViewController, animated: true, completion: nil)
     }

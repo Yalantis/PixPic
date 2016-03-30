@@ -282,7 +282,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
         guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
-            folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
+            followingQt = attributes?[Constants.Attributes.FollowingCount] else {
                 let activityService: ActivityService = locator.getService()
                 activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
                     if let this = self {
@@ -294,7 +294,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 return
         }
         followersQuantity.text = String(followersQt) + " followers"
-        followingQuantity.text = String(folowingQt) + " following"
+        followingQuantity.text = String(followingQt) + " following"
     }
     
     // MARK: - IBActions
@@ -330,11 +330,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         guard let user = user else {
             return
         }
-        guard let followersQuantity = followersQuantity.text else {
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followersQt = attributes?[Constants.Attributes.FollowersCount] as? Int else {
             return
         }
-        if followersQuantity[followersQuantity.startIndex] != "0" {
-            router.showFollowersList(user, followType: .Followers)
+        
+        if followersQt != 0 {
+            router.showFollowersList(user, followType: .Following)
         }
     }
     
@@ -342,10 +344,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         guard let user = user else {
             return
         }
-        guard let followingQuantity = followingQuantity.text else {
+        
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followingQt = attributes?[Constants.Attributes.FollowingCount] as? Int else {
             return
         }
-        if followingQuantity[followingQuantity.startIndex] != "0" {
+
+        if followingQt != 0 {
             router.showFollowersList(user, followType: .Following)
         }
     }
