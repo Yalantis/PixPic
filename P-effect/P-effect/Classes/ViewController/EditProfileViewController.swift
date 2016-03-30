@@ -291,7 +291,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInView(self)
+        photoGenerator.showInViewController(self)
     }
     
     @IBAction private func logoutAction() {

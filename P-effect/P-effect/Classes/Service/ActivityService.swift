@@ -54,7 +54,7 @@ class ActivityService {
         }
     }
     
-    func fetchFollowersQuantity(user: User, completion:((followersCount: Int, followingCount: Int) -> Void)?) {
+    func fetchFollowersQuantity(user: User, completion: ((followersCount: Int, followingCount: Int) -> Void)?) {
         var followersCount = 0
         var followingCount = 0
         fetchUsers(.Followers, forUser: user) { [weak self] activities, error -> Void in

@@ -20,12 +20,13 @@ private let registerActionTitle = "Register"
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
-    private var controller: UIViewController!
-    var completionAuthorizeUser:(() -> Void)!
-    var completionRemovePost:((atIndex: Int) -> Void)!
-    
-    func showInView(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
-        self.controller = controller
+    var completionAuthorizeUser: (() -> Void)!
+    var completionRemovePost: ((atIndex: Int) -> Void)!
+    private lazy var postService = PostService()
+    private var presenter: UIViewController!
+
+    func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
+        presenter = controller
 
         let reachabilityService =  ReachabilityService()
         guard reachabilityService.isReachable() else {
@@ -89,19 +90,18 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         alertController.addAction(cancelAction)
         alertController.addAction(registerAction)
         
-        controller.presentViewController(alertController, animated: true, completion: nil)
+        presenter.presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func removePost(post: Post, atIndex index: Int) {
         UIAlertController.showAlert(
-            inViewController: controller,
+            inViewController: presenter,
             message: removePostMessage) { [weak self] _ in
                 guard let this = self else {
                     return
                 }
                 
-                let postService = PostService()
-                postService.removePost(post) { succeeded, error in
+                this.postService.removePost(post) { succeeded, error in
                     if succeeded {
                         this.completionRemovePost(atIndex: index)
                     } else if let error = error?.localizedDescription {
@@ -152,12 +152,12 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         complaintMenu.addAction(complaintUserAvatarAction)
         complaintMenu.addAction(complaintPostAction)
         
-        controller.presentViewController(complaintMenu, animated: true, completion: nil)
+        presenter.presentViewController(complaintMenu, animated: true, completion: nil)
     }
     
-    private func showActivityController(items: [AnyObject]) {
+    private func showActivityController(withItems items: [AnyObject]) {
         let activityViewController = ActivityViewController.initWith(items)
-        controller.presentViewController(activityViewController, animated: true, completion: nil)
+        presenter.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 }

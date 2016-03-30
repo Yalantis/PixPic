@@ -25,13 +25,13 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
-    var completionImageReceived:(UIImage -> Void)?
+    var completionImageReceived: (UIImage -> Void)?
     
-    func showInView(controller: UIViewController) {
+    func showInViewController(controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
-        let actionSheetVC = UIAlertController(
+        let actionSheetViewController = UIAlertController(
             title: nil,
             message: nil,
             preferredStyle: .ActionSheet
@@ -56,21 +56,21 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
         }
-        actionSheetVC.addAction(selectFromLibraryAction)
-        actionSheetVC.addAction(takePhotoAction)
-        actionSheetVC.addAction(cancelAction)
-        controller.presentViewController(actionSheetVC, animated: true, completion: nil)
+        actionSheetViewController.addAction(selectFromLibraryAction)
+        actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(cancelAction)
+        controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExist = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let cameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if cameraExist {
+        if cameraExists {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
-            noCamera()
+            showWarningAboutAbsenceCamera()
         }
     }
     
@@ -81,10 +81,10 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func noCamera() {
-        let alertVC = UIAlertController(
-            title: noCameraTitle,
-            message: noCameraMessage,
+    private func showWarningAboutAbsenceCamera() {
+        let alertViewController = UIAlertController(
+            title: "No Camera",
+            message: "Sorry, this device has no camera",
             preferredStyle: .Alert
         )
         let okAction = UIAlertAction(
@@ -92,8 +92,8 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             style:.Default,
             handler: nil
         )
-        alertVC.addAction(okAction)
-        controller.presentViewController(alertVC, animated: true, completion: nil)
+        alertViewController.addAction(okAction)
+        controller.presentViewController(alertViewController, animated: true, completion: nil)
     }
     
     private func selectFromLibrary() {
@@ -136,7 +136,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func presentCameraAccessDialog() {
+    private func presentCameraAccessDialog() {
         let alert = UIAlertController(
             title: importantTitle,
             message: allowCameraMessage,
@@ -163,9 +163,10 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        completionImageReceived?(selectedImage)
+        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            completionImageReceived?(selectedImage)
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
