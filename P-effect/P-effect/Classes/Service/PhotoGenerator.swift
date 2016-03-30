@@ -23,7 +23,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
-        let actionSheetVC = UIAlertController(
+        let actionSheetViewController = UIAlertController(
             title: nil,
             message: nil,
             preferredStyle: .ActionSheet
@@ -51,10 +51,10 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
                 PushNotificationQueue.handleNotificationQueue()
             }
         )
-        actionSheetVC.addAction(selectFromLibraryAction)
-        actionSheetVC.addAction(takePhotoAction)
-        actionSheetVC.addAction(cancelAction)
-        controller.presentViewController(actionSheetVC, animated: true, completion: nil)
+        actionSheetViewController.addAction(selectFromLibraryAction)
+        actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(cancelAction)
+        controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
@@ -77,7 +77,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     }
     
     private func showWarningAboutAbsenceCamera() {
-        let alertVC = UIAlertController(
+        let alertViewController = UIAlertController(
             title: "No Camera",
             message: "Sorry, this device has no camera",
             preferredStyle: .Alert
@@ -87,8 +87,8 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             style:.Default,
             handler: nil
         )
-        alertVC.addAction(okAction)
-        controller.presentViewController(alertVC, animated: true, completion: nil)
+        alertViewController.addAction(okAction)
+        controller.presentViewController(alertViewController, animated: true, completion: nil)
     }
     
     private func selectFromLibrary() {
