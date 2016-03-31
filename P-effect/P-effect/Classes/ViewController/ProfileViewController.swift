@@ -9,8 +9,6 @@
 import UIKit
 import Toast
 
-private let removePostMessage = "This photo will be deleted from P-effect"
-
 final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Profile
@@ -25,6 +23,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
     private lazy var postAdapter = PostAdapter()
+    private lazy var settingsMenu = SettingsMenu()
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -63,10 +62,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     func setUserId(userId: String) {
         self.userId = userId
-        let userService: UserService = router.locator.getService()
+        let userService: UserService = locator.getService()
         userService.fetchUser(userId) { [weak self] user, error in
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             } else {
                 self?.setUser(user)
             }
@@ -124,7 +123,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.view.hideToastActivity()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -157,7 +156,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         }
         userName.text = user.username
         navigationItem.title = Constants.Profile.NavigationTitle
-        user.loadUserAvatar {[weak self] image, error in
+        
+        guard let avatar = user.avatar else {
+            return
+        }
+        
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -192,9 +196,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 return
             }
             
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            guard ReachabilityHelper.isReachable() else {
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
                 return
@@ -205,7 +208,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -218,7 +221,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -255,7 +258,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             alertController.addAction(unfollowAction)
             
             presentViewController(alertController, animated: true, completion: nil)
-            
         } else {
             // Follow
             followButton.selected = true
@@ -266,7 +268,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             followButton.addSubview(indicator)
             activityService.followUserEventually(user) { succeeded, error in
                 if error == nil {
-                    print("Attempt to follow was \(succeeded) ")
+                    log.debug("Attempt to follow was \(succeeded) ")
                     self.followButton.selected = true
                 } else {
                     self.followButton.selected = false
@@ -278,8 +280,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
-        guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
-            folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
+        guard let followersQuantity = attributes?[Constants.Attributes.FollowersCount],
+            followingQuantity = attributes?[Constants.Attributes.FollowingCount] else {
                 let activityService: ActivityService = locator.getService()
                 activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
                     if let this = self {
@@ -287,17 +289,17 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                         this.followingQuantity.text = String(followingCount) + " following"
                     }
                 }
+                
                 return
         }
-        followersQuantity.text = String(followersQt) + " followers"
-        followingQuantity.text = String(folowingQt) + " following"
+        self.followersQuantity.text = String(followersQuantity) + " followers"
+        self.followingQuantity.text = String(followingQuantity) + " following"
     }
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+        guard ReachabilityHelper.isReachable() else {
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }
@@ -326,14 +328,29 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Followers)
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followersQuantity = attributes?[Constants.Attributes.FollowersCount] as? Int else {
+            return
+        }
+        
+        if followersQuantity != 0 {
+            router.showFollowersList(user, followType: .Following)
+        }
     }
     
     dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Following)
+        
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followingQuantity = attributes?[Constants.Attributes.FollowingCount] as? Int else {
+            return
+        }
+
+        if followingQuantity != 0 {
+            router.showFollowersList(user, followType: .Following)
+        }
     }
     
 }
@@ -341,115 +358,19 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-            
-            return
-        }
-        if User.notAuthorized {
-            suggestLogin()
-        } else {
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
-                
-            } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
-                }
-                settingsMenu.addAction(complaintAction)
-            }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
-        }
-    }
-    
-    private func suggestLogin() {
-        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+        settingsMenu.locator = locator
+        settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        alertController.addAction(cancelAction)
-        alertController.addAction(registerAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-
-    private func removePost(post: Post, atIndex index: Int) {
-        UIAlertController.showAlert(
-            inViewController: self,
-            message: removePostMessage) { [weak self] _ in
-                guard let this = self else {
-                    return
-                }
-                
-                let postService: PostService = this.locator.getService()
-                postService.removePost(post) { succeeded, error in
-                    if succeeded {
-                        this.postAdapter.removePost(atIndex: index)
-                        this.tableView.reloadData()
-                    } else if let error = error?.localizedDescription {
-                        print(error)
-                    }
-                }
-        }
-    }
-    
-    private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: "Complain about", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        complaintMenu.addAction(cancelAction)
-        
-        let complaintService: ComplaintService = locator.getService()
-        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
-            complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
+        settingsMenu.postRemovalHandler = { [weak self] index in
+            guard let this = self else {
+                return
             }
+            this.postAdapter.removePost(atIndex: index)
+            this.tableView.reloadData()
         }
-        
-        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
-            complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
-            complaintService.complaintPost(post) { _, error in
-                print(error)
-            }
-        }
-        
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
-        
-        presentViewController(complaintMenu, animated: true, completion: nil)
-        
-    }
-    
-    private func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-    }
-
-    func showUserProfile(adapter: PostAdapter, user: User) {
-        
     }
     
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
@@ -461,7 +382,6 @@ extension ProfileViewController: PostAdapterDelegate {
     }
     
 }
-
 
 extension ProfileViewController {
     

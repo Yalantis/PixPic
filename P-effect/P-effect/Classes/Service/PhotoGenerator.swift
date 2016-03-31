@@ -9,23 +9,27 @@
 import UIKit
 import AVFoundation
 
-public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
+private let takePhotoActionTitle = "Take photo"
+private let selectFromLibraryActionTitle = "Choose photo from library"
+private let cancelActionTitle = "Cancel"
+
+class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
-    var completionImageReceived:(UIImage -> Void)?
+    var didSelectPhoto: (UIImage -> Void)?
     
-    public func showInView(controller: UIViewController) {
+    func showListOfOptions(inViewController controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
-        let actionSheetVC = UIAlertController(
+        let actionSheetViewController = UIAlertController(
             title: nil,
             message: nil,
             preferredStyle: .ActionSheet
         )
         let takePhotoAction = UIAlertAction(
-            title: "Take photo",
+            title: takePhotoActionTitle,
             style: .Default,
             handler: { _ in
                 self.takePhoto()
@@ -33,37 +37,35 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             }
         )
         let selectFromLibraryAction = UIAlertAction(
-            title: "Choose photo from library",
+            title: selectFromLibraryActionTitle,
             style: .Default,
             handler: { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
             }
         )
-        
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel,
             handler: { _ in
                 PushNotificationQueue.handleNotificationQueue()
             }
         )
-        actionSheetVC.addAction(selectFromLibraryAction)
-        actionSheetVC.addAction(takePhotoAction)
-        actionSheetVC.addAction(cancelAction)
-        controller.presentViewController(actionSheetVC, animated: true, completion: nil)
+        actionSheetViewController.addAction(selectFromLibraryAction)
+        actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(cancelAction)
+        controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExist: Bool = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let cameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if cameraExist {
+        if cameraExists {
             imagePickerController.sourceType = .Camera
             checkCamera()
-        }
-        else {
-            noCamera()
+        } else {
+            handleNoCamera()
         }
     }
     
@@ -74,8 +76,8 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func noCamera() {
-        let alertVC = UIAlertController(
+    private func handleNoCamera() {
+        let alertViewController = UIAlertController(
             title: "No Camera",
             message: "Sorry, this device has no camera",
             preferredStyle: .Alert
@@ -85,8 +87,8 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             style:.Default,
             handler: nil
         )
-        alertVC.addAction(okAction)
-        controller.presentViewController(alertVC, animated: true, completion: nil)
+        alertViewController.addAction(okAction)
+        controller.presentViewController(alertViewController, animated: true, completion: nil)
     }
     
     private func selectFromLibrary() {
@@ -131,7 +133,7 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func presentCameraAccessDialog() {
+    private func presentCameraAccessDialog() {
         let alert = UIAlertController(
             title: "IMPORTANT",
             message: "Please allow camera access",
@@ -154,13 +156,14 @@ public class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
-    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        completionImageReceived?(selectedImage)
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
+        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            didSelectPhoto?(selectedImage)
+        }
     }
     
-    public func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     

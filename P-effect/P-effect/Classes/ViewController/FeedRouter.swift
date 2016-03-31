@@ -20,14 +20,12 @@ class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, 
 }
 
 extension FeedRouter: Router {
-    
-    typealias Context = UIWindow
-    
+        
     func execute(context: UIWindow) {
         let feedViewController = FeedViewController.create()
         feedViewController.setRouter(self)
         feedViewController.setLocator(locator)
-        self.currentViewController = feedViewController
+        currentViewController = feedViewController
         let navigationController = AppearanceNavigationController(rootViewController: feedViewController)
         context.rootViewController = navigationController
     }

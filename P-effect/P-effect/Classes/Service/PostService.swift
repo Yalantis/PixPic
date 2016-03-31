@@ -13,8 +13,7 @@ private let messageUploadSuccessful = "Upload successful!"
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
-    lazy var reachabilityService = ReachabilityService()
-    
+        
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery
@@ -32,16 +31,14 @@ class PostService {
     func savePost(image: PFFile, comment: String? = nil) {
         image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
-                print("Saved!")
+                log.debug("Saved!")
                 self.uploadPost(image, comment: comment)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
-            },
-            progressBlock: { progress in
-                print("Uploaded: \(progress)%")
-            }
-        )
+        }, progressBlock: { progress in
+            log.debug("Uploaded: \(progress)%")
+        })
     }
     
     func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
@@ -64,7 +61,7 @@ class PostService {
                 )
             } else {
                 if let error = error?.localizedDescription {
-                    print(error)
+                    log.debug(error)
                 }
             }
         }
@@ -73,13 +70,14 @@ class PostService {
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
         var posts = [Post]()
         
-        if User.currentUser() == nil {
-            print("No user signUP")
+        if User.isAbsent {
+            log.debug("No user is signed up")
             completion(posts: nil, error: nil)
+            
             return
         }
         
-        if !reachabilityService.isReachable() {
+        if !ReachabilityHelper.isReachable() {
             query.fromLocalDatastore()
         }
         
@@ -95,7 +93,7 @@ class PostService {
                 }
                 completion(posts: posts, error: nil)
             } else if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(posts: nil, error: error)
             } else {
                 completion(posts: nil, error: nil)

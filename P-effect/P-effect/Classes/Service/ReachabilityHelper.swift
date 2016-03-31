@@ -10,18 +10,10 @@ import Foundation
 
 class ReachabilityHelper {
     
-    private static let reachability: Reachability? = try? Reachability.reachabilityForInternetConnection()
+    private static let reachability = try? Reachability.reachabilityForInternetConnection()
     
-    static func checkConnection(showAlert showAlert: Bool = true) -> Bool {
-        guard let reachability = ReachabilityHelper.reachability where reachability.isReachable() else {
-            if showAlert {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-            }
-            
-            return false
-        }
-        
-        return true
+    static func isReachable() -> Bool {
+        return reachability?.isReachable() == true
     }
     
 }

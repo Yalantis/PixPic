@@ -6,7 +6,7 @@
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
 
-class EffectsSticker: PFObject {
+class Sticker: PFObject {
     
     @NSManaged var image: PFFile
     private static var onceToken: dispatch_once_t = 0
@@ -19,7 +19,7 @@ class EffectsSticker: PFObject {
 
 }
 
-extension EffectsSticker: PFSubclassing {
+extension Sticker: PFSubclassing {
         
     class func parseClassName() -> String {
         return "EffectsSticker"

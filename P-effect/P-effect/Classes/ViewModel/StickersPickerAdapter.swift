@@ -10,10 +10,10 @@ import UIKit
 
 private let animationDuration = 0.3
 
-class EffectsPickerAdapter: NSObject {
+class StickersPickerAdapter: NSObject {
     
-    private var currentGroupNumber: Int?
-    private var effectsGroups: [EffectsModel]?
+    private var currentGroupIndex: Int?
+    private var stickersGroups: [StickersModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
     private var currentContentOffset: CGPoint!
@@ -21,18 +21,19 @@ class EffectsPickerAdapter: NSObject {
     override init() {
         super.init()
         
-        EffectsGroup()
-        EffectsSticker()
+        StickersGroup()
+        Sticker()
     }
     
-    func effectImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
-        guard let currentGroupNumber = currentGroupNumber, let effectsGroups = effectsGroups else {
+    func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
+        guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersGroups else {
             return
         }
-        let image = effectsGroups[currentGroupNumber].effectsStickers[indexPath.row].image
-        ImageLoaderService.getImageForContentItem(image) { image, error in
+        let image = stickersGroups[currentGroupNumber].stickers[indexPath.row].image
+        ImageLoaderHelper.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
+                
                 return
             }
             if let image = image {
@@ -41,9 +42,9 @@ class EffectsPickerAdapter: NSObject {
         }
     }
     
-    func sortEffectsGroups(groups: [EffectsModel]) {
-        effectsGroups = groups.sort {
-            $0.effectsGroup.label > $1.effectsGroup.label
+    func sortStickersGroups(groups: [StickersModel]) {
+        stickersGroups = groups.sort {
+            $0.stickersGroup.label > $1.stickersGroup.label
         }
     }
     
@@ -51,11 +52,11 @@ class EffectsPickerAdapter: NSObject {
     private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
         
-        guard let effectsGroups = effectsGroups else {
+        guard let stickersGroups = stickersGroups else {
             return cells
         }
                 
-        for i in 0..<effectsGroups[section].effectsStickers.count {
+        for i in 0..<stickersGroups[section].stickers.count {
             cells.append(NSIndexPath(forRow: i, inSection: 0))
         }
         
@@ -65,11 +66,11 @@ class EffectsPickerAdapter: NSObject {
     private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
         let sections = NSMutableIndexSet()
         
-        guard let effectsGroups = effectsGroups else {
+        guard let stickersGroups = stickersGroups else {
             return sections
         }
         
-        for i in 0..<effectsGroups.count {
+        for i in 0..<stickersGroups.count {
             if i != section {
                 sections.addIndexes(NSIndexSet(index: i))
             }
@@ -81,19 +82,23 @@ class EffectsPickerAdapter: NSObject {
 }
 
 // MARK: - UICollectionViewDataSource
-extension EffectsPickerAdapter: UICollectionViewDataSource {
+extension StickersPickerAdapter: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        if currentGroupNumber != nil {
-            return 1
+        let numberOfSections: Int
+        let isGroupSelected = currentGroupIndex != nil
+        if isGroupSelected {
+            numberOfSections = 1
         } else {
-            return effectsGroups?.count ?? 0
+            numberOfSections = stickersGroups?.count ?? 0
         }
+        
+        return numberOfSections
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let currentGroupNumber = currentGroupNumber {
-            return effectsGroups![currentGroupNumber].effectsStickers.count
+        if let currentGroupNumber = currentGroupIndex {
+            return stickersGroups![currentGroupNumber].stickers.count
         } else {
             return 0
         }
@@ -101,12 +106,12 @@ extension EffectsPickerAdapter: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            Constants.EffectsPicker.EffectsPickerCellIdentifier,
+            Constants.StickerPicker.StickerPickerCellIdentifier,
             forIndexPath: indexPath
-            ) as! EffectViewCell
+            ) as! StickerViewCell
         
-        if let effectsGroups = effectsGroups {
-            let sticker = effectsGroups[currentGroupNumber ?? 0].effectsStickers[indexPath.row]
+        if let stickersGroups = stickersGroups {
+            let sticker = stickersGroups[currentGroupIndex ?? 0].stickers[indexPath.row]
             cell.setStickerContent(sticker)
         }
         
@@ -119,23 +124,23 @@ extension EffectsPickerAdapter: UICollectionViewDataSource {
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
                 kind,
-                withReuseIdentifier: EffectsGroupHeaderView.identifier,
+                withReuseIdentifier: StickersGroupHeaderView.identifier,
                 forIndexPath: indexPath
-                ) as! EffectsGroupHeaderView
+                ) as! StickersGroupHeaderView
             
-            guard let effectsGroups = effectsGroups else {
+            guard let stickersGroups = stickersGroups else {
                 return reusableview
             }
-            let group = effectsGroups[currentGroupNumber ?? indexPath.section]
+            let group = stickersGroups[currentGroupIndex ?? indexPath.section]
             
-            headerView.configureWith(group: group.effectsGroup) {
+            headerView.configureWith(group: group.stickersGroup) {
                 self.currentHeader = headerView
                 collectionView.bringSubviewToFront(self.currentHeader!)
                 
-                if self.currentGroupNumber == nil {
+                if self.currentGroupIndex == nil {
                     self.currentContentOffset = collectionView.contentOffset
                     collectionView.performBatchUpdates({
-                        self.currentGroupNumber = indexPath.section
+                        self.currentGroupIndex = indexPath.section
                         
                         collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
                         collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section, count: collectionView.numberOfItemsInSection(indexPath.section)))
@@ -145,9 +150,9 @@ extension EffectsPickerAdapter: UICollectionViewDataSource {
                     
                     return true
                 } else {
-                    let lastGroupNumber = self.currentGroupNumber!
+                    let lastGroupNumber = self.currentGroupIndex!
                     collectionView.performBatchUpdates({
-                        self.currentGroupNumber = nil
+                        self.currentGroupIndex = nil
                         
                         collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: lastGroupNumber))
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))

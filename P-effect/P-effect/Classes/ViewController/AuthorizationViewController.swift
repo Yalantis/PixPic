@@ -58,9 +58,8 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
     
     private func proceedWithoutAuthorization() {
         router.showFeed()
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+        guard ReachabilityHelper.isReachable() else {
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }

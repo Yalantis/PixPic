@@ -10,7 +10,7 @@ import Foundation
 
 private let cellSize = CGSize(width: 105, height: 105)
 
-class EffectsLayout: UICollectionViewFlowLayout {
+class StickersLayout: UICollectionViewFlowLayout {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

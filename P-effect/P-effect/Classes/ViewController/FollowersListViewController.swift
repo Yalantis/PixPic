@@ -65,7 +65,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         tableView.dataSource = followerAdapter
         followerAdapter.delegate = self
         let cache = AttributesCache.sharedCache
-        let activityService: ActivityService = router.locator.getService()
+        let activityService: ActivityService = locator.getService()
         
         let isFollowers = (followType == .Followers)
         let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
@@ -77,6 +77,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
                         self?.followerAdapter.update(withFollowers: users, action: .Reload)
                     }
                 }
+                
                 return
         }
         self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)

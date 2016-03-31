@@ -83,14 +83,14 @@ struct Constants {
     
     struct PhotoEditor {
         static let ImageViewControllerSegue = "ImageViewControllerSegue"
-        static let EffectsPickerSegue = "EffectsPickerSegue"
+        static let StickersPickerSegue = "StickersPickerSegue"
     }
     
-    struct EffectsPicker {
-        static let EffectsPickerCellIdentifier = "EffectsPickerCell"
+    struct StickerPicker {
+        static let StickerPickerCellIdentifier = "StickerPickerCell"
     }
     
-    struct EffectEditor {
+    struct StickerEditor {
         static let UserResizableViewGlobalInset: CGFloat =  5.0
         static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
         
@@ -121,4 +121,5 @@ struct Constants {
         static let Type = "type"
         static let Content = "content"
     }
+    
 }

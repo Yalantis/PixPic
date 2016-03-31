@@ -94,7 +94,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -105,12 +105,12 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             } else {
                 this.avatarImageView.image = image
                 this.image = image
@@ -165,10 +165,10 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     
     dynamic private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        let reachabilityService: ReachabilityService = locator.getService()
-        if reachabilityService.isReachable() {
+        if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
+                
                 return
             }
             ValidationService.validateUserName(userName) { [weak self] completion in
@@ -182,9 +182,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     private func logout() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+        guard ReachabilityHelper.isReachable() else {
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }
@@ -266,7 +265,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
             nickname: userName!,
             completion: { _, error in
                 if let error = error {
-                    print(error)
+                    log.debug(error)
                 }
                 self.view.hideToastActivity()
                 self.view.userInteractionEnabled = true
@@ -276,7 +275,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInView(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     @IBAction private func logoutAction() {
@@ -320,6 +319,7 @@ extension EditProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return false
     }
 }

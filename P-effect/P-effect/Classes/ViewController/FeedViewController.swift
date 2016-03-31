@@ -11,8 +11,6 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-private let removePostMessage = "This photo will be deleted from P-effect"
-
 final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
@@ -21,6 +19,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
+    private lazy var settingsMenu = SettingsMenu()
     private lazy var postAdapter = PostAdapter()
     private var toolBar: FeedToolBar!
     
@@ -37,9 +36,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         setupObserver()
         setupLoadersCallback()
         
-        let reachabilityService: ReachabilityService = locator.getService()
-        if !reachabilityService.isReachable() {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+        if ReachabilityHelper.isReachable() {
+            ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
         }
@@ -60,6 +58,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
         toolBar.frame = CGRectMake(
             0,
@@ -119,7 +118,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -136,10 +135,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
-        photoGenerator.showInView(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     private func handlePhotoSelected(image: UIImage) {
@@ -157,7 +156,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.scrollToFirstRow()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
+                
                 return
             }
             self?.tableView?.pullToRefreshView.stopAnimating()
@@ -191,9 +191,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 return
             }
 
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            guard ReachabilityHelper.isReachable() else {
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
@@ -204,7 +203,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                     this.scrollToFirstRow()
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -215,13 +214,14 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             }
             guard let offset = self?.postAdapter.postQuantity else {
                 this.tableView.infiniteScrollingView.stopAnimating()
+                
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -245,109 +245,19 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-
-            return
-        }
-        if User.notAuthorized {
-            suggestLogin()
-        } else {
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
-            } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
-                }
-                settingsMenu.addAction(complaintAction)
-            }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
-        }
-    }
-    
-    private func suggestLogin() {
-        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+        settingsMenu.locator = locator
+        settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        alertController.addAction(cancelAction)
-        alertController.addAction(registerAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    private func removePost(post: Post, atIndex index: Int) {
-        UIAlertController.showAlert(
-            inViewController: self,
-            message: removePostMessage) { [weak self] _ in
-                guard let this = self else {
-                    return
-                }
-                
-                let postService: PostService = this.locator.getService()
-                postService.removePost(post) { succeeded, error in
-                    if succeeded {
-                        this.postAdapter.removePost(atIndex: index)
-                        this.tableView.reloadData()
-                    } else if let error = error?.localizedDescription {
-                        print(error)
-                    }
-                }
-        }
-    }
-    
-    private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: "Complaint about", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        complaintMenu.addAction(cancelAction)
-        
-        let complaintService: ComplaintService = locator.getService()
-        
-        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
-            complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
+        settingsMenu.postRemovalHandler = { [weak self] index in
+            guard let this = self else {
+                return
             }
+            this.postAdapter.removePost(atIndex: index)
+            this.tableView.reloadData()
         }
-        
-        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
-            complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
-            complaintService.complaintPost(post) { _, error in
-                print(error)
-            }
-        }
-        
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
-        
-        presentViewController(complaintMenu, animated: true, completion: nil)
-    }
-    
-    private func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
     func showUserProfile(adapter: PostAdapter, user: User) {

@@ -20,6 +20,7 @@ class User: PFUser {
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: User.parseClassName())
         query.orderByDescending("updatedAt")
+        
         return query
     }
     
@@ -42,6 +43,7 @@ extension User {
             if let currentUser = User.currentUser() where currentUser.facebookId == self.facebookId {
                 return true
             }
+            
             return false
         }
     }
@@ -57,32 +59,5 @@ extension User {
             return PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || User.isAbsent
         }
     }
-    
-    func checkUsernameExistance(completion: Bool -> Void) {
-        guard let username = username else {
-            completion(false)
-            return
-        }
-        let query = User.sortedQuery.whereKey("username", equalTo: username)
-        query.getFirstObjectInBackgroundWithBlock { object, _ in
-            if object != nil {
-                completion(true)
-                print("username exists")
-            } else {
-                completion(false)
-            }
-        }
-    }
-    
-    // MARK: - ProfileViewControllerMethods
-    func loadUserAvatar(completion: LoadingImageCompletion) {
-        if let avatar = avatar {
-            ImageLoaderService.getImageForContentItem(avatar) { image, error in
-                completion(image: image, error: error)
-            }
-        }
-    }
 
 }
-
-

@@ -34,6 +34,7 @@ extension UIImage {
         CGContextFillRect(context, rect)
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         return image
     }
     

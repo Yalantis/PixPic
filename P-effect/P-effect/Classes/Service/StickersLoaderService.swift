@@ -8,16 +8,15 @@
 
 import Foundation
 
-typealias LoadingEffectsCompletion = (objects: [EffectsModel]?, error: NSError?) -> Void
+typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError?) -> Void
 
-class EffectsLoaderService {
+class StickersLoaderService {
     
-    lazy var reachabilityService = ReachabilityService()
     private var isQueryFromLocalDataStoure = false
     
-    func loadEffects(completion: LoadingEffectsCompletion) {
-        let query = EffectsVersion.sortedQuery
-        var effectsVersion = EffectsVersion()
+    func loadStickers(completion: LoadingStickersCompletion) {
+        let query = StickersVersion.sortedQuery
+        var stickersVersion = StickersVersion()
         
         needToUpdateVersion { [weak self] needUpdate in
             guard let this = self else {
@@ -27,31 +26,32 @@ class EffectsLoaderService {
                 query.fromLocalDatastore()
                 this.isQueryFromLocalDataStoure = true
             }
-
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(objects: nil, error: error)
+                    
                     return
                 }
                 
-                guard let object = object as? EffectsVersion  else {
+                guard let object = object as? StickersVersion  else {
                     completion(objects: nil, error: nil)
+                    
                     return
                 }
                 
-                effectsVersion = object
-                effectsVersion.pinInBackground()
+                stickersVersion = object
+                stickersVersion.pinInBackground()
                 
-                this.loadEffectsGroups(effectsVersion) { objects, error in
+                this.loadStickersGroups(stickersVersion) { objects, error in
                     completion(objects: objects, error: error)
                 }
             }
         }
     }
     
-    private func loadEffectsGroups(effectsVersion: EffectsVersion, completion: LoadingEffectsCompletion) {
-        let groupsRelationQuery = effectsVersion.groupsRelation.query()
+    private func loadStickersGroups(stickersVersion: StickersVersion, completion: LoadingStickersCompletion) {
+        let groupsRelationQuery = stickersVersion.groupsRelation.query()
         
         if isQueryFromLocalDataStoure {
             groupsRelationQuery.fromLocalDatastore()
@@ -59,28 +59,30 @@ class EffectsLoaderService {
         
         groupsRelationQuery.findObjectsInBackgroundWithBlock { [weak self] objects, error in
             if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(objects: nil, error: error)
+                
                 return
             }
             
-            guard let objects = objects as? [EffectsGroup] else {
+            guard let objects = objects as? [StickersGroup] else {
                 completion(objects: nil, error: nil)
+                
                 return
             }
             
-            self?.loadEffectsStickers(objects) { objects, error in
+            self?.loadAllStickers(objects) { objects, error in
                 completion(objects: objects, error: error)
             }
         }
     }
     
-    private func loadEffectsStickers(effectsGroups: [EffectsGroup], completion: LoadingEffectsCompletion) {
-        var effects = [EffectsModel]()
-        var stickers = [EffectsSticker]()
-        let groupsQuantity = effectsGroups.count
+    private func loadAllStickers(stickersGroups: [StickersGroup], completion: LoadingStickersCompletion) {
+        var stickersModels = [StickersModel]()
+        var stickers = [Sticker]()
+        let groupsQuantity = stickersGroups.count
         
-        for group in effectsGroups {
+        for group in stickersGroups {
             group.pinInBackground()
 
             let stickersRelationQuery = group.stickersRelation.query()
@@ -89,26 +91,29 @@ class EffectsLoaderService {
             }
             stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(objects: nil, error: error)
+                    
                     return
                 }
                 
-                guard let objects = objects as? [EffectsSticker] else {
+                guard let objects = objects as? [Sticker] else {
                     completion(objects: nil, error: nil)
+                    
                     return
                 }
                 
                 stickers = objects
-                let effect = EffectsModel(effectsGroup: group, effectsStickers: stickers)
-                effects.append(effect)
+                let model = StickersModel(stickersGroup: group, stickers: stickers)
+                stickersModels.append(model)
                 
                 for sticker in stickers {
                     sticker.pinInBackground()
                 }
                 
-                if groupsQuantity == effects.count {
-                    completion(objects: effects, error: nil)
+                if groupsQuantity == stickersModels.count {
+                    completion(objects: stickersModels, error: nil)
+                    
                     return
                 }
             }
@@ -116,40 +121,43 @@ class EffectsLoaderService {
     }
 
     private func needToUpdateVersion(completion: Bool -> Void) {
-        var effectsVersion = EffectsVersion()
-        let query = EffectsVersion.sortedQuery
-        let queryFromLocal = EffectsVersion.sortedQuery
+        var stickersVersion = StickersVersion()
+        let query = StickersVersion.sortedQuery
+        let queryFromLocal = StickersVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
         
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             completion(false)
+            
             return
         }
         
         query.getFirstObjectInBackgroundWithBlock { object, error in
             if let error = error {
-                print(error.localizedDescription)
+                log.debug(error.localizedDescription)
                 completion(false)
+                
                 return
             }
             
-            guard let object = object as? EffectsVersion else {
+            guard let object = object as? StickersVersion else {
                 return
             }
             
-            effectsVersion = object
+            stickersVersion = object
             queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
                 if let error = error {
-                    print(error.localizedDescription)
+                    log.debug(error.localizedDescription)
                     completion(true)
+                    
                     return
                 }
                 
-                guard let localObject = localObject as? EffectsVersion else {
+                guard let localObject = localObject as? StickersVersion else {
                     return
                 }
                 
-                if effectsVersion.version > localObject.version {
+                if stickersVersion.version > localObject.version {
                     completion(true)
                 } else {
                     completion (false)

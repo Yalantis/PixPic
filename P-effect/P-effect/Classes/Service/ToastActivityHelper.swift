@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-class ToastActivityHelper: NSObject {
+class ToastActivityHelper {
 
     func showToastActivityOn(view: UIView, duration: Double) {
         view.makeToastActivity(CSToastPositionCenter)

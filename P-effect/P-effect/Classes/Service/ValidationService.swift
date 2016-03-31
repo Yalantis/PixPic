@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ValidationService: NSObject {
+class ValidationService {
     
     class func validateUserName(userName: String, completion: Bool -> Void) {
         if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
+            
             return
         }
-        
         if userName.characters.count < Constants.ValidationErrors.MinUserName ||
             userName.characters.count > Constants.ValidationErrors.MaxUserName {
                 AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.WrongLenght)
@@ -42,7 +42,7 @@ class ValidationService: NSObject {
             return false
         }
         let invalidCharacterSet = NSCharacterSet(charactersInString: Constants.ValidationErrors.CharacterSet).invertedSet
-        if let containsInvalidSymbols = userName.rangeOfCharacterFromSet(invalidCharacterSet) {
+        if userName.rangeOfCharacterFromSet(invalidCharacterSet) != nil {
             AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.NumbersAndSymbolsInUsername)
             
             return false
@@ -65,6 +65,5 @@ class ValidationService: NSObject {
         
         return true
     }
-    
     
 }
