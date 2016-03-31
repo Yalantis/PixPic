@@ -23,6 +23,14 @@ protocol PostAdapterDelegate: class {
     
 }
 
+extension PostAdapterDelegate {
+    
+    func showUserProfile(adapter: PostAdapter, user: User) {
+        
+    }
+
+}
+
 class PostAdapter: NSObject {
     
     private var posts = [Post]() {
@@ -52,6 +60,7 @@ class PostAdapter: NSObject {
     
     func getPost(atIndexPath indexPath: NSIndexPath) -> Post {
         let post = posts[indexPath.row]
+        
         return post
     }
     
@@ -101,5 +110,3 @@ extension PostAdapter: UITableViewDataSource {
     }
     
 }
-
-

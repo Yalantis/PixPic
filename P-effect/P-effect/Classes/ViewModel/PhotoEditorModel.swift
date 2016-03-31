@@ -18,14 +18,6 @@ class PhotoEditorModel: NSObject {
         super.init()
     }
     
-    func postImage(image: UIImage) {
-        
-    }
-    
-    func saveImageToLibrary(image: UIImage) {
-        
-    }
-    
     func originalImage() -> UIImage {
         return setedOriginalImage
     }

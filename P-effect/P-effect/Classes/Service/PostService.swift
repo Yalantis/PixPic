@@ -13,7 +13,8 @@ private let messageUploadSuccessful = "Upload successful!"
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
 class PostService {
-    lazy var reachabilityService = ReachabilityService()
+    
+    private lazy var reachabilityService = ReachabilityService()
     
     // MARK: - Public methods
     func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
@@ -32,16 +33,14 @@ class PostService {
     func savePost(image: PFFile, comment: String? = nil) {
         image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
-                print("Saved!")
+                log.debug("Saved!")
                 self.uploadPost(image, comment: comment)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
-            },
-            progressBlock: { progress in
-                print("Uploaded: \(progress)%")
-            }
-        )
+        }, progressBlock: { progress in
+            log.debug("Uploaded: \(progress)%")
+        })
     }
     
     func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
@@ -64,7 +63,7 @@ class PostService {
                 )
             } else {
                 if let error = error?.localizedDescription {
-                    print(error)
+                    log.debug(error)
                 }
             }
         }
@@ -72,10 +71,12 @@ class PostService {
     
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
         var posts = [Post]()
+        var postsQuery = PFQuery(className: Post.parseClassName())
         
-        if User.currentUser() == nil {
-            print("No user signUP")
+        if User.isAbsent {
+            log.debug("No user signUP")
             completion(posts: nil, error: nil)
+            
             return
         }
         
@@ -85,22 +86,44 @@ class PostService {
         
         if let user = user {
             query.whereKey("user", equalTo: user)
-        }
-        query.findObjectsInBackgroundWithBlock { objects, error in
-            if let objects = objects {
-                for object in objects {
-                    posts.append(object as! Post)
-                    object.saveEventually()
-                    object.pinInBackground()
+        } else if SettingsHelper.isShownOnlyFollowingUsersPosts && !User.notAuthorized {
+            let subQuery = PFQuery(className: Activity.parseClassName())
+            subQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+            subQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            subQuery.includeKey("toUser")
+            
+            var arrayOfUsers: [User] = [User.currentUser()!]
+            
+            subQuery.findObjectsInBackgroundWithBlock { objects, error in
+                if let objects = objects {
+                    for object in objects {
+                        arrayOfUsers.append(object.objectForKey("toUser") as! User)
+                    }
                 }
-                completion(posts: posts, error: nil)
-            } else if let error = error {
-                print(error.localizedDescription)
-                completion(posts: nil, error: error)
-            } else {
-                completion(posts: nil, error: nil)
+                query.whereKey("user", containedIn: arrayOfUsers)
+                query.findObjectsInBackgroundWithBlock { objects, error in
+                    if let objects = objects {
+                        for object in objects {
+                            posts.append(object as! Post)
+                            object.saveEventually()
+                            object.pinInBackground()
+                        }
+                        completion(posts: posts, error: nil)
+                    } else if let error = error {
+                        log.debug(error.localizedDescription)
+                        completion(posts: nil, error: error)
+                    } else {
+                        completion(posts: nil, error: nil)
+                    }
+                }
+
             }
+            
+
+            
         }
+        //----
+        //---
     }
     
 }

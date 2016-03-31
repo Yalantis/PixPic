@@ -16,7 +16,7 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
     init() {
         locator = ServiceLocator()
         locator.registerService(PostService())
-        locator.registerService(EffectsLoaderService())
+        locator.registerService(StickersLoaderService())
         locator.registerService(UserService())
         locator.registerService(ValidationService())
         locator.registerService(AuthService())
@@ -28,9 +28,7 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
 }
 
 extension LaunchRouter: Router {
-    
-    typealias Context = UIWindow
-    
+        
     func execute(context: UIWindow) {
         let launchViewController = LaunchViewController.create()
         launchViewController.setRouter(self)
@@ -38,14 +36,15 @@ extension LaunchRouter: Router {
         let navigationController = AppearanceNavigationController(rootViewController: launchViewController)
         context.rootViewController = navigationController
         
-        if User.currentUser() == nil {
-            (locator.getService() as AuthService).anonymousLogIn(
+        if User.isAbsent {
+            let authService: AuthService = locator.getService()
+            authService.anonymousLogIn(
                 completion: { [weak self] _ in
                     self?.presentFeed(context)
                 },
                 failure: { error in
                     if let error = error {
-                        handleError(error)
+                        ErrorHandler.handle(error)
                     }
             })
         } else {

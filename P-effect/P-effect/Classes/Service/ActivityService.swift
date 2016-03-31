@@ -11,7 +11,7 @@ import Parse
 
 typealias FetchingUsersCompletion = ((users: [User]?, error: NSError?) -> Void)?
 
-class ActivityService: NSObject {
+class ActivityService {
     
     func fetchUsers(type: FollowType, forUser user: User, completion: FetchingUsersCompletion) {
         let isFollowers = (type == .Followers)
@@ -91,10 +91,12 @@ class ActivityService: NSObject {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.createAuthError(.CurrentUserError)
             completionBlock?(succeeded: false, error: userError)
+            
             return
         }
         if user.objectId == currentUser.objectId {
             completionBlock?(succeeded: false, error: nil)
+            
             return
         }
         let followActivity = Activity()
@@ -109,6 +111,7 @@ class ActivityService: NSObject {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.createAuthError(.CurrentUserError)
             completionBlock?(succeeded: false, error: userError)
+            
             return
         }
         let query = PFQuery(className: Activity.parseClassName())

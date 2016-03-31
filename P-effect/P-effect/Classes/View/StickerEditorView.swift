@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EffectEditorView: UIView {
+class StickerEditorView: UIView {
     
     private var touchStart: CGPoint?
     private var prevPoint: CGPoint?
@@ -19,11 +19,11 @@ class EffectEditorView: UIView {
     private var borderView: BorderView!
     
     init(image: UIImage) {
-        let effectImageView = UIImageView(image: image)
+        let stickerImageView = UIImageView(image: image)
         
-        super.init(frame: effectImageView.frame)
+        super.init(frame: stickerImageView.frame)
         
-        setupContentView(effectImageView)
+        setupContentView(stickerImageView)
         setupDefaultAttributes()
     }
     
@@ -47,30 +47,30 @@ class EffectEditorView: UIView {
     
     private func setupDefaultAttributes() {
         let borderViewFrame = CGRectInset(bounds,
-            Constants.EffectEditor.UserResizableViewGlobalInset,
-            Constants.EffectEditor.UserResizableViewGlobalInset)
+            Constants.StickerEditor.UserResizableViewGlobalInset,
+            Constants.StickerEditor.UserResizableViewGlobalInset)
         
         borderView = BorderView(frame: borderViewFrame)
         addSubview(borderView)
         
         let deleteControlFrame = CGRectMake(0, 0,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
+            Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize)
         let deleteControlImage = UIImage(named: "delete_control")
         deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(EffectEditorView.singleTap(_:)))
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTap(_:)))
         deleteControl.addGestureRecognizer(singleTap)
         addSubview(deleteControl)
         
-        let resizingControlFrame = CGRectMake(frame.size.width - Constants.EffectEditor.StickerViewControlSize,
-            frame.size.height - Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
+        let resizingControlFrame = CGRectMake(frame.size.width - Constants.StickerEditor.StickerViewControlSize,
+            frame.size.height - Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize)
         let resizingControlImage = UIImage(named: "resize_control")
         resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
         
-        let panResizeGesture = UIPanGestureRecognizer(target: self, action: #selector(EffectEditorView.resizeTranslate(_:)))
+        let panResizeGesture = UIPanGestureRecognizer(target: self, action: #selector(resizeTranslate(_:)))
         resizingControl.addGestureRecognizer(panResizeGesture)
         addSubview(resizingControl)
         
@@ -83,10 +83,10 @@ class EffectEditorView: UIView {
         contentView.addSubview(content)
         
         contentView.frame = CGRectInset(bounds,
-            Constants.EffectEditor.UserResizableViewGlobalInset +
-                Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2,
-            Constants.EffectEditor.UserResizableViewGlobalInset +
-                Constants.EffectEditor.UserResizableViewInteractiveBorderSize / 2)
+            Constants.StickerEditor.UserResizableViewGlobalInset +
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
+            Constants.StickerEditor.UserResizableViewGlobalInset +
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
         
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
@@ -135,14 +135,14 @@ class EffectEditorView: UIView {
             bounds.size.width + wChange,
             bounds.size.height + hChange)
         
-        resizingControl.frame = CGRectMake(bounds.size.width - Constants.EffectEditor.StickerViewControlSize,
-            bounds.size.height - Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
+        resizingControl.frame = CGRectMake(bounds.size.width - Constants.StickerEditor.StickerViewControlSize,
+            bounds.size.height - Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize)
         
         deleteControl.frame = CGRectMake(0, 0,
-            Constants.EffectEditor.StickerViewControlSize,
-            Constants.EffectEditor.StickerViewControlSize)
+            Constants.StickerEditor.StickerViewControlSize,
+            Constants.StickerEditor.StickerViewControlSize)
         
         prevPoint = recognizer.locationOfTouch(0, inView: self)
     }
@@ -157,8 +157,8 @@ class EffectEditorView: UIView {
         }
         
         borderView.frame = CGRectInset(bounds,
-            Constants.EffectEditor.UserResizableViewGlobalInset,
-            Constants.EffectEditor.UserResizableViewGlobalInset)
+            Constants.StickerEditor.UserResizableViewGlobalInset,
+            Constants.StickerEditor.UserResizableViewGlobalInset)
         borderView.setNeedsDisplay()
         setNeedsDisplay()
     }

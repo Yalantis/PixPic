@@ -26,9 +26,9 @@ enum ComplaintRejectReason: String {
     case AnonymousComlaint = "You can't make a complaint without registration"
 }
 
-class ComplaintService: NSObject {
+class ComplaintService {
     
-    let reachabilityService = ReachabilityService()
+    private lazy var reachabilityService = ReachabilityService()
     
     func complaintUsername(user: User, post: Post? = nil, completion: ComplainCompletion) {
         if !shouldContinueExecutionWith(user) {
@@ -52,7 +52,7 @@ class ComplaintService: NSObject {
     
     func complaintPost(post: Post, completion: ComplainCompletion) {
         guard let user = post.user else {
-            print(nilUserInPost)
+            log.debug(nilUserInPost)
             
             return
         }
@@ -61,11 +61,8 @@ class ComplaintService: NSObject {
         }
         let complaint = Complaint(user: user, post: post, reason: ComplaintReason.PostImage)
         performIfComplaintExsist(complaint) { [weak self] existence in
-            guard let this = self else {
-                return
-            }
             if !existence {
-                this.sendComplaint(complaint) { result, error in
+                self?.sendComplaint(complaint) { result, error in
                     completion(result, error)
                 }
             } else {

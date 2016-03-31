@@ -16,6 +16,7 @@ extension NSError {
                 code: 701,
                 userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Facebook error", comment: "")]
             )
+            
             return error
             
         case .ParseError:
@@ -24,6 +25,7 @@ extension NSError {
                 code: 702,
                 userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parce error", comment: "")]
             )
+            
             return error
             
         case .CurrentUserError:
@@ -32,6 +34,7 @@ extension NSError {
                 code: 703,
                 userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parse current user not exist", comment: "")]
             )
+            
             return error
             
         case .AccessTokenError:
@@ -40,6 +43,7 @@ extension NSError {
                 code: 704,
                 userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Access token error", comment: "")]
             )
+            
             return error
         
         default:

@@ -22,12 +22,13 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
-        setupNavigavionBar()
         setupAdapter()
+        setupObserver()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -36,6 +37,11 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         AlertManager.sharedInstance.registerAlertListener(router)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -52,37 +58,47 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         self.router = router
     }
     
+    // MARK: - Private methods
     private func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
-    }
-    
-    private func setupNavigavionBar() {
-        navigationItem.title = followType.rawValue
     }
     
     private func setupAdapter() {
         tableView.dataSource = followerAdapter
         followerAdapter.delegate = self
         let cache = AttributesCache.sharedCache
-        let activityService: ActivityService = router.locator.getService()
+        let activityService: ActivityService = locator.getService()
         
         let isFollowers = (followType == .Followers)
         let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
         
-        guard let attributes = cache.attributesForUser(user),
-            cachedUsers = attributes[key] as? [User] else {
-                activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
-                    if let users = users {
-                        self?.followerAdapter.update(withFollowers: users, action: .Reload)
-                    }
-                }
-                return
+        if let attributes = cache.attributesForUser(user), cachedUsers = attributes[key] as? [User] {
+            self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
         }
-        self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
+        
+        activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
+            if let users = users {
+                self?.followerAdapter.update(withFollowers: users, action: .Reload)
+            }
+        }
+    }
+    
+    private func setupObserver() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "updateData",
+            name: Constants.NotificationName.FollowersListUpdated,
+            object: nil
+        )
+    }
+    
+    dynamic private func updateData() {
+        setupAdapter()
     }
 }
 
+// MARK: - FollowerAdapterDelegate methods
 extension FollowersListViewController: FollowerAdapterDelegate {
     
     func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter) {
@@ -91,6 +107,7 @@ extension FollowersListViewController: FollowerAdapterDelegate {
 
 }
 
+// MARK: - UITableViewDelegate methods
 extension FollowersListViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -100,9 +117,13 @@ extension FollowersListViewController: UITableViewDelegate {
     
 }
 
+// MARK: - NavigationControllerAppearanceContext methods
 extension FollowersListViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        return Appearance()
+        var appearance = Appearance()
+        appearance.title = followType.rawValue
+        return appearance
     }
+    
 }

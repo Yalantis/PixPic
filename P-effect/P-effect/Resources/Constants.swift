@@ -16,6 +16,7 @@ struct Constants {
     
     struct NotificationName {
         static let NewPostUploaded = "NewPostUploaded"
+        static let FollowersListUpdated = "FollowersListUpdated"
     }
     
     struct BaseDimensions {
@@ -43,6 +44,7 @@ struct Constants {
     
     struct UserDefaultsKeys {
         static let RemoteNotifications = "RemoteNotifications"
+        static let FollowedPosts = "FollowedPosts"
     }
     
     struct UserKey {
@@ -64,10 +66,6 @@ struct Constants {
         static let QueryLimit = 10 as Int
     }
     
-    struct BackButtonTitle {
-        static let HideTitlePosition = UIOffsetMake(0, -70)
-    }
-    
     struct ValidationErrors {
         static let WrongLenght = "Lenght of the username have to be more then 3 and less then 30 characters long" as String
         static let AlreadyExist = "Username already exist" as String
@@ -83,23 +81,24 @@ struct Constants {
     
     struct PhotoEditor {
         static let ImageViewControllerSegue = "ImageViewControllerSegue"
-        static let EffectsPickerSegue = "EffectsPickerSegue"
+        static let StickersPickerSegue = "StickersPickerSegue"
     }
     
-    struct EffectsPicker {
-        static let EffectsPickerCellIdentifier = "EffectsPickerCell"
+    struct StickerPicker {
+        static let StickerPickerCellIdentifier = "StickerPickerCell"
     }
     
-    struct EffectEditor {
+    struct StickerEditor {
         static let UserResizableViewGlobalInset: CGFloat =  5.0
         static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
         
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  10.0
+        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
         static let StickerViewControlSize: CGFloat =  36.0
     }
     
     struct EditProfile {
         static let EditProfileControllerIdentifier = "EditProfileViewController"
+        static let NavigationTitle = "Edit Profile"
     }
     
     struct Attributes {
@@ -121,4 +120,9 @@ struct Constants {
         static let Type = "type"
         static let Content = "content"
     }
+    
+    struct Feed {
+        static let NavigationTitle = "P-effect"
+    }
+    
 }

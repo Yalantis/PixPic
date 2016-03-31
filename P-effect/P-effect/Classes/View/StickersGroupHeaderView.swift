@@ -8,16 +8,16 @@
 
 import Foundation
 
-class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
+class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     
-    static let identifier = "EffectsGroupHeaderViewIdentifier"
+    static let identifier = "StickersGroupHeaderViewIdentifier"
     
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var label: UILabel!
     
-    func configureWith(group group: EffectsGroup, completion: (() -> Bool)) {
+    func configureWith(group group: StickersGroup, completion: (() -> Bool)) {
         downloadImageFromFile(group.image)
         label.text = group.label
         self.completion = completion
@@ -25,19 +25,8 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGroup))
         addGestureRecognizer(recognizer)
     }
-    
-    private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderService.getImageForContentItem(file) { image, error in
-            if let image = image {
-                self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
-                self.imageView.tintColor = UIColor.appWhiteColor
-            } else {
-                print("\(error)")
-            }
-        }
-    }
-    
-    func toggleGroup() {
+        
+    dynamic private func toggleGroup() {
         let isSelected = completion()
         let color = isSelected ? UIColor.appBlueColor : UIColor.appWhiteColor
         UIView.animateWithDuration(
@@ -49,6 +38,17 @@ class EffectsGroupHeaderView: UICollectionReusableView, CellInterface {
             },
             completion: nil
         )
+    }
+    
+    private func downloadImageFromFile(file: PFFile) {
+        ImageLoaderService.getImageForContentItem(file) { image, error in
+            if let image = image {
+                self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
+                self.imageView.tintColor = UIColor.appWhiteColor
+            } else {
+                log.debug(error?.localizedDescription)
+            }
+        }
     }
     
 }

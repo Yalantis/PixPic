@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
-
-private let removePostMessage = "This photo will be deleted from P-effect"
+ 
+private let titleForEmptyData = "No data is currently available"
+private let descriptionForEmptyData = "Please pull down to refresh"
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
@@ -21,6 +22,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
+    private lazy var settingsMenu = SettingsMenu()
     private lazy var postAdapter = PostAdapter()
     private var toolBar: FeedToolBar!
     
@@ -39,7 +41,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         
         let reachabilityService: ReachabilityService = locator.getService()
         if !reachabilityService.isReachable() {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
         }
@@ -60,6 +62,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         let pointY = view.frame.height - Constants.BaseDimensions.ToolBarHeight
         toolBar.frame = CGRectMake(
             0,
@@ -98,7 +101,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
     private func setupObserver() {
@@ -119,7 +122,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             if let objects = objects {
                 self?.postAdapter.update(withPosts: objects, action: .Reload)
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -157,7 +160,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.scrollToFirstRow()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
+                
                 return
             }
             self?.tableView?.pullToRefreshView.stopAnimating()
@@ -169,6 +173,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
+    // MARK: - IBActions
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         
@@ -193,7 +198,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
 
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
@@ -204,7 +209,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                     this.scrollToFirstRow()
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -215,13 +220,14 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             }
             guard let offset = self?.postAdapter.postQuantity else {
                 this.tableView.infiniteScrollingView.stopAnimating()
+                
                 return
             }
             postService.loadPagedPosts(offset: offset) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -229,7 +235,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
 }
-
+ 
+// MARK: - UITableViewDelegate methods
 extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -242,112 +249,19 @@ extension FeedViewController: UITableViewDelegate {
     
 }
 
+// MARK: - PostAdapterDelegate methods
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-
-            return
-        }
-        if User.notAuthorized {
-            suggestLogin()
-        } else {
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
-            } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
-                }
-                settingsMenu.addAction(complaintAction)
-            }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
-        }
-    }
-    
-    private func suggestLogin() {
-        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+        settingsMenu.showInView(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.completionAuthorizeUser = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        alertController.addAction(cancelAction)
-        alertController.addAction(registerAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
-    private func removePost(post: Post, atIndex index: Int) {
-        UIAlertController.showAlert(
-            inViewController: self,
-            message: removePostMessage) { [weak self] _ in
-                guard let this = self else {
-                    return
-                }
-                
-                let postService: PostService = this.locator.getService()
-                postService.removePost(post) { succeeded, error in
-                    if succeeded {
-                        this.postAdapter.removePost(atIndex: index)
-                        this.tableView.reloadData()
-                    } else if let error = error?.localizedDescription {
-                        print(error)
-                    }
-                }
+        settingsMenu.completionRemovePost = { [weak self] index in
+            self?.postAdapter.removePost(atIndex: index)
+            self?.tableView.reloadData()
         }
-    }
-    
-    private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: "Complaint about", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        complaintMenu.addAction(cancelAction)
-        
-        let complaintService: ComplaintService = locator.getService()
-        
-        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
-            complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
-            complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
-            complaintService.complaintPost(post) { _, error in
-                print(error)
-            }
-        }
-        
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
-        
-        presentViewController(complaintMenu, animated: true, completion: nil)
-    }
-    
-    private func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
     func showUserProfile(adapter: PostAdapter, user: User) {
@@ -367,7 +281,8 @@ extension FeedViewController: PostAdapterDelegate {
     }
 
 }
-
+ 
+// MARK: - DZNEmptyDataSetDelegate methods
 extension FeedViewController: DZNEmptyDataSetDelegate {
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
@@ -375,21 +290,18 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
     }
     
 }
-
+ 
+// MARK: - DZNEmptyDataSetSource methods
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data is currently available"
-        
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please pull down to refresh"
-        
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
@@ -398,15 +310,18 @@ extension FeedViewController: DZNEmptyDataSetSource {
             NSForegroundColorAttributeName: UIColor.lightGrayColor(),
             NSParagraphStyleAttributeName: paragraph]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: descriptionForEmptyData, attributes: attributes)
     }
     
 }
- 
+
+// MARK: - NavigationControllerAppearanceContext methods
 extension FeedViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        return Appearance()
+        var appearance = Appearance()
+        appearance.title = Constants.Feed.NavigationTitle
+        return appearance
     }
 
 }

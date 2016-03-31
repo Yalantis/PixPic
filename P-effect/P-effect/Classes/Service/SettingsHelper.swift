@@ -11,6 +11,7 @@ import Foundation
 class SettingsHelper {
     
     private static let remoteNotificationsKey = Constants.UserDefaultsKeys.RemoteNotifications
+    private static let followedPostsKey = Constants.UserDefaultsKeys.FollowedPosts
     
     static var isRemoteNotificationsEnabled: Bool {
         get {
@@ -22,10 +23,20 @@ class SettingsHelper {
         }
     }
     
+    static var isShownOnlyFollowingUsersPosts: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey(followedPostsKey)
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: followedPostsKey)
+        }
+    }
+    
     static func setupDefaultValues() {
         let isThisFirstTimeAppLaunched = NSUserDefaults.standardUserDefaults().objectForKey(remoteNotificationsKey) == nil
         if isThisFirstTimeAppLaunched {
             isRemoteNotificationsEnabled = true
+            isShownOnlyFollowingUsersPosts = false
         }
     }
 

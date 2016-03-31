@@ -20,6 +20,7 @@ extension StoryboardInitable {
     
     static func create() -> Self {
         let identifier = String(Self)
+        
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewControllerWithIdentifier(identifier) as! Self
     }
     

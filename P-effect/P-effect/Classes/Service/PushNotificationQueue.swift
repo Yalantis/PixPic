@@ -43,7 +43,6 @@ class PushNotificationQueue: NSObject {
         } else if notificationQueue.count > 1 {
             let message = String(notificationQueue.count) + " new amazing posts!"
             AlertManager.sharedInstance.showNotificationAlert(nil, message: message)
-            
         }
     }
     

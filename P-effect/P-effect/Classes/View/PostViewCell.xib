@@ -118,7 +118,6 @@
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="top" secondItem="gg0-D1-QNP" secondAttribute="bottom" id="3z7-hB-4S4"/>
                                     <constraint firstAttribute="trailing" secondItem="S7j-TD-CO3" secondAttribute="trailing" id="65T-de-bhs"/>
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="trailing" secondItem="gg0-D1-QNP" secondAttribute="trailing" id="HEg-IX-ved"/>
-                                    <constraint firstAttribute="bottom" secondItem="S7j-TD-CO3" secondAttribute="bottom" id="Wys-4U-ZmW"/>
                                     <constraint firstItem="8uy-cf-7cD" firstAttribute="top" secondItem="S7j-TD-CO3" secondAttribute="bottom" constant="10" id="Zc4-J5-IeN"/>
                                     <constraint firstItem="gg0-D1-QNP" firstAttribute="leading" secondItem="OAP-rW-k05" secondAttribute="leading" id="aiK-Cm-1oS"/>
                                     <constraint firstAttribute="trailing" secondItem="8uy-cf-7cD" secondAttribute="trailing" constant="10" id="nkE-ag-03e"/>
@@ -144,11 +143,6 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Wys-4U-ZmW"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>

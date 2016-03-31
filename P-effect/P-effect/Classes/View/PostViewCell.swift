@@ -15,19 +15,15 @@ private let footerViewHeight: CGFloat = 48
 
 private let actionByTapProfile = Selector("didTapProfile:")
 
-class PostViewCell: UITableViewCell {
+class PostViewCell: UITableViewCell, CellInterface {
     
     static let identifier = "PostViewCellIdentifier"
     static let designedHeight = headerViewHeight + footerViewHeight
     
-    static var nib: UINib? {
-        let nib = UINib(nibName: String(self), bundle: nil)
-        return nib
-    }
-    var didSelectUser: ((cell: PostViewCell) -> Void)!
     weak var post = Post?()
     
-    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)!
+    var didSelectUser: ((cell: PostViewCell) -> Void)?
+    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)?
 
     @IBOutlet private weak var postImageView: UIImageView!
     @IBOutlet private weak var profileImageView: UIImageView!
@@ -52,6 +48,7 @@ class PostViewCell: UITableViewCell {
         guard let post = post else {
             postImageView.image = UIImage.placeholderImage()
             profileImageView.image = UIImage.avatarPlaceholderImage()
+            
             return
         }
         self.post = post
@@ -76,6 +73,7 @@ class PostViewCell: UITableViewCell {
 
         guard let user = post.user else {
             profileImageView.image = UIImage.avatarPlaceholderImage()
+            
             return
         }
         if let avatar = user.avatar?.url {
@@ -89,7 +87,6 @@ class PostViewCell: UITableViewCell {
     dynamic private func didTapProfile(recognizer: UIGestureRecognizer) {
         didSelectUser?(cell: self)
     }
-
     
     @IBAction private func didTapSettingsButton() {
         let cache = KingfisherManager.sharedManager.cache

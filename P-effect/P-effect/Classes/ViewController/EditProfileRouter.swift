@@ -22,9 +22,7 @@ class EditProfileRouter: AlertManagerDelegate, FeedPresenter {
 }
 
 extension EditProfileRouter: Router {
-    
-    typealias Context = AppearanceNavigationController
-    
+        
     func execute(context: AppearanceNavigationController) {
         let editProfileController = EditProfileViewController.create()
         editProfileController.setRouter(self)

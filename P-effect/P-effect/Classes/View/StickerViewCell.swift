@@ -8,20 +8,20 @@
 
 import UIKit
 
-class EffectViewCell: UICollectionViewCell {
+class StickerViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var effectImage: UIImageView!
+    @IBOutlet private weak var stickerImage: UIImageView!
     
-    func setStickerContent(sticker: EffectsSticker) {
+    func setStickerContent(sticker: Sticker) {
         downloadImageFromFile(sticker.image)
     }
     
     private func downloadImageFromFile(file: PFFile) {
         ImageLoaderService.getImageForContentItem(file) { image, error in
             if let error = error {
-                print("\(error)")
+                log.debug(error.localizedDescription)
             } else {
-                self.effectImage.image = image
+                self.stickerImage.image = image
             }
         }
     }

@@ -11,11 +11,18 @@ import Photos
 
 protocol PhotoEditorDelegate: class {
     
-    func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage)
-    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage
-    func removeAllEffects(photoEditor: PhotoEditorViewController)
+    func photoEditor(photoEditor: PhotoEditorViewController, didChooseSticker: UIImage)
+    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withStickers: Bool) -> UIImage
+    func removeAllStickers(photoEditor: PhotoEditorViewController)
     
 }
+
+private let cancelActionTitle = "Cancel"
+private let postActionTitle = "Post with delay"
+private let saveActionTitle = "Save"
+private let dontSaveActionTitle = "Don't save"
+
+private let suggestSaveToCameraRollMessage = "Would you like to save results to photo library or post after internet access appears?"
 
 final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
@@ -28,13 +35,13 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
-    private var effectsPickerController: EffectsPickerViewController? {
+    private var stickersPickerController: StickersPickerViewController? {
         didSet {
-            effectsPickerController?.delegate = self
+            stickersPickerController?.delegate = self
         }
     }
     
-    @IBOutlet private weak var effectsPickerContainer: UIView!
+    @IBOutlet private weak var stickerPickerContainer: UIView!
     @IBOutlet private weak var imageContainer: UIView!
     
     // MARK: - Lifecycle
@@ -64,11 +71,10 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
             imageController?.setLocator(locator)
             delegate = imageController
             
-            
-        case Constants.PhotoEditor.EffectsPickerSegue:
-            effectsPickerController = segue.destinationViewController as? EffectsPickerViewController
-            effectsPickerController?.effectsPickerAdapter = EffectsPickerAdapter()
-            effectsPickerController?.setLocator(locator)
+        case Constants.PhotoEditor.StickersPickerSegue:
+            stickersPickerController = segue.destinationViewController as? StickersPickerViewController
+            stickersPickerController?.stickersPickerAdapter = StickersPickerAdapter()
+            stickersPickerController?.setLocator(locator)
             
         default:
             super.prepareForSegue(segue, sender: sender)
@@ -79,14 +85,15 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         super.viewWillLayoutSubviews()
         
         layoutImageContainer()
-        layoutEffectsPickerContainer()
+        layoutStickersPickerContainer()
         view.layoutIfNeeded()
     }
     
-    func didChooseEffectFromPicket(effect: UIImage) {
-        delegate?.photoEditor(self, didChooseEffect: effect)
+    func didChooseStickerFromPicket(sticker: UIImage) {
+        delegate?.photoEditor(self, didChooseSticker: sticker)
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -121,15 +128,15 @@ extension PhotoEditorViewController {
             action: #selector(saveImageToCameraRoll)
         )
         
-        let allEffectsRemovingButton = UIBarButtonItem(
+        let allStickerssRemovingButton = UIBarButtonItem(
             image: UIImage(named: "remove"),
             style: .Plain,
             target: self,
-            action: #selector(removeAllEffects)
+            action: #selector(removeAllStickers)
         )
-        allEffectsRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
+        allStickerssRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
 
-        navigationItem.rightBarButtonItems = [savingButton, allEffectsRemovingButton]
+        navigationItem.rightBarButtonItems = [savingButton, allStickerssRemovingButton]
         navigationItem.title = "Edit"
     }
     
@@ -140,10 +147,10 @@ extension PhotoEditorViewController {
         imageContainer.bounds.size = size
     }
     
-    private func layoutEffectsPickerContainer() {
-        var size = effectsPickerContainer.frame.size
+    private func layoutStickersPickerContainer() {
+        var size = stickerPickerContainer.frame.size
         size.width = view.bounds.width
-        effectsPickerContainer.bounds.size = size
+        stickerPickerContainer.bounds.size = size
     }
     
     private dynamic func performBackNavigation() {
@@ -153,29 +160,38 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save", style: .Default) { [weak self] _ in
-            guard let this = self else {
-                return
-            }
-            this.saveImageToCameraRoll()
-            this.navigationController!.popViewControllerAnimated(true)
+        let saveAction = UIAlertAction(
+            title: saveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                guard let this = self else {
+                    return
+                }
+                this.saveImageToCameraRoll()
+                this.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(saveAction)
         
-        let dontSaveAction = UIAlertAction(title: "Don't save", style: .Default) { [weak self] _ in
-            self?.navigationController!.popViewControllerAnimated(true)
+        let dontSaveAction = UIAlertAction(
+            title: dontSaveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(dontSaveAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
         alertController.addAction(cancelAction)
         
         presentViewController(alertController, animated: true, completion: nil)
     }
     
     private dynamic func saveImageToCameraRoll() {
-        guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-            ExceptionHandler.handle(Exception.CantApplyEffects)
+        guard let image = delegate?.imageForPhotoEditor(self, withStickers: true) else {
+            ExceptionHandler.handle(Exception.CantApplyStickers)
             
             return
         }
@@ -196,8 +212,8 @@ extension PhotoEditorViewController {
     
     private func postToFeed() {
         do {
-            guard let image = delegate?.imageForPhotoEditor(self, withEffects: true) else {
-                throw Exception.CantApplyEffects
+            guard let image = delegate?.imageForPhotoEditor(self, withStickers: true) else {
+                throw Exception.CantApplyStickers
             }
             var pictureData = UIImageJPEGRepresentation(image, 1.0)
             var i = 1.0
@@ -219,29 +235,37 @@ extension PhotoEditorViewController {
     private func suggestSaveToCameraRoll() {
         let alertController = UIAlertController(
             title: Exception.NoConnection.rawValue,
-            message: "Would you like to save results to photo library or post after internet access appears?",
+            message: suggestSaveToCameraRollMessage,
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(title: "Save now", style: .Default) { [weak self] _ in
-            self?.saveImageToCameraRoll()
+        let saveAction = UIAlertAction(
+            title: saveActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.saveImageToCameraRoll()
         }
         alertController.addAction(saveAction)
         
-        let postAction = UIAlertAction(title: "Post with delay", style: .Default) { [weak self] _ in
+        let postAction = UIAlertAction(
+            title: postActionTitle,
+            style: .Default
+            ) { [weak self] _ in
             self?.postToFeed()
         }
         alertController.addAction(postAction)
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
         alertController.addAction(cancelAction)
         
         presentViewController(alertController, animated: true, completion: nil)
     }
 
-    //TODO: link this func with button after implementing design
-    private dynamic func removeAllEffects() {
-        delegate?.removeAllEffects(self)
+    private dynamic func removeAllStickers() {
+        delegate?.removeAllStickers(self)
     }
     
 }

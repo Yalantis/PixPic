@@ -20,4 +20,6 @@ pod 'AFDropdownNotification', '~> 1.0'
 
 pod 'Kingfisher', '~> 2.0'
 
+pod 'XCGLogger', '~> 3.2'
+
 use_frameworks!

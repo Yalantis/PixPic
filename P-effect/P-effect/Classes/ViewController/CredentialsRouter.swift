@@ -20,9 +20,7 @@ class CredentialsRouter: AlertManagerDelegate, SettingsPresenter {
 }
 
 extension CredentialsRouter: Router {
-    
-    typealias Context = AppearanceNavigationController
-    
+        
     func execute(context: AppearanceNavigationController) {
         let credentialsController = CredentialsViewController.create()
         credentialsController.router = self

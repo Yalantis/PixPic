@@ -9,9 +9,15 @@
 import UIKit
 import Toast
 
-private let removePostMessage = "This photo will be deleted from P-effect"
+private let unfollowMessage = "Are you sure you want to unfollow?"
+private let unfollowTitle = "Unfollow"
+private let unfollowActionTitle = "Yes"
 
-final class ProfileViewController: UITableViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+private let suggestLoginMessage = "You can't follow someone without registration"
+private let registerActionTitle = "Register"
+private let cancelActionTitle = "Cancel"
+
+final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
@@ -25,6 +31,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     private weak var locator: ServiceLocator!
     private var activityShown: Bool?
     private lazy var postAdapter = PostAdapter()
+    private lazy var settingsMenu = SettingsMenu()
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -37,6 +44,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     @IBOutlet private weak var followButtonHeight: NSLayoutConstraint!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,9 +58,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         super.viewDidAppear(animated)
         
         AlertManager.sharedInstance.registerAlertListener(router)
+        fillFollowersQuantity(user!)
     }
     
-    // MARK: - Inner func
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -63,10 +72,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     func setUserId(userId: String) {
         self.userId = userId
-        let userService: UserService = router.locator.getService()
+        let userService: UserService = locator.getService()
         userService.fetchUser(userId) { [weak self] user, error in
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             } else {
                 self?.setUser(user)
             }
@@ -77,6 +86,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         self.router = router
     }
     
+    // MARK: - Private methods
     private func updateSelf() {
         setupFollowButton()
         setupController()
@@ -86,7 +96,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
@@ -124,7 +134,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.view.hideToastActivity()
             } else if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
         }
     }
@@ -156,8 +166,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             return
         }
         userName.text = user.username
-        navigationItem.title = Constants.Profile.NavigationTitle
-        user.loadUserAvatar {[weak self] image, error in
+        user.loadUserAvatar { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -194,7 +203,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             
             let reachabilityService: ReachabilityService = this.locator.getService()
             guard reachabilityService.isReachable() else {
-                AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+                ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
                 return
@@ -205,7 +214,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.pullToRefreshView.stopAnimating()
             }
@@ -218,7 +227,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .LoadMore)
                 } else if let error = error {
-                    print(error)
+                    log.debug(error.localizedDescription)
                 }
                 this.tableView.infiniteScrollingView.stopAnimating()
             }
@@ -234,28 +243,44 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             // Unfollow
             followButton.enabled = false
             
-            let alertController = UIAlertController(title: "Unfollow", message: "Are you sure you want to unfollow?", preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { [weak self] _ in
-                self?.followButton.enabled = true
+            let alertController = UIAlertController(
+                title: unfollowTitle,
+                message: unfollowMessage,
+                preferredStyle: .ActionSheet
+            )
+            let cancelAction = UIAlertAction(
+                title: cancelActionTitle,
+                style: .Cancel
+                ) { [weak self] _ in
+                    self?.followButton.enabled = true
             }
-            
-            let unfollowAction = UIAlertAction(title: "Yes", style: .Default) { [weak self] _ in
-                guard let this = self, user = this.user else {
-                    return
-                }
-                activityService.unfollowUserEventually(user) { [weak self] success, error in
-                    if success {
-                        self?.followButton.selected = false
-                        self?.followButton.enabled = true
+            let unfollowAction = UIAlertAction(
+                title: unfollowActionTitle,
+                style: .Default
+                ) { [weak self] _ in
+                    guard let this = self, user = this.user else {
+                        return
                     }
-                }
+                    activityService.unfollowUserEventually(user) { [weak self] success, error in
+                        if success {
+                            guard let this = self else {
+                                return
+                            }
+                            this.followButton.selected = false
+                            this.followButton.enabled = true
+                            this.fillFollowersQuantity(user)
+                            NSNotificationCenter.defaultCenter().postNotificationName(
+                                Constants.NotificationName.FollowersListUpdated,
+                                object: nil
+                            )
+                        }
+                    }
             }
             
             alertController.addAction(cancelAction)
             alertController.addAction(unfollowAction)
             
             presentViewController(alertController, animated: true, completion: nil)
-            
         } else {
             // Follow
             followButton.selected = true
@@ -264,55 +289,74 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
             indicator.hidesWhenStopped = true
             indicator.startAnimating()
             followButton.addSubview(indicator)
-            activityService.followUserEventually(user) { succeeded, error in
+            activityService.followUserEventually(user) { [weak self] succeeded, error in
+                guard let this = self else {
+                    return
+                }
                 if error == nil {
-                    print("Attempt to follow was \(succeeded) ")
-                    self.followButton.selected = true
+                    log.debug("Attempt to follow was \(succeeded) ")
+                    this.followButton.selected = true
                 } else {
-                    self.followButton.selected = false
+                    this.followButton.selected = false
                 }
                 indicator.removeFromSuperview()
+                this.fillFollowersQuantity(user)
+                NSNotificationCenter.defaultCenter().postNotificationName(
+                    Constants.NotificationName.FollowersListUpdated,
+                    object: nil
+                )
             }
         }
     }
     
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
-        guard let followersQt = attributes?[Constants.Attributes.FollowersCount],
-            folowingQt = attributes?[Constants.Attributes.FollowingCount] else {
-                let activityService: ActivityService = locator.getService()
-                activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
-                    if let this = self {
-                        this.followersQuantity.text = String(followersCount) + " followers"
-                        this.followingQuantity.text = String(followingCount) + " following"
-                    }
-                }
-                return
+        if let followersQt = attributes?[Constants.Attributes.FollowersCount],
+            folowingQt = attributes?[Constants.Attributes.FollowingCount] {
+                followersQuantity.text = String(followersQt) + " followers"
+                followingQuantity.text = String(folowingQt) + " following"
         }
-        followersQuantity.text = String(followersQt) + " followers"
-        followingQuantity.text = String(folowingQt) + " following"
+
+        let activityService: ActivityService = locator.getService()
+        activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
+            if let this = self {
+                this.followersQuantity.text = String(followersCount) + " followers"
+                this.followingQuantity.text = String(followingCount) + " following"
+            }
+        }
+
+    }
+    
+    private func suggestLogin() {
+        let alertController = UIAlertController(title: suggestLoginMessage, message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel,
+            handler: nil)
+        
+        let registerAction = UIAlertAction(
+            title: registerActionTitle,
+            style: .Default
+            ) { [weak self] _ in
+                self?.router.showAuthorization()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(registerAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
         let reachabilityService: ReachabilityService = locator.getService()
         guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
+            ExceptionHandler.handle(Exception.NoConnection)
             
             return
         }
         if User.notAuthorized {
-            let alertController = UIAlertController(title: "You can't follow someone without registration", message: "", preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            
-            let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
-                self?.router.showAuthorization()
-            }
-            
-            alertController.addAction(cancelAction)
-            alertController.addAction(registerAction)
-            
-            presentViewController(alertController, animated: true, completion: nil)
+            suggestLogin()
         } else {
             toggleFollowFriend()
         }
@@ -326,130 +370,41 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Followers)
+        guard let followersQuantity = followersQuantity.text else {
+            return
+        }
+        if followersQuantity[followersQuantity.startIndex] != "0" {
+            router.showFollowersList(user, followType: .Followers)
+        }
     }
     
     dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
-        router.showFollowersList(user, followType: .Following)
+        guard let followingQuantity = followingQuantity.text else {
+            return
+        }
+        if followingQuantity[followingQuantity.startIndex] != "0" {
+            router.showFollowersList(user, followType: .Following)
+        }
     }
     
 }
 
+// MARK: - PostAdapterDelegate methods
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
-            AlertManager.sharedInstance.showSimpleAlert("No internet connection")
-            
-            return
-        }
-        if User.notAuthorized {
-            suggestLogin()
-        } else {
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-            settingsMenu.addAction(cancelAction)
-            
-            let shareAction = UIAlertAction(title: "Share", style: .Default) { [weak self] _ in
-                self?.showActivityController(items)
-            }
-            settingsMenu.addAction(shareAction)
-            
-            
-            if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(title: "Remove post", style: .Default) { [weak self] _ in
-                    self?.removePost(post, atIndex: index)
-                }
-                settingsMenu.addAction(removeAction)
-                
-            } else {
-                let complaintAction = UIAlertAction(title: "Complain", style: .Default) { [weak self] _ in
-                    self?.complaintToPost(post)
-                }
-                settingsMenu.addAction(complaintAction)
-            }
-            
-            presentViewController(settingsMenu, animated: true, completion: nil)
-        }
-    }
-    
-    private func suggestLogin() {
-        let alertController = UIAlertController(title: "You can't use this function without registration", message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
+        settingsMenu.showInView(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.completionAuthorizeUser = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        alertController.addAction(cancelAction)
-        alertController.addAction(registerAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-
-    private func removePost(post: Post, atIndex index: Int) {
-        UIAlertController.showAlert(
-            inViewController: self,
-            message: removePostMessage) { [weak self] _ in
-                guard let this = self else {
-                    return
-                }
-                
-                let postService: PostService = this.locator.getService()
-                postService.removePost(post) { succeeded, error in
-                    if succeeded {
-                        this.postAdapter.removePost(atIndex: index)
-                        this.tableView.reloadData()
-                    } else if let error = error?.localizedDescription {
-                        print(error)
-                    }
-                }
+        settingsMenu.completionRemovePost = { [weak self] index in
+            self?.postAdapter.removePost(atIndex: index)
+            self?.tableView.reloadData()
         }
-    }
-    
-    private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: "Complain about", message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        complaintMenu.addAction(cancelAction)
-        
-        let complaintService: ComplaintService = locator.getService()
-        let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
-            complaintService.complaintUsername(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintUserAvatarAction = UIAlertAction(title: "User avatar", style: .Default) { _ in
-            complaintService.complaintUserAvatar(post.user!) { _, error in
-                print(error)
-            }
-        }
-        
-        let complaintPostAction = UIAlertAction(title: "Post", style: .Default) { _ in
-            complaintService.complaintPost(post) { _, error in
-                print(error)
-            }
-        }
-        
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
-        
-        presentViewController(complaintMenu, animated: true, completion: nil)
-        
-    }
-    
-    private func showActivityController(items: [AnyObject]) {
-        let activityViewController = ActivityViewController.initWith(items)
-        self.presentViewController(activityViewController, animated: true, completion: nil)
-    }
-
-    func showUserProfile(adapter: PostAdapter, user: User) {
-        
     }
     
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
@@ -462,7 +417,7 @@ extension ProfileViewController: PostAdapterDelegate {
     
 }
 
-
+// MARK: - UITableViewDelegate methods
 extension ProfileViewController {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -478,3 +433,15 @@ extension ProfileViewController {
     }
     
 }
+
+// MARK: - NavigationControllerAppearanceContext methods
+extension ProfileViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = Constants.Profile.NavigationTitle
+        return appearance
+    }
+    
+}
+

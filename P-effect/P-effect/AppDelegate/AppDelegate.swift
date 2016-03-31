@@ -12,6 +12,9 @@ import Crashlytics
 import Parse
 import ParseFacebookUtilsV4
 import Bolts
+import XCGLogger
+
+let log = XCGLogger.defaultInstance()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,6 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SettingsHelper.setupDefaultValues()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.makeKeyAndVisible()
+        
+        log.setup()
         
         router.execute(window!)
         
@@ -73,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         AlertManager.sharedInstance.handlePush(userInfo)
-        if PFUser.currentUser() != nil {
+        if !User.isAbsent {
             completionHandler(.NewData)
         } else {
             completionHandler(.NoData)

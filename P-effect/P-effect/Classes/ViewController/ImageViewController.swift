@@ -13,55 +13,57 @@ class ImageViewController: UIViewController {
     var model: ImageViewModel!
     
     private weak var locator: ServiceLocator!
-    private var effects = [EffectEditorView]()
+    private var stickers = [StickerEditorView]()
     
     @IBOutlet private weak var rawImageView: UIImageView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         rawImageView.image = model.originalImage()
-        // Do any additional setup after loading the view.
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
     
 }
 
+// MARK: - PhotoEditorDelegate methods
 extension ImageViewController: PhotoEditorDelegate {
     
-    func photoEditor(photoEditor: PhotoEditorViewController, didChooseEffect: UIImage) {
-        let userResizableView = EffectEditorView(image: didChooseEffect)
+    func photoEditor(photoEditor: PhotoEditorViewController, didChooseSticker: UIImage) {
+        let userResizableView = StickerEditorView(image: didChooseSticker)
         userResizableView.center = rawImageView.center
         rawImageView.addSubview(userResizableView)
-        effects.append(userResizableView)
+        stickers.append(userResizableView)
     }
     
-    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withEffects: Bool) -> UIImage {
-        guard withEffects else {
+    func imageForPhotoEditor(photoEditor: PhotoEditorViewController, withStickers: Bool) -> UIImage {
+        guard withStickers else {
             return rawImageView.image!
         }
         
-        for effect in effects {
-            effect.switchControls(toState: false)
+        for sticker in stickers {
+            sticker.switchControls(toState: false)
         }
         let rect = rawImageView.bounds
         UIGraphicsBeginImageContextWithOptions(rect.size, view.opaque, 0.0)
         rawImageView.drawViewHierarchyInRect(rect, afterScreenUpdates: true)
 
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        for effect in effects {
-            effect.switchControls(toState: true)
+        for sticker in stickers {
+            sticker.switchControls(toState: true)
         }
         
         return image
     }
     
-    func removeAllEffects(photoEditor: PhotoEditorViewController) {
-        for effect in effects {
-            effect.removeFromSuperview()
+    func removeAllStickers(photoEditor: PhotoEditorViewController) {
+        for sticker in stickers {
+            sticker.removeFromSuperview()
         }
     }
     

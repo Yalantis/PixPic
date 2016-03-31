@@ -108,7 +108,6 @@ class AuthService {
             } else if let user = user as? User {
                 completion(object: user)
                 PFInstallation.addPFUserToCurrentInstallation()
-                print(user)
             }
         }
     }

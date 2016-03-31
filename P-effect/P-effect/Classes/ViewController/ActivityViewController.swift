@@ -17,6 +17,8 @@ class ActivityViewController: UIActivityViewController {
     private let applyToContactMessage = "Applied to contact!"
     private let doneMessage = "Shared!"
     
+    private let activityTypePostToVK = "com.vk.vkclient.shareextension"
+    
     static func initWith(items: [AnyObject]) -> ActivityViewController {
         let activityViewController = ActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [
@@ -27,7 +29,7 @@ class ActivityViewController: UIActivityViewController {
         ]
         activityViewController.completionWithItemsHandler = { activity, success, items, error in
             if let error = error {
-                print(error)
+                log.debug(error.localizedDescription)
             }
             if let activity = activity where success  {
                 let message = activityViewController.activityViewController(
@@ -37,11 +39,13 @@ class ActivityViewController: UIActivityViewController {
                 AlertManager.sharedInstance.showSimpleAlert(message!)
             }
         }
+        
         return activityViewController
     }
     
 }
 
+// MARK: - UIActivityItemSource methods
 extension ActivityViewController: UIActivityItemSource {
     
     func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {
@@ -62,7 +66,7 @@ extension ActivityViewController: UIActivityItemSource {
         case UIActivityTypeAssignToContact:
             return applyToContactMessage
             
-        case "com.vk.vkclient.shareextension":
+        case activityTypePostToVK:
             return vkMessage
             
         default:
