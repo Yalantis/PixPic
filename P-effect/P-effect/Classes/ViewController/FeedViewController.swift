@@ -245,6 +245,7 @@ extension FeedViewController: UITableViewDelegate {
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+        settingsMenu.locator = locator
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
         settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()

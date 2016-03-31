@@ -12,9 +12,9 @@ private let removePostMessage = "This photo will be deleted from P-effect"
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
+    var locator: ServiceLocator!
     var userAuthorizationHandler: (() -> Void)!
     var postRemovalHandler: ((atIndex: Int) -> Void)!
-    private lazy var postService = PostService()
     private var presenter: UIViewController!
 
     func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
@@ -74,7 +74,8 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                     return
                 }
                 
-                this.postService.removePost(post) { succeeded, error in
+                let postService: PostService = this.locator.getService()
+                postService.removePost(post) { succeeded, error in
                     if succeeded {
                         this.postRemovalHandler(atIndex: index)
                     } else if let error = error?.localizedDescription {
@@ -89,8 +90,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         complaintMenu.addAction(cancelAction)
         
-        let complaintService = ComplaintService()
-        
+        let complaintService: ComplaintService = locator.getService()
         let complaintUsernameAction = UIAlertAction(title: "Username", style: .Default) { _ in
             complaintService.complaintUsername(post.user!) { _, error in
                 log.debug(error?.localizedDescription)
