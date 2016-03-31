@@ -30,7 +30,7 @@ class StickersPickerAdapter: NSObject {
             return
         }
         let image = stickersGroups[currentGroupNumber].stickers[indexPath.row].image
-        ImageLoaderService.getImageForContentItem(image) { image, error in
+        ImageLoaderHelper.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
                 

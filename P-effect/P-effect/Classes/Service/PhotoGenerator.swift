@@ -65,7 +65,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
-            showWarningAboutAbsenceCamera()
+            handleNoCamera()
         }
     }
     
@@ -76,7 +76,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func showWarningAboutAbsenceCamera() {
+    private func handleNoCamera() {
         let alertViewController = UIAlertController(
             title: "No Camera",
             message: "Sorry, this device has no camera",
