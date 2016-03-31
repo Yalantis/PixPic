@@ -48,7 +48,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 title: shareActionTitle,
                 style: .Default
                 ) { [weak self] _ in
-                    self?.showActivityController(items)
+                    self?.showActivityController(withItems: items)
             }
             settingsMenu.addAction(shareAction)
             

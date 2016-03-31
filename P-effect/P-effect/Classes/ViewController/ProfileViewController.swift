@@ -380,7 +380,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
         
         if followersQuantity != 0 {
-            router.showFollowersList(user, followType: .Following)
+            router.showFollowersList(user, followType: .Followers)
         }
     }
     
