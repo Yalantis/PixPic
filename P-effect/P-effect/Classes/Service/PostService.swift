@@ -38,8 +38,8 @@ class PostService {
             } else if let error = error {
                 log.debug(error.localizedDescription)
             }
-        }, progressBlock: { progress in
-            log.debug("Uploaded: \(progress)%")
+            }, progressBlock: { progress in
+                log.debug("Uploaded: \(progress)%")
         })
     }
     
@@ -70,60 +70,60 @@ class PostService {
     }
     
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
-        var posts = [Post]()
-        var postsQuery = PFQuery(className: Post.parseClassName())
-        
         if User.isAbsent {
             log.debug("No user signUP")
-            completion(posts: nil, error: nil)
+            fetchPosts(query, completion: completion)
             
             return
         }
-        
         if !reachabilityService.isReachable() {
             query.fromLocalDatastore()
         }
-        
         if let user = user {
             query.whereKey("user", equalTo: user)
+            fetchPosts(query, completion: completion)
+            
         } else if SettingsHelper.isShownOnlyFollowingUsersPosts && !User.notAuthorized {
-            let subQuery = PFQuery(className: Activity.parseClassName())
-            subQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
-            subQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
-            subQuery.includeKey("toUser")
+            let followersQuery = PFQuery(className: Activity.parseClassName())
+            followersQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+            followersQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            followersQuery.includeKey("toUser")
             
-            var arrayOfUsers: [User] = [User.currentUser()!]
-            
-            subQuery.findObjectsInBackgroundWithBlock { objects, error in
-                if let objects = objects {
-                    for object in objects {
-                        arrayOfUsers.append(object.objectForKey("toUser") as! User)
-                    }
-                }
-                query.whereKey("user", containedIn: arrayOfUsers)
-                query.findObjectsInBackgroundWithBlock { objects, error in
-                    if let objects = objects {
-                        for object in objects {
-                            posts.append(object as! Post)
-                            object.saveEventually()
-                            object.pinInBackground()
+            var arrayOfFollowers: [User] = [User.currentUser()!]
+            followersQuery.findObjectsInBackgroundWithBlock { [weak self] activities, error in
+                if let error = error {
+                    log.debug(error.localizedDescription)
+                } else if let activities = (activities as? [Activity]) {
+                    for activity in activities {
+                        if let followerUser = activity.objectForKey(Constants.ActivityKey.ToUser) as? User {
+                            arrayOfFollowers.append(followerUser)
                         }
-                        completion(posts: posts, error: nil)
-                    } else if let error = error {
-                        log.debug(error.localizedDescription)
-                        completion(posts: nil, error: error)
-                    } else {
-                        completion(posts: nil, error: nil)
                     }
                 }
-
+                query.whereKey("user", containedIn: arrayOfFollowers)
+                self?.fetchPosts(query, completion: completion)
             }
-            
-
-            
         }
-        //----
-        //---
+    }
+    
+    private func fetchPosts(query: PFQuery, completion: LoadingPostsCompletion) {
+        
+        var posts = [Post]()
+        query.findObjectsInBackgroundWithBlock { objects, error in
+            if let objects = objects {
+                for object in objects {
+                    posts.append(object as! Post)
+                    object.saveEventually()
+                    object.pinInBackground()
+                }
+                completion(posts: posts, error: nil)
+            } else if let error = error {
+                log.debug(error.localizedDescription)
+                completion(posts: nil, error: error)
+            } else {
+                completion(posts: nil, error: nil)
+            }
+        }
     }
     
 }
