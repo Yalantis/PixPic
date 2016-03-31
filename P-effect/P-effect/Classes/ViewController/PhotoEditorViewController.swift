@@ -249,8 +249,7 @@ extension PhotoEditorViewController {
 extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             suggestSaveToCameraRoll()
             
             return

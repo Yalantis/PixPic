@@ -196,8 +196,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
                 return
             }
             
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
+            guard ReachabilityHelper.isReachable() else {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
@@ -299,8 +298,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable, Na
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -361,11 +359,11 @@ extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
-        settingsMenu.completionAuthorizeUser = { [weak self] in
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        settingsMenu.completionRemovePost = { [weak self] index in
+        settingsMenu.postRemovalHandler = { [weak self] index in
             guard let this = self else {
                 return
             }

@@ -36,8 +36,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         setupObserver()
         setupLoadersCallback()
         
-        let reachabilityService: ReachabilityService = locator.getService()
-        if !reachabilityService.isReachable() {
+        if ReachabilityHelper.isReachable() {
             ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -136,10 +135,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
-        photoGenerator.showInViewController(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     private func handlePhotoSelected(image: UIImage) {
@@ -192,8 +191,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
                 return
             }
 
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
+            guard ReachabilityHelper.isReachable() else {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
@@ -248,11 +246,11 @@ extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
-        settingsMenu.completionAuthorizeUser = { [weak self] in
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        settingsMenu.completionRemovePost = { [weak self] index in
+        settingsMenu.postRemovalHandler = { [weak self] index in
             guard let this = self else {
                 return
             }

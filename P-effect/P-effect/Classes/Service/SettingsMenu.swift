@@ -12,16 +12,15 @@ private let removePostMessage = "This photo will be deleted from P-effect"
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
-    var completionAuthorizeUser: (() -> Void)!
-    var completionRemovePost: ((atIndex: Int) -> Void)!
+    var userAuthorizationHandler: (() -> Void)!
+    var postRemovalHandler: ((atIndex: Int) -> Void)!
     private lazy var postService = PostService()
     private var presenter: UIViewController!
 
     func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         presenter = controller
 
-        let reachabilityService =  ReachabilityService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -58,7 +57,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         let registerAction = UIAlertAction(title: "Register", style: .Default) { [weak self] _ in
-            self?.completionAuthorizeUser()
+            self?.userAuthorizationHandler()
         }
         
         alertController.addAction(cancelAction)
@@ -77,7 +76,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 
                 this.postService.removePost(post) { succeeded, error in
                     if succeeded {
-                        this.completionRemovePost(atIndex: index)
+                        this.postRemovalHandler(atIndex: index)
                     } else if let error = error?.localizedDescription {
                         log.debug(error)
                     }

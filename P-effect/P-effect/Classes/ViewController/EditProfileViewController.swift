@@ -94,7 +94,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -165,8 +165,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     
     dynamic private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        let reachabilityService: ReachabilityService = locator.getService()
-        if reachabilityService.isReachable() {
+        if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 
@@ -183,8 +182,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     private func logout() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -277,7 +275,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInViewController(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     @IBAction private func logoutAction() {

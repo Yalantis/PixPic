@@ -10,9 +10,9 @@ import Foundation
 
 class ReachabilityService {
     
-    private let reachability = try? Reachability.reachabilityForInternetConnection()
+    private static let reachability = try? Reachability.reachabilityForInternetConnection()
     
-    func isReachable() -> Bool {
+    static func isReachable() -> Bool {
         return reachability?.isReachable() == true
     }
     

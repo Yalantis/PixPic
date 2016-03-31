@@ -96,8 +96,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     }
     
     private func logout() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
