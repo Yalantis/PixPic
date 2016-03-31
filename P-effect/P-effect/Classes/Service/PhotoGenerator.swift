@@ -25,9 +25,9 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
-    var completionImageReceived: (UIImage -> Void)?
+    var didSelectPhoto: (UIImage -> Void)?
     
-    func showInViewController(controller: UIViewController) {
+    func showListOfOptions(inViewController controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
@@ -70,7 +70,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
-            showWarningAboutAbsenceCamera()
+            handleNoCamera()
         }
     }
     
@@ -81,7 +81,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func showWarningAboutAbsenceCamera() {
+    private func handleNoCamera() {
         let alertViewController = UIAlertController(
             title: "No Camera",
             message: "Sorry, this device has no camera",
@@ -165,7 +165,7 @@ extension PhotoGenerator: UIImagePickerControllerDelegate {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             controller.dismissViewControllerAnimated(true, completion: nil)
-            completionImageReceived?(selectedImage)
+            didSelectPhoto?(selectedImage)
         }
     }
     

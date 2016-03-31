@@ -12,7 +12,6 @@ typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError
 
 class StickersLoaderService {
     
-    private lazy var reachabilityService = ReachabilityService()
     private var isQueryFromLocalDataStoure = false
     
     func loadStickers(completion: LoadingStickersCompletion) {
@@ -127,7 +126,7 @@ class StickersLoaderService {
         let queryFromLocal = StickersVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
         
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             completion(false)
             
             return

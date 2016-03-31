@@ -12,7 +12,7 @@ private let animationDuration = 0.3
 
 class StickersPickerAdapter: NSObject {
     
-    private var currentGroupNumber: Int?
+    private var currentGroupIndex: Int?
     private var stickersGroups: [StickersModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
@@ -26,11 +26,11 @@ class StickersPickerAdapter: NSObject {
     }
     
     func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
-        guard let currentGroupNumber = currentGroupNumber, let stickersGroups = stickersGroups else {
+        guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersGroups else {
             return
         }
         let image = stickersGroups[currentGroupNumber].stickers[indexPath.row].image
-        ImageLoaderService.getImageForContentItem(image) { image, error in
+        ImageLoaderHelper.getImageForContentItem(image) { image, error in
             if let error = error {
                 completion(nil, error)
                 
@@ -85,13 +85,19 @@ class StickersPickerAdapter: NSObject {
 extension StickersPickerAdapter: UICollectionViewDataSource {
 
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        let isGroupSelected = currentGroupNumber != nil
-        let stickersGroupsQuantity = stickersGroups?.count ?? 0
-        return isGroupSelected ? 1 : stickersGroupsQuantity
+        let numberOfSections: Int
+        let isGroupSelected = currentGroupIndex != nil
+        if isGroupSelected {
+            numberOfSections = 1
+        } else {
+            numberOfSections = stickersGroups?.count ?? 0
+        }
+        
+        return numberOfSections
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let currentGroupNumber = currentGroupNumber {
+        if let currentGroupNumber = currentGroupIndex {
             return stickersGroups![currentGroupNumber].stickers.count
         } else {
             return 0
@@ -105,7 +111,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
             ) as! StickerViewCell
         
         if let stickersGroups = stickersGroups {
-            let sticker = stickersGroups[currentGroupNumber ?? 0].stickers[indexPath.row]
+            let sticker = stickersGroups[currentGroupIndex ?? 0].stickers[indexPath.row]
             cell.setStickerContent(sticker)
         }
         
@@ -125,16 +131,16 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
             guard let stickersGroups = stickersGroups else {
                 return reusableview
             }
-            let group = stickersGroups[currentGroupNumber ?? indexPath.section]
+            let group = stickersGroups[currentGroupIndex ?? indexPath.section]
             
             headerView.configureWith(group: group.stickersGroup) {
                 self.currentHeader = headerView
                 collectionView.bringSubviewToFront(self.currentHeader!)
                 
-                if self.currentGroupNumber == nil {
+                if self.currentGroupIndex == nil {
                     self.currentContentOffset = collectionView.contentOffset
                     collectionView.performBatchUpdates({
-                        self.currentGroupNumber = indexPath.section
+                        self.currentGroupIndex = indexPath.section
                         
                         collectionView.deleteSections(self.calculateOtherSectionsIndexPath(section: indexPath.section))
                         collectionView.insertItemsAtIndexPaths(self.calculateCellsIndexPath(section: indexPath.section, count: collectionView.numberOfItemsInSection(indexPath.section)))
@@ -144,9 +150,9 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
                     
                     return true
                 } else {
-                    let lastGroupNumber = self.currentGroupNumber!
+                    let lastGroupNumber = self.currentGroupIndex!
                     collectionView.performBatchUpdates({
-                        self.currentGroupNumber = nil
+                        self.currentGroupIndex = nil
                         
                         collectionView.deleteItemsAtIndexPaths(self.calculateCellsIndexPath(section: lastGroupNumber))
                         collectionView.insertSections(self.calculateOtherSectionsIndexPath(section: lastGroupNumber))

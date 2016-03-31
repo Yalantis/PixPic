@@ -103,7 +103,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -114,7 +114,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -178,8 +178,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     dynamic private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        let reachabilityService: ReachabilityService = locator.getService()
-        if reachabilityService.isReachable() {
+        if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 
@@ -196,8 +195,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     }
     
     private func logout() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -291,7 +289,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInViewController(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     @IBAction private func logoutAction() {

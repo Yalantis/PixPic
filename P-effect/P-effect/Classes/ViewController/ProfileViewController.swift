@@ -170,7 +170,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         guard let avatar = user.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
+        
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -205,8 +206,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 return
             }
             
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
+            guard ReachabilityHelper.isReachable() else {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
@@ -353,8 +353,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -405,12 +404,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+        settingsMenu.locator = locator
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
-        settingsMenu.completionAuthorizeUser = { [weak self] in
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        settingsMenu.completionRemovePost = { [weak self] index in
+        settingsMenu.postRemovalHandler = { [weak self] index in
             guard let this = self else {
                 return
             }

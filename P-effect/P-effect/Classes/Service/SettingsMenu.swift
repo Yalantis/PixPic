@@ -20,16 +20,15 @@ private let registerActionTitle = "Register"
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
-    var completionAuthorizeUser: (() -> Void)!
-    var completionRemovePost: ((atIndex: Int) -> Void)!
-    private lazy var postService = PostService()
+    var locator: ServiceLocator!
+    var userAuthorizationHandler: (() -> Void)!
+    var postRemovalHandler: ((atIndex: Int) -> Void)!
     private var presenter: UIViewController!
 
     func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         presenter = controller
 
-        let reachabilityService =  ReachabilityService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -84,7 +83,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             title: registerActionTitle,
             style: .Default
             ) { [weak self] _ in
-                self?.completionAuthorizeUser()
+                self?.userAuthorizationHandler()
         }
         
         alertController.addAction(cancelAction)
@@ -101,9 +100,10 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                     return
                 }
                 
-                this.postService.removePost(post) { succeeded, error in
+                let postService: PostService = this.locator.getService()
+                postService.removePost(post) { succeeded, error in
                     if succeeded {
-                        this.completionRemovePost(atIndex: index)
+                        this.postRemovalHandler(atIndex: index)
                     } else if let error = error?.localizedDescription {
                         log.debug(error)
                     }
@@ -119,8 +119,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             handler: nil)
         complaintMenu.addAction(cancelAction)
         
-        let complaintService = ComplaintService()
-        
+        let complaintService: ComplaintService = locator.getService()
         let complaintUsernameAction = UIAlertAction(
             title: ComplaintReason.Username.rawValue,
             style: .Default
