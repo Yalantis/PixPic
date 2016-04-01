@@ -85,7 +85,7 @@ class PostService {
             let followersQuery = PFQuery(className: Activity.parseClassName())
             followersQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
             followersQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
-            followersQuery.includeKey("toUser")
+            followersQuery.includeKey(Constants.ActivityKey.ToUser)
             
             var arrayOfFollowers: [User] = [User.currentUser()!]
             followersQuery.findObjectsInBackgroundWithBlock { [weak self] activities, error in
