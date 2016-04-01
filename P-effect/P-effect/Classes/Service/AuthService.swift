@@ -71,7 +71,7 @@ class AuthService {
         )
         fbRequest.startWithCompletionHandler { _, result, error in
             if error == nil && result != nil {
-                guard let facebookInfo = result as? [String:AnyObject],
+                guard let facebookInfo = result as? [String: AnyObject],
                     picture = facebookInfo["picture"],
                     data = picture.valueForKey("data"),
                     url = data.valueForKey("url") as? String else {

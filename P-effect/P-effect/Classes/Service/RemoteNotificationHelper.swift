@@ -19,7 +19,7 @@ final class RemoteNotificationHelper {
     
     static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject? {
         guard let type = userInfo?["t"] as? String,
-            aps = userInfo?["aps"] as? [String:AnyObject],
+            aps = userInfo?["aps"] as? [String: AnyObject],
             message = aps["alert"] as? String else {
                 return nil
         }

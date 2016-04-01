@@ -44,7 +44,7 @@ final class AttributesCache {
             Constants.Attributes.Following: following,
             Constants.Attributes.FollowingCount: following.count
         ]
-        setAttributes(attributes as! [String : AnyObject], forUser: user)
+        setAttributes(attributes as! [String: AnyObject], forUser: user)
     }
     
     func setAttributesForUser(user: User, followersCount: Int, followingCount: Int) {
@@ -55,10 +55,10 @@ final class AttributesCache {
         setAttributes(attributes, forUser: user)
     }
     
-    func attributesForPost(post: Post) -> [String:AnyObject]? {
+    func attributesForPost(post: Post) -> [String: AnyObject]? {
         let key = keyForPost(post)
         
-        return cache.objectForKey(key) as? [String:AnyObject]
+        return cache.objectForKey(key) as? [String: AnyObject]
     }
     
     func likeCountForPost(post: Post) -> Int {
@@ -131,10 +131,10 @@ final class AttributesCache {
         setAttributes(attributes as! [String : AnyObject], forUser: user)
     }
     
-    func attributesForUser(user: User) -> [String:AnyObject]? {
+    func attributesForUser(user: User) -> [String: AnyObject]? {
         let key = keyForUser(user)
         
-        return cache.objectForKey(key) as? [String:AnyObject]
+        return cache.objectForKey(key) as? [String: AnyObject]
     }
     
     func postCountForUser(user: User) -> Int {
@@ -171,12 +171,12 @@ final class AttributesCache {
     }
     
     // MARK: - Private methods
-    private func setAttributes(attributes: [String:AnyObject], forPost post: Post) {
+    private func setAttributes(attributes: [String: AnyObject], forPost post: Post) {
         let key = keyForPost(post)
         cache.setObject(attributes, forKey: key)
     }
     
-    private func setAttributes(attributes: [String:AnyObject], forUser user: User) {
+    private func setAttributes(attributes: [String: AnyObject], forUser user: User) {
         let key = keyForUser(user)
         cache.setObject(attributes, forKey: key)
     }
