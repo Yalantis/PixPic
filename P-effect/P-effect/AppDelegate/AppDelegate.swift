@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func sutupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
-        let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
+        let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
         let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
         if oldPushHandlerOnly || noPushPayload != nil {
             PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)

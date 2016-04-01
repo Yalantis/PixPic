@@ -13,7 +13,7 @@ import MHPrettyDate
 private let headerViewHeight: CGFloat = 78
 private let footerViewHeight: CGFloat = 48
 
-private let actionByTapProfile = Selector("didTapProfile:")
+private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
 class PostViewCell: UITableViewCell, CellInterface {
     

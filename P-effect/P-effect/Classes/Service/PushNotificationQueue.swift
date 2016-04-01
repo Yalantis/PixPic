@@ -16,7 +16,7 @@ class PushNotificationQueue: NSObject {
         NSTimer.scheduledTimerWithTimeInterval(
             2,
             target: PushNotificationQueue.self,
-            selector: "showNotificationFromQueue",
+            selector: #selector(showNotificationFromQueue),
             userInfo: nil,
             repeats: false
         )
