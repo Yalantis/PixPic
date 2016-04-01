@@ -10,25 +10,25 @@ import UIKit
 import AVFoundation
 
 enum ListOfOptions: String {
-    case takePhoto = "Take photo"
-    case selectFromLibrary = "Choose photo from library"
-    case cancel = "Cancel"
+    case TakePhoto = "Take photo"
+    case SelectFromLibrary = "Choose photo from library"
+    case Cancel = "Cancel"
 }
 
 enum HandleNoCamera: String {
-    case title = "No Camera"
-    case message = "Sorry, this device has no camera"
-    case okActionTitle = "OK"
+    case Title = "No Camera"
+    case Message = "Sorry, this device has no camera"
+    case OkActionTitle = "OK"
 }
 
 enum CameraAccess: String {
-    case importantTitle = "IMPORTANT"
-    case askForCameraAccessMessage = "Camera access required"
-    case allowCameraActionTitle = "Allow Camera"
-    case cancelActionTitle = "Cancel"
+    case ImportantTitle = "IMPORTANT"
+    case AskForCameraAccessMessage = "Camera access required"
+    case AllowCameraActionTitle = "Allow Camera"
+    case CancelActionTitle = "Cancel"
     
-    case allowCameraMessage = "Please allow camera access"
-    case dismissActionTitle = "Dismiss"
+    case AllowCameraMessage = "Please allow camera access"
+    case DismissActionTitle = "Dismiss"
 }
 
 class PhotoGenerator: NSObject, UINavigationControllerDelegate {
@@ -47,21 +47,21 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             preferredStyle: .ActionSheet
         )
         let takePhotoAction = UIAlertAction(
-            title: ListOfOptions.takePhoto.rawValue,
+            title: ListOfOptions.TakePhoto.rawValue,
             style: .Default
             ) { _ in
                 self.takePhoto()
                 PushNotificationQueue.handleNotificationQueue()
         }
         let selectFromLibraryAction = UIAlertAction(
-            title: ListOfOptions.selectFromLibrary.rawValue,
+            title: ListOfOptions.SelectFromLibrary.rawValue,
             style: .Default
             ) { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
         }
         let cancelAction = UIAlertAction(
-            title: ListOfOptions.cancel.rawValue,
+            title: ListOfOptions.Cancel.rawValue,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
@@ -93,12 +93,12 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private func handleNoCamera() {
         let alertViewController = UIAlertController(
-            title: HandleNoCamera.title.rawValue,
-            message: HandleNoCamera.message.rawValue,
+            title: HandleNoCamera.Title.rawValue,
+            message: HandleNoCamera.Message.rawValue,
             preferredStyle: .Alert
         )
         let okAction = UIAlertAction(
-            title: HandleNoCamera.okActionTitle.rawValue,
+            title: HandleNoCamera.OkActionTitle.rawValue,
             style:.Default,
             handler: nil
         )
@@ -128,32 +128,34 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private func askForCameraAccessViaSettings() {
         let alert = UIAlertController(
-            title: CameraAccess.importantTitle.rawValue,
-            message: CameraAccess.askForCameraAccessMessage.rawValue,
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AskForCameraAccessMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: CameraAccess.cancelActionTitle.rawValue,
+        let cancelAction = UIAlertAction(
+            title: CameraAccess.CancelActionTitle.rawValue,
             style: .Default,
-            handler: nil)
+            handler: nil
         )
-        alert.addAction(UIAlertAction(
-            title: CameraAccess.allowCameraActionTitle.rawValue,
+        let allowCameraAction = UIAlertAction(
+            title: CameraAccess.AllowCameraActionTitle.rawValue,
             style: .Cancel
             ) { _ in
                 UIApplication.redirectToAppSettings()
-        })
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(allowCameraAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
     private func presentCameraAccessDialog() {
         let alert = UIAlertController(
-            title: CameraAccess.importantTitle.rawValue,
-            message: CameraAccess.allowCameraMessage.rawValue,
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AllowCameraMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: CameraAccess.dismissActionTitle.rawValue,
+        let dismissAction = UIAlertAction(
+            title: CameraAccess.DismissActionTitle.rawValue,
             style: .Cancel
             ) { _ in
                 if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
@@ -163,8 +165,8 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
                         }
                     }
                 }
-            }
-        )
+        }
+        alert.addAction(dismissAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     

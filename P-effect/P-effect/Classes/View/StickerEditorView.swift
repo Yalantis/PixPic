@@ -98,14 +98,14 @@ class StickerEditorView: UIView {
         }
     }
     
-    dynamic private func singleTap(recognizer: UIPanGestureRecognizer) {
+    @objc private func singleTap(recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
         if let close = close {
             close.superview?.removeFromSuperview()
         }
     }
     
-    dynamic private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
+    @objc private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
         if recognizer.state == .Began {
             enableTranslucency(true)
             previousPoint = recognizer.locationInView(self)

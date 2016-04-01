@@ -156,7 +156,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
     // MARK: - Notification handling
-    dynamic func fetchDataFromNotification() {
+    @objc func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             guard let this = self else {

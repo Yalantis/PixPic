@@ -9,15 +9,15 @@
 import UIKit
 import Toast
 
-private let saveChangesWithoutConnectionMessage =  "Internet connection is required to save changes in profile"
-private let logoutMessage =                        "This will logout you. And you will not be able to share your amazing photos..("
-private let backWithChangesMessage =               "If you go back now, your changes will be discarded"
-private let logoutWithoutConnectionAttempt =       "Internet connection is required to logout"
-private let backWithChangesTitle =                 "Save changes"
-private let saveActionTitle =                      "Save"
-private let logoutActionTitle =                    "Logout me!"
-private let cancelActionTitle =                    "Cancel"
-private let okActionTitle =                        "Ok"
+private let saveChangesWithoutConnectionMessage = "Internet connection is required to save changes in profile"
+private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
+private let backWithChangesMessage = "If you go back now, your changes will be discarded"
+private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
+private let backWithChangesTitle = "Save changes"
+private let saveActionTitle = "Save"
+private let logoutActionTitle = "Logout me!"
+private let cancelActionTitle = "Cancel"
+private let okActionTitle = "Ok"
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
@@ -145,7 +145,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    dynamic private func handleBackButtonTap() {
+    @objc private func handleBackButtonTap() {
         if someChangesMade {
             let alertController = UIAlertController(
                 title: backWithChangesTitle,
@@ -176,7 +176,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
     }
     
-    dynamic private func saveChangesAction() {
+    @objc private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
         if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
@@ -213,7 +213,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         )
     }
     
-    dynamic private func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 if kbHeight == 0 {
@@ -225,7 +225,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
     }
     
-    dynamic private func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         animateTextField(false)
         kbHidden = true
         kbHeight = 0
@@ -244,7 +244,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         )
     }
     
-    dynamic private func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
         kbHidden = true
     }

@@ -93,7 +93,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         )
     }
     
-    dynamic private func updateData() {
+    @objc private func updateData() {
         setupAdapter()
     }
 }

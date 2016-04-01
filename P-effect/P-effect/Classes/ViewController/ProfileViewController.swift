@@ -369,7 +369,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         router.showEditProfile()
     }
 
-    dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+    @objc private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
@@ -383,7 +383,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
-    dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+    @objc private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }

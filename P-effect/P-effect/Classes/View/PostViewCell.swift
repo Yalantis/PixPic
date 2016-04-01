@@ -84,7 +84,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
     
-    dynamic private func didTapProfile(recognizer: UIGestureRecognizer) {
+    @objc private func didTapProfile(recognizer: UIGestureRecognizer) {
         didSelectUser?(cell: self)
     }
     

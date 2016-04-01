@@ -26,7 +26,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         addGestureRecognizer(recognizer)
     }
         
-    dynamic private func toggleGroup() {
+    @objc private func toggleGroup() {
         let isSelected = completion()
         let color = isSelected ? UIColor.appBlueColor : UIColor.appWhiteColor
         UIView.animateWithDuration(
