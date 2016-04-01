@@ -91,12 +91,9 @@ class PostService {
             followersQuery.findObjectsInBackgroundWithBlock { [weak self] activities, error in
                 if let error = error {
                     log.debug(error.localizedDescription)
-                } else if let activities = (activities as? [Activity]) {
-                    for activity in activities {
-                        if let followerUser = activity.objectForKey(Constants.ActivityKey.ToUser) as? User {
-                            arrayOfFollowers.append(followerUser)
-                        }
-                    }
+                } else if let activities = activities as? [Activity] {
+                    let friends = activities.flatMap { $0[Constants.ActivityKey.ToUser] as? User }
+                    arrayOfFollowers.appendContentsOf(friends)
                 }
                 query.whereKey("user", containedIn: arrayOfFollowers)
                 self?.fetchPosts(query, completion: completion)
