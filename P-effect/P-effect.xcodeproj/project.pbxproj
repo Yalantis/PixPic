@@ -24,10 +24,6 @@
 		499DD0531C579F1300DABCD5 /* StickersPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* StickersPickerAdapter.swift */; };
 		499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Feed.storyboard */; };
 		499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */; };
-		49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */; };
-		49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415721C4A7AA600143E78 /* Silverfake.otf */; };
-		49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415701C4A791600143E78 /* Scratch Basic.otf */; };
-		49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */ = {isa = PBXBuildFile; fileRef = 49F415711C4A791600143E78 /* Scratch Detail.otf */; };
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
 		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
@@ -153,10 +149,6 @@
 		499DD0521C579F1300DABCD5 /* StickersPickerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersPickerAdapter.swift; sourceTree = "<group>"; };
 		499DD0541C57D2D300DABCD5 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
-		49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ribbon_V2_2011.otf; sourceTree = "<group>"; };
-		49F415701C4A791600143E78 /* Scratch Basic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Basic.otf"; sourceTree = "<group>"; };
-		49F415711C4A791600143E78 /* Scratch Detail.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Scratch Detail.otf"; sourceTree = "<group>"; };
-		49F415721C4A7AA600143E78 /* Silverfake.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silverfake.otf; sourceTree = "<group>"; };
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
 		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
@@ -296,17 +288,6 @@
 				BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		49F4156D1C4A591500143E78 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				49F415721C4A7AA600143E78 /* Silverfake.otf */,
-				49F415701C4A791600143E78 /* Scratch Basic.otf */,
-				49F415711C4A791600143E78 /* Scratch Detail.otf */,
-				49F4156E1C4A591500143E78 /* Ribbon_V2_2011.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		49FE57C31C4E63E500C4B30F /* View */ = {
@@ -552,7 +533,6 @@
 		FDAF46AA1C49369E008060CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				49F4156D1C4A591500143E78 /* Fonts */,
 				FDAF46AE1C4936CA008060CD /* Images */,
 				FDAF46AF1C4936CA008060CD /* Storyboards */,
 				FD6C17BC1C49506100A01715 /* Constants.swift */,
@@ -702,12 +682,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */,
-				49F415731C4A7AD200143E78 /* Silverfake.otf in Resources */,
-				49F415741C4A7AD200143E78 /* Scratch Basic.otf in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
 				775635991C9185920069EA4F /* ButtonView.xib in Resources */,
-				49F415751C4A7AD200143E78 /* Scratch Detail.otf in Resources */,
 				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
@@ -716,7 +693,6 @@
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
-				49F4156F1C4A591500143E78 /* Ribbon_V2_2011.otf in Resources */,
 				7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */,
 				771CD2321C6BB10F00383B41 /* StickersGroupHeaderView.xib in Resources */,
 			);

@@ -84,9 +84,9 @@ class StickerEditorView: UIView {
         
         contentView.frame = CGRectInset(bounds,
             Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize / 2,
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
             Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize / 2)
+                Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
         
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
@@ -98,14 +98,14 @@ class StickerEditorView: UIView {
         }
     }
     
-    dynamic private func singleTap(recognizer: UIPanGestureRecognizer) {
+    @objc private func singleTap(recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
         if let close = close {
             close.superview?.removeFromSuperview()
         }
     }
     
-    dynamic private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
+    @objc private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
         if recognizer.state == .Began {
             enableTranslucency(true)
             previousPoint = recognizer.locationInView(self)

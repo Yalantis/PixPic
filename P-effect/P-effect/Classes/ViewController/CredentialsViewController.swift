@@ -17,12 +17,14 @@ final class CredentialsViewController: UIViewController, StoryboardInitable, Nav
     var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = title
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }

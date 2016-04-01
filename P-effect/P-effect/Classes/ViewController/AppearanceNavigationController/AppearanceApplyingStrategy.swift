@@ -20,6 +20,8 @@ class AppearanceApplyingStrategy {
                 appearance.navigationBar.backIndicatorTransitionMaskImage
             navigationBar.tintColor = appearance.navigationBar.tintColor
             navigationBar.topItem!.title = appearance.navigationBar.topItemTitle
+            
+            navigationItem?.title = appearance.title
         }
     }
     

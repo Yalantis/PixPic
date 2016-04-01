@@ -9,11 +9,17 @@
 import UIKit
 import Toast
 
+private let saveChangesWithoutConnectionMessage = "Internet connection is required to save changes in profile"
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
 private let backWithChangesMessage = "If you go back now, your changes will be discarded"
 private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
+private let backWithChangesTitle = "Save changes"
+private let saveActionTitle = "Save"
+private let logoutActionTitle = "Logout me!"
+private let cancelActionTitle = "Cancel"
+private let okActionTitle = "Ok"
 
-final class EditProfileViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -35,7 +41,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-    
+   
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,6 +74,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -75,6 +83,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         self.router = router
     }
     
+    // MARK: - Private methods
     private func subscribeOnNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -119,10 +128,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     }
     
     private func makeNavigation() {
-        navigationItem.title = "Edit profile"
-        
         let rightButton = UIBarButtonItem(
-            title: "Save",
+            title: saveActionTitle,
             style: .Plain,
             target: self,
             action: "saveChangesAction"
@@ -138,22 +145,28 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    dynamic private func handleBackButtonTap() {
+    @objc private func handleBackButtonTap() {
         if someChangesMade {
             let alertController = UIAlertController(
-                title: "Save changes",
+                title: backWithChangesTitle,
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let noAction = UIAlertAction(title: "Ok", style: .Cancel) { [weak self] action in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-                self?.navigationController!.popViewControllerAnimated(true)
+            let noAction = UIAlertAction(
+                title: okActionTitle,
+                style: .Cancel
+                ) { [weak self] action in
+                    PushNotificationQueue.handleNotificationQueue()
+                    alertController.dismissViewControllerAnimated(true, completion: nil)
+                    self?.navigationController!.popViewControllerAnimated(true)
             }
             alertController.addAction(noAction)
             
-            let yesAction = UIAlertAction(title: "Save", style: .Default) { [weak self] action in
-                self?.saveChangesAction()
-                PushNotificationQueue.handleNotificationQueue()
+            let yesAction = UIAlertAction(
+                title: saveActionTitle,
+                style: .Default
+                ) { [weak self] action in
+                    self?.saveChangesAction()
+                    PushNotificationQueue.handleNotificationQueue()
             }
             alertController.addAction(yesAction)
             
@@ -163,7 +176,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         }
     }
     
-    dynamic private func saveChangesAction() {
+    @objc private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
         if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
@@ -177,7 +190,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
                 }
             }
         } else {
-            AlertManager.sharedInstance.showSimpleAlert("Internet connection is required to save changes in profile")
+            AlertManager.sharedInstance.showSimpleAlert(saveChangesWithoutConnectionMessage)
         }
     }
     
@@ -194,13 +207,13 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
                 self.router.showFeed()
             }, failure: { error in
                 if let error = error {
-                    handleError(error)
+                    ErrorHandler.handle(error)
                 }
             }
         )
     }
     
-    dynamic private func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 if kbHeight == 0 {
@@ -212,7 +225,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         }
     }
     
-    dynamic private func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         animateTextField(false)
         kbHidden = true
         kbHeight = 0
@@ -231,7 +244,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         )
     }
     
-    dynamic private func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
         kbHidden = true
     }
@@ -274,6 +287,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         navigationController!.popToRootViewControllerAnimated(true)
     }
     
+    // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
         photoGenerator.showListOfOptions(inViewController: self)
     }
@@ -286,7 +300,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         )
         
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
@@ -295,7 +309,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
         alertController.addAction(cancelAction)
         
         let okAction = UIAlertAction(
-            title: "Logout me!",
+            title: logoutActionTitle,
             style: .Default
             ) { _ in
                 self.logout()
@@ -315,6 +329,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable, Nav
     
 }
 
+// MARK: - UITextFieldDelegate methods
 extension EditProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -322,4 +337,15 @@ extension EditProfileViewController: UITextFieldDelegate {
         
         return false
     }
+}
+
+// MARK: - NavigationControllerAppearanceContext methods
+extension EditProfileViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = Constants.EditProfile.NavigationTitle
+        return appearance
+    }
+    
 }

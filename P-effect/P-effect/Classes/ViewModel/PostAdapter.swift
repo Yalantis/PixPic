@@ -102,5 +102,3 @@ extension PostAdapter: UITableViewDataSource {
     }
     
 }
-
-

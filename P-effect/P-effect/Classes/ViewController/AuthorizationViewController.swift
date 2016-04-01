@@ -17,12 +17,14 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     private weak var locator: ServiceLocator!
     
+    // MARK: - Lifecycle
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         AlertManager.sharedInstance.registerAlertListener(router)
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
@@ -31,21 +33,17 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
         self.router = router
     }
     
-    @IBAction private func logInWithFBButtonTapped() {
-        view.makeToastActivity(CSToastPositionCenter)
-        signInWithFacebook()
-    }
-
+    // MARK: - Private methods
     private func signInWithFacebook() {
         let authService: AuthService = locator.getService()
         authService.signInWithFacebookInController(self) { [weak self] _, error in
             if let error = error {
-                handleError(error)
+                ErrorHandler.handle(error)
                 self?.proceedWithoutAuthorization()
             } else {
                 authService.signInWithPermission { _, error -> Void in
                     if let error = error {
-                        handleError(error)
+                        ErrorHandler.handle(error)
                     } else {
                         PFInstallation.addPFUserToCurrentInstallation()
                     }
@@ -63,6 +61,12 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
             
             return
         }
+    }
+    
+    // MARK: - IBAction
+    @IBAction private func logInWithFBButtonTapped() {
+        view.makeToastActivity(CSToastPositionCenter)
+        signInWithFacebook()
     }
     
 }

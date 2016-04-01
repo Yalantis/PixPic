@@ -45,6 +45,7 @@ class ActivityViewController: UIActivityViewController {
     
 }
 
+// MARK: - UIActivityItemSource methods
 extension ActivityViewController: UIActivityItemSource {
     
     func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {

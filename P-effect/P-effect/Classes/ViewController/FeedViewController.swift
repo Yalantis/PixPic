@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
+ 
+private let titleForEmptyData = "No data is currently available"
+private let descriptionForEmptyData = "Please pull down to refresh"
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
@@ -97,7 +100,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.nib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
     }
     
     private func setupObserver() {
@@ -105,6 +108,13 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             self,
             selector: "fetchDataFromNotification",
             name: Constants.NotificationName.NewPostUploaded,
+            object: nil
+        )
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "fetchDataFromNotification",
+            name: Constants.NotificationName.FollowersListUpdated,
             object: nil
         )
     }
@@ -146,7 +156,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
     // MARK: - Notification handling
-    dynamic func fetchDataFromNotification() {
+    @objc func fetchDataFromNotification() {
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             guard let this = self else {
@@ -169,6 +179,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
     }
     
+    // MARK: - IBActions
     @IBAction private func profileButtonTapped(sender: AnyObject) {
         let currentUser = User.currentUser()
         
@@ -229,7 +240,8 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     }
     
 }
-
+ 
+// MARK: - UITableViewDelegate methods
 extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -242,6 +254,7 @@ extension FeedViewController: UITableViewDelegate {
     
 }
 
+// MARK: - PostAdapterDelegate methods
 extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
@@ -277,7 +290,8 @@ extension FeedViewController: PostAdapterDelegate {
     }
 
 }
-
+ 
+// MARK: - DZNEmptyDataSetDelegate methods
 extension FeedViewController: DZNEmptyDataSetDelegate {
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
@@ -285,21 +299,18 @@ extension FeedViewController: DZNEmptyDataSetDelegate {
     }
     
 }
-
+ 
+// MARK: - DZNEmptyDataSetSource methods
 extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "No data is currently available"
-        
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
             NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let text = "Please pull down to refresh"
-        
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineBreakMode = .ByWordWrapping
         paragraph.alignment = .Center
@@ -308,15 +319,18 @@ extension FeedViewController: DZNEmptyDataSetSource {
             NSForegroundColorAttributeName: UIColor.lightGrayColor(),
             NSParagraphStyleAttributeName: paragraph]
         
-        return NSAttributedString(string: text, attributes: attributes)
+        return NSAttributedString(string: descriptionForEmptyData, attributes: attributes)
     }
     
 }
- 
+
+// MARK: - NavigationControllerAppearanceContext methods
 extension FeedViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        return Appearance()
+        var appearance = Appearance()
+        appearance.title = Constants.Feed.NavigationTitle
+        return appearance
     }
 
 }

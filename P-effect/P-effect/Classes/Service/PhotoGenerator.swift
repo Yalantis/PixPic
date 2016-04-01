@@ -9,9 +9,27 @@
 import UIKit
 import AVFoundation
 
-private let takePhotoActionTitle = "Take photo"
-private let selectFromLibraryActionTitle = "Choose photo from library"
-private let cancelActionTitle = "Cancel"
+enum ListOfOptions: String {
+    case TakePhoto = "Take photo"
+    case SelectFromLibrary = "Choose photo from library"
+    case Cancel = "Cancel"
+}
+
+enum HandleNoCamera: String {
+    case Title = "No Camera"
+    case Message = "Sorry, this device has no camera"
+    case OkActionTitle = "OK"
+}
+
+enum CameraAccess: String {
+    case ImportantTitle = "IMPORTANT"
+    case AskForCameraAccessMessage = "Camera access required"
+    case AllowCameraActionTitle = "Allow Camera"
+    case CancelActionTitle = "Cancel"
+    
+    case AllowCameraMessage = "Please allow camera access"
+    case DismissActionTitle = "Dismiss"
+}
 
 class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
@@ -29,28 +47,25 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             preferredStyle: .ActionSheet
         )
         let takePhotoAction = UIAlertAction(
-            title: takePhotoActionTitle,
-            style: .Default,
-            handler: { _ in
+            title: ListOfOptions.TakePhoto.rawValue,
+            style: .Default
+            ) { _ in
                 self.takePhoto()
                 PushNotificationQueue.handleNotificationQueue()
-            }
-        )
+        }
         let selectFromLibraryAction = UIAlertAction(
-            title: selectFromLibraryActionTitle,
-            style: .Default,
-            handler: { _ in
+            title: ListOfOptions.SelectFromLibrary.rawValue,
+            style: .Default
+            ) { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
-            }
-        )
+        }
         let cancelAction = UIAlertAction(
-            title: cancelActionTitle,
-            style: .Cancel,
-            handler: { _ in
+            title: ListOfOptions.Cancel.rawValue,
+            style: .Cancel
+            ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
-            }
-        )
+        }
         actionSheetViewController.addAction(selectFromLibraryAction)
         actionSheetViewController.addAction(takePhotoAction)
         actionSheetViewController.addAction(cancelAction)
@@ -78,12 +93,12 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private func handleNoCamera() {
         let alertViewController = UIAlertController(
-            title: "No Camera",
-            message: "Sorry, this device has no camera",
+            title: HandleNoCamera.Title.rawValue,
+            message: HandleNoCamera.Message.rawValue,
             preferredStyle: .Alert
         )
         let okAction = UIAlertAction(
-            title: "OK",
+            title: HandleNoCamera.OkActionTitle.rawValue,
             style:.Default,
             handler: nil
         )
@@ -113,42 +128,45 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private func askForCameraAccessViaSettings() {
         let alert = UIAlertController(
-            title: "IMPORTANT",
-            message: "Camera access required",
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AskForCameraAccessMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: "Cancel",
+        let cancelAction = UIAlertAction(
+            title: CameraAccess.CancelActionTitle.rawValue,
             style: .Default,
-            handler: nil)
+            handler: nil
         )
-        alert.addAction(UIAlertAction(
-            title: "Allow Camera",
-            style: .Cancel,
-            handler: { _ in
+        let allowCameraAction = UIAlertAction(
+            title: CameraAccess.AllowCameraActionTitle.rawValue,
+            style: .Cancel
+            ) { _ in
                 UIApplication.redirectToAppSettings()
-            }
-            )
-        )
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(allowCameraAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
     private func presentCameraAccessDialog() {
         let alert = UIAlertController(
-            title: "IMPORTANT",
-            message: "Please allow camera access",
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AllowCameraMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel) { _ in
-            if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.checkCamera()
+        let dismissAction = UIAlertAction(
+            title: CameraAccess.DismissActionTitle.rawValue,
+            style: .Cancel
+            ) { _ in
+                if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
+                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self?.checkCamera()
+                        }
                     }
                 }
-            }
-            }
-        )
+        }
+        alert.addAction(dismissAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     

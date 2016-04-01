@@ -16,6 +16,7 @@ struct Constants {
     
     struct NotificationName {
         static let NewPostUploaded = "NewPostUploaded"
+        static let FollowersListUpdated = "FollowersListUpdated"
     }
     
     struct BaseDimensions {
@@ -43,6 +44,7 @@ struct Constants {
     
     struct UserDefaultsKeys {
         static let RemoteNotifications = "RemoteNotifications"
+        static let FollowedPosts = "FollowedPosts"
     }
     
     struct UserKey {
@@ -62,10 +64,6 @@ struct Constants {
     
     struct DataSource {
         static let QueryLimit = 10 as Int
-    }
-    
-    struct BackButtonTitle {
-        static let HideTitlePosition = UIOffsetMake(0, -70)
     }
     
     struct ValidationErrors {
@@ -94,12 +92,13 @@ struct Constants {
         static let UserResizableViewGlobalInset: CGFloat =  5.0
         static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
         
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  10.0
+        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
         static let StickerViewControlSize: CGFloat =  36.0
     }
     
     struct EditProfile {
         static let EditProfileControllerIdentifier = "EditProfileViewController"
+        static let NavigationTitle = "Edit Profile"
     }
     
     struct Attributes {
@@ -120,6 +119,10 @@ struct Constants {
         static let ToUser = "toUser"
         static let Type = "type"
         static let Content = "content"
+    }
+    
+    struct Feed {
+        static let NavigationTitle = "P-effect"
     }
     
 }

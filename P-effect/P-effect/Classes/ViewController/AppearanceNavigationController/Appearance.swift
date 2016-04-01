@@ -22,6 +22,7 @@ struct Appearance: Equatable {
 
     }
     
+    var title = ""
     var statusBarStyle: UIStatusBarStyle = .LightContent
     var navigationBar = Bar()
     
@@ -39,5 +40,6 @@ func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
 
 func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     return lhs.statusBarStyle == rhs.statusBarStyle &&
-        lhs.navigationBar == rhs.navigationBar
+        lhs.navigationBar == rhs.navigationBar &&
+        lhs.title == rhs.title
 }

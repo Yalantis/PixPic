@@ -17,18 +17,21 @@ class ImageViewController: UIViewController {
     
     @IBOutlet private weak var rawImageView: UIImageView!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         rawImageView.image = model.originalImage()
     }
     
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
     
 }
 
+// MARK: - PhotoEditorDelegate methods
 extension ImageViewController: PhotoEditorDelegate {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseSticker: UIImage) {

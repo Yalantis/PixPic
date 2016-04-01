@@ -14,6 +14,7 @@ final class LaunchViewController: UIViewController, StoryboardInitable {
     
     private var router: protocol<AlertManagerDelegate, FeedPresenter>!
     
+    // MARK: - Setup methods
     func setRouter(router: LaunchRouter) {
         self.router = router
     }

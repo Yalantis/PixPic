@@ -9,7 +9,6 @@
 import Foundation
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let title = "Settings"
 
 enum SettingsState {
     
@@ -17,7 +16,7 @@ enum SettingsState {
     
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
@@ -28,8 +27,12 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
-    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts") { on in
-        //TODO: implement logic here
+    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts", initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
+        SettingsHelper.isShownOnlyFollowingUsersPosts = on
+        NSNotificationCenter.defaultCenter().postNotificationName(
+            Constants.NotificationName.NewPostUploaded,
+            object: nil
+        )
     }
     private lazy var logIn: UIView = ButtonView.instanceFromNib("Log In") {
         self.router.showAuthorization()
@@ -65,17 +68,19 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
     
     @IBOutlet private weak var settingsStack: UIStackView!
     
+    // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupAvailableSettings()
+    }
+    
+    // MARK: - Setup methods
     func setLocator(locator: ServiceLocator) {
         self.locator = locator
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.title = title
-        setupAvailableSettings()
-    }
-    
+    // MARK: - Private methods
     private func setupAvailableSettings() {
         settings[.Common] = [credentials, enableNotifications]
         for view in settings[.Common]! {
@@ -108,10 +113,22 @@ final class SettingsViewController: UIViewController, StoryboardInitable, Naviga
                 self.router.showFeed()
             }, failure: { error in
                 if let error = error {
-                    handleError(error)
+                    ErrorHandler.handle(error)
                 }
             }
         )
     }
     
 }
+
+// MARK: - NavigationControllerAppearanceContext methods
+extension SettingsViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = "Notification policies"
+        return appearance
+    }
+    
+}
+

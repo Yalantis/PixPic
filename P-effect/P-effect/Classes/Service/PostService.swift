@@ -83,6 +83,12 @@ class PostService {
         
         if let user = user {
             query.whereKey("user", equalTo: user)
+        } else if SettingsHelper.isShownOnlyFollowingUsersPosts && !User.notAuthorized {
+            let subQuery = PFQuery(className: Activity.parseClassName())
+            subQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+            subQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            
+            query.whereKey("user", matchesKey: Constants.ActivityKey.ToUser, inQuery: subQuery)
         }
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {

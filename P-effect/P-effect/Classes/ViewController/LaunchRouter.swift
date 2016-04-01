@@ -42,7 +42,7 @@ extension LaunchRouter: Router {
                 },
                 failure: { error in
                     if let error = error {
-                        handleError(error)
+                        ErrorHandler.handle(error)
                     }
             })
         } else {
