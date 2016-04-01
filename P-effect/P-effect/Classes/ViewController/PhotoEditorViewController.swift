@@ -153,7 +153,7 @@ extension PhotoEditorViewController {
         stickerPickerContainer.bounds.size = size
     }
     
-    private dynamic func performBackNavigation() {
+    @objc private func performBackNavigation() {
         let alertController = UIAlertController(
             title: "Results wasn't saved",
             message: "Do you want to save result to the photo library?",
@@ -189,7 +189,7 @@ extension PhotoEditorViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    private dynamic func saveImageToCameraRoll() {
+    @objc private func saveImageToCameraRoll() {
         guard let image = delegate?.imageForPhotoEditor(self, withStickers: true) else {
             ExceptionHandler.handle(Exception.CantApplyStickers)
             
@@ -264,7 +264,7 @@ extension PhotoEditorViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
 
-    private dynamic func removeAllStickers() {
+    @objc private func removeAllStickers() {
         delegate?.removeAllStickers(self)
     }
     
@@ -274,8 +274,7 @@ extension PhotoEditorViewController {
 extension PhotoEditorViewController {
     
     @IBAction private func postEditedImage() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             suggestSaveToCameraRoll()
             
             return

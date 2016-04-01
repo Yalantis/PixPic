@@ -23,32 +23,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var router = LaunchRouter()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        FBSDKApplicationDelegate.sharedInstance().application(
-            application,
-            didFinishLaunchingWithOptions: launchOptions
-        )
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         setupParse()
-
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
+
         Fabric.with([Crashlytics.self])
-        
+
         if application.applicationState != .Background {
-            let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
-            let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
-            if oldPushHandlerOnly || noPushPayload != nil {
-                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-            }
+            sutupParseAnalyticsWithLaunchOptions(launchOptions)
         }
-        SettingsHelper.setupDefaultValues()
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.makeKeyAndVisible()
-        
+        UIApplication.sharedApplication().statusBarStyle = .LightContent
+
         log.setup()
-        
-        router.execute(window!)
-        
+        SettingsHelper.setupDefaultValues()
+        setupRouter()
+                
         return true
     }
     
@@ -56,6 +45,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Parse.enableLocalDatastore()
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
+    }
+    
+    private func sutupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
+        let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
+        let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
+        if oldPushHandlerOnly || noPushPayload != nil {
+            PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        }
+    }
+    
+    private func setupRouter() {
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.makeKeyAndVisible()
+        router.execute(window!)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -78,10 +81,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         AlertManager.sharedInstance.handlePush(userInfo)
-        if !User.isAbsent {
-            completionHandler(.NewData)
-        } else {
+        if User.isAbsent {
             completionHandler(.NoData)
+        } else {
+            completionHandler(.NewData)
         }
     }
 

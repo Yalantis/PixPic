@@ -14,21 +14,13 @@ public enum UpdateType {
     
 }
 
-protocol PostAdapterDelegate: class {
+@objc protocol PostAdapterDelegate: class {
     
-    func showUserProfile(adapter: PostAdapter, user: User)
+    optional func showUserProfile(adapter: PostAdapter, user: User)
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter)
     func postAdapterRequestedViewUpdate(adapter: PostAdapter)
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject])
     
-}
-
-extension PostAdapterDelegate {
-    
-    func showUserProfile(adapter: PostAdapter, user: User) {
-        
-    }
-
 }
 
 class PostAdapter: NSObject {
@@ -91,7 +83,7 @@ extension PostAdapter: UITableViewDataSource {
             if let path = tableView.indexPathForCell(cell) {
                 let post = this.getPost(atIndexPath: path)
                 if let user = post.user {
-                    this.delegate?.showUserProfile(this, user: user)
+                    this.delegate?.showUserProfile?(this, user: user)
                 }
             }
         }

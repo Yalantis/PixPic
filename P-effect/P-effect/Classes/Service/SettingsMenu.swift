@@ -20,15 +20,15 @@ private let registerActionTitle = "Register"
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
-    private var controller: UIViewController!
-    var completionAuthorizeUser:(() -> Void)!
-    var completionRemovePost:((atIndex: Int) -> Void)!
-    
-    func showInView(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
-        self.controller = controller
+    var locator: ServiceLocator!
+    var userAuthorizationHandler: (() -> Void)!
+    var postRemovalHandler: ((atIndex: Int) -> Void)!
+    private var presenter: UIViewController!
 
-        let reachabilityService =  ReachabilityService()
-        guard reachabilityService.isReachable() else {
+    func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
+        presenter = controller
+
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -47,7 +47,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 title: shareActionTitle,
                 style: .Default
                 ) { [weak self] _ in
-                    self?.showActivityController(items)
+                    self?.showActivityController(withItems: items)
             }
             settingsMenu.addAction(shareAction)
             
@@ -83,27 +83,27 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             title: registerActionTitle,
             style: .Default
             ) { [weak self] _ in
-                self?.completionAuthorizeUser()
+                self?.userAuthorizationHandler()
         }
         
         alertController.addAction(cancelAction)
         alertController.addAction(registerAction)
         
-        controller.presentViewController(alertController, animated: true, completion: nil)
+        presenter.presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func removePost(post: Post, atIndex index: Int) {
         UIAlertController.showAlert(
-            inViewController: controller,
+            inViewController: presenter,
             message: removePostMessage) { [weak self] _ in
                 guard let this = self else {
                     return
                 }
                 
-                let postService = PostService()
+                let postService: PostService = this.locator.getService()
                 postService.removePost(post) { succeeded, error in
                     if succeeded {
-                        this.completionRemovePost(atIndex: index)
+                        this.postRemovalHandler(atIndex: index)
                     } else if let error = error?.localizedDescription {
                         log.debug(error)
                     }
@@ -119,8 +119,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             handler: nil)
         complaintMenu.addAction(cancelAction)
         
-        let complaintService = ComplaintService()
-        
+        let complaintService: ComplaintService = locator.getService()
         let complaintUsernameAction = UIAlertAction(
             title: ComplaintReason.Username.rawValue,
             style: .Default
@@ -152,12 +151,12 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         complaintMenu.addAction(complaintUserAvatarAction)
         complaintMenu.addAction(complaintPostAction)
         
-        controller.presentViewController(complaintMenu, animated: true, completion: nil)
+        presenter.presentViewController(complaintMenu, animated: true, completion: nil)
     }
     
-    private func showActivityController(items: [AnyObject]) {
+    private func showActivityController(withItems items: [AnyObject]) {
         let activityViewController = ActivityViewController.initWith(items)
-        controller.presentViewController(activityViewController, animated: true, completion: nil)
+        presenter.presentViewController(activityViewController, animated: true, completion: nil)
     }
 
 }

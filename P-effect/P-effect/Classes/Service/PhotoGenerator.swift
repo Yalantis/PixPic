@@ -9,68 +9,78 @@
 import UIKit
 import AVFoundation
 
-private let takePhotoActionTitle =          "Take photo"
-private let selectFromLibraryActionTitle =  "Choose photo from library"
-private let cancelActionTitle =             "Cancel"
-private let noCameraTitle =                 "No Camera"
-private let noCameraMessage =               "Sorry, this device has no camera"
-private let okActionTitle =                 "OK"
-private let importantTitle =                "IMPORTANT"
-private let allowCameraActionTitle =        "Allow Camera"
-private let allowCameraMessage =            "Please allow camera access"
-private let askForCameraAccessMessage =     "Camera access required"
-private let dismissActionTitle =            "Dismiss"
+enum ListOfOptions: String {
+    case TakePhoto = "Take photo"
+    case SelectFromLibrary = "Choose photo from library"
+    case Cancel = "Cancel"
+}
+
+enum HandleNoCamera: String {
+    case Title = "No Camera"
+    case Message = "Sorry, this device has no camera"
+    case OkActionTitle = "OK"
+}
+
+enum CameraAccess: String {
+    case ImportantTitle = "IMPORTANT"
+    case AskForCameraAccessMessage = "Camera access required"
+    case AllowCameraActionTitle = "Allow Camera"
+    case CancelActionTitle = "Cancel"
+    
+    case AllowCameraMessage = "Please allow camera access"
+    case DismissActionTitle = "Dismiss"
+}
 
 class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
-    var completionImageReceived:(UIImage -> Void)?
+    var didSelectPhoto: (UIImage -> Void)?
     
-    func showInView(controller: UIViewController) {
+    func showListOfOptions(inViewController controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
-        let actionSheetVC = UIAlertController(
+        let actionSheetViewController = UIAlertController(
             title: nil,
             message: nil,
             preferredStyle: .ActionSheet
         )
         let takePhotoAction = UIAlertAction(
-            title: takePhotoActionTitle,
+            title: ListOfOptions.TakePhoto.rawValue,
             style: .Default
             ) { _ in
                 self.takePhoto()
                 PushNotificationQueue.handleNotificationQueue()
         }
         let selectFromLibraryAction = UIAlertAction(
-            title: selectFromLibraryActionTitle,
+            title: ListOfOptions.SelectFromLibrary.rawValue,
             style: .Default
             ) { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
         }
         let cancelAction = UIAlertAction(
-            title: cancelActionTitle,
+            title: ListOfOptions.Cancel.rawValue,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
         }
-        actionSheetVC.addAction(selectFromLibraryAction)
-        actionSheetVC.addAction(takePhotoAction)
-        actionSheetVC.addAction(cancelAction)
-        controller.presentViewController(actionSheetVC, animated: true, completion: nil)
+        actionSheetViewController.addAction(selectFromLibraryAction)
+        actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(cancelAction)
+        controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
     }
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExist = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let cameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if cameraExist {
+        if cameraExists {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
-            noCamera()
+            handleNoCamera()
         }
     }
     
@@ -81,19 +91,19 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func noCamera() {
-        let alertVC = UIAlertController(
-            title: noCameraTitle,
-            message: noCameraMessage,
+    private func handleNoCamera() {
+        let alertViewController = UIAlertController(
+            title: HandleNoCamera.Title.rawValue,
+            message: HandleNoCamera.Message.rawValue,
             preferredStyle: .Alert
         )
         let okAction = UIAlertAction(
-            title: okActionTitle,
+            title: HandleNoCamera.OkActionTitle.rawValue,
             style:.Default,
             handler: nil
         )
-        alertVC.addAction(okAction)
-        controller.presentViewController(alertVC, animated: true, completion: nil)
+        alertViewController.addAction(okAction)
+        controller.presentViewController(alertViewController, animated: true, completion: nil)
     }
     
     private func selectFromLibrary() {
@@ -118,43 +128,45 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     private func askForCameraAccessViaSettings() {
         let alert = UIAlertController(
-            title: importantTitle,
-            message: allowCameraMessage,
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AskForCameraAccessMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: cancelActionTitle,
+        let cancelAction = UIAlertAction(
+            title: CameraAccess.CancelActionTitle.rawValue,
             style: .Default,
-            handler: nil)
+            handler: nil
         )
-        alert.addAction(UIAlertAction(
-            title: askForCameraAccessMessage,
+        let allowCameraAction = UIAlertAction(
+            title: CameraAccess.AllowCameraActionTitle.rawValue,
             style: .Cancel
             ) { _ in
                 UIApplication.redirectToAppSettings()
-        })
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(allowCameraAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func presentCameraAccessDialog() {
+    private func presentCameraAccessDialog() {
         let alert = UIAlertController(
-            title: importantTitle,
-            message: allowCameraMessage,
+            title: CameraAccess.ImportantTitle.rawValue,
+            message: CameraAccess.AllowCameraMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        alert.addAction(UIAlertAction(
-            title: dismissActionTitle,
+        let dismissAction = UIAlertAction(
+            title: CameraAccess.DismissActionTitle.rawValue,
             style: .Cancel
             ) { _ in
                 if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { granted in
+                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
                         dispatch_async(dispatch_get_main_queue()) {
-                            self.checkCamera()
+                            self?.checkCamera()
                         }
                     }
                 }
-            }
-        )
+        }
+        alert.addAction(dismissAction)
         controller.presentViewController(alert, animated: true, completion: nil)
     }
     
@@ -163,9 +175,10 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
 extension PhotoGenerator: UIImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        completionImageReceived?(selectedImage)
+        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            controller.dismissViewControllerAnimated(true, completion: nil)
+            didSelectPhoto?(selectedImage)
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

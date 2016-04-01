@@ -166,7 +166,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             return
         }
         userName.text = user.username
-        user.loadUserAvatar { [weak self] image, error in
+        
+        guard let avatar = user.avatar else {
+            return
+        }
+        
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -201,8 +206,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 return
             }
             
-            let reachabilityService: ReachabilityService = this.locator.getService()
-            guard reachabilityService.isReachable() else {
+            guard ReachabilityHelper.isReachable() else {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
 
@@ -311,10 +315,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     private func fillFollowersQuantity(user: User) {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
-        if let followersQt = attributes?[Constants.Attributes.FollowersCount],
-            folowingQt = attributes?[Constants.Attributes.FollowingCount] {
-                followersQuantity.text = String(followersQt) + " followers"
-                followingQuantity.text = String(folowingQt) + " following"
+        if let followersQuantity = attributes?[Constants.Attributes.FollowersCount],
+            followingQuantity = attributes?[Constants.Attributes.FollowingCount] {
+                self.followersQuantity.text = String(followersQuantity) + " followers"
+                self.followingQuantity.text = String(followingQuantity) + " following"
         }
 
         let activityService: ActivityService = locator.getService()
@@ -349,8 +353,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func followSomeone() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -366,26 +369,31 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         router.showEditProfile()
     }
 
-    dynamic private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+    @objc private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
-        guard let followersQuantity = followersQuantity.text else {
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followersQuantity = attributes?[Constants.Attributes.FollowersCount] as? Int else {
             return
         }
-        if followersQuantity[followersQuantity.startIndex] != "0" {
+        
+        if followersQuantity != 0 {
             router.showFollowersList(user, followType: .Followers)
         }
     }
     
-    dynamic private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+    @objc private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
-        guard let followingQuantity = followingQuantity.text else {
+        
+        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        guard let followingQuantity = attributes?[Constants.Attributes.FollowingCount] as? Int else {
             return
         }
-        if followingQuantity[followingQuantity.startIndex] != "0" {
+
+        if followingQuantity != 0 {
             router.showFollowersList(user, followType: .Following)
         }
     }
@@ -396,14 +404,18 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
 extension ProfileViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
-        settingsMenu.showInView(self, forPost: post, atIndex: index, items: items)
-        settingsMenu.completionAuthorizeUser = { [weak self] in
+        settingsMenu.locator = locator
+        settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
+        settingsMenu.userAuthorizationHandler = { [weak self] in
             self?.router.showAuthorization()
         }
         
-        settingsMenu.completionRemovePost = { [weak self] index in
-            self?.postAdapter.removePost(atIndex: index)
-            self?.tableView.reloadData()
+        settingsMenu.postRemovalHandler = { [weak self] index in
+            guard let this = self else {
+                return
+            }
+            this.postAdapter.removePost(atIndex: index)
+            this.tableView.reloadData()
         }
     }
     

@@ -87,13 +87,13 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     private func setupObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "updateData",
+            selector: #selector(updateData),
             name: Constants.NotificationName.FollowersListUpdated,
             object: nil
         )
     }
     
-    dynamic private func updateData() {
+    @objc private func updateData() {
         setupAdapter()
     }
 }

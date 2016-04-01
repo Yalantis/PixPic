@@ -9,15 +9,15 @@
 import UIKit
 import Toast
 
-private let saveChangesWithoutConnectionMessage =  "Internet connection is required to save changes in profile"
-private let logoutMessage =                        "This will logout you. And you will not be able to share your amazing photos..("
-private let backWithChangesMessage =               "If you go back now, your changes will be discarded"
-private let logoutWithoutConnectionAttempt =       "Internet connection is required to logout"
-private let backWithChangesTitle =                 "Save changes"
-private let saveActionTitle =                      "Save"
-private let logoutActionTitle =                    "Logout me!"
-private let cancelActionTitle =                    "Cancel"
-private let okActionTitle =                        "Ok"
+private let saveChangesWithoutConnectionMessage = "Internet connection is required to save changes in profile"
+private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
+private let backWithChangesMessage = "If you go back now, your changes will be discarded"
+private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
+private let backWithChangesTitle = "Save changes"
+private let saveActionTitle = "Save"
+private let logoutActionTitle = "Logout me!"
+private let cancelActionTitle = "Cancel"
+private let okActionTitle = "Ok"
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
@@ -103,7 +103,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        photoGenerator.completionImageReceived = { [weak self] selectedImage in
+        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -114,7 +114,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderService.getImageForContentItem(avatar) { [weak self] image, error in
+        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -145,7 +145,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    dynamic private func handleBackButtonTap() {
+    @objc private func handleBackButtonTap() {
         if someChangesMade {
             let alertController = UIAlertController(
                 title: backWithChangesTitle,
@@ -176,10 +176,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
     }
     
-    dynamic private func saveChangesAction() {
+    @objc private func saveChangesAction() {
         navigationItem.rightBarButtonItem!.enabled = false
-        let reachabilityService: ReachabilityService = locator.getService()
-        if reachabilityService.isReachable() {
+        if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
                 
@@ -196,8 +195,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     }
     
     private func logout() {
-        let reachabilityService: ReachabilityService = locator.getService()
-        guard reachabilityService.isReachable() else {
+        guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
             return
@@ -215,7 +213,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         )
     }
     
-    dynamic private func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 if kbHeight == 0 {
@@ -227,7 +225,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
     }
     
-    dynamic private func keyboardWillHide(notification: NSNotification) {
+    @objc private func keyboardWillHide(notification: NSNotification) {
         animateTextField(false)
         kbHidden = true
         kbHeight = 0
@@ -246,7 +244,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         )
     }
     
-    dynamic private func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         view.endEditing(true)
         kbHidden = true
     }
@@ -291,7 +289,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showInView(self)
+        photoGenerator.showListOfOptions(inViewController: self)
     }
     
     @IBAction private func logoutAction() {

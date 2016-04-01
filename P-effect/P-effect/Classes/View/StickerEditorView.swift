@@ -11,7 +11,7 @@ import UIKit
 class StickerEditorView: UIView {
     
     private var touchStart: CGPoint?
-    private var prevPoint: CGPoint?
+    private var previousPoint: CGPoint?
     private var deltaAngle: CGFloat?
     
     private var resizingControl: UIImageView!
@@ -98,17 +98,17 @@ class StickerEditorView: UIView {
         }
     }
     
-    dynamic private func singleTap(recognizer: UIPanGestureRecognizer) {
+    @objc private func singleTap(recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
         if let close = close {
             close.superview?.removeFromSuperview()
         }
     }
     
-    dynamic private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
+    @objc private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
         if recognizer.state == .Began {
             enableTranslucency(true)
-            prevPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.locationInView(self)
             setNeedsDisplay()
             
         } else if recognizer.state == .Changed {
@@ -118,22 +118,24 @@ class StickerEditorView: UIView {
             
         } else if recognizer.state == .Ended {
             enableTranslucency(false)
-            prevPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.locationInView(self)
             setNeedsDisplay()
         }
     }
     
     private func resizeView(recognizer: UIPanGestureRecognizer) {
         let point = recognizer.locationInView(self)
-        
-        let wChange = point.x - prevPoint!.x
-        let wRatioChange = wChange / bounds.size.width
-        let hChange = wRatioChange * bounds.size.height
+        guard let previousWidth = previousPoint?.x else {
+            return
+        }
+        let widthChange = point.x - previousWidth
+        let widthRatioChange = widthChange / bounds.size.width
+        let heightChange = widthRatioChange * bounds.size.height
         
         bounds = CGRectMake(bounds.origin.x,
             bounds.origin.y,
-            bounds.size.width + wChange,
-            bounds.size.height + hChange)
+            bounds.size.width + widthChange,
+            bounds.size.height + heightChange)
         
         resizingControl.frame = CGRectMake(bounds.size.width - Constants.StickerEditor.StickerViewControlSize,
             bounds.size.height - Constants.StickerEditor.StickerViewControlSize,
@@ -144,7 +146,7 @@ class StickerEditorView: UIView {
             Constants.StickerEditor.StickerViewControlSize,
             Constants.StickerEditor.StickerViewControlSize)
         
-        prevPoint = recognizer.locationOfTouch(0, inView: self)
+        previousPoint = recognizer.locationOfTouch(0, inView: self)
     }
     
     private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {

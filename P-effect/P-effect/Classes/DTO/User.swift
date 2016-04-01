@@ -59,14 +59,5 @@ extension User {
             return PFAnonymousUtils.isLinkedWithUser(User.currentUser()) || User.isAbsent
         }
     }
-    
-    // MARK: - ProfileViewControllerMethods
-    func loadUserAvatar(completion: LoadingImageCompletion) {
-        if let avatar = avatar {
-            ImageLoaderService.getImageForContentItem(avatar) { image, error in
-                completion(image: image, error: error)
-            }
-        }
-    }
 
 }
