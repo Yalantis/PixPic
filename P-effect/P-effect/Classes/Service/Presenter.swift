@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let appRouterAnimationDelay = 0.3
-private let appRouterAnimationDuration = 0.45
+private let appRouterAnimationDelay: NSTimeInterval = 0.3
+private let appRouterAnimationDuration: NSTimeInterval = 0.45
 
 typealias Handler = () -> Void
 
