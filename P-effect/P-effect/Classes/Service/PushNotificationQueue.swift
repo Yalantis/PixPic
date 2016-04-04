@@ -12,7 +12,7 @@ class PushNotificationQueue: NSObject {
     
     static var notificationQueue = [String]()
     
-    class func handleNotificationQueue() {
+    static func handleNotificationQueue() {
         NSTimer.scheduledTimerWithTimeInterval(
             2,
             target: PushNotificationQueue.self,
@@ -22,14 +22,14 @@ class PushNotificationQueue: NSObject {
         )
     }
     
-    class func addObjectInQueue(message: String?) {
+    static func addObjectInQueue(message: String?) {
         guard let message = message else {
             return
         }
         notificationQueue.append(message)
     }
     
-    class func clearQueue() {
+    static func clearQueue() {
         notificationQueue.removeAll()
     }
     
@@ -37,7 +37,7 @@ class PushNotificationQueue: NSObject {
         return PushNotificationQueue.notificationQueue.count
     }
     
-    class func showNotificationFromQueue() {
+    static func showNotificationFromQueue() {
         if notificationQueue.count == 1 {
             AlertManager.sharedInstance.showNotificationAlert(nil, message: notificationQueue.first)
         } else if notificationQueue.count > 1 {

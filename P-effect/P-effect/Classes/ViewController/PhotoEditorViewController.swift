@@ -114,7 +114,7 @@ extension PhotoEditorViewController {
     private func setupNavigavionBar() {
         navigationItem.hidesBackButton = true
         let newBackButton = UIBarButtonItem(
-            image: UIImage.appBackButton(),
+            image: UIImage.appBackButton,
             style: .Plain,
             target: self,
             action: #selector(performBackNavigation)

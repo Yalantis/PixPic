@@ -46,8 +46,8 @@ class PostViewCell: UITableViewCell, CellInterface {
     
     func configure(withPost post: Post?) {
         guard let post = post else {
-            postImageView.image = UIImage.placeholderImage()
-            profileImageView.image = UIImage.avatarPlaceholderImage()
+            postImageView.image = UIImage.placeholderImage
+            profileImageView.image = UIImage.avatarPlaceholderImage
             
             return
         }
@@ -64,7 +64,7 @@ class PostViewCell: UITableViewCell, CellInterface {
             let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
             postImageView.kf_setImageWithURL(
                 url,
-                placeholderImage: UIImage.placeholderImage(),
+                placeholderImage: UIImage.placeholderImage,
                 optionsInfo: nil) { [weak self] _, _, _, _ in
                     indicator.removeFromSuperview()
                     self?.settingsButton.enabled = true
@@ -72,14 +72,14 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
 
         guard let user = post.user else {
-            profileImageView.image = UIImage.avatarPlaceholderImage()
+            profileImageView.image = UIImage.avatarPlaceholderImage
             
             return
         }
         if let avatar = user.avatar?.url {
             profileImageView.kf_setImageWithURL(
                 NSURL(string: avatar)!,
-                placeholderImage: UIImage.avatarPlaceholderImage()
+                placeholderImage: UIImage.avatarPlaceholderImage
             )
         }
     }
