@@ -9,6 +9,14 @@
 import Foundation
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
+private let cancelActionTitle = "Cancel"
+private let okActionTitle = "Logout me"
+
+private let enableNotificationsSwitchTitle = "Enable Notifications"
+private let followedPostsSwitchTitle = "Show only following users posts"
+
+private let logInViewTitle = "Log In"
+private let logOutViewTitle = "Log Out"
 
 enum SettingsState {
     
@@ -21,20 +29,20 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
     
-    private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
+    private lazy var enableNotifications: UIView = SwitchView.instanceFromNib(enableNotificationsSwitchTitle, initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
-    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts", initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
+    private lazy var followedPosts: UIView = SwitchView.instanceFromNib(followedPostsSwitchTitle, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
         SettingsHelper.isShownOnlyFollowingUsersPosts = on
         NSNotificationCenter.defaultCenter().postNotificationName(
             Constants.NotificationName.NewPostUploaded,
             object: nil
         )
     }
-    private lazy var logIn: UIView = TextView.instanceFromNib("Log In") {
+    private lazy var logIn: UIView = TextView.instanceFromNib(logInViewTitle) {
         self.router.showAuthorization()
     }
-    private lazy var logOut: UIView = TextView.instanceFromNib("Log Out") {
+    private lazy var logOut: UIView = TextView.instanceFromNib(logOutViewTitle) {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -42,7 +50,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         )
         
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
@@ -51,7 +59,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         alertController.addAction(cancelAction)
         
         let okAction = UIAlertAction(
-            title: "Logout me!",
+            title: okActionTitle,
             style: .Default
             ) { _ in
                 self.logout()
