@@ -29,11 +29,11 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>!
     
-    private lazy var enableNotifications = SwitchView.instanceFromNib(enableNotificationsNibName, initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
-        SettingsHelper.isRemoteNotificationsEnabled = on
+    private lazy var enableNotifications = SwitchView.instanceFromNib(enableNotificationsNibName, initialState: SettingsHelper.isRemoteNotificationsEnabled) { switchState in
+        SettingsHelper.isRemoteNotificationsEnabled = switchState
     }
-    private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
-        SettingsHelper.isShownOnlyFollowingUsersPosts = on
+    private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
+        SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
         NSNotificationCenter.defaultCenter().postNotificationName(
             Constants.NotificationName.NewPostUploaded,
             object: nil
