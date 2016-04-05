@@ -12,11 +12,11 @@ private let logoutMessage = "This will logout you. And you will not be able to s
 private let cancelActionTitle = "Cancel"
 private let okActionTitle = "Logout me"
 
-private let enableNotificationsSwitchTitle = "Enable Notifications"
-private let followedPostsSwitchTitle = "Show only following users posts"
+private let enableNotificationsNibName = "Enable Notifications"
+private let followedPostsNibName = "Show only following users posts"
 
-private let logInViewTitle = "Log In"
-private let logOutViewTitle = "Log Out"
+private let logInNibName = "Log In"
+private let logOutNibName = "Log Out"
 
 enum SettingsState {
     
@@ -27,22 +27,22 @@ enum SettingsState {
 final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
-    var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
+    var router: protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>!
     
-    private lazy var enableNotifications: UIView = SwitchView.instanceFromNib(enableNotificationsSwitchTitle, initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
+    private lazy var enableNotifications = SwitchView.instanceFromNib(enableNotificationsNibName, initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
-    private lazy var followedPosts: UIView = SwitchView.instanceFromNib(followedPostsSwitchTitle, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
+    private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
         SettingsHelper.isShownOnlyFollowingUsersPosts = on
         NSNotificationCenter.defaultCenter().postNotificationName(
             Constants.NotificationName.NewPostUploaded,
             object: nil
         )
     }
-    private lazy var logIn: UIView = TextView.instanceFromNib(logInViewTitle) {
+    private lazy var logIn: UIView = TextView.instanceFromNib(logInNibName) {
         self.router.showAuthorization()
     }
-    private lazy var logOut: UIView = TextView.instanceFromNib(logOutViewTitle) {
+    private lazy var logOut: UIView = TextView.instanceFromNib(logOutNibName) {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
