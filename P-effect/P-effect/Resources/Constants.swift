@@ -125,4 +125,8 @@ struct Constants {
         static let NavigationTitle = "P-effect"
     }
     
+    struct Settings {
+        static let NavigationTitle = "Settings"
+    }
+    
 }

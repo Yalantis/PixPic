@@ -123,7 +123,7 @@ extension SettingsViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
-        appearance.title = "Notification policies"
+        appearance.title = Constants.Settings.NavigationTitle
         return appearance
     }
     
