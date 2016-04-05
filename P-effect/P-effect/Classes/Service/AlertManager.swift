@@ -24,8 +24,9 @@ extension AlertManagerDelegate {
         currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
     }
     
-    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, var message: String?) {
+    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
         let title = notification
+        var message = message
         guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
             return
         }

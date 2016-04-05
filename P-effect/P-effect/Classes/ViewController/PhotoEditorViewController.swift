@@ -117,7 +117,7 @@ extension PhotoEditorViewController {
             image: UIImage.appBackButton(),
             style: .Plain,
             target: self,
-            action: "performBackNavigation"
+            action: #selector(performBackNavigation)
         )
         navigationItem.leftBarButtonItem = newBackButton
         
@@ -125,14 +125,14 @@ extension PhotoEditorViewController {
             image: UIImage(named: "save"),
             style: .Plain,
             target: self,
-            action: "saveImageToCameraRoll"
+            action: #selector(saveImageToCameraRoll)
         )
         
         let allStickerssRemovingButton = UIBarButtonItem(
             image: UIImage(named: "remove"),
             style: .Plain,
             target: self,
-            action: "removeAllStickers"
+            action: #selector(removeAllStickers)
         )
         allStickerssRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
 

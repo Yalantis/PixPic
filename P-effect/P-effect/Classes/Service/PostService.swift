@@ -36,8 +36,8 @@ class PostService {
             } else if let error = error {
                 log.debug(error.localizedDescription)
             }
-        }, progressBlock: { progress in
-            log.debug("Uploaded: \(progress)%")
+            }, progressBlock: { progress in
+                log.debug("Uploaded: \(progress)%")
         })
     }
     
@@ -68,28 +68,43 @@ class PostService {
     }
     
     private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
-        var posts = [Post]()
-        
         if User.isAbsent {
-            log.debug("No user is signed up")
-            completion(posts: nil, error: nil)
+            log.debug("No user signUP")
+            fetchPosts(query, completion: completion)
             
             return
         }
-        
         if !ReachabilityHelper.isReachable() {
             query.fromLocalDatastore()
         }
-        
         if let user = user {
             query.whereKey("user", equalTo: user)
-        } else if SettingsHelper.isShownOnlyFollowingUsersPosts && !User.notAuthorized {
-            let subQuery = PFQuery(className: Activity.parseClassName())
-            subQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
-            subQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            fetchPosts(query, completion: completion)
             
-            query.whereKey("user", matchesKey: Constants.ActivityKey.ToUser, inQuery: subQuery)
+        } else if SettingsHelper.isShownOnlyFollowingUsersPosts && !User.notAuthorized {
+            let followersQuery = PFQuery(className: Activity.parseClassName())
+            followersQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
+            followersQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
+            followersQuery.includeKey(Constants.ActivityKey.ToUser)
+            
+            var arrayOfFollowers: [User] = [User.currentUser()!]
+            followersQuery.findObjectsInBackgroundWithBlock { [weak self] activities, error in
+                if let error = error {
+                    log.debug(error.localizedDescription)
+                } else if let activities = activities as? [Activity] {
+                    let friends = activities.flatMap { $0[Constants.ActivityKey.ToUser] as? User }
+                    arrayOfFollowers.appendContentsOf(friends)
+                }
+                query.whereKey("user", containedIn: arrayOfFollowers)
+                self?.fetchPosts(query, completion: completion)
+            }
+        } else {
+            fetchPosts(query, completion: completion)
         }
+    }
+    
+    private func fetchPosts(query: PFQuery, completion: LoadingPostsCompletion) {
+        var posts = [Post]()
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {
                 for object in objects {
