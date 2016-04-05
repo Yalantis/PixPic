@@ -21,9 +21,9 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
     
-    private lazy var credentials: UIView = TextView.instanceFromNib("Credentials/Policies") {
-        self.router.showCredentials()
-    }
+//    private lazy var credentials: UIView = TextView.instanceFromNib("Credentials/Policies") {
+//        self.router.showCredentials()
+//    }
     private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
@@ -34,10 +34,10 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
             object: nil
         )
     }
-    private lazy var logIn: UIView = ButtonView.instanceFromNib("Log In") {
+    private lazy var logIn: UIView = TextView.instanceFromNib("Logn") {
         self.router.showAuthorization()
     }
-    private lazy var logOut: UIView = ButtonView.instanceFromNib("Log Out") {
+    private lazy var logOut: UIView = TextView.instanceFromNib("Log Out") {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -82,7 +82,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     
     // MARK: - Private methods
     private func setupAvailableSettings() {
-        settings[.Common] = [credentials, enableNotifications]
+        settings[.Common] = [enableNotifications]
         for view in settings[.Common]! {
             settingsStack.addArrangedSubview(view)
         }

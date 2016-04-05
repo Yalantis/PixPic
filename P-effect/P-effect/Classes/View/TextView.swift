@@ -20,7 +20,7 @@ class TextView: UIView {
     
     static func instanceFromNib(text: String, action: (() -> Void)) -> TextView {
         let view = UINib(nibName: String(self), bundle: nil).instantiateWithOwner(nil, options: nil).first as! TextView
-        view.button.titleLabel?.text = text
+        view.button.setTitle(text, forState: .Normal)
         view.action = action
         
         return view
