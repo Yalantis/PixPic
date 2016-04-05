@@ -106,7 +106,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
-                                        <rect key="frame" x="313" y="448" width="28" height="22"/>
+                                        <rect key="frame" x="313" y="453" width="28" height="22"/>
                                         <state key="normal" image="more_icon"/>
                                         <connections>
                                             <action selector="didTapSettingsButton" destination="wTx-Av-Y8L" eventType="touchUpInside" id="KDQ-VB-JSF"/>
@@ -118,7 +118,7 @@
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="top" secondItem="gg0-D1-QNP" secondAttribute="bottom" id="3z7-hB-4S4"/>
                                     <constraint firstAttribute="trailing" secondItem="S7j-TD-CO3" secondAttribute="trailing" id="65T-de-bhs"/>
                                     <constraint firstItem="S7j-TD-CO3" firstAttribute="trailing" secondItem="gg0-D1-QNP" secondAttribute="trailing" id="HEg-IX-ved"/>
-                                    <constraint firstItem="8uy-cf-7cD" firstAttribute="top" secondItem="S7j-TD-CO3" secondAttribute="bottom" constant="10" id="Zc4-J5-IeN"/>
+                                    <constraint firstItem="8uy-cf-7cD" firstAttribute="top" secondItem="S7j-TD-CO3" secondAttribute="bottom" constant="15" id="Zc4-J5-IeN"/>
                                     <constraint firstItem="gg0-D1-QNP" firstAttribute="leading" secondItem="OAP-rW-k05" secondAttribute="leading" id="aiK-Cm-1oS"/>
                                     <constraint firstAttribute="trailing" secondItem="8uy-cf-7cD" secondAttribute="trailing" constant="10" id="nkE-ag-03e"/>
                                     <constraint firstAttribute="trailing" secondItem="gg0-D1-QNP" secondAttribute="trailing" id="rJq-jz-Zos"/>
