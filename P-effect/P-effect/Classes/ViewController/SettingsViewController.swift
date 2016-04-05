@@ -21,9 +21,6 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     static let storyboardName = Constants.Storyboard.Settings
     var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
     
-//    private lazy var credentials: UIView = TextView.instanceFromNib("Credentials/Policies") {
-//        self.router.showCredentials()
-//    }
     private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
         SettingsHelper.isRemoteNotificationsEnabled = on
     }
@@ -34,7 +31,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
             object: nil
         )
     }
-    private lazy var logIn: UIView = TextView.instanceFromNib("Logn") {
+    private lazy var logIn: UIView = TextView.instanceFromNib("Log In") {
         self.router.showAuthorization()
     }
     private lazy var logOut: UIView = TextView.instanceFromNib("Log Out") {
