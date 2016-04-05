@@ -36,9 +36,7 @@
 		7734892D1C8752B700034B66 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7734892C1C8752B700034B66 /* SettingsHelper.swift */; };
 		775635931C9184420069EA4F /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635921C9184420069EA4F /* TextView.xib */; };
 		775635951C91848B0069EA4F /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635941C91848B0069EA4F /* SwitchView.xib */; };
-		775635991C9185920069EA4F /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635981C9185920069EA4F /* ButtonView.xib */; };
 		7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756359E1C9195D50069EA4F /* SwitchView.swift */; };
-		775635A11C91A1AF0069EA4F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775635A01C91A1AF0069EA4F /* ButtonView.swift */; };
 		775635A31C91A2D50069EA4F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775635A21C91A2D50069EA4F /* TextView.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
@@ -161,9 +159,7 @@
 		7734892C1C8752B700034B66 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		775635921C9184420069EA4F /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
 		775635941C91848B0069EA4F /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
-		775635981C9185920069EA4F /* ButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
 		7756359E1C9195D50069EA4F /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
-		775635A01C91A1AF0069EA4F /* ButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		775635A21C91A2D50069EA4F /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
@@ -312,8 +308,6 @@
 		7756358D1C9183EF0069EA4F /* SettingsViews */ = {
 			isa = PBXGroup;
 			children = (
-				775635A01C91A1AF0069EA4F /* ButtonView.swift */,
-				775635981C9185920069EA4F /* ButtonView.xib */,
 				775635921C9184420069EA4F /* TextView.xib */,
 				775635A21C91A2D50069EA4F /* TextView.swift */,
 				7756359E1C9195D50069EA4F /* SwitchView.swift */,
@@ -684,7 +678,6 @@
 				499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */,
 				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
 				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
-				775635991C9185920069EA4F /* ButtonView.xib in Resources */,
 				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
@@ -774,7 +767,6 @@
 				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
 				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
 				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
-				775635A11C91A1AF0069EA4F /* ButtonView.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
 				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
