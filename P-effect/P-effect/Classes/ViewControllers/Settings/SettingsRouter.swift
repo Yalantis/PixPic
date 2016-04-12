@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SettingsRouter: AlertManagerDelegate, FeedPresenter, CredentialsPresenter, AuthorizationPresenter {
+class SettingsRouter: AlertManagerDelegate, FeedPresenter, AuthorizationPresenter {
     
     private(set) weak var currentViewController: UIViewController!
     private(set) weak var locator: ServiceLocator!
