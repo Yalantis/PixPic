@@ -7,74 +7,94 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904A1B51C526EA200F26E05 /* ValidationService.swift */; };
 		492D17EF1C5A00EE00D98404 /* StickersGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17EE1C5A00EE00D98404 /* StickersGroup.swift */; };
 		492D17F11C5A024E00D98404 /* StickersVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F01C5A024E00D98404 /* StickersVersion.swift */; };
 		492D17F31C5A027D00D98404 /* Sticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F21C5A027D00D98404 /* Sticker.swift */; };
 		492D17F51C5A186100D98404 /* StickersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F41C5A186100D98404 /* StickersModel.swift */; };
-		492D17F71C5B9FE500D98404 /* StickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492D17F61C5B9FE500D98404 /* StickerViewCell.swift */; };
 		496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D261C89BB7C00DED33F /* Complaint.swift */; };
-		496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496B6D281C89BB8900DED33F /* ComplaintService.swift */; };
-		497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497954631C7B497E0003B960 /* ToastActivityHelper.swift */; };
-		497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B87241C4D152C00A4A32B /* ProfileViewController.swift */; };
-		499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */; };
-		499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */; };
-		499DD04F1C579D3100DABCD5 /* StickersPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD04E1C579D3100DABCD5 /* StickersPickerViewController.swift */; };
-		499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0501C579EF200DABCD5 /* ImageViewController.swift */; };
-		499DD0531C579F1300DABCD5 /* StickersPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0521C579F1300DABCD5 /* StickersPickerAdapter.swift */; };
 		499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 499DD0541C57D2D300DABCD5 /* Feed.storyboard */; };
-		499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */; };
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
-		49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49FE57C51C4E63E500C4B30F /* PostViewCell.xib */; };
-		49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */; };
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
 		7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */; };
-		771CD2321C6BB10F00383B41 /* StickersGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 771CD2311C6BB10F00383B41 /* StickersGroupHeaderView.xib */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
-		7729BE6F1C888A7E00ECC707 /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */; };
-		7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7729BE701C889EAA00ECC707 /* LaunchRouter.swift */; };
-		7734892D1C8752B700034B66 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7734892C1C8752B700034B66 /* SettingsHelper.swift */; };
-		775635931C9184420069EA4F /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635921C9184420069EA4F /* TextView.xib */; };
-		775635951C91848B0069EA4F /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 775635941C91848B0069EA4F /* SwitchView.xib */; };
-		7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7756359E1C9195D50069EA4F /* SwitchView.swift */; };
-		775635A31C91A2D50069EA4F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775635A21C91A2D50069EA4F /* TextView.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
-		77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C971C7B396800DCED81 /* ProfileRouter.swift */; };
-		77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */; };
-		77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C9A1C7B396800DCED81 /* FeedRouter.swift */; };
-		77752CA11C7B396800DCED81 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C9B1C7B396800DCED81 /* EditProfileRouter.swift */; };
-		77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C9C1C7B396800DCED81 /* AuthorizationRouter.swift */; };
-		7787919B1C693CEF00DFF8C9 /* StickersGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7787919A1C693CEF00DFF8C9 /* StickersGroupHeaderView.swift */; };
-		77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */; };
 		77B42D231C6B762B00C5A999 /* StickersLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* StickersLayout.swift */; };
 		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
-		77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0A4471C883C3A007852A0 /* LaunchViewController.swift */; };
-		77C580641C85E93D00345124 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580631C85E93D00345124 /* SettingsViewController.swift */; };
-		77C580661C85E96900345124 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580651C85E96900345124 /* SettingsRouter.swift */; };
-		77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580671C85F14800345124 /* CredentialsRouter.swift */; };
-		77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C580691C85F1ED00345124 /* CredentialsViewController.swift */; };
-		77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5295D1C60D90900C8932C /* ExceptionHandler.swift */; };
 		7A649FE17AF60EB2C2115AEC /* Pods_P_effect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EAC014D175B3AC5F9A48DD /* Pods_P_effect.framework */; };
-		95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95199AEA1C4CF6A00086D613 /* FeedViewController.swift */; };
-		9521D01B1C735DF200683F87 /* StickersLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521D01A1C735DF200683F87 /* StickersLoaderService.swift */; };
-		956B860F1CA3E66300189577 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B860E1CA3E66300189577 /* SettingsMenu.swift */; };
-		95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221931C8850E90004A3EF /* FollowerViewCell.swift */; };
-		95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D221951C8851020004A3EF /* FollowerViewCell.xib */; };
-		95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221971C885CBB0004A3EF /* FollowersListViewController.swift */; };
-		95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D221991C8869E70004A3EF /* FollowerAdapter.swift */; };
-		95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */; };
+		95308C3B1CBBB319001DD181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3A1CBBB319001DD181 /* AppDelegate.swift */; };
+		95308C421CBBB337001DD181 /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */; };
+		95308C431CBBB337001DD181 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3E1CBBB337001DD181 /* ImageViewModel.swift */; };
+		95308C441CBBB337001DD181 /* PhotoEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3F1CBBB337001DD181 /* PhotoEditorModel.swift */; };
+		95308C451CBBB337001DD181 /* PostAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C401CBBB337001DD181 /* PostAdapter.swift */; };
+		95308C461CBBB337001DD181 /* StickersPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C411CBBB337001DD181 /* StickersPickerAdapter.swift */; };
+		95308C8C1CBBB389001DD181 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C7C1CBBB389001DD181 /* BorderView.swift */; };
+		95308C8D1CBBB389001DD181 /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C7D1CBBB389001DD181 /* FeedToolBar.swift */; };
+		95308C8E1CBBB389001DD181 /* FeedToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C7E1CBBB389001DD181 /* FeedToolBar.xib */; };
+		95308C8F1CBBB389001DD181 /* FollowerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C7F1CBBB389001DD181 /* FollowerViewCell.swift */; };
+		95308C901CBBB389001DD181 /* FollowerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C801CBBB389001DD181 /* FollowerViewCell.xib */; };
+		95308C911CBBB389001DD181 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C811CBBB389001DD181 /* PostViewCell.swift */; };
+		95308C921CBBB389001DD181 /* PostViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C821CBBB389001DD181 /* PostViewCell.xib */; };
+		95308C931CBBB389001DD181 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C841CBBB389001DD181 /* SwitchView.swift */; };
+		95308C941CBBB389001DD181 /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C851CBBB389001DD181 /* SwitchView.xib */; };
+		95308C951CBBB389001DD181 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C861CBBB389001DD181 /* TextView.swift */; };
+		95308C961CBBB389001DD181 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C871CBBB389001DD181 /* TextView.xib */; };
+		95308C971CBBB389001DD181 /* StickerEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C881CBBB389001DD181 /* StickerEditorView.swift */; };
+		95308C981CBBB389001DD181 /* StickersGroupHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C891CBBB389001DD181 /* StickersGroupHeaderView.swift */; };
+		95308C991CBBB389001DD181 /* StickersGroupHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95308C8A1CBBB389001DD181 /* StickersGroupHeaderView.xib */; };
+		95308C9A1CBBB389001DD181 /* StickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C8B1CBBB389001DD181 /* StickerViewCell.swift */; };
+		95308CB41CBBB3AA001DD181 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9C1CBBB3AA001DD181 /* ActivityService.swift */; };
+		95308CB51CBBB3AA001DD181 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9D1CBBB3AA001DD181 /* AlertManager.swift */; };
+		95308CB61CBBB3AA001DD181 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9E1CBBB3AA001DD181 /* AuthService.swift */; };
+		95308CB71CBBB3AA001DD181 /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */; };
+		95308CB81CBBB3AA001DD181 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */; };
+		95308CB91CBBB3AA001DD181 /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */; };
+		95308CBA1CBBB3AA001DD181 /* ImageLoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */; };
+		95308CBB1CBBB3AA001DD181 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA31CBBB3AA001DD181 /* LoaderService.swift */; };
+		95308CBC1CBBB3AA001DD181 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */; };
+		95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA51CBBB3AA001DD181 /* PostService.swift */; };
+		95308CBE1CBBB3AA001DD181 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA61CBBB3AA001DD181 /* Presenter.swift */; };
+		95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */; };
+		95308CC01CBBB3AA001DD181 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */; };
+		95308CC11CBBB3AA001DD181 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */; };
+		95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */; };
+		95308CC31CBBB3AA001DD181 /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */; };
+		95308CC41CBBB3AA001DD181 /* SaverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAC1CBBB3AA001DD181 /* SaverService.swift */; };
+		95308CC51CBBB3AA001DD181 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */; };
+		95308CC61CBBB3AA001DD181 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */; };
+		95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */; };
+		95308CC81CBBB3AA001DD181 /* StickersLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */; };
+		95308CC91CBBB3AA001DD181 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */; };
+		95308CCA1CBBB3AA001DD181 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB21CBBB3AA001DD181 /* UserService.swift */; };
+		95308CCB1CBBB3AA001DD181 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB31CBBB3AA001DD181 /* ValidationService.swift */; };
+		95308CCF1CBBB3FF001DD181 /* AttributesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */; };
+		95308CD01CBBB3FF001DD181 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CCE1CBBB3FF001DD181 /* Reachability.swift */; };
+		95308CD21CBBB522001DD181 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95308CD11CBBB522001DD181 /* Info.plist */; };
+		95308CF51CBBB858001DD181 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD51CBBB858001DD181 /* ActivityViewController.swift */; };
+		95308CF61CBBB858001DD181 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD71CBBB858001DD181 /* Appearance.swift */; };
+		95308CF71CBBB858001DD181 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD81CBBB858001DD181 /* AppearanceApplyingStrategy.swift */; };
+		95308CF81CBBB858001DD181 /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD91CBBB858001DD181 /* AppearanceNavigationController.swift */; };
+		95308CF91CBBB858001DD181 /* NavigationControllerAppearanceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CDA1CBBB858001DD181 /* NavigationControllerAppearanceContext.swift */; };
+		95308CFA1CBBB858001DD181 /* AuthorizationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CDC1CBBB858001DD181 /* AuthorizationRouter.swift */; };
+		95308CFB1CBBB858001DD181 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CDD1CBBB858001DD181 /* AuthorizationViewController.swift */; };
+		95308CFC1CBBB858001DD181 /* EditProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CDF1CBBB858001DD181 /* EditProfileRouter.swift */; };
+		95308CFD1CBBB858001DD181 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE01CBBB858001DD181 /* EditProfileViewController.swift */; };
+		95308CFE1CBBB858001DD181 /* FeedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE21CBBB858001DD181 /* FeedRouter.swift */; };
+		95308CFF1CBBB858001DD181 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE31CBBB858001DD181 /* FeedViewController.swift */; };
+		95308D001CBBB858001DD181 /* FollowersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE51CBBB858001DD181 /* FollowersListRouter.swift */; };
+		95308D011CBBB858001DD181 /* FollowersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE61CBBB858001DD181 /* FollowersListViewController.swift */; };
+		95308D021CBBB858001DD181 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE81CBBB858001DD181 /* LaunchRouter.swift */; };
+		95308D031CBBB858001DD181 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CE91CBBB858001DD181 /* LaunchViewController.swift */; };
+		95308D041CBBB858001DD181 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CEB1CBBB858001DD181 /* ImageViewController.swift */; };
+		95308D051CBBB858001DD181 /* PhotoEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CEC1CBBB858001DD181 /* PhotoEditorRouter.swift */; };
+		95308D061CBBB858001DD181 /* PhotoEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CED1CBBB858001DD181 /* PhotoEditorViewController.swift */; };
+		95308D071CBBB858001DD181 /* StickersPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CEE1CBBB858001DD181 /* StickersPickerViewController.swift */; };
+		95308D081CBBB858001DD181 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CF01CBBB858001DD181 /* ProfileRouter.swift */; };
+		95308D091CBBB858001DD181 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CF11CBBB858001DD181 /* ProfileViewController.swift */; };
+		95308D0A1CBBB858001DD181 /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CF31CBBB858001DD181 /* SettingsRouter.swift */; };
+		95308D0B1CBBB858001DD181 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CF41CBBB858001DD181 /* SettingsViewController.swift */; };
 		95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA01C77636C007F1B6A /* Authorization.storyboard */; };
 		95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA41C776477007F1B6A /* Profile.storyboard */; };
 		95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */; };
-		95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */; };
-		95D6D7AF1C4E9036004E2145 /* ImageLoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7AE1C4E9036004E2145 /* ImageLoaderHelper.swift */; };
-		95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D6D7B21C50998D004E2145 /* ErrorHandler.swift */; };
-		95E4A0721C58EA8700D52150 /* StickerEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0711C58EA8700D52150 /* StickerEditorView.swift */; };
-		95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4A0751C58F47D00D52150 /* BorderView.swift */; };
-		95EDD8A41C96FA4D006FB001 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A01C96FA4D006FB001 /* Appearance.swift */; };
-		95EDD8A51C96FA4D006FB001 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */; };
-		95EDD8A61C96FA4D006FB001 /* AppearanceNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */; };
-		95EDD8A71C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */; };
 		95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */; };
 		FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0586231C847FA200995E61 /* UIActivityIndicatorView + UIView.swift */; };
 		FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */; };
@@ -83,32 +103,14 @@
 		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
 		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
 		FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */; };
-		FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD27A2721C64CFEC0058203F /* FeedToolBar.xib */; };
-		FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD27A2741C64D09E0058203F /* FeedToolBar.swift */; };
 		FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */; };
 		FD6C17BD1C49506100A01715 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C17BC1C49506100A01715 /* Constants.swift */; };
-		FD73BB9F1C9717A3006B2EA3 /* RemoteNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73BB9E1C9717A3006B2EA3 /* RemoteNotificationHelper.swift */; };
 		FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */; };
 		FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */; };
-		FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */; };
-		FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */; };
 		FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */; };
-		FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAF46A01C49369E008060CD /* AppDelegate.swift */; };
-		FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AD1C4E528700331799 /* AlertManager.swift */; };
-		FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0AE1C4E528700331799 /* AuthService.swift */; };
-		FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */; };
-		FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B11C4E528700331799 /* Presenter.swift */; };
-		FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */; };
 		FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BB1C4E52F300331799 /* Post.swift */; };
-		FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD0F0BF1C4E535900331799 /* Reachability.swift */; };
 		FDE508D41C49482F003C772B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE508D31C49482F003C772B /* User.swift */; };
-		FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23121C7341E9009EE533 /* ServiceLocator.swift */; };
-		FDEA23151C73434E009EE533 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23141C73434E009EE533 /* UserService.swift */; };
-		FDEA23171C734359009EE533 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEA23161C734359009EE533 /* PostService.swift */; };
-		FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */; };
 		FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757261C89E6FB00D9ED68 /* Activity.swift */; };
-		FDF757291C89EDC100D9ED68 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757281C89EDC100D9ED68 /* ActivityService.swift */; };
-		FDF7572D1C89F8F100D9ED68 /* AttributesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,74 +131,94 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4904A1B51C526EA200F26E05 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		492D17EE1C5A00EE00D98404 /* StickersGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersGroup.swift; sourceTree = "<group>"; };
 		492D17F01C5A024E00D98404 /* StickersVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersVersion.swift; sourceTree = "<group>"; };
 		492D17F21C5A027D00D98404 /* Sticker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sticker.swift; sourceTree = "<group>"; };
 		492D17F41C5A186100D98404 /* StickersModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersModel.swift; sourceTree = "<group>"; };
-		492D17F61C5B9FE500D98404 /* StickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerViewCell.swift; sourceTree = "<group>"; };
 		496B6D261C89BB7C00DED33F /* Complaint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Complaint.swift; sourceTree = "<group>"; };
-		496B6D281C89BB8900DED33F /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
-		497954631C7B497E0003B960 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
-		497B87241C4D152C00A4A32B /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
-		499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
-		499DD04E1C579D3100DABCD5 /* StickersPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersPickerViewController.swift; sourceTree = "<group>"; };
-		499DD0501C579EF200DABCD5 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
-		499DD0521C579F1300DABCD5 /* StickersPickerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersPickerAdapter.swift; sourceTree = "<group>"; };
 		499DD0541C57D2D300DABCD5 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		49FE57C51C4E63E500C4B30F /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
-		49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
 		73EAC014D175B3AC5F9A48DD /* Pods_P_effect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P_effect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		771CD2311C6BB10F00383B41 /* StickersGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StickersGroupHeaderView.xib; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
-		7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
-		7729BE701C889EAA00ECC707 /* LaunchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
-		7734892C1C8752B700034B66 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
-		775635921C9184420069EA4F /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
-		775635941C91848B0069EA4F /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
-		7756359E1C9195D50069EA4F /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
-		775635A21C91A2D50069EA4F /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
-		77752C971C7B396800DCED81 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
-		77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
-		77752C9A1C7B396800DCED81 /* FeedRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
-		77752C9B1C7B396800DCED81 /* EditProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
-		77752C9C1C7B396800DCED81 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
-		7787919A1C693CEF00DFF8C9 /* StickersGroupHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersGroupHeaderView.swift; sourceTree = "<group>"; };
-		77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* StickersLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLayout.swift; sourceTree = "<group>"; };
 		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		77C0A4471C883C3A007852A0 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		77C580631C85E93D00345124 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		77C580651C85E96900345124 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
-		77C580671C85F14800345124 /* CredentialsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsRouter.swift; sourceTree = "<group>"; };
-		77C580691C85F1ED00345124 /* CredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialsViewController.swift; sourceTree = "<group>"; };
-		77D5295D1C60D90900C8932C /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
-		95199AEA1C4CF6A00086D613 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		9521D01A1C735DF200683F87 /* StickersLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLoaderService.swift; sourceTree = "<group>"; };
-		956B860E1CA3E66300189577 /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
-		95D221931C8850E90004A3EF /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
-		95D221951C8851020004A3EF /* FollowerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerViewCell.xib; sourceTree = "<group>"; };
-		95D221971C885CBB0004A3EF /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
-		95D221991C8869E70004A3EF /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
-		95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListRouter.swift; sourceTree = "<group>"; };
+		95308C3A1CBBB319001DD181 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
+		95308C3E1CBBB337001DD181 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		95308C3F1CBBB337001DD181 /* PhotoEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorModel.swift; sourceTree = "<group>"; };
+		95308C401CBBB337001DD181 /* PostAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAdapter.swift; sourceTree = "<group>"; };
+		95308C411CBBB337001DD181 /* StickersPickerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersPickerAdapter.swift; sourceTree = "<group>"; };
+		95308C7C1CBBB389001DD181 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
+		95308C7D1CBBB389001DD181 /* FeedToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedToolBar.swift; sourceTree = "<group>"; };
+		95308C7E1CBBB389001DD181 /* FeedToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedToolBar.xib; sourceTree = "<group>"; };
+		95308C7F1CBBB389001DD181 /* FollowerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerViewCell.swift; sourceTree = "<group>"; };
+		95308C801CBBB389001DD181 /* FollowerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerViewCell.xib; sourceTree = "<group>"; };
+		95308C811CBBB389001DD181 /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		95308C821CBBB389001DD181 /* PostViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostViewCell.xib; sourceTree = "<group>"; };
+		95308C841CBBB389001DD181 /* SwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
+		95308C851CBBB389001DD181 /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
+		95308C861CBBB389001DD181 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		95308C871CBBB389001DD181 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		95308C881CBBB389001DD181 /* StickerEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerEditorView.swift; sourceTree = "<group>"; };
+		95308C891CBBB389001DD181 /* StickersGroupHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersGroupHeaderView.swift; sourceTree = "<group>"; };
+		95308C8A1CBBB389001DD181 /* StickersGroupHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StickersGroupHeaderView.xib; sourceTree = "<group>"; };
+		95308C8B1CBBB389001DD181 /* StickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerViewCell.swift; sourceTree = "<group>"; };
+		95308C9C1CBBB3AA001DD181 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
+		95308C9D1CBBB3AA001DD181 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		95308C9E1CBBB3AA001DD181 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
+		95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
+		95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderHelper.swift; sourceTree = "<group>"; };
+		95308CA31CBBB3AA001DD181 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
+		95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
+		95308CA51CBBB3AA001DD181 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		95308CA61CBBB3AA001DD181 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
+		95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
+		95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
+		95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHelper.swift; sourceTree = "<group>"; };
+		95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
+		95308CAC1CBBB3AA001DD181 /* SaverService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaverService.swift; sourceTree = "<group>"; };
+		95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
+		95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
+		95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLoaderService.swift; sourceTree = "<group>"; };
+		95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
+		95308CB21CBBB3AA001DD181 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		95308CB31CBBB3AA001DD181 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
+		95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesCache.swift; sourceTree = "<group>"; };
+		95308CCE1CBBB3FF001DD181 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		95308CD11CBBB522001DD181 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95308CD51CBBB858001DD181 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		95308CD71CBBB858001DD181 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		95308CD81CBBB858001DD181 /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
+		95308CD91CBBB858001DD181 /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
+		95308CDA1CBBB858001DD181 /* NavigationControllerAppearanceContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAppearanceContext.swift; sourceTree = "<group>"; };
+		95308CDC1CBBB858001DD181 /* AuthorizationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationRouter.swift; sourceTree = "<group>"; };
+		95308CDD1CBBB858001DD181 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		95308CDF1CBBB858001DD181 /* EditProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileRouter.swift; sourceTree = "<group>"; };
+		95308CE01CBBB858001DD181 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		95308CE21CBBB858001DD181 /* FeedRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedRouter.swift; sourceTree = "<group>"; };
+		95308CE31CBBB858001DD181 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		95308CE51CBBB858001DD181 /* FollowersListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListRouter.swift; sourceTree = "<group>"; };
+		95308CE61CBBB858001DD181 /* FollowersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersListViewController.swift; sourceTree = "<group>"; };
+		95308CE81CBBB858001DD181 /* LaunchRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
+		95308CE91CBBB858001DD181 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		95308CEB1CBBB858001DD181 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		95308CEC1CBBB858001DD181 /* PhotoEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorRouter.swift; sourceTree = "<group>"; };
+		95308CED1CBBB858001DD181 /* PhotoEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditorViewController.swift; sourceTree = "<group>"; };
+		95308CEE1CBBB858001DD181 /* StickersPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersPickerViewController.swift; sourceTree = "<group>"; };
+		95308CF01CBBB858001DD181 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		95308CF11CBBB858001DD181 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		95308CF31CBBB858001DD181 /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		95308CF41CBBB858001DD181 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		95D57EA01C77636C007F1B6A /* Authorization.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Authorization.storyboard; sourceTree = "<group>"; };
 		95D57EA41C776477007F1B6A /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		95D57EA61C7764D5007F1B6A /* PhotoEditor.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotoEditor.storyboard; sourceTree = "<group>"; };
-		95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
-		95D6D7AE1C4E9036004E2145 /* ImageLoaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderHelper.swift; sourceTree = "<group>"; };
-		95D6D7B21C50998D004E2145 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		95E4A0711C58EA8700D52150 /* StickerEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerEditorView.swift; sourceTree = "<group>"; };
-		95E4A0751C58F47D00D52150 /* BorderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
-		95EDD8A01C96FA4D006FB001 /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceApplyingStrategy.swift; sourceTree = "<group>"; };
-		95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceNavigationController.swift; sourceTree = "<group>"; };
-		95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationControllerAppearanceContext.swift; sourceTree = "<group>"; };
 		95F780291C86F0520037D36E /* UIAlertController+ConfimAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+ConfimAction.swift"; sourceTree = "<group>"; };
 		B1ADE7E4A46923A3F2CE20E1 /* Pods-P-effect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P-effect.release.xcconfig"; path = "Pods/Target Support Files/Pods-P-effect/Pods-P-effect.release.xcconfig"; sourceTree = "<group>"; };
 		BA0D5660DDF81DF3E1E53DB7 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,38 +231,19 @@
 		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		FD27A26C1C6281170058203F /* UIApplication+AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+AppSettings.swift"; sourceTree = "<group>"; };
 		FD27A26E1C64A9080058203F /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "Pods/../build/Debug-iphoneos/libSDWebImage.a"; sourceTree = "<group>"; };
-		FD27A2721C64CFEC0058203F /* FeedToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedToolBar.xib; sourceTree = "<group>"; };
-		FD27A2741C64D09E0058203F /* FeedToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedToolBar.swift; sourceTree = "<group>"; };
 		FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFInstallation+User.swift"; sourceTree = "<group>"; };
 		FD3B4A061C5BF87F00F0FC52 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Debug-iphoneos/libBolts.a"; sourceTree = "<group>"; };
 		FD6C17BC1C49506100A01715 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FD73BB9E1C9717A3006B2EA3 /* RemoteNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHelper.swift; sourceTree = "<group>"; };
 		FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BaseColor.swift"; sourceTree = "<group>"; };
 		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
-		FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
-		FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ErrorType.swift"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF467D1C47E8AA008060CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF46A01C49369E008060CD /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
-		FDD0F0AD1C4E528700331799 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		FDD0F0AE1C4E528700331799 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
-		FDD0F0B11C4E528700331799 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
-		FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostAdapter.swift; sourceTree = "<group>"; };
 		FDD0F0BB1C4E52F300331799 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		FDD0F0BF1C4E535900331799 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FDEA23121C7341E9009EE533 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
-		FDEA23141C73434E009EE533 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		FDEA23161C734359009EE533 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
-		FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		FDF757261C89E6FB00D9ED68 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		FDF757281C89EDC100D9ED68 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
-		FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,36 +300,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		49FE57C31C4E63E500C4B30F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				7756358D1C9183EF0069EA4F /* SettingsViews */,
-				49FE57CA1C4E66E600C4B30F /* PostViewCell.swift */,
-				49FE57C51C4E63E500C4B30F /* PostViewCell.xib */,
-				492D17F61C5B9FE500D98404 /* StickerViewCell.swift */,
-				7787919A1C693CEF00DFF8C9 /* StickersGroupHeaderView.swift */,
-				771CD2311C6BB10F00383B41 /* StickersGroupHeaderView.xib */,
-				95E4A0711C58EA8700D52150 /* StickerEditorView.swift */,
-				95E4A0751C58F47D00D52150 /* BorderView.swift */,
-				FD27A2721C64CFEC0058203F /* FeedToolBar.xib */,
-				FD27A2741C64D09E0058203F /* FeedToolBar.swift */,
-				95D221931C8850E90004A3EF /* FollowerViewCell.swift */,
-				95D221951C8851020004A3EF /* FollowerViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		7756358D1C9183EF0069EA4F /* SettingsViews */ = {
-			isa = PBXGroup;
-			children = (
-				775635921C9184420069EA4F /* TextView.xib */,
-				775635A21C91A2D50069EA4F /* TextView.swift */,
-				7756359E1C9195D50069EA4F /* SwitchView.swift */,
-				775635941C91848B0069EA4F /* SwitchView.xib */,
-			);
-			name = SettingsViews;
-			sourceTree = "<group>";
-		};
 		77B42D211C6B760D00C5A999 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,15 +308,196 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
-		95EDD89F1C96FA4D006FB001 /* AppearanceNavigationController */ = {
+		95308C3C1CBBB337001DD181 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				95EDD8A01C96FA4D006FB001 /* Appearance.swift */,
-				95EDD8A11C96FA4D006FB001 /* AppearanceApplyingStrategy.swift */,
-				95EDD8A21C96FA4D006FB001 /* AppearanceNavigationController.swift */,
-				95EDD8A31C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift */,
+				95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */,
+				95308C3E1CBBB337001DD181 /* ImageViewModel.swift */,
+				95308C3F1CBBB337001DD181 /* PhotoEditorModel.swift */,
+				95308C401CBBB337001DD181 /* PostAdapter.swift */,
+				95308C411CBBB337001DD181 /* StickersPickerAdapter.swift */,
 			);
-			path = AppearanceNavigationController;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		95308C7B1CBBB389001DD181 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95308C7C1CBBB389001DD181 /* BorderView.swift */,
+				95308C7D1CBBB389001DD181 /* FeedToolBar.swift */,
+				95308C7E1CBBB389001DD181 /* FeedToolBar.xib */,
+				95308C7F1CBBB389001DD181 /* FollowerViewCell.swift */,
+				95308C801CBBB389001DD181 /* FollowerViewCell.xib */,
+				95308C811CBBB389001DD181 /* PostViewCell.swift */,
+				95308C821CBBB389001DD181 /* PostViewCell.xib */,
+				95308C831CBBB389001DD181 /* SettingsViews */,
+				95308C881CBBB389001DD181 /* StickerEditorView.swift */,
+				95308C891CBBB389001DD181 /* StickersGroupHeaderView.swift */,
+				95308C8A1CBBB389001DD181 /* StickersGroupHeaderView.xib */,
+				95308C8B1CBBB389001DD181 /* StickerViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		95308C831CBBB389001DD181 /* SettingsViews */ = {
+			isa = PBXGroup;
+			children = (
+				95308C841CBBB389001DD181 /* SwitchView.swift */,
+				95308C851CBBB389001DD181 /* SwitchView.xib */,
+				95308C861CBBB389001DD181 /* TextView.swift */,
+				95308C871CBBB389001DD181 /* TextView.xib */,
+			);
+			path = SettingsViews;
+			sourceTree = "<group>";
+		};
+		95308C9B1CBBB3AA001DD181 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				95308C9C1CBBB3AA001DD181 /* ActivityService.swift */,
+				95308C9D1CBBB3AA001DD181 /* AlertManager.swift */,
+				95308C9E1CBBB3AA001DD181 /* AuthService.swift */,
+				95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */,
+				95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */,
+				95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */,
+				95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */,
+				95308CA31CBBB3AA001DD181 /* LoaderService.swift */,
+				95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */,
+				95308CA51CBBB3AA001DD181 /* PostService.swift */,
+				95308CA61CBBB3AA001DD181 /* Presenter.swift */,
+				95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */,
+				95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */,
+				95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */,
+				95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */,
+				95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */,
+				95308CAC1CBBB3AA001DD181 /* SaverService.swift */,
+				95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */,
+				95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */,
+				95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */,
+				95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */,
+				95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */,
+				95308CB21CBBB3AA001DD181 /* UserService.swift */,
+				95308CB31CBBB3AA001DD181 /* ValidationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		95308CCC1CBBB3FF001DD181 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */,
+				95308CCE1CBBB3FF001DD181 /* Reachability.swift */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		95308CD31CBBB858001DD181 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				95308CD41CBBB858001DD181 /* Activity */,
+				95308CD61CBBB858001DD181 /* Appearance */,
+				95308CDB1CBBB858001DD181 /* Authorization */,
+				95308CDE1CBBB858001DD181 /* EditProfile */,
+				95308CE11CBBB858001DD181 /* Feed */,
+				95308CE41CBBB858001DD181 /* FollowersList */,
+				95308CE71CBBB858001DD181 /* Launch */,
+				95308CEA1CBBB858001DD181 /* PhotoEditor */,
+				95308CEF1CBBB858001DD181 /* Profile */,
+				95308CF21CBBB858001DD181 /* Settings */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		95308CD41CBBB858001DD181 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				95308CD51CBBB858001DD181 /* ActivityViewController.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		95308CD61CBBB858001DD181 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				95308CD71CBBB858001DD181 /* Appearance.swift */,
+				95308CD81CBBB858001DD181 /* AppearanceApplyingStrategy.swift */,
+				95308CD91CBBB858001DD181 /* AppearanceNavigationController.swift */,
+				95308CDA1CBBB858001DD181 /* NavigationControllerAppearanceContext.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		95308CDB1CBBB858001DD181 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				95308CDC1CBBB858001DD181 /* AuthorizationRouter.swift */,
+				95308CDD1CBBB858001DD181 /* AuthorizationViewController.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		95308CDE1CBBB858001DD181 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				95308CDF1CBBB858001DD181 /* EditProfileRouter.swift */,
+				95308CE01CBBB858001DD181 /* EditProfileViewController.swift */,
+			);
+			path = EditProfile;
+			sourceTree = "<group>";
+		};
+		95308CE11CBBB858001DD181 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				95308CE21CBBB858001DD181 /* FeedRouter.swift */,
+				95308CE31CBBB858001DD181 /* FeedViewController.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		95308CE41CBBB858001DD181 /* FollowersList */ = {
+			isa = PBXGroup;
+			children = (
+				95308CE51CBBB858001DD181 /* FollowersListRouter.swift */,
+				95308CE61CBBB858001DD181 /* FollowersListViewController.swift */,
+			);
+			path = FollowersList;
+			sourceTree = "<group>";
+		};
+		95308CE71CBBB858001DD181 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				95308CE81CBBB858001DD181 /* LaunchRouter.swift */,
+				95308CE91CBBB858001DD181 /* LaunchViewController.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		95308CEA1CBBB858001DD181 /* PhotoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				95308CEB1CBBB858001DD181 /* ImageViewController.swift */,
+				95308CEC1CBBB858001DD181 /* PhotoEditorRouter.swift */,
+				95308CED1CBBB858001DD181 /* PhotoEditorViewController.swift */,
+				95308CEE1CBBB858001DD181 /* StickersPickerViewController.swift */,
+			);
+			path = PhotoEditor;
+			sourceTree = "<group>";
+		};
+		95308CEF1CBBB858001DD181 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				95308CF01CBBB858001DD181 /* ProfileRouter.swift */,
+				95308CF11CBBB858001DD181 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		95308CF21CBBB858001DD181 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				95308CF31CBBB858001DD181 /* SettingsRouter.swift */,
+				95308CF41CBBB858001DD181 /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		FDAF46651C47E8AA008060CD = {
@@ -370,21 +524,13 @@
 			isa = PBXGroup;
 			children = (
 				FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */,
-				FDAF469F1C49369E008060CD /* AppDelegate */,
+				95308C3A1CBBB319001DD181 /* AppDelegate.swift */,
 				FDAF46A11C49369E008060CD /* Classes */,
 				FDAF46A71C49369E008060CD /* Misc */,
-				FDAF46AB1C49369E008060CD /* ThirdPartyLibs */,
+				95308CCC1CBBB3FF001DD181 /* External */,
 				FDAF46AA1C49369E008060CD /* Resources */,
 			);
 			path = "P-effect";
-			sourceTree = "<group>";
-		};
-		FDAF469F1C49369E008060CD /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				FDAF46A01C49369E008060CD /* AppDelegate.swift */,
-			);
-			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		FDAF46A11C49369E008060CD /* Classes */ = {
@@ -393,10 +539,10 @@
 				77B42D211C6B760D00C5A999 /* Layout */,
 				FDAF46A21C49369E008060CD /* DTO */,
 				FDAF46A31C49369E008060CD /* Model */,
-				FDAF46A41C49369E008060CD /* Service */,
-				49FE57C31C4E63E500C4B30F /* View */,
-				FDAF46A61C49369E008060CD /* ViewModel */,
-				FDAF46A51C49369E008060CD /* ViewController */,
+				95308C3C1CBBB337001DD181 /* ViewModels */,
+				95308C7B1CBBB389001DD181 /* Views */,
+				95308CD31CBBB858001DD181 /* ViewControllers */,
+				95308C9B1CBBB3AA001DD181 /* Services */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -421,75 +567,6 @@
 				492D17F41C5A186100D98404 /* StickersModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FDAF46A41C49369E008060CD /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				FDD0F0AD1C4E528700331799 /* AlertManager.swift */,
-				7734892C1C8752B700034B66 /* SettingsHelper.swift */,
-				FDD0F0AE1C4E528700331799 /* AuthService.swift */,
-				9521D01A1C735DF200683F87 /* StickersLoaderService.swift */,
-				95D6D7B21C50998D004E2145 /* ErrorHandler.swift */,
-				77D5295D1C60D90900C8932C /* ExceptionHandler.swift */,
-				95D6D7AE1C4E9036004E2145 /* ImageLoaderHelper.swift */,
-				FDD0F0B01C4E528700331799 /* PhotoGenerator.swift */,
-				FD7C431C1C60CC89003E4072 /* PushNotificationQueue.swift */,
-				77A362091C6239FD0095B0B5 /* ReachabilityHelper.swift */,
-				FDD0F0B11C4E528700331799 /* Presenter.swift */,
-				4904A1B51C526EA200F26E05 /* ValidationService.swift */,
-				FDEA23121C7341E9009EE533 /* ServiceLocator.swift */,
-				FDEA23141C73434E009EE533 /* UserService.swift */,
-				FDEA23161C734359009EE533 /* PostService.swift */,
-				497954631C7B497E0003B960 /* ToastActivityHelper.swift */,
-				FDF757281C89EDC100D9ED68 /* ActivityService.swift */,
-				7729BE6E1C888A7E00ECC707 /* RemoteNotificationManager.swift */,
-				496B6D281C89BB8900DED33F /* ComplaintService.swift */,
-				FD73BB9E1C9717A3006B2EA3 /* RemoteNotificationHelper.swift */,
-				956B860E1CA3E66300189577 /* SettingsMenu.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		FDAF46A51C49369E008060CD /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				95EDD89F1C96FA4D006FB001 /* AppearanceNavigationController */,
-				77752C971C7B396800DCED81 /* ProfileRouter.swift */,
-				497B87241C4D152C00A4A32B /* ProfileViewController.swift */,
-				77752C981C7B396800DCED81 /* PhotoEditorRouter.swift */,
-				499DD04A1C57964000DABCD5 /* PhotoEditorViewController.swift */,
-				77752C9A1C7B396800DCED81 /* FeedRouter.swift */,
-				95199AEA1C4CF6A00086D613 /* FeedViewController.swift */,
-				77752C9B1C7B396800DCED81 /* EditProfileRouter.swift */,
-				FD8EFA061C4FDCCC00B1C021 /* EditProfileViewController.swift */,
-				77752C9C1C7B396800DCED81 /* AuthorizationRouter.swift */,
-				95D6D7AC1C4E5E3B004E2145 /* AuthorizationViewController.swift */,
-				499DD04E1C579D3100DABCD5 /* StickersPickerViewController.swift */,
-				499DD0501C579EF200DABCD5 /* ImageViewController.swift */,
-				77C580651C85E96900345124 /* SettingsRouter.swift */,
-				77C580631C85E93D00345124 /* SettingsViewController.swift */,
-				77C580671C85F14800345124 /* CredentialsRouter.swift */,
-				77C580691C85F1ED00345124 /* CredentialsViewController.swift */,
-				95D2219B1C8888D90004A3EF /* FollowersListRouter.swift */,
-				95D221971C885CBB0004A3EF /* FollowersListViewController.swift */,
-				7729BE701C889EAA00ECC707 /* LaunchRouter.swift */,
-				77C0A4471C883C3A007852A0 /* LaunchViewController.swift */,
-				FDF757241C874E0E00D9ED68 /* ActivityViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		FDAF46A61C49369E008060CD /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				FDD0F0B91C4E52DD00331799 /* PostAdapter.swift */,
-				499DD04C1C579A4600DABCD5 /* PhotoEditorModel.swift */,
-				499DD0521C579F1300DABCD5 /* StickersPickerAdapter.swift */,
-				499DD0561C57DFD100DABCD5 /* ImageViewModel.swift */,
-				95D221991C8869E70004A3EF /* FollowerAdapter.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		FDAF46A71C49369E008060CD /* Misc */ = {
@@ -532,18 +609,9 @@
 				FDAF46AE1C4936CA008060CD /* Images */,
 				FDAF46AF1C4936CA008060CD /* Storyboards */,
 				FD6C17BC1C49506100A01715 /* Constants.swift */,
-				FDAF467D1C47E8AA008060CD /* Info.plist */,
+				95308CD11CBBB522001DD181 /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		FDAF46AB1C49369E008060CD /* ThirdPartyLibs */ = {
-			isa = PBXGroup;
-			children = (
-				FDF7572C1C89F8F100D9ED68 /* AttributesCache.swift */,
-				FDD0F0BF1C4E535900331799 /* Reachability.swift */,
-			);
-			path = ThirdPartyLibs;
 			sourceTree = "<group>";
 		};
 		FDAF46AE1C4936CA008060CD /* Images */ = {
@@ -580,6 +648,7 @@
 				FDAF466C1C47E8AA008060CD /* Resources */,
 				5C76BAE70F2FD16C4C0851EE /* 📦 Embed Pods Frameworks */,
 				AE797737D3B201BB8060F2E9 /* 📦 Copy Pods Resources */,
+				D9119DC22FD9CFE4F968A7C2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -678,18 +747,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				499DD0551C57D2D300DABCD5 /* Feed.storyboard in Resources */,
-				49FE57C71C4E63E500C4B30F /* PostViewCell.xib in Resources */,
-				FD27A2731C64CFEC0058203F /* FeedToolBar.xib in Resources */,
-				95D221961C8851020004A3EF /* FollowerViewCell.xib in Resources */,
+				95308C991CBBB389001DD181 /* StickersGroupHeaderView.xib in Resources */,
+				95308C921CBBB389001DD181 /* PostViewCell.xib in Resources */,
+				95308C8E1CBBB389001DD181 /* FeedToolBar.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
+				95308C961CBBB389001DD181 /* TextView.xib in Resources */,
+				95308CD21CBBB522001DD181 /* Info.plist in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
-				775635951C91848B0069EA4F /* SwitchView.xib in Resources */,
-				775635931C9184420069EA4F /* TextView.xib in Resources */,
+				95308C941CBBB389001DD181 /* SwitchView.xib in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */,
-				771CD2321C6BB10F00383B41 /* StickersGroupHeaderView.xib in Resources */,
+				95308C901CBBB389001DD181 /* FollowerViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +825,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P-effect/Pods-P-effect-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D9119DC22FD9CFE4F968A7C2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P-effect/Pods-P-effect-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -762,90 +847,91 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD8EFA071C4FDCCC00B1C021 /* EditProfileViewController.swift in Sources */,
-				499DD0531C579F1300DABCD5 /* StickersPickerAdapter.swift in Sources */,
-				499DD04B1C57964000DABCD5 /* PhotoEditorViewController.swift in Sources */,
-				775635A31C91A2D50069EA4F /* TextView.swift in Sources */,
-				95E4A0761C58F47D00D52150 /* BorderView.swift in Sources */,
-				95D2219C1C8888D90004A3EF /* FollowersListRouter.swift in Sources */,
-				77752CA21C7B396800DCED81 /* AuthorizationRouter.swift in Sources */,
+				95308C441CBBB337001DD181 /* PhotoEditorModel.swift in Sources */,
+				95308C431CBBB337001DD181 /* ImageViewModel.swift in Sources */,
 				FD27A26D1C6281170058203F /* UIApplication+AppSettings.swift in Sources */,
+				95308CFD1CBBB858001DD181 /* EditProfileViewController.swift in Sources */,
 				FD7C431B1C60AC04003E4072 /* UIImage+BaseImage.swift in Sources */,
-				499DD04D1C579A4600DABCD5 /* PhotoEditorModel.swift in Sources */,
-				7729BE6F1C888A7E00ECC707 /* RemoteNotificationManager.swift in Sources */,
-				49FE57CB1C4E66E600C4B30F /* PostViewCell.swift in Sources */,
-				77C580661C85E96900345124 /* SettingsRouter.swift in Sources */,
+				95308CF51CBBB858001DD181 /* ActivityViewController.swift in Sources */,
 				FD3B4A051C5BE9E300F0FC52 /* PFInstallation+User.swift in Sources */,
-				77D5295E1C60D90900C8932C /* ExceptionHandler.swift in Sources */,
-				77C0A4481C883C3A007852A0 /* LaunchViewController.swift in Sources */,
-				77752CA01C7B396800DCED81 /* FeedRouter.swift in Sources */,
-				77C580641C85E93D00345124 /* SettingsViewController.swift in Sources */,
-				95D221981C885CBB0004A3EF /* FollowersListViewController.swift in Sources */,
-				95EDD8A51C96FA4D006FB001 /* AppearanceApplyingStrategy.swift in Sources */,
-				95EDD8A71C96FA4D006FB001 /* NavigationControllerAppearanceContext.swift in Sources */,
-				FDF757251C874E0E00D9ED68 /* ActivityViewController.swift in Sources */,
-				499DD04F1C579D3100DABCD5 /* StickersPickerViewController.swift in Sources */,
-				FDD0F0B71C4E528700331799 /* Presenter.swift in Sources */,
-				95D2219A1C8869E70004A3EF /* FollowerAdapter.swift in Sources */,
+				95308CC61CBBB3AA001DD181 /* SettingsHelper.swift in Sources */,
+				95308C911CBBB389001DD181 /* PostViewCell.swift in Sources */,
+				95308C8F1CBBB389001DD181 /* FollowerViewCell.swift in Sources */,
+				95308CD01CBBB3FF001DD181 /* Reachability.swift in Sources */,
+				95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */,
+				95308C9A1CBBB389001DD181 /* StickerViewCell.swift in Sources */,
+				95308CBC1CBBB3AA001DD181 /* PhotoGenerator.swift in Sources */,
 				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
-				77752C9E1C7B396800DCED81 /* PhotoEditorRouter.swift in Sources */,
-				FD73BB9F1C9717A3006B2EA3 /* RemoteNotificationHelper.swift in Sources */,
-				7734892D1C8752B700034B66 /* SettingsHelper.swift in Sources */,
+				95308CFC1CBBB858001DD181 /* EditProfileRouter.swift in Sources */,
+				95308C8C1CBBB389001DD181 /* BorderView.swift in Sources */,
 				7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */,
 				77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */,
+				95308D031CBBB858001DD181 /* LaunchViewController.swift in Sources */,
+				95308D011CBBB858001DD181 /* FollowersListViewController.swift in Sources */,
+				95308C461CBBB337001DD181 /* StickersPickerAdapter.swift in Sources */,
+				95308CC81CBBB3AA001DD181 /* StickersLoaderService.swift in Sources */,
+				95308D071CBBB858001DD181 /* StickersPickerViewController.swift in Sources */,
+				95308CBA1CBBB3AA001DD181 /* ImageLoaderHelper.swift in Sources */,
+				95308CC41CBBB3AA001DD181 /* SaverService.swift in Sources */,
+				95308D081CBBB858001DD181 /* ProfileRouter.swift in Sources */,
+				95308CB51CBBB3AA001DD181 /* AlertManager.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
-				FDEA23131C7341E9009EE533 /* ServiceLocator.swift in Sources */,
-				497B87251C4D152C00A4A32B /* ProfileViewController.swift in Sources */,
-				499DD0511C579EF200DABCD5 /* ImageViewController.swift in Sources */,
-				FD27A2751C64D09E0058203F /* FeedToolBar.swift in Sources */,
-				9521D01B1C735DF200683F87 /* StickersLoaderService.swift in Sources */,
+				95308CB81CBBB3AA001DD181 /* ErrorHandler.swift in Sources */,
+				95308CCB1CBBB3AA001DD181 /* ValidationService.swift in Sources */,
+				95308CF81CBBB858001DD181 /* AppearanceNavigationController.swift in Sources */,
+				95308CFA1CBBB858001DD181 /* AuthorizationRouter.swift in Sources */,
+				95308CB91CBBB3AA001DD181 /* ExceptionHandler.swift in Sources */,
 				492D17F11C5A024E00D98404 /* StickersVersion.swift in Sources */,
-				FDEA23171C734359009EE533 /* PostService.swift in Sources */,
-				FDEA23151C73434E009EE533 /* UserService.swift in Sources */,
-				FD7C431D1C60CC89003E4072 /* PushNotificationQueue.swift in Sources */,
+				95308CF61CBBB858001DD181 /* Appearance.swift in Sources */,
+				95308CBE1CBBB3AA001DD181 /* Presenter.swift in Sources */,
+				95308C971CBBB389001DD181 /* StickerEditorView.swift in Sources */,
 				492D17F31C5A027D00D98404 /* Sticker.swift in Sources */,
 				FDD0F0BC1C4E52F300331799 /* Post.swift in Sources */,
-				7756359F1C9195D50069EA4F /* SwitchView.swift in Sources */,
-				FDD0F0B31C4E528700331799 /* AlertManager.swift in Sources */,
-				95D6D7AD1C4E5E3B004E2145 /* AuthorizationViewController.swift in Sources */,
-				95D221941C8850E90004A3EF /* FollowerViewCell.swift in Sources */,
+				95308D021CBBB858001DD181 /* LaunchRouter.swift in Sources */,
+				95308C931CBBB389001DD181 /* SwitchView.swift in Sources */,
+				95308D051CBBB858001DD181 /* PhotoEditorRouter.swift in Sources */,
+				95308C981CBBB389001DD181 /* StickersGroupHeaderView.swift in Sources */,
+				95308D091CBBB858001DD181 /* ProfileViewController.swift in Sources */,
+				95308D0A1CBBB858001DD181 /* SettingsRouter.swift in Sources */,
+				95308CC01CBBB3AA001DD181 /* ReachabilityHelper.swift in Sources */,
 				771E3E801C74CB22000608EF /* CellInterface.swift in Sources */,
-				77A3620A1C6239FD0095B0B5 /* ReachabilityHelper.swift in Sources */,
-				FDF757291C89EDC100D9ED68 /* ActivityService.swift in Sources */,
-				FDD0F0B61C4E528700331799 /* PhotoGenerator.swift in Sources */,
-				95D6D7AF1C4E9036004E2145 /* ImageLoaderHelper.swift in Sources */,
-				77752CA11C7B396800DCED81 /* EditProfileRouter.swift in Sources */,
 				95F7802A1C86F0520037D36E /* UIAlertController+ConfimAction.swift in Sources */,
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
-				95EDD8A41C96FA4D006FB001 /* Appearance.swift in Sources */,
-				FDAF46AC1C49369E008060CD /* AppDelegate.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* StickersModel.swift in Sources */,
-				FDF7572D1C89F8F100D9ED68 /* AttributesCache.swift in Sources */,
-				7787919B1C693CEF00DFF8C9 /* StickersGroupHeaderView.swift in Sources */,
-				4904A1B61C526EA200F26E05 /* ValidationService.swift in Sources */,
-				492D17F71C5B9FE500D98404 /* StickerViewCell.swift in Sources */,
-				95D6D7B31C50998D004E2145 /* ErrorHandler.swift in Sources */,
+				95308CBB1CBBB3AA001DD181 /* LoaderService.swift in Sources */,
+				95308CC51CBBB3AA001DD181 /* ServiceLocator.swift in Sources */,
+				95308CB71CBBB3AA001DD181 /* ComplaintService.swift in Sources */,
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
-				499DD0571C57DFD100DABCD5 /* ImageViewModel.swift in Sources */,
+				95308CFE1CBBB858001DD181 /* FeedRouter.swift in Sources */,
+				95308CC31CBBB3AA001DD181 /* RemoteNotificationManager.swift in Sources */,
+				95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */,
+				95308CFB1CBBB858001DD181 /* AuthorizationViewController.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* StickersGroup.swift in Sources */,
-				496B6D291C89BB8900DED33F /* ComplaintService.swift in Sources */,
+				95308CC11CBBB3AA001DD181 /* ReachabilityService.swift in Sources */,
+				95308CB41CBBB3AA001DD181 /* ActivityService.swift in Sources */,
+				95308D0B1CBBB858001DD181 /* SettingsViewController.swift in Sources */,
+				95308D041CBBB858001DD181 /* ImageViewController.swift in Sources */,
+				95308CFF1CBBB858001DD181 /* FeedViewController.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,
-				77C5806A1C85F1ED00345124 /* CredentialsViewController.swift in Sources */,
-				956B860F1CA3E66300189577 /* SettingsMenu.swift in Sources */,
-				95199AEB1C4CF6A00086D613 /* FeedViewController.swift in Sources */,
-				77C580681C85F14800345124 /* CredentialsRouter.swift in Sources */,
-				FDD0F0BA1C4E52DD00331799 /* PostAdapter.swift in Sources */,
-				77752C9D1C7B396800DCED81 /* ProfileRouter.swift in Sources */,
-				497954641C7B497E0003B960 /* ToastActivityHelper.swift in Sources */,
+				95308C421CBBB337001DD181 /* FollowerAdapter.swift in Sources */,
+				95308CF91CBBB858001DD181 /* NavigationControllerAppearanceContext.swift in Sources */,
+				95308CF71CBBB858001DD181 /* AppearanceApplyingStrategy.swift in Sources */,
+				95308C951CBBB389001DD181 /* TextView.swift in Sources */,
+				95308CB61CBBB3AA001DD181 /* AuthService.swift in Sources */,
+				95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */,
+				95308CCA1CBBB3AA001DD181 /* UserService.swift in Sources */,
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
-				95E4A0721C58EA8700D52150 /* StickerEditorView.swift in Sources */,
-				FDD0F0C01C4E535900331799 /* Reachability.swift in Sources */,
-				7729BE711C889EAA00ECC707 /* LaunchRouter.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* StickersLayout.swift in Sources */,
-				95EDD8A61C96FA4D006FB001 /* AppearanceNavigationController.swift in Sources */,
+				95308C451CBBB337001DD181 /* PostAdapter.swift in Sources */,
 				FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */,
-				FDD0F0B41C4E528700331799 /* AuthService.swift in Sources */,
+				95308CC91CBBB3AA001DD181 /* ToastActivityHelper.swift in Sources */,
+				95308D061CBBB858001DD181 /* PhotoEditorViewController.swift in Sources */,
+				95308CCF1CBBB3FF001DD181 /* AttributesCache.swift in Sources */,
+				95308D001CBBB858001DD181 /* FollowersListRouter.swift in Sources */,
+				95308C3B1CBBB319001DD181 /* AppDelegate.swift in Sources */,
+				95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */,
+				95308C8D1CBBB389001DD181 /* FeedToolBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
