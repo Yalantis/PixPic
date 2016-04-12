@@ -50,7 +50,7 @@ extension AlertManagerDelegate {
                 duration: 3.0,
                 position: CSToastPositionTop,
                 title: title,
-                image: UIImage(named: "ic_notification"),
+                image: UIImage(named: "icon_notification"),
                 style: nil,
                 completion: { [weak self] didTap in
                     if didTap {
