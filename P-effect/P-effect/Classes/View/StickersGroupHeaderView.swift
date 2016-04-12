@@ -9,9 +9,7 @@
 import Foundation
 
 class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
-    
-    static let identifier = "StickersGroupHeaderViewIdentifier"
-    
+        
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!

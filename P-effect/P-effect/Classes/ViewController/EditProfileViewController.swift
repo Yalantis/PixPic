@@ -137,7 +137,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         navigationItem.rightBarButtonItem = rightButton
         
         let leftButton = UIBarButtonItem(
-            image: UIImage.appBackButton(),
+            image: UIImage.appBackButton,
             style: .Plain,
             target: self,
             action: #selector(handleBackButtonTap)

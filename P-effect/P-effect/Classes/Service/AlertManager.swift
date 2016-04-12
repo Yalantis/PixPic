@@ -27,7 +27,7 @@ extension AlertManagerDelegate {
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
         let title = notification
         var message = message
-        guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
+        guard let notificationObject = RemoteNotificationParser.parse(userInfo) else  {
             return
         }
         
@@ -100,7 +100,7 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            if let notificationObject = RemoteNotificationHelper.parse(userInfo) {
+            if let notificationObject = RemoteNotificationParser.parse(userInfo) {
                 switch notificationObject {
                 case .NewFollower(_, let userId):
                     delegate?.showProfile(userId)

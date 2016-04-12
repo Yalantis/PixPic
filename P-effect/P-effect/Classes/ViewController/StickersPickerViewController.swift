@@ -31,7 +31,7 @@ class StickersPickerViewController: UICollectionViewController {
         collectionView!.registerNib(
             StickersGroupHeaderView.cellNib,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
-            withReuseIdentifier: StickersGroupHeaderView.identifier
+            withReuseIdentifier: StickersGroupHeaderView.id
         )        
         collectionView!.collectionViewLayout = StickersLayout()
         collectionView!.dataSource = stickersPickerAdapter
