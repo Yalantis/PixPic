@@ -49,16 +49,13 @@
 		95308CB81CBBB3AA001DD181 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */; };
 		95308CB91CBBB3AA001DD181 /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */; };
 		95308CBA1CBBB3AA001DD181 /* ImageLoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */; };
-		95308CBB1CBBB3AA001DD181 /* LoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA31CBBB3AA001DD181 /* LoaderService.swift */; };
 		95308CBC1CBBB3AA001DD181 /* PhotoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */; };
 		95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA51CBBB3AA001DD181 /* PostService.swift */; };
 		95308CBE1CBBB3AA001DD181 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA61CBBB3AA001DD181 /* Presenter.swift */; };
 		95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */; };
 		95308CC01CBBB3AA001DD181 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */; };
-		95308CC11CBBB3AA001DD181 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */; };
 		95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */; };
 		95308CC31CBBB3AA001DD181 /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */; };
-		95308CC41CBBB3AA001DD181 /* SaverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAC1CBBB3AA001DD181 /* SaverService.swift */; };
 		95308CC51CBBB3AA001DD181 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */; };
 		95308CC61CBBB3AA001DD181 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */; };
 		95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */; };
@@ -113,23 +110,6 @@
 		FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF757261C89E6FB00D9ED68 /* Activity.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		FDAF46831C47E8AB008060CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FDAF46661C47E8AA008060CD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FDAF466D1C47E8AA008060CD;
-			remoteInfo = "P-effect";
-		};
-		FDAF468E1C47E8AB008060CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FDAF46661C47E8AA008060CD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = FDAF466D1C47E8AA008060CD;
-			remoteInfo = "P-effect";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		492D17EE1C5A00EE00D98404 /* StickersGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersGroup.swift; sourceTree = "<group>"; };
 		492D17F01C5A024E00D98404 /* StickersVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersVersion.swift; sourceTree = "<group>"; };
@@ -173,16 +153,13 @@
 		95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderHelper.swift; sourceTree = "<group>"; };
-		95308CA31CBBB3AA001DD181 /* LoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderService.swift; sourceTree = "<group>"; };
 		95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoGenerator.swift; sourceTree = "<group>"; };
 		95308CA51CBBB3AA001DD181 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		95308CA61CBBB3AA001DD181 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
 		95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
-		95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityService.swift; sourceTree = "<group>"; };
 		95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHelper.swift; sourceTree = "<group>"; };
 		95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
-		95308CAC1CBBB3AA001DD181 /* SaverService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaverService.swift; sourceTree = "<group>"; };
 		95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
@@ -238,8 +215,6 @@
 		FD7C431A1C60AC04003E4072 /* UIImage+BaseImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+BaseImage.swift"; sourceTree = "<group>"; };
 		FD9D83681C7521B100D6495D /* NSError+ErrorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+ErrorType.swift"; sourceTree = "<group>"; };
 		FDAF466E1C47E8AA008060CD /* P-effect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P-effect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF46821C47E8AB008060CD /* P-effectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "P-effectUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDAF46B61C493871008060CD /* P-effect-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "P-effect-Bridging-Header.h"; sourceTree = "<group>"; };
 		FDD0F0BB1C4E52F300331799 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FDE508D31C49482F003C772B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -256,20 +231,6 @@
 				FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */,
 				FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */,
 				7A649FE17AF60EB2C2115AEC /* Pods_P_effect.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDAF467F1C47E8AB008060CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDAF468A1C47E8AB008060CD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,16 +321,13 @@
 				95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */,
 				95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */,
 				95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */,
-				95308CA31CBBB3AA001DD181 /* LoaderService.swift */,
 				95308CA41CBBB3AA001DD181 /* PhotoGenerator.swift */,
 				95308CA51CBBB3AA001DD181 /* PostService.swift */,
 				95308CA61CBBB3AA001DD181 /* Presenter.swift */,
 				95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */,
 				95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */,
-				95308CA91CBBB3AA001DD181 /* ReachabilityService.swift */,
 				95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */,
 				95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */,
-				95308CAC1CBBB3AA001DD181 /* SaverService.swift */,
 				95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */,
 				95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */,
 				95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */,
@@ -514,8 +472,6 @@
 			isa = PBXGroup;
 			children = (
 				FDAF466E1C47E8AA008060CD /* P-effect.app */,
-				FDAF46821C47E8AB008060CD /* P-effectTests.xctest */,
-				FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -659,42 +615,6 @@
 			productReference = FDAF466E1C47E8AA008060CD /* P-effect.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FDAF46811C47E8AB008060CD /* P-effectTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FDAF46991C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectTests" */;
-			buildPhases = (
-				FDAF467E1C47E8AB008060CD /* Sources */,
-				FDAF467F1C47E8AB008060CD /* Frameworks */,
-				FDAF46801C47E8AB008060CD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FDAF46841C47E8AB008060CD /* PBXTargetDependency */,
-			);
-			name = "P-effectTests";
-			productName = "P-effectTests";
-			productReference = FDAF46821C47E8AB008060CD /* P-effectTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		FDAF468C1C47E8AB008060CD /* P-effectUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FDAF469C1C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectUITests" */;
-			buildPhases = (
-				FDAF46891C47E8AB008060CD /* Sources */,
-				FDAF468A1C47E8AB008060CD /* Frameworks */,
-				FDAF468B1C47E8AB008060CD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FDAF468F1C47E8AB008060CD /* PBXTargetDependency */,
-			);
-			name = "P-effectUITests";
-			productName = "P-effectUITests";
-			productReference = FDAF468D1C47E8AB008060CD /* P-effectUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -708,16 +628,6 @@
 					FDAF466D1C47E8AA008060CD = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = UCN646ZLE7;
-					};
-					FDAF46811C47E8AB008060CD = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = UCN646ZLE7;
-						TestTargetID = FDAF466D1C47E8AA008060CD;
-					};
-					FDAF468C1C47E8AB008060CD = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = UCN646ZLE7;
-						TestTargetID = FDAF466D1C47E8AA008060CD;
 					};
 				};
 			};
@@ -735,8 +645,6 @@
 			projectRoot = "";
 			targets = (
 				FDAF466D1C47E8AA008060CD /* P-effect */,
-				FDAF46811C47E8AB008060CD /* P-effectTests */,
-				FDAF468C1C47E8AB008060CD /* P-effectUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -760,20 +668,6 @@
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */,
 				95308C901CBBB389001DD181 /* FollowerViewCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDAF46801C47E8AB008060CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDAF468B1C47E8AB008060CD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,7 +766,6 @@
 				95308CC81CBBB3AA001DD181 /* StickersLoaderService.swift in Sources */,
 				95308D071CBBB858001DD181 /* StickersPickerViewController.swift in Sources */,
 				95308CBA1CBBB3AA001DD181 /* ImageLoaderHelper.swift in Sources */,
-				95308CC41CBBB3AA001DD181 /* SaverService.swift in Sources */,
 				95308D081CBBB858001DD181 /* ProfileRouter.swift in Sources */,
 				95308CB51CBBB3AA001DD181 /* AlertManager.swift in Sources */,
 				FDE508D41C49482F003C772B /* User.swift in Sources */,
@@ -899,7 +792,6 @@
 				FD27A2671C620ECE0058203F /* UIView+Effects.swift in Sources */,
 				FD9D83691C7521B100D6495D /* NSError+ErrorType.swift in Sources */,
 				492D17F51C5A186100D98404 /* StickersModel.swift in Sources */,
-				95308CBB1CBBB3AA001DD181 /* LoaderService.swift in Sources */,
 				95308CC51CBBB3AA001DD181 /* ServiceLocator.swift in Sources */,
 				95308CB71CBBB3AA001DD181 /* ComplaintService.swift in Sources */,
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
@@ -908,7 +800,6 @@
 				95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */,
 				95308CFB1CBBB858001DD181 /* AuthorizationViewController.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* StickersGroup.swift in Sources */,
-				95308CC11CBBB3AA001DD181 /* ReachabilityService.swift in Sources */,
 				95308CB41CBBB3AA001DD181 /* ActivityService.swift in Sources */,
 				95308D0B1CBBB858001DD181 /* SettingsViewController.swift in Sources */,
 				95308D041CBBB858001DD181 /* ImageViewController.swift in Sources */,
@@ -935,34 +826,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FDAF467E1C47E8AB008060CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FDAF46891C47E8AB008060CD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		FDAF46841C47E8AB008060CD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FDAF466D1C47E8AA008060CD /* P-effect */;
-			targetProxy = FDAF46831C47E8AB008060CD /* PBXContainerItemProxy */;
-		};
-		FDAF468F1C47E8AB008060CD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = FDAF466D1C47E8AA008060CD /* P-effect */;
-			targetProxy = FDAF468E1C47E8AB008060CD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FDAF46941C47E8AB008060CD /* Debug */ = {
@@ -1068,7 +932,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "P-effect/Info.plist";
+				INFOPLIST_FILE = "P-effect/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1096,7 +960,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = "P-effect/Info.plist";
+				INFOPLIST_FILE = "P-effect/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1107,54 +971,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
 				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
-			};
-			name = Release;
-		};
-		FDAF469A1C47E8AB008060CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "P-effectTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effectTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P-effect.app/P-effect";
-			};
-			name = Debug;
-		};
-		FDAF469B1C47E8AB008060CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "P-effectTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effectTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/P-effect.app/P-effect";
-			};
-			name = Release;
-		};
-		FDAF469D1C47E8AB008060CD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "P-effectUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effectUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "P-effect";
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		FDAF469E1C47E8AB008060CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "P-effectUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Yal.P-effectUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = "P-effect";
-				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -1175,24 +991,6 @@
 			buildConfigurations = (
 				FDAF46971C47E8AB008060CD /* Debug */,
 				FDAF46981C47E8AB008060CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FDAF46991C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FDAF469A1C47E8AB008060CD /* Debug */,
-				FDAF469B1C47E8AB008060CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FDAF469C1C47E8AB008060CD /* Build configuration list for PBXNativeTarget "P-effectUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FDAF469D1C47E8AB008060CD /* Debug */,
-				FDAF469E1C47E8AB008060CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
