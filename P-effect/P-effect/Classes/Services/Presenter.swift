@@ -142,23 +142,6 @@ extension SettingsPresenter {
     
 }
 
-protocol CredentialsPresenter: PresenterType {
-    
-    func showCredentials()
-    
-}
-
-extension CredentialsPresenter {
-    
-    func showCredentials() {
-        let credentialsRouter = CredentialsRouter(locator: locator)
-        if let appearanceController = currentViewController.navigationController as? AppearanceNavigationController {
-            credentialsRouter.execute(appearanceController)
-        }
-    }
-    
-}
-
 protocol FollowersListPresenter: PresenterType {
     
     func showFollowersList(user: User, followType: FollowType)
