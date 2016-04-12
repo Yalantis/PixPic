@@ -146,7 +146,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QXO-7N-2az">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="edit_icon" id="xc4-g0-tKg">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon_edit" id="xc4-g0-tKg">
                             <color key="tintColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="profileSettings" destination="Lav-xa-cbI" id="jit-0F-JSQ"/>
@@ -323,6 +323,6 @@
     <resources>
         <image name="btn_follow" width="129" height="35"/>
         <image name="btn_following" width="129" height="35"/>
-        <image name="edit_icon" width="28" height="28"/>
+        <image name="icon_edit" width="28" height="28"/>
     </resources>
 </document>

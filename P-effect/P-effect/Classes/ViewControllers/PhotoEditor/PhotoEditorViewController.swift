@@ -122,14 +122,14 @@ extension PhotoEditorViewController {
         navigationItem.leftBarButtonItem = newBackButton
         
         let savingButton = UIBarButtonItem(
-            image: UIImage(named: "save"),
+            image: UIImage(named: "icon_save"),
             style: .Plain,
             target: self,
             action: #selector(saveImageToCameraRoll)
         )
         
         let allStickerssRemovingButton = UIBarButtonItem(
-            image: UIImage(named: "remove"),
+            image: UIImage(named: "icon_remove"),
             style: .Plain,
             target: self,
             action: #selector(removeAllStickers)

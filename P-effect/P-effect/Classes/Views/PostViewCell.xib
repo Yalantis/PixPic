@@ -107,7 +107,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uy-cf-7cD">
                                         <rect key="frame" x="313" y="453" width="28" height="22"/>
-                                        <state key="normal" image="more_icon"/>
+                                        <state key="normal" image="icon_more"/>
                                         <connections>
                                             <action selector="didTapSettingsButton" destination="wTx-Av-Y8L" eventType="touchUpInside" id="KDQ-VB-JSF"/>
                                         </connections>
@@ -181,6 +181,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="more_icon" width="28" height="6"/>
+        <image name="icon_more" width="28" height="6"/>
     </resources>
 </document>
