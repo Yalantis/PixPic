@@ -1,5 +1,5 @@
 //
-//  RemoteNotificationManager.swift
+//  RemoteNotificationHelper.swift
 //  P-effect
 //
 //  Created by Jack Lapin on 14.03.16.
@@ -8,20 +8,39 @@
 
 import Foundation
 
-class RemoteNotificationHelper {
+enum RemoteNotificationObject {
     
-    static func switchNotificationAvailbilityState(to enabled: Bool) {
-        let application = UIApplication.sharedApplication()
-        if enabled {
-            let settings = UIUserNotificationSettings(
-                forTypes: [.Alert, .Badge, .Sound],
-                categories: nil
-            )
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        } else {
-            application.unregisterForRemoteNotifications()
+    case NewPost(message: String, postId: String)
+    case NewFollower(message: String, followerId: String)
+    
+}
+
+final class RemoteNotificationParser {
+    
+    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject? {
+        guard let type = userInfo?["t"] as? String,
+            aps = userInfo?["aps"] as? [String: AnyObject],
+            message = aps["alert"] as? String else {
+                return nil
         }
+        
+        switch type {
+        case "p":
+            if let postId = userInfo?["postid"] as? String {
+                return RemoteNotificationObject.NewPost(message: message, postId: postId)
+            }
+            
+        case "f":
+            if let followerId = userInfo?["fromUserId"] as? String {
+                return RemoteNotificationObject.NewFollower(message: message, followerId: followerId)
+            }
+            
+        default:
+            break
+        }
+        return nil
     }
     
 }
+
+
