@@ -59,7 +59,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
     }
     
     override func viewWillDisappear(animated: Bool) {

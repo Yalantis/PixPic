@@ -51,7 +51,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
         tableView.reloadData()
     }
     

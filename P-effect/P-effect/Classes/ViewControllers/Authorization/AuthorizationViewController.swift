@@ -23,7 +23,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
     }
     
     // MARK: - Setup methods

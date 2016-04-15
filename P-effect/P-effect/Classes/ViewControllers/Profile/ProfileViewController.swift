@@ -59,7 +59,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
         fillFollowersQuantity(user!)
     }
     
