@@ -16,17 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTD-CW-fGF">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTD-CW-fGF">
                                 <rect key="frame" x="179" y="277" width="242" height="46"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                <state key="normal" title="Log in with Facebook" image="facebook_icon" backgroundImage="facebook_login_btn">
+                                <state key="normal" title="Log in with Facebook" image="icon_facebook" backgroundImage="btn_facebook_login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="facebook_login_btn_pressed"/>
+                                <state key="highlighted" backgroundImage="btn_facebook_login_pressed"/>
                                 <connections>
                                     <action selector="logInWithFBButtonTapped" destination="vXq-ZV-3AE" eventType="touchUpInside" id="nDa-qJ-sPr"/>
                                 </connections>
@@ -45,8 +45,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="facebook_icon" width="10" height="20"/>
-        <image name="facebook_login_btn" width="242" height="46"/>
-        <image name="facebook_login_btn_pressed" width="242" height="46"/>
+        <image name="btn_facebook_login" width="242" height="46"/>
+        <image name="btn_facebook_login_pressed" width="242" height="46"/>
+        <image name="icon_facebook" width="10" height="20"/>
     </resources>
 </document>
