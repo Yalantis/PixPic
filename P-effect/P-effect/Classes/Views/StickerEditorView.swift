@@ -135,7 +135,8 @@ class StickerEditorView: UIView {
     
     private func updateControlsPosition() {
         deleteControl.center = CGPointMake(borderView.frame.origin.x, borderView.frame.origin.y)
-        resizingControl.center = CGPointMake(borderView.frame.origin.x + borderView.frame.size.width, borderView.frame.origin.y + borderView.frame.size.height)
+        resizingControl.center = CGPointMake(borderView.frame.origin.x + borderView.frame.size.width,
+                                             borderView.frame.origin.y + borderView.frame.size.height)
     }
     
     private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {

@@ -14,7 +14,8 @@ class StickerEditorViewControl: UIImageView {
         super.init(image: image)
         
         self.addGestureRecognizer(gestureRecognizer)
-        self.frame = CGRectMake(0, 0,
+        self.frame = CGRectMake(0,
+                                0,
                                 Constants.StickerEditor.StickerViewControlSize,
                                 Constants.StickerEditor.StickerViewControlSize)
         
