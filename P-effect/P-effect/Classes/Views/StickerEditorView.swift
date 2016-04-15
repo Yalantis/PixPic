@@ -14,8 +14,8 @@ class StickerEditorView: UIView {
     private var previousPoint: CGPoint?
     private var deltaAngle: CGFloat?
     
-    private var resizingControl: UIImageView!
-    private var deleteControl: UIImageView!
+    private var resizingControl: StickerEditorViewControl!
+    private var deleteControl: StickerEditorViewControl!
     private var borderView: BorderView!
     
     init(image: UIImage) {
@@ -46,33 +46,24 @@ class StickerEditorView: UIView {
     }
     
     private func setupDefaultAttributes() {
-        let borderViewFrame = CGRectInset(bounds,
+        let borderViewFrame = CGRectInset(
+            bounds,
             Constants.StickerEditor.UserResizableViewGlobalInset,
-            Constants.StickerEditor.UserResizableViewGlobalInset)
+            Constants.StickerEditor.UserResizableViewGlobalInset
+        )
         
         borderView = BorderView(frame: borderViewFrame)
         addSubview(borderView)
         
-        let deleteControlFrame = CGRectMake(0, 0,
-            Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize)
-        let deleteControlImage = UIImage(named: "delete_control")
-        deleteControl = createControlWithFrame(deleteControlFrame, image: deleteControlImage)
-        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTap(_:)))
-        deleteControl.addGestureRecognizer(singleTap)
+        deleteControl = StickerEditorViewControl(image: UIImage(named: "delete_control"), gestureRecognizer: singleTap)
         addSubview(deleteControl)
         
-        let resizingControlFrame = CGRectMake(frame.size.width - Constants.StickerEditor.StickerViewControlSize,
-            frame.size.height - Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize)
-        let resizingControlImage = UIImage(named: "resize_control")
-        resizingControl = createControlWithFrame(resizingControlFrame, image: resizingControlImage)
-        
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: #selector(resizeTranslate(_:)))
-        resizingControl.addGestureRecognizer(panResizeGesture)
+        resizingControl = StickerEditorViewControl(image: UIImage(named: "resize_control"), gestureRecognizer: panResizeGesture)
         addSubview(resizingControl)
+        
+        updateControlsPosition()
         
         deltaAngle = atan2(frame.origin.y + frame.height - center.y, frame.origin.x + frame.width - center.x)
     }
@@ -82,11 +73,11 @@ class StickerEditorView: UIView {
         contentView.backgroundColor = UIColor.clearColor()
         contentView.addSubview(content)
         
-        contentView.frame = CGRectInset(bounds,
-            Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
-            Constants.StickerEditor.UserResizableViewGlobalInset +
-                Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
+        contentView.frame = CGRectInset(
+            bounds,
+            Constants.StickerEditor.UserResizableViewGlobalInset + Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
+            Constants.StickerEditor.UserResizableViewGlobalInset + Constants.StickerEditor.UserResizableViewInteractiveBorderSize
+        )
         
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         
@@ -121,48 +112,47 @@ class StickerEditorView: UIView {
             previousPoint = recognizer.locationInView(self)
             setNeedsDisplay()
         }
+        updateControlsPosition()
     }
     
     private func resizeView(recognizer: UIPanGestureRecognizer) {
         let point = recognizer.locationInView(self)
-        guard let previousWidth = previousPoint?.x else {
+        guard let previousPoint = previousPoint else {
             return
         }
-        let widthChange = point.x - previousWidth
+        let widthChange = point.x - previousPoint.x
         let widthRatioChange = widthChange / bounds.size.width
-        let heightChange = widthRatioChange * bounds.size.height
         
-        bounds = CGRectMake(bounds.origin.x,
-            bounds.origin.y,
-            bounds.size.width + widthChange,
-            bounds.size.height + heightChange)
+        let heightChange = point.y - previousPoint.y
+        let heightRatioChange = heightChange / bounds.size.height
         
-        resizingControl.frame = CGRectMake(bounds.size.width - Constants.StickerEditor.StickerViewControlSize,
-            bounds.size.height - Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize)
+        let totalRatio = (1 + widthRatioChange) * (1 + heightRatioChange)
         
-        deleteControl.frame = CGRectMake(0, 0,
-            Constants.StickerEditor.StickerViewControlSize,
-            Constants.StickerEditor.StickerViewControlSize)
-        
-        previousPoint = recognizer.locationOfTouch(0, inView: self)
+        bounds = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width * totalRatio, bounds.size.height * totalRatio)
+        updateControlsPosition()
+        self.previousPoint = recognizer.locationOfTouch(0, inView: self)
+    }
+    
+    private func updateControlsPosition() {
+        deleteControl.center = CGPointMake(borderView.frame.origin.x, borderView.frame.origin.y)
+        resizingControl.center = CGPointMake(borderView.frame.origin.x + borderView.frame.size.width,
+                                             borderView.frame.origin.y + borderView.frame.size.height)
     }
     
     private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
         let angle = atan2(recognizer.locationInView(superview).y - center.y,
-            recognizer.locationInView(superview).x - center.x)
+                          recognizer.locationInView(superview).x - center.x)
         
         if let deltaAngle = deltaAngle {
             let angleDiff = deltaAngle - angle
             transform = CGAffineTransformMakeRotation(-angleDiff)
         }
         
-        borderView.frame = CGRectInset(bounds,
-            Constants.StickerEditor.UserResizableViewGlobalInset,
-            Constants.StickerEditor.UserResizableViewGlobalInset)
+        borderView.frame = CGRectInset(bounds, Constants.StickerEditor.UserResizableViewGlobalInset,
+                                       Constants.StickerEditor.UserResizableViewGlobalInset)
         borderView.setNeedsDisplay()
         setNeedsDisplay()
+        updateControlsPosition()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -209,16 +199,20 @@ class StickerEditorView: UIView {
         }
     }
     
-    private func createControlWithFrame(frame: CGRect, image: UIImage?) -> UIImageView {
-        let control = UIImageView(frame: frame)
-        control.layer.cornerRadius = control.frame.width / 2
-        control.backgroundColor = UIColor.appWhiteColor
-        if let image = image {
-            control.image = image
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        if CGRectContainsPoint(resizingControl.frame, point) ||
+            CGRectContainsPoint(deleteControl.frame, point) ||
+            CGRectContainsPoint(bounds, point) {
+            for subview in subviews.reverse() {
+                let convertedPoint = subview.convertPoint(point, fromView: self)
+                let hitTestView = subview.hitTest(convertedPoint, withEvent: event)
+                if hitTestView != nil {
+                    return hitTestView
+                }
+            }
+            return self;
         }
-        control.userInteractionEnabled = true
-        
-        return control
+        return nil;
     }
     
 }

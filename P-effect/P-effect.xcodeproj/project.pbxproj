@@ -18,6 +18,7 @@
 		7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
+		77A4CC921CBFB9D90077A33B /* StickerEditorViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CC911CBFB9D90077A33B /* StickerEditorViewControl.swift */; };
 		77B42D231C6B762B00C5A999 /* StickersLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* StickersLayout.swift */; };
 		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
 		7A649FE17AF60EB2C2115AEC /* Pods_P_effect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EAC014D175B3AC5F9A48DD /* Pods_P_effect.framework */; };
@@ -123,6 +124,7 @@
 		7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
+		77A4CC911CBFB9D90077A33B /* StickerEditorViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerEditorViewControl.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* StickersLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLayout.swift; sourceTree = "<group>"; };
 		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95308C3A1CBBB319001DD181 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				95308C821CBBB389001DD181 /* PostViewCell.xib */,
 				95308C831CBBB389001DD181 /* SettingsViews */,
 				95308C881CBBB389001DD181 /* StickerEditorView.swift */,
+				77A4CC911CBFB9D90077A33B /* StickerEditorViewControl.swift */,
 				95308C891CBBB389001DD181 /* StickersGroupHeaderView.swift */,
 				95308C8A1CBBB389001DD181 /* StickersGroupHeaderView.xib */,
 				95308C8B1CBBB389001DD181 /* StickerViewCell.swift */,
@@ -822,6 +825,7 @@
 				95308D001CBBB858001DD181 /* FollowersListRouter.swift in Sources */,
 				95308C3B1CBBB319001DD181 /* AppDelegate.swift in Sources */,
 				95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */,
+				77A4CC921CBFB9D90077A33B /* StickerEditorViewControl.swift in Sources */,
 				95308C8D1CBBB389001DD181 /* FeedToolBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
