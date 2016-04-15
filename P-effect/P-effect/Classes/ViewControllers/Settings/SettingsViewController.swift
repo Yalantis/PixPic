@@ -9,6 +9,14 @@
 import Foundation
 
 private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
+private let cancelActionTitle = "Cancel"
+private let okActionTitle = "Logout me"
+
+private let enableNotificationsNibName = "Enable Notifications"
+private let followedPostsNibName = "Show only following users posts"
+
+private let logInNibName = "Log In"
+private let logOutNibName = "Log Out"
 
 enum SettingsState {
     
@@ -19,25 +27,22 @@ enum SettingsState {
 final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
-    var router: protocol<FeedPresenter, AlertManagerDelegate, CredentialsPresenter, AuthorizationPresenter>!
+    var router: protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>!
     
-    private lazy var credentials: UIView = TextView.instanceFromNib("Credentials/Policies") {
-        self.router.showCredentials()
+    private lazy var enableNotifications = SwitchView.instanceFromNib(enableNotificationsNibName, initialState: SettingsHelper.isRemoteNotificationsEnabled) { switchState in
+        SettingsHelper.isRemoteNotificationsEnabled = switchState
     }
-    private lazy var enableNotifications: UIView = SwitchView.instanceFromNib("Enable Notifications", initialState: SettingsHelper.isRemoteNotificationsEnabled) { on in
-        SettingsHelper.isRemoteNotificationsEnabled = on
-    }
-    private lazy var followedPosts: UIView = SwitchView.instanceFromNib("Show only following users posts", initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { on in
-        SettingsHelper.isShownOnlyFollowingUsersPosts = on
+    private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
+        SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
         NSNotificationCenter.defaultCenter().postNotificationName(
             Constants.NotificationName.NewPostUploaded,
             object: nil
         )
     }
-    private lazy var logIn: UIView = ButtonView.instanceFromNib("Log In") {
+    private lazy var logIn: UIView = TextView.instanceFromNib(logInNibName) {
         self.router.showAuthorization()
     }
-    private lazy var logOut: UIView = ButtonView.instanceFromNib("Log Out") {
+    private lazy var logOut: UIView = TextView.instanceFromNib(logOutNibName) {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -45,7 +50,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         )
         
         let cancelAction = UIAlertAction(
-            title: "Cancel",
+            title: cancelActionTitle,
             style: .Cancel
             ) { _ in
                 PushNotificationQueue.handleNotificationQueue()
@@ -54,7 +59,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         alertController.addAction(cancelAction)
         
         let okAction = UIAlertAction(
-            title: "Logout me!",
+            title: okActionTitle,
             style: .Default
             ) { _ in
                 self.logout()
@@ -82,7 +87,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     
     // MARK: - Private methods
     private func setupAvailableSettings() {
-        settings[.Common] = [credentials, enableNotifications]
+        settings[.Common] = [enableNotifications]
         for view in settings[.Common]! {
             settingsStack.addArrangedSubview(view)
         }
@@ -126,7 +131,7 @@ extension SettingsViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
-        appearance.title = "Notification policies"
+        appearance.title = Constants.Settings.NavigationTitle
         return appearance
     }
     

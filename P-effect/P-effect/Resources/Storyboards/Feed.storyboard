@@ -34,13 +34,13 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" title="P-effect" id="P4x-GP-BLW">
-                        <barButtonItem key="leftBarButtonItem" image="settings" id="JMc-Wg-qsG">
+                        <barButtonItem key="leftBarButtonItem" image="icon_settings" id="JMc-Wg-qsG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="presentSettings:" destination="fm0-UY-D5k" id="Xwu-2j-UB1"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="ic_profile" id="eed-Oc-yJB">
+                        <barButtonItem key="rightBarButtonItem" image="icon_profile" id="eed-Oc-yJB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
@@ -57,7 +57,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_profile" width="25" height="25"/>
-        <image name="settings" width="25" height="25"/>
+        <image name="icon_profile" width="25" height="25"/>
+        <image name="icon_settings" width="25" height="25"/>
     </resources>
 </document>
