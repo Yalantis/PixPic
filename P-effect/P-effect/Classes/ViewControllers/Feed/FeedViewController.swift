@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
+
+typealias FeedViewControllerRouterProtocols = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, GeneralViewControllerRouterProtocols>
  
 private let titleForEmptyData = "No data is currently available"
 private let descriptionForEmptyData = "Please pull down to refresh"
@@ -18,7 +20,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    private var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter>!
+    private var router: FeedViewControllerRouterProtocols!
     private weak var locator: ServiceLocator!
     
     private lazy var photoGenerator = PhotoGenerator()
@@ -86,7 +88,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
-    func setRouter(router: FeedRouter) {
+    func setRouter(router: FeedViewControllerRouterProtocols) {
         self.router = router
     }
     

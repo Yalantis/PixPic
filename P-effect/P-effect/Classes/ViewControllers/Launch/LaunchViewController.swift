@@ -12,10 +12,10 @@ final class LaunchViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.LaunchScreen
     
-    private var router: protocol<AlertManagerDelegate, FeedPresenter>!
+    private var router: GeneralViewControllerRouterProtocols!
     
     // MARK: - Setup methods
-    func setRouter(router: LaunchRouter) {
+    func setRouter(router: GeneralViewControllerRouterProtocols) {
         self.router = router
     }
 

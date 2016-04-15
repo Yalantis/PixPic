@@ -23,7 +23,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: GeneralViewControllerRouterProtocols!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -79,7 +79,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
-    func setRouter(router: EditProfileRouter) {
+    func setRouter(router: GeneralViewControllerRouterProtocols) {
         self.router = router
     }
     

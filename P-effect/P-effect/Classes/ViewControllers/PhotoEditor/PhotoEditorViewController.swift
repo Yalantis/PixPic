@@ -32,7 +32,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
 
     private var model: PhotoEditorModel!
     
-    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: GeneralViewControllerRouterProtocols!
     private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
     private var stickersPickerController: StickersPickerViewController? {
@@ -98,7 +98,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         self.locator = locator
     }
     
-    func setRouter(router: PhotoEditorRouter) {
+    func setRouter(router: GeneralViewControllerRouterProtocols) {
         self.router = router
     }
     

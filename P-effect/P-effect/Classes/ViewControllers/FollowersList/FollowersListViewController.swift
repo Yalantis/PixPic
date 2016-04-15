@@ -54,7 +54,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         self.followType = type
     }
     
-    func setRouter(router: FollowersListRouter) {
+    func setRouter(router: protocol<ProfilePresenter, AlertManagerDelegate>) {
         self.router = router
     }
     
