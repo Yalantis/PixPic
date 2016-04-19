@@ -128,15 +128,15 @@ extension PhotoEditorViewController {
             action: #selector(saveImageToCameraRoll)
         )
         
-        let allStickersRemovingButton = UIBarButtonItem(
+        let removeAllStickersButton = UIBarButtonItem(
             image: UIImage(named: "icon_remove"),
             style: .Plain,
             target: self,
             action: #selector(removeAllStickers)
         )
-        allStickersRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
+        removeAllStickersButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
 
-        navigationItem.rightBarButtonItems = [savingButton, allStickersRemovingButton]
+        navigationItem.rightBarButtonItems = [savingButton, removeAllStickersButton]
         navigationItem.title = "Edit"
     }
     

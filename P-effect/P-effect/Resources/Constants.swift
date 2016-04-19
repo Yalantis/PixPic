@@ -68,12 +68,12 @@ struct Constants {
     
     struct ValidationErrors {
         static let WrongLenght = "Length of the username has to be more then 3 and less then 30 characters long" as String
-        static let AlreadyExist = "Username already exist" as String
+        static let AlreadyExist = "Username already exists" as String
         static let SpaceInBegining = "Username can't start with spaces" as String
         static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ " as String
         static let SpaceInEnd = "Username can't end with spaces" as String
         static let NumbersAndSymbolsInUsername = "Username has to contain only letters and numbers" as String
-        static let TwoSpacesInRow = "Username can't contain two or more spaces per row" as String
+        static let TwoSpacesInRow = "Username can't contain more than one space per row" as String
         static let MinUserName: Int = 3
         static let MaxUserName: Int = 30
         static let WhiteSpace: Character = " "

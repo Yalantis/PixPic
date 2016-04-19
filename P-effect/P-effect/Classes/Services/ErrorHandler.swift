@@ -48,7 +48,7 @@ class ErrorHandler {
                 message = "Connection is failed"
                 
             case PFErrorCode.ErrorFacebookIdMissing.rawValue:
-                message = "Facebook id is missing in request"
+                message = "Facebook id is missed in request"
                 
             case PFErrorCode.ErrorObjectNotFound.rawValue:
                 message = "Object Not Found"

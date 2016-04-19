@@ -74,9 +74,9 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     // MARK: - Private methods
     private func takePhoto() {
-        let isCameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let isCameraExist = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if isCameraExists {
+        if isCameraExist {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {
