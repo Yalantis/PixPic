@@ -56,7 +56,7 @@ class PostService {
             if succeeded {
                 AlertManager.sharedInstance.showSimpleAlert(messageUploadSuccessful)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.NewPostUploaded,
+                    Constants.NotificationName.NewPostIsUploaded,
                     object: nil
                 )
             } else {

@@ -274,7 +274,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                             this.followButton.enabled = true
                             this.fillFollowersQuantity(user)
                             NSNotificationCenter.defaultCenter().postNotificationName(
-                                Constants.NotificationName.FollowersListUpdated,
+                                Constants.NotificationName.FollowersListIsUpdated,
                                 object: nil
                             )
                         }
@@ -306,7 +306,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.FollowersListUpdated,
+                    Constants.NotificationName.FollowersListIsUpdated,
                     object: nil
                 )
             }

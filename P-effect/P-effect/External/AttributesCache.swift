@@ -25,7 +25,7 @@ final class AttributesCache {
     func setAttributesForPost(post: Post, likers: [User], commenters: [User], likedByCurrentUser: Bool) {
         let attributes = [
             Constants.Attributes.IsLikedByCurrentUser: likedByCurrentUser,
-            Constants.Attributes.LikeCount: likers.count,
+            Constants.Attributes.LikesCount: likers.count,
             Constants.Attributes.Likers: likers
         ]
         setAttributes(attributes as! [String : AnyObject], forPost: post)
@@ -61,11 +61,11 @@ final class AttributesCache {
         return cache.objectForKey(key) as? [String: AnyObject]
     }
     
-    func likeCountForPost(post: Post) -> Int {
+    func likesCountForPost(post: Post) -> Int {
         if let attributes = attributesForPost(post) {
             if attributes.isEmpty {
                 return 0
-            } else if let likesCount = attributes[Constants.Attributes.LikeCount] as? Int {
+            } else if let likesCount = attributes[Constants.Attributes.LikesCount] as? Int {
                 return likesCount
             }
         }
@@ -104,21 +104,21 @@ final class AttributesCache {
         return false
     }
     
-    func incrementLikerCountForpost(post: Post) {
-        let likerCount = likeCountForPost(post) + 1
+    func incrementLikersCountForpost(post: Post) {
+        let likerCount = likesCountForPost(post) + 1
         if var attributes = attributesForPost(post) {
-            attributes[Constants.Attributes.LikeCount] = likerCount
+            attributes[Constants.Attributes.LikesCount] = likerCount
             setAttributes(attributes, forPost: post)
         }
     }
     
-    func decrementLikerCountForpost(post: Post) {
-        let likerCount = likeCountForPost(post) - 1
-        if likerCount < 0 {
+    func decrementLikersCountForpost(post: Post) {
+        let likersCount = likesCountForPost(post) - 1
+        if likersCount < 0 {
             return
         }
         if var attributes = attributesForPost(post) {
-            attributes[Constants.Attributes.LikeCount] = likerCount
+            attributes[Constants.Attributes.LikesCount] = likersCount
             setAttributes(attributes, forPost: post)
         }
     }
@@ -137,10 +137,10 @@ final class AttributesCache {
         return cache.objectForKey(key) as? [String: AnyObject]
     }
     
-    func postCountForUser(user: User) -> Int {
+    func postsCountForUser(user: User) -> Int {
         if let attributes = attributesForUser(user),
-            postCount = attributes[Constants.Attributes.PostsCount] as? Int {
-                return postCount
+            postsCount = attributes[Constants.Attributes.PostsCount] as? Int {
+                return postsCount
         }
         
         return 0

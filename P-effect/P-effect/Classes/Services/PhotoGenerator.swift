@@ -11,7 +11,7 @@ import AVFoundation
 
 enum ListOfOptions: String {
     case TakePhoto = "Take photo"
-    case SelectFromLibrary = "Choose photo from library"
+    case SelectFromLibrary = "Choose photo from the library"
     case Cancel = "Cancel"
 }
 
@@ -74,9 +74,9 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
     // MARK: - Private methods
     private func takePhoto() {
-        let cameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
+        let isCameraExists = UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
-        if cameraExists {
+        if isCameraExists {
             imagePickerController.sourceType = .Camera
             checkCamera()
         } else {

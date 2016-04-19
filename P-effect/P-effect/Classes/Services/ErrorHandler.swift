@@ -17,7 +17,7 @@ class ErrorHandler {
         if error.domain == FBSDKErrorDomain {
             switch errorCode {
             case FBSDKErrorCode.NetworkErrorCode.rawValue:
-                message = "A request failed due to a network error"
+                message = "The request failed due to a network error"
                 
             case FBSDKErrorCode.UnknownErrorCode.rawValue:
                 message = "The error code for unknown errors"
@@ -45,16 +45,16 @@ class ErrorHandler {
             
             switch errorCode {
             case PFErrorCode.ErrorConnectionFailed.rawValue:
-                message = "Connection Failed"
+                message = "Connection is failed"
                 
             case PFErrorCode.ErrorFacebookIdMissing.rawValue:
-                message = "Facebook id missing from request"
+                message = "Facebook id is missing in request"
                 
             case PFErrorCode.ErrorObjectNotFound.rawValue:
                 message = "Object Not Found"
                 
             case PFErrorCode.ErrorFacebookInvalidSession.rawValue:
-                message = "Invalid Facebook session"
+                message = "Facebook session is invalid"
                 
             default:
                 message = error.localizedDescription
