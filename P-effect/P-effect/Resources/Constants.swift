@@ -89,11 +89,9 @@ struct Constants {
     }
     
     struct StickerEditor {
-        static let UserResizableViewGlobalInset: CGFloat =  5.0
-        static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
-        
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
-        static let StickerViewControlSize: CGFloat =  36.0
+        static let UserResizableViewGlobalOffset: CGFloat = 5
+        static let UserResizableViewDefaultMinWidth: CGFloat = 48.0
+        static let StickerViewControlSize: CGFloat = 36.0
     }
     
     struct EditProfile {

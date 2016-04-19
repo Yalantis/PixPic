@@ -20,7 +20,6 @@ class StickerEditorView: UIView {
     
     init(image: UIImage) {
         let stickerImageView = UIImageView(image: image)
-        
         super.init(frame: stickerImageView.frame)
         
         setupContentView(stickerImageView)
@@ -46,13 +45,7 @@ class StickerEditorView: UIView {
     }
     
     private func setupDefaultAttributes() {
-        let borderViewFrame = CGRectInset(
-            bounds,
-            Constants.StickerEditor.UserResizableViewGlobalInset,
-            Constants.StickerEditor.UserResizableViewGlobalInset
-        )
-        
-        borderView = BorderView(frame: borderViewFrame)
+        borderView = BorderView(frame: bounds)
         addSubview(borderView)
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTap(_:)))
@@ -72,15 +65,7 @@ class StickerEditorView: UIView {
         let contentView = UIView(frame: content.frame)
         contentView.backgroundColor = UIColor.clearColor()
         contentView.addSubview(content)
-        
-        contentView.frame = CGRectInset(
-            bounds,
-            Constants.StickerEditor.UserResizableViewGlobalInset + Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
-            Constants.StickerEditor.UserResizableViewGlobalInset + Constants.StickerEditor.UserResizableViewInteractiveBorderSize
-        )
-        
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        
         addSubview(contentView)
         
         for subview in contentView.subviews {
@@ -103,7 +88,6 @@ class StickerEditorView: UIView {
             setNeedsDisplay()
             
         } else if recognizer.state == .Changed {
-            enableTranslucency(true)
             resizeView(recognizer)
             rotateViewWithAngle(angle: deltaAngle, recognizer: recognizer)
             
@@ -120,20 +104,18 @@ class StickerEditorView: UIView {
         guard let previousPoint = previousPoint else {
             return
         }
-        let widthChange = point.x - previousPoint.x
-        let widthRatioChange = widthChange / bounds.size.width
-        
-        let heightChange = point.y - previousPoint.y
-        let heightRatioChange = heightChange / bounds.size.height
-        
-        let totalRatio = (1 + widthRatioChange) * (1 + heightRatioChange)
-        
-        bounds = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width * totalRatio, bounds.size.height * totalRatio)
-        updateControlsPosition()
-        self.previousPoint = recognizer.locationOfTouch(0, inView: self)
+        let diagonal = sqrt(pow(point.x, 2) + pow(point.y, 2))
+        let previousDiagonal = sqrt(pow(previousPoint.x, 2) + pow(previousPoint.y, 2))
+        let totalRatio = pow(diagonal / previousDiagonal , 2)
+
+        bounds = CGRectMake(0, 0, bounds.size.width * totalRatio, bounds.size.height * totalRatio)
+        self.previousPoint = recognizer.locationInView(self)
     }
     
     private func updateControlsPosition() {
+        let delta = Constants.StickerEditor.UserResizableViewGlobalOffset
+        borderView.frame = CGRectMake(-delta, -delta, bounds.size.width + delta * 2, bounds.size.height + delta * 2)
+        
         deleteControl.center = CGPointMake(borderView.frame.origin.x, borderView.frame.origin.y)
         resizingControl.center = CGPointMake(borderView.frame.origin.x + borderView.frame.size.width,
                                              borderView.frame.origin.y + borderView.frame.size.height)
@@ -147,12 +129,6 @@ class StickerEditorView: UIView {
             let angleDiff = deltaAngle - angle
             transform = CGAffineTransformMakeRotation(-angleDiff)
         }
-        
-        borderView.frame = CGRectInset(bounds, Constants.StickerEditor.UserResizableViewGlobalInset,
-                                       Constants.StickerEditor.UserResizableViewGlobalInset)
-        borderView.setNeedsDisplay()
-        setNeedsDisplay()
-        updateControlsPosition()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -165,8 +141,6 @@ class StickerEditorView: UIView {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        enableTranslucency(true)
-        
         let touchLocation = touches.first?.locationInView(self)
         if CGRectContainsPoint(resizingControl.frame, touchLocation!) {
             return
@@ -175,10 +149,6 @@ class StickerEditorView: UIView {
         let touch = touches.first?.locationInView(superview)
         translateUsingTouchLocation(touch!)
         touchStart = touch
-    }
-    
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        enableTranslucency(false)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {

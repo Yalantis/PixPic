@@ -17,11 +17,7 @@ class BorderView: UIView {
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
         
-        let borderRect = CGRectInset(bounds,
-            Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
-            Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
-        
-        CGContextAddRect(context, borderRect)
+        CGContextAddRect(context, rect)
         
         CGContextStrokePath(context)
         CGContextRestoreGState(context)
