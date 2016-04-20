@@ -1,23 +1,24 @@
 platform :ios, '9.0'
+use_frameworks!
 
 inhibit_all_warnings!
 
-target “P-effect” do
+target 'P-effect' do
+
 pod 'Parse', '~> 1.12'
 pod 'SVPullToRefresh'
 pod 'Toast', '~> 3.0'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'ParseFacebookUtilsV4', '~> 1.11'
-pod 'FBSDKCoreKit', '4.11.0’
-pod 'FBSDKLoginKit', '4.11.0’
-pod 'FBSDKShareKit', '4.11.0’
+pod 'FBSDKCoreKit', '4.10.1'
+pod 'FBSDKLoginKit', '4.10.1'
+pod 'FBSDKShareKit', '4.10.1'
 pod 'MHPrettyDate', '~> 1.1'
 pod 'DZNEmptyDataSet', '~> 1.7'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'AFDropdownNotification', '~> 1.0'
 pod 'Kingfisher', '~> 2.0'
 pod 'XCGLogger', '~> 3.2'
-end 
 
-use_frameworks!
+end
