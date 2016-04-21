@@ -32,7 +32,7 @@ class StickersVersion: PFObject {
 
 extension StickersVersion: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "EffectsVersion"
     }
     

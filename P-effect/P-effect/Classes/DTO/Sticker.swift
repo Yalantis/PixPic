@@ -21,7 +21,7 @@ class Sticker: PFObject {
 
 extension Sticker: PFSubclassing {
         
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "EffectsSticker"
     }
         
