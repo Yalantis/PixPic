@@ -22,22 +22,18 @@ class PushNotificationQueue: NSObject {
         )
     }
     
-    class func addObjectInQueue(message: String?) {
+    static func addObjectToQueue(message: String?) {
         guard let message = message else {
             return
         }
         notificationQueue.append(message)
     }
     
-    class func clearQueue() {
+    static func clearQueue() {
         notificationQueue.removeAll()
     }
     
-    private func countOfNotificationsInQueue() -> Int {
-        return PushNotificationQueue.notificationQueue.count
-    }
-    
-    class func showNotificationFromQueue() {
+    static func showNotificationFromQueue() {
         if notificationQueue.count == 1 {
             AlertManager.sharedInstance.showNotificationAlert(nil, message: notificationQueue.first)
         } else if notificationQueue.count > 1 {
