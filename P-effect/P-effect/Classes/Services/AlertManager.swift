@@ -44,7 +44,7 @@ extension AlertManagerDelegate {
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
         
         if isControllerWaitingForResponse {
-            PushNotificationQueue.addObjectInQueue(message)
+            PushNotificationQueue.addObjectToQueue(message)
         } else {
             PushNotificationQueue.clearQueue()
             currentViewController.view.makeToast(
