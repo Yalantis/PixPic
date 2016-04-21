@@ -53,7 +53,7 @@ class Complaint: PFObject {
 
 extension Complaint: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "Complaint"
     }
     

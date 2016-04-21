@@ -21,10 +21,10 @@ class FollowerViewCell: UITableViewCell, CellInterface {
         if let avatar = follower.avatar?.url, let url = NSURL(string: avatar) {
             profileImageView.kf_setImageWithURL(
                 url,
-                placeholderImage: UIImage.avatarPlaceholderImage()
+                placeholderImage: UIImage.avatarPlaceholderImage
             )
         } else {
-            profileImageView.image = UIImage.avatarPlaceholderImage()
+            profileImageView.image = UIImage.avatarPlaceholderImage
         }
     }
     

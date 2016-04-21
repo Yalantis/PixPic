@@ -33,7 +33,7 @@ class Activity: PFObject {
 
 extension Activity: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "Activity"
     }
     
