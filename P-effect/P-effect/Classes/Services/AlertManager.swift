@@ -10,6 +10,8 @@ import UIKit
 import Toast
 
 private let notification = "Notification"
+private let simpleAlertDuration: NSTimeInterval = 2
+private let notificationAlertDuration: NSTimeInterval = 3
 
 protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
     
@@ -21,7 +23,7 @@ protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
 extension AlertManagerDelegate {
     
     func showSimpleAlert(message: String) {
-        currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
+        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom)
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
@@ -47,7 +49,7 @@ extension AlertManagerDelegate {
             PushNotificationQueue.clearQueue()
             currentViewController.view.makeToast(
                 message,
-                duration: 3.0,
+                duration: notificationAlertDuration,
                 position: CSToastPositionTop,
                 title: title,
                 image: UIImage(named: "icon_notification"),

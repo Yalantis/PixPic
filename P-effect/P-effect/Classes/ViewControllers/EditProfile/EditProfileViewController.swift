@@ -18,6 +18,7 @@ private let saveActionTitle = "Save"
 private let logoutActionTitle = "Logout me!"
 private let cancelActionTitle = "Cancel"
 private let okActionTitle = "Ok"
+private let textFieldAnimationDuration: NSTimeInterval = 0.3
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
@@ -237,7 +238,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         topConstraint.constant = kbHidden ? -movement / 2 : 0
         view.needsUpdateConstraints()
         UIView.animateWithDuration(
-            0.3,
+            textFieldAnimationDuration,
             animations: {
                 self.view.layoutIfNeeded()
             }

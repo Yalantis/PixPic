@@ -21,8 +21,8 @@ class StickersPickerAdapter: NSObject {
     override init() {
         super.init()
         
-        StickersGroup()
-        Sticker()
+        _ = StickersGroup()
+        _ = Sticker()
     }
     
     func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {

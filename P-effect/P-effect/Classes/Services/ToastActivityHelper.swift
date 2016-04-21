@@ -11,10 +11,10 @@ import Toast
 
 class ToastActivityHelper {
 
-    func showToastActivityOn(view: UIView, duration: Double) {
+    func showToastActivityOn(view: UIView, duration: NSTimeInterval) {
         view.makeToastActivity(CSToastPositionCenter)
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * NSTimeInterval(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             view.hideToastActivity()
         }
