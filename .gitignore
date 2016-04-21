@@ -22,7 +22,6 @@ DerivedData
 !*.xcodeproj/xcshareddata
 
 Pods
-Podfile.lock
 .idea
 
 pkg/*
