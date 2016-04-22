@@ -17,7 +17,7 @@ class StickerViewCell: UICollectionViewCell {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderHelper.getImageForContentItem(file) { image, error in
+        file.getImageForContentItem { image, error in
             if let error = error {
                 log.debug(error.localizedDescription)
             } else {

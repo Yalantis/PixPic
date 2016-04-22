@@ -10,10 +10,10 @@ import UIKit
 
 typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> Void
 
-class ImageLoaderHelper {
+extension PFFile {
     
-    static func getImageForContentItem(content: PFFile, completion: LoadingImageCompletion) {
-        content.getDataInBackgroundWithBlock { data, error in
+    func getImageForContentItem(completion: LoadingImageCompletion) {
+        getDataInBackgroundWithBlock { data, error in
             if let data = data, let image = UIImage(data: data){
                 completion(image: image, error: error)
             }

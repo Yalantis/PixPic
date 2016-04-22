@@ -43,7 +43,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderHelper.getImageForContentItem(file) { image, error in
+        file.getImageForContentItem { image, error in
             if let image = image {
                 self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
                 self.imageView.tintColor = UIColor.appWhiteColor
