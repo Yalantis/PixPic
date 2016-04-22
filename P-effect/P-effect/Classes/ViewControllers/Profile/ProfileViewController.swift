@@ -23,7 +23,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
     private var user: User? {
         didSet {
-            updateSelf()
+            updateData()
         }
     }
     private var userId: String?
@@ -87,7 +87,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     // MARK: - Private methods
-    private func updateSelf() {
+    private func updateData() {
         setupFollowButton()
         setupController()
     }
