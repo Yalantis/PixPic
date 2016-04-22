@@ -1,5 +1,5 @@
 //
-//  AuthService.swift
+//  AuthenticationService.swift
 //  P-effect
 //
 //  Created by anna on 1/18/16.
@@ -10,7 +10,7 @@ import Foundation
 import Parse
 import ParseFacebookUtilsV4
 
-enum AuthError: Int {
+enum AuthenticationError: Int {
     
     case FacebookError = 701
     case ParseError = 702
@@ -19,11 +19,11 @@ enum AuthError: Int {
 
 }
 
-class AuthService {
+class AuthenticationService {
     
     func signInWithPermission(completion: (User!, NSError?) -> Void) {
         guard let token = FBSDKAccessToken.currentAccessToken() else {
-            let accessTokenError = NSError.createAuthError(.AccessTokenError)
+            let accessTokenError = NSError.createAuthenticationError(.AccessTokenError)
             completion(nil, accessTokenError)
             
             return
@@ -40,7 +40,7 @@ class AuthService {
             } else if let error = error {
                 completion(nil, error)
             } else {
-                let userError = NSError.createAuthError(.FacebookError)
+                let userError = NSError.createAuthenticationError(.FacebookError)
                 completion(nil, userError)
                 
                 return
