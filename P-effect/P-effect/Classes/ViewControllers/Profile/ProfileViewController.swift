@@ -9,13 +9,13 @@
 import UIKit
 import Toast
 
-private let unfollowMessage = "Are you sure you want to unfollow?"
-private let unfollowTitle = "Unfollow"
-private let unfollowActionTitle = "Yes"
+private let unfollowMessage = NSLocalizedString("Are you sure you want to unfollow?", comment: "")
+private let unfollowTitle = NSLocalizedString("Unfollow", comment: "")
+private let unfollowActionTitle = NSLocalizedString("Yes", comment: "")
 
-private let suggestLoginMessage = "You can't follow someone without registration"
-private let registerActionTitle = "Register"
-private let cancelActionTitle = "Cancel"
+private let suggestLoginMessage = NSLocalizedString("You can't follow someone without registration", comment: "")
+private let registerActionTitle = NSLocalizedString("Register", comment: "")
+private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     

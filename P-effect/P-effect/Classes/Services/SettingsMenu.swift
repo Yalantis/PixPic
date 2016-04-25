@@ -8,15 +8,15 @@
 
 import UIKit
 
-private let removePostMessage = "This photo will be deleted from P-effect"
-private let suggestLoginMessage = "You can't use this function without registration"
-private let complaintMessage = "Complaint about"
+private let removePostMessage = NSLocalizedString("This photo will be deleted from P-effect", comment: "")
+private let suggestLoginMessage = NSLocalizedString("You can't use this function without registration", comment: "")
+private let complaintMessage = NSLocalizedString("Complaint about", comment: "")
 
-private let cancelActionTitle = "Cancel"
-private let shareActionTitle = "Share"
-private let removeActionTitle = "Remove post"
-private let complaintActionTitle = "Complain"
-private let registerActionTitle = "Register"
+private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+private let shareActionTitle = NSLocalizedString("Share", comment: "")
+private let removeActionTitle = NSLocalizedString("Remove post", comment: "")
+private let complaintActionTitle = NSLocalizedString("Complain" , comment: "")
+private let registerActionTitle = NSLocalizedString("Register", comment: "")
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     

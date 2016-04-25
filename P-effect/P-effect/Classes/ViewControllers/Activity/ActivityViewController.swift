@@ -10,12 +10,12 @@ import UIKit
 
 class ActivityViewController: UIActivityViewController {
     
-    private let facebokMessage = "Posted on Facebook!"
-    private let twitterMessage = "Tweeted!"
-    private let cameraRollMessage = "Saved to Photos!"
-    private let vkMessage = "Posted to VK!"
-    private let applyToContactMessage = "Applied to contact!"
-    private let doneMessage = "Shared!"
+    private let facebokMessage = NSLocalizedString("Posted on Facebook!", comment: "")
+    private let twitterMessage = NSLocalizedString("Tweeted!", comment: "")
+    private let cameraRollMessage = NSLocalizedString("Saved to Photos!", comment: "")
+    private let vkMessage = NSLocalizedString("Posted to VK!", comment: "")
+    private let applyToContactMessage = NSLocalizedString("Applied to contact!", comment: "")
+    private let doneMessage = NSLocalizedString("Shared!", comment: "")
     
     private let activityTypePostToVK = "com.vk.vkclient.shareextension"
     

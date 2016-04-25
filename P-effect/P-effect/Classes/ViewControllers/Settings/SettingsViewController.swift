@@ -8,15 +8,15 @@
 
 import Foundation
 
-private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let cancelActionTitle = "Cancel"
-private let okActionTitle = "Logout me"
+private let logoutMessage = NSLocalizedString("This will logout you. And you will not be able to share your amazing photos..(", comment: "")
+private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+private let okActionTitle = NSLocalizedString("Logout me", comment: "")
 
-private let enableNotificationsNibName = "Enable Notifications"
-private let followedPostsNibName = "Show only following users posts"
+private let enableNotificationsNibName = NSLocalizedString("Enable Notifications", comment: "")
+private let followedPostsNibName = NSLocalizedString("Show only following users posts", comment: "")
 
-private let logInNibName = "Log In"
-private let logOutNibName = "Log Out"
+private let logInNibName = NSLocalizedString("Log In", comment: "")
+private let logOutNibName = NSLocalizedString("Log Out", comment: "")
 
 enum SettingsState {
     case Common, LoggedIn, LoggedOut

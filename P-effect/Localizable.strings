@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  P-effect
+
+  Created by AndrewPetrov on 4/25/16.
+  Copyright © 2016 Yalantis. All rights reserved.
+*/
+
+"This photo will be deleted from P-effect" = "This photo will be deleted from P-effect";
+"You can't use this function without registration" = "You can't use this function without registration";
+"Complaint about" ="Complaint about";
+"Cancel" = "Cancel";
+"Share" = "Share";
+"Remove post" = "Remove post";
+"Complain" = "Complain";
+"Register" = "Register";
+
+"Posted on Facebook!" = "Posted on Facebook!";
+"Tweeted!" = "Tweeted!";
+"Saved to Photos!" = "Saved to Photos!";
+"Posted to VK!" = "Posted to VK!";
+"Applied to contact!" = "Applied to contact!";
+"Shared!" = "Shared!";
+
+"Notification" = "Notification";
+
+"Thank you for complaint" = "Thank you for complaint";
+"Nil user in post" = "Nil user in post";
+
+"User Avatar" = "User Avatar";
+"Post Image" = "Post Image";
+"Username" = "Username";
+
+"You can't make a complaint on yourself" = "You can't make a complaint on yourself";
+"You already make a complaint on this post" = "You already make a complaint on this post";
+"You can't make a complaint without registration" = "You can't make a complaint without registration";
+
+"Internet connection is required to save changes in profile" = "Internet connection is required to save changes in profile";
+"This will logout you. And you will not be able to share your amazing photos..(" = "This will logout you. And you will not be able to share your amazing photos..(";
+"If you go back now, your changes will be discarded" = "If you go back now, your changes will be discarded";
+"Internet connection is required to logout" = "Internet connection is required to logout";
+"Save changes" = "Save changes";
+"Save" = "Save";
+"Logout me!" = "Logout me!"
+"Ok" = "Ok";
+"No data is currently available" = "No data is currently available";
+"Please pull down to refresh" = "Please pull down to refresh";
+
+"Cancel" = "Cancel";
+"Post with delay" = "Post with delay";
+"Save" = "Save";
+"Don't save" = "Don't save";
+"Would you like to save results to photo library or post after internet access appears?" = "Would you like to save results to photo library or post after internet access appears?";
+
+
+"Take photo" = "Take photo";
+"Choose photo from library" = "Choose photo from library";
+"Cancel" = "Cancel";
+"No Camera" = "No Camera";
+"Sorry, this device has no camera" = "Sorry, this device has no camera";
+"OK" = "OK";
+"IMPORTANT" = "IMPORTANT";
+"Camera access required" = "Camera access required";
+"Allow Camera" = "Allow Camera";
+"Cancel" = "Cancel";
+"Please allow camera access" = "Please allow camera access";
+"Dismiss" = "Dismiss";
+
+"Upload successful!" = "Upload successful!";
+
+"Are you sure you want to unfollow?" = "Are you sure you want to unfollow?";
+"Unfollow" = "Unfollow";
+"Yes" = "Yes";
+"You can't follow someone without registration" = "You can't follow someone without registration";
+"Register" = "Register";
+"Cancel" = "Cancel";
+
+"This will logout you. And you will not be able to share your amazing photos..(" = "This will logout you. And you will not be able to share your amazing photos..(";
+"Cancel" = "Cancel";
+"Logout me" = "Logout me";
+"Enable Notifications" = "Enable Notifications";
+"Show only following users posts" = "Show only following users posts";
+"Log In" = "Log In";
+"Log Out" = "Log Out";
+
+"User data has been updated!" = "User data has been updated!";
+"Troubles with the update! Check it out later" = "Troubles with the update! Check it out later";

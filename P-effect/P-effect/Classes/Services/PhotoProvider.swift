@@ -9,20 +9,20 @@
 import UIKit
 import AVFoundation
 
-private let takePhotoOption = "Take photo"
-private let selectFromLibraryOption = "Choose photo from library"
-private let cancelOption = "Cancel"
+private let takePhotoOption = NSLocalizedString("Take photo", comment: "")
+private let selectFromLibraryOption = NSLocalizedString("Choose photo from library", comment: "")
+private let cancelOption = NSLocalizedString("Cancel", comment: "")
 
-private let cameraAbsenceTitle = "No Camera"
-private let cameraAbsenceMessage = "Sorry, this device has no camera"
-private let okActionTitle = "OK"
+private let cameraAbsenceTitle = NSLocalizedString("No Camera", comment: "")
+private let cameraAbsenceMessage = NSLocalizedString("Sorry, this device has no camera", comment: "")
+private let okActionTitle = NSLocalizedString("OK", comment: "")
 
-private let importantTitle = "IMPORTANT"
-private let askForCameraAccessMessage = "Camera access required"
-private let allowCameraActionTitle = "Allow Camera"
-private let cancelActionTitle = "Cancel"
-private let allowCameraMessage = "Please allow camera access"
-private let dismissActionTitle = "Dismiss"
+private let importantTitle = NSLocalizedString("IMPORTANT", comment: "")
+private let askForCameraAccessMessage = NSLocalizedString("Camera access required", comment: "")
+private let allowCameraActionTitle = NSLocalizedString("Allow Camera", comment: "")
+private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+private let allowCameraMessage = NSLocalizedString("Please allow camera access", comment: "")
+private let dismissActionTitle = NSLocalizedString("Dismiss", comment: "")
 
 class PhotoProvider: NSObject, UINavigationControllerDelegate {
     
