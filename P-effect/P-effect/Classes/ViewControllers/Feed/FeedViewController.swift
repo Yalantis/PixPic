@@ -148,7 +148,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         photoProvider.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
-        photoProvider.presentPhotoOptionsDialog(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     private func handlePhotoSelected(image: UIImage) {

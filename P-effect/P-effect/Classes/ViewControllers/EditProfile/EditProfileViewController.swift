@@ -290,7 +290,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoProvider.presentPhotoOptionsDialog(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     @IBAction private func logoutAction() {

@@ -9,9 +9,7 @@
 import Foundation
 
 public enum UpdateType {
-    
     case Reload, LoadMore
-    
 }
 
 @objc protocol PostAdapterDelegate: class {
