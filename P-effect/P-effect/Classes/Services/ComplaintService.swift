@@ -28,36 +28,36 @@ enum ComplaintRejectReason: String {
 
 class ComplaintService {
         
-    func complaintUsername(user: User, post: Post? = nil, completion: ComplainCompletion) {
-        if !shouldContinueExecutionWith(user) {
+    func complainAboutUsername(user: User, completion: ComplainCompletion) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.Username)
+        let complaint = Complaint(user: user, post: nil, reason: .Username)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
     }
     
-    func complaintUserAvatar(user: User, post: Post? = nil, completion: ComplainCompletion) {
-        if !shouldContinueExecutionWith(user) {
+    func complainAboutUserAvatar(user: User, completion: ComplainCompletion) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.UserAvatar)
+        let complaint = Complaint(user: user, post: nil, reason: .UserAvatar)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
     }
     
-    func complaintPost(post: Post, completion: ComplainCompletion) {
+    func complainAboutPost(post: Post, completion: ComplainCompletion) {
         guard let user = post.user else {
             log.debug(nilUserInPost)
             
             return
         }
-        if !shouldContinueExecutionWith(user) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.PostImage)
+        let complaint = Complaint(user: user, post: post, reason: .PostImage)
         performIfComplaintExsist(complaint) { [weak self] existence in
             if !existence {
                 self?.sendComplaint(complaint) { result, error in

@@ -11,9 +11,7 @@ import Foundation
 private let tintColorAnimationDuration: NSTimeInterval = 0.2
 
 class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
-    
-    static let identifier = "StickersGroupHeaderViewIdentifier"
-    
+        
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!

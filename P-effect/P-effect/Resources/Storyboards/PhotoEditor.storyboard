@@ -80,7 +80,7 @@
                         <gestureRecognizers/>
                         <collectionViewLayout key="collectionViewLayout" id="0uH-cm-fCd"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="StickerPickerCell" id="6Yd-Sn-MA1" customClass="StickerViewCell" customModule="P_effect" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="StickerViewCell" id="6Yd-Sn-MA1" customClass="StickerViewCell" customModule="P_effect" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">

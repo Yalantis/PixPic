@@ -100,7 +100,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
     }
     
     private func setupObserver() {

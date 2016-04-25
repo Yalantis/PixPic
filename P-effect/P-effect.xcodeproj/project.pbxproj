@@ -55,8 +55,8 @@
 		95308CBE1CBBB3AA001DD181 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA61CBBB3AA001DD181 /* Presenter.swift */; };
 		95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */; };
 		95308CC01CBBB3AA001DD181 /* ReachabilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */; };
-		95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */; };
-		95308CC31CBBB3AA001DD181 /* RemoteNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */; };
+		95308CC21CBBB3AA001DD181 /* RemoteNotificationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAA1CBBB3AA001DD181 /* RemoteNotificationParser.swift */; };
+		95308CC31CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAB1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */; };
 		95308CC51CBBB3AA001DD181 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */; };
 		95308CC61CBBB3AA001DD181 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */; };
 		95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */; };
@@ -66,7 +66,6 @@
 		95308CCB1CBBB3AA001DD181 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB31CBBB3AA001DD181 /* ValidationService.swift */; };
 		95308CCF1CBBB3FF001DD181 /* AttributesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */; };
 		95308CD01CBBB3FF001DD181 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CCE1CBBB3FF001DD181 /* Reachability.swift */; };
-		95308CD21CBBB522001DD181 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95308CD11CBBB522001DD181 /* Info.plist */; };
 		95308CF51CBBB858001DD181 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD51CBBB858001DD181 /* ActivityViewController.swift */; };
 		95308CF61CBBB858001DD181 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD71CBBB858001DD181 /* Appearance.swift */; };
 		95308CF71CBBB858001DD181 /* AppearanceApplyingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CD81CBBB858001DD181 /* AppearanceApplyingStrategy.swift */; };
@@ -160,8 +159,8 @@
 		95308CA61CBBB3AA001DD181 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
 		95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityHelper.swift; sourceTree = "<group>"; };
-		95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHelper.swift; sourceTree = "<group>"; };
-		95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationManager.swift; sourceTree = "<group>"; };
+		95308CAA1CBBB3AA001DD181 /* RemoteNotificationParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationParser.swift; sourceTree = "<group>"; };
+		95308CAB1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationHelper.swift; sourceTree = "<group>"; };
 		95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
 		95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
@@ -323,8 +322,8 @@
 				95308CA61CBBB3AA001DD181 /* Presenter.swift */,
 				95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */,
 				95308CA81CBBB3AA001DD181 /* ReachabilityHelper.swift */,
-				95308CAA1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */,
-				95308CAB1CBBB3AA001DD181 /* RemoteNotificationManager.swift */,
+				95308CAA1CBBB3AA001DD181 /* RemoteNotificationParser.swift */,
+				95308CAB1CBBB3AA001DD181 /* RemoteNotificationHelper.swift */,
 				95308CAD1CBBB3AA001DD181 /* ServiceLocator.swift */,
 				95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */,
 				95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */,
@@ -619,7 +618,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Yalantis;
 				TargetAttributes = {
 					FDAF466D1C47E8AA008060CD = {
@@ -657,7 +656,6 @@
 				95308C8E1CBBB389001DD181 /* FeedToolBar.xib in Resources */,
 				95D57EA51C776477007F1B6A /* Profile.storyboard in Resources */,
 				95308C961CBBB389001DD181 /* TextView.xib in Resources */,
-				95308CD21CBBB522001DD181 /* Info.plist in Resources */,
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
 				95308C941CBBB389001DD181 /* SwitchView.xib in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
@@ -749,7 +747,7 @@
 				95308C911CBBB389001DD181 /* PostViewCell.swift in Sources */,
 				95308C8F1CBBB389001DD181 /* FollowerViewCell.swift in Sources */,
 				95308CD01CBBB3FF001DD181 /* Reachability.swift in Sources */,
-				95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */,
+				95308CC21CBBB3AA001DD181 /* RemoteNotificationParser.swift in Sources */,
 				95308C9A1CBBB389001DD181 /* StickerViewCell.swift in Sources */,
 				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				95308CFC1CBBB858001DD181 /* EditProfileRouter.swift in Sources */,
@@ -792,7 +790,7 @@
 				95308CB71CBBB3AA001DD181 /* ComplaintService.swift in Sources */,
 				FD0586241C847FA200995E61 /* UIActivityIndicatorView + UIView.swift in Sources */,
 				95308CFE1CBBB858001DD181 /* FeedRouter.swift in Sources */,
-				95308CC31CBBB3AA001DD181 /* RemoteNotificationManager.swift in Sources */,
+				95308CC31CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */,
 				95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */,
 				95308CFB1CBBB858001DD181 /* AuthorizationViewController.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* StickersGroup.swift in Sources */,
@@ -922,6 +920,7 @@
 			baseConfigurationReference = D5F43AA7EC959DA2C424A300 /* Pods-P-effect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
@@ -950,6 +949,7 @@
 			baseConfigurationReference = B1ADE7E4A46923A3F2CE20E1 /* Pods-P-effect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";

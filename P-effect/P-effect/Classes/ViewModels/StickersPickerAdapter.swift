@@ -106,7 +106,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            Constants.StickerPicker.StickerPickerCellIdentifier,
+            StickerViewCell.id,
             forIndexPath: indexPath
             ) as! StickerViewCell
         
@@ -124,7 +124,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
                 kind,
-                withReuseIdentifier: StickersGroupHeaderView.identifier,
+                withReuseIdentifier: StickersGroupHeaderView.id,
                 forIndexPath: indexPath
                 ) as! StickersGroupHeaderView
             

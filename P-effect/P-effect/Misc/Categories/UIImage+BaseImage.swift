@@ -10,10 +10,21 @@ import UIKit
 
 extension UIImage {
     
-    @nonobjc static let appBackButton = UIImage(named: "back_arrow")
-    @nonobjc static let placeholderImage = UIImage(named: "photo_placeholder")
-    @nonobjc static let avatarPlaceholderImage = UIImage(named: "profile_placeholder")
-    @nonobjc static let appAddPhotoButton = UIImage(named: "btn_make_photo")
+    static var appBackButton: UIImage? {
+        return UIImage(named: "icon_back_arrow")
+    }
+    
+    static var placeholderImage: UIImage? {
+        return UIImage(named: "photo_placeholder")
+    }
+    
+    static var avatarPlaceholderImage: UIImage? {
+        return UIImage(named: "profile_placeholder")
+    }
+    
+    static var appAddPhotoButton: UIImage? {
+        return UIImage(named: "btn_make_photo")
+    }
     
     public static func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
         let rect = CGRectMake(0.0, 0.0, size.width, size.height)

@@ -96,7 +96,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
