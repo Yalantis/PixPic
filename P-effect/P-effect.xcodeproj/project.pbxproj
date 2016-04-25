@@ -16,6 +16,7 @@
 		49F415771C4A842F00143E78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F415761C4A842F00143E78 /* Assets.xcassets */; };
 		562FCF71E71F00B5038BF992 /* Pods_P_effect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */; };
 		7702E0931C6950C50013CB4D /* UICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */; };
+		7708BF7D1CCE17F3009B17C6 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */; };
 		7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
@@ -50,7 +51,6 @@
 		95308CB81CBBB3AA001DD181 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */; };
 		95308CB91CBBB3AA001DD181 /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */; };
 		95308CBA1CBBB3AA001DD181 /* ImageLoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */; };
-		95308CBC1CBBB3AA001DD181 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA41CBBB3AA001DD181 /* PhotoProvider.swift */; };
 		95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA51CBBB3AA001DD181 /* PostService.swift */; };
 		95308CBE1CBBB3AA001DD181 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA61CBBB3AA001DD181 /* Presenter.swift */; };
 		95308CBF1CBBB3AA001DD181 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */; };
@@ -61,7 +61,7 @@
 		95308CC61CBBB3AA001DD181 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */; };
 		95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */; };
 		95308CC81CBBB3AA001DD181 /* StickersLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */; };
-		95308CC91CBBB3AA001DD181 /* ToastActivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */; };
+		95308CC91CBBB3AA001DD181 /* UIView+showToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB11CBBB3AA001DD181 /* UIView+showToast.swift */; };
 		95308CCA1CBBB3AA001DD181 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB21CBBB3AA001DD181 /* UserService.swift */; };
 		95308CCB1CBBB3AA001DD181 /* ValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CB31CBBB3AA001DD181 /* ValidationService.swift */; };
 		95308CCF1CBBB3FF001DD181 /* AttributesCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */; };
@@ -121,6 +121,7 @@
 		49F415761C4A842F00143E78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P_effect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
 		7716E9BC1C85E35D00BBA6CD /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoaderHelper.swift; sourceTree = "<group>"; };
-		95308CA41CBBB3AA001DD181 /* PhotoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
 		95308CA51CBBB3AA001DD181 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		95308CA61CBBB3AA001DD181 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 		95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenu.swift; sourceTree = "<group>"; };
 		95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLoaderService.swift; sourceTree = "<group>"; };
-		95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastActivityHelper.swift; sourceTree = "<group>"; };
+		95308CB11CBBB3AA001DD181 /* UIView+showToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+showToast.swift"; path = "../../Classes/Services/UIView+showToast.swift"; sourceTree = "<group>"; };
 		95308CB21CBBB3AA001DD181 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		95308CB31CBBB3AA001DD181 /* ValidationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationService.swift; sourceTree = "<group>"; };
 		95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributesCache.swift; sourceTree = "<group>"; };
@@ -311,6 +311,7 @@
 		95308C9B1CBBB3AA001DD181 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */,
 				95308C9C1CBBB3AA001DD181 /* ActivityService.swift */,
 				95308C9D1CBBB3AA001DD181 /* AlertManager.swift */,
 				95308C9E1CBBB3AA001DD181 /* AuthService.swift */,
@@ -318,7 +319,6 @@
 				95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */,
 				95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */,
 				95308CA21CBBB3AA001DD181 /* ImageLoaderHelper.swift */,
-				95308CA41CBBB3AA001DD181 /* PhotoProvider.swift */,
 				95308CA51CBBB3AA001DD181 /* PostService.swift */,
 				95308CA61CBBB3AA001DD181 /* Presenter.swift */,
 				95308CA71CBBB3AA001DD181 /* PushNotificationQueue.swift */,
@@ -329,7 +329,6 @@
 				95308CAE1CBBB3AA001DD181 /* SettingsHelper.swift */,
 				95308CAF1CBBB3AA001DD181 /* SettingsMenu.swift */,
 				95308CB01CBBB3AA001DD181 /* StickersLoaderService.swift */,
-				95308CB11CBBB3AA001DD181 /* ToastActivityHelper.swift */,
 				95308CB21CBBB3AA001DD181 /* UserService.swift */,
 				95308CB31CBBB3AA001DD181 /* ValidationService.swift */,
 			);
@@ -534,6 +533,7 @@
 		FDAF46A81C49369E008060CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				95308CB11CBBB3AA001DD181 /* UIView+showToast.swift */,
 				7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */,
 				FD3B4A041C5BE9E300F0FC52 /* PFInstallation+User.swift */,
 				FD7C43181C60AB9D003E4072 /* UIColor+BaseColor.swift */,
@@ -751,7 +751,6 @@
 				95308CD01CBBB3FF001DD181 /* Reachability.swift in Sources */,
 				95308CC21CBBB3AA001DD181 /* RemoteNotificationHelper.swift in Sources */,
 				95308C9A1CBBB389001DD181 /* StickerViewCell.swift in Sources */,
-				95308CBC1CBBB3AA001DD181 /* PhotoProvider.swift in Sources */,
 				496B6D271C89BB7C00DED33F /* Complaint.swift in Sources */,
 				95308CFC1CBBB858001DD181 /* EditProfileRouter.swift in Sources */,
 				95308C8C1CBBB389001DD181 /* BorderView.swift in Sources */,
@@ -808,12 +807,13 @@
 				95308C951CBBB389001DD181 /* TextView.swift in Sources */,
 				95308CB61CBBB3AA001DD181 /* AuthService.swift in Sources */,
 				95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */,
+				7708BF7D1CCE17F3009B17C6 /* PhotoProvider.swift in Sources */,
 				95308CCA1CBBB3AA001DD181 /* UserService.swift in Sources */,
 				FD7C43191C60AB9D003E4072 /* UIColor+BaseColor.swift in Sources */,
 				77B42D231C6B762B00C5A999 /* StickersLayout.swift in Sources */,
 				95308C451CBBB337001DD181 /* PostAdapter.swift in Sources */,
 				FDF757271C89E6FC00D9ED68 /* Activity.swift in Sources */,
-				95308CC91CBBB3AA001DD181 /* ToastActivityHelper.swift in Sources */,
+				95308CC91CBBB3AA001DD181 /* UIView+showToast.swift in Sources */,
 				95308D061CBBB858001DD181 /* PhotoEditorViewController.swift in Sources */,
 				95308CCF1CBBB3FF001DD181 /* AttributesCache.swift in Sources */,
 				95308D001CBBB858001DD181 /* FollowersListRouter.swift in Sources */,

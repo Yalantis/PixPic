@@ -201,9 +201,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        let authService: AuthService = locator.getService()
-        authService.logOut()
-        authService.anonymousLogIn(
+        let authenticationService: AuthenticationService = locator.getService()
+        authenticationService.logOut()
+        authenticationService.anonymousLogIn(
             completion: { object in
                 self.router.showFeed()
             }, failure: { error in

@@ -112,9 +112,15 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         imagePickerController.allowsEditing = true
     }
     
+<<<<<<< HEAD:P-effect/P-effect/Classes/Services/PhotoProvider.swift
     private func checkCameraAccessibility() {
+        let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        switch authStatus {
+=======
+    private func checkCamera() {
         let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         switch authorizationStatus {
+>>>>>>> develop:P-effect/P-effect/Classes/Services/PhotoGenerator.swift
         case .Authorized:
             callCamera()
             
