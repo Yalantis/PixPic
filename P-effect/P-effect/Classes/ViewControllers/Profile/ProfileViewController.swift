@@ -23,7 +23,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
     private var user: User? {
         didSet {
-            updateData()
+            updateFollowButton()
+            updateController()
         }
     }
     private var userId: String?
@@ -50,7 +51,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         
         setupController()
         setupLoadersCallback()
-        setupFollowButton()
         setupGestureRecognizers()
     }
     
@@ -87,32 +87,30 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     // MARK: - Private methods
-    private func updateData() {
-        setupFollowButton()
-        setupController()
-    }
-    
     private func setupController() {
-        showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
         setupTableViewFooter()
+    }
+    
+    private func updateController() {
+        showToast()
         applyUser()
         loadUserPosts()
     }
     
-    private func setupFollowButton() {
+    private func updateFollowButton() {
         guard let user = user else {
             return
         }
-        followButton?.selected = false
-        followButton?.enabled = false
         let cache = AttributesCache.sharedCache
         if let followStatus = cache.followStatusForUser(user) {
             followButton?.selected = followStatus
             followButton?.enabled = true
         } else {
+            followButton?.selected = false
+            followButton?.enabled = false
             let activityService: ActivityService = locator.getService()
             activityService.checkIsFollowing(user) { [weak self] follow in
                 self?.followButton?.selected = follow
@@ -255,30 +253,30 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             let cancelAction = UIAlertAction(
                 title: cancelActionTitle,
                 style: .Cancel
-                ) { [weak self] _ in
-                    self?.followButton.enabled = true
+            ) { [weak self] _ in
+                self?.followButton.enabled = true
             }
             let unfollowAction = UIAlertAction(
                 title: unfollowActionTitle,
                 style: .Default
-                ) { [weak self] _ in
-                    guard let this = self, user = this.user else {
-                        return
-                    }
-                    activityService.unfollowUserEventually(user) { [weak self] success, error in
-                        if success {
-                            guard let this = self else {
-                                return
-                            }
-                            this.followButton.selected = false
-                            this.followButton.enabled = true
-                            this.fillFollowersQuantity(user)
-                            NSNotificationCenter.defaultCenter().postNotificationName(
-                                Constants.NotificationName.FollowersListUpdated,
-                                object: nil
-                            )
+            ) { [weak self] _ in
+                guard let this = self, user = this.user else {
+                    return
+                }
+                activityService.unfollowUserEventually(user) { [weak self] success, error in
+                    if success {
+                        guard let this = self else {
+                            return
                         }
+                        this.followButton.selected = false
+                        this.followButton.enabled = true
+                        this.fillFollowersQuantity(user)
+                        NSNotificationCenter.defaultCenter().postNotificationName(
+                            Constants.NotificationName.FollowersListUpdated,
+                            object: nil
+                        )
                     }
+                }
             }
             
             alertController.addAction(cancelAction)
@@ -317,8 +315,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         let attributes = AttributesCache.sharedCache.attributesForUser(user)
         if let followersQuantity = attributes?[Constants.Attributes.FollowersCount],
             followingQuantity = attributes?[Constants.Attributes.FollowingCount] {
-                self.followersQuantity.text = String(followersQuantity) + " followers"
-                self.followingQuantity.text = String(followingQuantity) + " following"
+            self.followersQuantity.text = String(followersQuantity) + " followers"
+            self.followingQuantity.text = String(followingQuantity) + " following"
         }
 
         let activityService: ActivityService = locator.getService()
@@ -341,8 +339,8 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         let registerAction = UIAlertAction(
             title: registerActionTitle,
             style: .Default
-            ) { [weak self] _ in
-                self?.router.showAuthorization()
+        ) { [weak self] _ in
+            self?.router.showAuthorization()
         }
         
         alertController.addAction(cancelAction)
