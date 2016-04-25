@@ -89,7 +89,7 @@ class ActivityService {
     
     func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            let userError = NSError.createAuthError(.CurrentUserError)
+            let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
             
             return
@@ -109,7 +109,7 @@ class ActivityService {
     
     func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            let userError = NSError.createAuthError(.CurrentUserError)
+            let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
             
             return

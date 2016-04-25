@@ -7,11 +7,9 @@
 //
 
 enum ActivityType: String {
-    
     case Like = "like"
     case Follow = "follow"
     case Comment = "comment"
-    
 }
 
 class Activity: PFObject {
@@ -33,7 +31,7 @@ class Activity: PFObject {
 
 extension Activity: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "Activity"
     }
     

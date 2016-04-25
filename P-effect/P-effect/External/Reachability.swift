@@ -108,7 +108,7 @@ public class Reachability: NSObject {
         self.init(reachabilityRef: ref)
     }
 
-    public class func reachabilityForInternetConnection() throws -> Reachability {
+    public static func reachabilityForInternetConnection() throws -> Reachability {
         
         var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
@@ -121,7 +121,7 @@ public class Reachability: NSObject {
         return Reachability(reachabilityRef: ref)
     }
 
-    public class func reachabilityForLocalWiFi() throws -> Reachability {
+    public static func reachabilityForLocalWiFi() throws -> Reachability {
 
         var localWifiAddress: sockaddr_in = sockaddr_in(sin_len: __uint8_t(0), sin_family: sa_family_t(0), sin_port: in_port_t(0), sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
         localWifiAddress.sin_len = UInt8(sizeofValue(localWifiAddress))

@@ -26,7 +26,7 @@ extension UIImage {
         return UIImage(named: "btn_make_photo")
     }
     
-    public class func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
+    public static func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
         let rect = CGRectMake(0.0, 0.0, size.width, size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context: CGContextRef = UIGraphicsGetCurrentContext()!

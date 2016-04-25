@@ -82,7 +82,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         if let avatar = user.avatar?.url {
             profileImageView.kf_setImageWithURL(
                 NSURL(string: avatar)!,
-                placeholderImage: UIImage.avatarPlaceholderImage!
+                placeholderImage: UIImage.avatarPlaceholderImage
             )
         }
     }
