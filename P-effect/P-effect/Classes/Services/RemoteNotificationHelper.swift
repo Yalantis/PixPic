@@ -9,10 +9,8 @@
 import Foundation
 
 enum RemoteNotificationObject {
-    
     case NewPost(message: String, postId: String)
     case NewFollower(message: String, followerId: String)
-    
 }
 
 final class RemoteNotificationHelper {

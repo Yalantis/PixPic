@@ -11,12 +11,10 @@ import Parse
 import ParseFacebookUtilsV4
 
 enum AuthenticationError: Int {
-    
     case FacebookError = 701
     case ParseError = 702
     case ParseCurrentUserNotExist = 703
     case InvalidAccessToken = 704
-
 }
 
 class AuthenticationService {

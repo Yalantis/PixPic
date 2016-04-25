@@ -19,9 +19,7 @@ private let logInNibName = "Log In"
 private let logOutNibName = "Log Out"
 
 enum SettingsState {
-    
     case Common, LoggedIn, LoggedOut
-    
 }
 
 final class SettingsViewController: UIViewController, StoryboardInitable {

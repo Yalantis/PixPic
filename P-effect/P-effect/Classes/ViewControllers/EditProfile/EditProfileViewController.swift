@@ -26,7 +26,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     
-    private lazy var photoGenerator = PhotoGenerator()
+    private lazy var photoProvider = PhotoProvider()
     
     private var image: UIImage?
     private var userName: String?
@@ -104,7 +104,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
+        photoProvider.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -290,7 +290,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showListOfOptions(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     @IBAction private func logoutAction() {
