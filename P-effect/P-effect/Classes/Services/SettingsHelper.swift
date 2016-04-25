@@ -19,7 +19,7 @@ class SettingsHelper {
         }
         set {
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: remoteNotificationsKey)
-            RemoteNotificationHelper.switchNotificationAvailbilityState(to: newValue)
+            RemoteNotificationHelper.setNotificationsAvailable(newValue)
         }
     }
     

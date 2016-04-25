@@ -44,6 +44,8 @@ class PostViewCell: UITableViewCell, CellInterface {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         postImageView.image = UIImage.placeholderImage
         profileImageView.image = UIImage.avatarPlaceholderImage
     }

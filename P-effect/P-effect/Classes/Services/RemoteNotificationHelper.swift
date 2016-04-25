@@ -10,7 +10,7 @@ import Foundation
 
 class RemoteNotificationHelper {
     
-    static func switchNotificationAvailbilityState(to enabled: Bool) {
+    static func setNotificationsAvailable(enabled: Bool) {
         let application = UIApplication.sharedApplication()
         if enabled {
             let settings = UIUserNotificationSettings(

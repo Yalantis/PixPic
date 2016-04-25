@@ -42,5 +42,3 @@ final class RemoteNotificationParser {
     }
     
 }
-
-
