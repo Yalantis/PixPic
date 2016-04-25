@@ -14,8 +14,8 @@ enum AuthenticationError: Int {
     
     case FacebookError = 701
     case ParseError = 702
-    case CurrentUserError = 703
-    case AccessTokenError = 704
+    case ParseCurrentUserNotExist = 703
+    case InvalidAccessToken = 704
 
 }
 
@@ -23,7 +23,7 @@ class AuthenticationService {
     
     func signInWithPermission(completion: (User!, NSError?) -> Void) {
         guard let token = FBSDKAccessToken.currentAccessToken() else {
-            let accessTokenError = NSError.createAuthenticationError(.AccessTokenError)
+            let accessTokenError = NSError.authenticationError(.InvalidAccessToken)
             completion(nil, accessTokenError)
             
             return
@@ -40,7 +40,7 @@ class AuthenticationService {
             } else if let error = error {
                 completion(nil, error)
             } else {
-                let userError = NSError.createAuthenticationError(.FacebookError)
+                let userError = NSError.authenticationError(.FacebookError)
                 completion(nil, userError)
                 
                 return
