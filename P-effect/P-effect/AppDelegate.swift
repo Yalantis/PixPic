@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         if application.applicationState != .Background {
-            sutupParseAnalyticsWithLaunchOptions(launchOptions)
+            setupParseAnalyticsWithLaunchOptions(launchOptions)
         }
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
     }
     
-    private func sutupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
+    private func setupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
         let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
         let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
         if oldPushHandlerOnly || noPushPayload != nil {
