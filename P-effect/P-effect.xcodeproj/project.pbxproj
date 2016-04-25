@@ -46,7 +46,7 @@
 		95308C9A1CBBB389001DD181 /* StickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C8B1CBBB389001DD181 /* StickerViewCell.swift */; };
 		95308CB41CBBB3AA001DD181 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9C1CBBB3AA001DD181 /* ActivityService.swift */; };
 		95308CB51CBBB3AA001DD181 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9D1CBBB3AA001DD181 /* AlertManager.swift */; };
-		95308CB61CBBB3AA001DD181 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9E1CBBB3AA001DD181 /* AuthService.swift */; };
+		95308CB61CBBB3AA001DD181 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9E1CBBB3AA001DD181 /* AuthenticationService.swift */; };
 		95308CB71CBBB3AA001DD181 /* ComplaintService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */; };
 		95308CB81CBBB3AA001DD181 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */; };
 		95308CB91CBBB3AA001DD181 /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */; };
@@ -151,7 +151,7 @@
 		95308C8B1CBBB389001DD181 /* StickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerViewCell.swift; sourceTree = "<group>"; };
 		95308C9C1CBBB3AA001DD181 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		95308C9D1CBBB3AA001DD181 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
-		95308C9E1CBBB3AA001DD181 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		95308C9E1CBBB3AA001DD181 /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplaintService.swift; sourceTree = "<group>"; };
 		95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
@@ -314,7 +314,7 @@
 				7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */,
 				95308C9C1CBBB3AA001DD181 /* ActivityService.swift */,
 				95308C9D1CBBB3AA001DD181 /* AlertManager.swift */,
-				95308C9E1CBBB3AA001DD181 /* AuthService.swift */,
+				95308C9E1CBBB3AA001DD181 /* AuthenticationService.swift */,
 				95308C9F1CBBB3AA001DD181 /* ComplaintService.swift */,
 				95308CA01CBBB3AA001DD181 /* ErrorHandler.swift */,
 				95308CA11CBBB3AA001DD181 /* ExceptionHandler.swift */,
@@ -805,7 +805,7 @@
 				95308CF91CBBB858001DD181 /* NavigationControllerAppearanceContext.swift in Sources */,
 				95308CF71CBBB858001DD181 /* AppearanceApplyingStrategy.swift in Sources */,
 				95308C951CBBB389001DD181 /* TextView.swift in Sources */,
-				95308CB61CBBB3AA001DD181 /* AuthService.swift in Sources */,
+				95308CB61CBBB3AA001DD181 /* AuthenticationService.swift in Sources */,
 				95308CC71CBBB3AA001DD181 /* SettingsMenu.swift in Sources */,
 				7708BF7D1CCE17F3009B17C6 /* PhotoProvider.swift in Sources */,
 				95308CCA1CBBB3AA001DD181 /* UserService.swift in Sources */,
