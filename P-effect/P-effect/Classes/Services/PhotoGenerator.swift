@@ -113,8 +113,8 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     }
     
     private func checkCamera() {
-        let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-        switch authStatus {
+        let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        switch authorizationStatus {
         case .Authorized:
             callCamera()
             
