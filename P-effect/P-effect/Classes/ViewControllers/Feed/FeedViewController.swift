@@ -11,8 +11,8 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
  
-private let titleForEmptyData = "No data is currently available"
-private let descriptionForEmptyData = "Please pull down to refresh"
+private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
+private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     

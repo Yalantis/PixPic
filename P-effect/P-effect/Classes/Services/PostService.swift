@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let messageUploadSuccessful = "Upload successful!"
+private let messageUploadSuccessful = NSLocalizedString("upload_successful", comment: "")
 
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 

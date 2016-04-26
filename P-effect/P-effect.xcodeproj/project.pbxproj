@@ -21,6 +21,7 @@
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
 		772AEFEA1CCF74DF005FC781 /* PFFile+ImageForContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AEFE91CCF74DF005FC781 /* PFFile+ImageForContent.swift */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
+		779884C01CCE34B20027E706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 779884BF1CCE34B20027E706 /* Localizable.strings */; };
 		77A4CC921CBFB9D90077A33B /* StickerEditorViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4CC911CBFB9D90077A33B /* StickerEditorViewControl.swift */; };
 		77B42D231C6B762B00C5A999 /* StickersLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B42D221C6B762B00C5A999 /* StickersLayout.swift */; };
 		77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */; };
@@ -125,6 +126,7 @@
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		772AEFE91CCF74DF005FC781 /* PFFile+ImageForContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PFFile+ImageForContent.swift"; path = "P-effect/Classes/Services/PFFile+ImageForContent.swift"; sourceTree = SOURCE_ROOT; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
+		779884BF1CCE34B20027E706 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		77A4CC911CBFB9D90077A33B /* StickerEditorViewControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickerEditorViewControl.swift; sourceTree = "<group>"; };
 		77B42D221C6B762B00C5A999 /* StickersLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersLayout.swift; sourceTree = "<group>"; };
 		77C0A4451C883BF5007852A0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 		FDAF46651C47E8AA008060CD = {
 			isa = PBXGroup;
 			children = (
+				779884BF1CCE34B20027E706 /* Localizable.strings */,
 				FDAF46701C47E8AA008060CD /* P-effect */,
 				FDAF466F1C47E8AA008060CD /* Products */,
 				468733C5E0D7CEB26FEA9271 /* Frameworks */,
@@ -664,6 +667,7 @@
 				77C0A4461C883BF5007852A0 /* LaunchScreen.storyboard in Resources */,
 				95308C941CBBB389001DD181 /* SwitchView.xib in Resources */,
 				95D57EA71C7764D5007F1B6A /* PhotoEditor.storyboard in Resources */,
+				779884C01CCE34B20027E706 /* Localizable.strings in Resources */,
 				95D57EA11C77636C007F1B6A /* Authorization.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
 				7716E9BD1C85E35D00BBA6CD /* Settings.storyboard in Resources */,

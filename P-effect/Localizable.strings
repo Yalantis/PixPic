@@ -1,0 +1,81 @@
+/* 
+  Localizable.strings
+  P-effect
+
+  Created by AndrewPetrov on 4/25/16.
+  Copyright © 2016 Yalantis. All rights reserved.
+*/
+
+"photo_deleted" = "This photo will be deleted from P-effect";
+"need_registration" = "You can't use this function without registration";
+"complaint_about" ="Complaint about";
+"cancel" = "Cancel";
+"share" = "Share";
+"remove_post" = "Remove post";
+"complain" = "Complain";
+"register" = "Register";
+
+"posted_FB" = "Posted on Facebook!";
+"posted_TW" = "Tweeted!";
+"saved_to_lib" = "Saved to Photos!";
+"posted_VK" = "Posted to VK!";
+"applied_to_contact" = "Applied to contact!";
+"shared" = "Shared!";
+
+"notification" = "Notification";
+
+"thanks_complaint" = "Thank you for complaint";
+"nil_user_in_post" = "Nil user in post";
+
+"user_avatar" = "User Avatar";
+"post_image" = "Post Image";
+"username" = "Username";
+
+"complaint_yourself" = "You can't make a complaint on yourself";
+"already_complaint" = "You already made a complaint on this post";
+"complaint_without_registration" = "You can't make a complaint without registration";
+
+"internet_required_to_change_profile" = "Internet connection is required to save changes in profile";
+"will_logout" = "This will logout you. And you will not be able to share your amazing photos..(";
+"changes_will_be_discarded" = "If you go back now, your changes will be discarded";
+"internet_required_to_logout" = "Internet connection is required to logout";
+"save_changes" = "Save changes";
+"save" = "Save";
+"logout_me" = "Logout me!";
+"ok" = "Ok";
+"cancel" = "Cancel";
+
+"no_data_available" = "No data is currently available";
+"pull_to_refresh" = "Please pull down to refresh";
+
+"post_with_delay" = "Post with delay";
+"don't_save" = "Don't save";
+"save_result_after_internet_appears" = "Would you like to save results to photo library or post after internet access appears?";
+
+
+"take_photo" = "Take photo";
+"photo_from_library" = "Choose photo from library";
+"no_camera" = "No Camera";
+"Sorry, this device has no camera" = "Sorry, this device has no camera";
+"OK" = "OK";
+"IMPORTANT" = "IMPORTANT";
+"camera_access_required" = "Camera access required";
+"allow_camera" = "Allow Camera";
+"allow_camera_access" = "Please allow camera access";
+"dismiss" = "Dismiss";
+
+"upload_successful" = "Upload successful!";
+
+"sure_unfollow" = "Are you sure you want to unfollow?";
+"unfollow" = "Unfollow";
+"yes" = "Yes";
+"can't_follow_no_registration" = "You can't follow someone without registration";
+"register" = "Register";
+
+"enable_notifications" = "Enable Notifications";
+"only_following_users_posts" = "Show only following users posts";
+"log_in" = "Log In";
+"log_out" = "Log Out";
+
+"user_data_updated" = "User data has been updated!";
+"check_later" = "Troubles with the update! Check it out later";
