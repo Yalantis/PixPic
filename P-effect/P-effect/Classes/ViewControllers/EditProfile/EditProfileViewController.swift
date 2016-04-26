@@ -32,7 +32,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     private var userName: String?
     private var originalUserName: String?
     
-    private var kbHeight: CGFloat = 0.0
+    private var kbHeight: CGFloat = 0
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
@@ -72,7 +72,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
     }
     
     // MARK: - Setup methods
