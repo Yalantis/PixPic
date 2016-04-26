@@ -1,5 +1,5 @@
 //
-//  PhotoGenerator.swift
+//  PhotoProvider.swift
 //  UserProfile
 //
 //  Created by Admin on 10/30/15.
@@ -15,7 +15,7 @@ enum ListOfOptions: String {
     case Cancel = "Cancel"
 }
 
-enum HandleNoCamera: String {
+enum HandleCameraAbsence: String {
     case Title = "No Camera"
     case Message = "Sorry, this device has no camera"
     case OkActionTitle = "OK"
@@ -31,13 +31,13 @@ enum CameraAccess: String {
     case DismissActionTitle = "Dismiss"
 }
 
-class PhotoGenerator: NSObject, UINavigationControllerDelegate {
+class PhotoProvider: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
     private lazy var imagePickerController = UIImagePickerController()
     var didSelectPhoto: (UIImage -> Void)?
     
-    func showListOfOptions(inViewController controller: UIViewController) {
+    func presentPhotoOptionsDialog(inViewController controller: UIViewController) {
         self.controller = controller
         imagePickerController.editing = false
         imagePickerController.delegate = self
@@ -78,9 +78,9 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
             || UIImagePickerController.availableCaptureModesForCameraDevice(.Front) != nil
         if isCameraExist {
             imagePickerController.sourceType = .Camera
-            checkCamera()
+            checkCameraAccessibility()
         } else {
-            handleNoCamera()
+            handleCameraAbsence()
         }
     }
     
@@ -91,14 +91,14 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    private func handleNoCamera() {
+    private func handleCameraAbsence() {
         let alertViewController = UIAlertController(
-            title: HandleNoCamera.Title.rawValue,
-            message: HandleNoCamera.Message.rawValue,
+            title: HandleCameraAbsence.Title.rawValue,
+            message: HandleCameraAbsence.Message.rawValue,
             preferredStyle: .Alert
         )
         let okAction = UIAlertAction(
-            title: HandleNoCamera.OkActionTitle.rawValue,
+            title: HandleCameraAbsence.OkActionTitle.rawValue,
             style:.Default,
             handler: nil
         )
@@ -112,9 +112,15 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
         imagePickerController.allowsEditing = true
     }
     
-    private func checkCamera() {
+<<<<<<< HEAD:P-effect/P-effect/Classes/Services/PhotoProvider.swift
+    private func checkCameraAccessibility() {
         let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
         switch authStatus {
+=======
+    private func checkCamera() {
+        let authorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        switch authorizationStatus {
+>>>>>>> develop:P-effect/P-effect/Classes/Services/PhotoGenerator.swift
         case .Authorized:
             callCamera()
             
@@ -161,7 +167,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
                 if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
                     AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
                         dispatch_async(dispatch_get_main_queue()) {
-                            self?.checkCamera()
+                            self?.checkCameraAccessibility()
                         }
                     }
                 }
@@ -172,7 +178,7 @@ class PhotoGenerator: NSObject, UINavigationControllerDelegate {
     
 }
 
-extension PhotoGenerator: UIImagePickerControllerDelegate {
+extension PhotoProvider: UIImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {

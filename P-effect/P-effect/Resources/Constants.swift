@@ -20,8 +20,8 @@ struct Constants {
     }
     
     struct BaseDimensions {
-        static let ToolBarHeight: CGFloat = 50.0
-        static let NavBarWithStatusBarHeight: CGFloat = 64.0
+        static let ToolBarHeight: CGFloat = 50
+        static let NavBarWithStatusBarHeight: CGFloat = 64
     }
     
     struct FileSize {
@@ -53,7 +53,7 @@ struct Constants {
     }
     
     struct Profile {
-        static let ToastActivityDuration = 5.0
+        static let ToastActivityDuration: NSTimeInterval = 5
         static let HeaderHeight: CGFloat = 322
         static let AvatarImageCornerRadius: CGFloat = 95.5
         static let AvatarImagePlaceholderName = "profile_placeholder.png"
@@ -89,11 +89,9 @@ struct Constants {
     }
     
     struct StickerEditor {
-        static let UserResizableViewGlobalInset: CGFloat =  5.0
-        static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
-        
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
-        static let StickerViewControlSize: CGFloat =  36.0
+        static let UserResizableViewGlobalOffset: CGFloat = 5
+        static let UserResizableViewDefaultMinWidth: CGFloat = 48
+        static let StickerViewControlSize: CGFloat = 36
     }
     
     struct EditProfile {

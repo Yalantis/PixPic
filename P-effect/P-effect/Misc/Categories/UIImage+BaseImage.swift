@@ -10,24 +10,24 @@ import UIKit
 
 extension UIImage {
     
-    public class func appBackButton() -> UIImage? {
+    static var appBackButton: UIImage? {
         return UIImage(named: "icon_back_arrow")
     }
     
-    public class func placeholderImage() -> UIImage? {
+    static var placeholderImage: UIImage? {
         return UIImage(named: "photo_placeholder")
     }
     
-    public class func avatarPlaceholderImage() -> UIImage? {
+    static var avatarPlaceholderImage: UIImage? {
         return UIImage(named: "profile_placeholder")
     }
     
-    public class func appAddPhotoButton() -> UIImage? {
+    static var appAddPhotoButton: UIImage? {
         return UIImage(named: "btn_make_photo")
     }
     
-    public class func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
-        let rect = CGRectMake(0.0, 0.0, size.width, size.height)
+    public static func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
+        let rect = CGRectMake(0, 0, size.width, size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context: CGContextRef = UIGraphicsGetCurrentContext()!
         CGContextSetFillColorWithColor(context, color.CGColor)
