@@ -13,7 +13,7 @@ class BorderView: UIView {
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         CGContextSaveGState(context)
-        CGContextSetLineWidth(context, 1.0)
+        CGContextSetLineWidth(context, 1)
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
         

@@ -27,7 +27,7 @@ extension UIImage {
     }
     
     public static func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
-        let rect = CGRectMake(0.0, 0.0, size.width, size.height)
+        let rect = CGRectMake(0, 0, size.width, size.height)
         UIGraphicsBeginImageContext(rect.size)
         let context: CGContextRef = UIGraphicsGetCurrentContext()!
         CGContextSetFillColorWithColor(context, color.CGColor)

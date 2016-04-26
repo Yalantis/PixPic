@@ -113,8 +113,8 @@ class StickerEditorView: UIView {
     }
     
     private func updateControlsPosition() {
-        let delta = Constants.StickerEditor.UserResizableViewGlobalOffset
-        borderView.frame = CGRectMake(-delta, -delta, bounds.size.width + delta * 2, bounds.size.height + delta * 2)
+        let offset = Constants.StickerEditor.UserResizableViewGlobalOffset
+        borderView.frame = CGRectMake(-offset, -offset, bounds.size.width + offset * 2, bounds.size.height + offset * 2)
         
         deleteControl.center = CGPointMake(borderView.frame.origin.x, borderView.frame.origin.y)
         resizingControl.center = CGPointMake(borderView.frame.origin.x + borderView.frame.size.width,
@@ -165,7 +165,7 @@ class StickerEditorView: UIView {
         if state == true {
             alpha = 0.65
         } else {
-            alpha = 1.0
+            alpha = 1
         }
     }
     
