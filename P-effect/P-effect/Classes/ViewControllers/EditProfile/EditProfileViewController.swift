@@ -18,6 +18,7 @@ private let saveActionTitle = "Save"
 private let logoutActionTitle = "Logout me!"
 private let cancelActionTitle = "Cancel"
 private let okActionTitle = "Ok"
+private let textFieldAnimationDuration: NSTimeInterval = 0.3
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {
     
@@ -25,7 +26,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     
-    private lazy var photoGenerator = PhotoGenerator()
+    private lazy var photoProvider = PhotoProvider()
     
     private var image: UIImage?
     private var userName: String?
@@ -103,7 +104,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
+        photoProvider.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -137,7 +138,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         navigationItem.rightBarButtonItem = rightButton
         
         let leftButton = UIBarButtonItem(
-            image: UIImage.appBackButton(),
+            image: UIImage.appBackButton,
             style: .Plain,
             target: self,
             action: #selector(handleBackButtonTap)
@@ -200,9 +201,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        let authService: AuthService = locator.getService()
-        authService.logOut()
-        authService.anonymousLogIn(
+        let authenticationService: AuthenticationService = locator.getService()
+        authenticationService.logOut()
+        authenticationService.anonymousLogIn(
             completion: { object in
                 self.router.showFeed()
             }, failure: { error in
@@ -237,7 +238,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         topConstraint.constant = kbHidden ? -movement / 2 : 0
         view.needsUpdateConstraints()
         UIView.animateWithDuration(
-            0.3,
+            textFieldAnimationDuration,
             animations: {
                 self.view.layoutIfNeeded()
             }
@@ -289,7 +290,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showListOfOptions(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     @IBAction private func logoutAction() {

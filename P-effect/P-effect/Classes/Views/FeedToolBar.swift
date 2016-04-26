@@ -7,6 +7,7 @@
 //
 
 import UIKit
+private let buttonAnimationDuration: NSTimeInterval = 0.7
 
 class FeedToolBar: UIView {
     
@@ -37,7 +38,7 @@ class FeedToolBar: UIView {
         bottomSpaceConstraint.constant = isLifting ? 0 : -Constants.BaseDimensions.ToolBarHeight
         topSpaceConstraint.constant = isLifting ? 0 : Constants.BaseDimensions.ToolBarHeight
         UIView.animateWithDuration(
-            0.7,
+            buttonAnimationDuration,
             delay: 0,
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.7,

@@ -96,7 +96,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
@@ -194,8 +194,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func showToast() {
-        let toastActivityHelper = ToastActivityHelper()
-        toastActivityHelper.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
+        view.showToastActivityWithDuration(Constants.Profile.ToastActivityDuration)
         activityShown = true
     }
     

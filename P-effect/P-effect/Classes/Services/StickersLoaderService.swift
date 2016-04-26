@@ -12,7 +12,7 @@ typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError
 
 class StickersLoaderService {
     
-    private var isQueryFromLocalDataStoure = false
+    private var isQueryFromLocalDataStore = false
     
     func loadStickers(completion: LoadingStickersCompletion) {
         let query = StickersVersion.sortedQuery
@@ -24,7 +24,7 @@ class StickersLoaderService {
             }
             if !needUpdate {
                 query.fromLocalDatastore()
-                this.isQueryFromLocalDataStoure = true
+                this.isQueryFromLocalDataStore = true
             }
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
@@ -53,7 +53,7 @@ class StickersLoaderService {
     private func loadStickersGroups(stickersVersion: StickersVersion, completion: LoadingStickersCompletion) {
         let groupsRelationQuery = stickersVersion.groupsRelation.query()
         
-        if isQueryFromLocalDataStoure {
+        if isQueryFromLocalDataStore {
             groupsRelationQuery.fromLocalDatastore()
         }
         
@@ -86,7 +86,7 @@ class StickersLoaderService {
             group.pinInBackground()
 
             let stickersRelationQuery = group.stickersRelation.query()
-            if isQueryFromLocalDataStoure {
+            if isQueryFromLocalDataStore {
                 stickersRelationQuery.fromLocalDatastore()
             }
             stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in

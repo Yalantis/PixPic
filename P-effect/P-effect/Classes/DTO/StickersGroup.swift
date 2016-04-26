@@ -26,7 +26,7 @@ class StickersGroup: PFObject {
 
 extension StickersGroup: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "EffectsGroup"
     }
     

@@ -48,7 +48,7 @@ class PostService {
     // MARK: - Private methods
     private func uploadPost(image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
-            // Auth service
+            // Authentication service
             return
         }
         let post = Post(image: image, user: user, comment: comment)

@@ -10,7 +10,7 @@ import Foundation
 
 extension PFInstallation {
     
-    class func addPFUserToCurrentInstallation() {
+    static func addPFUserToCurrentInstallation() {
         let installation = PFInstallation.currentInstallation()
         installation["user"] = PFUser.currentUser()
         installation.saveInBackground()
