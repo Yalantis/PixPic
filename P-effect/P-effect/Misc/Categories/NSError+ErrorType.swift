@@ -8,7 +8,7 @@
 
 extension NSError {
     
-    static func createAuthError(type: AuthError) -> NSError {
+    static func authenticationError(type: AuthenticationError) -> NSError {
         switch type {
         case .FacebookError:
             let error = NSError(
@@ -28,7 +28,7 @@ extension NSError {
             
             return error
             
-        case .CurrentUserError:
+        case .ParseCurrentUserNotExist:
             let error = NSError(
                 domain: NSBundle.mainBundle().bundleIdentifier!,
                 code: 703,
@@ -37,7 +37,7 @@ extension NSError {
             
             return error
             
-        case .AccessTokenError:
+        case .InvalidAccessToken:
             let error = NSError(
                 domain: NSBundle.mainBundle().bundleIdentifier!,
                 code: 704,

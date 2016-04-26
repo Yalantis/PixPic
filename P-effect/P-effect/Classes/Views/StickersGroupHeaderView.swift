@@ -8,10 +8,10 @@
 
 import Foundation
 
+private let tintColorAnimationDuration: NSTimeInterval = 0.2
+
 class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
-    
-    static let identifier = "StickersGroupHeaderViewIdentifier"
-    
+        
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!
@@ -30,7 +30,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         let isSelected = completion()
         let color = isSelected ? UIColor.appBlueColor : UIColor.appWhiteColor
         UIView.animateWithDuration(
-            0.2,
+            tintColorAnimationDuration,
             delay: 0,
             options: [.CurveLinear, .BeginFromCurrentState],
             animations: {

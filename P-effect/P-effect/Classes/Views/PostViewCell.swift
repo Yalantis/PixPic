@@ -17,7 +17,6 @@ private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
 class PostViewCell: UITableViewCell, CellInterface {
     
-    static let identifier = "PostViewCellIdentifier"
     static let designedHeight = headerViewHeight + footerViewHeight
     
     weak var post = Post?()
@@ -44,11 +43,15 @@ class PostViewCell: UITableViewCell, CellInterface {
         selectionStyle = .None
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        postImageView.image = UIImage.placeholderImage
+        profileImageView.image = UIImage.avatarPlaceholderImage
+    }
+    
     func configure(withPost post: Post?) {
         guard let post = post else {
-            postImageView.image = UIImage.placeholderImage()
-            profileImageView.image = UIImage.avatarPlaceholderImage()
-            
             return
         }
         self.post = post
@@ -64,7 +67,7 @@ class PostViewCell: UITableViewCell, CellInterface {
             let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
             postImageView.kf_setImageWithURL(
                 url,
-                placeholderImage: UIImage.placeholderImage(),
+                placeholderImage: UIImage.placeholderImage,
                 optionsInfo: nil) { [weak self] _, _, _, _ in
                     indicator.removeFromSuperview()
                     self?.settingsButton.enabled = true
@@ -72,14 +75,14 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
 
         guard let user = post.user else {
-            profileImageView.image = UIImage.avatarPlaceholderImage()
+            profileImageView.image = UIImage.avatarPlaceholderImage
             
             return
         }
         if let avatar = user.avatar?.url {
             profileImageView.kf_setImageWithURL(
                 NSURL(string: avatar)!,
-                placeholderImage: UIImage.avatarPlaceholderImage()
+                placeholderImage: UIImage.avatarPlaceholderImage
             )
         }
     }

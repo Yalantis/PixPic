@@ -40,7 +40,7 @@ class Post: PFObject {
 
 extension Post: PFSubclassing {
     
-    class func parseClassName() -> String {
+    static func parseClassName() -> String {
         return "Post"
     }
     

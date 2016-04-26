@@ -120,36 +120,36 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         complaintMenu.addAction(cancelAction)
         
         let complaintService: ComplaintService = locator.getService()
-        let complaintUsernameAction = UIAlertAction(
+        let complainAboutUsernameAction = UIAlertAction(
             title: ComplaintReason.Username.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintUsername(post.user!) { _, error in
+                complaintService.complainAboutUsername(post.user!) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        let complaintUserAvatarAction = UIAlertAction(
+        let complainAboutUserAvatarAction = UIAlertAction(
             title: ComplaintReason.UserAvatar.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintUserAvatar(post.user!) { _, error in
+                complaintService.complainAboutUserAvatar(post.user!) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        let complaintPostAction = UIAlertAction(
+        let complainAboutPostAction = UIAlertAction(
             title: ComplaintReason.PostImage.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintPost(post) { _, error in
+                complaintService.complainAboutPost(post) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
+        complaintMenu.addAction(complainAboutUsernameAction)
+        complaintMenu.addAction(complainAboutUserAvatarAction)
+        complaintMenu.addAction(complainAboutPostAction)
         
         presenter.presentViewController(complaintMenu, animated: true, completion: nil)
     }
