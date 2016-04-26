@@ -9,15 +9,15 @@
 import UIKit
 import Toast
 
-private let saveChangesWithoutConnectionMessage = "Internet connection is required to save changes in profile"
-private let logoutMessage = "This will logout you. And you will not be able to share your amazing photos..("
-private let backWithChangesMessage = "If you go back now, your changes will be discarded"
-private let logoutWithoutConnectionAttempt = "Internet connection is required to logout"
-private let backWithChangesTitle = "Save changes"
-private let saveActionTitle = "Save"
-private let logoutActionTitle = "Logout me!"
-private let cancelActionTitle = "Cancel"
-private let okActionTitle = "Ok"
+private let saveChangesWithoutConnectionMessage = NSLocalizedString("internet_required_to_change_profile", comment: "")
+private let logoutMessage = NSLocalizedString("will_logout", comment: "")
+private let backWithChangesMessage = NSLocalizedString("changes_will_be_discarded", comment: "")
+private let logoutWithoutConnectionAttempt = NSLocalizedString("internet_required_to_logout", comment: "")
+private let backWithChangesTitle = NSLocalizedString("save_changes", comment: "")
+private let saveActionTitle = NSLocalizedString("save", comment: "")
+private let logoutActionTitle = NSLocalizedString("logout_me", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let okActionTitle = NSLocalizedString("ok", comment: "")
 private let textFieldAnimationDuration: NSTimeInterval = 0.3
 
 final class EditProfileViewController: UIViewController, StoryboardInitable {

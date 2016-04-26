@@ -17,12 +17,12 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-private let cancelActionTitle = "Cancel"
-private let postActionTitle = "Post with delay"
-private let saveActionTitle = "Save"
-private let dontSaveActionTitle = "Don't save"
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let postActionTitle = NSLocalizedString("post_with_delay", comment: "")
+private let saveActionTitle = NSLocalizedString("save", comment: "")
+private let dontSaveActionTitle = NSLocalizedString("don't_save", comment: "")
 
-private let suggestSaveToCameraRollMessage = "Would you like to save results to photo library or post after internet access appears?"
+private let suggestSaveToCameraRollMessage = NSLocalizedString("save_result_after_internet_appears", comment: "")
 
 final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
