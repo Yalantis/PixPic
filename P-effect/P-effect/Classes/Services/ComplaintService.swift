@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let complaintSuccessfull = "Thank you for complaint"
+private let complaintSuccessfull = "Thank you for the complaint"
 private let nilUserInPost = "Nil user in post"
 private let noObjectsFoundErrorCode = 101
 

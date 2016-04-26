@@ -107,14 +107,14 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(FeedViewController.fetchDataFromNotification),
-            name: Constants.NotificationName.NewPostUploaded,
+            name: Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
-            name: Constants.NotificationName.FollowersListUpdated,
+            name: Constants.NotificationName.FollowersListIsUpdated,
             object: nil
         )
     }

@@ -33,7 +33,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
         SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
         NSNotificationCenter.defaultCenter().postNotificationName(
-            Constants.NotificationName.NewPostUploaded,
+            Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
     }
