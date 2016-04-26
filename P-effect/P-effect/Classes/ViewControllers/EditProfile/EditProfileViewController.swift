@@ -26,13 +26,13 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     private var router: protocol<FeedPresenter, AlertManagerDelegate>!
     
-    private lazy var photoGenerator = PhotoGenerator()
+    private lazy var photoProvider = PhotoProvider()
     
     private var image: UIImage?
     private var userName: String?
     private var originalUserName: String?
     
-    private var kbHeight: CGFloat = 0.0
+    private var kbHeight: CGFloat = 0
     private var kbHidden = true
     private var someChangesMade = false
     private var usernameChanged = false
@@ -72,7 +72,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2.0
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
     }
     
     // MARK: - Setup methods
@@ -104,7 +104,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
+        photoProvider.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
@@ -201,9 +201,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        let authService: AuthService = locator.getService()
-        authService.logOut()
-        authService.anonymousLogIn(
+        let authenticationService: AuthenticationService = locator.getService()
+        authenticationService.logOut()
+        authenticationService.anonymousLogIn(
             completion: { object in
                 self.router.showFeed()
             }, failure: { error in
@@ -290,7 +290,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     // MARK: - IBActions
     @IBAction private func avatarTapAction(sender: AnyObject) {
-        photoGenerator.showListOfOptions(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     @IBAction private func logoutAction() {

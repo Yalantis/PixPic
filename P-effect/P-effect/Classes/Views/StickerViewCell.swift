@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StickerViewCell: UICollectionViewCell {
+class StickerViewCell: UICollectionViewCell, CellInterface {
     
     @IBOutlet private weak var stickerImage: UIImageView!
     

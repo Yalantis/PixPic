@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityViewController: UIActivityViewController {
     
-    private let facebokMessage = "Posted on Facebook!"
+    private let facebookMessage = "Posted on Facebook!"
     private let twitterMessage = "Tweeted!"
     private let cameraRollMessage = "Saved to Photos!"
     private let vkMessage = "Posted to VK!"
@@ -55,7 +55,7 @@ extension ActivityViewController: UIActivityItemSource {
     func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
         switch activityType {
         case UIActivityTypePostToFacebook:
-            return facebokMessage
+            return facebookMessage
             
         case UIActivityTypePostToTwitter:
             return twitterMessage
