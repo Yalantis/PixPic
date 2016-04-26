@@ -11,9 +11,7 @@ import Foundation
 private let tintColorAnimationDuration: NSTimeInterval = 0.2
 
 class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
-    
-    static let identifier = "StickersGroupHeaderViewIdentifier"
-    
+        
     private var completion: (() -> Bool)!
     
     @IBOutlet private weak var imageView: UIImageView!
@@ -43,7 +41,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderHelper.getImageForContentItem(file) { image, error in
+        file.getImage { image, error in
             if let image = image {
                 self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
                 self.imageView.tintColor = UIColor.appWhiteColor

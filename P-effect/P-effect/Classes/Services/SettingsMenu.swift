@@ -8,15 +8,15 @@
 
 import UIKit
 
-private let removePostMessage = NSLocalizedString("This photo will be deleted from P-effect", comment: "")
-private let suggestLoginMessage = NSLocalizedString("You can't use this function without registration", comment: "")
-private let complaintMessage = NSLocalizedString("Complaint about", comment: "")
+private let removePostMessage = NSLocalizedString("photo_deleted", comment: "")
+private let suggestLoginMessage = NSLocalizedString("need_registration", comment: "")
+private let complaintMessage = NSLocalizedString("complaint_about", comment: "")
 
-private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
-private let shareActionTitle = NSLocalizedString("Share", comment: "")
-private let removeActionTitle = NSLocalizedString("Remove post", comment: "")
-private let complaintActionTitle = NSLocalizedString("Complain" , comment: "")
-private let registerActionTitle = NSLocalizedString("Register", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let shareActionTitle = NSLocalizedString("share", comment: "")
+private let removeActionTitle = NSLocalizedString("remove_post", comment: "")
+private let complaintActionTitle = NSLocalizedString("complain" , comment: "")
+private let registerActionTitle = NSLocalizedString("register", comment: "")
 
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
@@ -120,36 +120,36 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         complaintMenu.addAction(cancelAction)
         
         let complaintService: ComplaintService = locator.getService()
-        let complaintUsernameAction = UIAlertAction(
+        let complainAboutUsernameAction = UIAlertAction(
             title: ComplaintReason.Username.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintUsername(post.user!) { _, error in
+                complaintService.complainAboutUsername(post.user!) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        let complaintUserAvatarAction = UIAlertAction(
+        let complainAboutUserAvatarAction = UIAlertAction(
             title: ComplaintReason.UserAvatar.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintUserAvatar(post.user!) { _, error in
+                complaintService.complainAboutUserAvatar(post.user!) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        let complaintPostAction = UIAlertAction(
+        let complainAboutPostAction = UIAlertAction(
             title: ComplaintReason.PostImage.rawValue,
             style: .Default
             ) { _ in
-                complaintService.complaintPost(post) { _, error in
+                complaintService.complainAboutPost(post) { _, error in
                     log.debug(error?.localizedDescription)
                 }
         }
         
-        complaintMenu.addAction(complaintUsernameAction)
-        complaintMenu.addAction(complaintUserAvatarAction)
-        complaintMenu.addAction(complaintPostAction)
+        complaintMenu.addAction(complainAboutUsernameAction)
+        complaintMenu.addAction(complainAboutUserAvatarAction)
+        complaintMenu.addAction(complainAboutPostAction)
         
         presenter.presentViewController(complaintMenu, animated: true, completion: nil)
     }

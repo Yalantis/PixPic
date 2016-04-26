@@ -8,54 +8,54 @@
 
 import UIKit
 
-private let complaintSuccessfull = NSLocalizedString("Thank you for complaint", comment: "")
-private let nilUserInPost = NSLocalizedString("Nil user in post", comment: "")
+private let complaintSuccessfull = NSLocalizedString("thanks_complaint", comment: "")
+private let nilUserInPost = NSLocalizedString("nil_user_in_post", comment: "")
 private let noObjectsFoundErrorCode = 101
 
-private let selfComplaint = NSLocalizedString("You can't make a complaint on yourself", comment: "")
-private let alreadyComplainedPost = NSLocalizedString("You already make a complaint on this post", comment: "")
-private let anonymousComlaint = NSLocalizedString("You can't make a complaint without registration", comment: "")
+private let selfComplaint = NSLocalizedString("complaint_yourself", comment: "")
+private let alreadyComplainedPost = NSLocalizedString("already_complaint", comment: "")
+private let anonymousComlaint = NSLocalizedString("complaint_without_registration", comment: "")
 
 typealias ComplainCompletion = (Bool, NSError?) -> Void
 
 enum ComplaintReason: String {
-    case UserAvatar = "User Avatar"
-    case PostImage = "Post Image"
-    case Username = "Username"
+    case UserAvatar = "user_avatar"
+    case PostImage = "post_image"
+    case Username = "username"
 }
 
 class ComplaintService {
         
-    func complaintUsername(user: User, post: Post? = nil, completion: ComplainCompletion) {
-        if !shouldContinueExecutionWith(user) {
+    func complainAboutUsername(user: User, completion: ComplainCompletion) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.Username)
+        let complaint = Complaint(user: user, post: nil, reason: .Username)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
     }
     
-    func complaintUserAvatar(user: User, post: Post? = nil, completion: ComplainCompletion) {
-        if !shouldContinueExecutionWith(user) {
+    func complainAboutUserAvatar(user: User, completion: ComplainCompletion) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.UserAvatar)
+        let complaint = Complaint(user: user, post: nil, reason: .UserAvatar)
         sendComplaint(complaint) { result, error in
             completion(result, error)
         }
     }
     
-    func complaintPost(post: Post, completion: ComplainCompletion) {
+    func complainAboutPost(post: Post, completion: ComplainCompletion) {
         guard let user = post.user else {
             log.debug(nilUserInPost)
             
             return
         }
-        if !shouldContinueExecutionWith(user) {
+        guard shouldContinueExecutionWith(user) else {
             return
         }
-        let complaint = Complaint(user: user, post: post, reason: ComplaintReason.PostImage)
+        let complaint = Complaint(user: user, post: post, reason: .PostImage)
         performIfComplaintExsist(complaint) { [weak self] existence in
             if !existence {
                 self?.sendComplaint(complaint) { result, error in

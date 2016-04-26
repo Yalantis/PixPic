@@ -10,8 +10,8 @@ import Foundation
 
 typealias LoadingUserCompletion = (object: User?, error: NSError?) -> Void
 
-private let messageDataSuccessfullyUpdated = NSLocalizedString("User data has been updated!", comment: "")
-private let messageDataNotUpdated = NSLocalizedString("Troubles with the update! Check it out later", comment: "")
+private let messageDataSuccessfullyUpdated = NSLocalizedString("user_data_updated", comment: "")
+private let messageDataNotUpdated = NSLocalizedString("check_later", comment: "")
 
 class UserService {
     

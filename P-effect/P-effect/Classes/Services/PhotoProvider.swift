@@ -9,20 +9,20 @@
 import UIKit
 import AVFoundation
 
-private let takePhotoOption = NSLocalizedString("Take photo", comment: "")
-private let selectFromLibraryOption = NSLocalizedString("Choose photo from library", comment: "")
-private let cancelOption = NSLocalizedString("Cancel", comment: "")
+private let takePhotoOption = NSLocalizedString("take_photo", comment: "")
+private let selectFromLibraryOption = NSLocalizedString("photo_from_library", comment: "")
+private let cancelOption = NSLocalizedString("cancel", comment: "")
 
-private let cameraAbsenceTitle = NSLocalizedString("No Camera", comment: "")
+private let cameraAbsenceTitle = NSLocalizedString("no_camera", comment: "")
 private let cameraAbsenceMessage = NSLocalizedString("Sorry, this device has no camera", comment: "")
 private let okActionTitle = NSLocalizedString("OK", comment: "")
 
 private let importantTitle = NSLocalizedString("IMPORTANT", comment: "")
-private let askForCameraAccessMessage = NSLocalizedString("Camera access required", comment: "")
-private let allowCameraActionTitle = NSLocalizedString("Allow Camera", comment: "")
-private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
-private let allowCameraMessage = NSLocalizedString("Please allow camera access", comment: "")
-private let dismissActionTitle = NSLocalizedString("Dismiss", comment: "")
+private let askForCameraAccessMessage = NSLocalizedString("camera_access_required", comment: "")
+private let allowCameraActionTitle = NSLocalizedString("allow_camera", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let allowCameraMessage = NSLocalizedString("allow_camera_access", comment: "")
+private let dismissActionTitle = NSLocalizedString("dismiss", comment: "")
 
 class PhotoProvider: NSObject, UINavigationControllerDelegate {
     

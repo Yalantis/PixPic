@@ -17,12 +17,12 @@ protocol PhotoEditorDelegate: class {
     
 }
 
-private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
-private let postActionTitle = NSLocalizedString("Post with delay", comment: "")
-private let saveActionTitle = NSLocalizedString("Save", comment: "")
-private let dontSaveActionTitle = NSLocalizedString("Don't save", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let postActionTitle = NSLocalizedString("post_with_delay", comment: "")
+private let saveActionTitle = NSLocalizedString("save", comment: "")
+private let dontSaveActionTitle = NSLocalizedString("don't_save", comment: "")
 
-private let suggestSaveToCameraRollMessage = NSLocalizedString("Would you like to save results to photo library or post after internet access appears?", comment: "")
+private let suggestSaveToCameraRollMessage = NSLocalizedString("save_result_after_internet_appears", comment: "")
 
 final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
     
@@ -67,7 +67,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         switch segue.identifier! {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
-            imageController?.model = ImageViewModel(image: model.originalImage())
+            imageController?.model = ImageViewModel(image: model.originalImage)
             imageController?.setLocator(locator)
             delegate = imageController
             
@@ -128,15 +128,15 @@ extension PhotoEditorViewController {
             action: #selector(saveImageToCameraRoll)
         )
         
-        let allStickerssRemovingButton = UIBarButtonItem(
+        let removeAllStickersButton = UIBarButtonItem(
             image: UIImage(named: "icon_remove"),
             style: .Plain,
             target: self,
             action: #selector(removeAllStickers)
         )
-        allStickerssRemovingButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
+        removeAllStickersButton.imageInsets = UIEdgeInsetsMake(0, 0, 0, -30)
 
-        navigationItem.rightBarButtonItems = [savingButton, allStickerssRemovingButton]
+        navigationItem.rightBarButtonItems = [savingButton, removeAllStickersButton]
         navigationItem.title = "Edit"
     }
     
@@ -155,7 +155,7 @@ extension PhotoEditorViewController {
     
     @objc private func performBackNavigation() {
         let alertController = UIAlertController(
-            title: "Results wasn't saved",
+            title: "Result wasn't saved",
             message: "Do you want to save result to the photo library?",
             preferredStyle: .ActionSheet
         )
@@ -201,10 +201,10 @@ extension PhotoEditorViewController {
                 switch status {
                 case .Authorized:
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                    AlertManager.sharedInstance.showSimpleAlert("Image saved to library")
+                    AlertManager.sharedInstance.showSimpleAlert("Image was saved to the photo library")
                     
                 default:
-                    AlertManager.sharedInstance.showSimpleAlert("No access to photo library")
+                    AlertManager.sharedInstance.showSimpleAlert("No access to the photo library")
                 }
             }
         }
@@ -215,13 +215,13 @@ extension PhotoEditorViewController {
             guard let image = delegate?.imageForPhotoEditor(self, withStickers: true) else {
                 throw Exception.CantApplyStickers
             }
-            var pictureData = UIImageJPEGRepresentation(image, 1.0)
+            var imageData = UIImageJPEGRepresentation(image, 1.0)
             var i = 1.0
-            while pictureData?.length > Constants.FileSize.MaxUploadSizeBytes {
+            while imageData?.length > Constants.FileSize.MaxUploadSizeBytes {
                 i = i - 0.1
-                pictureData = UIImageJPEGRepresentation(image, CGFloat(i))
+                imageData = UIImageJPEGRepresentation(image, CGFloat(i))
             }
-            guard let file = PFFile(name: "image", data: pictureData!) else {
+            guard let file = PFFile(name: "image", data: imageData!) else {
                 throw Exception.CantCreateParseFile
             }
             let postService: PostService = locator.getService()

@@ -8,15 +8,15 @@
 
 import Foundation
 
-private let logoutMessage = NSLocalizedString("This will logout you. And you will not be able to share your amazing photos..(", comment: "")
-private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
-private let okActionTitle = NSLocalizedString("Logout me", comment: "")
+private let logoutMessage = NSLocalizedString("will_logout", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
+private let okActionTitle = NSLocalizedString("logout_me", comment: "")
 
-private let enableNotificationsNibName = NSLocalizedString("Enable Notifications", comment: "")
-private let followedPostsNibName = NSLocalizedString("Show only following users posts", comment: "")
+private let enableNotificationsNibName = NSLocalizedString("enable_notifications", comment: "")
+private let followedPostsNibName = NSLocalizedString("only_following_users_posts", comment: "")
 
-private let logInNibName = NSLocalizedString("Log In", comment: "")
-private let logOutNibName = NSLocalizedString("Log Out", comment: "")
+private let logInNibName = NSLocalizedString("log_in", comment: "")
+private let logOutNibName = NSLocalizedString("log_out", comment: "")
 
 enum SettingsState {
     case Common, LoggedIn, LoggedOut
@@ -33,7 +33,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
         SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
         NSNotificationCenter.defaultCenter().postNotificationName(
-            Constants.NotificationName.NewPostUploaded,
+            Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
     }

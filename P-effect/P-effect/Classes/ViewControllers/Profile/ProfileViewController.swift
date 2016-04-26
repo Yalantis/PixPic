@@ -9,13 +9,13 @@
 import UIKit
 import Toast
 
-private let unfollowMessage = NSLocalizedString("Are you sure you want to unfollow?", comment: "")
-private let unfollowTitle = NSLocalizedString("Unfollow", comment: "")
-private let unfollowActionTitle = NSLocalizedString("Yes", comment: "")
+private let unfollowMessage = NSLocalizedString("sure_unfollow", comment: "")
+private let unfollowTitle = NSLocalizedString("unfollow", comment: "")
+private let unfollowActionTitle = NSLocalizedString("yes", comment: "")
 
-private let suggestLoginMessage = NSLocalizedString("You can't follow someone without registration", comment: "")
-private let registerActionTitle = NSLocalizedString("Register", comment: "")
-private let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+private let suggestLoginMessage = NSLocalizedString("can't_follow_no_registration", comment: "")
+private let registerActionTitle = NSLocalizedString("register", comment: "")
+private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
@@ -96,7 +96,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         showToast()
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
         setupTableViewFooter()
         applyUser()
         loadUserPosts()
@@ -171,7 +171,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             return
         }
         
-        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
+        avatar.getImage { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -273,7 +273,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                             this.followButton.enabled = true
                             this.fillFollowersQuantity(user)
                             NSNotificationCenter.defaultCenter().postNotificationName(
-                                Constants.NotificationName.FollowersListUpdated,
+                                Constants.NotificationName.FollowersListIsUpdated,
                                 object: nil
                             )
                         }
@@ -305,7 +305,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.FollowersListUpdated,
+                    Constants.NotificationName.FollowersListIsUpdated,
                     object: nil
                 )
             }

@@ -10,12 +10,12 @@ import UIKit
 
 class ActivityViewController: UIActivityViewController {
     
-    private let facebokMessage = NSLocalizedString("Posted on Facebook!", comment: "")
-    private let twitterMessage = NSLocalizedString("Tweeted!", comment: "")
-    private let cameraRollMessage = NSLocalizedString("Saved to Photos!", comment: "")
-    private let vkMessage = NSLocalizedString("Posted to VK!", comment: "")
-    private let applyToContactMessage = NSLocalizedString("Applied to contact!", comment: "")
-    private let doneMessage = NSLocalizedString("Shared!", comment: "")
+    private let facebookMessage = NSLocalizedString("posted_FB!", comment: "")
+    private let twitterMessage = NSLocalizedString("posted_TW", comment: "")
+    private let cameraRollMessage = NSLocalizedString("saved_to_lib", comment: "")
+    private let vkMessage = NSLocalizedString("posted_VK", comment: "")
+    private let applyToContactMessage = NSLocalizedString("applied_to_contact", comment: "")
+    private let doneMessage = NSLocalizedString("shared", comment: "")
     
     private let activityTypePostToVK = "com.vk.vkclient.shareextension"
     
@@ -55,7 +55,7 @@ extension ActivityViewController: UIActivityItemSource {
     func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
         switch activityType {
         case UIActivityTypePostToFacebook:
-            return facebokMessage
+            return facebookMessage
             
         case UIActivityTypePostToTwitter:
             return twitterMessage

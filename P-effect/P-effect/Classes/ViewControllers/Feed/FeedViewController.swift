@@ -11,8 +11,8 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
  
-private let titleForEmptyData = NSLocalizedString("No data is currently available", comment: "")
-private let descriptionForEmptyData = NSLocalizedString("Please pull down to refresh", comment: "")
+private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
+private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
@@ -100,21 +100,21 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
     }
     
     private func setupObserver() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(FeedViewController.fetchDataFromNotification),
-            name: Constants.NotificationName.NewPostUploaded,
+            name: Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
-            name: Constants.NotificationName.FollowersListUpdated,
+            name: Constants.NotificationName.FollowersListIsUpdated,
             object: nil
         )
     }
