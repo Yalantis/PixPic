@@ -171,7 +171,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             return
         }
         
-        avatar.getImageForContentItem { [weak self] image, error in
+        avatar.getImage { [weak self] image, error in
             guard let this = self else {
                 return
             }

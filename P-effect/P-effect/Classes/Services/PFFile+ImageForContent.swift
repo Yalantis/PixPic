@@ -12,7 +12,7 @@ typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> Void
 
 extension PFFile {
     
-    func getImageForContentItem(completion: LoadingImageCompletion) {
+    func getImage(completion: LoadingImageCompletion) {
         getDataInBackgroundWithBlock { data, error in
             if let data = data, let image = UIImage(data: data){
                 completion(image: image, error: error)
