@@ -10,15 +10,12 @@ import UIKit
 
 class PhotoEditorModel: NSObject {
     
-    private let setOriginalImage: UIImage
+    private(set) var originalImage: UIImage
     
     init(image: UIImage) {
-        setOriginalImage = image
+        originalImage = image
         
         super.init()
     }
-    
-    func originalImage() -> UIImage {
-        return setOriginalImage
-    }
+
 }

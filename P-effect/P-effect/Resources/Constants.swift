@@ -29,7 +29,7 @@ struct Constants {
     }
     
     struct Path {
-        static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         static let Tmp = NSTemporaryDirectory()
     }
     
@@ -67,13 +67,13 @@ struct Constants {
     }
     
     struct ValidationErrors {
-        static let WrongLenght = "Length of the username has to be more then 3 and less then 30 characters long" as String
-        static let AlreadyExist = "Username already exists" as String
-        static let SpaceInBegining = "Username can't start with spaces" as String
-        static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ " as String
-        static let SpaceInEnd = "Username can't end with spaces" as String
-        static let NumbersAndSymbolsInUsername = "Username has to contain only letters and numbers" as String
-        static let TwoSpacesInRow = "Username can't contain more than one space per row" as String
+        static let WrongLenght = "Length of the username must be 3-30 characters long"
+        static let AlreadyExist = "Username already exists"
+        static let SpaceInBegining = "Username can't start with spaces"
+        static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ "
+        static let SpaceInEnd = "Username can't end with spaces"
+        static let NumbersAndSymbolsInUsername = "Username has to contain only letters and numbers"
+        static let TwoConsecutiveSpaces = "Username can't contain two consecutive spaces"
         static let MinUserName: Int = 3
         static let MaxUserName: Int = 30
         static let WhiteSpace: Character = " "

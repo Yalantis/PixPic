@@ -22,7 +22,7 @@ final class AttributesCache {
         cache.removeAllObjects()
     }
     
-    func setAttributesForPost(post: Post, likers: [User], commenters: [User], likedByCurrentUser: Bool) {
+    func setAttributes(for post: Post, likers: [User], commenters: [User], likedByCurrentUser: Bool) {
         let attributes = [
             Constants.Attributes.IsLikedByCurrentUser: likedByCurrentUser,
             Constants.Attributes.LikesCount: likers.count,
@@ -55,14 +55,14 @@ final class AttributesCache {
         setAttributes(attributes, forUser: user)
     }
     
-    func attributesForPost(post: Post) -> [String: AnyObject]? {
+    func attributes(for post: Post) -> [String: AnyObject]? {
         let key = keyForPost(post)
         
         return cache.objectForKey(key) as? [String: AnyObject]
     }
     
-    func likesCountForPost(post: Post) -> Int {
-        if let attributes = attributesForPost(post) {
+    func likesCount(for post: Post) -> Int {
+        if let attributes = attributes(for: post) {
             if attributes.isEmpty {
                 return 0
             } else if let likesCount = attributes[Constants.Attributes.LikesCount] as? Int {
@@ -73,8 +73,8 @@ final class AttributesCache {
         return 0
     }
     
-    func likersForPost(post: Post) -> [User] {
-        if let attributes = attributesForPost(post) {
+    func likers(for post: Post) -> [User] {
+        if let attributes = attributes(for: post) {
             if attributes.isEmpty {
                 return [User]()
             } else if let likers = attributes[Constants.Attributes.Likers] as? [User] {
@@ -86,14 +86,14 @@ final class AttributesCache {
     }
     
     func setPostIsLikedByCurrentUser(post: Post, liked: Bool) {
-        if var attributes = attributesForPost(post) {
+        if var attributes = attributes(for: post) {
             attributes[Constants.Attributes.IsLikedByCurrentUser] = liked
             setAttributes(attributes, forPost: post)
         }
     }
     
     func isPostLikedByCurrentUser(post: Post) -> Bool {
-        if let attributes = attributesForPost(post) {
+        if let attributes = attributes(for: post) {
             if attributes.isEmpty {
                 return false
             } else if let isLikedByUser = attributes[Constants.Attributes.IsLikedByCurrentUser] as? Bool {
@@ -104,20 +104,20 @@ final class AttributesCache {
         return false
     }
     
-    func incrementLikersCountForpost(post: Post) {
-        let likerCount = likesCountForPost(post) + 1
-        if var attributes = attributesForPost(post) {
+    func incrementLikersCount(for post: Post) {
+        let likerCount = likesCount(for: post) + 1
+        if var attributes = attributes(for: post) {
             attributes[Constants.Attributes.LikesCount] = likerCount
             setAttributes(attributes, forPost: post)
         }
     }
     
-    func decrementLikersCountForpost(post: Post) {
-        let likersCount = likesCountForPost(post) - 1
+    func decrementLikersCount(for post: Post) {
+        let likersCount = likesCount(for: post) - 1
         if likersCount < 0 {
             return
         }
-        if var attributes = attributesForPost(post) {
+        if var attributes = attributes(for: post) {
             attributes[Constants.Attributes.LikesCount] = likersCount
             setAttributes(attributes, forPost: post)
         }

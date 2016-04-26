@@ -67,7 +67,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         switch segue.identifier! {
         case Constants.PhotoEditor.ImageViewControllerSegue:
             imageController = segue.destinationViewController as? ImageViewController
-            imageController?.model = ImageViewModel(image: model.originalImage())
+            imageController?.model = ImageViewModel(image: model.originalImage)
             imageController?.setLocator(locator)
             delegate = imageController
             
