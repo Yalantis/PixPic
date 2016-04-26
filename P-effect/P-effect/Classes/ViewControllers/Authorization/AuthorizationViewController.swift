@@ -37,13 +37,13 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
     
     // MARK: - Private methods
     private func signInWithFacebook() {
-        let authService: AuthService = locator.getService()
-        authService.signInWithFacebookInController(self) { [weak self] _, error in
+        let authenticationService: AuthenticationService = locator.getService()
+        authenticationService.signInWithFacebookInController(self) { [weak self] _, error in
             if let error = error {
                 ErrorHandler.handle(error)
                 self?.proceedWithoutAuthorization()
             } else {
-                authService.signInWithPermission { _, error -> Void in
+                authenticationService.signInWithPermission { _, error -> Void in
                     if let error = error {
                         ErrorHandler.handle(error)
                     } else {

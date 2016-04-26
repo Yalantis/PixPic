@@ -23,7 +23,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     private var router: FeedRouterInterface!
     private weak var locator: ServiceLocator!
     
-    private lazy var photoGenerator = PhotoGenerator()
+    private lazy var photoProvider = PhotoProvider()
     private lazy var settingsMenu = SettingsMenu()
     private lazy var postAdapter = PostAdapter()
     private var toolBar: FeedToolBar!
@@ -102,7 +102,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
     }
     
     private func setupObserver() {
@@ -147,10 +147,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        photoGenerator.didSelectPhoto = { [weak self] selectedImage in
+        photoProvider.didSelectPhoto = { [weak self] selectedImage in
             self?.handlePhotoSelected(selectedImage)
         }
-        photoGenerator.showListOfOptions(inViewController: self)
+        photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
     private func handlePhotoSelected(image: UIImage) {

@@ -10,6 +10,8 @@ import UIKit
 import Toast
 
 private let notification = "Notification"
+private let simpleAlertDuration: NSTimeInterval = 2
+private let notificationAlertDuration: NSTimeInterval = 3
 
 protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
     
@@ -21,13 +23,13 @@ protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
 extension AlertManagerDelegate {
     
     func showSimpleAlert(message: String) {
-        currentViewController.view.makeToast(message, duration: 2.0, position: CSToastPositionBottom)
+        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom)
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
         let title = notification
         var message = message
-        guard let notificationObject = RemoteNotificationHelper.parse(userInfo) else  {
+        guard let notificationObject = RemoteNotificationParser.parse(userInfo) else  {
             return
         }
         
@@ -42,12 +44,12 @@ extension AlertManagerDelegate {
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
         
         if isControllerWaitingForResponse {
-            PushNotificationQueue.addObjectInQueue(message)
+            PushNotificationQueue.addObjectToQueue(message)
         } else {
             PushNotificationQueue.clearQueue()
             currentViewController.view.makeToast(
                 message,
-                duration: 3.0,
+                duration: notificationAlertDuration,
                 position: CSToastPositionTop,
                 title: title,
                 image: UIImage(named: "icon_notification"),
@@ -100,7 +102,7 @@ final class AlertManager {
         let application = UIApplication.sharedApplication()
         if application.applicationState == .Inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-            if let notificationObject = RemoteNotificationHelper.parse(userInfo) {
+            if let notificationObject = RemoteNotificationParser.parse(userInfo) {
                 switch notificationObject {
                 case .NewFollower(_, let userId):
                     delegate?.showProfile(userId)

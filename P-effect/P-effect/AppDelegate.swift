@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self])
 
         if application.applicationState != .Background {
-            sutupParseAnalyticsWithLaunchOptions(launchOptions)
+            setupParseAnalyticsWithLaunchOptions(launchOptions)
         }
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
@@ -39,26 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupRouter()
                 
         return true
-    }
-    
-    private func setupParse() {
-        User.registerSubclass()
-        Parse.enableLocalDatastore()
-        Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
-    }
-    
-    private func sutupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
-        let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
-        let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
-        if oldPushHandlerOnly || noPushPayload != nil {
-            PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        }
-    }
-    
-    private func setupRouter() {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.makeKeyAndVisible()
-        router.execute(window!)
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -90,15 +70,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
+        resetBadge()
+    }
+    
+    func applicationDidEnterBackground(application: UIApplication) {
+        resetBadge()
+    }
+    
+    private func resetBadge() {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
         currentInstallation.saveEventually()
     }
     
-    func applicationDidEnterBackground(application: UIApplication) {
-        let currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.badge = 0
-        currentInstallation.saveEventually()
+    private func setupParse() {
+        User.registerSubclass()
+        Parse.enableLocalDatastore()
+        Parse.setApplicationId(Constants.ParseApplicationId.AppID, clientKey: Constants.ParseApplicationId.ClientKey)
+    }
+    
+    private func setupParseAnalyticsWithLaunchOptions(launchOptions: [NSObject: AnyObject]?) {
+        let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
+        let noPushPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey]
+        if oldPushHandlerOnly || noPushPayload != nil {
+            PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        }
+    }
+    
+    private func setupRouter() {
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window!.makeKeyAndVisible()
+        router.execute(window!)
     }
     
 }
