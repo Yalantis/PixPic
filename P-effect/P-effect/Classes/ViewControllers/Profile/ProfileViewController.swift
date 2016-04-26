@@ -90,7 +90,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private func setupController() {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
-        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.identifier)
+        tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
         setupTableViewFooter()
     }
     
@@ -169,7 +169,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             return
         }
         
-        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
+        avatar.getImage { [weak self] image, error in
             guard let this = self else {
                 return
             }
@@ -192,8 +192,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func showToast() {
-        let toastActivityHelper = ToastActivityHelper()
-        toastActivityHelper.showToastActivityOn(view, duration: Constants.Profile.ToastActivityDuration)
+        view.showToastActivityWithDuration(Constants.Profile.ToastActivityDuration)
         activityShown = true
     }
     
@@ -272,7 +271,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                         this.followButton.enabled = true
                         this.fillFollowersQuantity(user)
                         NSNotificationCenter.defaultCenter().postNotificationName(
-                            Constants.NotificationName.FollowersListUpdated,
+                                Constants.NotificationName.FollowersListIsUpdated,
                             object: nil
                         )
                     }
@@ -304,7 +303,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.FollowersListUpdated,
+                    Constants.NotificationName.FollowersListIsUpdated,
                     object: nil
                 )
             }

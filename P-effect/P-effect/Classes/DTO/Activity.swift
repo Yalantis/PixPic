@@ -7,11 +7,9 @@
 //
 
 enum ActivityType: String {
-    
     case Like = "like"
     case Follow = "follow"
     case Comment = "comment"
-    
 }
 
 class Activity: PFObject {

@@ -10,8 +10,6 @@ import UIKit
 
 class FollowerViewCell: UITableViewCell, CellInterface {
     
-    static let identifier = "FollowerViewCellIdentifier"
-    
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var profileLabel: UILabel!
     

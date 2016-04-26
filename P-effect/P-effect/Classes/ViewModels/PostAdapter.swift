@@ -9,9 +9,7 @@
 import Foundation
 
 public enum UpdateType {
-    
     case Reload, LoadMore
-    
 }
 
 @objc protocol PostAdapterDelegate: class {
@@ -70,7 +68,7 @@ extension PostAdapter: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            PostViewCell.identifier,
+            PostViewCell.id,
             forIndexPath: indexPath
             ) as! PostViewCell
         let post = getPost(atIndexPath: indexPath)

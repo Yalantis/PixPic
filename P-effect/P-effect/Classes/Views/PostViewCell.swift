@@ -17,7 +17,6 @@ private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
 class PostViewCell: UITableViewCell, CellInterface {
     
-    static let identifier = "PostViewCellIdentifier"
     static let designedHeight = headerViewHeight + footerViewHeight
     
     weak var post = Post?()
@@ -44,11 +43,15 @@ class PostViewCell: UITableViewCell, CellInterface {
         selectionStyle = .None
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        postImageView.image = UIImage.placeholderImage
+        profileImageView.image = UIImage.avatarPlaceholderImage
+    }
+    
     func configure(withPost post: Post?) {
         guard let post = post else {
-            postImageView.image = UIImage.placeholderImage
-            profileImageView.image = UIImage.avatarPlaceholderImage
-            
             return
         }
         self.post = post

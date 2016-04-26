@@ -15,13 +15,13 @@ struct Constants {
     }
     
     struct NotificationName {
-        static let NewPostUploaded = "NewPostUploaded"
-        static let FollowersListUpdated = "FollowersListUpdated"
+        static let NewPostIsUploaded = "NewPostIsUploaded"
+        static let FollowersListIsUpdated = "FollowersListIsUpdated"
     }
     
     struct BaseDimensions {
-        static let ToolBarHeight: CGFloat = 50.0
-        static let NavBarWithStatusBarHeight: CGFloat = 64.0
+        static let ToolBarHeight: CGFloat = 50
+        static let NavBarWithStatusBarHeight: CGFloat = 64
     }
     
     struct FileSize {
@@ -29,7 +29,7 @@ struct Constants {
     }
     
     struct Path {
-        static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        static let Documents = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         static let Tmp = NSTemporaryDirectory()
     }
     
@@ -67,13 +67,13 @@ struct Constants {
     }
     
     struct ValidationErrors {
-        static let WrongLenght = "Lenght of the username have to be more then 3 and less then 30 characters long" as String
-        static let AlreadyExist = "Username already exist" as String
-        static let SpaceInBegining = "Username can't start with spaces" as String
-        static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ " as String
-        static let SpaceInEnd = "Username can't end with spaces" as String
-        static let NumbersAndSymbolsInUsername = "Username have to consist only with letters an numbers" as String
-        static let TwoSpacesInRow = "Username can't consist two or more spaces in row" as String
+        static let WrongLenght = "Length of the username must be 3-30 characters long"
+        static let AlreadyExist = "Username already exists"
+        static let SpaceInBegining = "Username can't start with spaces"
+        static let CharacterSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLKMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ "
+        static let SpaceInEnd = "Username can't end with spaces"
+        static let NumbersAndSymbolsInUsername = "Username has to contain only letters and numbers"
+        static let TwoConsecutiveSpaces = "Username can't contain two consecutive spaces"
         static let MinUserName: Int = 3
         static let MaxUserName: Int = 30
         static let WhiteSpace: Character = " "
@@ -89,11 +89,9 @@ struct Constants {
     }
     
     struct StickerEditor {
-        static let UserResizableViewGlobalInset: CGFloat =  5.0
-        static let UserResizableViewDefaultMinWidth: CGFloat =  48.0
-        
-        static let UserResizableViewInteractiveBorderSize: CGFloat =  5.0
-        static let StickerViewControlSize: CGFloat =  36.0
+        static let UserResizableViewGlobalOffset: CGFloat = 5
+        static let UserResizableViewDefaultMinWidth: CGFloat = 48
+        static let StickerViewControlSize: CGFloat = 36
     }
     
     struct EditProfile {
@@ -105,8 +103,8 @@ struct Constants {
         static let PostsCount = "postsCount"
         static let IsFollowedByCurrentUser = "isFollowedByCurrentUser"
         static let IsLikedByCurrentUser = "isLikedByCurrentUser"
-        static let PhotoCount = "photoCount"
-        static let LikeCount = "likeCount"
+        static let PhotosCount = "photosCount"
+        static let LikesCount = "likesCount"
         static let Likers = "likers"
         static let Followers = "followers"
         static let Following = "following"

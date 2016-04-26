@@ -50,7 +50,7 @@ extension ImageViewController: PhotoEditorDelegate {
             sticker.switchControls(toState: false)
         }
         let rect = rawImageView.bounds
-        UIGraphicsBeginImageContextWithOptions(rect.size, view.opaque, 0.0)
+        UIGraphicsBeginImageContextWithOptions(rect.size, view.opaque, 0)
         rawImageView.drawViewHierarchyInRect(rect, afterScreenUpdates: true)
 
         let image = UIGraphicsGetImageFromCurrentImageContext()

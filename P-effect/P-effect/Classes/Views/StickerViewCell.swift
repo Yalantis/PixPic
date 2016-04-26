@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StickerViewCell: UICollectionViewCell {
+class StickerViewCell: UICollectionViewCell, CellInterface {
     
     @IBOutlet private weak var stickerImage: UIImageView!
     
@@ -17,7 +17,7 @@ class StickerViewCell: UICollectionViewCell {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        ImageLoaderHelper.getImageForContentItem(file) { image, error in
+        file.getImage { image, error in
             if let error = error {
                 log.debug(error.localizedDescription)
             } else {

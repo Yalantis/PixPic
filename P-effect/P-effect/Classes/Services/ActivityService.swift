@@ -9,11 +9,11 @@
 import Foundation
 import Parse
 
-typealias FetchingUsersCompletion = ((users: [User]?, error: NSError?) -> Void)?
+typealias FetchingFollowersCompletion = ((followers: [User]?, error: NSError?) -> Void)?
 
 class ActivityService {
     
-    func fetchUsers(type: FollowType, forUser user: User, completion: FetchingUsersCompletion) {
+    func fetchFollowers(type: FollowType, forUser user: User, completion: FetchingFollowersCompletion) {
         let isFollowers = (type == .Followers)
         let key = isFollowers ? Constants.ActivityKey.ToUser : Constants.ActivityKey.FromUser
         
@@ -23,31 +23,31 @@ class ActivityService {
         
         query.findObjectsInBackgroundWithBlock { followActivities, error in
             if let error = error {
-                completion?(users: nil, error: error)
+                completion?(followers: nil, error: error)
             } else if let activities = followActivities as? [Activity] {
-                var users = isFollowers ? activities.map{$0.fromUser} : activities.map{$0.toUser}
-                let userQuery = User.sortedQuery
-                var usersIds = [String]()
-                for user in users {
-                    if let userId = user.objectId {
-                        usersIds.append(userId)
+                var followers = isFollowers ? activities.map{$0.fromUser} : activities.map{$0.toUser}
+                let followerQuery = User.sortedQuery
+                var followersIds = [String]()
+                for follower in followers {
+                    if let followerId = follower.objectId {
+                        followersIds.append(followerId)
                     }
                 }
-                userQuery.whereKey(Constants.UserKey.Id, containedIn: usersIds)
+                followerQuery.whereKey(Constants.UserKey.Id, containedIn: followersIds)
                 
-                userQuery.findObjectsInBackgroundWithBlock { objects, error in
+                followerQuery.findObjectsInBackgroundWithBlock { objects, error in
                     if let objects = objects as? [User] {
-                        users = objects
-                        let realFollowers = Set(users)
-                        users = Array(realFollowers)
+                        followers = objects
+                        let realFollowers = Set(followers)
+                        followers = Array(realFollowers)
                         if isFollowers {
-                            AttributesCache.sharedCache.setAttributesForUser(user, followers: users)
+                            AttributesCache.sharedCache.setAttributesForUser(user, followers: followers)
                         } else {
-                            AttributesCache.sharedCache.setAttributesForUser(user, following: users)
+                            AttributesCache.sharedCache.setAttributesForUser(user, following: followers)
                         }
-                        completion?(users: users, error: nil)
+                        completion?(followers: followers, error: nil)
                     } else if let error = error {
-                        completion?(users: nil, error: error)
+                        completion?(followers: nil, error: error)
                     }
                 }
             }
@@ -57,10 +57,10 @@ class ActivityService {
     func fetchFollowersQuantity(user: User, completion: ((followersCount: Int, followingCount: Int) -> Void)?) {
         var followersCount = 0
         var followingCount = 0
-        fetchUsers(.Followers, forUser: user) { [weak self] activities, error -> Void in
+        fetchFollowers(.Followers, forUser: user) { [weak self] activities, error -> Void in
             if let activities = activities {
                 followersCount = activities.count
-                self?.fetchUsers(.Following, forUser: user) { activities, error -> Void in
+                self?.fetchFollowers(.Following, forUser: user) { activities, error -> Void in
                     if let activities = activities {
                         followingCount = activities.count
                         completion?(followersCount: followersCount, followingCount: followingCount)
@@ -89,7 +89,7 @@ class ActivityService {
     
     func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            let userError = NSError.createAuthError(.CurrentUserError)
+            let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
             
             return
@@ -109,7 +109,7 @@ class ActivityService {
     
     func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
-            let userError = NSError.createAuthError(.CurrentUserError)
+            let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
             
             return

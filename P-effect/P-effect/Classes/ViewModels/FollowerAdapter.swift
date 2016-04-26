@@ -9,10 +9,8 @@
 import Foundation
 
 enum FollowType: String {
-    
     case Followers = "Followers"
     case Following = "Following"
-    
 }
 
 protocol FollowerAdapterDelegate: class {
@@ -61,7 +59,7 @@ extension FollowerAdapter: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            FollowerViewCell.identifier,
+            FollowerViewCell.id,
             forIndexPath: indexPath
             ) as! FollowerViewCell
         let follower = getFollower(atIndexPath: indexPath)

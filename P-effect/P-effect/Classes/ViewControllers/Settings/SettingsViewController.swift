@@ -19,9 +19,7 @@ private let logInNibName = "Log In"
 private let logOutNibName = "Log Out"
 
 enum SettingsState {
-    
     case Common, LoggedIn, LoggedOut
-    
 }
 
 final class SettingsViewController: UIViewController, StoryboardInitable {
@@ -35,7 +33,7 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
     private lazy var followedPosts = SwitchView.instanceFromNib(followedPostsNibName, initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
         SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
         NSNotificationCenter.defaultCenter().postNotificationName(
-            Constants.NotificationName.NewPostUploaded,
+            Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
     }
@@ -111,9 +109,9 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
             
             return
         }
-        let authService: AuthService = locator.getService()
-        authService.logOut()
-        authService.anonymousLogIn(
+        let authenticationService: AuthenticationService = locator.getService()
+        authenticationService.logOut()
+        authenticationService.anonymousLogIn(
             completion: { _ in
                 self.router.showFeed()
             }, failure: { error in

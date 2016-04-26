@@ -61,7 +61,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
     // MARK: - Private methods
     private func setupTableView() {
         tableView.delegate = self
-        tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.identifier)
+        tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.id)
     }
     
     private func setupAdapter() {
@@ -77,9 +77,9 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
             self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
         }
         
-        activityService.fetchUsers(followType, forUser: user) { [weak self] users, _ in
-            if let users = users {
-                self?.followerAdapter.update(withFollowers: users, action: .Reload)
+        activityService.fetchFollowers(followType, forUser: user) { [weak self] followers, _ in
+            if let followers = followers {
+                self?.followerAdapter.update(withFollowers: followers, action: .Reload)
             }
         }
     }
@@ -88,7 +88,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(updateData),
-            name: Constants.NotificationName.FollowersListUpdated,
+            name: Constants.NotificationName.FollowersListIsUpdated,
             object: nil
         )
     }

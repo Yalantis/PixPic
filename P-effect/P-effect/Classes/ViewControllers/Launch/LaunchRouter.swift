@@ -19,7 +19,7 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
         locator.registerService(StickersLoaderService())
         locator.registerService(UserService())
         locator.registerService(ValidationService())
-        locator.registerService(AuthService())
+        locator.registerService(AuthenticationService())
         locator.registerService(ComplaintService())
         locator.registerService(ActivityService())
     }
@@ -35,8 +35,8 @@ extension LaunchRouter: Router {
         context.rootViewController = navigationController
         
         if User.isAbsent {
-            let authService: AuthService = locator.getService()
-            authService.anonymousLogIn(
+            let authenticationService: AuthenticationService = locator.getService()
+            authenticationService.anonymousLogIn(
                 completion: { [weak self] _ in
                     self?.presentFeed(context)
                 },
