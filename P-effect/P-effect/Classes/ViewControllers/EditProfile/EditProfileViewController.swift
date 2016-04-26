@@ -115,7 +115,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         guard let avatar = User.currentUser()?.avatar else {
             return
         }
-        ImageLoaderHelper.getImageForContentItem(avatar) { [weak self] image, error in
+        avatar.getImage { [weak self] image, error in
             guard let this = self else {
                 return
             }
