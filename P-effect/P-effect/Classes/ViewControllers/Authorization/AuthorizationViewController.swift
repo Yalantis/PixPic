@@ -10,13 +10,13 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-typealias GeneralViewControllerRouterProtocols = protocol<FeedPresenter, AlertManagerDelegate>
+typealias RouterInterface = protocol<FeedPresenter, AlertManagerDelegate>
 
 final class AuthorizationViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
-    private var router: GeneralViewControllerRouterProtocols!
+    private var router: RouterInterface!
     private weak var locator: ServiceLocator!
     
     // MARK: - Lifecycle
@@ -31,7 +31,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
         self.locator = locator
     }
     
-    func setRouter(router: GeneralViewControllerRouterProtocols) {
+    func setRouter(router: RouterInterface) {
         self.router = router
     }
     

@@ -23,7 +23,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    private var router: GeneralViewControllerRouterProtocols!
+    private var router: RouterInterface!
     
     private lazy var photoGenerator = PhotoGenerator()
     
@@ -79,7 +79,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
-    func setRouter(router: GeneralViewControllerRouterProtocols) {
+    func setRouter(router: RouterInterface) {
         self.router = router
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-typealias ProfileViewControllerRouterProtocols = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, GeneralViewControllerRouterProtocols>
+typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, RouterInterface>
 
 private let unfollowMessage = "Are you sure you want to unfollow?"
 private let unfollowTitle = "Unfollow"
@@ -22,7 +22,7 @@ private let cancelActionTitle = "Cancel"
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
-    private var router: ProfileViewControllerRouterProtocols!
+    private var router: ProfileRouterInterface!
     private var user: User? {
         didSet {
             updateSelf()
@@ -84,7 +84,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
-    func setRouter(router: ProfileViewControllerRouterProtocols) {
+    func setRouter(router: ProfileRouterInterface) {
         self.router = router
     }
     
