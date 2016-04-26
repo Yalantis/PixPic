@@ -70,14 +70,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
-        nullifyBadge()
+        resetBadge()
     }
     
     func applicationDidEnterBackground(application: UIApplication) {
-        nullifyBadge()
+        resetBadge()
     }
     
-    private func nullifyBadge() {
+    private func resetBadge() {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
         currentInstallation.saveEventually()
