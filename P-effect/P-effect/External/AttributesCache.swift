@@ -123,7 +123,7 @@ final class AttributesCache {
         }
     }
     
-    func setAttributesForUser(user: User, postCount count: Int, followedByCurrentUser following: Bool) {
+    func setAttributes(for user: User, postCount count: Int, followedByCurrentUser following: Bool) {
         let attributes = [
             Constants.Attributes.PostsCount: count,
             Constants.Attributes.IsFollowedByCurrentUser: following
@@ -131,14 +131,14 @@ final class AttributesCache {
         setAttributes(attributes as! [String : AnyObject], forUser: user)
     }
     
-    func attributesForUser(user: User) -> [String: AnyObject]? {
+    func attributes(for user: User) -> [String: AnyObject]? {
         let key = keyForUser(user)
         
         return cache.objectForKey(key) as? [String: AnyObject]
     }
     
     func postsCountForUser(user: User) -> Int {
-        if let attributes = attributesForUser(user),
+        if let attributes = attributes(for: user),
             postsCount = attributes[Constants.Attributes.PostsCount] as? Int {
                 return postsCount
         }
@@ -146,8 +146,8 @@ final class AttributesCache {
         return 0
     }
     
-    func followStatusForUser(user: User) -> Bool? {
-        if let attributes = attributesForUser(user) {
+    func followStatus(for user: User) -> Bool? {
+        if let attributes = attributes(for: user) {
             let followStatus = attributes[Constants.Attributes.IsFollowedByCurrentUser] as? Bool
             
             return followStatus
@@ -157,14 +157,14 @@ final class AttributesCache {
     }
     
     func setPostCount(count: Int,  user: User) {
-        if var attributes = attributesForUser(user) {
+        if var attributes = attributes(for: user) {
             attributes[Constants.Attributes.PostsCount] = count
             setAttributes(attributes, forUser: user)
         }
     }
     
     func setFollowStatus(following: Bool, user: User) {
-        if var attributes = attributesForUser(user) {
+        if var attributes = attributes(for: user) {
             attributes[Constants.Attributes.IsFollowedByCurrentUser] = following
             setAttributes(attributes, forUser: user)
         }

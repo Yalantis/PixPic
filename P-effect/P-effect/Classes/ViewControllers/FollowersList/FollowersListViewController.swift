@@ -73,7 +73,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         let isFollowers = (followType == .Followers)
         let key = isFollowers ? Constants.Attributes.Followers : Constants.Attributes.Following
         
-        if let attributes = cache.attributesForUser(user), cachedUsers = attributes[key] as? [User] {
+        if let attributes = cache.attributes(for: user), cachedUsers = attributes[key] as? [User] {
             self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
         }
         

@@ -23,8 +23,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
     private var user: User? {
         didSet {
-            updateFollowButton()
-            updateController()
+            reloadData()
         }
     }
     private var userId: String?
@@ -33,6 +32,17 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private var activityShown: Bool?
     private lazy var postAdapter = PostAdapter()
     private lazy var settingsMenu = SettingsMenu()
+    
+    private var isFollowing: Bool? {
+        didSet {
+            if let followingStatus = isFollowing {
+                followButton.selected = followingStatus
+                followButton.enabled = true
+            } else {
+                followButton.enabled = false
+            }
+        }
+    }
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -49,7 +59,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        isFollowing = nil
         setupController()
+        setupUserImagePlaceholder()
         setupLoadersCallback()
         setupGestureRecognizers()
     }
@@ -94,27 +106,27 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         setupTableViewFooter()
     }
     
-    private func updateController() {
+    private func reloadData() {
         showToast()
-        applyUser()
+        setupUser()
         loadUserPosts()
+        checkIsFollowing()
     }
     
-    private func updateFollowButton() {
+    private func checkIsFollowing() {
         guard let user = user else {
+            isFollowing = nil
+            
             return
         }
+        
         let cache = AttributesCache.sharedCache
-        if let followStatus = cache.followStatusForUser(user) {
-            followButton?.selected = followStatus
-            followButton?.enabled = true
+        if let followStatus = cache.followStatus(for: user) {
+            isFollowing = followStatus
         } else {
-            followButton?.selected = false
-            followButton?.enabled = false
             let activityService: ActivityService = locator.getService()
             activityService.checkIsFollowing(user) { [weak self] follow in
-                self?.followButton?.selected = follow
-                self?.followButton?.enabled = true
+                self!.isFollowing = follow
             }
         }
     }
@@ -156,10 +168,20 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         let followingGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapFollowingLabel(_:)))
         followingQuantity.addGestureRecognizer(followingGestureRecognizer)
     }
-    
-    private func applyUser() {
+    private func setupUserImagePlaceholder() {
         userAvatar.layer.cornerRadius = Constants.Profile.AvatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
+    }
+    
+    private func switchToCurrentUserMode() {
+        profileSettingsButton.enabled = true
+        profileSettingsButton.tintColor = UIColor.appWhiteColor
+        
+        followButton.hidden = true
+        followButtonHeight.constant = 0.1
+    }
+    
+    private func setupUser() {
         guard let user = user else {
             return
         }
@@ -181,13 +203,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
         
         if user.isCurrentUser {
-            profileSettingsButton.enabled = true
-            profileSettingsButton.image = UIImage(named: Constants.Profile.SettingsButtonImage)
-            profileSettingsButton.tintColor = UIColor.appWhiteColor
-
-            followButton.hidden = true
-            followButtonHeight.constant = 0.1
+            switchToCurrentUserMode()
         }
+        
         fillFollowersQuantity(user)
     }
     
@@ -239,10 +257,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         guard let user = user else {
             return
         }
+        
         let activityService: ActivityService = locator.getService()
-        if followButton.selected {
+        if isFollowing! {
             // Unfollow
-            followButton.enabled = false
             
             let alertController = UIAlertController(
                 title: unfollowTitle,
@@ -262,18 +280,21 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 guard let this = self, user = this.user else {
                     return
                 }
+                self!.isFollowing = nil
+                this.isFollowStatusNeedUpdate = true
                 activityService.unfollowUserEventually(user) { [weak self] success, error in
                     if success {
                         guard let this = self else {
                             return
                         }
-                        this.followButton.selected = false
-                        this.followButton.enabled = true
+                        self!.isFollowing = false
                         this.fillFollowersQuantity(user)
                         NSNotificationCenter.defaultCenter().postNotificationName(
-                                Constants.NotificationName.FollowersListIsUpdated,
+                            Constants.NotificationName.FollowersListIsUpdated,
                             object: nil
                         )
+                    } else {
+                        self!.isFollowing = true
                     }
                 }
             }
@@ -284,7 +305,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Follow
-            followButton.selected = true
+            isFollowing = nil
             let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
             indicator.center = followButton.center
             indicator.hidesWhenStopped = true
@@ -294,11 +315,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 guard let this = self else {
                     return
                 }
+                this.isFollowStatusNeedUpdate = true
                 if error == nil {
                     log.debug("Attempt to follow was \(succeeded) ")
-                    this.followButton.selected = true
+                    this.isFollowing = true
                 } else {
-                    this.followButton.selected = false
+                    this.isFollowing = false
                 }
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
@@ -311,7 +333,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     }
     
     private func fillFollowersQuantity(user: User) {
-        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        let attributes = AttributesCache.sharedCache.attributes(for: user)
         if let followersQuantity = attributes?[Constants.Attributes.FollowersCount],
             followingQuantity = attributes?[Constants.Attributes.FollowingCount] {
             self.followersQuantity.text = String(followersQuantity) + " followers"
@@ -370,7 +392,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         guard let user = user else {
             return
         }
-        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        let attributes = AttributesCache.sharedCache.attributes(for: user)
         guard let followersQuantity = attributes?[Constants.Attributes.FollowersCount] as? Int else {
             return
         }
@@ -385,7 +407,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             return
         }
         
-        let attributes = AttributesCache.sharedCache.attributesForUser(user)
+        let attributes = AttributesCache.sharedCache.attributes(for: user)
         guard let followingQuantity = attributes?[Constants.Attributes.FollowingCount] as? Int else {
             return
         }
