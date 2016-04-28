@@ -50,7 +50,7 @@ class ValidationService {
             var previousChar = Constants.ValidationErrors.WhiteSpace as Character
             for char in userName.characters {
                 if previousChar == Constants.ValidationErrors.WhiteSpace && char == Constants.ValidationErrors.WhiteSpace {
-                    AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.TwoSpacesInRow)
+                    AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.TwoConsecutiveSpaces)
                     
                     return false
                 }

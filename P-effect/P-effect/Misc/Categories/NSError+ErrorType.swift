@@ -23,7 +23,7 @@ extension NSError {
             let error = NSError(
                 domain: NSBundle.mainBundle().bundleIdentifier!,
                 code: 702,
-                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parce error", comment: "")]
+                userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Parse error", comment: "")]
             )
             
             return error

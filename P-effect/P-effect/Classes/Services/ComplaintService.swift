@@ -8,22 +8,20 @@
 
 import UIKit
 
-private let complaintSuccessfull = "Thank you for complaint"
-private let nilUserInPost = "Nil user in post"
+private let complaintSuccessfull = NSLocalizedString("thanks_complaint", comment: "")
+private let nilUserInPost = NSLocalizedString("nil_user_in_post", comment: "")
 private let noObjectsFoundErrorCode = 101
+
+private let selfComplaint = NSLocalizedString("complaint_yourself", comment: "")
+private let alreadyComplainedPost = NSLocalizedString("already_complaint", comment: "")
+private let anonymousComlaint = NSLocalizedString("complaint_without_registration", comment: "")
 
 typealias ComplainCompletion = (Bool, NSError?) -> Void
 
 enum ComplaintReason: String {
-    case UserAvatar = "User Avatar"
-    case PostImage = "Post Image"
-    case Username = "Username"
-}
-
-enum ComplaintRejectReason: String {
-    case SelfComplaint = "You can't make a complaint on yourself"
-    case AlreadyComplainedPost = "You already make a complaint on this post"
-    case AnonymousComlaint = "You can't make a complaint without registration"
+    case UserAvatar = "user_avatar"
+    case PostImage = "post_image"
+    case Username = "username"
 }
 
 class ComplaintService {
@@ -64,7 +62,7 @@ class ComplaintService {
                     completion(result, error)
                 }
             } else {
-                AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.AlreadyComplainedPost.rawValue)
+                AlertManager.sharedInstance.showSimpleAlert(alreadyComplainedPost)
             }
         }
     }
@@ -89,13 +87,13 @@ class ComplaintService {
     //MARK: Private methods
     private func shouldContinueExecutionWith(user:User) -> Bool {
         if user.isCurrentUser {
-            AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.SelfComplaint.rawValue)
+            AlertManager.sharedInstance.showSimpleAlert(selfComplaint)
             
             return false
         }
         
         if User.notAuthorized {
-            AlertManager.sharedInstance.showSimpleAlert(ComplaintRejectReason.AnonymousComlaint.rawValue)
+            AlertManager.sharedInstance.showSimpleAlert(anonymousComlaint)
             
             return false
         }

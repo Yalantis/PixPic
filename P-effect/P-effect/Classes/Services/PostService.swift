@@ -8,7 +8,7 @@
 
 import Foundation
 
-private let messageUploadSuccessful = "Upload successful!"
+private let messageUploadSuccessful = NSLocalizedString("upload_successful", comment: "")
 
 typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
 
@@ -56,7 +56,7 @@ class PostService {
             if succeeded {
                 AlertManager.sharedInstance.showSimpleAlert(messageUploadSuccessful)
                 NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.NewPostUploaded,
+                    Constants.NotificationName.NewPostIsUploaded,
                     object: nil
                 )
             } else {

@@ -10,9 +10,9 @@ import Foundation
 
 enum Exception: String, ErrorType {
     case NoConnection = "There is no internet connection"
-    case CantApplyStickers = "Can't apply stickers to photo"
-    case CantCreateParseFile = "Can't create parse file"
-    case InvalidSessionToken = "Can't get authorization data from Facebook"
+    case CantApplyStickers = "You can't apply stickers to the photo"
+    case CantCreateParseFile = "You can't create parse file"
+    case InvalidSessionToken = "You can't get authorization data from Facebook"
 }
 
 class ExceptionHandler {

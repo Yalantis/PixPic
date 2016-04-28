@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-private let notification = "Notification"
+private let notification = NSLocalizedString("notification", comment: "")
 private let simpleAlertDuration: NSTimeInterval = 2
 private let notificationAlertDuration: NSTimeInterval = 3
 

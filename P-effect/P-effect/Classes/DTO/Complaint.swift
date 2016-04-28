@@ -34,7 +34,7 @@ class Complaint: PFObject {
             return
         }
         self.complainer = complainer
-        self.complaintReason = reason.rawValue
+        self.complaintReason = NSLocalizedString(reason.rawValue, comment: "")
         self.suspectedUser = user
     }
     

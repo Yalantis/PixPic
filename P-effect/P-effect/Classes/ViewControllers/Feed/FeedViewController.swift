@@ -13,8 +13,8 @@ import Toast
 
 typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, RouterInterface>
  
-private let titleForEmptyData = "No data is currently available"
-private let descriptionForEmptyData = "Please pull down to refresh"
+private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
+private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
 
 final class FeedViewController: UIViewController, StoryboardInitable {
     
@@ -109,14 +109,14 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(FeedViewController.fetchDataFromNotification),
-            name: Constants.NotificationName.NewPostUploaded,
+            name: Constants.NotificationName.NewPostIsUploaded,
             object: nil
         )
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
-            name: Constants.NotificationName.FollowersListUpdated,
+            name: Constants.NotificationName.FollowersListIsUpdated,
             object: nil
         )
     }

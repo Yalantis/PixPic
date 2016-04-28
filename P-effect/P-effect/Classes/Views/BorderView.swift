@@ -13,15 +13,11 @@ class BorderView: UIView {
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         CGContextSaveGState(context)
-        CGContextSetLineWidth(context, 1.0)
+        CGContextSetLineWidth(context, 1)
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
         
-        let borderRect = CGRectInset(bounds,
-            Constants.StickerEditor.UserResizableViewInteractiveBorderSize,
-            Constants.StickerEditor.UserResizableViewInteractiveBorderSize)
-        
-        CGContextAddRect(context, borderRect)
+        CGContextAddRect(context, rect)
         
         CGContextStrokePath(context)
         CGContextRestoreGState(context)
