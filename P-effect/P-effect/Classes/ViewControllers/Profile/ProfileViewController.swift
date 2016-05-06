@@ -9,7 +9,7 @@
 import UIKit
 import Toast
 
-typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, RouterInterface>
+typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, FeedPresenter, AlertManagerDelegate>
 
 private let unfollowMessage = NSLocalizedString("sure_unfollow", comment: "")
 private let unfollowTitle = NSLocalizedString("unfollow", comment: "")

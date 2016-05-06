@@ -11,7 +11,7 @@ import UIKit
 import DZNEmptyDataSet
 import Toast
 
-typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, RouterInterface>
+typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, FeedPresenter, AlertManagerDelegate>
  
 private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
 private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")

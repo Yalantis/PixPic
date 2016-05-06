@@ -8,11 +8,13 @@
 
 import UIKit
 
+typealias FollowersListRouterInterface = protocol<ProfilePresenter, AlertManagerDelegate>
+
 final class FollowersListViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    private var router: protocol<ProfilePresenter, AlertManagerDelegate>!
+    private var router: FollowersListRouterInterface!
     
     private var user: User!
     private var followType: FollowType = .Followers
@@ -54,7 +56,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitable {
         self.followType = type
     }
     
-    func setRouter(router: protocol<ProfilePresenter, AlertManagerDelegate>) {
+    func setRouter(router: FollowersListRouterInterface) {
         self.router = router
     }
     

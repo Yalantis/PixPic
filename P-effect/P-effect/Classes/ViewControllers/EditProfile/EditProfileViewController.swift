@@ -9,6 +9,8 @@
 import UIKit
 import Toast
 
+typealias EditProfileRouterInterface = AuthorizationRouterInterface
+
 private let saveChangesWithoutConnectionMessage = NSLocalizedString("internet_required_to_change_profile", comment: "")
 private let logoutMessage = NSLocalizedString("will_logout", comment: "")
 private let backWithChangesMessage = NSLocalizedString("changes_will_be_discarded", comment: "")
@@ -24,7 +26,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
-    private var router: RouterInterface!
+    private var router: EditProfileRouterInterface!
     
     private lazy var photoProvider = PhotoProvider()
     
@@ -80,7 +82,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
-    func setRouter(router: RouterInterface) {
+    func setRouter(router: EditProfileRouterInterface) {
         self.router = router
     }
     

@@ -8,14 +8,16 @@
 
 import Foundation
 
+typealias LaunchRouterInterface = AuthorizationRouterInterface
+
 final class LaunchViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.LaunchScreen
     
-    private var router: RouterInterface!
+    private var router: LaunchRouterInterface!
     
     // MARK: - Setup methods
-    func setRouter(router: RouterInterface) {
+    func setRouter(router: LaunchRouterInterface) {
         self.router = router
     }
 
