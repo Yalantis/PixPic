@@ -9,6 +9,8 @@
 import UIKit
 import Photos
 
+typealias PhotoEditorRouterInterface = AuthorizationRouterInterface
+
 protocol PhotoEditorDelegate: class {
     
     func photoEditor(photoEditor: PhotoEditorViewController, didChooseSticker: UIImage)
@@ -32,7 +34,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
 
     private var model: PhotoEditorModel!
     
-    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: PhotoEditorRouterInterface!
     private weak var locator: ServiceLocator!
     private var imageController: ImageViewController?
     private var stickersPickerController: StickersPickerViewController? {
@@ -54,7 +56,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -98,7 +100,7 @@ final class PhotoEditorViewController: UIViewController, StoryboardInitable, Nav
         self.locator = locator
     }
     
-    func setRouter(router: PhotoEditorRouter) {
+    func setRouter(router: PhotoEditorRouterInterface) {
         self.router = router
     }
     
@@ -163,20 +165,20 @@ extension PhotoEditorViewController {
         let saveAction = UIAlertAction(
             title: saveActionTitle,
             style: .Default
-            ) { [weak self] _ in
-                guard let this = self else {
-                    return
-                }
-                this.saveImageToCameraRoll()
-                this.navigationController!.popViewControllerAnimated(true)
+        ) { [weak self] _ in
+            guard let this = self else {
+                return
+            }
+            this.saveImageToCameraRoll()
+            this.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(saveAction)
         
         let dontSaveAction = UIAlertAction(
             title: dontSaveActionTitle,
             style: .Default
-            ) { [weak self] _ in
-                self?.navigationController!.popViewControllerAnimated(true)
+        ) { [weak self] _ in
+            self?.navigationController!.popViewControllerAnimated(true)
         }
         alertController.addAction(dontSaveAction)
         
@@ -242,15 +244,15 @@ extension PhotoEditorViewController {
         let saveAction = UIAlertAction(
             title: saveActionTitle,
             style: .Default
-            ) { [weak self] _ in
-                self?.saveImageToCameraRoll()
+        ) { [weak self] _ in
+            self?.saveImageToCameraRoll()
         }
         alertController.addAction(saveAction)
         
         let postAction = UIAlertAction(
             title: postActionTitle,
             style: .Default
-            ) { [weak self] _ in
+        ) { [weak self] _ in
             self?.postToFeed()
         }
         alertController.addAction(postAction)

@@ -9,6 +9,8 @@
 import UIKit
 import Toast
 
+typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, FeedPresenter, AlertManagerDelegate>
+
 private let unfollowMessage = NSLocalizedString("sure_unfollow", comment: "")
 private let unfollowTitle = NSLocalizedString("unfollow", comment: "")
 private let unfollowActionTitle = NSLocalizedString("yes", comment: "")
@@ -20,7 +22,7 @@ private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
-    private var router: protocol<EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter, AlertManagerDelegate>!
+    private var router: ProfileRouterInterface!
     private var user: User? {
         didSet {
             updateSelf()
@@ -57,7 +59,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
         fillFollowersQuantity(user!)
     }
     
@@ -82,7 +84,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
     }
     
-    func setRouter(router: ProfileRouter) {
+    func setRouter(router: ProfileRouterInterface) {
         self.router = router
     }
     

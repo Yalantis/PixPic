@@ -86,8 +86,8 @@ final class AlertManager {
         return instance
     }
     
-    func registerAlertListener(listener: AlertManagerDelegate) {
-        delegate = listener
+    func setAlertDelegate(delegate: AlertManagerDelegate) {
+        self.delegate = delegate
     }
     
     func showSimpleAlert(message: String) {
