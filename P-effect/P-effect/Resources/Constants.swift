@@ -101,8 +101,8 @@ struct Constants {
     
     struct Attributes {
         static let PostsCount = "postsCount"
-        static let IsFollowedByCurrentUser = "isFollowedByCurrentUser"
-        static let IsLikedByCurrentUser = "isLikedByCurrentUser"
+        static let FollowStatusByCurrentUser = "FollowStatusByCurrentUser"
+        static let LikeStatusByCurrentUser = "LikeStatusByCurrentUser"
         static let PhotosCount = "photosCount"
         static let LikesCount = "likesCount"
         static let Likers = "likers"
