@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias SettingsRouterInterface = protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>
+
 private let logoutMessage = NSLocalizedString("will_logout", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let okActionTitle = NSLocalizedString("logout_me", comment: "")
@@ -25,7 +27,7 @@ enum SettingsState {
 final class SettingsViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
-    var router: protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>!
+    var router: SettingsRouterInterface!
     
     private lazy var enableNotifications = SwitchView.instanceFromNib(enableNotificationsNibName, initialState: SettingsHelper.isRemoteNotificationsEnabled) { switchState in
         SettingsHelper.isRemoteNotificationsEnabled = switchState

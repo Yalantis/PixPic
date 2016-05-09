@@ -10,18 +10,20 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
+typealias AuthorizationRouterInterface = protocol<FeedPresenter, AlertManagerDelegate>
+
 final class AuthorizationViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
-    private var router: protocol<FeedPresenter, AlertManagerDelegate>!
+    private var router: AuthorizationRouterInterface!
     private weak var locator: ServiceLocator!
     
     // MARK: - Lifecycle
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
     }
     
     // MARK: - Setup methods
@@ -29,7 +31,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
         self.locator = locator
     }
     
-    func setRouter(router: AuthorizationRouter) {
+    func setRouter(router: AuthorizationRouterInterface) {
         self.router = router
     }
     

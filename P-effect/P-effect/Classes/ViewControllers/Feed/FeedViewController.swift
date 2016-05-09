@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import DZNEmptyDataSet
 import Toast
+
+typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, FeedPresenter, AlertManagerDelegate>
  
 private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
 private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
@@ -18,7 +20,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
-    private var router: protocol<AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter, SettingsPresenter>!
+    private var router: FeedRouterInterface!
     private weak var locator: ServiceLocator!
     
     private lazy var photoProvider = PhotoProvider()
@@ -49,7 +51,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        AlertManager.sharedInstance.registerAlertListener(router)
+        AlertManager.sharedInstance.setAlertDelegate(router)
         tableView.reloadData()
     }
     
@@ -86,7 +88,7 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         self.locator = locator
     }
     
-    func setRouter(router: FeedRouter) {
+    func setRouter(router: FeedRouterInterface) {
         self.router = router
     }
     
