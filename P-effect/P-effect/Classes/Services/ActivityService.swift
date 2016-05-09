@@ -75,13 +75,13 @@ class ActivityService {
         }
     }
     
-    func checkFollowingStatus(user: User, completion: (FollowStatus) -> Void) {
+    func checkFollowingStatus(user: User, completion: FollowStatus -> Void) {
         let isFollowingQuery = PFQuery(className: Activity.parseClassName())
         isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
         isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
         isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
-        isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
-            let status: FollowStatus = (error == nil && number > 0) ? FollowStatus.Following : FollowStatus.NotFollowing
+        isFollowingQuery.countObjectsInBackgroundWithBlock { count, error in
+            let status: FollowStatus = (error == nil && count > 0) ? .Following : .NotFollowing
             AttributesCache.sharedCache.setFollowStatus(status, user: user)
             completion(status)
         }

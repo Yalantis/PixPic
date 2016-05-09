@@ -27,6 +27,8 @@ private let suggestLoginMessage = NSLocalizedString("can't_follow_no_registratio
 private let registerActionTitle = NSLocalizedString("register", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 
+private let followButtonMinHeight: CGFloat = 0.1
+
 final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
@@ -137,7 +139,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         if status == .Unknown {
             let activityService: ActivityService = locator.getService()
             activityService.checkFollowingStatus(user) { [weak self] follow in
-                self!.followStatus = follow
+                self?.followStatus = follow
             }
         } else {
             followStatus = status
@@ -186,12 +188,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         userAvatar.image = UIImage(named: Constants.Profile.AvatarImagePlaceholderName)
     }
     
-    private func switchToCurrentUserMode() {
+    private func applyCurrentUserAppearance() {
         profileSettingsButton.enabled = true
         profileSettingsButton.tintColor = UIColor.appWhiteColor
         
         followButton.hidden = true
-        followButtonHeight.constant = 0.1
+        followButtonHeight.constant = followButtonMinHeight
     }
     
     private func updateUser() {
@@ -216,7 +218,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
         
         if user.isCurrentUser {
-            switchToCurrentUserMode()
+            applyCurrentUserAppearance()
         }
         
         fillFollowersQuantity(user)
