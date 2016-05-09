@@ -24,7 +24,7 @@ final class AttributesCache {
     
     func setAttributes(for post: Post, likers: [User], commenters: [User], likeStatusByCurrentUser: LikeStatus) {
         let attributes: [String: AnyObject] = [
-            Constants.Attributes.LikeStatusByCurrentUser: likeStatusByCurrentUser as! AnyObject,
+            Constants.Attributes.LikeStatusByCurrentUser: likeStatusByCurrentUser.rawValue,
             Constants.Attributes.LikesCount: likers.count,
             Constants.Attributes.Likers: likers
         ]
@@ -83,13 +83,13 @@ final class AttributesCache {
     
     func setLikeStatusByCurrentUser(post: Post, likeStatus: LikeStatus) {
         if var attributes = attributes(for: post) {
-            attributes[Constants.Attributes.LikeStatusByCurrentUser] = (likeStatus as! AnyObject)
+            attributes[Constants.Attributes.LikeStatusByCurrentUser] = likeStatus.rawValue
             setAttributes(attributes, forPost: post)
         }
     }
     
     func postLikeStatusByCurrentUser(post: Post) -> LikeStatus {
-        if let attributes = attributes(for: post), likeStatus = attributes[Constants.Attributes.LikeStatusByCurrentUser] as? LikeStatus {
+        if let attributes = attributes(for: post), likeStatus = LikeStatus(rawValue: attributes[Constants.Attributes.LikeStatusByCurrentUser] as! Int) {
             return likeStatus
         }
         

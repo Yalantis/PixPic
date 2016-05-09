@@ -121,7 +121,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     private func reloadData() {
         showToast()
-        setupUser()
+        updateUser()
         loadUserPosts()
         checkIsFollowing()
     }
@@ -194,7 +194,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         followButtonHeight.constant = 0.1
     }
     
-    private func setupUser() {
+    private func updateUser() {
         guard let user = user else {
             return
         }
@@ -293,20 +293,20 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 guard let this = self, user = this.user else {
                     return
                 }
-                self!.followStatus = .Unknown
+                this.followStatus = .Unknown
                 activityService.unfollowUserEventually(user) { [weak self] success, error in
                     if success {
                         guard let this = self else {
                             return
                         }
-                        self!.followStatus = .NotFollowing
+                        this.followStatus = .NotFollowing
                         this.fillFollowersQuantity(user)
                         NSNotificationCenter.defaultCenter().postNotificationName(
                             Constants.NotificationName.FollowersListIsUpdated,
                             object: nil
                         )
                     } else {
-                        self!.followStatus = .Following
+                        this.followStatus = .Following
                     }
                 }
             }
