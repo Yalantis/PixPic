@@ -75,13 +75,13 @@ class ActivityService {
         }
     }
     
-    func checkIsFollowing(user: User, completion: (Bool) -> Void) {
+    func checkFollowingStatus(user: User, completion: (FollowStatus) -> Void) {
         let isFollowingQuery = PFQuery(className: Activity.parseClassName())
         isFollowingQuery.whereKey(Constants.ActivityKey.FromUser, equalTo: User.currentUser()!)
         isFollowingQuery.whereKey(Constants.ActivityKey.Type, equalTo: ActivityType.Follow.rawValue)
         isFollowingQuery.whereKey(Constants.ActivityKey.ToUser, equalTo: user)
         isFollowingQuery.countObjectsInBackgroundWithBlock { number, error in
-            let status = (error == nil && number > 0)
+            let status: FollowStatus = (error == nil && number > 0) ? FollowStatus.Following : FollowStatus.NotFollowing
             AttributesCache.sharedCache.setFollowStatus(status, user: user)
             completion(status)
         }
@@ -104,7 +104,7 @@ class ActivityService {
         followActivity.fromUser = currentUser
         followActivity.toUser = user
         followActivity.saveInBackgroundWithBlock(completionBlock)
-        AttributesCache.sharedCache.setFollowStatus(true, user: user)
+        AttributesCache.sharedCache.setFollowStatus(.Following, user: user)
     }
     
     func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
@@ -127,7 +127,7 @@ class ActivityService {
                 }
             }
         }
-        AttributesCache.sharedCache.setFollowStatus(false, user: user)
+        AttributesCache.sharedCache.setFollowStatus(.NotFollowing, user: user)
     }
     
 }

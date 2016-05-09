@@ -22,13 +22,13 @@ final class AttributesCache {
         cache.removeAllObjects()
     }
     
-    func setAttributes(for post: Post, likers: [User], commenters: [User], likedByCurrentUser: Bool) {
-        let attributes = [
-            Constants.Attributes.IsLikedByCurrentUser: likedByCurrentUser,
+    func setAttributes(for post: Post, likers: [User], commenters: [User], likeStatusByCurrentUser: LikeStatus) {
+        let attributes: [String: AnyObject] = [
+            Constants.Attributes.LikeStatusByCurrentUser: likeStatusByCurrentUser as! AnyObject,
             Constants.Attributes.LikesCount: likers.count,
             Constants.Attributes.Likers: likers
         ]
-        setAttributes(attributes as! [String : AnyObject], forPost: post)
+        setAttributes(attributes, forPost: post)
     }
     
     func setAttributesForUser(user: User, followers: [User]) {
@@ -74,34 +74,26 @@ final class AttributesCache {
     }
     
     func likers(for post: Post) -> [User] {
-        if let attributes = attributes(for: post) {
-            if attributes.isEmpty {
-                return [User]()
-            } else if let likers = attributes[Constants.Attributes.Likers] as? [User] {
-                return likers
-            }
+        if let attributes = attributes(for: post), let likers = attributes[Constants.Attributes.Likers] as? [User] {
+            return likers
         }
         
         return [User]()
     }
     
-    func setPostIsLikedByCurrentUser(post: Post, liked: Bool) {
+    func setLikeStatusByCurrentUser(post: Post, likeStatus: LikeStatus) {
         if var attributes = attributes(for: post) {
-            attributes[Constants.Attributes.IsLikedByCurrentUser] = liked
+            attributes[Constants.Attributes.LikeStatusByCurrentUser] = (likeStatus as! AnyObject)
             setAttributes(attributes, forPost: post)
         }
     }
     
-    func isPostLikedByCurrentUser(post: Post) -> Bool {
-        if let attributes = attributes(for: post) {
-            if attributes.isEmpty {
-                return false
-            } else if let isLikedByUser = attributes[Constants.Attributes.IsLikedByCurrentUser] as? Bool {
-                return isLikedByUser
-            }
+    func postLikeStatusByCurrentUser(post: Post) -> LikeStatus {
+        if let attributes = attributes(for: post), likeStatus = attributes[Constants.Attributes.LikeStatusByCurrentUser] as? LikeStatus {
+            return likeStatus
         }
         
-        return false
+        return LikeStatus.Unknown
     }
     
     func incrementLikersCount(for post: Post) {
@@ -123,12 +115,12 @@ final class AttributesCache {
         }
     }
     
-    func setAttributes(for user: User, postCount count: Int, followedByCurrentUser following: Bool) {
-        let attributes = [
+    func setAttributes(for user: User, postCount count: Int, followedByCurrentUser followStatus: FollowStatus) {
+        let attributes: [String: AnyObject] = [
             Constants.Attributes.PostsCount: count,
-            Constants.Attributes.IsFollowedByCurrentUser: following
+            Constants.Attributes.FollowStatusByCurrentUser: followStatus.rawValue
         ]
-        setAttributes(attributes as! [String : AnyObject], forUser: user)
+        setAttributes(attributes, forUser: user)
     }
     
     func attributes(for user: User) -> [String: AnyObject]? {
@@ -140,20 +132,19 @@ final class AttributesCache {
     func postsCountForUser(user: User) -> Int {
         if let attributes = attributes(for: user),
             postsCount = attributes[Constants.Attributes.PostsCount] as? Int {
-                return postsCount
+            
+            return postsCount
         }
         
         return 0
     }
     
-    func followStatus(for user: User) -> Bool? {
-        if let attributes = attributes(for: user) {
-            let followStatus = attributes[Constants.Attributes.IsFollowedByCurrentUser] as? Bool
-            
-            return followStatus
+    func followStatus(for user: User) -> FollowStatus? {
+        if let attributes = attributes(for: user), followStatus = attributes[Constants.Attributes.FollowStatusByCurrentUser] {
+            return FollowStatus(rawValue: followStatus as! Int)
         }
         
-        return nil
+        return FollowStatus.Unknown
     }
     
     func setPostCount(count: Int,  user: User) {
@@ -163,9 +154,9 @@ final class AttributesCache {
         }
     }
     
-    func setFollowStatus(following: Bool, user: User) {
+    func setFollowStatus(followStatus: FollowStatus, user: User) {
         if var attributes = attributes(for: user) {
-            attributes[Constants.Attributes.IsFollowedByCurrentUser] = following
+            attributes[Constants.Attributes.FollowStatusByCurrentUser] = followStatus.rawValue
             setAttributes(attributes, forUser: user)
         }
     }

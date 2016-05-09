@@ -11,6 +11,14 @@ import Toast
 
 typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter, FeedPresenter, AlertManagerDelegate>
 
+enum FollowStatus: Int {
+    case Following, NotFollowing, Unknown
+}
+
+enum LikeStatus: Int {
+    case Liked, NotLiked, Unknown
+}
+
 private let unfollowMessage = NSLocalizedString("sure_unfollow", comment: "")
 private let unfollowTitle = NSLocalizedString("unfollow", comment: "")
 private let unfollowActionTitle = NSLocalizedString("yes", comment: "")
@@ -35,12 +43,16 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     private lazy var postAdapter = PostAdapter()
     private lazy var settingsMenu = SettingsMenu()
     
-    private var isFollowing: Bool? {
+    private var followStatus = FollowStatus.Unknown {
         didSet {
-            if let followingStatus = isFollowing {
-                followButton.selected = followingStatus
+            switch followStatus {
+            case .Following:
+                followButton.selected = true
                 followButton.enabled = true
-            } else {
+            case .NotFollowing:
+                followButton.selected = false
+                followButton.enabled = true
+            case .Unknown:
                 followButton.enabled = false
             }
         }
@@ -61,7 +73,6 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isFollowing = nil
         setupController()
         setupUserImagePlaceholder()
         setupLoadersCallback()
@@ -117,19 +128,19 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     private func checkIsFollowing() {
         guard let user = user else {
-            isFollowing = nil
+            followStatus = .Unknown
             
             return
         }
-        
         let cache = AttributesCache.sharedCache
-        if let followStatus = cache.followStatus(for: user) {
-            isFollowing = followStatus
-        } else {
+        let status = cache.followStatus(for: user)!
+        if status == .Unknown {
             let activityService: ActivityService = locator.getService()
-            activityService.checkIsFollowing(user) { [weak self] follow in
-                self!.isFollowing = follow
+            activityService.checkFollowingStatus(user) { [weak self] follow in
+                self!.followStatus = follow
             }
+        } else {
+            followStatus = status
         }
     }
     
@@ -226,10 +237,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             guard ReachabilityHelper.isReachable() else {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
-
+                
                 return
             }
-                
+            
             postService.loadPosts(this.user) { objects, error in
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
@@ -261,7 +272,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         }
         
         let activityService: ActivityService = locator.getService()
-        if isFollowing! {
+        if followStatus == .Following {
             // Unfollow
             
             let alertController = UIAlertController(
@@ -282,20 +293,20 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 guard let this = self, user = this.user else {
                     return
                 }
-                self!.isFollowing = nil
+                self!.followStatus = .Unknown
                 activityService.unfollowUserEventually(user) { [weak self] success, error in
                     if success {
                         guard let this = self else {
                             return
                         }
-                        self!.isFollowing = false
+                        self!.followStatus = .NotFollowing
                         this.fillFollowersQuantity(user)
                         NSNotificationCenter.defaultCenter().postNotificationName(
                             Constants.NotificationName.FollowersListIsUpdated,
                             object: nil
                         )
                     } else {
-                        self!.isFollowing = true
+                        self!.followStatus = .Following
                     }
                 }
             }
@@ -306,7 +317,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Follow
-            isFollowing = nil
+            followStatus = .Unknown
             let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
             indicator.center = followButton.center
             indicator.hidesWhenStopped = true
@@ -318,9 +329,9 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 }
                 if error == nil {
                     log.debug("Attempt to follow was \(succeeded) ")
-                    this.isFollowing = true
+                    this.followStatus = .Following
                 } else {
-                    this.isFollowing = false
+                    this.followStatus = .NotFollowing
                 }
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
@@ -339,7 +350,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             self.followersQuantity.text = String(followersQuantity) + " followers"
             self.followingQuantity.text = String(followingQuantity) + " following"
         }
-
+        
         let activityService: ActivityService = locator.getService()
         activityService.fetchFollowersQuantity(user) { [weak self] followersCount, followingCount in
             if let this = self {
@@ -347,7 +358,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 this.followingQuantity.text = String(followingCount) + " following"
             }
         }
-
+        
     }
     
     private func suggestLogin() {
@@ -387,7 +398,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     @IBAction private func profileSettings() {
         router.showEditProfile()
     }
-
+    
     @objc private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
@@ -411,7 +422,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         guard let followingQuantity = attributes?[Constants.Attributes.FollowingCount] as? Int else {
             return
         }
-
+        
         if followingQuantity != 0 {
             router.showFollowersList(user, followType: .Following)
         }
