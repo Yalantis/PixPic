@@ -121,7 +121,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         
         let complaintService: ComplaintService = locator.getService()
         let complainAboutUsernameAction = UIAlertAction(
-            title: ComplaintReason.Username.rawValue,
+            title: NSLocalizedString("\(ComplaintReason.Username.rawValue)", comment: ""),
             style: .Default
             ) { _ in
                 complaintService.complainAboutUsername(post.user!) { _, error in
@@ -130,7 +130,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         }
         
         let complainAboutUserAvatarAction = UIAlertAction(
-            title: ComplaintReason.UserAvatar.rawValue,
+            title: NSLocalizedString("\(ComplaintReason.UserAvatar.rawValue)", comment: ""),
             style: .Default
             ) { _ in
                 complaintService.complainAboutUserAvatar(post.user!) { _, error in
@@ -139,7 +139,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         }
         
         let complainAboutPostAction = UIAlertAction(
-            title: ComplaintReason.PostImage.rawValue,
+            title: NSLocalizedString("\(ComplaintReason.PostImage.rawValue)", comment: ""),
             style: .Default
             ) { _ in
                 complaintService.complainAboutPost(post) { _, error in
