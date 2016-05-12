@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Lav-xa-cbI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -45,16 +45,16 @@
                                     </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
-                                    <rect key="frame" x="198" y="250" width="204" height="17"/>
+                                    <rect key="frame" x="198" y="248" width="204" height="19"/>
                                     <subviews>
                                         <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
-                                            <rect key="frame" x="0.0" y="4" width="83" height="13"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="83" height="19"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
-                                            <rect key="frame" x="120" y="4" width="84" height="13"/>
+                                            <rect key="frame" x="120" y="0.0" width="84" height="19"/>
                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -62,9 +62,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="bsh-Xb-JtV" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" constant="4" id="2aN-bW-Qyu"/>
+                                        <constraint firstItem="bsh-Xb-JtV" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" id="2aN-bW-Qyu"/>
                                         <constraint firstItem="bsh-Xb-JtV" firstAttribute="leading" secondItem="wMO-2N-lNa" secondAttribute="trailing" constant="37" id="Ca7-Rj-2mZ"/>
-                                        <constraint firstItem="wMO-2N-lNa" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" constant="4" id="Nlf-tt-KET"/>
+                                        <constraint firstItem="wMO-2N-lNa" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="top" id="Nlf-tt-KET"/>
                                         <constraint firstAttribute="bottom" secondItem="bsh-Xb-JtV" secondAttribute="bottom" id="Tzg-cA-H98"/>
                                         <constraint firstAttribute="bottom" secondItem="wMO-2N-lNa" secondAttribute="bottom" id="nFc-Xp-YZh"/>
                                         <constraint firstItem="wMO-2N-lNa" firstAttribute="leading" secondItem="Nye-UC-bFD" secondAttribute="leading" id="pst-jP-aZy"/>
@@ -116,7 +116,7 @@
                                 <constraint firstAttribute="bottom" secondItem="Mza-2S-LBW" secondAttribute="bottom" id="JtD-7a-U6G"/>
                                 <constraint firstItem="Nye-UC-bFD" firstAttribute="centerX" secondItem="NK7-AM-JLQ" secondAttribute="centerX" id="RLh-S4-f7l"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="3W9-Wv-xaN" secondAttribute="centerX" id="SM2-1i-jsq"/>
-                                <constraint firstItem="Nye-UC-bFD" firstAttribute="top" secondItem="ASI-e7-emX" secondAttribute="bottom" constant="10" id="bJJ-9j-bcd"/>
+                                <constraint firstItem="Nye-UC-bFD" firstAttribute="top" secondItem="ASI-e7-emX" secondAttribute="bottom" constant="8" id="bJJ-9j-bcd"/>
                                 <constraint firstItem="Mza-2S-LBW" firstAttribute="top" secondItem="Nye-UC-bFD" secondAttribute="bottom" id="cU1-Iq-oNX"/>
                                 <constraint firstItem="ASI-e7-emX" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="bottom" constant="12" id="tvI-i0-M9c"/>
                             </constraints>
