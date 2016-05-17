@@ -42,22 +42,22 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         let takePhotoAction = UIAlertAction(
             title: takePhotoOption,
             style: .Default
-            ) { _ in
-                self.takePhoto()
-                PushNotificationQueue.handleNotificationQueue()
+        ) { _ in
+            self.takePhoto()
+            PushNotificationQueue.handleNotificationQueue()
         }
         let selectFromLibraryAction = UIAlertAction(
             title: selectFromLibraryOption,
             style: .Default
-            ) { _ in
-                self.selectFromLibrary()
-                PushNotificationQueue.handleNotificationQueue()
+        ) { _ in
+            self.selectFromLibrary()
+            PushNotificationQueue.handleNotificationQueue()
         }
         let cancelAction = UIAlertAction(
             title: cancelOption,
             style: .Cancel
-            ) { _ in
-                PushNotificationQueue.handleNotificationQueue()
+        ) { _ in
+            PushNotificationQueue.handleNotificationQueue()
         }
         actionSheetViewController.addAction(selectFromLibraryAction)
         actionSheetViewController.addAction(takePhotoAction)
@@ -133,8 +133,8 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         let allowCameraAction = UIAlertAction(
             title: allowCameraActionTitle,
             style: .Cancel
-            ) { _ in
-                UIApplication.redirectToAppSettings()
+        ) { _ in
+            UIApplication.redirectToAppSettings()
         }
         alert.addAction(cancelAction)
         alert.addAction(allowCameraAction)
@@ -142,27 +142,14 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
     }
     
     private func presentCameraAccessDialog() {
-        let alert = UIAlertController(
-            title: importantTitle,
-            message: allowCameraActionTitle,
-            preferredStyle: UIAlertControllerStyle.Alert
-        )
-        let dismissAction = UIAlertAction(
-            title: dismissActionTitle,
-            style: .Cancel
-            ) { _ in
-                if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
-                    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self?.checkCameraAccessibility()
-                        }
-                    }
+        if AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo).count > 0 {
+            AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { [weak self] granted in
+                dispatch_async(dispatch_get_main_queue()) {
+                    self?.checkCameraAccessibility()
                 }
+            }
         }
-        alert.addAction(dismissAction)
-        controller.presentViewController(alert, animated: true, completion: nil)
     }
-    
 }
 
 extension PhotoProvider: UIImagePickerControllerDelegate {
