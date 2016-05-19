@@ -13,5 +13,4 @@
 #import <MHPrettyDate/MHPrettyDate.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-
-
+#import "VPImageCropperViewController.h"

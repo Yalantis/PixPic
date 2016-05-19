@@ -24,6 +24,8 @@ private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let allowCameraMessage = NSLocalizedString("allow_camera_access", comment: "")
 private let dismissActionTitle = NSLocalizedString("dismiss", comment: "")
 
+private let maxAllowedImageScale = 10
+
 class PhotoProvider: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
@@ -80,7 +82,6 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
     private func callCamera() {
         imagePickerController.cameraCaptureMode = .Photo
         imagePickerController.modalPresentationStyle = .FullScreen
-        imagePickerController.allowsEditing = true
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
@@ -102,7 +103,6 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
     private func selectFromLibrary() {
         imagePickerController.sourceType = .PhotoLibrary
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
-        imagePickerController.allowsEditing = true
     }
     
     private func checkCameraAccessibility() {
@@ -150,18 +150,38 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             }
         }
     }
+    
 }
 
 extension PhotoProvider: UIImagePickerControllerDelegate {
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        if let selectedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
-            controller.dismissViewControllerAnimated(true, completion: nil)
-            didSelectPhoto?(selectedImage)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            presentCropperFor(image)
         }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func presentCropperFor(image: UIImage) {
+        let squareSideSize = imagePickerController.view.bounds.size.width
+        let cropSquare = CGRectMake(0, 100, squareSideSize, squareSideSize)
+        let imageCropperViewController = VPImageCropperViewController(image: image, cropFrame: cropSquare, limitScaleRatio: maxAllowedImageScale)
+        imageCropperViewController.delegate = self
+        imagePickerController.pushViewController(imageCropperViewController, animated: true)
+    }
+    
+}
+extension PhotoProvider: VPImageCropperDelegate {
+    
+    func imageCropper(cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        didSelectPhoto?(editedImage)
+    }
+    
+    func imageCropperDidCancel(cropperViewController: VPImageCropperViewController!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     

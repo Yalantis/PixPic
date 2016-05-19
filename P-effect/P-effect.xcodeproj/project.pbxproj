@@ -17,6 +17,7 @@
 		7708BF7D1CCE17F3009B17C6 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */; };
 		771E3E801C74CB22000608EF /* CellInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771E3E7F1C74CB22000608EF /* CellInterface.swift */; };
 		772AEFEA1CCF74DF005FC781 /* PFFile+ImageForContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772AEFE91CCF74DF005FC781 /* PFFile+ImageForContent.swift */; };
+		7771DA631CEDDB6300E7B2F2 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7771DA621CEDDB6300E7B2F2 /* VPImageCropperViewController.m */; };
 		77752C961C7B2AD500DCED81 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */; };
 		779884C01CCE34B20027E706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 779884BF1CCE34B20027E706 /* Localizable.strings */; };
 		77B783881CE0E1E7004DE856 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B7834E1CE0E1E7004DE856 /* ActivityViewController.swift */; };
@@ -122,6 +123,8 @@
 		7708BF7C1CCE17F3009B17C6 /* PhotoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
 		771E3E7F1C74CB22000608EF /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		772AEFE91CCF74DF005FC781 /* PFFile+ImageForContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PFFile+ImageForContent.swift"; path = "P-effect/Classes/Services/PFFile+ImageForContent.swift"; sourceTree = SOURCE_ROOT; };
+		7771DA611CEDDB6300E7B2F2 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		7771DA621CEDDB6300E7B2F2 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		77752C951C7B2AD500DCED81 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		779884BF1CCE34B20027E706 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		77B7834E1CE0E1E7004DE856 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
@@ -256,6 +259,15 @@
 				68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7771DA601CEDDB6300E7B2F2 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				7771DA611CEDDB6300E7B2F2 /* VPImageCropperViewController.h */,
+				7771DA621CEDDB6300E7B2F2 /* VPImageCropperViewController.m */,
+			);
+			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
 		77B7834C1CE0E1E7004DE856 /* Flow */ = {
@@ -449,6 +461,7 @@
 		95308CCC1CBBB3FF001DD181 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				7771DA601CEDDB6300E7B2F2 /* VPImageCropper */,
 				95308CCD1CBBB3FF001DD181 /* AttributesCache.swift */,
 				95308CCE1CBBB3FF001DD181 /* Reachability.swift */,
 			);
@@ -801,6 +814,7 @@
 				77B783A51CE0E1E7004DE856 /* StickerEditorView.swift in Sources */,
 				77B7838E1CE0E1E7004DE856 /* AuthorizationRouter.swift in Sources */,
 				77B783881CE0E1E7004DE856 /* ActivityViewController.swift in Sources */,
+				7771DA631CEDDB6300E7B2F2 /* VPImageCropperViewController.m in Sources */,
 				95308CBD1CBBB3AA001DD181 /* PostService.swift in Sources */,
 				77B7839C1CE0E1E7004DE856 /* BorderView.swift in Sources */,
 				772AEFEA1CCF74DF005FC781 /* PFFile+ImageForContent.swift in Sources */,
