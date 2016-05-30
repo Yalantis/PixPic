@@ -955,6 +955,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
 				SWIFT_OBJC_BRIDGING_HEADER = "P-effect/P-effect-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
