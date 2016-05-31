@@ -7,7 +7,7 @@
 */
 
 "photo_deleted" = "This photo will be deleted from P-effect";
-"need_registration" = "This function is available only to registered users”
+"need_registration" = "This function is available only to registered users";
 "complaint_about" ="Complaint about";
 "cancel" = "Cancel";
 "share" = "Share";
@@ -74,7 +74,7 @@
 "register" = "Register";
 
 "enable_notifications" = "Enable Notifications";
-"only_following_users_posts" = "Show only posts of people I follow”
+"only_following_users_posts" = "Show only posts of people I follow";
 "log_in" = "Log In";
 "log_out" = "Log Out";
 
