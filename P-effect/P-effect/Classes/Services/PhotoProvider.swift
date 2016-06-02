@@ -167,7 +167,8 @@ extension PhotoProvider: UIImagePickerControllerDelegate {
     
     private func presentCropperFor(image: UIImage) {
         let squareSideSize = imagePickerController.view.bounds.size.width
-        let cropSquare = CGRectMake(0, 100, squareSideSize, squareSideSize)
+        let cropSquareOriginY = (imagePickerController.view.bounds.size.height - squareSideSize) / 2
+        let cropSquare = CGRectMake(0, cropSquareOriginY, squareSideSize, squareSideSize)
         let imageCropperViewController = VPImageCropperViewController(image: image, cropFrame: cropSquare, limitScaleRatio: maxAllowedImageScale)
         imageCropperViewController.delegate = self
         imagePickerController.pushViewController(imageCropperViewController, animated: true)
