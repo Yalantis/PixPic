@@ -59,6 +59,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
         }
     }
+    private var timeoutTimer: NSTimer!
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -86,6 +87,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         
         AlertManager.sharedInstance.setAlertDelegate(router)
         fillFollowersQuantity(user!)
+    }
+    
+    deinit {
+        deleteTimer()
     }
     
     // MARK: - Setup methods
@@ -229,6 +234,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         activityShown = true
     }
     
+    private func deleteTimer() {
+        timeoutTimer?.invalidate()
+        timeoutTimer = nil
+    }
+    
     private func setupLoadersCallback() {
         let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
@@ -236,14 +246,24 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 return
             }
             
-            guard ReachabilityHelper.isReachable() else {
+            let noConnection = {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
+                this.deleteTimer()
+                
+                return
+            }
+            this.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.Network.TimeoutTimeInterval, repeats: false) {
+                noConnection()
+            }
+            guard ReachabilityHelper.isReachable() else {
+                noConnection()
                 
                 return
             }
             
             postService.loadPosts(this.user) { objects, error in
+                this.deleteTimer()
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()
