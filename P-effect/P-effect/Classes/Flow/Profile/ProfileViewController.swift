@@ -59,6 +59,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
         }
     }
+    private var timeoutTimer: NSTimer!
     
     @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
     @IBOutlet private weak var userAvatar: UIImageView!
@@ -86,6 +87,10 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         
         AlertManager.sharedInstance.setAlertDelegate(router)
         fillFollowersQuantity(user!)
+    }
+    
+    deinit {
+        deleteTimer()
     }
     
     // MARK: - Setup methods
@@ -229,6 +234,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         activityShown = true
     }
     
+    private func deleteTimer() {
+        timeoutTimer?.invalidate()
+        timeoutTimer = nil
+    }
+    
     private func setupLoadersCallback() {
         let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
@@ -239,10 +249,11 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             let noConnection = {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
+                this.deleteTimer()
                 
                 return
             }
-            var timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.Network.TimeoutTimeInterval, repeats: false) {
+            this.timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.Network.TimeoutTimeInterval, repeats: false) {
                 noConnection()
             }
             guard ReachabilityHelper.isReachable() else {
@@ -252,8 +263,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
             }
             
             postService.loadPosts(this.user) { objects, error in
-                timeoutTimer.invalidate()
-                timeoutTimer = nil
+                this.deleteTimer()
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()
