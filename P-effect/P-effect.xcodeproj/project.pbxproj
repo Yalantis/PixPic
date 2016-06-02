@@ -67,6 +67,7 @@
 		77B783B41CE0E1E7004DE856 /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B783851CE0E1E7004DE856 /* SwitchView.xib */; };
 		77B783B51CE0E1E7004DE856 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B783861CE0E1E7004DE856 /* TextView.swift */; };
 		77B783B61CE0E1E7004DE856 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B783871CE0E1E7004DE856 /* TextView.xib */; };
+		77EBB56A1CFF36A900261CCC /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EBB5691CFF36A900261CCC /* NSTimer+Block.m */; };
 		95308C3B1CBBB319001DD181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3A1CBBB319001DD181 /* AppDelegate.swift */; };
 		95308C421CBBB337001DD181 /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */; };
 		95308C431CBBB337001DD181 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3E1CBBB337001DD181 /* ImageViewModel.swift */; };
@@ -174,6 +175,8 @@
 		77B783851CE0E1E7004DE856 /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
 		77B783861CE0E1E7004DE856 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77B783871CE0E1E7004DE856 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		77EBB5681CFF36A900261CCC /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		77EBB5691CFF36A900261CCC /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		95308C3A1CBBB319001DD181 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerAdapter.swift; sourceTree = "<group>"; };
 		95308C3E1CBBB337001DD181 /* ImageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
@@ -420,6 +423,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		77EBB5671CFF36A900261CCC /* NSTimer+Block */ = {
+			isa = PBXGroup;
+			children = (
+				77EBB5681CFF36A900261CCC /* NSTimer+Block.h */,
+				77EBB5691CFF36A900261CCC /* NSTimer+Block.m */,
+			);
+			path = "NSTimer+Block";
+			sourceTree = "<group>";
+		};
 		95308C3C1CBBB337001DD181 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,6 +549,7 @@
 		FDAF46A81C49369E008060CD /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				77EBB5671CFF36A900261CCC /* NSTimer+Block */,
 				772AEFE91CCF74DF005FC781 /* PFFile+ImageForContent.swift */,
 				95308CB11CBBB3AA001DD181 /* UIView+showToast.swift */,
 				7702E0921C6950C50013CB4D /* UICollectionViewFlowLayout.swift */,
@@ -819,6 +832,7 @@
 				77B783931CE0E1E7004DE856 /* FeedRouter.swift in Sources */,
 				492D17EF1C5A00EE00D98404 /* StickersGroup.swift in Sources */,
 				77B783A61CE0E1E7004DE856 /* StickerEditorViewControl.swift in Sources */,
+				77EBB56A1CFF36A900261CCC /* NSTimer+Block.m in Sources */,
 				95308CB41CBBB3AA001DD181 /* ActivityService.swift in Sources */,
 				77B783AF1CE0E1E7004DE856 /* ProfileViewController.swift in Sources */,
 				FD6C17BD1C49506100A01715 /* Constants.swift in Sources */,

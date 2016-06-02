@@ -75,15 +75,11 @@ extension AlertManagerDelegate {
 
 final class AlertManager {
     
-    static let instance = AlertManager()
+    static let sharedInstance = AlertManager()
     
     private weak var delegate: AlertManagerDelegate?
     
     private init() {
-    }
-    
-    static var sharedInstance: AlertManager {
-        return instance
     }
     
     func setAlertDelegate(delegate: AlertManagerDelegate) {

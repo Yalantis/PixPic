@@ -1,22 +1,22 @@
  //
-//  FeedViewController.swift
-//  P-effect
-//
-//  Created by anna on 1/18/16.
-//  Copyright © 2016 Yalantis. All rights reserved.
-//
-
-import Foundation
-import UIKit
-import DZNEmptyDataSet
-import Toast
-
-typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, FeedPresenter, AlertManagerDelegate>
+ //  FeedViewController.swift
+ //  P-effect
+ //
+ //  Created by anna on 1/18/16.
+ //  Copyright © 2016 Yalantis. All rights reserved.
+ //
  
-private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
-private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
-
-final class FeedViewController: UIViewController, StoryboardInitable {
+ import Foundation
+ import UIKit
+ import DZNEmptyDataSet
+ import Toast
+ 
+ typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, SettingsPresenter, FeedPresenter, AlertManagerDelegate>
+ 
+ private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
+ private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
+ 
+ final class FeedViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
@@ -203,14 +203,24 @@ final class FeedViewController: UIViewController, StoryboardInitable {
             guard let this = self else {
                 return
             }
-
-            guard ReachabilityHelper.isReachable() else {
+            let noConnection = {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
             }
+            var timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.Network.TimeoutTimeInterval, repeats: false) {
+                noConnection()
+            }
+            
+            guard ReachabilityHelper.isReachable() else {
+                noConnection()
+                
+                return
+            }
             postService.loadPosts { objects, error in
+                timeoutTimer.invalidate()
+                timeoutTimer = nil
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     this.scrollToFirstRow()
@@ -241,10 +251,10 @@ final class FeedViewController: UIViewController, StoryboardInitable {
         }
     }
     
-}
+ }
  
-// MARK: - UITableViewDelegate methods
-extension FeedViewController: UITableViewDelegate {
+ // MARK: - UITableViewDelegate methods
+ extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return tableView.bounds.size.width + PostViewCell.designedHeight
@@ -254,10 +264,10 @@ extension FeedViewController: UITableViewDelegate {
         view.hideToastActivity()
     }
     
-}
-
-// MARK: - PostAdapterDelegate methods
-extension FeedViewController: PostAdapterDelegate {
+ }
+ 
+ // MARK: - PostAdapterDelegate methods
+ extension FeedViewController: PostAdapterDelegate {
     
     func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         settingsMenu.locator = locator
@@ -274,9 +284,9 @@ extension FeedViewController: PostAdapterDelegate {
             this.tableView.reloadData()
         }
     }
-
+    
     func showUserProfile(adapter: PostAdapter, user: User) {
-         router.showProfile(user)
+        router.showProfile(user)
     }
     
     func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
@@ -290,24 +300,24 @@ extension FeedViewController: PostAdapterDelegate {
     func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
         tableView.reloadData()
     }
-
-}
+    
+ }
  
-// MARK: - DZNEmptyDataSetDelegate methods
-extension FeedViewController: DZNEmptyDataSetDelegate {
+ // MARK: - DZNEmptyDataSetDelegate methods
+ extension FeedViewController: DZNEmptyDataSetDelegate {
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
     }
     
-}
+ }
  
-// MARK: - DZNEmptyDataSetSource methods
-extension FeedViewController: DZNEmptyDataSetSource {
+ // MARK: - DZNEmptyDataSetSource methods
+ extension FeedViewController: DZNEmptyDataSetSource {
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-            NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
         
         return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }
@@ -318,21 +328,21 @@ extension FeedViewController: DZNEmptyDataSetSource {
         paragraph.alignment = .Center
         
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
-            NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-            NSParagraphStyleAttributeName: paragraph]
+                          NSForegroundColorAttributeName: UIColor.lightGrayColor(),
+                          NSParagraphStyleAttributeName: paragraph]
         
         return NSAttributedString(string: descriptionForEmptyData, attributes: attributes)
     }
     
-}
-
-// MARK: - NavigationControllerAppearanceContext methods
-extension FeedViewController: NavigationControllerAppearanceContext {
+ }
+ 
+ // MARK: - NavigationControllerAppearanceContext methods
+ extension FeedViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = Constants.Feed.NavigationTitle
         return appearance
     }
-
-}
+    
+ }
