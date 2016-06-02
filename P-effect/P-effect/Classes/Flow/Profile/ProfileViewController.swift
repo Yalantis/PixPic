@@ -236,14 +236,24 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 return
             }
             
-            guard ReachabilityHelper.isReachable() else {
+            let noConnection = {
                 ExceptionHandler.handle(Exception.NoConnection)
                 this.tableView.pullToRefreshView.stopAnimating()
                 
                 return
             }
+            var timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.Network.TimeoutTimeInterval, repeats: false) {
+                noConnection()
+            }
+            guard ReachabilityHelper.isReachable() else {
+                noConnection()
+                
+                return
+            }
             
             postService.loadPosts(this.user) { objects, error in
+                timeoutTimer.invalidate()
+                timeoutTimer = nil
                 if let objects = objects {
                     this.postAdapter.update(withPosts: objects, action: .Reload)
                     AttributesCache.sharedCache.clear()

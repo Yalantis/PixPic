@@ -127,4 +127,8 @@ struct Constants {
         static let NavigationTitle = "Settings"
     }
     
+    struct Network {
+        static let TimeoutTimeInterval: NSTimeInterval = 5
+    }
+    
 }
