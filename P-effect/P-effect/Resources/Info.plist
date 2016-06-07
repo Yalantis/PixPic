@@ -87,9 +87,7 @@
 		</dict>
 	</dict>
 	<key>UIAppFonts</key>
-	<array>
-		<string>Ribbon_V2_2011.otf</string>
-	</array>
+	<array/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
