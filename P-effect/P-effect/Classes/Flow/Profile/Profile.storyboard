@@ -9,8 +9,14 @@
     <customFonts key="customFonts">
         <mutableArray key="Nootype - Radikal Medium.otf">
             <string>Radikal-Medium</string>
+            <string>Radikal-Medium</string>
         </mutableArray>
         <mutableArray key="Nootype - Radikal.otf">
+            <string>Radikal</string>
+            <string>Radikal</string>
+            <string>Radikal</string>
+            <string>Radikal</string>
+            <string>Radikal</string>
             <string>Radikal</string>
         </mutableArray>
     </customFonts>
@@ -53,18 +59,18 @@
                                         <constraint firstItem="Lrk-fZ-kCM" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="topMargin" priority="700" id="vrj-fv-tNC"/>
                                     </constraints>
                                 </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
                                     <rect key="frame" x="198" y="248" width="204" height="19"/>
                                     <subviews>
-                                        <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
+                                        <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
                                             <rect key="frame" x="0.0" y="0.0" width="83" height="19"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
+                                        <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
                                             <rect key="frame" x="120" y="0.0" width="84" height="19"/>
-                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -81,21 +87,22 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
-                                    <rect key="frame" x="196" y="215" width="209" height="25"/>
+                                    <rect key="frame" x="193" y="215" width="215" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="343-7o-1DQ"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mza-2S-LBW">
-                                    <rect key="frame" x="235" y="267" width="130" height="55"/>
+                                    <rect key="frame" x="215" y="267" width="169" height="55"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhm-c2-hmO">
-                                            <rect key="frame" x="0.0" y="15" width="130" height="35"/>
+                                            <rect key="frame" x="0.0" y="15" width="169" height="41"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <state key="normal" image="btn_follow"/>
+                                            <fontDescription key="fontDescription" name="Radikal-Medium" family="Radikal" pointSize="16"/>
+                                            <state key="normal" image="btnLogin"/>
                                             <state key="selected" image="btn_following"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -109,7 +116,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="130" id="Jg4-fH-DVf"/>
+                                        <constraint firstAttribute="width" constant="169" id="Jg4-fH-DVf"/>
                                         <constraint firstItem="Mhm-c2-hmO" firstAttribute="leading" secondItem="Mza-2S-LBW" secondAttribute="leading" id="Mga-y9-B3l"/>
                                         <constraint firstAttribute="height" constant="55" id="hPE-eQ-oar"/>
                                         <constraint firstAttribute="trailing" secondItem="Mhm-c2-hmO" secondAttribute="trailing" id="j4H-iD-Akh"/>
@@ -135,8 +142,8 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
-                                    <rect key="frame" x="218" y="163" width="165" height="24"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <rect key="frame" x="216" y="165" width="169.5" height="20"/>
+                                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="20"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -258,7 +265,7 @@
                                             <constraint firstAttribute="height" constant="30" id="3bb-5Q-23X"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -351,7 +358,7 @@ Pix Pic makes your photos more creative.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="btn_follow" width="129" height="35"/>
+        <image name="btnLogin" width="169" height="41"/>
         <image name="btn_following" width="129" height="35"/>
         <image name="emoji3" width="90" height="85"/>
         <image name="icon_edit" width="28" height="28"/>
