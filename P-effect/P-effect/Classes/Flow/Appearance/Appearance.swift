@@ -14,7 +14,10 @@ struct Appearance: Equatable {
         
         var barTintColor = UIColor.appNavBarColor
         var translucent = false
-        var titleTextAttributes = [NSForegroundColorAttributeName: UIColor.appWhiteColor]
+        var titleTextAttributes = [
+            NSForegroundColorAttributeName: UIColor.appWhiteColor,
+            NSFontAttributeName: UIFont(name: "Radikal", size: 18)!
+        ]
         var backIndicatorImage = UIImage.appBackButton
         var backIndicatorTransitionMaskImage = UIImage.appBackButton
         var tintColor = UIColor.appWhiteColor

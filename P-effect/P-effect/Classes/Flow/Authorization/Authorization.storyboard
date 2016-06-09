@@ -2,13 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXq-ZV-3AE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Autorization View Controller-->
         <scene sceneID="LKi-xe-jhM">
             <objects>
-                <viewController storyboardIdentifier="AuthorizationViewController" id="vXq-ZV-3AE" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthorizationViewController" title="Login" id="vXq-ZV-3AE" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lYv-4a-1oh"/>
                         <viewControllerLayoutGuide type="bottom" id="Otb-eJ-vAW"/>
@@ -17,11 +19,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="bgLogin" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-sq-O8V">
-                                <rect key="frame" x="20" y="-200" width="560" height="800"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="emojiLogin" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-sq-O8V">
+                                <rect key="frame" x="20" y="259.5" width="560" height="328.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UF8-sq-O8V" secondAttribute="height" multiplier="351:206" id="moA-ed-0dJ"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTD-CW-fGF">
-                                <rect key="frame" x="152" y="264" width="295" height="71"/>
+                                <rect key="frame" x="152.5" y="132.5" width="295" height="71"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -37,25 +42,48 @@
                                     <action selector="logInWithFBButtonTapped" destination="vXq-ZV-3AE" eventType="touchUpInside" id="nDa-qJ-sPr"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCQ-2d-WST">
+                                <rect key="frame" x="20" y="20" width="560" height="112.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nsf-Sf-q4g">
+                                <rect key="frame" x="20" y="203.5" width="560" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UF8-sq-O8V" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="4rw-cr-OSi"/>
+                            <constraint firstItem="WTD-CW-fGF" firstAttribute="top" secondItem="tCQ-2d-WST" secondAttribute="bottom" id="8cf-Cp-Ucg"/>
                             <constraint firstItem="WTD-CW-fGF" firstAttribute="centerX" secondItem="rz2-y5-t88" secondAttribute="centerX" id="Bc6-av-8Rg"/>
-                            <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="rz2-y5-t88" secondAttribute="topMargin" constant="-200" id="WoN-B0-1Xk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tCQ-2d-WST" secondAttribute="trailing" id="HTD-FM-zFJ"/>
+                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="height" secondItem="tCQ-2d-WST" secondAttribute="height" multiplier="1:2" id="IPR-bq-qI5"/>
+                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="JyE-bR-7px"/>
+                            <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="Nsf-Sf-q4g" secondAttribute="bottom" id="Uw8-ir-rat"/>
+                            <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="rz2-y5-t88" secondAttribute="topMargin" constant="200" id="WoN-B0-1Xk"/>
+                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="top" secondItem="WTD-CW-fGF" secondAttribute="bottom" id="eUV-To-MqR"/>
+                            <constraint firstItem="tCQ-2d-WST" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="juZ-Nm-kQc"/>
                             <constraint firstItem="WTD-CW-fGF" firstAttribute="centerY" secondItem="rz2-y5-t88" secondAttribute="centerY" id="lpO-wq-Ime"/>
+                            <constraint firstItem="tCQ-2d-WST" firstAttribute="top" secondItem="lYv-4a-1oh" secondAttribute="bottom" id="nY6-n2-qVw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Nsf-Sf-q4g" secondAttribute="trailing" id="tCA-XQ-RiI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UF8-sq-O8V" secondAttribute="trailing" id="uoi-iA-41g"/>
-                            <constraint firstItem="Otb-eJ-vAW" firstAttribute="top" secondItem="UF8-sq-O8V" secondAttribute="bottom" id="zmq-fn-RQU"/>
+                            <constraint firstItem="Otb-eJ-vAW" firstAttribute="top" secondItem="UF8-sq-O8V" secondAttribute="bottom" constant="12" id="zmq-fn-RQU"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lpO-wq-Ime"/>
+                                <exclude reference="WoN-B0-1Xk"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPs-Ce-5Yj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="676" y="-350"/>
+            <point key="canvasLocation" x="635" y="-347"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bgLogin" width="375" height="667"/>
         <image name="btnLogin" width="295" height="71"/>
+        <image name="emojiLogin" width="346" height="199"/>
     </resources>
 </document>

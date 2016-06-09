@@ -10,8 +10,8 @@ import UIKit
 import Kingfisher
 import MHPrettyDate
 
-private let headerViewHeight: CGFloat = 78
-private let footerViewHeight: CGFloat = 48
+private let headerViewHeight: CGFloat = 87
+private let footerViewHeight: CGFloat = 40
 
 private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
@@ -58,7 +58,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         profileLabel.text = post.user?.username
         dateLabel.text = MHPrettyDate.prettyDateFromDate(
             post.createdAt,
-            withFormat: MHPrettyDateShortRelativeTime
+            withFormat: MHPrettyDateFormatNoTime
         )
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
@@ -98,7 +98,7 @@ class PostViewCell: UITableViewCell, CellInterface {
             cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
                 return
         }
-        let message = "Created by " + username + " with P-Effect app."
+        let message = "Created by " + username + " with Pix Pic app."
         let items = [cachedImage, message]
         
         didSelectSettings?(cell: self, items: items)

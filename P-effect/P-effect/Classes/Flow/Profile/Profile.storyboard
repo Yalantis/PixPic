@@ -59,17 +59,17 @@
                                         <constraint firstItem="Lrk-fZ-kCM" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="topMargin" priority="700" id="vrj-fv-tNC"/>
                                     </constraints>
                                 </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
-                                    <rect key="frame" x="202" y="248" width="196" height="19"/>
+                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
+                                    <rect key="frame" x="204" y="248" width="192.5" height="19"/>
                                     <subviews>
                                         <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
-                                            <rect key="frame" x="0.0" y="0.0" width="78.5" height="19"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="78" height="19"/>
                                             <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
-                                            <rect key="frame" x="115" y="0.0" width="80.5" height="19"/>
+                                        <label opaque="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsh-Xb-JtV">
+                                            <rect key="frame" x="114" y="0.0" width="77.5" height="19"/>
                                             <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -86,8 +86,8 @@
                                         <constraint firstAttribute="trailing" secondItem="bsh-Xb-JtV" secondAttribute="trailing" id="sDu-Eg-305"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
-                                    <rect key="frame" x="193" y="215" width="215" height="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
+                                    <rect key="frame" x="194.5" y="215" width="212.5" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="343-7o-1DQ"/>
                                     </constraints>
@@ -102,7 +102,7 @@
                                             <rect key="frame" x="0.0" y="15" width="169" height="41"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="Radikal-Medium" family="Radikal" pointSize="16"/>
-                                            <state key="normal" image="btnLogin"/>
+                                            <state key="normal" image="btnFollow"/>
                                             <state key="selected" image="btn_following"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -138,10 +138,10 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="RWA-d4-3KE">
-                            <rect key="frame" x="0.0" y="322" width="600" height="350"/>
+                            <rect key="frame" x="0.0" y="322" width="600" height="383"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
                                     <rect key="frame" x="216" y="165" width="169.5" height="20"/>
                                     <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="20"/>
                                     <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,7 +160,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QXO-7N-2az">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icon_edit" id="xc4-g0-tKg">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" image="icEdit" id="xc4-g0-tKg">
                             <color key="tintColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="profileSettings" destination="Lav-xa-cbI" id="jit-0F-JSQ"/>
@@ -174,6 +174,7 @@
                         <outlet property="followingQuantity" destination="bsh-Xb-JtV" id="VPw-WG-LcA"/>
                         <outlet property="profileSettingsButton" destination="xc4-g0-tKg" id="1F4-Rw-7oh"/>
                         <outlet property="tableViewFooter" destination="RWA-d4-3KE" id="65t-jj-0Ow"/>
+                        <outlet property="tableViewHeader" destination="3W9-Wv-xaN" id="mKv-mH-kZf"/>
                         <outlet property="userAvatar" destination="Lrk-fZ-kCM" id="FWi-c5-QN3"/>
                         <outlet property="userName" destination="ASI-e7-emX" id="58r-pq-lQf"/>
                     </connections>
@@ -358,9 +359,9 @@ Pix Pic makes your photos more creative.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="btnLogin" width="169" height="41"/>
+        <image name="btnFollow" width="169" height="41"/>
         <image name="btn_following" width="129" height="35"/>
         <image name="emoji3" width="90" height="85"/>
-        <image name="icon_edit" width="28" height="28"/>
+        <image name="icEdit" width="19" height="19"/>
     </resources>
 </document>

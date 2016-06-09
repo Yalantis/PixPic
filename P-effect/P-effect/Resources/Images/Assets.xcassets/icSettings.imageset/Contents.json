@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "emoji3.png"
+      "filename" : "icSettings.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "emoji3@2x.png"
+      "filename" : "icSettings@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "emoji3@3x.png"
+      "filename" : "icSettings@3x.png"
     }
   ],
   "info" : {

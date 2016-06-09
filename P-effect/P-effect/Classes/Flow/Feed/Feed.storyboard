@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--P-effect-->
+        <!--Pix Pic-->
         <scene sceneID="See-yb-Ljy">
             <objects>
                 <viewController storyboardIdentifier="FeedViewController" id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,14 +33,14 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <navigationItem key="navigationItem" title="P-effect" id="P4x-GP-BLW">
-                        <barButtonItem key="leftBarButtonItem" image="icon_settings" id="JMc-Wg-qsG">
+                    <navigationItem key="navigationItem" title="Pix Pic" id="P4x-GP-BLW">
+                        <barButtonItem key="leftBarButtonItem" image="icSettings" id="JMc-Wg-qsG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="presentSettings:" destination="fm0-UY-D5k" id="Xwu-2j-UB1"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="icon_profile" id="eed-Oc-yJB">
+                        <barButtonItem key="rightBarButtonItem" image="icProfile" id="eed-Oc-yJB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="profileButtonTapped:" destination="fm0-UY-D5k" id="FN5-fv-5SO"/>
@@ -57,7 +57,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_profile" width="25" height="25"/>
-        <image name="icon_settings" width="25" height="25"/>
+        <image name="icProfile" width="21" height="21"/>
+        <image name="icSettings" width="23" height="23"/>
     </resources>
 </document>
