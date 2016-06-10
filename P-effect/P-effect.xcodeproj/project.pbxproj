@@ -67,6 +67,20 @@
 		77B783B41CE0E1E7004DE856 /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B783851CE0E1E7004DE856 /* SwitchView.xib */; };
 		77B783B51CE0E1E7004DE856 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B783861CE0E1E7004DE856 /* TextView.swift */; };
 		77B783B61CE0E1E7004DE856 /* TextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77B783871CE0E1E7004DE856 /* TextView.xib */; };
+		77DC68DD1D0701B4002751BF /* Nootype - Radikal Black Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68CE1D0701B4002751BF /* Nootype - Radikal Black Italic.otf */; };
+		77DC68DE1D0701B4002751BF /* Nootype - Radikal Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68CF1D0701B4002751BF /* Nootype - Radikal Black.otf */; };
+		77DC68DF1D0701B4002751BF /* Nootype - Radikal Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D01D0701B4002751BF /* Nootype - Radikal Bold Italic.otf */; };
+		77DC68E01D0701B4002751BF /* Nootype - Radikal Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D11D0701B4002751BF /* Nootype - Radikal Bold.otf */; };
+		77DC68E11D0701B4002751BF /* Nootype - Radikal Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D21D0701B4002751BF /* Nootype - Radikal Italic.otf */; };
+		77DC68E21D0701B4002751BF /* Nootype - Radikal Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D31D0701B4002751BF /* Nootype - Radikal Light Italic.otf */; };
+		77DC68E31D0701B4002751BF /* Nootype - Radikal Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D41D0701B4002751BF /* Nootype - Radikal Light.otf */; };
+		77DC68E41D0701B4002751BF /* Nootype - Radikal Medium Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D51D0701B4002751BF /* Nootype - Radikal Medium Italic.otf */; };
+		77DC68E51D0701B4002751BF /* Nootype - Radikal Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D61D0701B4002751BF /* Nootype - Radikal Medium.otf */; };
+		77DC68E61D0701B4002751BF /* Nootype - Radikal Thin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D71D0701B4002751BF /* Nootype - Radikal Thin Italic.otf */; };
+		77DC68E71D0701B4002751BF /* Nootype - Radikal Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D81D0701B4002751BF /* Nootype - Radikal Thin.otf */; };
+		77DC68E81D0701B4002751BF /* Nootype - Radikal UltraThin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68D91D0701B4002751BF /* Nootype - Radikal UltraThin Italic.otf */; };
+		77DC68E91D0701B4002751BF /* Nootype - Radikal UltraThin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68DA1D0701B4002751BF /* Nootype - Radikal UltraThin.otf */; };
+		77DC68EA1D0701B4002751BF /* Nootype - Radikal.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77DC68DB1D0701B4002751BF /* Nootype - Radikal.otf */; };
 		77EBB56A1CFF36A900261CCC /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EBB5691CFF36A900261CCC /* NSTimer+Block.m */; };
 		95308C3B1CBBB319001DD181 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3A1CBBB319001DD181 /* AppDelegate.swift */; };
 		95308C421CBBB337001DD181 /* FollowerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95308C3D1CBBB337001DD181 /* FollowerAdapter.swift */; };
@@ -175,6 +189,20 @@
 		77B783851CE0E1E7004DE856 /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
 		77B783861CE0E1E7004DE856 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		77B783871CE0E1E7004DE856 /* TextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextView.xib; sourceTree = "<group>"; };
+		77DC68CE1D0701B4002751BF /* Nootype - Radikal Black Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Black Italic.otf"; sourceTree = "<group>"; };
+		77DC68CF1D0701B4002751BF /* Nootype - Radikal Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Black.otf"; sourceTree = "<group>"; };
+		77DC68D01D0701B4002751BF /* Nootype - Radikal Bold Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Bold Italic.otf"; sourceTree = "<group>"; };
+		77DC68D11D0701B4002751BF /* Nootype - Radikal Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Bold.otf"; sourceTree = "<group>"; };
+		77DC68D21D0701B4002751BF /* Nootype - Radikal Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Italic.otf"; sourceTree = "<group>"; };
+		77DC68D31D0701B4002751BF /* Nootype - Radikal Light Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Light Italic.otf"; sourceTree = "<group>"; };
+		77DC68D41D0701B4002751BF /* Nootype - Radikal Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Light.otf"; sourceTree = "<group>"; };
+		77DC68D51D0701B4002751BF /* Nootype - Radikal Medium Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Medium Italic.otf"; sourceTree = "<group>"; };
+		77DC68D61D0701B4002751BF /* Nootype - Radikal Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Medium.otf"; sourceTree = "<group>"; };
+		77DC68D71D0701B4002751BF /* Nootype - Radikal Thin Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Thin Italic.otf"; sourceTree = "<group>"; };
+		77DC68D81D0701B4002751BF /* Nootype - Radikal Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal Thin.otf"; sourceTree = "<group>"; };
+		77DC68D91D0701B4002751BF /* Nootype - Radikal UltraThin Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal UltraThin Italic.otf"; sourceTree = "<group>"; };
+		77DC68DA1D0701B4002751BF /* Nootype - Radikal UltraThin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal UltraThin.otf"; sourceTree = "<group>"; };
+		77DC68DB1D0701B4002751BF /* Nootype - Radikal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nootype - Radikal.otf"; sourceTree = "<group>"; };
 		77EBB5681CFF36A900261CCC /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
 		77EBB5691CFF36A900261CCC /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		95308C3A1CBBB319001DD181 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -423,6 +451,44 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		77DC68CC1D0701B4002751BF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				77DC68CD1D0701B4002751BF /* Radical */,
+			);
+			name = Fonts;
+			path = "P-effect/Misc/Fonts";
+			sourceTree = SOURCE_ROOT;
+		};
+		77DC68CD1D0701B4002751BF /* Radical */ = {
+			isa = PBXGroup;
+			children = (
+				77DC68CE1D0701B4002751BF /* Nootype - Radikal Black Italic.otf */,
+				77DC68CF1D0701B4002751BF /* Nootype - Radikal Black.otf */,
+				77DC68D01D0701B4002751BF /* Nootype - Radikal Bold Italic.otf */,
+				77DC68D11D0701B4002751BF /* Nootype - Radikal Bold.otf */,
+				77DC68D21D0701B4002751BF /* Nootype - Radikal Italic.otf */,
+				77DC68D31D0701B4002751BF /* Nootype - Radikal Light Italic.otf */,
+				77DC68D41D0701B4002751BF /* Nootype - Radikal Light.otf */,
+				77DC68D51D0701B4002751BF /* Nootype - Radikal Medium Italic.otf */,
+				77DC68D61D0701B4002751BF /* Nootype - Radikal Medium.otf */,
+				77DC68D71D0701B4002751BF /* Nootype - Radikal Thin Italic.otf */,
+				77DC68D81D0701B4002751BF /* Nootype - Radikal Thin.otf */,
+				77DC68D91D0701B4002751BF /* Nootype - Radikal UltraThin Italic.otf */,
+				77DC68DA1D0701B4002751BF /* Nootype - Radikal UltraThin.otf */,
+				77DC68DB1D0701B4002751BF /* Nootype - Radikal.otf */,
+				77DC68DC1D0701B4002751BF /* Radical */,
+			);
+			path = Radical;
+			sourceTree = "<group>";
+		};
+		77DC68DC1D0701B4002751BF /* Radical */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Radical;
+			sourceTree = "<group>";
+		};
 		77EBB5671CFF36A900261CCC /* NSTimer+Block */ = {
 			isa = PBXGroup;
 			children = (
@@ -577,6 +643,7 @@
 		FDAF46AA1C49369E008060CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77DC68CC1D0701B4002751BF /* Fonts */,
 				FDAF46AE1C4936CA008060CD /* Images */,
 				FD6C17BC1C49506100A01715 /* Constants.swift */,
 				95308CD11CBBB522001DD181 /* Info.plist */,
@@ -662,19 +729,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				77B7839E1CE0E1E7004DE856 /* FollowerViewCell.xib in Resources */,
+				77DC68E71D0701B4002751BF /* Nootype - Radikal Thin.otf in Resources */,
 				77B783AD1CE0E1E7004DE856 /* Profile.storyboard in Resources */,
+				77DC68E41D0701B4002751BF /* Nootype - Radikal Medium Italic.otf in Resources */,
+				77DC68E21D0701B4002751BF /* Nootype - Radikal Light Italic.otf in Resources */,
+				77DC68E61D0701B4002751BF /* Nootype - Radikal Thin Italic.otf in Resources */,
+				77DC68DE1D0701B4002751BF /* Nootype - Radikal Black.otf in Resources */,
 				77B7838D1CE0E1E7004DE856 /* Authorization.storyboard in Resources */,
 				77B783B01CE0E1E7004DE856 /* Settings.storyboard in Resources */,
+				77DC68E31D0701B4002751BF /* Nootype - Radikal Light.otf in Resources */,
 				77B783B41CE0E1E7004DE856 /* SwitchView.xib in Resources */,
+				77DC68EA1D0701B4002751BF /* Nootype - Radikal.otf in Resources */,
+				77DC68DD1D0701B4002751BF /* Nootype - Radikal Black Italic.otf in Resources */,
 				77B783A21CE0E1E7004DE856 /* PhotoEditor.storyboard in Resources */,
 				77B783A01CE0E1E7004DE856 /* PostViewCell.xib in Resources */,
 				779884C01CCE34B20027E706 /* Localizable.strings in Resources */,
+				77DC68E91D0701B4002751BF /* Nootype - Radikal UltraThin.otf in Resources */,
+				77DC68E81D0701B4002751BF /* Nootype - Radikal UltraThin Italic.otf in Resources */,
+				77DC68E11D0701B4002751BF /* Nootype - Radikal Italic.otf in Resources */,
+				77DC68DF1D0701B4002751BF /* Nootype - Radikal Bold Italic.otf in Resources */,
 				77B783951CE0E1E7004DE856 /* FeedToolBar.xib in Resources */,
 				77B7839A1CE0E1E7004DE856 /* LaunchScreen.storyboard in Resources */,
 				77B783A81CE0E1E7004DE856 /* StickersGroupHeaderView.xib in Resources */,
 				77B783B61CE0E1E7004DE856 /* TextView.xib in Resources */,
 				77B783921CE0E1E7004DE856 /* Feed.storyboard in Resources */,
 				49F415771C4A842F00143E78 /* Assets.xcassets in Resources */,
+				77DC68E51D0701B4002751BF /* Nootype - Radikal Medium.otf in Resources */,
+				77DC68E01D0701B4002751BF /* Nootype - Radikal Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

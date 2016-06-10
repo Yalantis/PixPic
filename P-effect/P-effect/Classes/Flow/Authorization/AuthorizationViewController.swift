@@ -12,7 +12,7 @@ import ParseFacebookUtilsV4
 
 typealias AuthorizationRouterInterface = protocol<FeedPresenter, AlertManagerDelegate>
 
-final class AuthorizationViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext {
+final class AuthorizationViewController: UIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Authorization
     
@@ -69,6 +69,16 @@ final class AuthorizationViewController: UIViewController, StoryboardInitable, N
     @IBAction private func logInWithFBButtonTapped() {
         view.makeToastActivity(CSToastPositionCenter)
         signInWithFacebook()
+    }
+    
+}
+
+extension AuthorizationViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        var appearance = Appearance()
+        appearance.title = Constants.Profile.NavigationTitle
+        return appearance
     }
     
 }

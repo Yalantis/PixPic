@@ -2,22 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "bG.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "bG@2x.png"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "bG@3x.png"
+      "filename" : "bg.pdf"
     }
   ],
   "info" : {
-    "author" : "zeplin",
-    "version" : "1"
+    "version" : 1,
+    "author" : "xcode"
   }
 }

@@ -20,7 +20,7 @@ struct Constants {
     }
     
     struct BaseDimensions {
-        static let ToolBarHeight: CGFloat = 50
+        static let ToolBarHeight: CGFloat = 66
         static let NavBarWithStatusBarHeight: CGFloat = 64
     }
     
@@ -120,7 +120,7 @@ struct Constants {
     }
     
     struct Feed {
-        static let NavigationTitle = "P-effect"
+        static let NavigationTitle = "Pix Pic"
     }
     
     struct Settings {

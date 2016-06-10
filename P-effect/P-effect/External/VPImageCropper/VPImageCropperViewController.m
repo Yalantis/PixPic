@@ -91,7 +91,7 @@
     [self.view addSubview:self.overlayView];
     
     self.ratioView = [[UIView alloc] initWithFrame:self.cropFrame];
-    self.ratioView.layer.borderColor = [UIColor colorWithRed:0 green:97.0/255 blue:221.0/255 alpha:1].CGColor;
+    self.ratioView.layer.borderColor = [UIColor colorWithRed:137.0/255 green:81.0/255 blue:187.0/255 alpha:1].CGColor;
     self.ratioView.layer.borderWidth = 1.0f;
     self.ratioView.autoresizingMask = UIViewAutoresizingNone;
     [self.view addSubview:self.ratioView];

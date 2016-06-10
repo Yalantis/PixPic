@@ -15,7 +15,7 @@ extension UIImage {
     }
     
     static var placeholderImage: UIImage? {
-        return UIImage(named: "photo_placeholder")
+        return UIImage(named: "noPhotoPlaceholder")
     }
     
     static var avatarPlaceholderImage: UIImage? {
