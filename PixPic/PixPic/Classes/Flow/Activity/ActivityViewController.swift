@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityViewController: UIActivityViewController {
     
-    private let facebookMessage = NSLocalizedString("posted_FB!", comment: "")
+    private let facebookMessage = NSLocalizedString("posted_FB", comment: "")
     private let twitterMessage = NSLocalizedString("posted_TW", comment: "")
     private let cameraRollMessage = NSLocalizedString("saved_to_lib", comment: "")
     private let vkMessage = NSLocalizedString("posted_VK", comment: "")
