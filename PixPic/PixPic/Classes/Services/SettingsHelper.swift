@@ -1,6 +1,6 @@
 //
 //  SettingsHelper.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by AndrewPetrov on 3/2/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

@@ -120,7 +120,7 @@ struct Constants {
     }
     
     struct Feed {
-        static let NavigationTitle = "Pix Pic"
+        static let NavigationTitle = "PixPic"
     }
     
     struct Settings {

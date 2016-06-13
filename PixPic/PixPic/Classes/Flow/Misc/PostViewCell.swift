@@ -1,6 +1,6 @@
 //
 //  PostViewCell.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by anna on 1/18/16.
 //  Copyright © 2016 Yalantis. All rights reserved.
@@ -98,7 +98,7 @@ class PostViewCell: UITableViewCell, CellInterface {
             cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
                 return
         }
-        let message = "Created by " + username + " with Pix Pic app."
+        let message = "Created by " + username + " with PixPic app."
         let items = [cachedImage, message]
         
         didSelectSettings?(cell: self, items: items)

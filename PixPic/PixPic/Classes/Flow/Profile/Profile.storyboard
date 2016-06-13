@@ -24,7 +24,7 @@
         <!--Profile View Controller-->
         <scene sceneID="ExZ-76-J3v">
             <objects>
-                <tableViewController storyboardIdentifier="ProfileViewController" id="Lav-xa-cbI" customClass="ProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ProfileViewController" id="Lav-xa-cbI" customClass="ProfileViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="460" sectionHeaderHeight="28" sectionFooterHeight="28" id="lgz-Ib-TeA">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +59,7 @@
                                         <constraint firstItem="Lrk-fZ-kCM" firstAttribute="top" secondItem="NK7-AM-JLQ" secondAttribute="topMargin" priority="700" id="vrj-fv-tNC"/>
                                     </constraints>
                                 </stackView>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
                                     <rect key="frame" x="204" y="248" width="192.5" height="19"/>
                                     <subviews>
                                         <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
@@ -86,7 +86,7 @@
                                         <constraint firstAttribute="trailing" secondItem="bsh-Xb-JtV" secondAttribute="trailing" id="sDu-Eg-305"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
                                     <rect key="frame" x="194.5" y="215" width="212.5" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="343-7o-1DQ"/>
@@ -192,7 +192,7 @@
         <!--Followers List View Controller-->
         <scene sceneID="ubq-ru-dgC">
             <objects>
-                <viewController storyboardIdentifier="FollowersListViewController" id="l49-gn-m9K" customClass="FollowersListViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FollowersListViewController" id="l49-gn-m9K" customClass="FollowersListViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fX5-2a-pKm"/>
                         <viewControllerLayoutGuide type="bottom" id="EC8-Da-UjJ"/>
@@ -225,7 +225,7 @@
         <!--Edit Profile View Controller-->
         <scene sceneID="W6c-uW-Y2B">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="bt5-ep-FuB" customClass="EditProfileViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="bt5-ep-FuB" customClass="EditProfileViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vg2-h3-1J3"/>
                         <viewControllerLayoutGuide type="bottom" id="VE8-yJ-0bX"/>
@@ -284,26 +284,26 @@
                                             <outlet property="delegate" destination="bt5-ep-FuB" id="bNS-Cn-ubX"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="evV-Jz-9Yk">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="evV-Jz-9Yk">
                                         <rect key="frame" x="32" y="462" width="311" height="36"/>
                                         <string key="text">Remember! 
-Pix Pic makes your photos more creative.</string>
+PixPic makes your photos more creative.</string>
                                         <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="emoji3" translatesAutoresizingMaskIntoConstraints="NO" id="K8E-hi-aIN">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="emoji3" translatesAutoresizingMaskIntoConstraints="NO" id="K8E-hi-aIN">
                                         <rect key="frame" x="142" y="344" width="90" height="85"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-vx-KfD">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-vx-KfD">
                                         <rect key="frame" x="0.0" y="498" width="375" height="98"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
                                         <rect key="frame" x="0.0" y="429" width="375" height="33"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4X-79-nC9">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h4X-79-nC9">
                                         <rect key="frame" x="0.0" y="245" width="375" height="99"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>

@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Pix Pic-->
+        <!--PixPic-->
         <scene sceneID="See-yb-Ljy">
             <objects>
-                <viewController storyboardIdentifier="FeedViewController" id="fm0-UY-D5k" customClass="FeedViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="fm0-UY-D5k" customClass="FeedViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eiC-e1-lIt"/>
                         <viewControllerLayoutGuide type="bottom" id="vf9-Xn-rsh"/>
@@ -33,7 +33,7 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="_clipsToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <navigationItem key="navigationItem" title="Pix Pic" id="P4x-GP-BLW">
+                    <navigationItem key="navigationItem" title="PixPic" id="P4x-GP-BLW">
                         <barButtonItem key="leftBarButtonItem" image="icSettings" id="JMc-Wg-qsG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

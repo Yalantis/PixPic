@@ -1,12 +1,12 @@
 /* 
   Localizable.strings
-  Pix Pic
+  PixPic
 
   Created by AndrewPetrov on 4/25/16.
   Copyright © 2016 Yalantis. All rights reserved.
 */
 
-"photo_deleted" = "This photo will be deleted from Pix Pic";
+"photo_deleted" = "This photo will be deleted from PixPic";
 "need_registration" = "This function is available only to registered users";
 "complaint_about" ="Complaint about";
 "cancel" = "Cancel";

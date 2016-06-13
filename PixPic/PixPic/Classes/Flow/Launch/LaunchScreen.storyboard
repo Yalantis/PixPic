@@ -14,7 +14,7 @@
         <!--Launch View Controller-->
         <scene sceneID="d0s-fH-AlX">
             <objects>
-                <viewController storyboardIdentifier="LaunchViewController" id="mkH-pW-enh" customClass="LaunchViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LaunchViewController" id="mkH-pW-enh" customClass="LaunchViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3rQ-o8-51k"/>
                         <viewControllerLayoutGuide type="bottom" id="6Gp-J1-raO"/>
@@ -32,8 +32,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTF-RO-sb4">
                                 <rect key="frame" x="20" y="20" width="560" height="206.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pix Pic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu9-dG-C1t">
-                                        <rect key="frame" x="208" y="109.5" width="143.5" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PixPic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu9-dG-C1t">
+                                        <rect key="frame" x="214" y="110" width="132" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="WOQ-O4-byI"/>
                                         </constraints>

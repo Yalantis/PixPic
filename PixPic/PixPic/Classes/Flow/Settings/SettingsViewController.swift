@@ -1,6 +1,6 @@
 //
 //  SettingsViewController.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by AndrewPetrov on 3/1/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  AttributesCache.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Jack Lapin on 07.03.16.
 //  Copyright © 2016 Yalantis. All rights reserved.

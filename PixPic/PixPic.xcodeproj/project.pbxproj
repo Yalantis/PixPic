@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		562FCF71E71F00B5038BF992 /* Pods_P_effect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */; };
 		7774D8431D0EC4F300E5DCE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D83F1D0EC4F300E5DCE0 /* Constants.swift */; };
 		7774D8441D0EC4F300E5DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */; };
 		7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8421D0EC4F300E5DCE0 /* Info.plist */; };
@@ -123,7 +122,6 @@
 		7774D93D1D0EC50700E5DCE0 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8CF1D0EC50700E5DCE0 /* StoryboardInitable.swift */; };
 		7774D93F1D0EC51400E5DCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D93E1D0EC51400E5DCE0 /* AppDelegate.swift */; };
 		779884C01CCE34B20027E706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 779884BF1CCE34B20027E706 /* Localizable.strings */; };
-		9A31E4E0C332DB84D686874C /* Pods_Pix_Pic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD707DBF9DE66669E285D75 /* Pods_Pix_Pic.framework */; };
 		CD9A7A6543D20501F89F37B7 /* Pods_PixPic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B55465A103903CD3D0318DC /* Pods_PixPic.framework */; };
 		FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */; };
 		FD0658FE1C7125A100743AF1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FD1C7125A100743AF1 /* Photos.framework */; };
@@ -134,8 +132,6 @@
 /* Begin PBXFileReference section */
 		2B55465A103903CD3D0318DC /* Pods_PixPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PixPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCE0C40092F9699A50D4758 /* Pods-PixPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PixPic/Pods-PixPic.debug.xcconfig"; sourceTree = "<group>"; };
-		4BD707DBF9DE66669E285D75 /* Pods_Pix_Pic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pix_Pic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_P_effect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7774D83F1D0EC4F300E5DCE0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7774D8421D0EC4F300E5DCE0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -252,14 +248,14 @@
 		7774D8CE1D0EC50700E5DCE0 /* CellInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInterface.swift; sourceTree = "<group>"; };
 		7774D8CF1D0EC50700E5DCE0 /* StoryboardInitable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInitable.swift; sourceTree = "<group>"; };
 		7774D93E1D0EC51400E5DCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PixPic/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
-		7774D9401D0EC53B00E5DCE0 /* PixPic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "PixPic-Bridging-Header.h"; path = "PixPic/PixPic-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		778AE8891D0ECAA500802366 /* PixPic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PixPic-Bridging-Header.h"; sourceTree = "<group>"; };
 		779884BF1CCE34B20027E706 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		ABE068F05E15B0704DE3E101 /* Pods-PixPic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixPic.release.xcconfig"; path = "Pods/Target Support Files/Pods-PixPic/Pods-PixPic.release.xcconfig"; sourceTree = "<group>"; };
 		FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		FD0658FD1C7125A100743AF1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		FD27A2681C6249610058203F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FD27A26A1C62497F0058203F /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
-		FDAF466E1C47E8AA008060CD /* Pix Pic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pix Pic.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDAF466E1C47E8AA008060CD /* PixPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,8 +267,6 @@
 				FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */,
 				FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */,
 				FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */,
-				562FCF71E71F00B5038BF992 /* Pods_P_effect.framework in Frameworks */,
-				9A31E4E0C332DB84D686874C /* Pods_Pix_Pic.framework in Frameworks */,
 				CD9A7A6543D20501F89F37B7 /* Pods_PixPic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,8 +290,6 @@
 				FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */,
 				FD27A26A1C62497F0058203F /* AVKit.framework */,
 				FD27A2681C6249610058203F /* AVFoundation.framework */,
-				68A11DBD40035C777E4DDC33 /* Pods_P_effect.framework */,
-				4BD707DBF9DE66669E285D75 /* Pods_Pix_Pic.framework */,
 				2B55465A103903CD3D0318DC /* Pods_PixPic.framework */,
 			);
 			name = Frameworks;
@@ -645,6 +637,7 @@
 		FDAF46651C47E8AA008060CD = {
 			isa = PBXGroup;
 			children = (
+				778AE8891D0ECAA500802366 /* PixPic-Bridging-Header.h */,
 				779884BF1CCE34B20027E706 /* Localizable.strings */,
 				FDAF46701C47E8AA008060CD /* PixPic */,
 				FDAF466F1C47E8AA008060CD /* Products */,
@@ -656,7 +649,7 @@
 		FDAF466F1C47E8AA008060CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FDAF466E1C47E8AA008060CD /* Pix Pic.app */,
+				FDAF466E1C47E8AA008060CD /* PixPic.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -664,7 +657,6 @@
 		FDAF46701C47E8AA008060CD /* PixPic */ = {
 			isa = PBXGroup;
 			children = (
-				7774D9401D0EC53B00E5DCE0 /* PixPic-Bridging-Header.h */,
 				7774D8AE1D0EC50700E5DCE0 /* Misc */,
 				7774D8A81D0EC50700E5DCE0 /* External */,
 				7774D8461D0EC50700E5DCE0 /* Classes */,
@@ -698,7 +690,7 @@
 			);
 			name = PixPic;
 			productName = "P-effect";
-			productReference = FDAF466E1C47E8AA008060CD /* Pix Pic.app */;
+			productReference = FDAF466E1C47E8AA008060CD /* PixPic.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -713,7 +705,6 @@
 				TargetAttributes = {
 					FDAF466D1C47E8AA008060CD = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = FB7DMU7KQQ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -865,7 +856,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P-effect/Pods-P-effect-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PixPic/Pods-PixPic-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1064,7 +1055,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1078,8 +1069,8 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
-				PRODUCT_NAME = "Pix Pic";
-				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
+				PRODUCT_NAME = PixPic;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1094,7 +1085,7 @@
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1108,8 +1099,8 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
-				PRODUCT_NAME = "Pix Pic";
-				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
+				PRODUCT_NAME = PixPic;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;

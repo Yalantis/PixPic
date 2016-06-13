@@ -1,6 +1,6 @@
 //
 //  PhotoEditorViewController.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Illya on 1/25/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

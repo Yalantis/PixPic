@@ -1,6 +1,6 @@
 //
 //  EffectEditorView.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by anna on 1/27/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

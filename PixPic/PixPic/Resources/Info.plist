@@ -47,7 +47,7 @@
 	<key>FacebookAppID</key>
 	<string>1698949640383957</string>
 	<key>FacebookDisplayName</key>
-	<string>Pix Pic</string>
+	<string>PixPic</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

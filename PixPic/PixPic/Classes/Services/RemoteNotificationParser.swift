@@ -1,6 +1,6 @@
 //
 //  RemoteNotificationHelper.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Jack Lapin on 14.03.16.
 //  Copyright © 2016 Yalantis. All rights reserved.

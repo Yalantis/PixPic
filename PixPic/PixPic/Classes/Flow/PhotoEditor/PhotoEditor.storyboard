@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Ku-Rq-LyC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0Ku-Rq-LyC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -13,7 +13,7 @@
         <!--Photo Editor View Controller-->
         <scene sceneID="ddc-j7-oyG">
             <objects>
-                <viewController storyboardIdentifier="PhotoEditorViewController" id="0Ku-Rq-LyC" customClass="PhotoEditorViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoEditorViewController" id="0Ku-Rq-LyC" customClass="PhotoEditorViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="k85-Jg-USM"/>
                         <viewControllerLayoutGuide type="bottom" id="Ig8-qO-GqX"/>
@@ -77,7 +77,7 @@
         <!--Stickers Picker View Controller-->
         <scene sceneID="akr-CG-0B1">
             <objects>
-                <collectionViewController storyboardIdentifier="EffectsPickerViewController" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="StickersPickerViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="EffectsPickerViewController" autoresizesArchivedViewToFullSize="NO" id="yyD-Hu-4ME" customClass="StickersPickerViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="bottom" semanticContentAttribute="forceLeftToRight" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="Vwq-mq-bPe">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,7 +85,7 @@
                         <gestureRecognizers/>
                         <collectionViewLayout key="collectionViewLayout" id="0uH-cm-fCd"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="StickerViewCell" id="6Yd-Sn-MA1" customClass="StickerViewCell" customModule="P_effect" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" reuseIdentifier="StickerViewCell" id="6Yd-Sn-MA1" customClass="StickerViewCell" customModule="PixPic" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -151,7 +151,7 @@
         <!--Image View Controller-->
         <scene sceneID="Yd8-ec-jAf">
             <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="wxA-8C-VyA" customClass="ImageViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" id="wxA-8C-VyA" customClass="ImageViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YEr-66-wtS"/>
                         <viewControllerLayoutGuide type="bottom" id="LDz-xm-pR0"/>

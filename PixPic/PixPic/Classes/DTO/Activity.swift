@@ -1,10 +1,11 @@
 //
 //  Activity.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Jack Lapin on 04.03.16.
 //  Copyright © 2016 Yalantis. All rights reserved.
 //
+
 
 enum ActivityType: String {
     case Like = "like"

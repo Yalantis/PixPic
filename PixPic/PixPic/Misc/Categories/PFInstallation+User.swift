@@ -1,6 +1,6 @@
 //
 //  PFInstallation+User.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Jack Lapin on 28.01.16.
 //  Copyright © 2016 Yalantis. All rights reserved.

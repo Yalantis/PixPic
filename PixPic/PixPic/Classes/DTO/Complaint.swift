@@ -1,6 +1,6 @@
 //
 //  Complaint.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Illya on 3/1/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

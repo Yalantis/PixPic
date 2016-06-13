@@ -1,6 +1,6 @@
 //
 //  SettingsMenu.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by anna on 3/24/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

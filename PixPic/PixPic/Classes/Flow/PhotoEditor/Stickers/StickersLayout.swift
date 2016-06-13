@@ -1,6 +1,6 @@
 //
 //  EffectsLayout.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by AndrewPetrov on 2/10/16.
 //  Copyright © 2016 Yalantis. All rights reserved.

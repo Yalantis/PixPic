@@ -1,6 +1,6 @@
 //
 //  UIImage+BaseImage.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Jack Lapin on 02.02.16.
 //  Copyright © 2016 Yalantis. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  ToastActivityHelper.swift
-//  Pix Pic
+//  PixPic
 //
 //  Created by Illya on 2/22/16.
 //  Copyright © 2016 Yalantis. All rights reserved.
