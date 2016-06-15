@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cky-m3-Ruy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cky-m3-Ruy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -7,7 +7,7 @@
         <!--Settings View Controller-->
         <scene sceneID="zRY-Do-2CF">
             <objects>
-                <viewController storyboardIdentifier="SettingsViewController" id="Cky-m3-Ruy" customClass="SettingsViewController" customModule="P_effect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="Cky-m3-Ruy" customClass="SettingsViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZnM-rl-u7N"/>
                         <viewControllerLayoutGuide type="bottom" id="pSB-5w-ASy"/>
@@ -28,6 +28,7 @@
                             <constraint firstAttribute="trailing" secondItem="Fh6-NS-pkb" secondAttribute="trailing" id="yWB-af-vde"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="settingsStack" destination="Fh6-NS-pkb" id="lrB-9p-iWo"/>
                     </connections>

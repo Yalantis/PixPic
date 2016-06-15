@@ -65,6 +65,7 @@
                             <constraint firstItem="BiL-1J-hH1" firstAttribute="leading" secondItem="8Oc-Oq-Q7s" secondAttribute="leading" id="yNR-bU-BVr"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imageContainer" destination="iAG-LE-Z91" id="lWr-hG-5BJ"/>
                         <outlet property="stickerPickerContainer" destination="BiL-1J-hH1" id="iGf-eH-mn2"/>
