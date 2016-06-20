@@ -25,4 +25,10 @@ class StickerViewCell: UICollectionViewCell, CellInterface {
             }
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        stickerImage.image = UIImage.stickerPlaceholderImage
+    }
 }

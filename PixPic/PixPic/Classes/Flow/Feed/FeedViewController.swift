@@ -257,7 +257,7 @@
  extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight
+        return tableView.frame.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

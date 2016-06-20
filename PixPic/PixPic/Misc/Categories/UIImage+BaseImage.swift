@@ -18,6 +18,10 @@ extension UIImage {
         return UIImage(named: "noPhotoPlaceholder")
     }
     
+    static var stickerPlaceholderImage: UIImage? {
+        return UIImage(named: "stickerPlaceholderImage")
+    }
+    
     static var avatarPlaceholderImage: UIImage? {
         return UIImage(named: "profile_placeholder")
     }
