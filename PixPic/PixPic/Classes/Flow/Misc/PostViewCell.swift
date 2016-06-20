@@ -8,7 +8,6 @@
 
 import UIKit
 import Kingfisher
-import MHPrettyDate
 
 private let headerViewHeight: CGFloat = 40
 private let footerViewHeight: CGFloat = 40
@@ -61,10 +60,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
         self.post = post
         profileLabel.text = post.user?.username
-        dateLabel.text = MHPrettyDate.prettyDateFromDate(
-            post.createdAt,
-            withFormat: MHPrettyDateFormatNoTime
-        )
+        dateLabel.text = post.createdAt?.timeAgoSinceNow()
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         settingsButton.enabled = false
