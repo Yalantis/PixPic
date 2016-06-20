@@ -30,7 +30,7 @@ private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let followButtonMinHeight: CGFloat = 0.1
 private let followButtonMaxHeight: CGFloat = 55
 
-final class ProfileViewController: UITableViewController, StoryboardInitable {
+final class ProfileViewController: BaseUITableViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: ProfileRouterInterface!

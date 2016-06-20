@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77665C6E1D1832900008A7CE /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6D1D1832900008A7CE /* BaseUIViewController.swift */; };
+		77665C701D1834440008A7CE /* BaseUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */; };
 		7774D8431D0EC4F300E5DCE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D83F1D0EC4F300E5DCE0 /* Constants.swift */; };
 		7774D8441D0EC4F300E5DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */; };
 		7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8421D0EC4F300E5DCE0 /* Info.plist */; };
@@ -131,6 +133,8 @@
 /* Begin PBXFileReference section */
 		2B55465A103903CD3D0318DC /* Pods_PixPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PixPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCE0C40092F9699A50D4758 /* Pods-PixPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PixPic/Pods-PixPic.debug.xcconfig"; sourceTree = "<group>"; };
+		77665C6D1D1832900008A7CE /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUIViewController.swift; sourceTree = "<group>"; };
+		77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUITableViewController.swift; sourceTree = "<group>"; };
 		7774D83F1D0EC4F300E5DCE0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7774D8421D0EC4F300E5DCE0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -572,6 +576,8 @@
 				7774D8B91D0EC50700E5DCE0 /* UIColor+BaseColor.swift */,
 				7774D8BA1D0EC50700E5DCE0 /* UIImage+BaseImage.swift */,
 				7774D8BB1D0EC50700E5DCE0 /* UIView+Effects.swift */,
+				77665C6D1D1832900008A7CE /* BaseUIViewController.swift */,
+				77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				7774D9161D0EC50700E5DCE0 /* SettingsHelper.swift in Sources */,
 				7774D8DA1D0EC50700E5DCE0 /* AppearanceNavigationController.swift in Sources */,
 				7774D8F41D0EC50700E5DCE0 /* StickerEditorView.swift in Sources */,
+				77665C701D1834440008A7CE /* BaseUITableViewController.swift in Sources */,
 				7774D92D1D0EC50700E5DCE0 /* UIView+Effects.swift in Sources */,
 				7774D8E31D0EC50700E5DCE0 /* FeedToolBar.swift in Sources */,
 				7774D8E81D0EC50700E5DCE0 /* LaunchRouter.swift in Sources */,
@@ -943,6 +950,7 @@
 				7774D91E1D0EC50700E5DCE0 /* PhotoEditorModel.swift in Sources */,
 				7774D91B1D0EC50700E5DCE0 /* ValidationService.swift in Sources */,
 				7774D9241D0EC50700E5DCE0 /* NSError+ErrorType.swift in Sources */,
+				77665C6E1D1832900008A7CE /* BaseUIViewController.swift in Sources */,
 				7774D9021D0EC50700E5DCE0 /* SwitchView.swift in Sources */,
 				7774D9191D0EC50700E5DCE0 /* UIView+showToast.swift in Sources */,
 				7774D93F1D0EC51400E5DCE0 /* AppDelegate.swift in Sources */,

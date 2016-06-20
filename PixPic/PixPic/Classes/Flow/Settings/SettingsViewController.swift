@@ -24,7 +24,7 @@ enum SettingsState {
     case Common, LoggedIn, LoggedOut
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable {
+final class SettingsViewController: BaseUIViewController, StoryboardInitable {
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: SettingsRouterInterface!

@@ -15,9 +15,6 @@ class AppearanceApplyingStrategy {
             navigationBar.barTintColor = appearance.navigationBar.barTintColor
             navigationBar.translucent = appearance.navigationBar.translucent
             navigationBar.titleTextAttributes = appearance.navigationBar.titleTextAttributes
-            navigationBar.backIndicatorImage = appearance.navigationBar.backIndicatorImage
-            navigationBar.backIndicatorTransitionMaskImage =
-                appearance.navigationBar.backIndicatorTransitionMaskImage
             navigationBar.tintColor = appearance.navigationBar.tintColor
             navigationBar.topItem!.title = appearance.navigationBar.topItemTitle
             

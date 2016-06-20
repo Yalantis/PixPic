@@ -18,8 +18,6 @@ struct Appearance: Equatable {
             NSForegroundColorAttributeName: UIColor.appWhiteColor,
             NSFontAttributeName: UIFont(name: "Radikal", size: 18)!
         ]
-        var backIndicatorImage = UIImage.appBackButton
-        var backIndicatorTransitionMaskImage = UIImage.appBackButton
         var tintColor = UIColor.appWhiteColor
         var topItemTitle = ""
 
@@ -35,8 +33,6 @@ func ==(lhs: Appearance.Bar, rhs: Appearance.Bar) -> Bool {
     return lhs.barTintColor == rhs.barTintColor &&
         lhs.translucent == rhs.translucent &&
         lhs.titleTextAttributes == rhs.titleTextAttributes &&
-        lhs.backIndicatorImage == rhs.backIndicatorImage &&
-        lhs.backIndicatorTransitionMaskImage == rhs.backIndicatorTransitionMaskImage &&
         lhs.tintColor == rhs.tintColor &&
         lhs.topItemTitle == rhs.topItemTitle
 }
