@@ -18,6 +18,9 @@ class StickerEditorView: UIView {
     private var deleteControl: StickerEditorViewControl!
     private var borderView: BorderView!
     
+    private var oldBounds: CGRect!
+    private var oldTransform: CGAffineTransform!
+    
     init(image: UIImage) {
         let stickerImageView = UIImageView(image: image)
         super.init(frame: stickerImageView.frame)
@@ -56,6 +59,14 @@ class StickerEditorView: UIView {
         resizingControl = StickerEditorViewControl(image: UIImage(named: "resize_control"), gestureRecognizer: panResizeGesture)
         addSubview(resizingControl)
         
+        let pinchResizeGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch(_:)))
+        pinchResizeGesture.delegate = self
+        addGestureRecognizer(pinchResizeGesture)
+        
+        let rotateResizeGesture = UIRotationGestureRecognizer(target: self, action: #selector(rotate(_:)))
+        rotateResizeGesture.delegate = self
+        addGestureRecognizer(rotateResizeGesture)
+        
         updateControlsPosition()
         
         deltaAngle = atan2(frame.origin.y + frame.height - center.y, frame.origin.x + frame.width - center.x)
@@ -73,7 +84,7 @@ class StickerEditorView: UIView {
             subview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         }
     }
-    
+    // MARK: Gestures with controls
     @objc private func singleTap(recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
         if let close = close {
@@ -112,6 +123,16 @@ class StickerEditorView: UIView {
         self.previousPoint = recognizer.locationInView(self)
     }
     
+    private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
+        let angle = atan2(recognizer.locationInView(superview).y - center.y,
+                          recognizer.locationInView(superview).x - center.x)
+        
+        if let deltaAngle = deltaAngle {
+            let angleDiff = deltaAngle - angle
+            transform = CGAffineTransformMakeRotation(-angleDiff)
+        }
+    }
+    
     private func updateControlsPosition() {
         let offset = Constants.StickerEditor.UserResizableViewGlobalOffset
         borderView.frame = CGRectMake(-offset, -offset, bounds.size.width + offset * 2, bounds.size.height + offset * 2)
@@ -121,14 +142,39 @@ class StickerEditorView: UIView {
                                              borderView.frame.origin.y + borderView.frame.size.height)
     }
     
-    private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
-        let angle = atan2(recognizer.locationInView(superview).y - center.y,
-                          recognizer.locationInView(superview).x - center.x)
-        
-        if let deltaAngle = deltaAngle {
-            let angleDiff = deltaAngle - angle
-            transform = CGAffineTransformMakeRotation(-angleDiff)
+    // MARK: Gestures without controls
+    @objc private func pinch(recognizer: UIPinchGestureRecognizer) {
+        if recognizer.state == .Began {
+            oldBounds = bounds
+            enableTranslucency(true)
+            previousPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
+        } else if recognizer.state == .Changed {
+            bounds = CGRectMake(0, 0, oldBounds.width * recognizer.scale, oldBounds.height * recognizer.scale)
+        } else if recognizer.state == .Ended {
+            oldBounds = bounds
+            enableTranslucency(false)
+            previousPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
         }
+        updateControlsPosition()
+    }
+    
+    @objc private func rotate(recognizer: UIRotationGestureRecognizer) {
+        if recognizer.state == .Began {
+            oldTransform = transform
+            enableTranslucency(true)
+            previousPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
+        } else if recognizer.state == .Changed {
+            transform = CGAffineTransformRotate(oldTransform, recognizer.rotation)
+        } else if recognizer.state == .Ended {
+            oldTransform = transform
+            enableTranslucency(false)
+            previousPoint = recognizer.locationInView(self)
+            setNeedsDisplay()
+        }
+        updateControlsPosition()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -183,6 +229,18 @@ class StickerEditorView: UIView {
             return self;
         }
         return nil;
+    }
+    
+}
+
+extension StickerEditorView: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKindOfClass(UIPinchGestureRecognizer) && otherGestureRecognizer.isKindOfClass(UIRotationGestureRecognizer) {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
