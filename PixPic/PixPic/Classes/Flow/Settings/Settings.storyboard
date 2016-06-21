@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Cky-m3-Ruy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Settings View Controller-->
@@ -17,20 +18,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-NS-pkb">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="80"/>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stickerPlaceholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-5Y-JJt">
+                                <rect key="frame" x="75" y="110" width="450" height="450"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="gdd-5Y-JJt" secondAttribute="height" multiplier="1:1" id="fTC-fr-EP0"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PixPic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-dp-aSr">
+                                <rect key="frame" x="274.5" y="570" width="50.5" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4ec-4c-atA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="gdd-5Y-JJt" firstAttribute="width" relation="lessThanOrEqual" secondItem="9rU-R9-dP5" secondAttribute="width" id="7Kv-J8-3YY"/>
+                            <constraint firstItem="gdd-5Y-JJt" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="MpQ-JF-9ll"/>
                             <constraint firstItem="Fh6-NS-pkb" firstAttribute="top" secondItem="ZnM-rl-u7N" secondAttribute="bottom" id="OCe-3d-dcT"/>
-                            <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" id="Vlt-aC-fRv"/>
+                            <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" constant="500" id="Vlt-aC-fRv"/>
+                            <constraint firstItem="aPK-dp-aSr" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="at8-Fr-PgG"/>
+                            <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="aPK-dp-aSr" secondAttribute="bottom" constant="10" id="iOB-dJ-WAB"/>
+                            <constraint firstItem="gdd-5Y-JJt" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" constant="10" id="ryL-0m-Ayr"/>
                             <constraint firstItem="Fh6-NS-pkb" firstAttribute="leading" secondItem="9rU-R9-dP5" secondAttribute="leading" id="wJM-oc-2Y3"/>
+                            <constraint firstItem="aPK-dp-aSr" firstAttribute="top" secondItem="gdd-5Y-JJt" secondAttribute="bottom" constant="10" id="wxW-zi-OJo"/>
                             <constraint firstAttribute="trailing" secondItem="Fh6-NS-pkb" secondAttribute="trailing" id="yWB-af-vde"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="settingsStack" destination="Fh6-NS-pkb" id="lrB-9p-iWo"/>
+                        <outlet property="settingsStack" destination="Fh6-NS-pkb" id="2AD-Kn-OA7"/>
+                        <outlet property="versionLabel" destination="aPK-dp-aSr" id="k84-1V-e5S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDT-ot-0h4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -38,4 +61,7 @@
             <point key="canvasLocation" x="1278" y="1964"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="stickerPlaceholderImage" width="60" height="60"/>
+    </resources>
 </document>

@@ -71,6 +71,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
     private var settings = [SettingsState: [UIView]]()
     private weak var locator: ServiceLocator!
     
+    @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var settingsStack: UIStackView!
     
     // MARK: - Lifecycle
@@ -78,6 +79,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         super.viewDidLoad()
         
         setupAvailableSettings()
+        updateVersionLabel()
     }
     
     // MARK: - Setup methods
@@ -103,6 +105,12 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
                 settingsStack.addArrangedSubview(view)
             }
         }
+        
+    }
+    
+    private func updateVersionLabel() {
+        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]!
+        versionLabel.text = "PixPic v. \(version)"
     }
     
     private func logout() {
