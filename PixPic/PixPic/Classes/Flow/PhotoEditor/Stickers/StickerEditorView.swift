@@ -52,11 +52,11 @@ class StickerEditorView: UIView {
         addSubview(borderView)
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(singleTap(_:)))
-        deleteControl = StickerEditorViewControl(image: UIImage(named: "delete_control"), gestureRecognizer: singleTap)
+        deleteControl = StickerEditorViewControl(image: UIImage(named: "btnClose"), gestureRecognizer: singleTap)
         addSubview(deleteControl)
         
         let panResizeGesture = UIPanGestureRecognizer(target: self, action: #selector(resizeTranslate(_:)))
-        resizingControl = StickerEditorViewControl(image: UIImage(named: "resize_control"), gestureRecognizer: panResizeGesture)
+        resizingControl = StickerEditorViewControl(image: UIImage(named: "btnRotation"), gestureRecognizer: panResizeGesture)
         addSubview(resizingControl)
         
         let pinchResizeGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch(_:)))

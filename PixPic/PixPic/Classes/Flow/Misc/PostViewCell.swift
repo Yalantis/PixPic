@@ -9,8 +9,8 @@
 import UIKit
 import Kingfisher
 
-private let headerViewHeight: CGFloat = 40
-private let footerViewHeight: CGFloat = 40
+private let headerViewHeight: CGFloat = 62
+private let footerViewHeight: CGFloat = 47
 private let cellInset: CGFloat = 10
 
 private let actionByTapProfile = #selector(PostViewCell.didTapProfile)

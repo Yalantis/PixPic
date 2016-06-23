@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-NS-pkb">
-                                <rect key="frame" x="0.0" y="20" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="25" width="600" height="75"/>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stickerPlaceholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-5Y-JJt">
                                 <rect key="frame" x="75" y="110" width="450" height="450"/>
@@ -40,7 +40,7 @@
                         <constraints>
                             <constraint firstItem="gdd-5Y-JJt" firstAttribute="width" relation="lessThanOrEqual" secondItem="9rU-R9-dP5" secondAttribute="width" id="7Kv-J8-3YY"/>
                             <constraint firstItem="gdd-5Y-JJt" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="MpQ-JF-9ll"/>
-                            <constraint firstItem="Fh6-NS-pkb" firstAttribute="top" secondItem="ZnM-rl-u7N" secondAttribute="bottom" id="OCe-3d-dcT"/>
+                            <constraint firstItem="Fh6-NS-pkb" firstAttribute="top" secondItem="ZnM-rl-u7N" secondAttribute="bottom" constant="5" id="OCe-3d-dcT"/>
                             <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" constant="500" id="Vlt-aC-fRv"/>
                             <constraint firstItem="aPK-dp-aSr" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="at8-Fr-PgG"/>
                             <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="aPK-dp-aSr" secondAttribute="bottom" constant="10" id="iOB-dJ-WAB"/>

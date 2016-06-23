@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "icMore.png"
+      "filename" : "btnMakeAPhoto.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "icMore@2x.png"
+      "filename" : "btnMakeAPhoto@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "icMore@3x.png"
+      "filename" : "btnMakeAPhoto@3x.png"
     }
   ],
   "info" : {
