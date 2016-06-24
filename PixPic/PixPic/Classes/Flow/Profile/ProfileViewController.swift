@@ -28,7 +28,11 @@ private let registerActionTitle = NSLocalizedString("register", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 
 private let followButtonMinHeight: CGFloat = 0.1
-private let followButtonMaxHeight: CGFloat = 55
+private let followButtonMaxHeight: CGFloat = 30
+
+private let headerMaxHeight: CGFloat = 308
+private let followButtonVerticalInset: CGFloat = 15
+private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight - followButtonVerticalInset
 
 final class ProfileViewController: BaseUITableViewController, StoryboardInitable {
     
@@ -201,13 +205,9 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
         
         followButton.hidden = true
         followButtonHeight.constant = followButtonMinHeight
-        return
         
-        let expandedTableViewHeaderFrame = tableViewHeader.frame
-        let collapsedTableViewHeaderFrame = CGRect(x: expandedTableViewHeaderFrame.origin.x, y: expandedTableViewHeaderFrame.origin.y, width: expandedTableViewHeaderFrame.size.width, height: expandedTableViewHeaderFrame.size.height - followButtonMaxHeight)
-        tableViewHeader.frame = collapsedTableViewHeaderFrame
-        tableView.reloadData()
-        view.updateConstraints()
+        tableViewHeader.frame = CGRect(x: tableViewHeader.frame.origin.x, y: tableViewHeader.frame.origin.y, width: tableViewHeader.frame.size.width, height: headerMinHeight)
+        tableView.tableHeaderView = tableViewHeader
     }
     
     private func updateUser() {

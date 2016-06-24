@@ -185,7 +185,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="OAP-rW-k05" firstAttribute="leading" secondItem="pYa-2x-KWW" secondAttribute="leading" id="1HP-fD-peT"/>
                             <constraint firstItem="OAP-rW-k05" firstAttribute="top" secondItem="pYa-2x-KWW" secondAttribute="top" id="Mg6-nR-vsU"/>
