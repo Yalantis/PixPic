@@ -329,6 +329,9 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             someChangesMade = true
         }
     }
+    @IBAction func changeNickNameTextFieldWidth(sender: AnyObject) {
+         nickNameTextField.invalidateIntrinsicContentSize()
+    }
     
 }
 

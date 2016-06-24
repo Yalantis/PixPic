@@ -252,7 +252,7 @@
                                             <action selector="avatarTapAction:" destination="bt5-ep-FuB" eventType="touchUpInside" id="H2Q-1M-fCA"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
                                         <rect key="frame" x="157" y="215" width="60" height="19"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -268,6 +268,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="changeNickNameTextFieldWidth:" destination="bt5-ep-FuB" eventType="editingChanged" id="t0D-tz-rT0"/>
                                             <action selector="searchTextFieldValueChanged:" destination="bt5-ep-FuB" eventType="editingDidEnd" id="0t5-n3-f9j"/>
                                             <outlet property="delegate" destination="bt5-ep-FuB" id="bNS-Cn-ubX"/>
                                         </connections>
