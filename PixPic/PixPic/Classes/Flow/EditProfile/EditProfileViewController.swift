@@ -42,8 +42,10 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var nickNameTextField: UITextField!
+    
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var saveButton: UIButton!
    
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -110,7 +112,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             self?.handlePhotoSelected(selectedImage)
         }
         avatarImageView.layer.masksToBounds = true
-        navigationItem.rightBarButtonItem!.enabled = false
+        saveButton.enabled = false
         nickNameTextField.text = User.currentUser()?.username
         userName = User.currentUser()?.username
         originalUserName = userName
@@ -131,14 +133,6 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     }
     
     private func makeNavigation() {
-        let rightButton = UIBarButtonItem(
-            title: saveActionTitle,
-            style: .Plain,
-            target: self,
-            action: #selector(saveChangesAction)
-        )
-        navigationItem.rightBarButtonItem = rightButton
-        
         let leftButton = UIBarButtonItem(
             image: UIImage.appBackButton,
             style: .Plain,
@@ -179,8 +173,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         }
     }
     
-    @objc private func saveChangesAction() {
-        navigationItem.rightBarButtonItem!.enabled = false
+    @IBAction func saveChangesAction() {
+        saveButton.enabled = false
         if ReachabilityHelper.isReachable() {
             guard let userName = userName where originalUserName != userName else {
                 saveChanges()
@@ -195,25 +189,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         } else {
             AlertManager.sharedInstance.showSimpleAlert(saveChangesWithoutConnectionMessage)
         }
-    }
-    
-    private func logout() {
-        guard ReachabilityHelper.isReachable() else {
-            ExceptionHandler.handle(Exception.NoConnection)
-            
-            return
-        }
-        let authenticationService: AuthenticationService = locator.getService()
-        authenticationService.logOut()
-        authenticationService.anonymousLogIn(
-            completion: { object in
-                self.router.showFeed()
-            }, failure: { error in
-                if let error = error {
-                    ErrorHandler.handle(error)
-                }
-            }
-        )
+
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -295,42 +271,16 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
         photoProvider.presentPhotoOptionsDialog(in: self)
     }
     
-    @IBAction private func logoutAction() {
-        let alertController = UIAlertController(
-            title: nil,
-            message: logoutMessage,
-            preferredStyle: .ActionSheet
-        )
-        
-        let cancelAction = UIAlertAction(
-            title: cancelActionTitle,
-            style: .Cancel
-            ) { _ in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        alertController.addAction(cancelAction)
-        
-        let okAction = UIAlertAction(
-            title: logoutActionTitle,
-            style: .Default
-            ) { _ in
-                self.logout()
-        }
-        alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction private func searchTextFieldValueChanged(sender: UITextField) {
         let afterStr = sender.text
         if userName != afterStr {
             userName = afterStr
-            navigationItem.rightBarButtonItem!.enabled = true
+            saveButton.enabled = true
             someChangesMade = true
         }
     }
     @IBAction func changeNickNameTextFieldWidth(sender: AnyObject) {
-         nickNameTextField.invalidateIntrinsicContentSize()
+        nickNameTextField.invalidateIntrinsicContentSize()
     }
     
 }

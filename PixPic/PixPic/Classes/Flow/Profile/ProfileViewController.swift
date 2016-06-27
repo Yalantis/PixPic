@@ -27,10 +27,10 @@ private let suggestLoginMessage = NSLocalizedString("can't_follow_no_registratio
 private let registerActionTitle = NSLocalizedString("register", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 
-private let followButtonMinHeight: CGFloat = 0.1
+private let followButtonMinHeight: CGFloat = 0.01
 private let followButtonMaxHeight: CGFloat = 30
 
-private let headerMaxHeight: CGFloat = 308
+private let headerMaxHeight: CGFloat = 328
 private let followButtonVerticalInset: CGFloat = 15
 private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight - followButtonVerticalInset
 

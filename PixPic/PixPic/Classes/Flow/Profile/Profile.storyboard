@@ -30,13 +30,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <color key="sectionIndexBackgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="3W9-Wv-xaN">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="308"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NK7-AM-JLQ">
-                                    <rect key="frame" x="205" y="12" width="191" height="191"/>
+                                    <rect key="frame" x="205" y="30" width="191" height="191"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lrk-fZ-kCM">
                                             <rect key="frame" x="0.0" y="0.0" width="191" height="191"/>
@@ -60,7 +60,7 @@
                                     </constraints>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-UC-bFD">
-                                    <rect key="frame" x="221" y="240" width="158.5" height="14"/>
+                                    <rect key="frame" x="221" y="258" width="158.5" height="14"/>
                                     <subviews>
                                         <label opaque="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMO-2N-lNa">
                                             <rect key="frame" x="0.0" y="0.0" width="68.5" height="14"/>
@@ -87,7 +87,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name: Ivan Ivanovich" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASI-e7-emX">
-                                    <rect key="frame" x="205" y="215" width="191" height="19"/>
+                                    <rect key="frame" x="205" y="233" width="191" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="19" id="343-7o-1DQ"/>
                                     </constraints>
@@ -96,7 +96,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mhm-c2-hmO">
-                                    <rect key="frame" x="210" y="269" width="180" height="30"/>
+                                    <rect key="frame" x="210" y="287" width="180" height="30"/>
                                     <color key="backgroundColor" red="0.58039215686274503" green="0.21568627450980393" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="180" id="44h-Rh-7tQ"/>
@@ -120,7 +120,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="NK7-AM-JLQ" firstAttribute="top" secondItem="3W9-Wv-xaN" secondAttribute="top" constant="12" id="0S9-mo-TKl"/>
+                                <constraint firstItem="NK7-AM-JLQ" firstAttribute="top" secondItem="3W9-Wv-xaN" secondAttribute="top" constant="30" id="0S9-mo-TKl"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="ASI-e7-emX" secondAttribute="centerX" id="74s-cv-yzE"/>
                                 <constraint firstItem="Nye-UC-bFD" firstAttribute="centerX" secondItem="NK7-AM-JLQ" secondAttribute="centerX" id="RLh-S4-f7l"/>
                                 <constraint firstItem="NK7-AM-JLQ" firstAttribute="centerX" secondItem="3W9-Wv-xaN" secondAttribute="centerX" id="SM2-1i-jsq"/>
@@ -131,7 +131,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="RWA-d4-3KE">
-                            <rect key="frame" x="0.0" y="308" width="600" height="383"/>
+                            <rect key="frame" x="0.0" y="328" width="600" height="383"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
@@ -232,28 +232,31 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Radikal-Medium" family="Radikal" pointSize="18"/>
                                         <color key="tintColor" red="0.0" green="0.46274509800000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Log out">
+                                        <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.12549019610000001" green="0.12549019610000001" blue="0.12549019610000001" alpha="0.50344827586206897" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
-                                            <action selector="logoutAction" destination="bt5-ep-FuB" eventType="touchUpInside" id="X3E-7P-k9T"/>
+                                            <action selector="saveChangesAction" destination="bt5-ep-FuB" eventType="touchUpInside" id="HBz-gM-kZq"/>
                                         </connections>
                                     </button>
                                     <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DAu-4M-uxh">
-                                        <rect key="frame" x="92" y="12" width="191" height="191"/>
+                                        <rect key="frame" x="92" y="30" width="191" height="191"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="DAu-4M-uxh" secondAttribute="height" multiplier="1:1" id="QXa-GO-cdH"/>
                                             <constraint firstAttribute="width" constant="191" id="mdh-xk-oC0"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-pl-R4d" userLabel="Edit Image Button">
-                                        <rect key="frame" x="92" y="12" width="191" height="191"/>
+                                        <rect key="frame" x="92" y="30" width="191" height="191"/>
                                         <connections>
                                             <action selector="avatarTapAction:" destination="bt5-ep-FuB" eventType="touchUpInside" id="H2Q-1M-fCA"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
-                                        <rect key="frame" x="157" y="215" width="60" height="19"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
+                                        <rect key="frame" x="157" y="233" width="60" height="19"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="3bb-5Q-23X"/>
@@ -274,7 +277,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="evV-Jz-9Yk">
-                                        <rect key="frame" x="32" y="460.5" width="311" height="32"/>
+                                        <rect key="frame" x="32" y="466" width="311" height="32"/>
                                         <string key="text">Remember! 
 PixPic makes your photos more creative.</string>
                                         <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
@@ -282,25 +285,25 @@ PixPic makes your photos more creative.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="emoji3" translatesAutoresizingMaskIntoConstraints="NO" id="K8E-hi-aIN">
-                                        <rect key="frame" x="142" y="340.5" width="90" height="85"/>
+                                        <rect key="frame" x="142" y="349" width="90" height="85"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-vx-KfD">
-                                        <rect key="frame" x="0.0" y="492.5" width="375" height="103"/>
+                                        <rect key="frame" x="0.0" y="498" width="375" height="97.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
-                                        <rect key="frame" x="0.0" y="422" width="375" height="35"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
+                                        <rect key="frame" x="0.0" y="434" width="375" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
-                                        <rect key="frame" x="147.5" y="236" width="80" height="2"/>
+                                        <rect key="frame" x="147" y="254" width="80" height="2"/>
                                         <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="ObT-3a-ehb"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4X-79-nC9">
-                                        <rect key="frame" x="0.0" y="234" width="375" height="106.5"/>
+                                        <rect key="frame" x="0.0" y="252" width="375" height="97.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -338,15 +341,15 @@ PixPic makes your photos more creative.</string>
                                     <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="Flk-vx-KfD" secondAttribute="bottom" id="l7e-U9-8sK"/>
                                     <constraint firstItem="F8s-G4-bV3" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="nQf-pI-gHF"/>
                                     <constraint firstAttribute="trailing" secondItem="hqq-Fy-EDd" secondAttribute="trailing" id="pS8-cq-P19"/>
-                                    <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="lkT-uC-fK2" secondAttribute="top" constant="12" id="pol-gl-S6B"/>
+                                    <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="lkT-uC-fK2" secondAttribute="top" constant="30" id="pol-gl-S6B"/>
                                     <constraint firstItem="Flk-vx-KfD" firstAttribute="top" secondItem="evV-Jz-9Yk" secondAttribute="bottom" id="qxD-1v-aKW"/>
                                     <constraint firstAttribute="bottom" secondItem="F8s-G4-bV3" secondAttribute="bottom" id="xla-wv-nv8"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="N9y-Vc-W4l"/>
                                         <exclude reference="4uL-Is-eny"/>
                                         <exclude reference="QyI-wi-1Ep"/>
+                                        <exclude reference="N9y-Vc-W4l"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -365,6 +368,7 @@ PixPic makes your photos more creative.</string>
                         <outlet property="avatarImageView" destination="DAu-4M-uxh" id="pvV-zr-OKl"/>
                         <outlet property="bottomConstraint" destination="Yub-8R-Tbu" id="9KP-qH-fOE"/>
                         <outlet property="nickNameTextField" destination="iIb-XJ-1cU" id="I9m-6H-Trx"/>
+                        <outlet property="saveButton" destination="F8s-G4-bV3" id="YcT-MY-Dz4"/>
                         <outlet property="topConstraint" destination="cpE-wE-WgZ" id="3TD-Wh-7nA"/>
                     </connections>
                 </viewController>

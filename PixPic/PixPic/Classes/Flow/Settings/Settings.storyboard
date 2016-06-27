@@ -4,6 +4,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Nootype - Radikal Medium.otf">
+            <string>Radikal-Medium</string>
+            <string>Radikal-Medium</string>
+        </mutableArray>
+        <mutableArray key="Nootype - Radikal.otf">
+            <string>Radikal</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Settings View Controller-->
         <scene sceneID="zRY-Do-2CF">
@@ -20,31 +29,66 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fh6-NS-pkb">
                                 <rect key="frame" x="0.0" y="25" width="600" height="75"/>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stickerPlaceholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-5Y-JJt">
-                                <rect key="frame" x="75" y="110" width="450" height="450"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-5Y-JJt">
+                                <rect key="frame" x="235" y="334" width="130" height="130"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="0kn-m8-SoN"/>
                                     <constraint firstAttribute="width" secondItem="gdd-5Y-JJt" secondAttribute="height" multiplier="1:1" id="fTC-fr-EP0"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PixPic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-dp-aSr">
-                                <rect key="frame" x="274.5" y="570" width="50.5" height="20"/>
+                                <rect key="frame" x="281" y="474" width="38.5" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="4ec-4c-atA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koM-WU-GzJ">
+                                <rect key="frame" x="0.0" y="529" width="600" height="71"/>
+                                <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="HOe-fc-MU2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Radikal-Medium" family="Radikal" pointSize="18"/>
+                                <state key="normal" title="Log out">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="Cky-m3-Ruy" eventType="touchUpInside" id="kpk-FL-RRY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JD7-dS-yPA">
+                                <rect key="frame" x="0.0" y="529" width="600" height="71"/>
+                                <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="71" id="u0S-2G-VO4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Radikal-Medium" family="Radikal" pointSize="18"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logIn:" destination="Cky-m3-Ruy" eventType="touchUpInside" id="G3h-An-ijc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="JD7-dS-yPA" firstAttribute="leading" secondItem="koM-WU-GzJ" secondAttribute="leading" id="4fI-rW-PRH"/>
                             <constraint firstItem="gdd-5Y-JJt" firstAttribute="width" relation="lessThanOrEqual" secondItem="9rU-R9-dP5" secondAttribute="width" id="7Kv-J8-3YY"/>
+                            <constraint firstItem="JD7-dS-yPA" firstAttribute="top" secondItem="koM-WU-GzJ" secondAttribute="top" id="8WC-aJ-A2P"/>
+                            <constraint firstItem="koM-WU-GzJ" firstAttribute="top" secondItem="aPK-dp-aSr" secondAttribute="bottom" constant="35" id="Gqk-06-47y"/>
                             <constraint firstItem="gdd-5Y-JJt" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="MpQ-JF-9ll"/>
                             <constraint firstItem="Fh6-NS-pkb" firstAttribute="top" secondItem="ZnM-rl-u7N" secondAttribute="bottom" constant="5" id="OCe-3d-dcT"/>
                             <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" constant="500" id="Vlt-aC-fRv"/>
                             <constraint firstItem="aPK-dp-aSr" firstAttribute="centerX" secondItem="9rU-R9-dP5" secondAttribute="centerX" id="at8-Fr-PgG"/>
-                            <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="aPK-dp-aSr" secondAttribute="bottom" constant="10" id="iOB-dJ-WAB"/>
-                            <constraint firstItem="gdd-5Y-JJt" firstAttribute="top" secondItem="Fh6-NS-pkb" secondAttribute="bottom" priority="750" constant="10" id="ryL-0m-Ayr"/>
+                            <constraint firstItem="pSB-5w-ASy" firstAttribute="top" secondItem="koM-WU-GzJ" secondAttribute="bottom" id="cMI-kS-BIc"/>
+                            <constraint firstItem="koM-WU-GzJ" firstAttribute="leading" secondItem="9rU-R9-dP5" secondAttribute="leading" id="hLe-e9-RFv"/>
+                            <constraint firstItem="JD7-dS-yPA" firstAttribute="trailing" secondItem="koM-WU-GzJ" secondAttribute="trailing" id="iUj-OT-Llf"/>
+                            <constraint firstItem="JD7-dS-yPA" firstAttribute="bottom" secondItem="koM-WU-GzJ" secondAttribute="bottom" id="lRV-sc-osS"/>
+                            <constraint firstAttribute="trailing" secondItem="koM-WU-GzJ" secondAttribute="trailing" id="trZ-EY-pFb"/>
                             <constraint firstItem="Fh6-NS-pkb" firstAttribute="leading" secondItem="9rU-R9-dP5" secondAttribute="leading" id="wJM-oc-2Y3"/>
                             <constraint firstItem="aPK-dp-aSr" firstAttribute="top" secondItem="gdd-5Y-JJt" secondAttribute="bottom" constant="10" id="wxW-zi-OJo"/>
                             <constraint firstAttribute="trailing" secondItem="Fh6-NS-pkb" secondAttribute="trailing" id="yWB-af-vde"/>
@@ -52,6 +96,8 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="logInButton" destination="JD7-dS-yPA" id="a5d-lS-DCM"/>
+                        <outlet property="logOutButton" destination="koM-WU-GzJ" id="KpA-4B-A1p"/>
                         <outlet property="settingsStack" destination="Fh6-NS-pkb" id="2AD-Kn-OA7"/>
                         <outlet property="versionLabel" destination="aPK-dp-aSr" id="k84-1V-e5S"/>
                     </connections>
@@ -62,6 +108,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="stickerPlaceholderImage" width="60" height="60"/>
+        <image name="camera" width="130" height="105"/>
     </resources>
 </document>

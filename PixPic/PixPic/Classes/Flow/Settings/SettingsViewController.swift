@@ -17,14 +17,17 @@ private let okActionTitle = NSLocalizedString("logout_me", comment: "")
 private let enableNotificationsNibName = NSLocalizedString("enable_notifications", comment: "")
 private let followedPostsNibName = NSLocalizedString("only_following_users_posts", comment: "")
 
-private let logInNibName = NSLocalizedString("log_in", comment: "")
-private let logOutNibName = NSLocalizedString("log_out", comment: "")
+private let logInString = NSLocalizedString("log_in", comment: "")
+private let logOutString = NSLocalizedString("log_out", comment: "")
 
 enum SettingsState {
     case Common, LoggedIn, LoggedOut
 }
 
 final class SettingsViewController: BaseUIViewController, StoryboardInitable {
+    
+    @IBOutlet private weak var logInButton: UIButton!
+    @IBOutlet private weak var logOutButton: UIButton!
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: SettingsRouterInterface!
@@ -39,34 +42,6 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
             object: nil
         )
     }
-    private lazy var logIn: UIView = TextView.instanceFromNib(logInNibName) {
-        self.router.showAuthorization()
-    }
-    private lazy var logOut: UIView = TextView.instanceFromNib(logOutNibName) {
-        let alertController = UIAlertController(
-            title: nil,
-            message: logoutMessage,
-            preferredStyle: .ActionSheet
-        )
-        
-        let cancelAction = UIAlertAction(
-            title: cancelActionTitle,
-            style: .Cancel
-            ) { _ in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        alertController.addAction(cancelAction)
-        
-        let okAction = UIAlertAction(
-            title: okActionTitle,
-            style: .Default
-            ) { _ in
-                self.logout()
-        }
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
     
     private var settings = [SettingsState: [UIView]]()
     private weak var locator: ServiceLocator!
@@ -80,6 +55,9 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         
         setupAvailableSettings()
         updateVersionLabel()
+        
+        logInButton.setTitle(logInString, forState: .Normal)
+        logOutButton.setTitle(logOutString, forState: .Normal)
     }
     
     // MARK: - Setup methods
@@ -95,15 +73,15 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         }
         let currentUser = User.currentUser()
         if User.notAuthorized {
-            settings[.LoggedOut] = [logIn]
-            for view in settings[.LoggedOut]! {
-                settingsStack.addArrangedSubview(view)
-            }
+            logInButton.hidden = false
+            logOutButton.hidden = true
         } else if currentUser != nil {
-            settings[.LoggedIn] = [followedPosts, logOut]
+            settings[.LoggedIn] = [followedPosts]
             for view in settings[.LoggedIn]! {
                 settingsStack.addArrangedSubview(view)
             }
+            logInButton.hidden = true
+            logOutButton.hidden = false
         }
         
     }
@@ -113,7 +91,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         versionLabel.text = "PixPic v. \(version)"
     }
     
-    private func logout() {
+    @IBAction private func logout(sender: AnyObject) {
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
@@ -130,6 +108,36 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
                 }
             }
         )
+    }
+    
+    @IBAction private func logIn(sender: AnyObject) {
+        self.router.showAuthorization()
+    }
+    
+    private func shawlogOutAlert() {
+        let alertController = UIAlertController(
+            title: nil,
+            message: logoutMessage,
+            preferredStyle: .ActionSheet
+        )
+        
+        let cancelAction = UIAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel
+        ) { _ in
+            PushNotificationQueue.handleNotificationQueue()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(
+            title: okActionTitle,
+            style: .Default
+        ) { _ in
+            self.shawlogOutAlert()
+        }
+        alertController.addAction(okAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 }

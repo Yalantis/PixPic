@@ -10,14 +10,13 @@ import UIKit
 import Kingfisher
 
 private let headerViewHeight: CGFloat = 62
-private let footerViewHeight: CGFloat = 47
-private let cellInset: CGFloat = 10
+private let footerViewHeight: CGFloat = 44
 
 private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
 class PostViewCell: UITableViewCell, CellInterface {
     
-    static let designedHeight = headerViewHeight + footerViewHeight + cellInset
+    static let designedHeight = headerViewHeight + footerViewHeight
     
     weak var post = Post?()
     

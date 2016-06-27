@@ -20,7 +20,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="6b9-Fy-Pwb"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="14"/>
                     <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Log In">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
