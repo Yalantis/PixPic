@@ -129,6 +129,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
+        profileSettingsButton.tintColor = UIColor.clearColor()
         setupTableViewFooter()
     }
     
