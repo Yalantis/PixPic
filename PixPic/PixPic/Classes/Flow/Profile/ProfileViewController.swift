@@ -30,7 +30,7 @@ private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let followButtonMinHeight: CGFloat = 0.01
 private let followButtonMaxHeight: CGFloat = 30
 
-private let headerMaxHeight: CGFloat = 328
+private let headerMaxHeight: CGFloat = 343
 private let followButtonVerticalInset: CGFloat = 15
 private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight - followButtonVerticalInset
 

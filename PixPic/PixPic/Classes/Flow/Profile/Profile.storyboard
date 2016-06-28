@@ -32,7 +32,7 @@
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="3W9-Wv-xaN">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="343"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NK7-AM-JLQ">
@@ -131,7 +131,7 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="RWA-d4-3KE">
-                            <rect key="frame" x="0.0" y="328" width="600" height="383"/>
+                            <rect key="frame" x="0.0" y="343" width="600" height="383"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
@@ -255,7 +255,7 @@
                                             <action selector="avatarTapAction:" destination="bt5-ep-FuB" eventType="touchUpInside" id="H2Q-1M-fCA"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
                                         <rect key="frame" x="157" y="233" width="60" height="19"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -270,6 +270,11 @@
                                                 <color key="value" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="3yX-hq-cax"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="changeNickNameTextFieldWidth:" destination="bt5-ep-FuB" eventType="editingChanged" id="t0D-tz-rT0"/>
                                             <action selector="searchTextFieldValueChanged:" destination="bt5-ep-FuB" eventType="editingDidEnd" id="0t5-n3-f9j"/>
@@ -295,7 +300,7 @@ PixPic makes your photos more creative.</string>
                                         <rect key="frame" x="0.0" y="434" width="375" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
                                         <rect key="frame" x="147" y="254" width="80" height="2"/>
                                         <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>

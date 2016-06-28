@@ -45,7 +45,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet private weak var saveButton: UIButton!
    
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -230,7 +230,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
     
     private func handlePhotoSelected(image: UIImage) {
         setSelectedPhoto(image)
-        navigationItem.rightBarButtonItem!.enabled = true
+        saveButton.enabled = true
         someChangesMade = true
     }
     
@@ -279,6 +279,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             someChangesMade = true
         }
     }
+    
     @IBAction func changeNickNameTextFieldWidth(sender: AnyObject) {
         nickNameTextField.invalidateIntrinsicContentSize()
     }
