@@ -75,8 +75,8 @@
 
 "enable_notifications" = "Enable Notifications";
 "only_following_users_posts" = "Show only posts of people I follow";
-"log_in" = "Log In";
-"log_out" = "Log Out";
+"log_in" = "Log in";
+"log_out" = "Log out";
 
 "user_data_updated" = "User data have been updated!";
 "check_later" = "Update cannot be viewed now. Check it out later";

@@ -282,21 +282,21 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="evV-Jz-9Yk">
-                                        <rect key="frame" x="32" y="466" width="311" height="32"/>
-                                        <string key="text">Remember! 
+                                        <rect key="frame" x="32" y="457" width="311" height="48"/>
+                                        <string key="text">Remember!  
 PixPic makes your photos more creative.</string>
                                         <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="emoji3" translatesAutoresizingMaskIntoConstraints="NO" id="K8E-hi-aIN">
-                                        <rect key="frame" x="142" y="349" width="90" height="85"/>
+                                        <rect key="frame" x="142" y="342.5" width="90" height="85"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-vx-KfD">
-                                        <rect key="frame" x="0.0" y="498" width="375" height="97.5"/>
+                                        <rect key="frame" x="0.0" y="505" width="375" height="90.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
                                         <rect key="frame" x="0.0" y="434" width="375" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -308,7 +308,7 @@ PixPic makes your photos more creative.</string>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4X-79-nC9">
-                                        <rect key="frame" x="0.0" y="252" width="375" height="97.5"/>
+                                        <rect key="frame" x="0.0" y="252" width="375" height="90.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>

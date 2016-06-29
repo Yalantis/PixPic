@@ -317,7 +317,7 @@
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+                          NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }
