@@ -148,7 +148,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
                 title: backWithChangesTitle,
                 message: backWithChangesMessage, preferredStyle: .Alert
             )
-            let noAction = UIAlertAction(
+            let noAction = UIAlertAction.appAlertAction(
                 title: okActionTitle,
                 style: .Cancel
                 ) { [weak self] action in
@@ -158,7 +158,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitable {
             }
             alertController.addAction(noAction)
             
-            let yesAction = UIAlertAction(
+            let yesAction = UIAlertAction.appAlertAction(
                 title: saveActionTitle,
                 style: .Default
                 ) { [weak self] action in

@@ -312,13 +312,13 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
                 message: unfollowMessage,
                 preferredStyle: .ActionSheet
             )
-            let cancelAction = UIAlertAction(
+            let cancelAction = UIAlertAction.appAlertAction(
                 title: cancelActionTitle,
                 style: .Cancel
             ) { [weak self] _ in
                 self?.followButton.enabled = true
             }
-            let unfollowAction = UIAlertAction(
+            let unfollowAction = UIAlertAction.appAlertAction(
                 title: unfollowActionTitle,
                 style: .Default
             ) { [weak self] _ in
@@ -395,12 +395,12 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
     
     private func suggestLogin() {
         let alertController = UIAlertController(title: suggestLoginMessage, message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
         
-        let registerAction = UIAlertAction(
+        let registerAction = UIAlertAction.appAlertAction(
             title: registerActionTitle,
             style: .Default
         ) { [weak self] _ in

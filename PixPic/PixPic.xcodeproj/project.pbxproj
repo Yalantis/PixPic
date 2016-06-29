@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		775507D31D23B8530000D47B /* UIAlertAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775507D21D23B8530000D47B /* UIAlertAction.swift */; };
 		77665C6E1D1832900008A7CE /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6D1D1832900008A7CE /* BaseUIViewController.swift */; };
 		77665C701D1834440008A7CE /* BaseUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */; };
 		7774D8431D0EC4F300E5DCE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D83F1D0EC4F300E5DCE0 /* Constants.swift */; };
@@ -133,6 +134,7 @@
 /* Begin PBXFileReference section */
 		2B55465A103903CD3D0318DC /* Pods_PixPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PixPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BCE0C40092F9699A50D4758 /* Pods-PixPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PixPic/Pods-PixPic.debug.xcconfig"; sourceTree = "<group>"; };
+		775507D21D23B8530000D47B /* UIAlertAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIAlertAction.swift; path = ../../Classes/Services/UIAlertAction.swift; sourceTree = "<group>"; };
 		77665C6D1D1832900008A7CE /* BaseUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUIViewController.swift; sourceTree = "<group>"; };
 		77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUITableViewController.swift; sourceTree = "<group>"; };
 		7774D83F1D0EC4F300E5DCE0 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				7774D8B11D0EC50700E5DCE0 /* NSTimer+Block */,
 				7774D8B41D0EC50700E5DCE0 /* PFInstallation+User.swift */,
 				7774D8B61D0EC50700E5DCE0 /* UIAlertController+ConfimAction.swift */,
+				775507D21D23B8530000D47B /* UIAlertAction.swift */,
 				7774D8B71D0EC50700E5DCE0 /* UIApplication+AppSettings.swift */,
 				7774D8B81D0EC50700E5DCE0 /* UICollectionViewFlowLayout.swift */,
 				7774D8B91D0EC50700E5DCE0 /* UIColor+BaseColor.swift */,
@@ -919,6 +922,7 @@
 				7774D90A1D0EC50700E5DCE0 /* ErrorHandler.swift in Sources */,
 				7774D92C1D0EC50700E5DCE0 /* UIImage+BaseImage.swift in Sources */,
 				7774D8E51D0EC50700E5DCE0 /* FeedViewController.swift in Sources */,
+				775507D31D23B8530000D47B /* UIAlertAction.swift in Sources */,
 				7774D8EA1D0EC50700E5DCE0 /* LaunchViewController.swift in Sources */,
 				7774D9001D0EC50700E5DCE0 /* SettingsRouter.swift in Sources */,
 				7774D8E21D0EC50700E5DCE0 /* FeedRouter.swift in Sources */,

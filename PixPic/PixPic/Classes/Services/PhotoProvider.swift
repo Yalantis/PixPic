@@ -41,21 +41,21 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: nil,
             preferredStyle: .ActionSheet
         )
-        let takePhotoAction = UIAlertAction(
+        let takePhotoAction = UIAlertAction.appAlertAction(
             title: takePhotoOption,
             style: .Default
         ) { _ in
             self.takePhoto()
             PushNotificationQueue.handleNotificationQueue()
         }
-        let selectFromLibraryAction = UIAlertAction(
+        let selectFromLibraryAction = UIAlertAction.appAlertAction(
             title: selectFromLibraryOption,
             style: .Default
         ) { _ in
             self.selectFromLibrary()
             PushNotificationQueue.handleNotificationQueue()
         }
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelOption,
             style: .Cancel
         ) { _ in
@@ -91,7 +91,7 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: cameraAbsenceMessage,
             preferredStyle: .Alert
         )
-        let okAction = UIAlertAction(
+        let okAction = UIAlertAction.appAlertAction(
             title: okActionTitle,
             style:.Default,
             handler: nil
@@ -125,12 +125,12 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: askForCameraAccessMessage,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Default,
             handler: nil
         )
-        let allowCameraAction = UIAlertAction(
+        let allowCameraAction = UIAlertAction.appAlertAction(
             title: allowCameraActionTitle,
             style: .Cancel
         ) { _ in

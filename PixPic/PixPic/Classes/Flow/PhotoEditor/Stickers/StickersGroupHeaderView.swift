@@ -28,7 +28,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         
     @objc private func toggleGroup() {
         let isSelected = completion()
-        let color = isSelected ? UIColor.appPurpleColor : UIColor.appWhiteColor
+        let color = isSelected ? UIColor.appTintColor : UIColor.appWhiteColor
         UIView.animateWithDuration(
             tintColorAnimationDuration,
             delay: 0,

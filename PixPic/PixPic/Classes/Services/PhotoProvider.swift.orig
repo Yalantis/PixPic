@@ -46,21 +46,21 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: nil,
             preferredStyle: .ActionSheet
         )
-        let takePhotoAction = UIAlertAction(
+        let takePhotoAction = UIAlertAction.appAlertAction(
             title: ListOfOptions.TakePhoto.rawValue,
             style: .Default
             ) { _ in
                 self.takePhoto()
                 PushNotificationQueue.handleNotificationQueue()
         }
-        let selectFromLibraryAction = UIAlertAction(
+        let selectFromLibraryAction = UIAlertAction.appAlertAction(
             title: ListOfOptions.SelectFromLibrary.rawValue,
             style: .Default
             ) { _ in
                 self.selectFromLibrary()
                 PushNotificationQueue.handleNotificationQueue()
         }
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: ListOfOptions.Cancel.rawValue,
             style: .Cancel
             ) { _ in
@@ -97,7 +97,7 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: HandleCameraAbsence.Message.rawValue,
             preferredStyle: .Alert
         )
-        let okAction = UIAlertAction(
+        let okAction = UIAlertAction.appAlertAction(
             title: HandleCameraAbsence.OkActionTitle.rawValue,
             style:.Default,
             handler: nil
@@ -138,12 +138,12 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: CameraAccess.AskForCameraAccessMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: CameraAccess.CancelActionTitle.rawValue,
             style: .Default,
             handler: nil
         )
-        let allowCameraAction = UIAlertAction(
+        let allowCameraAction = UIAlertAction.appAlertAction(
             title: CameraAccess.AllowCameraActionTitle.rawValue,
             style: .Cancel
             ) { _ in
@@ -160,7 +160,7 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             message: CameraAccess.AllowCameraMessage.rawValue,
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        let dismissAction = UIAlertAction(
+        let dismissAction = UIAlertAction.appAlertAction(
             title: CameraAccess.DismissActionTitle.rawValue,
             style: .Cancel
             ) { _ in

@@ -162,7 +162,7 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(
+        let saveAction = UIAlertAction.appAlertAction(
             title: saveActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -172,9 +172,11 @@ extension PhotoEditorViewController {
             this.saveImageToCameraRoll()
             this.navigationController!.popViewControllerAnimated(true)
         }
+        saveAction.setValue(UIColor.redColor(), forKey: "titleTextColor")
+        
         alertController.addAction(saveAction)
         
-        let dontSaveAction = UIAlertAction(
+        let dontSaveAction = UIAlertAction.appAlertAction(
             title: dontSaveActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -182,7 +184,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(dontSaveAction)
         
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
@@ -241,7 +243,7 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(
+        let saveAction = UIAlertAction.appAlertAction(
             title: saveActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -249,7 +251,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(saveAction)
         
-        let postAction = UIAlertAction(
+        let postAction = UIAlertAction.appAlertAction(
             title: postActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -257,7 +259,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(postAction)
         
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)

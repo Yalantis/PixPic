@@ -37,13 +37,13 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             suggestLogin()
         } else {
             let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction = UIAlertAction(
+            let cancelAction = UIAlertAction.appAlertAction(
                 title: cancelActionTitle,
                 style: .Cancel,
                 handler: nil)
             settingsMenu.addAction(cancelAction)
             
-            let shareAction = UIAlertAction(
+            let shareAction = UIAlertAction.appAlertAction(
                 title: shareActionTitle,
                 style: .Default
                 ) { [weak self] _ in
@@ -52,7 +52,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             settingsMenu.addAction(shareAction)
             
             if post.user == User.currentUser() {
-                let removeAction = UIAlertAction(
+                let removeAction = UIAlertAction.appAlertAction(
                     title: removeActionTitle,
                     style: .Default
                     ) { [weak self] _ in
@@ -60,7 +60,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 }
                 settingsMenu.addAction(removeAction)
             } else {
-                let complaintAction = UIAlertAction(
+                let complaintAction = UIAlertAction.appAlertAction(
                     title: complaintActionTitle,
                     style: .Default
                     ) { [weak self] _ in
@@ -74,12 +74,12 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
     private func suggestLogin() {
         let alertController = UIAlertController(title: suggestLoginMessage, message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
         
-        let registerAction = UIAlertAction(
+        let registerAction = UIAlertAction.appAlertAction(
             title: registerActionTitle,
             style: .Default
             ) { [weak self] _ in
@@ -113,14 +113,14 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
     
     private func complaintToPost(post: Post) {
         let complaintMenu = UIAlertController(title: complaintMessage, message: nil, preferredStyle: .ActionSheet)
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
         complaintMenu.addAction(cancelAction)
         
         let complaintService: ComplaintService = locator.getService()
-        let complainAboutUsernameAction = UIAlertAction(
+        let complainAboutUsernameAction = UIAlertAction.appAlertAction(
             title: NSLocalizedString("\(ComplaintReason.Username.rawValue)", comment: ""),
             style: .Default
             ) { _ in
@@ -129,7 +129,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 }
         }
         
-        let complainAboutUserAvatarAction = UIAlertAction(
+        let complainAboutUserAvatarAction = UIAlertAction.appAlertAction(
             title: NSLocalizedString("\(ComplaintReason.UserAvatar.rawValue)", comment: ""),
             style: .Default
             ) { _ in
@@ -138,7 +138,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 }
         }
         
-        let complainAboutPostAction = UIAlertAction(
+        let complainAboutPostAction = UIAlertAction.appAlertAction(
             title: NSLocalizedString("\(ComplaintReason.PostImage.rawValue)", comment: ""),
             style: .Default
             ) { _ in

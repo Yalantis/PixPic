@@ -121,7 +121,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
             preferredStyle: .ActionSheet
         )
         
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel
         ) { _ in
@@ -130,7 +130,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         }
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(
+        let okAction = UIAlertAction.appAlertAction(
             title: okActionTitle,
             style: .Default
         ) { _ in

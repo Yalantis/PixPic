@@ -17,7 +17,7 @@
                         <constraint firstAttribute="height" constant="49" id="ySE-sE-9Wv"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C79DC637-CADA-4F45-98BF-A144D9349BED" translatesAutoresizingMaskIntoConstraints="NO" id="Cbq-NT-J4B">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3E15D0C2-7BB0-4504-AD03-6A02DF3475F2" translatesAutoresizingMaskIntoConstraints="NO" id="Cbq-NT-J4B">
                     <rect key="frame" x="0.0" y="16" width="351" height="49"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="nVZ-K2-xci"/>
@@ -73,7 +73,7 @@
         </view>
     </objects>
     <resources>
-        <image name="C79DC637-CADA-4F45-98BF-A144D9349BED" width="375" height="49">
+        <image name="3E15D0C2-7BB0-4504-AD03-6A02DF3475F2" width="375" height="49">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISgrLjQ3VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
