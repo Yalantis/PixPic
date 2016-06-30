@@ -74,7 +74,7 @@ class StickerEditorView: UIView {
     
     private func setupContentView(content: UIView) {
         let contentView = UIView(frame: content.frame)
-        contentView.backgroundColor = UIColor.clearColor()
+        contentView.backgroundColor = .clearColor()
         contentView.addSubview(content)
         contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         addSubview(contentView)
@@ -100,7 +100,7 @@ class StickerEditorView: UIView {
             
         } else if recognizer.state == .Changed {
             resizeView(recognizer)
-            rotateViewWithAngle(angle: deltaAngle, recognizer: recognizer)
+            rotateView(with: deltaAngle, recognizer: recognizer)
             
         } else if recognizer.state == .Ended {
             enableTranslucency(false)
@@ -123,7 +123,7 @@ class StickerEditorView: UIView {
         self.previousPoint = recognizer.locationInView(self)
     }
     
-    private func rotateViewWithAngle(angle deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
+    private func rotateView(with deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
         let angle = atan2(recognizer.locationInView(superview).y - center.y,
                           recognizer.locationInView(superview).x - center.x)
         

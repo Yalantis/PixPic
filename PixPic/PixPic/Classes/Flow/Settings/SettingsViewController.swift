@@ -24,7 +24,7 @@ enum SettingsState {
     case Common, LoggedIn, LoggedOut
 }
 
-final class SettingsViewController: BaseUIViewController, StoryboardInitable {
+final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
     
     @IBOutlet private weak var logInButton: UIButton!
     @IBOutlet private weak var logOutButton: UIButton!
@@ -72,17 +72,16 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
             settingsStack.addArrangedSubview(view)
         }
         let currentUser = User.currentUser()
-        if User.notAuthorized {
-            logInButton.hidden = false
-            logOutButton.hidden = true
-        } else if currentUser != nil {
+        let notAuthorized = User.notAuthorized
+        
+        if currentUser != nil && notAuthorized == false {
             settings[.LoggedIn] = [followedPosts]
             for view in settings[.LoggedIn]! {
                 settingsStack.addArrangedSubview(view)
             }
-            logInButton.hidden = true
-            logOutButton.hidden = false
         }
+        logInButton.hidden = !notAuthorized
+        logOutButton.hidden = notAuthorized
         
     }
     
@@ -114,7 +113,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
         self.router.showAuthorization()
     }
     
-    private func shawlogOutAlert() {
+    private func showlogOutAlert() {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -134,10 +133,10 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitable {
             title: okActionTitle,
             style: .Default
         ) { _ in
-            self.shawlogOutAlert()
+            self.showlogOutAlert()
         }
         alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
 }

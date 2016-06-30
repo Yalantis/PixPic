@@ -1,5 +1,5 @@
 //
-//  StoryboardInitable.swift
+//  StoryboardInitiable.swift
 //  PixPic
 //
 //  Created by AndrewPetrov on 2/17/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol StoryboardInitable {
+protocol StoryboardInitiable {
     
     static var storyboardName: String { get }
     
@@ -16,7 +16,7 @@ protocol StoryboardInitable {
     
 }
 
-extension StoryboardInitable {
+extension StoryboardInitiable {
     
     static func create() -> Self {
         let identifier = String(Self)

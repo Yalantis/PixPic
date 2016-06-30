@@ -34,7 +34,7 @@ private let headerMaxHeight: CGFloat = 343
 private let followButtonVerticalInset: CGFloat = 15
 private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight - followButtonVerticalInset
 
-final class ProfileViewController: BaseUITableViewController, StoryboardInitable {
+final class ProfileViewController: BaseUITableViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: ProfileRouterInterface!
@@ -129,7 +129,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
-        profileSettingsButton.tintColor = UIColor.clearColor()
+        profileSettingsButton.tintColor = .clearColor()
         setupTableViewFooter()
     }
     
@@ -202,7 +202,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitable
     
     private func applyCurrentUserAppearance() {
         profileSettingsButton.enabled = true
-        profileSettingsButton.tintColor = UIColor.appWhiteColor
+        profileSettingsButton.tintColor = .appWhiteColor
         
         followButton.hidden = true
         followButtonHeight.constant = followButtonMinHeight

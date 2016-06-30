@@ -22,7 +22,7 @@ class BaseUIViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    func navigateBack() {
+    @objc private func navigateBack() {
         navigationController?.popViewControllerAnimated(true)
     }
     

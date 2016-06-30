@@ -26,7 +26,7 @@ private let dontSaveActionTitle = NSLocalizedString("don't_save", comment: "")
 
 private let suggestSaveToCameraRollMessage = NSLocalizedString("save_result_after_internet_appears", comment: "")
 
-final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
+final class PhotoEditorViewController: UIViewController, StoryboardInitiable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
     
@@ -164,7 +164,7 @@ extension PhotoEditorViewController {
         
         let saveAction = UIAlertAction.appAlertAction(
             title: saveActionTitle,
-            style: .Default
+            style: .Default, color: UIColor.redColor()
         ) { [weak self] _ in
             guard let this = self else {
                 return
@@ -172,7 +172,6 @@ extension PhotoEditorViewController {
             this.saveImageToCameraRoll()
             this.navigationController!.popViewControllerAnimated(true)
         }
-        saveAction.setValue(UIColor.redColor(), forKey: "titleTextColor")
         
         alertController.addAction(saveAction)
         
