@@ -125,10 +125,6 @@
 		7774D93F1D0EC51400E5DCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D93E1D0EC51400E5DCE0 /* AppDelegate.swift */; };
 		779884C01CCE34B20027E706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 779884BF1CCE34B20027E706 /* Localizable.strings */; };
 		CD9A7A6543D20501F89F37B7 /* Pods_PixPic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B55465A103903CD3D0318DC /* Pods_PixPic.framework */; };
-		FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */; };
-		FD0658FE1C7125A100743AF1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD0658FD1C7125A100743AF1 /* Photos.framework */; };
-		FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A2681C6249610058203F /* AVFoundation.framework */; };
-		FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD27A26A1C62497F0058203F /* AVKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,10 +263,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD0658FE1C7125A100743AF1 /* Photos.framework in Frameworks */,
-				FD0658FC1C71234F00743AF1 /* AssetsLibrary.framework in Frameworks */,
-				FD27A26B1C62497F0058203F /* AVKit.framework in Frameworks */,
-				FD27A2691C6249610058203F /* AVFoundation.framework in Frameworks */,
 				CD9A7A6543D20501F89F37B7 /* Pods_PixPic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
