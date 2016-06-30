@@ -16,7 +16,7 @@
  private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
  private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
  
- final class FeedViewController: UIViewController, StoryboardInitable {
+ final class FeedViewController: UIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Feed
     
@@ -257,7 +257,7 @@
  extension FeedViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return tableView.bounds.size.width + PostViewCell.designedHeight
+        return tableView.frame.width + PostViewCell.designedHeight
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -317,7 +317,7 @@
     
     func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-                          NSForegroundColorAttributeName: UIColor.darkGrayColor()]
+                          NSForegroundColorAttributeName: UIColor.whiteColor()]
         
         return NSAttributedString(string: titleForEmptyData, attributes: attributes)
     }

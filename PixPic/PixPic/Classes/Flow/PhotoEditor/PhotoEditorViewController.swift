@@ -26,7 +26,7 @@ private let dontSaveActionTitle = NSLocalizedString("don't_save", comment: "")
 
 private let suggestSaveToCameraRollMessage = NSLocalizedString("save_result_after_internet_appears", comment: "")
 
-final class PhotoEditorViewController: UIViewController, StoryboardInitable, NavigationControllerAppearanceContext{
+final class PhotoEditorViewController: UIViewController, StoryboardInitiable, NavigationControllerAppearanceContext{
     
     static let storyboardName = Constants.Storyboard.PhotoEditor
     
@@ -124,14 +124,14 @@ extension PhotoEditorViewController {
         navigationItem.leftBarButtonItem = newBackButton
         
         let savingButton = UIBarButtonItem(
-            image: UIImage(named: "icon_save"),
+            image: UIImage(named: "icSave"),
             style: .Plain,
             target: self,
             action: #selector(saveImageToCameraRoll)
         )
         
         let removeAllStickersButton = UIBarButtonItem(
-            image: UIImage(named: "icon_remove"),
+            image: UIImage(named: "icRemove"),
             style: .Plain,
             target: self,
             action: #selector(removeAllStickers)
@@ -162,9 +162,9 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(
+        let saveAction = UIAlertAction.appAlertAction(
             title: saveActionTitle,
-            style: .Default
+            style: .Default, color: UIColor.redColor()
         ) { [weak self] _ in
             guard let this = self else {
                 return
@@ -172,9 +172,10 @@ extension PhotoEditorViewController {
             this.saveImageToCameraRoll()
             this.navigationController!.popViewControllerAnimated(true)
         }
+        
         alertController.addAction(saveAction)
         
-        let dontSaveAction = UIAlertAction(
+        let dontSaveAction = UIAlertAction.appAlertAction(
             title: dontSaveActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -182,7 +183,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(dontSaveAction)
         
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
@@ -241,7 +242,7 @@ extension PhotoEditorViewController {
             preferredStyle: .ActionSheet
         )
         
-        let saveAction = UIAlertAction(
+        let saveAction = UIAlertAction.appAlertAction(
             title: saveActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -249,7 +250,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(saveAction)
         
-        let postAction = UIAlertAction(
+        let postAction = UIAlertAction.appAlertAction(
             title: postActionTitle,
             style: .Default
         ) { [weak self] _ in
@@ -257,7 +258,7 @@ extension PhotoEditorViewController {
         }
         alertController.addAction(postAction)
         
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)

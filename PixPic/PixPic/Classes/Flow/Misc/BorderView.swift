@@ -14,8 +14,11 @@ class BorderView: UIView {
         let context = UIGraphicsGetCurrentContext()
         CGContextSaveGState(context)
         CGContextSetLineWidth(context, 1)
+    
+        let dash: Array<CGFloat> = [4.0, 2.0]
+        CGContextSetLineDash(context, 0.0, dash, 2)
         
-        CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
+        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
         
         CGContextAddRect(context, rect)
         

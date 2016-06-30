@@ -17,6 +17,7 @@ class StickerViewCell: UICollectionViewCell, CellInterface {
     }
     
     private func downloadImageFromFile(file: PFFile) {
+        stickerImage.image = UIImage.stickerPlaceholderImage
         file.getImage { image, error in
             if let error = error {
                 log.debug(error.localizedDescription)
@@ -24,5 +25,11 @@ class StickerViewCell: UICollectionViewCell, CellInterface {
                 self.stickerImage.image = image
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        stickerImage.image = nil
     }
 }

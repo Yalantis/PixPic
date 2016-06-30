@@ -27,10 +27,14 @@ private let suggestLoginMessage = NSLocalizedString("can't_follow_no_registratio
 private let registerActionTitle = NSLocalizedString("register", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 
-private let followButtonMinHeight: CGFloat = 0.1
-private let followButtonMaxHeight: CGFloat = 55
+private let followButtonMinHeight: CGFloat = 0.01
+private let followButtonMaxHeight: CGFloat = 30
 
-final class ProfileViewController: UITableViewController, StoryboardInitable {
+private let headerMaxHeight: CGFloat = 343
+private let followButtonVerticalInset: CGFloat = 15
+private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight - followButtonVerticalInset
+
+final class ProfileViewController: BaseUITableViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Profile
     private var router: ProfileRouterInterface!
@@ -125,6 +129,7 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
+        profileSettingsButton.tintColor = .clearColor()
         setupTableViewFooter()
     }
     
@@ -197,17 +202,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     private func applyCurrentUserAppearance() {
         profileSettingsButton.enabled = true
-        profileSettingsButton.tintColor = UIColor.appWhiteColor
+        profileSettingsButton.tintColor = .appWhiteColor
         
         followButton.hidden = true
         followButtonHeight.constant = followButtonMinHeight
-        return
         
-        let expandedTableViewHeaderFrame = tableViewHeader.frame
-        let collapsedTableViewHeaderFrame = CGRect(x: expandedTableViewHeaderFrame.origin.x, y: expandedTableViewHeaderFrame.origin.y, width: expandedTableViewHeaderFrame.size.width, height: expandedTableViewHeaderFrame.size.height - followButtonMaxHeight)
-        tableViewHeader.frame = collapsedTableViewHeaderFrame
-        tableView.reloadData()
-        view.updateConstraints()
+        tableViewHeader.frame = CGRect(x: tableViewHeader.frame.origin.x, y: tableViewHeader.frame.origin.y, width: tableViewHeader.frame.size.width, height: headerMinHeight)
+        tableView.tableHeaderView = tableViewHeader
     }
     
     private func updateUser() {
@@ -311,13 +312,13 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
                 message: unfollowMessage,
                 preferredStyle: .ActionSheet
             )
-            let cancelAction = UIAlertAction(
+            let cancelAction = UIAlertAction.appAlertAction(
                 title: cancelActionTitle,
                 style: .Cancel
             ) { [weak self] _ in
                 self?.followButton.enabled = true
             }
-            let unfollowAction = UIAlertAction(
+            let unfollowAction = UIAlertAction.appAlertAction(
                 title: unfollowActionTitle,
                 style: .Default
             ) { [weak self] _ in
@@ -394,12 +395,12 @@ final class ProfileViewController: UITableViewController, StoryboardInitable {
     
     private func suggestLogin() {
         let alertController = UIAlertController(title: suggestLoginMessage, message: "", preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(
+        let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
             handler: nil)
         
-        let registerAction = UIAlertAction(
+        let registerAction = UIAlertAction.appAlertAction(
             title: registerActionTitle,
             style: .Default
         ) { [weak self] _ in

@@ -8,10 +8,9 @@
 
 import UIKit
 import Kingfisher
-import MHPrettyDate
 
-private let headerViewHeight: CGFloat = 87
-private let footerViewHeight: CGFloat = 40
+private let headerViewHeight: CGFloat = 62
+private let footerViewHeight: CGFloat = 44
 
 private let actionByTapProfile = #selector(PostViewCell.didTapProfile)
 
@@ -31,6 +30,8 @@ class PostViewCell: UITableViewCell, CellInterface {
     @IBOutlet private weak var profileLabel: UILabel!
     
     @IBOutlet private weak var settingsButton: UIButton!
+    @IBOutlet private weak var indicator: UIActivityIndicatorView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,6 +49,8 @@ class PostViewCell: UITableViewCell, CellInterface {
         
         postImageView.image = UIImage.placeholderImage
         profileImageView.image = UIImage.avatarPlaceholderImage
+        indicator.hidden = false
+        indicator.startAnimating()
     }
     
     func configure(withPost post: Post?) {
@@ -56,20 +59,16 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
         self.post = post
         profileLabel.text = post.user?.username
-        dateLabel.text = MHPrettyDate.prettyDateFromDate(
-            post.createdAt,
-            withFormat: MHPrettyDateFormatNoTime
-        )
+        dateLabel.text = post.createdAt?.timeAgoSinceNow()
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         
         settingsButton.enabled = false
         if let urlString = post.image.url, url = NSURL(string: urlString) {
-            let indicator = UIActivityIndicatorView().addActivityIndicatorOn(view: postImageView)
             postImageView.kf_setImageWithURL(
                 url,
                 placeholderImage: UIImage.placeholderImage,
                 optionsInfo: nil) { [weak self] _, _, _, _ in
-                    indicator.removeFromSuperview()
+                    self?.indicator.stopAnimating()
                     self?.settingsButton.enabled = true
             }
         }

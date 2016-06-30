@@ -10,7 +10,7 @@ import UIKit
 
 typealias FollowersListRouterInterface = protocol<ProfilePresenter, AlertManagerDelegate>
 
-final class FollowersListViewController: UIViewController, StoryboardInitable {
+final class FollowersListViewController: UIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Profile
     

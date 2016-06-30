@@ -10,7 +10,7 @@ import Foundation
 
 typealias LaunchRouterInterface = AuthorizationRouterInterface
 
-final class LaunchViewController: UIViewController, StoryboardInitable {
+final class LaunchViewController: UIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.LaunchScreen
     

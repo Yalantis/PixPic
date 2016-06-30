@@ -12,7 +12,7 @@ import ParseFacebookUtilsV4
 
 typealias AuthorizationRouterInterface = protocol<FeedPresenter, AlertManagerDelegate>
 
-final class AuthorizationViewController: UIViewController, StoryboardInitable {
+final class AuthorizationViewController: UIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Authorization
     

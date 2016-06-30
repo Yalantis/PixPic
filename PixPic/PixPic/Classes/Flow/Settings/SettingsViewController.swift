@@ -17,14 +17,17 @@ private let okActionTitle = NSLocalizedString("logout_me", comment: "")
 private let enableNotificationsNibName = NSLocalizedString("enable_notifications", comment: "")
 private let followedPostsNibName = NSLocalizedString("only_following_users_posts", comment: "")
 
-private let logInNibName = NSLocalizedString("log_in", comment: "")
-private let logOutNibName = NSLocalizedString("log_out", comment: "")
+private let logInString = NSLocalizedString("log_in", comment: "")
+private let logOutString = NSLocalizedString("log_out", comment: "")
 
 enum SettingsState {
     case Common, LoggedIn, LoggedOut
 }
 
-final class SettingsViewController: UIViewController, StoryboardInitable {
+final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
+    
+    @IBOutlet private weak var logInButton: UIButton!
+    @IBOutlet private weak var logOutButton: UIButton!
     
     static let storyboardName = Constants.Storyboard.Settings
     var router: SettingsRouterInterface!
@@ -39,38 +42,11 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
             object: nil
         )
     }
-    private lazy var logIn: UIView = TextView.instanceFromNib(logInNibName) {
-        self.router.showAuthorization()
-    }
-    private lazy var logOut: UIView = TextView.instanceFromNib(logOutNibName) {
-        let alertController = UIAlertController(
-            title: nil,
-            message: logoutMessage,
-            preferredStyle: .ActionSheet
-        )
-        
-        let cancelAction = UIAlertAction(
-            title: cancelActionTitle,
-            style: .Cancel
-            ) { _ in
-                PushNotificationQueue.handleNotificationQueue()
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        alertController.addAction(cancelAction)
-        
-        let okAction = UIAlertAction(
-            title: okActionTitle,
-            style: .Default
-            ) { _ in
-                self.logout()
-        }
-        alertController.addAction(okAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
     
     private var settings = [SettingsState: [UIView]]()
     private weak var locator: ServiceLocator!
     
+    @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var settingsStack: UIStackView!
     
     // MARK: - Lifecycle
@@ -78,6 +54,10 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
         super.viewDidLoad()
         
         setupAvailableSettings()
+        updateVersionLabel()
+        
+        logInButton.setTitle(logInString, forState: .Normal)
+        logOutButton.setTitle(logOutString, forState: .Normal)
     }
     
     // MARK: - Setup methods
@@ -92,20 +72,25 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
             settingsStack.addArrangedSubview(view)
         }
         let currentUser = User.currentUser()
-        if User.notAuthorized {
-            settings[.LoggedOut] = [logIn]
-            for view in settings[.LoggedOut]! {
-                settingsStack.addArrangedSubview(view)
-            }
-        } else if currentUser != nil {
-            settings[.LoggedIn] = [followedPosts, logOut]
+        let notAuthorized = User.notAuthorized
+        
+        if currentUser != nil && notAuthorized == false {
+            settings[.LoggedIn] = [followedPosts]
             for view in settings[.LoggedIn]! {
                 settingsStack.addArrangedSubview(view)
             }
         }
+        logInButton.hidden = !notAuthorized
+        logOutButton.hidden = notAuthorized
+        
     }
     
-    private func logout() {
+    private func updateVersionLabel() {
+        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]!
+        versionLabel.text = "PixPic v. \(version)"
+    }
+    
+    @IBAction private func logout(sender: AnyObject) {
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
             
@@ -122,6 +107,36 @@ final class SettingsViewController: UIViewController, StoryboardInitable {
                 }
             }
         )
+    }
+    
+    @IBAction private func logIn(sender: AnyObject) {
+        self.router.showAuthorization()
+    }
+    
+    private func showlogOutAlert() {
+        let alertController = UIAlertController(
+            title: nil,
+            message: logoutMessage,
+            preferredStyle: .ActionSheet
+        )
+        
+        let cancelAction = UIAlertAction.appAlertAction(
+            title: cancelActionTitle,
+            style: .Cancel
+        ) { _ in
+            PushNotificationQueue.handleNotificationQueue()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction.appAlertAction(
+            title: okActionTitle,
+            style: .Default
+        ) { _ in
+            self.showlogOutAlert()
+        }
+        alertController.addAction(okAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
 }

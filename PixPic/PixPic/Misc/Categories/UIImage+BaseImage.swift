@@ -11,11 +11,15 @@ import UIKit
 extension UIImage {
     
     static var appBackButton: UIImage? {
-        return UIImage(named: "icon_back_arrow")
+        return UIImage(named: "backArrow")
     }
     
     static var placeholderImage: UIImage? {
         return UIImage(named: "noPhotoPlaceholder")
+    }
+    
+    static var stickerPlaceholderImage: UIImage? {
+        return UIImage(named: "stickerPlaceholderImage")
     }
     
     static var avatarPlaceholderImage: UIImage? {

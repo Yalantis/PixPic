@@ -10,9 +10,9 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <Toast/UIView+Toast.h>
 #import <SVPullToRefresh/SVPullToRefresh.h>
-#import <MHPrettyDate/MHPrettyDate.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <DateTools/DateTools.h>
 #import "VPImageCropperViewController.h"
 #import "NSTimer+Block.h"
 

@@ -17,7 +17,7 @@ target 'PixPic' do
     # UI
         pod 'Toast', '~> 3.0'
         pod 'SVPullToRefresh'
-        pod 'MHPrettyDate', '~> 1.1'
+        pod 'DateTools’, '~> 1.7.0'
         pod 'DZNEmptyDataSet', '~> 1.7'
         pod 'MBProgressHUD', '~> 0.9.2'
         pod 'AFDropdownNotification', '~> 1.0'
