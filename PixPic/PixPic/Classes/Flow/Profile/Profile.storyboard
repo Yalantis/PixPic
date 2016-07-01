@@ -303,7 +303,7 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEdit" translatesAutoresizingMaskIntoConstraints="NO" id="5e0-Qc-FLd">
-                                        <rect key="frame" x="20" y="285" width="335" height="261"/>
+                                        <rect key="frame" x="20" y="275" width="335" height="301"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -322,13 +322,13 @@
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="width" secondItem="iIb-XJ-1cU" secondAttribute="width" constant="20" id="Tyr-5k-HVl"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="ZLo-Bf-9SW"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="top" secondItem="iIb-XJ-1cU" secondAttribute="bottom" constant="2" id="biI-sk-jw0"/>
-                                    <constraint firstItem="5e0-Qc-FLd" firstAttribute="top" secondItem="Gwd-Au-Ldp" secondAttribute="bottom" constant="30" id="fbv-FZ-M1S"/>
+                                    <constraint firstItem="5e0-Qc-FLd" firstAttribute="top" secondItem="Gwd-Au-Ldp" secondAttribute="bottom" constant="20" id="fbv-FZ-M1S"/>
                                     <constraint firstItem="tSx-pl-R4d" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="kS4-Vs-bvH"/>
                                     <constraint firstItem="tSx-pl-R4d" firstAttribute="leading" secondItem="DAu-4M-uxh" secondAttribute="leading" id="kma-uK-Bf7"/>
                                     <constraint firstItem="F8s-G4-bV3" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="nQf-pI-gHF"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="lkT-uC-fK2" secondAttribute="top" constant="30" id="pol-gl-S6B"/>
                                     <constraint firstItem="5e0-Qc-FLd" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="20" id="qus-bk-gDd"/>
-                                    <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="5e0-Qc-FLd" secondAttribute="bottom" constant="50" id="rvp-KV-fNg"/>
+                                    <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="5e0-Qc-FLd" secondAttribute="bottom" constant="20" id="rvp-KV-fNg"/>
                                     <constraint firstAttribute="bottom" secondItem="F8s-G4-bV3" secondAttribute="bottom" id="xla-wv-nv8"/>
                                 </constraints>
                                 <variation key="default">
