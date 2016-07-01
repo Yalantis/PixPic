@@ -22,7 +22,7 @@ private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let okActionTitle = NSLocalizedString("ok", comment: "")
 private let textFieldAnimationDuration: NSTimeInterval = 0.3
 
-final class EditProfileViewController: UIViewController, StoryboardInitiable {
+final class EditProfileViewController: BaseUIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Profile
     

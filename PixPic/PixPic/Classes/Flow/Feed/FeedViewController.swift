@@ -53,6 +53,11 @@
         
         AlertManager.sharedInstance.setAlertDelegate(router)
         tableView.reloadData()
+        
+        let subviews = navigationController!.navigationBar.subviews
+        for view in subviews {
+            view.exclusiveTouch = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
