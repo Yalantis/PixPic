@@ -2,9 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXq-ZV-3AE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Autorization View Controller-->
@@ -20,13 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="emojiLogin" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-sq-O8V">
-                                <rect key="frame" x="20" y="259.5" width="560" height="328.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="UF8-sq-O8V" secondAttribute="height" multiplier="351:206" id="moA-ed-0dJ"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="371" width="560" height="199"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTD-CW-fGF">
-                                <rect key="frame" x="152.5" y="127" width="295" height="71"/>
+                                <rect key="frame" x="156" y="265" width="288" height="65"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -42,32 +37,22 @@
                                     <action selector="logInWithFBButtonTapped" destination="vXq-ZV-3AE" eventType="touchUpInside" id="nDa-qJ-sPr"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCQ-2d-WST">
-                                <rect key="frame" x="20" y="20" width="560" height="107"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nsf-Sf-q4g">
-                                <rect key="frame" x="20" y="198" width="560" height="61.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="M42-vQ-wuE">
+                                <rect key="frame" x="65" y="65" width="470" height="155"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="UF8-sq-O8V" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="4rw-cr-OSi"/>
-                            <constraint firstItem="WTD-CW-fGF" firstAttribute="top" secondItem="tCQ-2d-WST" secondAttribute="bottom" id="8cf-Cp-Ucg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="M42-vQ-wuE" secondAttribute="trailing" constant="45" id="AqR-cK-VZ3"/>
                             <constraint firstItem="WTD-CW-fGF" firstAttribute="centerX" secondItem="rz2-y5-t88" secondAttribute="centerX" id="Bc6-av-8Rg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tCQ-2d-WST" secondAttribute="trailing" id="HTD-FM-zFJ"/>
-                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="height" secondItem="tCQ-2d-WST" secondAttribute="height" multiplier="4:7" id="IPR-bq-qI5"/>
-                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="JyE-bR-7px"/>
-                            <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="Nsf-Sf-q4g" secondAttribute="bottom" id="Uw8-ir-rat"/>
+                            <constraint firstItem="M42-vQ-wuE" firstAttribute="top" secondItem="lYv-4a-1oh" secondAttribute="bottom" constant="45" id="HQh-ED-7qi"/>
                             <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="rz2-y5-t88" secondAttribute="topMargin" constant="200" id="WoN-B0-1Xk"/>
-                            <constraint firstItem="Nsf-Sf-q4g" firstAttribute="top" secondItem="WTD-CW-fGF" secondAttribute="bottom" id="eUV-To-MqR"/>
-                            <constraint firstItem="tCQ-2d-WST" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="juZ-Nm-kQc"/>
+                            <constraint firstItem="WTD-CW-fGF" firstAttribute="top" secondItem="M42-vQ-wuE" secondAttribute="bottom" constant="45" id="g8a-rO-sQV"/>
+                            <constraint firstItem="M42-vQ-wuE" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" constant="45" id="ibu-mw-hhC"/>
                             <constraint firstItem="WTD-CW-fGF" firstAttribute="centerY" secondItem="rz2-y5-t88" secondAttribute="centerY" id="lpO-wq-Ime"/>
-                            <constraint firstItem="tCQ-2d-WST" firstAttribute="top" secondItem="lYv-4a-1oh" secondAttribute="bottom" id="nY6-n2-qVw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Nsf-Sf-q4g" secondAttribute="trailing" id="tCA-XQ-RiI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UF8-sq-O8V" secondAttribute="trailing" id="uoi-iA-41g"/>
-                            <constraint firstItem="Otb-eJ-vAW" firstAttribute="top" secondItem="UF8-sq-O8V" secondAttribute="bottom" constant="12" id="zmq-fn-RQU"/>
+                            <constraint firstItem="Otb-eJ-vAW" firstAttribute="top" secondItem="UF8-sq-O8V" secondAttribute="bottom" constant="30" id="zmq-fn-RQU"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -83,7 +68,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="btnLogin" width="295" height="71"/>
+        <image name="btnLogin" width="288" height="65"/>
         <image name="emojiLogin" width="346" height="199"/>
+        <image name="img1" width="277" height="155"/>
     </resources>
 </document>

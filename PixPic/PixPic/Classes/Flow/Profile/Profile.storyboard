@@ -4,14 +4,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Nootype - Radikal Medium.otf">
             <string>Radikal-Medium</string>
         </mutableArray>
         <mutableArray key="Nootype - Radikal.otf">
-            <string>Radikal</string>
             <string>Radikal</string>
             <string>Radikal</string>
             <string>Radikal</string>
@@ -46,7 +44,10 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="0.0"/>
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
@@ -248,15 +249,28 @@
                                             <constraint firstAttribute="width" secondItem="DAu-4M-uxh" secondAttribute="height" multiplier="1:1" id="QXa-GO-cdH"/>
                                             <constraint firstAttribute="width" constant="191" id="mdh-xk-oC0"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSx-pl-R4d" userLabel="Edit Image Button">
                                         <rect key="frame" x="92" y="30" width="191" height="191"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="avatarTapAction:" destination="bt5-ep-FuB" eventType="touchUpInside" id="H2Q-1M-fCA"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
-                                        <rect key="frame" x="157" y="233" width="60" height="19"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
+                                        <rect key="frame" x="162.5" y="233" width="49" height="19"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="3bb-5Q-23X"/>
@@ -281,73 +295,40 @@
                                             <outlet property="delegate" destination="bt5-ep-FuB" id="bNS-Cn-ubX"/>
                                         </connections>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.84999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="evV-Jz-9Yk">
-                                        <rect key="frame" x="32" y="457" width="311" height="48"/>
-                                        <string key="text">Remember!  
-PixPic makes your photos more creative.</string>
-                                        <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="emoji3" translatesAutoresizingMaskIntoConstraints="NO" id="K8E-hi-aIN">
-                                        <rect key="frame" x="142" y="342.5" width="90" height="85"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Flk-vx-KfD">
-                                        <rect key="frame" x="0.0" y="505" width="375" height="90.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hqq-Fy-EDd">
-                                        <rect key="frame" x="0.0" y="434" width="375" height="32"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
-                                        <rect key="frame" x="147" y="254" width="80" height="2"/>
+                                        <rect key="frame" x="152" y="254" width="69" height="1"/>
                                         <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ObT-3a-ehb"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4X-79-nC9">
-                                        <rect key="frame" x="0.0" y="252" width="375" height="90.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEdit" translatesAutoresizingMaskIntoConstraints="NO" id="5e0-Qc-FLd">
+                                        <rect key="frame" x="20" y="285" width="335" height="261"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5e0-Qc-FLd" secondAttribute="trailing" constant="20" id="2FR-yp-A9w"/>
                                     <constraint firstItem="tSx-pl-R4d" firstAttribute="trailing" secondItem="DAu-4M-uxh" secondAttribute="trailing" id="4F5-Bf-XRb"/>
                                     <constraint firstAttribute="trailing" secondItem="iIb-XJ-1cU" secondAttribute="trailing" constant="60" id="4uL-Is-eny"/>
-                                    <constraint firstAttribute="trailing" secondItem="h4X-79-nC9" secondAttribute="trailing" id="5Ql-Yt-2us"/>
-                                    <constraint firstItem="hqq-Fy-EDd" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="B5B-7Y-Swp"/>
                                     <constraint firstItem="iIb-XJ-1cU" firstAttribute="top" secondItem="tSx-pl-R4d" secondAttribute="bottom" constant="12" id="Eh3-RE-M3T"/>
-                                    <constraint firstItem="h4X-79-nC9" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="F1h-Qz-TzL"/>
-                                    <constraint firstItem="evV-Jz-9Yk" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="32" id="FYd-pO-ck3"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="bottom" secondItem="tSx-pl-R4d" secondAttribute="bottom" id="GTS-eb-4lO"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="Hjp-Gw-O2S"/>
-                                    <constraint firstItem="evV-Jz-9Yk" firstAttribute="top" secondItem="hqq-Fy-EDd" secondAttribute="bottom" id="InD-aK-UeR"/>
                                     <constraint firstItem="iIb-XJ-1cU" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="Li9-r5-aSN"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="tSx-pl-R4d" secondAttribute="top" id="MpP-Ju-uER"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="width" secondItem="iIb-XJ-1cU" secondAttribute="width" id="N9y-Vc-W4l"/>
                                     <constraint firstItem="iIb-XJ-1cU" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="59" id="QyI-wi-1Ep"/>
-                                    <constraint firstAttribute="trailing" secondItem="Flk-vx-KfD" secondAttribute="trailing" id="RFM-ga-uik"/>
                                     <constraint firstAttribute="trailing" secondItem="F8s-G4-bV3" secondAttribute="trailing" id="SWB-tt-gRB"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="width" secondItem="iIb-XJ-1cU" secondAttribute="width" constant="20" id="Tyr-5k-HVl"/>
-                                    <constraint firstItem="hqq-Fy-EDd" firstAttribute="height" secondItem="h4X-79-nC9" secondAttribute="height" multiplier="1:3" id="WdZ-gy-sYm"/>
-                                    <constraint firstItem="K8E-hi-aIN" firstAttribute="top" secondItem="h4X-79-nC9" secondAttribute="bottom" id="Wey-Rj-wyH"/>
-                                    <constraint firstItem="hqq-Fy-EDd" firstAttribute="top" secondItem="K8E-hi-aIN" secondAttribute="bottom" id="ZCm-ce-qZB"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="ZLo-Bf-9SW"/>
-                                    <constraint firstAttribute="trailing" secondItem="evV-Jz-9Yk" secondAttribute="trailing" constant="32" id="aKO-UJ-lJR"/>
-                                    <constraint firstItem="K8E-hi-aIN" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="aSz-xw-IEd"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="top" secondItem="iIb-XJ-1cU" secondAttribute="bottom" constant="2" id="biI-sk-jw0"/>
-                                    <constraint firstItem="h4X-79-nC9" firstAttribute="top" secondItem="iIb-XJ-1cU" secondAttribute="bottom" id="fjF-W2-fOP"/>
-                                    <constraint firstItem="hqq-Fy-EDd" firstAttribute="height" secondItem="Flk-vx-KfD" secondAttribute="height" multiplier="1:3" id="foi-N3-YI0"/>
-                                    <constraint firstItem="Flk-vx-KfD" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="hJx-Pv-fKI"/>
+                                    <constraint firstItem="5e0-Qc-FLd" firstAttribute="top" secondItem="Gwd-Au-Ldp" secondAttribute="bottom" constant="30" id="fbv-FZ-M1S"/>
                                     <constraint firstItem="tSx-pl-R4d" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="kS4-Vs-bvH"/>
                                     <constraint firstItem="tSx-pl-R4d" firstAttribute="leading" secondItem="DAu-4M-uxh" secondAttribute="leading" id="kma-uK-Bf7"/>
-                                    <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="Flk-vx-KfD" secondAttribute="bottom" id="l7e-U9-8sK"/>
                                     <constraint firstItem="F8s-G4-bV3" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="nQf-pI-gHF"/>
-                                    <constraint firstAttribute="trailing" secondItem="hqq-Fy-EDd" secondAttribute="trailing" id="pS8-cq-P19"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="lkT-uC-fK2" secondAttribute="top" constant="30" id="pol-gl-S6B"/>
-                                    <constraint firstItem="Flk-vx-KfD" firstAttribute="top" secondItem="evV-Jz-9Yk" secondAttribute="bottom" id="qxD-1v-aKW"/>
+                                    <constraint firstItem="5e0-Qc-FLd" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="20" id="qus-bk-gDd"/>
+                                    <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="5e0-Qc-FLd" secondAttribute="bottom" constant="50" id="rvp-KV-fNg"/>
                                     <constraint firstAttribute="bottom" secondItem="F8s-G4-bV3" secondAttribute="bottom" id="xla-wv-nv8"/>
                                 </constraints>
                                 <variation key="default">
@@ -383,7 +364,7 @@ PixPic makes your photos more creative.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="emoji3" width="90" height="85"/>
         <image name="icEdit" width="19" height="19"/>
+        <image name="imgEdit" width="255" height="193"/>
     </resources>
 </document>
