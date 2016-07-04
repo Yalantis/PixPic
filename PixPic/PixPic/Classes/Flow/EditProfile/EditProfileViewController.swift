@@ -45,6 +45,8 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
     
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unlerlineWidth: NSLayoutConstraint!
+    
     @IBOutlet private weak var saveButton: UIButton!
    
     // MARK: - Lifecycle
@@ -55,6 +57,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
         view.layoutIfNeeded()
         configureImagesAndText()
         subscribeOnNotifications()
+        changeNickNameTextFieldWidth()
     }
     
     deinit {
@@ -280,8 +283,10 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
         }
     }
     
-    @IBAction func changeNickNameTextFieldWidth(sender: AnyObject) {
-        nickNameTextField.invalidateIntrinsicContentSize()
+    @IBAction func changeNickNameTextFieldWidth() {
+        if let width = nickNameTextField.attributedText?.size().width {
+             unlerlineWidth.constant = width + 20
+        }
     }
     
 }

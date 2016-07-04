@@ -44,7 +44,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="1"/>
+                                                    <real key="value" value="0.0"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                     <color key="value" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,7 +270,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="Name" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iIb-XJ-1cU">
-                                        <rect key="frame" x="162.5" y="233" width="49" height="19"/>
+                                        <rect key="frame" x="0.0" y="233" width="375" height="19"/>
                                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="3bb-5Q-23X"/>
@@ -290,16 +290,17 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="changeNickNameTextFieldWidth:" destination="bt5-ep-FuB" eventType="editingChanged" id="t0D-tz-rT0"/>
+                                            <action selector="changeNickNameTextFieldWidth" destination="bt5-ep-FuB" eventType="editingChanged" id="p8K-BT-W3a"/>
                                             <action selector="searchTextFieldValueChanged:" destination="bt5-ep-FuB" eventType="editingDidEnd" id="0t5-n3-f9j"/>
                                             <outlet property="delegate" destination="bt5-ep-FuB" id="bNS-Cn-ubX"/>
                                         </connections>
                                     </textField>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
-                                        <rect key="frame" x="152" y="254" width="69" height="1"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwd-Au-Ldp">
+                                        <rect key="frame" x="153" y="254" width="69" height="1"/>
                                         <color key="backgroundColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="ObT-3a-ehb"/>
+                                            <constraint firstAttribute="width" constant="69" id="tSc-vq-GOF"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgEdit" translatesAutoresizingMaskIntoConstraints="NO" id="5e0-Qc-FLd">
@@ -314,12 +315,10 @@
                                     <constraint firstItem="iIb-XJ-1cU" firstAttribute="top" secondItem="tSx-pl-R4d" secondAttribute="bottom" constant="12" id="Eh3-RE-M3T"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="bottom" secondItem="tSx-pl-R4d" secondAttribute="bottom" id="GTS-eb-4lO"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="Hjp-Gw-O2S"/>
-                                    <constraint firstItem="iIb-XJ-1cU" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="Li9-r5-aSN"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="tSx-pl-R4d" secondAttribute="top" id="MpP-Ju-uER"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="width" secondItem="iIb-XJ-1cU" secondAttribute="width" id="N9y-Vc-W4l"/>
                                     <constraint firstItem="iIb-XJ-1cU" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="59" id="QyI-wi-1Ep"/>
                                     <constraint firstAttribute="trailing" secondItem="F8s-G4-bV3" secondAttribute="trailing" id="SWB-tt-gRB"/>
-                                    <constraint firstItem="Gwd-Au-Ldp" firstAttribute="width" secondItem="iIb-XJ-1cU" secondAttribute="width" constant="20" id="Tyr-5k-HVl"/>
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="centerX" secondItem="lkT-uC-fK2" secondAttribute="centerX" id="ZLo-Bf-9SW"/>
                                     <constraint firstItem="Gwd-Au-Ldp" firstAttribute="top" secondItem="iIb-XJ-1cU" secondAttribute="bottom" constant="2" id="biI-sk-jw0"/>
                                     <constraint firstItem="5e0-Qc-FLd" firstAttribute="top" secondItem="Gwd-Au-Ldp" secondAttribute="bottom" constant="20" id="fbv-FZ-M1S"/>
@@ -329,6 +328,8 @@
                                     <constraint firstItem="DAu-4M-uxh" firstAttribute="top" secondItem="lkT-uC-fK2" secondAttribute="top" constant="30" id="pol-gl-S6B"/>
                                     <constraint firstItem="5e0-Qc-FLd" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" constant="20" id="qus-bk-gDd"/>
                                     <constraint firstItem="F8s-G4-bV3" firstAttribute="top" secondItem="5e0-Qc-FLd" secondAttribute="bottom" constant="20" id="rvp-KV-fNg"/>
+                                    <constraint firstAttribute="trailing" secondItem="iIb-XJ-1cU" secondAttribute="trailing" id="s0A-1a-Pqo"/>
+                                    <constraint firstItem="iIb-XJ-1cU" firstAttribute="leading" secondItem="lkT-uC-fK2" secondAttribute="leading" id="tcU-Cf-ET9"/>
                                     <constraint firstAttribute="bottom" secondItem="F8s-G4-bV3" secondAttribute="bottom" id="xla-wv-nv8"/>
                                 </constraints>
                                 <variation key="default">
@@ -356,6 +357,7 @@
                         <outlet property="nickNameTextField" destination="iIb-XJ-1cU" id="I9m-6H-Trx"/>
                         <outlet property="saveButton" destination="F8s-G4-bV3" id="YcT-MY-Dz4"/>
                         <outlet property="topConstraint" destination="cpE-wE-WgZ" id="3TD-Wh-7nA"/>
+                        <outlet property="unlerlineWidth" destination="tSc-vq-GOF" id="lCG-tU-Rqk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aGg-Rk-Ufu" userLabel="First Responder" sceneMemberID="firstResponder"/>
