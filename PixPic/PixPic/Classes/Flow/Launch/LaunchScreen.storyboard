@@ -60,7 +60,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="img1" width="281" height="175"/>
+        <image name="img1" width="277" height="155"/>
         <image name="img2" width="319" height="324"/>
     </resources>
 </document>

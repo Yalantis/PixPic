@@ -75,7 +75,6 @@
 		7774D90B1D0EC50700E5DCE0 /* ExceptionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8911D0EC50700E5DCE0 /* ExceptionHandler.swift */; };
 		7774D90C1D0EC50700E5DCE0 /* PFFile+ImageForContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8921D0EC50700E5DCE0 /* PFFile+ImageForContent.swift */; };
 		7774D90D1D0EC50700E5DCE0 /* PhotoProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8931D0EC50700E5DCE0 /* PhotoProvider.swift */; };
-		7774D90E1D0EC50700E5DCE0 /* PhotoProvider.swift.orig in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8941D0EC50700E5DCE0 /* PhotoProvider.swift.orig */; };
 		7774D90F1D0EC50700E5DCE0 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8951D0EC50700E5DCE0 /* PostService.swift */; };
 		7774D9101D0EC50700E5DCE0 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8961D0EC50700E5DCE0 /* Presenter.swift */; };
 		7774D9111D0EC50700E5DCE0 /* PushNotificationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8971D0EC50700E5DCE0 /* PushNotificationQueue.swift */; };
@@ -202,7 +201,6 @@
 		7774D8911D0EC50700E5DCE0 /* ExceptionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExceptionHandler.swift; sourceTree = "<group>"; };
 		7774D8921D0EC50700E5DCE0 /* PFFile+ImageForContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PFFile+ImageForContent.swift"; sourceTree = "<group>"; };
 		7774D8931D0EC50700E5DCE0 /* PhotoProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoProvider.swift; sourceTree = "<group>"; };
-		7774D8941D0EC50700E5DCE0 /* PhotoProvider.swift.orig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PhotoProvider.swift.orig; sourceTree = "<group>"; };
 		7774D8951D0EC50700E5DCE0 /* PostService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		7774D8961D0EC50700E5DCE0 /* Presenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		7774D8971D0EC50700E5DCE0 /* PushNotificationQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationQueue.swift; sourceTree = "<group>"; };
@@ -505,7 +503,6 @@
 				7774D8911D0EC50700E5DCE0 /* ExceptionHandler.swift */,
 				7774D8921D0EC50700E5DCE0 /* PFFile+ImageForContent.swift */,
 				7774D8931D0EC50700E5DCE0 /* PhotoProvider.swift */,
-				7774D8941D0EC50700E5DCE0 /* PhotoProvider.swift.orig */,
 				7774D8951D0EC50700E5DCE0 /* PostService.swift */,
 				7774D8961D0EC50700E5DCE0 /* Presenter.swift */,
 				7774D8971D0EC50700E5DCE0 /* PushNotificationQueue.swift */,
@@ -752,7 +749,6 @@
 				7774D8EF1D0EC50700E5DCE0 /* PostViewCell.xib in Resources */,
 				7774D8DC1D0EC50700E5DCE0 /* Authorization.storyboard in Resources */,
 				7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */,
-				7774D90E1D0EC50700E5DCE0 /* PhotoProvider.swift.orig in Resources */,
 				7774D9331D0EC50700E5DCE0 /* Nootype - Radikal Light Italic.otf in Resources */,
 				7774D9051D0EC50700E5DCE0 /* TextView.xib in Resources */,
 				7774D9311D0EC50700E5DCE0 /* Nootype - Radikal Bold.otf in Resources */,

@@ -85,10 +85,12 @@ class StickersLoaderService {
         for group in stickersGroups {
             group.pinInBackground()
 
-            let stickersRelationQuery = group.stickersRelation.query()
+            let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
+            
             if isQueryFromLocalDataStore {
                 stickersRelationQuery.fromLocalDatastore()
             }
+            
             stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
                 if let error = error {
                     log.debug(error.localizedDescription)
@@ -96,7 +98,6 @@ class StickersLoaderService {
                     
                     return
                 }
-                
                 guard let objects = objects as? [Sticker] else {
                     completion(objects: nil, error: nil)
                     

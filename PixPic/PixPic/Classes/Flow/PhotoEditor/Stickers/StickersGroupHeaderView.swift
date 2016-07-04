@@ -52,4 +52,8 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         }
     }
     
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
+    
 }
