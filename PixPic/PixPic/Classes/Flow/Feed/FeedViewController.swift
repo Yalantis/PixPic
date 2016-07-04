@@ -34,7 +34,7 @@
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.makeToastActivity(CSToastPositionCenter)
+        view.makeToastActivity(CSToastPositionTop)
         setupTableView()
         setupToolBar()
         setupAdapter()
@@ -44,7 +44,6 @@
         if ReachabilityHelper.isReachable() {
             ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
-            view.hideToastActivity()
         }
     }
     
@@ -164,6 +163,7 @@
             guard let this = self else {
                 return
             }
+            this.view.hideToastActivity()
             if let objects = objects {
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.scrollToFirstRow()
