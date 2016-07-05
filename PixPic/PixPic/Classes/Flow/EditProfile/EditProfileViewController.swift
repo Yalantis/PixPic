@@ -154,7 +154,7 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
                 ) { [weak self] action in
                     PushNotificationQueue.handleNotificationQueue()
                     alertController.dismissViewControllerAnimated(true, completion: nil)
-                    self?.navigationController!.popViewControllerAnimated(true)
+                    self?.navigationController?.popViewControllerAnimated(true)
             }
             alertController.addAction(noAction)
             
@@ -169,7 +169,7 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
             
             self.presentViewController(alertController, animated: true) {}
         } else {
-            navigationController!.popViewControllerAnimated(true)
+            navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -263,7 +263,7 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
                 self.view.userInteractionEnabled = true
             }
         )
-        navigationController!.popToRootViewControllerAnimated(true)
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
     // MARK: - IBActions
