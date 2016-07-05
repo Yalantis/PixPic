@@ -44,7 +44,6 @@
         if ReachabilityHelper.isReachable() {
             ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
-            view.hideToastActivity()
         }
     }
     
@@ -143,7 +142,6 @@
     
     private func setupPlaceholderForEmptyDataSet() {
         tableView?.emptyDataSetDelegate = self
-        tableView?.emptyDataSetSource = self
     }
     
     // MARK: - photo editor
@@ -170,6 +168,7 @@
             guard let this = self else {
                 return
             }
+            this.view.hideToastActivity()
             if let objects = objects {
                 this.postAdapter.update(withPosts: objects, action: .Reload)
                 this.scrollToFirstRow()
@@ -314,30 +313,6 @@
     
     func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
         return true
-    }
-    
- }
- 
- // MARK: - DZNEmptyDataSetSource methods
- extension FeedViewController: DZNEmptyDataSetSource {
-    
-    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-                          NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        return NSAttributedString(string: titleForEmptyData, attributes: attributes)
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.lineBreakMode = .ByWordWrapping
-        paragraph.alignment = .Center
-        
-        let attributes = [NSFontAttributeName: UIFont.boldSystemFontOfSize(15),
-                          NSForegroundColorAttributeName: UIColor.lightGrayColor(),
-                          NSParagraphStyleAttributeName: paragraph]
-        
-        return NSAttributedString(string: descriptionForEmptyData, attributes: attributes)
     }
     
  }

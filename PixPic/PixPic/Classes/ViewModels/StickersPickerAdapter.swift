@@ -13,7 +13,7 @@ private let animationDuration = 0.3
 class StickersPickerAdapter: NSObject {
     
     private var currentGroupIndex: Int?
-    private var stickersGroups: [StickersModel]?
+    private var stickersModels: [StickersModel]?
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
     private var currentContentOffset: CGPoint!
@@ -26,7 +26,7 @@ class StickersPickerAdapter: NSObject {
     }
     
     func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
-        guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersGroups else {
+        guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersModels else {
             return
         }
         let image = stickersGroups[currentGroupNumber].stickers[indexPath.row].image
@@ -43,8 +43,8 @@ class StickersPickerAdapter: NSObject {
     }
     
     func sortStickersGroups(groups: [StickersModel]) {
-        stickersGroups = groups.sort {
-            $0.stickersGroup.label > $1.stickersGroup.label
+        stickersModels = groups.sort {
+            $0.stickersGroup.label < $1.stickersGroup.label
         }
     }
     
@@ -52,7 +52,7 @@ class StickersPickerAdapter: NSObject {
     private func calculateCellsIndexPath(section section: Int, count: Int = 0) -> [NSIndexPath] {
         var cells = [NSIndexPath]()
         
-        guard let stickersGroups = stickersGroups else {
+        guard let stickersGroups = stickersModels else {
             return cells
         }
                 
@@ -66,7 +66,7 @@ class StickersPickerAdapter: NSObject {
     private func calculateOtherSectionsIndexPath(section section: Int) -> NSIndexSet {
         let sections = NSMutableIndexSet()
         
-        guard let stickersGroups = stickersGroups else {
+        guard let stickersGroups = stickersModels else {
             return sections
         }
         
@@ -90,7 +90,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
         if isGroupSelected {
             numberOfSections = 1
         } else {
-            numberOfSections = stickersGroups?.count ?? 0
+            numberOfSections = stickersModels?.count ?? 0
         }
         
         return numberOfSections
@@ -98,7 +98,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let currentGroupNumber = currentGroupIndex {
-            return stickersGroups![currentGroupNumber].stickers.count
+            return stickersModels![currentGroupNumber].stickers.count
         } else {
             return 0
         }
@@ -110,7 +110,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
             forIndexPath: indexPath
             ) as! StickerViewCell
         
-        if let stickersGroups = stickersGroups {
+        if let stickersGroups = stickersModels {
             let sticker = stickersGroups[currentGroupIndex ?? 0].stickers[indexPath.row]
             cell.setStickerContent(sticker)
         }
@@ -128,7 +128,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
                 forIndexPath: indexPath
                 ) as! StickersGroupHeaderView
             
-            guard let stickersGroups = stickersGroups else {
+            guard let stickersGroups = stickersModels else {
                 return reusableview
             }
             let group = stickersGroups[currentGroupIndex ?? indexPath.section]

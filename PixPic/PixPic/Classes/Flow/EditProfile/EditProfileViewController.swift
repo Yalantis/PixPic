@@ -21,6 +21,7 @@ private let logoutActionTitle = NSLocalizedString("logout_me", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let okActionTitle = NSLocalizedString("ok", comment: "")
 private let textFieldAnimationDuration: NSTimeInterval = 0.3
+private let nickNameTextFieldUnderlineOffset: CGFloat = 20
 
 final class EditProfileViewController: BaseUIViewController, StoryboardInitiable {
     
@@ -45,6 +46,8 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
     
     @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unlerlineWidth: NSLayoutConstraint!
+    
     @IBOutlet private weak var saveButton: UIButton!
    
     // MARK: - Lifecycle
@@ -55,6 +58,7 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
         view.layoutIfNeeded()
         configureImagesAndText()
         subscribeOnNotifications()
+        changeNickNameTextFieldWidth()
     }
     
     deinit {
@@ -280,8 +284,10 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
         }
     }
     
-    @IBAction func changeNickNameTextFieldWidth(sender: AnyObject) {
-        nickNameTextField.invalidateIntrinsicContentSize()
+    @IBAction func changeNickNameTextFieldWidth() {
+        if let width = nickNameTextField.attributedText?.size().width {
+             unlerlineWidth.constant = width + nickNameTextFieldUnderlineOffset
+        }
     }
     
 }
