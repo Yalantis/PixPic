@@ -21,6 +21,7 @@ private let logoutActionTitle = NSLocalizedString("logout_me", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let okActionTitle = NSLocalizedString("ok", comment: "")
 private let textFieldAnimationDuration: NSTimeInterval = 0.3
+private let nickNameTextFieldUnderlineOffset: CGFloat = 20
 
 final class EditProfileViewController: UIViewController, StoryboardInitiable {
     
@@ -285,7 +286,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
     
     @IBAction func changeNickNameTextFieldWidth() {
         if let width = nickNameTextField.attributedText?.size().width {
-             unlerlineWidth.constant = width + 20
+             unlerlineWidth.constant = width + nickNameTextFieldUnderlineOffset
         }
     }
     

@@ -147,6 +147,11 @@
                                 <constraint firstItem="gLL-uG-VHv" firstAttribute="centerY" secondItem="RWA-d4-3KE" secondAttribute="centerY" id="mix-Bh-VBZ"/>
                                 <constraint firstItem="gLL-uG-VHv" firstAttribute="centerX" secondItem="RWA-d4-3KE" secondAttribute="centerX" id="z50-eE-eEy"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="gLL-uG-VHv"/>
+                                </mask>
+                            </variation>
                         </view>
                         <connections>
                             <outlet property="dataSource" destination="Lav-xa-cbI" id="mn8-Xp-Unq"/>
