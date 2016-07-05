@@ -45,7 +45,7 @@ extension FeedPresenter {
     }
     
     func showFeed() {
-        currentViewController.navigationController!.popToRootViewControllerAnimated(true)
+        currentViewController.navigationController?.popToRootViewControllerAnimated(true)
     }
     
 }
