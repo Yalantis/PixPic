@@ -45,7 +45,8 @@ extension FeedPresenter {
     }
     
     func showFeed() {
-        currentViewController.navigationController!.popToRootViewControllerAnimated(true)
+        currentViewController.navigationController?.viewControllers.first?.navigationItem.title = Constants.Feed.NavigationTitle
+        currentViewController.navigationController?.popToRootViewControllerAnimated(true)
     }
     
 }

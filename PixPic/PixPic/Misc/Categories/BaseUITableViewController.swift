@@ -26,4 +26,14 @@ class BaseUITableViewController: UITableViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let subviews = navigationController?.navigationBar.subviews {
+            for view in subviews {
+                view.exclusiveTouch = true
+            }
+        }
+    }
+    
 }

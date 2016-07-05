@@ -23,7 +23,7 @@ private let okActionTitle = NSLocalizedString("ok", comment: "")
 private let textFieldAnimationDuration: NSTimeInterval = 0.3
 private let nickNameTextFieldUnderlineOffset: CGFloat = 20
 
-final class EditProfileViewController: UIViewController, StoryboardInitiable {
+final class EditProfileViewController: BaseUIViewController, StoryboardInitiable {
     
     static let storyboardName = Constants.Storyboard.Profile
     
@@ -158,7 +158,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
                 ) { [weak self] action in
                     PushNotificationQueue.handleNotificationQueue()
                     alertController.dismissViewControllerAnimated(true, completion: nil)
-                    self?.navigationController!.popViewControllerAnimated(true)
+                    self?.navigationController?.popViewControllerAnimated(true)
             }
             alertController.addAction(noAction)
             
@@ -173,7 +173,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
             
             self.presentViewController(alertController, animated: true) {}
         } else {
-            navigationController!.popViewControllerAnimated(true)
+            navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -267,7 +267,7 @@ final class EditProfileViewController: UIViewController, StoryboardInitiable {
                 self.view.userInteractionEnabled = true
             }
         )
-        navigationController!.popToRootViewControllerAnimated(true)
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
     // MARK: - IBActions
