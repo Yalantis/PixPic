@@ -27,7 +27,7 @@ final class LaunchViewController: UIViewController, StoryboardInitiable {
 extension LaunchViewController: NavigationControllerAppearanceContext {
     
     func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
-        var appearance = Appearance()
+        let appearance = Appearance()
         return appearance
     }
     
