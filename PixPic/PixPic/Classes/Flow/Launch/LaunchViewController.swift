@@ -22,3 +22,14 @@ final class LaunchViewController: UIViewController, StoryboardInitiable {
     }
 
 }
+
+// MARK: - NavigationControllerAppearanceContext methods
+extension LaunchViewController: NavigationControllerAppearanceContext {
+    
+    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+        let appearance = Appearance()
+        return appearance
+    }
+    
+}
+
