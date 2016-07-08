@@ -16,7 +16,6 @@ class StickersLoaderService {
     
     func loadStickers(completion: LoadingStickersCompletion) {
         let query = StickersVersion.sortedQuery
-        var stickersVersion = StickersVersion()
         
         needToUpdateVersion { [weak self] needUpdate in
             guard let this = self else {
@@ -34,17 +33,15 @@ class StickersLoaderService {
                     return
                 }
                 
-                guard let object = object as? StickersVersion  else {
+                guard let remoteVersion = object as? StickersVersion  else {
                     completion(objects: nil, error: nil)
                     
                     return
                 }
                 
-                stickersVersion = object
-                stickersVersion.pinInBackground()
-                
-                this.loadStickersGroups(stickersVersion) { objects, error in
+                this.loadStickersGroups(remoteVersion) { objects, error in
                     completion(objects: objects, error: error)
+                    remoteVersion.pinInBackground()
                 }
             }
         }
@@ -122,7 +119,6 @@ class StickersLoaderService {
     }
 
     private func needToUpdateVersion(completion: Bool -> Void) {
-        var stickersVersion = StickersVersion()
         let query = StickersVersion.sortedQuery
         let queryFromLocal = StickersVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
@@ -141,11 +137,10 @@ class StickersLoaderService {
                 return
             }
             
-            guard let object = object as? StickersVersion else {
+            guard let remoteVersion = object as? StickersVersion else {
                 return
             }
             
-            stickersVersion = object
             queryFromLocal.getFirstObjectInBackgroundWithBlock { localObject, error in
                 if let error = error {
                     log.debug(error.localizedDescription)
@@ -158,10 +153,10 @@ class StickersLoaderService {
                     return
                 }
                 
-                if stickersVersion.version > localObject.version {
+                if remoteVersion.version > localObject.version {
                     completion(true)
                 } else {
-                    completion (false)
+                    completion(false)
                 }
             }
         }
