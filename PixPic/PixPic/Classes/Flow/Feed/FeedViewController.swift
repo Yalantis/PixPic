@@ -121,6 +121,13 @@
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
+            name: Constants.NotificationName.NewPostIsReceaved,
+            object: nil
+        )
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(fetchDataFromNotification),
             name: Constants.NotificationName.FollowersListIsUpdated,
             object: nil
         )
