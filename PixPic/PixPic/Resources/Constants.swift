@@ -16,6 +16,7 @@ struct Constants {
     
     struct NotificationName {
         static let NewPostIsUploaded = "NewPostIsUploaded"
+        static let NewPostIsReceaved = "NewPostIsReceaved"
         static let FollowersListIsUpdated = "FollowersListIsUpdated"
     }
     
