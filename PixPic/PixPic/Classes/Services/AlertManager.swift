@@ -104,6 +104,10 @@ final class AlertManager {
                     delegate?.showProfile(userId)
                     
                 default:
+                    NSNotificationCenter.defaultCenter().postNotificationName(
+                        Constants.NotificationName.NewPostIsReceaved,
+                        object: nil
+                    )
                     delegate?.showFeed()
                 }
             }
