@@ -15,12 +15,12 @@ class StickersLoaderService {
     private var isQueryFromLocalDataStore = false
     
     func loadStickers(completion: LoadingStickersCompletion) {
-        let query = StickersVersion.sortedQuery
         
-        needToUpdateVersion { [weak self] needUpdate in
+        checkIfNeedToUpdateVersion { [weak self] needUpdate in
             guard let this = self else {
                 return
             }
+            let query = StickersVersion.sortedQuery
             if !needUpdate {
                 query.fromLocalDatastore()
                 this.isQueryFromLocalDataStore = true
@@ -33,15 +33,15 @@ class StickersLoaderService {
                     return
                 }
                 
-                guard let remoteVersion = object as? StickersVersion  else {
+                guard let stickersVersion = object as? StickersVersion  else {
                     completion(objects: nil, error: nil)
                     
                     return
                 }
                 
-                this.loadStickersGroups(remoteVersion) { objects, error in
+                this.loadStickersGroups(stickersVersion) { objects, error in
+                    stickersVersion.pinInBackground()
                     completion(objects: objects, error: error)
-                    remoteVersion.pinInBackground()
                 }
             }
         }
@@ -77,48 +77,56 @@ class StickersLoaderService {
     private func loadAllStickers(stickersGroups: [StickersGroup], completion: LoadingStickersCompletion) {
         var stickersModels = [StickersModel]()
         var stickers = [Sticker]()
-        let groupsQuantity = stickersGroups.count
+        
+        let dispatchGroup = dispatch_group_create()
         
         for group in stickersGroups {
-            group.pinInBackground()
-
-            let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
+            dispatch_group_enter(dispatchGroup)
             
-            if isQueryFromLocalDataStore {
-                stickersRelationQuery.fromLocalDatastore()
-            }
-            
-            stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
-                if let error = error {
-                    log.debug(error.localizedDescription)
-                    completion(objects: nil, error: error)
+            group.image.getDataInBackgroundWithBlock { _, _ in
+                group.pinInBackgroundWithBlock { _, _ in
+                    let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
                     
-                    return
-                }
-                guard let objects = objects as? [Sticker] else {
-                    completion(objects: nil, error: nil)
+                    if self.isQueryFromLocalDataStore {
+                        stickersRelationQuery.fromLocalDatastore()
+                    }
                     
-                    return
-                }
-                
-                stickers = objects
-                let model = StickersModel(stickersGroup: group, stickers: stickers)
-                stickersModels.append(model)
-                
-                for sticker in stickers {
-                    sticker.pinInBackground()
-                }
-                
-                if groupsQuantity == stickersModels.count {
-                    completion(objects: stickersModels, error: nil)
-                    
-                    return
+                    stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
+                        if let error = error {
+                            log.debug(error.localizedDescription)
+                            completion(objects: nil, error: error)
+                            
+                            return
+                        }
+                        guard let objects = objects as? [Sticker] else {
+                            completion(objects: nil, error: nil)
+                            
+                            return
+                        }
+                        
+                        stickers = objects
+                        let model = StickersModel(stickersGroup: group, stickers: stickers)
+                        stickersModels.append(model)
+                        
+                        dispatch_group_leave(dispatchGroup)
+                        
+                        for sticker in stickers {
+                            sticker.image.getDataInBackgroundWithBlock { _, _ in
+                                sticker.pinInBackground()
+                            }
+                        }
+                    }
                 }
             }
         }
+        
+        dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
+            completion(objects: stickersModels, error: nil)
+        }
+        
     }
-
-    private func needToUpdateVersion(completion: Bool -> Void) {
+    
+    private func checkIfNeedToUpdateVersion(completion: Bool -> Void) {
         let query = StickersVersion.sortedQuery
         let queryFromLocal = StickersVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()
@@ -161,5 +169,5 @@ class StickersLoaderService {
             }
         }
     }
-
+    
 }
