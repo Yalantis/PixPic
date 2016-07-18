@@ -59,10 +59,7 @@ static const CGFloat CSFAlbumRequestDelay = 0.5;
     
     [self setRefreshControl:[UIRefreshControl new]];
     [self.refreshControl addTarget:self action:@selector(requestAlbums) forControlEvents:UIControlEventValueChanged];
-    [self.refreshControl setTintColor:[UIColor colorWithRed:69.f/255.f
-                                                      green:212.f/255.f
-                                                       blue:232.f/255.f
-                                                      alpha:1.0f]];
+    [self.refreshControl setTintColor: [UIColor appTintColor]];
     [self.refreshControl endRefreshing];
     self.tableView.contentOffset = CGPointMake(0, -self.refreshControl.frame.size.height);
     [self.refreshControl beginRefreshing];

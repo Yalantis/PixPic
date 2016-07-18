@@ -12,13 +12,13 @@ struct Appearance: Equatable {
     
     struct Bar: Equatable {
         
-        var barTintColor = UIColor.appNavBarColor
+        var barTintColor = UIColor.appNavBarColor()
         var translucent = false
         var titleTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.appWhiteColor,
+            NSForegroundColorAttributeName: UIColor.appWhiteColor(),
             NSFontAttributeName: UIFont(name: "Radikal", size: 18)!
         ]
-        var tintColor = UIColor.appWhiteColor
+        var tintColor = UIColor.appWhiteColor()
         var topItemTitle = ""
 
     }
