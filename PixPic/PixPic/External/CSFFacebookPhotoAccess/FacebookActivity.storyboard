@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <scenes>
+        <!--Facebook Albums-->
+        <scene sceneID="zrN-RG-q6x">
+            <objects>
+                <tableViewController storyboardIdentifier="CSFFacebookAlbumsListTableViewController" id="p3z-dJ-22J" customClass="CSFFacebookAlbumsListViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqa-J3-LIh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CSFFacebookAlbumCell" rowHeight="45" id="3fr-do-JWC" customClass="CSFFacebookAlbumCell">
+                                <rect key="frame" x="0.0" y="28" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3fr-do-JWC" id="yfw-iS-hrj">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="45"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmk-Yt-3a0" userLabel="Separator">
+                                            <rect key="frame" x="10" y="44" width="310" height="1"/>
+                                            <color key="backgroundColor" red="0.87058823529999996" green="0.87450980389999999" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="X5m-u5-8eO"/>
+                                            </constraints>
+                                        </view>
+                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Gy-Nha">
+                                            <rect key="frame" x="10" y="0.0" width="43" height="43"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqy-XF-qv3">
+                                            <rect key="frame" x="63" y="2" width="224" height="23"/>
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-X6-9gI">
+                                            <rect key="frame" x="63" y="25" width="224" height="16"/>
+                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                            <color key="textColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="lmk-Yt-3a0" secondAttribute="trailing" constant="-33" id="0K1-Cc-MdT"/>
+                                        <constraint firstAttribute="bottom" secondItem="lmk-Yt-3a0" secondAttribute="bottom" id="BjT-te-GTZ"/>
+                                        <constraint firstItem="lmk-Yt-3a0" firstAttribute="leading" secondItem="yfw-iS-hrj" secondAttribute="leading" constant="10" id="EWa-zt-dW9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="albumCoverImageView" destination="hcj-Gy-Nha" id="0QX-Su-MdB"/>
+                                    <outlet property="subTitleLabel" destination="AWO-X6-9gI" id="xX2-MM-IWK"/>
+                                    <outlet property="titleLabel" destination="Pqy-XF-qv3" id="D6u-rh-dPg"/>
+                                    <segue destination="3gW-RR-6Hu" kind="push" id="bHS-5z-ZCN"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p3z-dJ-22J" id="mTk-l8-FJM"/>
+                            <outlet property="delegate" destination="p3z-dJ-22J" id="rnk-O4-lXT"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Facebook Albums" id="lz9-R5-gVk"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gy3-4S-OgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="16"/>
+        </scene>
+        <!--Facebook Expanded Album Collection View Controller-->
+        <scene sceneID="LwF-QM-tvV">
+            <objects>
+                <collectionViewController storyboardIdentifier="CSFFacebookExpandedAlbumCollectionViewController" autoresizesArchivedViewToFullSize="NO" id="3gW-RR-6Hu" customClass="CSFFacebookExpandedAlbumCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="uHO-Bt-YyS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="bEa-Hg-TX2">
+                            <size key="itemSize" width="79" height="79"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CSFFacebookPhotoCell" id="F2y-s8-Dt4" customClass="CSFFacebookPhotoCell">
+                                <rect key="frame" x="0.0" y="2" width="79" height="79"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YpD-zX-d7o">
+                                            <rect key="frame" x="0.0" y="0.0" width="79" height="79"/>
+                                        </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="25f-Uz-dMq">
+                                            <rect key="frame" x="29" y="30" width="20" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="Mcb-EL-wxg"/>
+                                                <constraint firstAttribute="height" constant="20" id="pMG-uf-Swn"/>
+                                            </constraints>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="25f-Uz-dMq" secondAttribute="centerY" id="CIX-ed-QwN"/>
+                                    <constraint firstAttribute="centerX" secondItem="25f-Uz-dMq" secondAttribute="centerX" id="Rpn-Jw-c55"/>
+                                    <constraint firstAttribute="bottom" secondItem="YpD-zX-d7o" secondAttribute="bottom" id="Uu0-yx-ldq"/>
+                                    <constraint firstItem="YpD-zX-d7o" firstAttribute="leading" secondItem="F2y-s8-Dt4" secondAttribute="leading" id="WJH-3Y-xde"/>
+                                    <constraint firstAttribute="trailing" secondItem="YpD-zX-d7o" secondAttribute="trailing" id="aCc-9X-lbk"/>
+                                    <constraint firstItem="YpD-zX-d7o" firstAttribute="top" secondItem="F2y-s8-Dt4" secondAttribute="top" id="to8-GC-Rs9"/>
+                                </constraints>
+                                <size key="customSize" width="79" height="79"/>
+                                <connections>
+                                    <outlet property="photoImageView" destination="YpD-zX-d7o" id="5Rw-fk-I2L"/>
+                                    <outlet property="progress" destination="25f-Uz-dMq" id="zYR-Iv-HBP"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="3gW-RR-6Hu" id="Twr-IB-gOr"/>
+                            <outlet property="delegate" destination="3gW-RR-6Hu" id="V8e-2k-KrR"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="bHw-1f-k9N">
+                        <nil key="title"/>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p6h-7d-w15" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="767" y="16"/>
+        </scene>
+    </scenes>
+</document>

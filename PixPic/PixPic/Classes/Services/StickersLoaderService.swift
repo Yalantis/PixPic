@@ -40,7 +40,9 @@ class StickersLoaderService {
                 }
                 
                 this.loadStickersGroups(stickersVersion) { objects, error in
-                    stickersVersion.pinInBackground()
+                    if !self!.isQueryFromLocalDataStore {
+                        stickersVersion.pinInBackground()
+                    }
                     completion(objects: objects, error: error)
                 }
             }
@@ -111,8 +113,10 @@ class StickersLoaderService {
                         dispatch_group_leave(dispatchGroup)
                         
                         for sticker in stickers {
-                            sticker.image.getDataInBackgroundWithBlock { _, _ in
-                                sticker.pinInBackground()
+                            if !self.isQueryFromLocalDataStore {
+                                sticker.image.getDataInBackgroundWithBlock { _, _ in
+                                    sticker.pinInBackground()
+                                }
                             }
                         }
                     }

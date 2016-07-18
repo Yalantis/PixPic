@@ -11,6 +11,7 @@ import AVFoundation
 
 private let takePhotoOption = NSLocalizedString("take_photo", comment: "")
 private let selectFromLibraryOption = NSLocalizedString("photo_from_library", comment: "")
+private let importFromFabookOption = NSLocalizedString("import_from_facebook", comment: "")
 private let cancelOption = NSLocalizedString("cancel", comment: "")
 
 private let cameraAbsenceTitle = NSLocalizedString("no_camera", comment: "")
@@ -55,6 +56,13 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
             self.selectFromLibrary()
             PushNotificationQueue.handleNotificationQueue()
         }
+        let importFromFacebookAction = UIAlertAction.appAlertAction(
+            title: importFromFabookOption,
+            style: .Default
+        ) { _ in
+            self.presentFacebookAlbumsList()
+            PushNotificationQueue.handleNotificationQueue()
+        }
         let cancelAction = UIAlertAction.appAlertAction(
             title: cancelOption,
             style: .Cancel
@@ -63,6 +71,7 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         }
         actionSheetViewController.addAction(selectFromLibraryAction)
         actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(importFromFacebookAction)
         actionSheetViewController.addAction(cancelAction)
         controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
     }
@@ -103,6 +112,31 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
     private func selectFromLibrary() {
         imagePickerController.sourceType = .PhotoLibrary
         controller.presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+    
+    private func presentFacebookAlbumsList() {
+        let facebookFlow = "FacebookActivity"
+        let facebookAlbumsListViewControllerID = "CSFFacebookAlbumsListTableViewController"
+        
+        let board = UIStoryboard(name: facebookFlow, bundle: nil)
+        let facebookViewController = board.instantiateViewControllerWithIdentifier(facebookAlbumsListViewControllerID) as! CSFFacebookAlbumsListViewController
+        
+        
+        //let facebookNavigationController = BroNavigationController(rootViewController: facebookViewController)n
+        facebookViewController.successfulCropWithImageView = { [weak self] imageView in
+            print("successfulCropWithImageView")
+            let image = imageView?.image
+            //self?.importCompletionHandler?(image: image, error: nil)
+            self!.didSelectPhoto?(image!)
+        }
+        
+        facebookViewController.fbAlbumsNeedsToDissmiss = { [weak self] in
+            print("fbAlbumsNeedsToDissmiss")
+            self!.controller.navigationController?.popToRootViewControllerAnimated(true)
+            //facebookViewController.dismissViewControllerAnimated(true, completion: nil)
+            //self?.importCompletionHandler?(image: nil, error: nil)
+        }
+        controller.navigationController?.pushViewController(facebookViewController, animated: true)
     }
     
     private func checkCameraAccessibility() {

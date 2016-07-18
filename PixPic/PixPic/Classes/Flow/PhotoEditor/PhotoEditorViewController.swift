@@ -229,7 +229,8 @@ extension PhotoEditorViewController {
             }
             let postService: PostService = locator.getService()
             postService.savePost(file)
-            navigationController!.popViewControllerAnimated(true)
+            //navigationController!.popViewControllerAnimated(true)
+            navigationController!.popToRootViewControllerAnimated(true)
         } catch let exception {
             ExceptionHandler.handle(exception as! Exception)
         }

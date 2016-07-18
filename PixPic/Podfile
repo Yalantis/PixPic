@@ -29,5 +29,7 @@ target 'PixPic' do
     # Utils
         pod 'Kingfisher', '~> 2.0'
         pod 'XCGLogger', '~> 3.2'
+        pod 'SDWebImage', '~>3.8'
+        pod 'AFNetworking', '~> 3.0'
 
 end
