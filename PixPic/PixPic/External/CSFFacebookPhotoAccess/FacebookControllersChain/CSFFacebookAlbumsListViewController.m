@@ -153,8 +153,8 @@ static const CGFloat CSFAlbumRequestDelay = 0.5;
 }
 
 - (void)showFBError:(NSError *)error{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error.userInfo objectForKey:FBSDKErrorLocalizedTitleKey]
-                                                    message:[error.userInfo objectForKey:FBSDKErrorLocalizedDescriptionKey]
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[error.userInfo objectForKey:kCFErrorLocalizedFailureReasonKey]
+                                                    message:[error.userInfo objectForKey:kCFErrorLocalizedDescriptionKey]
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
