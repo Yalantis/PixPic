@@ -114,8 +114,6 @@ static const CGFloat CSFAlbumRequestDelay = 0.5;
         }];
         
         self.facebookAlbums = tempArray;
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
         
         if(tempArray.count){
             CSFFacebookAlbum *album = [CSFFacebookAlbum generatePhotosOfMeAlbumWithCount:self.photosOfMeCount
@@ -149,6 +147,7 @@ static const CGFloat CSFAlbumRequestDelay = 0.5;
             }
             [strongSelf.tableView reloadData];
         }
+        [self.refreshControl endRefreshing];
     }];
 }
 
