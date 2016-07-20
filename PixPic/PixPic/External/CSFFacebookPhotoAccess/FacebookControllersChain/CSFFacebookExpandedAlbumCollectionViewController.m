@@ -76,7 +76,7 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
     
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(requestPhotos) forControlEvents:UIControlEventValueChanged];
-    [self.refreshControl setTintColor: [UIColor appTintColor]];
+    [self.refreshControl setTintColor: [UIColor appWhiteColor]];
     [self.collectionView addSubview:self.refreshControl];
     [self.refreshControl endRefreshing];
     [self setupOffsetForStateLoading:YES];

@@ -15,10 +15,10 @@
             <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-dC-sAK">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPhotoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="ftN-dC-sAK">
                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wE1-CM-uqm">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="wE1-CM-uqm">
                     <rect key="frame" x="2" y="81" width="101" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="fZw-UY-tMq"/>
@@ -55,4 +55,7 @@
             <point key="canvasLocation" x="225.5" y="563"/>
         </view>
     </objects>
+    <resources>
+        <image name="noPhotoPlaceholder" width="351" height="351"/>
+    </resources>
 </document>

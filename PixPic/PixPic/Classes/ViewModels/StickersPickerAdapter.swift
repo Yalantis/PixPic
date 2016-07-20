@@ -9,6 +9,8 @@
 import UIKit
 
 private let animationDuration = 0.3
+private let defaultNumberOfStickerGroups = 6
+private let defaultNumberOfStickersInGroup = 6
 
 class StickersPickerAdapter: NSObject {
     
@@ -17,13 +19,6 @@ class StickersPickerAdapter: NSObject {
     private var headers = [Int: UIView]()
     private var currentHeader: UIView?
     private var currentContentOffset: CGPoint!
-    
-    override init() {
-        super.init()
-        
-        _ = StickersGroup()
-        _ = Sticker()
-    }
     
     func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
         guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersModels else {
@@ -90,7 +85,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
         if isGroupSelected {
             numberOfSections = 1
         } else {
-            numberOfSections = stickersModels?.count ?? 0
+            numberOfSections = stickersModels?.count ?? defaultNumberOfStickerGroups
         }
         
         return numberOfSections
@@ -98,7 +93,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let currentGroupNumber = currentGroupIndex {
-            return stickersModels![currentGroupNumber].stickers.count
+            return stickersModels?[currentGroupNumber].stickers.count ?? defaultNumberOfStickersInGroup
         } else {
             return 0
         }
@@ -129,7 +124,7 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
                 ) as! StickersGroupHeaderView
             
             guard let stickersGroups = stickersModels else {
-                return reusableview
+                return headerView
             }
             let group = stickersGroups[currentGroupIndex ?? indexPath.section]
             

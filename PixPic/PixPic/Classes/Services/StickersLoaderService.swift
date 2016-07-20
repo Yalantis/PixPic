@@ -12,11 +12,23 @@ typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError
 
 class StickersLoaderService {
     
-    private var isQueryFromLocalDataStore = false
+    private var isQueryFromLocalDataStore: Bool = false {
+        didSet {
+            log.debug("--local--\(isQueryFromLocalDataStore)")
+        }
+    }
+    
+    private var isParseFetchInProgress = false {
+        didSet {
+            log.debug("++InProgress++\(isParseFetchInProgress)")
+        }
+    }
     
     func loadStickers(completion: LoadingStickersCompletion) {
-        
         checkIfNeedToUpdateVersion { [weak self] needUpdate in
+            log.debug("needUpdate_________\(needUpdate)")
+            self!.isParseFetchInProgress = needUpdate
+            
             guard let this = self else {
                 return
             }
@@ -40,8 +52,13 @@ class StickersLoaderService {
                 }
                 
                 this.loadStickersGroups(stickersVersion) { objects, error in
+                    log.debug("-----------loadStickersGroups(stickersVersion)-----------")
+                    log.debug("\n\nobjects ______\(objects?.count)\n\n")
                     if !self!.isQueryFromLocalDataStore {
-                        stickersVersion.pinInBackground()
+                        stickersVersion.pinInBackgroundWithBlock{ _, _ in
+                            log.debug("================stickersVersion.pinInBackground()================")
+                            self!.isParseFetchInProgress = false
+                        }
                     }
                     completion(objects: objects, error: error)
                 }
@@ -85,45 +102,57 @@ class StickersLoaderService {
         for group in stickersGroups {
             dispatch_group_enter(dispatchGroup)
             
-            group.image.getDataInBackgroundWithBlock { _, _ in
-                group.pinInBackgroundWithBlock { _, _ in
-                    let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
-                    
-                    if self.isQueryFromLocalDataStore {
-                        stickersRelationQuery.fromLocalDatastore()
+            let comletionBlock = {
+                let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
+                
+                if self.isQueryFromLocalDataStore {
+                    stickersRelationQuery.fromLocalDatastore()
+                }
+                
+                stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
+                    if let error = error {
+                        log.debug(error.localizedDescription)
+                        completion(objects: nil, error: error)
+                        
+                        return
+                    }
+                    guard let objects = objects as? [Sticker] else {
+                        completion(objects: nil, error: nil)
+                        
+                        return
                     }
                     
-                    stickersRelationQuery.findObjectsInBackgroundWithBlock { objects, error in
-                        if let error = error {
-                            log.debug(error.localizedDescription)
-                            completion(objects: nil, error: error)
-                            
-                            return
-                        }
-                        guard let objects = objects as? [Sticker] else {
-                            completion(objects: nil, error: nil)
-                            
-                            return
-                        }
-                        
-                        stickers = objects
-                        let model = StickersModel(stickersGroup: group, stickers: stickers)
-                        stickersModels.append(model)
-                        
-                        dispatch_group_leave(dispatchGroup)
-                        
-                        for sticker in stickers {
-                            if !self.isQueryFromLocalDataStore {
-                                sticker.image.getDataInBackgroundWithBlock { _, _ in
-                                    sticker.pinInBackground()
-                                }
+                    stickers = objects
+                    let model = StickersModel(stickersGroup: group, stickers: stickers)
+                    stickersModels.append(model)
+                    
+                    dispatch_group_leave(dispatchGroup)
+                    
+                    for sticker in stickers {
+                        if !self.isQueryFromLocalDataStore {
+                            sticker.image.getDataInBackgroundWithBlock { _, _ in
+                                log.debug("!!!!get sticker image!!!!!")
+                                sticker.pinInBackground()
                             }
                         }
                     }
                 }
             }
+            
+            if isQueryFromLocalDataStore {
+                group.image.getDataInBackgroundWithBlock { _, _ in
+                    comletionBlock()
+                }
+                
+            } else {
+                group.image.getDataInBackgroundWithBlock { _, _ in
+                    log.debug("!!!!get gr image!!!!!")
+                    group.pinInBackgroundWithBlock { _, _ in
+                        comletionBlock()
+                    }
+                }
+            }
         }
-        
         dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
             completion(objects: stickersModels, error: nil)
         }
@@ -131,6 +160,9 @@ class StickersLoaderService {
     }
     
     private func checkIfNeedToUpdateVersion(completion: Bool -> Void) {
+        if isParseFetchInProgress {
+            return
+        }
         let query = StickersVersion.sortedQuery
         let queryFromLocal = StickersVersion.sortedQuery
         queryFromLocal.fromLocalDatastore()

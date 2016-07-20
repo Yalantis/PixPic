@@ -69,8 +69,8 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         ) { _ in
             PushNotificationQueue.handleNotificationQueue()
         }
-        actionSheetViewController.addAction(selectFromLibraryAction)
         actionSheetViewController.addAction(takePhotoAction)
+        actionSheetViewController.addAction(selectFromLibraryAction)
         actionSheetViewController.addAction(importFromFacebookAction)
         actionSheetViewController.addAction(cancelAction)
         controller.presentViewController(actionSheetViewController, animated: true, completion: nil)
@@ -124,14 +124,12 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         
         //let facebookNavigationController = BroNavigationController(rootViewController: facebookViewController)n
         facebookViewController.successfulCropWithImageView = { [weak self] imageView in
-            print("successfulCropWithImageView")
             let image = imageView?.image
             //self?.importCompletionHandler?(image: image, error: nil)
             self!.didSelectPhoto?(image!)
         }
         
         facebookViewController.fbAlbumsNeedsToDissmiss = { [weak self] in
-            print("fbAlbumsNeedsToDissmiss")
             self!.controller.navigationController?.popToRootViewControllerAnimated(true)
             //facebookViewController.dismissViewControllerAnimated(true, completion: nil)
             //self?.importCompletionHandler?(image: nil, error: nil)

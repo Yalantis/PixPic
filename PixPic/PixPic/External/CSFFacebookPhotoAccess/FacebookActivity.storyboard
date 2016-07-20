@@ -2,11 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Lato-Regular.ttf">
-            <string>Lato-Regular</string>
-            <string>Lato-Regular</string>
+        <mutableArray key="Nootype - Radikal.otf">
+            <string>Radikal</string>
+            <string>Radikal</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -14,50 +15,62 @@
         <scene sceneID="zrN-RG-q6x">
             <objects>
                 <tableViewController storyboardIdentifier="CSFFacebookAlbumsListTableViewController" id="p3z-dJ-22J" customClass="CSFFacebookAlbumsListViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqa-J3-LIh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" id="hqa-J3-LIh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CSFFacebookAlbumCell" rowHeight="45" id="3fr-do-JWC" customClass="CSFFacebookAlbumCell">
-                                <rect key="frame" x="0.0" y="28" width="320" height="45"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CSFFacebookAlbumCell" rowHeight="50" id="3fr-do-JWC" customClass="CSFFacebookAlbumCell">
+                                <rect key="frame" x="0.0" y="28" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3fr-do-JWC" id="yfw-iS-hrj">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmk-Yt-3a0" userLabel="Separator">
-                                            <rect key="frame" x="10" y="44" width="310" height="1"/>
+                                            <rect key="frame" x="49" y="49" width="251" height="1"/>
                                             <color key="backgroundColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="X5m-u5-8eO"/>
                                             </constraints>
                                         </view>
-                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Gy-Nha">
-                                            <rect key="frame" x="10" y="0.0" width="43" height="43"/>
+                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-Gy-Nha">
+                                            <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="hcj-Gy-Nha" secondAttribute="height" multiplier="1:1" id="Zcn-zM-4la"/>
+                                            </constraints>
                                         </imageView>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqy-XF-qv3">
-                                            <rect key="frame" x="63" y="2" width="224" height="23"/>
-                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-X6-9gI">
+                                            <rect key="frame" x="59" y="27.5" width="34.5" height="16.5"/>
+                                            <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="14"/>
+                                            <color key="textColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-X6-9gI">
-                                            <rect key="frame" x="63" y="25" width="224" height="16"/>
-                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
-                                            <color key="textColor" red="0.58039215690000001" green="0.2156862745" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pqy-XF-qv3">
+                                            <rect key="frame" x="59" y="7" width="39.5" height="19"/>
+                                            <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="lmk-Yt-3a0" secondAttribute="trailing" constant="-33" id="0K1-Cc-MdT"/>
+                                        <constraint firstItem="Pqy-XF-qv3" firstAttribute="leading" secondItem="hcj-Gy-Nha" secondAttribute="trailing" constant="10" id="6AD-xT-hNC"/>
                                         <constraint firstAttribute="bottom" secondItem="lmk-Yt-3a0" secondAttribute="bottom" id="BjT-te-GTZ"/>
-                                        <constraint firstItem="lmk-Yt-3a0" firstAttribute="leading" secondItem="yfw-iS-hrj" secondAttribute="leading" constant="10" id="EWa-zt-dW9"/>
+                                        <constraint firstItem="hcj-Gy-Nha" firstAttribute="leading" secondItem="yfw-iS-hrj" secondAttribute="leading" id="LW5-Ww-Pj2"/>
+                                        <constraint firstItem="Pqy-XF-qv3" firstAttribute="top" secondItem="hcj-Gy-Nha" secondAttribute="top" constant="7" id="NoZ-pe-XAp"/>
+                                        <constraint firstItem="lmk-Yt-3a0" firstAttribute="leading" secondItem="hcj-Gy-Nha" secondAttribute="trailing" id="ZOt-ek-HWt"/>
+                                        <constraint firstItem="AWO-X6-9gI" firstAttribute="bottom" secondItem="hcj-Gy-Nha" secondAttribute="bottom" constant="-5" id="dxW-LX-xyx"/>
+                                        <constraint firstItem="lmk-Yt-3a0" firstAttribute="top" secondItem="hcj-Gy-Nha" secondAttribute="bottom" id="grR-9v-ACD"/>
+                                        <constraint firstItem="AWO-X6-9gI" firstAttribute="leading" secondItem="Pqy-XF-qv3" secondAttribute="leading" id="qct-IP-hEh"/>
+                                        <constraint firstItem="hcj-Gy-Nha" firstAttribute="top" secondItem="yfw-iS-hrj" secondAttribute="top" id="xe4-to-6Kt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="lmk-Yt-3a0" secondAttribute="trailing" constant="20" id="zF4-xr-Yeg"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="albumCoverImageView" destination="hcj-Gy-Nha" id="0QX-Su-MdB"/>
                                     <outlet property="subTitleLabel" destination="AWO-X6-9gI" id="xX2-MM-IWK"/>

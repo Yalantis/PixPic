@@ -44,6 +44,7 @@
         if ReachabilityHelper.isReachable() {
             ExceptionHandler.handle(Exception.NoConnection)
             setupPlaceholderForEmptyDataSet()
+            loadStickers()
         }
     }
     
@@ -150,6 +151,16 @@
     private func setupPlaceholderForEmptyDataSet() {
         tableView?.emptyDataSetDelegate = self
     }
+    
+    private func loadStickers() {
+        _ = StickersGroup()
+        _ = Sticker()
+        
+        let stickersService: StickersLoaderService = locator.getService()
+        stickersService.loadStickers() { _, _ in
+        }
+    }
+    
     
     // MARK: - photo editor
     private func choosePhoto() {
