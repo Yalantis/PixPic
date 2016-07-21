@@ -23,7 +23,8 @@ protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
 extension AlertManagerDelegate {
     
     func showSimpleAlert(message: String) {
-        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom)
+        let style = CSToastStyle.init(defaultStyle: ())
+        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom, style: style)
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
