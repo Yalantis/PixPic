@@ -23,12 +23,13 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 
 @interface CSFFacebookExpandedAlbumCollectionViewController ()<VPImageCropperDelegate>
 
-@property (nonatomic,strong) NSArray *dataSource;
+@property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,strong) IBOutlet UILabel *titleLabel;
 @property (nonatomic,strong) UIImageView *imageViewToCrop;
 @property (nonatomic,strong) UIRefreshControl *refreshControl;
 @property (nonatomic,assign) CGFloat cellSide;
 @property (nonatomic,assign) CGFloat startYOffset;
+@property (nonatomic,strong) NSMutableString *photosAfterCursor;
 
 @end
 
@@ -42,8 +43,9 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 }
 
 - (void)viewDidLoad{
-    
     [super viewDidLoad];
+    
+    self.photosAfterCursor = @"";
     [self setupBackButton];
     [self setupCorrectCellSize];
     [self setupPullToRefresh];
@@ -117,10 +119,24 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
     self.cellSide = DefaultCellSide * sizeRatio;
 }
 
+-(NSDictionary *)requestParametrsDictionary {
+    NSDictionary *parameters;
+
+    if([self.photosAfterCursor isEqual: @""]){
+        parameters = nil;
+    } else {
+        parameters = @{@"after": self.photosAfterCursor};
+    }
+    return parameters;
+}
+
 -(void)requestPhotos{
+    if(self.photosAfterCursor == nil) {
+        return;
+    }
     
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/photos?fields=name,images,id&limit=10000",self.albumId]
-                                                                   parameters:nil];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/photos?fields=name,images,id&limit=48",self.albumId]
+                                                                   parameters:[self requestParametrsDictionary]];
     __weak typeof(self) weakSelf = self;
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -134,9 +150,12 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 }
 
 -(void)requestPhotosOfMe{
+    if(self.photosAfterCursor == nil) {
+        return;
+    }
     
-    FBSDKGraphRequest *photosOfMeRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/photos/tagged?fields=name,images,id&limit=10000"
-                                                                   parameters:nil];
+    FBSDKGraphRequest *photosOfMeRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/photos/tagged?fields=name,images,id&limit=48"
+                                                                   parameters:[self requestParametrsDictionary]];
     __weak typeof(self) weakSelf = self;
     [photosOfMeRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -163,13 +182,16 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 -(void)handlePhotoResult:(id)result{
     
     NSArray *photos = [result objectForKey:@"data"];
+    
+    self.photosAfterCursor = result[@"paging"][@"cursors"][@"after"] ? result[@"paging"][@"cursors"][@"after"] : nil;
+    
     NSMutableArray *tempArray = [NSMutableArray array];
     [photos enumerateObjectsUsingBlock:^(NSDictionary *photoDictionary, NSUInteger idx, BOOL *stop) {
         
         [tempArray addObject:[[CSFFacebookPhoto alloc] initWithDictionary:photoDictionary]];
     }];
     [self performSelector:@selector(hidePullToRefresh) withObject:nil afterDelay:CSFPhotosRequestDelay];
-    self.dataSource = [NSArray arrayWithArray:tempArray];
+    [self.dataSource addObjectsFromArray:tempArray];
     [self.collectionView reloadData];
 }
 
@@ -235,9 +257,16 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
                                                                                            cropFrame:frameForImageToCrop
                                                                                      limitScaleRatio:ScaleRatioForImageToCrop];
     [croperViewController setDelegate:self];
-    //[croperViewController setInitialFrame:frame];
     [croperViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:croperViewController animated:YES completion:nil];
+}
+
+#pragma mark UICollectionViewDelegate 
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.dataSource.count - 8) {
+        [self requestPhotos];
+    }
 }
 
 #pragma mark VPImageCropperDelegate
