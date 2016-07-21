@@ -31,7 +31,7 @@
         photoCountString = NSLocalizedString(@"photo", nil);
     }
     [self.subTitleLabel setText:[NSString stringWithFormat:@"%i %@",[_album.count intValue],photoCountString]];
-    [self.albumCoverImageView sd_setImageWithURL:[NSURL URLWithString:_album.coverPhotoUrl]];
+    [self.albumCoverImageView sd_setImageWithURL:[NSURL URLWithString:_album.coverPhotoUrl] placeholderImage:[UIImage imageNamed:@"placeholder_photo"]];
 }
 
 @end
