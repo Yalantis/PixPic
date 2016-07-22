@@ -19,7 +19,7 @@ extension UIImage {
     }
     
     static var stickerPlaceholderImage: UIImage? {
-        return UIImage(named: "stickerPlaceholderImage")
+        return UIImage(named: "placeholder")
     }
     
     static var avatarPlaceholderImage: UIImage? {

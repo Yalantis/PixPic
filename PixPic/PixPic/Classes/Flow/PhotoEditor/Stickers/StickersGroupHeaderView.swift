@@ -42,7 +42,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     private func downloadImageFromFile(file: PFFile) {
-        imageView.image = UIImage.placeholderImage
+        imageView.image = UIImage.stickerPlaceholderImage
         file.getImage { image, error in
             if let image = image {
                 self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
@@ -54,7 +54,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     override func prepareForReuse() {
-        imageView.image = UIImage.placeholderImage
+        imageView.image = UIImage.stickerPlaceholderImage
     }
     
 }
