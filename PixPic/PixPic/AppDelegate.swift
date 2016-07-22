@@ -106,8 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func setupToast() {
-        //strange syntax
-        let style = CSToastStyle.init(defaultStyle: ())
+        let style = CSToastStyle(defaultStyle: ())
         style.backgroundColor = UIColor.clearColor()
         CSToastManager.setSharedStyle(style)
     }

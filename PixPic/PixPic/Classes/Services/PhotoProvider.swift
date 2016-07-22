@@ -120,19 +120,13 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
         
         let board = UIStoryboard(name: facebookFlow, bundle: nil)
         let facebookViewController = board.instantiateViewControllerWithIdentifier(facebookAlbumsListViewControllerID) as! CSFFacebookAlbumsListViewController
-        
-        
-        //let facebookNavigationController = BroNavigationController(rootViewController: facebookViewController)n
         facebookViewController.successfulCropWithImageView = { [weak self] imageView in
             let image = imageView?.image
-            //self?.importCompletionHandler?(image: image, error: nil)
             self!.didSelectPhoto?(image!)
         }
         
         facebookViewController.fbAlbumsNeedsToDissmiss = { [weak self] in
             self!.controller.navigationController?.popToRootViewControllerAnimated(true)
-            //facebookViewController.dismissViewControllerAnimated(true, completion: nil)
-            //self?.importCompletionHandler?(image: nil, error: nil)
         }
         controller.navigationController?.pushViewController(facebookViewController, animated: true)
     }

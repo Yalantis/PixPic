@@ -12,21 +12,11 @@ typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError
 
 class StickersLoaderService {
     
-    private var isQueryFromLocalDataStore: Bool = false {
-        didSet {
-            log.debug("--local--\(isQueryFromLocalDataStore)")
-        }
-    }
-    
-    private var isParseFetchInProgress = false {
-        didSet {
-            log.debug("++InProgress++\(isParseFetchInProgress)")
-        }
-    }
+    private var isQueryFromLocalDataStore = false
+    private var isParseFetchInProgress = false
     
     func loadStickers(completion: LoadingStickersCompletion) {
         checkIfNeedToUpdateVersion { [weak self] needUpdate in
-            log.debug("needUpdate_________\(needUpdate)")
             self!.isParseFetchInProgress = needUpdate
             
             guard let this = self else {
@@ -52,11 +42,8 @@ class StickersLoaderService {
                 }
                 
                 this.loadStickersGroups(stickersVersion) { objects, error in
-                    log.debug("-----------loadStickersGroups(stickersVersion)-----------")
-                    log.debug("\n\nobjects ______\(objects?.count)\n\n")
                     if !self!.isQueryFromLocalDataStore {
                         stickersVersion.pinInBackgroundWithBlock{ _, _ in
-                            log.debug("================stickersVersion.pinInBackground()================")
                             self!.isParseFetchInProgress = false
                         }
                     }
@@ -131,7 +118,6 @@ class StickersLoaderService {
                     for sticker in stickers {
                         if !self.isQueryFromLocalDataStore {
                             sticker.image.getDataInBackgroundWithBlock { _, _ in
-                                log.debug("!!!!get sticker image!!!!!")
                                 sticker.pinInBackground()
                             }
                         }
@@ -146,7 +132,6 @@ class StickersLoaderService {
                 
             } else {
                 group.image.getDataInBackgroundWithBlock { _, _ in
-                    log.debug("!!!!get gr image!!!!!")
                     group.pinInBackgroundWithBlock { _, _ in
                         comletionBlock()
                     }

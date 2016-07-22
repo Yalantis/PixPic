@@ -812,6 +812,7 @@
 				TargetAttributes = {
 					FDAF466D1C47E8AA008060CD = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = X369K52C4V;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1093,8 +1094,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1116,7 +1117,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
+				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1141,8 +1142,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1157,7 +1158,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
+				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1172,8 +1173,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Sergiy Fesenko (Y8JZQ7JQ9A)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1188,7 +1189,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
+				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1218,7 +1219,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
+				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;
