@@ -11,9 +11,17 @@ import UIKit
 extension UIColor {
     
     // MARK: - Base colors
-    @nonobjc static let appNavBarColor = UIColor(rgbColorCodeRed: 46, green: 46, blue: 46, alpha: 1)
-    @nonobjc static let appTintColor = UIColor(rgbColorCodeRed: 148, green: 55, blue: 234, alpha: 1)
-    @nonobjc static let appWhiteColor = UIColor.whiteColor()
+    static func appNavBarColor() -> UIColor {
+        return UIColor(rgbColorCodeRed: 46, green: 46, blue: 46, alpha: 1)
+    }
+    
+    static func appTintColor() -> UIColor {
+        return UIColor(rgbColorCodeRed: 148, green: 55, blue: 234, alpha: 1)
+    }
+    
+    static func appWhiteColor() -> UIColor {
+        return UIColor.whiteColor()
+    }
     
     convenience init(rgbColorCodeRed red: Int, green: Int, blue: Int, alpha: CGFloat) {
         let redPart = CGFloat(red) / 255

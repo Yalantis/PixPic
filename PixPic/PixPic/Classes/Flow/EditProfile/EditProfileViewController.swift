@@ -236,6 +236,7 @@ final class EditProfileViewController: BaseUIViewController, StoryboardInitiable
         setSelectedPhoto(image)
         saveButton.enabled = true
         someChangesMade = true
+        navigationController?.popToViewController(self, animated: true)
     }
     
     private func setSelectedPhoto(image: UIImage) {

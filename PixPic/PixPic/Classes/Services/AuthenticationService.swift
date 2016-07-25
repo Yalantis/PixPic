@@ -48,7 +48,7 @@ class AuthenticationService {
     
     func signInWithFacebookInController(controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
         let loginManager = FBSDKLoginManager()
-        let permissions = ["public_profile", "email"]
+        let permissions = ["public_profile", "email", "user_photos"]
         
         loginManager.loginBehavior = .Native
         loginManager.logInWithReadPermissions(permissions, fromViewController: controller) { result, error in

@@ -124,14 +124,14 @@ extension PhotoEditorViewController {
         navigationItem.leftBarButtonItem = newBackButton
         
         let savingButton = UIBarButtonItem(
-            image: UIImage(named: "icSave"),
+            image: UIImage(named: "ic_save"),
             style: .Plain,
             target: self,
             action: #selector(saveImageToCameraRoll)
         )
         
         let removeAllStickersButton = UIBarButtonItem(
-            image: UIImage(named: "icRemove"),
+            image: UIImage(named: "ic_remove"),
             style: .Plain,
             target: self,
             action: #selector(removeAllStickers)
@@ -229,7 +229,7 @@ extension PhotoEditorViewController {
             }
             let postService: PostService = locator.getService()
             postService.savePost(file)
-            navigationController!.popViewControllerAnimated(true)
+            navigationController!.popToRootViewControllerAnimated(true)
         } catch let exception {
             ExceptionHandler.handle(exception as! Exception)
         }

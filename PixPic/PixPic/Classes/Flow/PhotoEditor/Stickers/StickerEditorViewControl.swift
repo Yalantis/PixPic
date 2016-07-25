@@ -20,7 +20,7 @@ class StickerEditorViewControl: UIImageView {
                                 Constants.StickerEditor.StickerViewControlSize)
         
         layer.cornerRadius = frame.width / 2
-        backgroundColor = UIColor.appWhiteColor
+        backgroundColor = UIColor.appWhiteColor()
         userInteractionEnabled = true
     }
     

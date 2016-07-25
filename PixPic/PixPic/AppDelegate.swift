@@ -13,6 +13,7 @@ import Parse
 import ParseFacebookUtilsV4
 import Bolts
 import XCGLogger
+import Toast
 
 let log = XCGLogger.defaultInstance()
 
@@ -35,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = .LightContent
 
         log.setup()
+        setupToast()
         SettingsHelper.setupDefaultValues()
         setupRouter()
                 
@@ -103,4 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         router.execute(window!)
     }
     
+    private func setupToast() {
+        let style = CSToastStyle(defaultStyle: ())
+        style.backgroundColor = UIColor.clearColor()
+        CSToastManager.setSharedStyle(style)
+    }
 }

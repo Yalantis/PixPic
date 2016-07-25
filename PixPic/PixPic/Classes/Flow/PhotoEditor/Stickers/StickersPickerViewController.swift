@@ -39,6 +39,7 @@ class StickersPickerViewController: UICollectionViewController {
     
     private func setupAdapter() {
         let stickersService: StickersLoaderService = locator.getService()
+        collectionView!.reloadData()
         stickersService.loadStickers() { [weak self] objects, error in
             guard let this = self else {
                 return

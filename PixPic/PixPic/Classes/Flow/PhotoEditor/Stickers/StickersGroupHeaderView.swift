@@ -28,7 +28,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         
     @objc private func toggleGroup() {
         let isSelected = completion()
-        let color = isSelected ? UIColor.appTintColor : UIColor.appWhiteColor
+        let color = isSelected ? UIColor.appTintColor() : UIColor.appWhiteColor()
         UIView.animateWithDuration(
             tintColorAnimationDuration,
             delay: 0,
@@ -42,10 +42,11 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     private func downloadImageFromFile(file: PFFile) {
+        imageView.image = UIImage.stickerPlaceholderImage
         file.getImage { image, error in
             if let image = image {
                 self.imageView.image = image.imageWithRenderingMode(.AlwaysTemplate)
-                self.imageView.tintColor = UIColor.appWhiteColor
+                self.imageView.tintColor = UIColor.appWhiteColor()
             } else {
                 log.debug(error?.localizedDescription)
             }
@@ -53,7 +54,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
     }
     
     override func prepareForReuse() {
-        imageView.image = nil
+        imageView.image = UIImage.stickerPlaceholderImage
     }
     
 }

@@ -12,7 +12,6 @@
 		77665C701D1834440008A7CE /* BaseUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */; };
 		7774D8431D0EC4F300E5DCE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D83F1D0EC4F300E5DCE0 /* Constants.swift */; };
 		7774D8441D0EC4F300E5DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */; };
-		7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8421D0EC4F300E5DCE0 /* Info.plist */; };
 		7774D8D01D0EC50700E5DCE0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8481D0EC50700E5DCE0 /* Activity.swift */; };
 		7774D8D11D0EC50700E5DCE0 /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8491D0EC50700E5DCE0 /* Complaint.swift */; };
 		7774D8D21D0EC50700E5DCE0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D84A1D0EC50700E5DCE0 /* Post.swift */; };
@@ -123,6 +122,16 @@
 		7774D93D1D0EC50700E5DCE0 /* StoryboardInitable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8CF1D0EC50700E5DCE0 /* StoryboardInitable.swift */; };
 		7774D93F1D0EC51400E5DCE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D93E1D0EC51400E5DCE0 /* AppDelegate.swift */; };
 		779884C01CCE34B20027E706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 779884BF1CCE34B20027E706 /* Localizable.strings */; };
+		77EED8561D38FD2E00A38E04 /* FacebookActivity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77EED83B1D38FD2E00A38E04 /* FacebookActivity.storyboard */; };
+		77EED8571D38FD2F00A38E04 /* CSFFacebookAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED83F1D38FD2E00A38E04 /* CSFFacebookAlbumCell.m */; };
+		77EED8581D38FD2F00A38E04 /* CSFFacebookPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED8421D38FD2E00A38E04 /* CSFFacebookPhotoCell.m */; };
+		77EED8591D38FD2F00A38E04 /* CSFFacebookAlbumsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED8451D38FD2E00A38E04 /* CSFFacebookAlbumsListViewController.m */; };
+		77EED85A1D38FD2F00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED8471D38FD2E00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.m */; };
+		77EED85B1D38FD2F00A38E04 /* CSFFacebookAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED84A1D38FD2E00A38E04 /* CSFFacebookAlbum.m */; };
+		77EED85C1D38FD2F00A38E04 /* CSFFacebookPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED84C1D38FD2E00A38E04 /* CSFFacebookPhoto.m */; };
+		77EED85D1D38FD2F00A38E04 /* CSFFacebookPhotoImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED84E1D38FD2E00A38E04 /* CSFFacebookPhotoImage.m */; };
+		77EED85E1D38FD2F00A38E04 /* TDIRoundNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EED8511D38FD2E00A38E04 /* TDIRoundNavigationButton.m */; };
+		77EED85F1D38FD2F00A38E04 /* TDIRoundNavigationButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77EED8521D38FD2E00A38E04 /* TDIRoundNavigationButton.xib */; };
 		CD9A7A6543D20501F89F37B7 /* Pods_PixPic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B55465A103903CD3D0318DC /* Pods_PixPic.framework */; };
 /* End PBXBuildFile section */
 
@@ -248,6 +257,25 @@
 		7774D93E1D0EC51400E5DCE0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = PixPic/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		778AE8891D0ECAA500802366 /* PixPic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PixPic-Bridging-Header.h"; sourceTree = "<group>"; };
 		779884BF1CCE34B20027E706 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		77EED83A1D38FD2E00A38E04 /* CSFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFConstants.h; sourceTree = "<group>"; };
+		77EED83B1D38FD2E00A38E04 /* FacebookActivity.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FacebookActivity.storyboard; sourceTree = "<group>"; };
+		77EED83E1D38FD2E00A38E04 /* CSFFacebookAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookAlbumCell.h; sourceTree = "<group>"; };
+		77EED83F1D38FD2E00A38E04 /* CSFFacebookAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookAlbumCell.m; sourceTree = "<group>"; };
+		77EED8411D38FD2E00A38E04 /* CSFFacebookPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookPhotoCell.h; sourceTree = "<group>"; };
+		77EED8421D38FD2E00A38E04 /* CSFFacebookPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookPhotoCell.m; sourceTree = "<group>"; };
+		77EED8441D38FD2E00A38E04 /* CSFFacebookAlbumsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookAlbumsListViewController.h; sourceTree = "<group>"; };
+		77EED8451D38FD2E00A38E04 /* CSFFacebookAlbumsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookAlbumsListViewController.m; sourceTree = "<group>"; };
+		77EED8461D38FD2E00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookExpandedAlbumCollectionViewController.h; sourceTree = "<group>"; };
+		77EED8471D38FD2E00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookExpandedAlbumCollectionViewController.m; sourceTree = "<group>"; };
+		77EED8491D38FD2E00A38E04 /* CSFFacebookAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookAlbum.h; sourceTree = "<group>"; };
+		77EED84A1D38FD2E00A38E04 /* CSFFacebookAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookAlbum.m; sourceTree = "<group>"; };
+		77EED84B1D38FD2E00A38E04 /* CSFFacebookPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookPhoto.h; sourceTree = "<group>"; };
+		77EED84C1D38FD2E00A38E04 /* CSFFacebookPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookPhoto.m; sourceTree = "<group>"; };
+		77EED84D1D38FD2E00A38E04 /* CSFFacebookPhotoImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFFacebookPhotoImage.h; sourceTree = "<group>"; };
+		77EED84E1D38FD2E00A38E04 /* CSFFacebookPhotoImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFFacebookPhotoImage.m; sourceTree = "<group>"; };
+		77EED8501D38FD2E00A38E04 /* TDIRoundNavigationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDIRoundNavigationButton.h; sourceTree = "<group>"; };
+		77EED8511D38FD2E00A38E04 /* TDIRoundNavigationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDIRoundNavigationButton.m; sourceTree = "<group>"; };
+		77EED8521D38FD2E00A38E04 /* TDIRoundNavigationButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDIRoundNavigationButton.xib; sourceTree = "<group>"; };
 		ABE068F05E15B0704DE3E101 /* Pods-PixPic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixPic.release.xcconfig"; path = "Pods/Target Support Files/Pods-PixPic/Pods-PixPic.release.xcconfig"; sourceTree = "<group>"; };
 		FD0658FB1C71234F00743AF1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		FD0658FD1C7125A100743AF1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -527,6 +555,7 @@
 		7774D8A81D0EC50700E5DCE0 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				77EED8391D38FD2E00A38E04 /* CSFFacebookPhotoAccess */,
 				7774D8A91D0EC50700E5DCE0 /* AttributesCache.swift */,
 				7774D8AA1D0EC50700E5DCE0 /* Reachability.swift */,
 				7774D8AB1D0EC50700E5DCE0 /* VPImageCropper */,
@@ -629,6 +658,88 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		77EED8391D38FD2E00A38E04 /* CSFFacebookPhotoAccess */ = {
+			isa = PBXGroup;
+			children = (
+				77EED83A1D38FD2E00A38E04 /* CSFConstants.h */,
+				77EED83B1D38FD2E00A38E04 /* FacebookActivity.storyboard */,
+				77EED83C1D38FD2E00A38E04 /* FacebookCells */,
+				77EED8431D38FD2E00A38E04 /* FacebookControllersChain */,
+				77EED8481D38FD2E00A38E04 /* FacebookModels */,
+				77EED84F1D38FD2E00A38E04 /* RoundNavigationButton */,
+				77EED8531D38FD2E00A38E04 /* VPImageCropper */,
+			);
+			path = CSFFacebookPhotoAccess;
+			sourceTree = "<group>";
+		};
+		77EED83C1D38FD2E00A38E04 /* FacebookCells */ = {
+			isa = PBXGroup;
+			children = (
+				77EED83D1D38FD2E00A38E04 /* FacebookAlbumCell */,
+				77EED8401D38FD2E00A38E04 /* FacebookPhotoCell */,
+			);
+			path = FacebookCells;
+			sourceTree = "<group>";
+		};
+		77EED83D1D38FD2E00A38E04 /* FacebookAlbumCell */ = {
+			isa = PBXGroup;
+			children = (
+				77EED83E1D38FD2E00A38E04 /* CSFFacebookAlbumCell.h */,
+				77EED83F1D38FD2E00A38E04 /* CSFFacebookAlbumCell.m */,
+			);
+			path = FacebookAlbumCell;
+			sourceTree = "<group>";
+		};
+		77EED8401D38FD2E00A38E04 /* FacebookPhotoCell */ = {
+			isa = PBXGroup;
+			children = (
+				77EED8411D38FD2E00A38E04 /* CSFFacebookPhotoCell.h */,
+				77EED8421D38FD2E00A38E04 /* CSFFacebookPhotoCell.m */,
+			);
+			path = FacebookPhotoCell;
+			sourceTree = "<group>";
+		};
+		77EED8431D38FD2E00A38E04 /* FacebookControllersChain */ = {
+			isa = PBXGroup;
+			children = (
+				77EED8441D38FD2E00A38E04 /* CSFFacebookAlbumsListViewController.h */,
+				77EED8451D38FD2E00A38E04 /* CSFFacebookAlbumsListViewController.m */,
+				77EED8461D38FD2E00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.h */,
+				77EED8471D38FD2E00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.m */,
+			);
+			path = FacebookControllersChain;
+			sourceTree = "<group>";
+		};
+		77EED8481D38FD2E00A38E04 /* FacebookModels */ = {
+			isa = PBXGroup;
+			children = (
+				77EED8491D38FD2E00A38E04 /* CSFFacebookAlbum.h */,
+				77EED84A1D38FD2E00A38E04 /* CSFFacebookAlbum.m */,
+				77EED84B1D38FD2E00A38E04 /* CSFFacebookPhoto.h */,
+				77EED84C1D38FD2E00A38E04 /* CSFFacebookPhoto.m */,
+				77EED84D1D38FD2E00A38E04 /* CSFFacebookPhotoImage.h */,
+				77EED84E1D38FD2E00A38E04 /* CSFFacebookPhotoImage.m */,
+			);
+			path = FacebookModels;
+			sourceTree = "<group>";
+		};
+		77EED84F1D38FD2E00A38E04 /* RoundNavigationButton */ = {
+			isa = PBXGroup;
+			children = (
+				77EED8501D38FD2E00A38E04 /* TDIRoundNavigationButton.h */,
+				77EED8511D38FD2E00A38E04 /* TDIRoundNavigationButton.m */,
+				77EED8521D38FD2E00A38E04 /* TDIRoundNavigationButton.xib */,
+			);
+			path = RoundNavigationButton;
+			sourceTree = "<group>";
+		};
+		77EED8531D38FD2E00A38E04 /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VPImageCropper;
+			sourceTree = "<group>";
+		};
 		FDAF46651C47E8AA008060CD = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +811,7 @@
 				TargetAttributes = {
 					FDAF466D1C47E8AA008060CD = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = X369K52C4V;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -740,10 +852,10 @@
 				7774D8ED1D0EC50700E5DCE0 /* FollowerViewCell.xib in Resources */,
 				7774D8EF1D0EC50700E5DCE0 /* PostViewCell.xib in Resources */,
 				7774D8DC1D0EC50700E5DCE0 /* Authorization.storyboard in Resources */,
-				7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */,
 				7774D9331D0EC50700E5DCE0 /* Nootype - Radikal Light Italic.otf in Resources */,
 				7774D9051D0EC50700E5DCE0 /* TextView.xib in Resources */,
 				7774D9311D0EC50700E5DCE0 /* Nootype - Radikal Bold.otf in Resources */,
+				77EED85F1D38FD2F00A38E04 /* TDIRoundNavigationButton.xib in Resources */,
 				7774D9371D0EC50700E5DCE0 /* Nootype - Radikal Thin Italic.otf in Resources */,
 				7774D9321D0EC50700E5DCE0 /* Nootype - Radikal Italic.otf in Resources */,
 				7774D8FC1D0EC50700E5DCE0 /* Profile.storyboard in Resources */,
@@ -754,6 +866,7 @@
 				779884C01CCE34B20027E706 /* Localizable.strings in Resources */,
 				7774D9391D0EC50700E5DCE0 /* Nootype - Radikal UltraThin Italic.otf in Resources */,
 				7774D8F11D0EC50700E5DCE0 /* PhotoEditor.storyboard in Resources */,
+				77EED8561D38FD2E00A38E04 /* FacebookActivity.storyboard in Resources */,
 				7774D93A1D0EC50700E5DCE0 /* Nootype - Radikal UltraThin.otf in Resources */,
 				7774D92F1D0EC50700E5DCE0 /* Nootype - Radikal Black.otf in Resources */,
 				7774D92E1D0EC50700E5DCE0 /* Nootype - Radikal Black Italic.otf in Resources */,
@@ -861,13 +974,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				7774D8F31D0EC50700E5DCE0 /* PhotoEditorViewController.swift in Sources */,
+				77EED8591D38FD2F00A38E04 /* CSFFacebookAlbumsListViewController.m in Sources */,
 				7774D9041D0EC50700E5DCE0 /* TextView.swift in Sources */,
 				7774D8E71D0EC50700E5DCE0 /* FollowersListViewController.swift in Sources */,
 				7774D8D01D0EC50700E5DCE0 /* Activity.swift in Sources */,
 				7774D9121D0EC50700E5DCE0 /* ReachabilityHelper.swift in Sources */,
 				7774D8D31D0EC50700E5DCE0 /* Sticker.swift in Sources */,
+				77EED85E1D38FD2F00A38E04 /* TDIRoundNavigationButton.m in Sources */,
 				7774D91F1D0EC50700E5DCE0 /* PostAdapter.swift in Sources */,
+				77EED85B1D38FD2F00A38E04 /* CSFFacebookAlbum.m in Sources */,
+				77EED85A1D38FD2F00A38E04 /* CSFFacebookExpandedAlbumCollectionViewController.m in Sources */,
 				7774D8D11D0EC50700E5DCE0 /* Complaint.swift in Sources */,
+				77EED8571D38FD2F00A38E04 /* CSFFacebookAlbumCell.m in Sources */,
 				7774D9071D0EC50700E5DCE0 /* AlertManager.swift in Sources */,
 				7774D8D71D0EC50700E5DCE0 /* ActivityViewController.swift in Sources */,
 				7774D8DE1D0EC50700E5DCE0 /* AuthorizationViewController.swift in Sources */,
@@ -875,6 +993,7 @@
 				7774D92A1D0EC50700E5DCE0 /* UICollectionViewFlowLayout.swift in Sources */,
 				7774D8F91D0EC50700E5DCE0 /* StickersModel.swift in Sources */,
 				7774D9151D0EC50700E5DCE0 /* ServiceLocator.swift in Sources */,
+				77EED85D1D38FD2F00A38E04 /* CSFFacebookPhotoImage.m in Sources */,
 				7774D93C1D0EC50700E5DCE0 /* CellInterface.swift in Sources */,
 				7774D92B1D0EC50700E5DCE0 /* UIColor+BaseColor.swift in Sources */,
 				7774D9281D0EC50700E5DCE0 /* UIAlertController+ConfimAction.swift in Sources */,
@@ -897,6 +1016,7 @@
 				7774D8D61D0EC50700E5DCE0 /* User.swift in Sources */,
 				7774D9181D0EC50700E5DCE0 /* StickersLoaderService.swift in Sources */,
 				7774D9211D0EC50700E5DCE0 /* AttributesCache.swift in Sources */,
+				77EED85C1D38FD2F00A38E04 /* CSFFacebookPhoto.m in Sources */,
 				7774D8F81D0EC50700E5DCE0 /* StickersLayout.swift in Sources */,
 				7774D91A1D0EC50700E5DCE0 /* UserService.swift in Sources */,
 				7774D8EE1D0EC50700E5DCE0 /* PostViewCell.swift in Sources */,
@@ -932,6 +1052,7 @@
 				7774D8D21D0EC50700E5DCE0 /* Post.swift in Sources */,
 				7774D9171D0EC50700E5DCE0 /* SettingsMenu.swift in Sources */,
 				7774D90B1D0EC50700E5DCE0 /* ExceptionHandler.swift in Sources */,
+				77EED8581D38FD2F00A38E04 /* CSFFacebookPhotoCell.m in Sources */,
 				7774D93D1D0EC50700E5DCE0 /* StoryboardInitable.swift in Sources */,
 				7774D8DD1D0EC50700E5DCE0 /* AuthorizationRouter.swift in Sources */,
 				7774D8FA1D0EC50700E5DCE0 /* StickersPickerViewController.swift in Sources */,
@@ -994,7 +1115,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
+				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1035,7 +1156,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "6df421a4-7f40-4b24-b6c4-ede4dd89854d";
+				PROVISIONING_PROFILE = "14af9056-c8ec-4aa2-a389-104f032e9bdd";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1050,8 +1171,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1066,7 +1187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1080,8 +1201,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sergiy Fesenko (R7JGNRV2SS)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1096,7 +1217,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;

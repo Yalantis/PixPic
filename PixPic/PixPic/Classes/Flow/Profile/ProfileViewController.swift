@@ -202,7 +202,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
     
     private func applyCurrentUserAppearance() {
         profileSettingsButton.enabled = true
-        profileSettingsButton.tintColor = .appWhiteColor
+        profileSettingsButton.tintColor = .appWhiteColor()
         
         followButton.hidden = true
         followButtonHeight.constant = followButtonMinHeight

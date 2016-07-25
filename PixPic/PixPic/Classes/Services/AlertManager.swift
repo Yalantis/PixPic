@@ -23,7 +23,8 @@ protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter {
 extension AlertManagerDelegate {
     
     func showSimpleAlert(message: String) {
-        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom)
+        let style = CSToastStyle(defaultStyle: ())
+        currentViewController.view.makeToast(message, duration: simpleAlertDuration, position: CSToastPositionBottom, style: style)
     }
     
     func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
@@ -43,6 +44,7 @@ extension AlertManagerDelegate {
         
         let isControllerWaitingForResponse = (currentViewController.presentedViewController as? UIAlertController) != nil
         
+        let style = CSToastStyle(defaultStyle: ())
         if isControllerWaitingForResponse {
             PushNotificationQueue.addObjectToQueue(message)
         } else {
@@ -53,7 +55,7 @@ extension AlertManagerDelegate {
                 position: CSToastPositionTop,
                 title: title,
                 image: UIImage(named: "icon_notification"),
-                style: nil,
+                style: style,
                 completion: { [weak self] didTap in
                     if didTap {
                         switch notificationObject {
