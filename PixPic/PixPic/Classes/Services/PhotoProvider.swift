@@ -27,6 +27,9 @@ private let dismissActionTitle = NSLocalizedString("dismiss", comment: "")
 
 private let maxAllowedImageScale = 10
 
+private let facebookFlow = "FacebookActivity"
+private let facebookAlbumsListViewControllerID = "CSFFacebookAlbumsListTableViewController"
+
 class PhotoProvider: NSObject, UINavigationControllerDelegate {
     
     private var controller: UIViewController!
@@ -115,18 +118,16 @@ class PhotoProvider: NSObject, UINavigationControllerDelegate {
     }
     
     private func presentFacebookAlbumsList() {
-        let facebookFlow = "FacebookActivity"
-        let facebookAlbumsListViewControllerID = "CSFFacebookAlbumsListTableViewController"
-        
         let board = UIStoryboard(name: facebookFlow, bundle: nil)
         let facebookViewController = board.instantiateViewControllerWithIdentifier(facebookAlbumsListViewControllerID) as! CSFFacebookAlbumsListViewController
         facebookViewController.successfulCropWithImageView = { [weak self] imageView in
-            let image = imageView?.image
-            self!.didSelectPhoto?(image!)
+            if let image = imageView?.image {
+                self!.didSelectPhoto?(image)
+            }
         }
         
         facebookViewController.fbAlbumsNeedsToDissmiss = { [weak self] in
-            self!.controller.navigationController?.popToRootViewControllerAnimated(true)
+            self?.controller.navigationController?.popToRootViewControllerAnimated(true)
         }
         controller.navigationController?.pushViewController(facebookViewController, animated: true)
     }

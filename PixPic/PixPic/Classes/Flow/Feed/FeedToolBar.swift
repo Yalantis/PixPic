@@ -14,7 +14,6 @@ class FeedToolBar: UIView {
     var didSelectPhoto: (() -> Void)?
 
     @IBOutlet private weak var bottomSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var topSpaceConstraint: NSLayoutConstraint!
     
     static func loadFromNibNamed(nibNamed: String, bundle: NSBundle? = nil) -> FeedToolBar? {
         return UINib(
@@ -31,12 +30,10 @@ class FeedToolBar: UIView {
         super.awakeFromNib()
         
         bottomSpaceConstraint.constant = -Constants.BaseDimensions.ToolBarHeight
-        topSpaceConstraint.constant = Constants.BaseDimensions.ToolBarHeight
     }
     
     func animateButton(isLifting isLifting: Bool) {
         bottomSpaceConstraint.constant = isLifting ? 0 : -Constants.BaseDimensions.ToolBarHeight
-        topSpaceConstraint.constant = isLifting ? 0 : Constants.BaseDimensions.ToolBarHeight
         UIView.animateWithDuration(
             buttonAnimationDuration,
             delay: 0,

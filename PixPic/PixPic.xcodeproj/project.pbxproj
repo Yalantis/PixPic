@@ -12,7 +12,6 @@
 		77665C701D1834440008A7CE /* BaseUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77665C6F1D1834440008A7CE /* BaseUITableViewController.swift */; };
 		7774D8431D0EC4F300E5DCE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D83F1D0EC4F300E5DCE0 /* Constants.swift */; };
 		7774D8441D0EC4F300E5DCE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8411D0EC4F300E5DCE0 /* Assets.xcassets */; };
-		7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7774D8421D0EC4F300E5DCE0 /* Info.plist */; };
 		7774D8D01D0EC50700E5DCE0 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8481D0EC50700E5DCE0 /* Activity.swift */; };
 		7774D8D11D0EC50700E5DCE0 /* Complaint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D8491D0EC50700E5DCE0 /* Complaint.swift */; };
 		7774D8D21D0EC50700E5DCE0 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7774D84A1D0EC50700E5DCE0 /* Post.swift */; };
@@ -853,7 +852,6 @@
 				7774D8ED1D0EC50700E5DCE0 /* FollowerViewCell.xib in Resources */,
 				7774D8EF1D0EC50700E5DCE0 /* PostViewCell.xib in Resources */,
 				7774D8DC1D0EC50700E5DCE0 /* Authorization.storyboard in Resources */,
-				7774D8451D0EC4F300E5DCE0 /* Info.plist in Resources */,
 				7774D9331D0EC50700E5DCE0 /* Nootype - Radikal Light Italic.otf in Resources */,
 				7774D9051D0EC50700E5DCE0 /* TextView.xib in Resources */,
 				7774D9311D0EC50700E5DCE0 /* Nootype - Radikal Bold.otf in Resources */,
@@ -1189,7 +1187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1219,7 +1217,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;

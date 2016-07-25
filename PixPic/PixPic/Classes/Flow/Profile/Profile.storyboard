@@ -15,7 +15,6 @@
             <string>Radikal</string>
             <string>Radikal</string>
             <string>Radikal</string>
-            <string>Radikal</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -134,24 +133,7 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="RWA-d4-3KE">
                             <rect key="frame" x="0.0" y="343" width="600" height="383"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-uG-VHv">
-                                    <rect key="frame" x="216" y="181.5" width="169.5" height="20"/>
-                                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="20"/>
-                                    <color key="textColor" red="0.98039215690000003" green="0.97254901959999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstItem="gLL-uG-VHv" firstAttribute="centerY" secondItem="RWA-d4-3KE" secondAttribute="centerY" id="mix-Bh-VBZ"/>
-                                <constraint firstItem="gLL-uG-VHv" firstAttribute="centerX" secondItem="RWA-d4-3KE" secondAttribute="centerX" id="z50-eE-eEy"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="gLL-uG-VHv"/>
-                                </mask>
-                            </variation>
                         </view>
                         <connections>
                             <outlet property="dataSource" destination="Lav-xa-cbI" id="mn8-Xp-Unq"/>

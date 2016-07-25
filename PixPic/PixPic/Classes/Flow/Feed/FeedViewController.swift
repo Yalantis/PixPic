@@ -152,13 +152,9 @@
         tableView?.emptyDataSetDelegate = self
     }
     
-    private func loadStickers() {
-        _ = StickersGroup()
-        _ = Sticker()
-        
+    private func loadStickers() {        
         let stickersService: StickersLoaderService = locator.getService()
-        stickersService.loadStickers() { _, _ in
-        }
+        stickersService.loadStickers()
     }
     
     

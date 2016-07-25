@@ -15,13 +15,19 @@ class StickersLoaderService {
     private var isQueryFromLocalDataStore = false
     private var isParseFetchInProgress = false
     
-    func loadStickers(completion: LoadingStickersCompletion) {
+    //register Parse subclasses
+    init() {
+        StickersGroup.initialize()
+        Sticker.initialize()
+    }
+    
+    func loadStickers(completion: LoadingStickersCompletion? = nil) {
         checkIfNeedToUpdateVersion { [weak self] needUpdate in
-            self!.isParseFetchInProgress = needUpdate
-            
             guard let this = self else {
                 return
             }
+            this.isParseFetchInProgress = needUpdate
+            
             let query = StickersVersion.sortedQuery
             if !needUpdate {
                 query.fromLocalDatastore()
@@ -30,13 +36,13 @@ class StickersLoaderService {
             query.getFirstObjectInBackgroundWithBlock { object, error in
                 if let error = error {
                     log.debug(error.localizedDescription)
-                    completion(objects: nil, error: error)
+                    completion?(objects: nil, error: error)
                     
                     return
                 }
                 
                 guard let stickersVersion = object as? StickersVersion  else {
-                    completion(objects: nil, error: nil)
+                    completion?(objects: nil, error: nil)
                     
                     return
                 }
@@ -44,10 +50,10 @@ class StickersLoaderService {
                 this.loadStickersGroups(stickersVersion) { objects, error in
                     if !self!.isQueryFromLocalDataStore {
                         stickersVersion.pinInBackgroundWithBlock{ _, _ in
-                            self!.isParseFetchInProgress = false
+                            self?.isParseFetchInProgress = false
                         }
                     }
-                    completion(objects: objects, error: error)
+                    completion?(objects: objects, error: error)
                 }
             }
         }
@@ -82,7 +88,6 @@ class StickersLoaderService {
     
     private func loadAllStickers(stickersGroups: [StickersGroup], completion: LoadingStickersCompletion) {
         var stickersModels = [StickersModel]()
-        var stickers = [Sticker]()
         
         let dispatchGroup = dispatch_group_create()
         
@@ -103,20 +108,19 @@ class StickersLoaderService {
                         
                         return
                     }
-                    guard let objects = objects as? [Sticker] else {
+                    guard let stickers = objects as? [Sticker] else {
                         completion(objects: nil, error: nil)
                         
                         return
                     }
                     
-                    stickers = objects
                     let model = StickersModel(stickersGroup: group, stickers: stickers)
                     stickersModels.append(model)
                     
                     dispatch_group_leave(dispatchGroup)
                     
-                    for sticker in stickers {
-                        if !self.isQueryFromLocalDataStore {
+                    if !self.isQueryFromLocalDataStore {
+                        for sticker in stickers {
                             sticker.image.getDataInBackgroundWithBlock { _, _ in
                                 sticker.pinInBackground()
                             }
