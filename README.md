@@ -3,6 +3,13 @@
 ## PixPic, a Photo Editing App Built by Our iOS Interns 
 Read more on [link here].
 
+![PixPic](https://github.com/Yalantis/PixPic/blob/develop/MIsc/5.5%20Device%201.jpg)
+![PixPic](https://github.com/Yalantis/PixPic/blob/develop/MIsc/5.5%20Device%202.jpg)
+![PixPic](https://github.com/Yalantis/PixPic/blob/develop/MIsc/5.5%20Device%203.jpg)
+![PixPic](https://github.com/Yalantis/PixPic/blob/develop/MIsc/5.5%20Device%204.jpg)
+![PixPic](https://github.com/Yalantis/PixPic/blob/develop/MIsc/5.5%20Device%205.jpg)
+
+
 ## Technology Stack
 
 **Toast** - An Objective-C category that adds toast notifications to the UIView object class.
