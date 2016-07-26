@@ -3,10 +3,9 @@
 ## PixPic, a Photo Editing App Built by Our iOS Interns 
 Read more on [link here].
 
-![PixPic](https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%201.jpg =250x)
-![PixPic](https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%204.jpg =250x)
-![PixPic](https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%205.jpg =250x)
-
+<img src="https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%201.jpg" width="250" />
+<img src="https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%204.jpg" width="250" />
+<img src="https://github.com/Yalantis/PixPic/blob/master/MIsc/4.0%20Device%205.jpg" width="250" />
 
 ## Technology Stack
 
