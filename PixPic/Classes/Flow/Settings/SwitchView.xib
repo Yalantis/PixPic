@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Nootype - Radikal.otf">
+            <string>Radikal</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SwitchView" customModule="PixPic" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show only posts of people I follow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="M7K-gh-GYe">
+                    <rect key="frame" x="20" y="18" width="501" height="14"/>
+                    <fontDescription key="fontDescription" name="Radikal" family="Radikal" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xuA-nw-qzN">
+                    <rect key="frame" x="531" y="9.5" width="51" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="49" id="lUh-rO-a4h"/>
+                    </constraints>
+                    <color key="onTintColor" red="0.58039218187332153" green="0.21568627655506134" blue="0.91764706373214722" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="switchAction:" destination="iN0-l3-epB" eventType="valueChanged" id="GUj-97-lsC"/>
+                    </connections>
+                </switch>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xYu-Oy-HbV">
+                    <rect key="frame" x="300" y="0.0" width="0.0" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="JRv-WT-zvF"/>
+                        <constraint firstAttribute="width" id="Lxi-la-PQK"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d4e-A8-r0w">
+                    <rect key="frame" x="20" y="49" width="560" height="1"/>
+                    <color key="backgroundColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="i6y-W1-mlw"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="xuA-nw-qzN" firstAttribute="leading" secondItem="M7K-gh-GYe" secondAttribute="trailing" constant="10" id="08G-vK-srj"/>
+                <constraint firstItem="d4e-A8-r0w" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="4NI-Yi-ozr"/>
+                <constraint firstItem="xYu-Oy-HbV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="H57-ou-Sah"/>
+                <constraint firstAttribute="bottom" secondItem="xYu-Oy-HbV" secondAttribute="bottom" id="OTc-xP-MGl"/>
+                <constraint firstAttribute="trailing" secondItem="d4e-A8-r0w" secondAttribute="trailing" constant="20" id="PIE-iF-Eq0"/>
+                <constraint firstAttribute="bottom" secondItem="d4e-A8-r0w" secondAttribute="bottom" id="TDT-Ae-dbt"/>
+                <constraint firstItem="xYu-Oy-HbV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XaI-hz-71L"/>
+                <constraint firstItem="M7K-gh-GYe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gBT-DX-eEm"/>
+                <constraint firstAttribute="trailing" secondItem="xuA-nw-qzN" secondAttribute="trailing" constant="20" id="mHH-Mf-Nm2"/>
+                <constraint firstItem="xuA-nw-qzN" firstAttribute="centerY" secondItem="M7K-gh-GYe" secondAttribute="centerY" id="nO2-KS-eun"/>
+                <constraint firstItem="M7K-gh-GYe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="vmA-6Z-vaw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="switchControl" destination="xuA-nw-qzN" id="z6Z-ZC-720"/>
+                <outlet property="textLabel" destination="M7K-gh-GYe" id="AyH-ag-rAN"/>
+            </connections>
+        </view>
+    </objects>
+</document>
