@@ -265,7 +265,11 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.dataSource.count - 8) {
-        [self requestPhotos];
+        if([self.albumId isEqualToString:CSFPhotosOfMeAlbumId]){
+            [self requestPhotosOfMe];
+        }else{
+            [self requestPhotos];
+        }
     }
 }
 

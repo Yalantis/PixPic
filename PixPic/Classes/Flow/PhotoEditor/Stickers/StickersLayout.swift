@@ -23,6 +23,7 @@ class StickersLayout: UICollectionViewFlowLayout {
         headerReferenceSize = cellSize
         scrollDirection = UICollectionViewScrollDirection.Horizontal
         sectionHeadersPinToVisibleBounds = true
+        
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
     }
