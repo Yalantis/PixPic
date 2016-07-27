@@ -30,6 +30,8 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 @property (nonatomic,assign) CGFloat cellSide;
 @property (nonatomic,assign) CGFloat startYOffset;
 @property (nonatomic,strong) NSMutableString *photosAfterCursor;
+@property (nonatomic,assign) BOOL isRequestExecuting;
+
 
 @end
 
@@ -38,6 +40,7 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     self.dataSource = [NSMutableArray array];
+    self.isRequestExecuting = NO;
     
     return self;
 }
@@ -131,9 +134,10 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
 }
 
 -(void)requestPhotos{
-    if(self.photosAfterCursor == nil) {
+    if(self.photosAfterCursor == nil || self.isRequestExecuting == YES) {
         return;
     }
+    self.isRequestExecuting = YES;
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/photos?fields=name,images,id&limit=48",self.albumId]
                                                                    parameters:[self requestParametrsDictionary]];
@@ -186,9 +190,11 @@ static const CGFloat CSFPhotosRequestDelay = 0.4;
     self.photosAfterCursor = result[@"paging"][@"cursors"][@"after"] ? result[@"paging"][@"cursors"][@"after"] : nil;
     
     NSMutableArray *tempArray = [NSMutableArray array];
+    __weak typeof(self) weakSelf = self;
     [photos enumerateObjectsUsingBlock:^(NSDictionary *photoDictionary, NSUInteger idx, BOOL *stop) {
-        
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
         [tempArray addObject:[[CSFFacebookPhoto alloc] initWithDictionary:photoDictionary]];
+        strongSelf.isRequestExecuting = NO;
     }];
     [self performSelector:@selector(hidePullToRefresh) withObject:nil afterDelay:CSFPhotosRequestDelay];
     [self.dataSource addObjectsFromArray:tempArray];
