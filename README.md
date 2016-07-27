@@ -3,12 +3,12 @@
 ## PixPic, a Photo Editing App Built by Our iOS Interns 
 Read more on [link here].
 
-<img src="Screenshots/4.0%20Device%200.jpg" width="250" />
-<img src="Screenshots/4.0%20Device%201.jpg" width="250" />
-<img src="Screenshots/4.0%20Device%202.jpg" width="250" />
-<img src="Screenshots/4.0%20Device%203.jpg" width="250" />
-<img src="Screenshots/4.0%20Device%204.jpg" width="250" />
-<img src="Screenshots/4.0%20Device%205.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%200.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%201.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%202.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%203.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%204.jpg" width="250" />
+<img src="Screenshots/5.5%20Device%205.jpg" width="250" />
 
 ## Technology Stack
 

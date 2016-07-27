@@ -1187,7 +1187,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic/Resources/PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1217,7 +1217,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yalantis.PIxPic;
 				PRODUCT_NAME = PixPic;
-				PROVISIONING_PROFILE = "0ed09714-2f2c-4001-babb-3fafc9737564";
+				PROVISIONING_PROFILE = "5a26b9d7-0d30-40af-9f91-8dfe25b9ad81";
 				SWIFT_OBJC_BRIDGING_HEADER = "PixPic/Resources/PixPic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = 1;
