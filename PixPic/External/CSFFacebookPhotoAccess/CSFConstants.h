@@ -9,6 +9,6 @@
 #ifndef CSFConstants_h
 #define CSFConstants_h
 
-static NSString* const CSFPhotosOfMeAlbumId = @"com.brotechllc.thebroapp.CSFConstants.photosOfMeAlbumId";
+static NSString* const CSFPhotosOfMeAlbumId = @"photosOfMeAlbumId";
 
 #endif /* CSFConstants_h */

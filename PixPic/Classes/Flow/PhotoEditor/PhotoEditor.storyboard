@@ -162,7 +162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VUI-BL-gPN">
-                                <rect key="frame" x="12" y="-86" width="576" height="576"/>
+                                <rect key="frame" x="0.0" y="-98" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VUI-BL-gPN" secondAttribute="height" multiplier="1:1" id="U4g-NO-jEJ"/>
@@ -176,9 +176,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="VUI-BL-gPN" secondAttribute="trailing" constant="12" id="SGq-c2-Bg5"/>
+                            <constraint firstAttribute="trailing" secondItem="VUI-BL-gPN" secondAttribute="trailing" id="SGq-c2-Bg5"/>
                             <constraint firstItem="VUI-BL-gPN" firstAttribute="centerY" secondItem="yGG-M4-QUf" secondAttribute="centerY" id="V8G-UB-W5L"/>
-                            <constraint firstItem="VUI-BL-gPN" firstAttribute="leading" secondItem="yGG-M4-QUf" secondAttribute="leading" constant="12" id="inh-mA-XHZ"/>
+                            <constraint firstItem="VUI-BL-gPN" firstAttribute="leading" secondItem="yGG-M4-QUf" secondAttribute="leading" id="inh-mA-XHZ"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
