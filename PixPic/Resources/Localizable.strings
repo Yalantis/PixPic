@@ -1,0 +1,83 @@
+/* 
+  Localizable.strings
+  PixPic
+
+  Created by AndrewPetrov on 4/25/16.
+  Copyright © 2016 Yalantis. All rights reserved.
+*/
+
+"photo_deleted" = "This photo will be deleted from PixPic";
+"need_registration" = "This function is available only to registered users";
+"complaint_about" ="Complaint about";
+"cancel" = "Cancel";
+"share" = "Share";
+"remove_post" = "Remove post";
+"complain" = "Complain";
+"register" = "Register";
+
+"posted_FB" = "Posted on Facebook";
+"posted_TW" = "Tweeted";
+"saved_to_lib" = "Saved to Photos";
+"posted_VK" = "Posted to VK";
+"applied_to_contact" = "Applied to contact";
+"shared" = "Shared";
+
+
+"notification" = "Notification";
+
+"thanks_complaint" = "Thank you for submitting your complaint";
+"nil_user_in_post" = "Nil user in post";
+
+"user_avatar" = "User Avatar";
+"post_image" = "Post Image";
+"username" = "Username";
+
+"complaint_yourself" = "You can't submit a complaint about the content you posted";
+"already_complaint" = "You have already submitted a complaint about this post";
+"complaint_without_registration" = "Only registered users can submit a complaint";
+
+"internet_required_to_change_profile" = "Internet connection is required to save changes in profile";
+"will_logout" = "Are you sure you want to log out? You won't be able to share your photos once you're logged out.";
+"changes_will_be_discarded" = "If you go back now, all changes you made will be discarded";
+"internet_required_to_logout" = "Internet connection is required to log out";
+"save_changes" = "Save changes";
+"save" = "Save";
+"logout_me" = "Log me out!";
+"ok" = "Ok";
+"cancel" = "Cancel";
+
+"no_data_available" = "No data are currently available";
+"pull_to_refresh" = "Pull down to refresh";
+
+"post_with_delay" = "Post with delay";
+"don't_save" = "Don't save";
+"save_result_after_internet_appears" = "Would you like to save results to photo library or post them after you are online?";
+
+
+"take_photo" = "Take photo";
+"photo_from_library" = "Choose photo from the library";
+"import_from_facebook" = "Import photo from Facebook";
+"no_camera" = "No Camera";
+"Sorry, this device has no camera" = "Sorry, this device has no camera";
+"OK" = "OK";
+"IMPORTANT" = "IMPORTANT";
+"camera_access_required" = "Camera access required";
+"allow_camera" = "Allow Camera";
+"allow_camera_access" = "Please allow the app access to the camera";
+"dismiss" = "Dismiss";
+
+"upload_successful" = "Upload was successful!";
+
+"sure_unfollow" = "Are you sure you want to unfollow?";
+"unfollow" = "Unfollow";
+"yes" = "Yes";
+"can't_follow_no_registration" = "Only registered users can follow other users";
+"register" = "Register";
+
+"enable_notifications" = "Enable Notifications";
+"only_following_users_posts" = "Show only posts of people I follow";
+"log_in" = "Log in";
+"log_out" = "Log out";
+
+"user_data_updated" = "User data have been updated!";
+"check_later" = "Update cannot be viewed now. Check it out later";

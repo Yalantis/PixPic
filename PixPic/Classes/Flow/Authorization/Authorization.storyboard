@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXq-ZV-3AE">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--Autorization View Controller-->
+        <scene sceneID="LKi-xe-jhM">
+            <objects>
+                <viewController storyboardIdentifier="AuthorizationViewController" title="Login" id="vXq-ZV-3AE" userLabel="Autorization View Controller" customClass="AuthorizationViewController" customModule="PixPic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lYv-4a-1oh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Otb-eJ-vAW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rz2-y5-t88">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" image="emojiLogin" translatesAutoresizingMaskIntoConstraints="NO" id="UF8-sq-O8V">
+                                <rect key="frame" x="12" y="371" width="576" height="199"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="M42-vQ-wuE">
+                                <rect key="frame" x="45" y="65" width="510" height="155"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTD-CW-fGF">
+                                <rect key="frame" x="156" y="268" width="288" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="SoY-wm-nKL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="3"/>
+                                <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" backgroundImage="btnLogin">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="btnLogin"/>
+                                <state key="highlighted" backgroundImage="btnLogin"/>
+                                <state key="focused" backgroundImage="btnLogin"/>
+                                <connections>
+                                    <action selector="logInWithFBButtonTapped" destination="vXq-ZV-3AE" eventType="touchUpInside" id="nDa-qJ-sPr"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCD-tZ-MzZ">
+                                <rect key="frame" x="171" y="28" width="240" height="24"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ve0-e2-EX1">
+                                <rect key="frame" x="156" y="578" width="240" height="14"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GY4-Dh-cM5">
+                                <rect key="frame" x="171" y="228" width="240" height="18"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Bp-sW-1yE">
+                                <rect key="frame" x="180" y="349" width="240" height="16"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UF8-sq-O8V" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leading" constant="12" id="4rw-cr-OSi"/>
+                            <constraint firstItem="4Bp-sW-1yE" firstAttribute="height" secondItem="NCD-tZ-MzZ" secondAttribute="height" id="67m-LV-xLe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NCD-tZ-MzZ" secondAttribute="trailing" id="6vo-AN-4mn"/>
+                            <constraint firstAttribute="trailing" secondItem="M42-vQ-wuE" secondAttribute="trailing" constant="45" id="AqR-cK-VZ3"/>
+                            <constraint firstItem="UF8-sq-O8V" firstAttribute="top" secondItem="4Bp-sW-1yE" secondAttribute="bottom" id="CYz-IM-9i1"/>
+                            <constraint firstItem="M42-vQ-wuE" firstAttribute="top" secondItem="NCD-tZ-MzZ" secondAttribute="bottom" id="Hhl-qQ-HDk"/>
+                            <constraint firstItem="Otb-eJ-vAW" firstAttribute="top" secondItem="ve0-e2-EX1" secondAttribute="bottom" id="Lsy-bF-lO3"/>
+                            <constraint firstItem="ve0-e2-EX1" firstAttribute="top" secondItem="UF8-sq-O8V" secondAttribute="bottom" id="Nyi-3i-R8P"/>
+                            <constraint firstItem="NCD-tZ-MzZ" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="Tcf-9V-Dug"/>
+                            <constraint firstItem="ve0-e2-EX1" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="WOK-UJ-1Tb"/>
+                            <constraint firstItem="4Bp-sW-1yE" firstAttribute="top" secondItem="WTD-CW-fGF" secondAttribute="bottom" id="XsZ-zE-TFN"/>
+                            <constraint firstItem="4Bp-sW-1yE" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="a0f-Ly-Uhi"/>
+                            <constraint firstItem="WTD-CW-fGF" firstAttribute="top" secondItem="GY4-Dh-cM5" secondAttribute="bottom" id="doV-Vt-qY2"/>
+                            <constraint firstItem="WTD-CW-fGF" firstAttribute="centerX" secondItem="rz2-y5-t88" secondAttribute="centerX" constant="6" id="gSw-hG-MH9"/>
+                            <constraint firstItem="NCD-tZ-MzZ" firstAttribute="top" secondItem="lYv-4a-1oh" secondAttribute="bottom" id="gjb-T8-NNK"/>
+                            <constraint firstItem="M42-vQ-wuE" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leading" constant="45" id="ibu-mw-hhC"/>
+                            <constraint firstItem="M42-vQ-wuE" firstAttribute="height" secondItem="UF8-sq-O8V" secondAttribute="height" multiplier="160:206" id="jMe-SW-LpY"/>
+                            <constraint firstItem="ve0-e2-EX1" firstAttribute="height" secondItem="NCD-tZ-MzZ" secondAttribute="height" id="msC-ff-m0O"/>
+                            <constraint firstItem="GY4-Dh-cM5" firstAttribute="top" secondItem="M42-vQ-wuE" secondAttribute="bottom" id="ohX-9K-mX9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GY4-Dh-cM5" secondAttribute="trailing" id="rHO-eo-NyZ"/>
+                            <constraint firstAttribute="trailing" secondItem="UF8-sq-O8V" secondAttribute="trailing" constant="12" id="uoi-iA-41g"/>
+                            <constraint firstItem="GY4-Dh-cM5" firstAttribute="height" secondItem="NCD-tZ-MzZ" secondAttribute="height" id="vNU-HB-FiZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Bp-sW-1yE" secondAttribute="trailing" id="w3y-YH-Kqy"/>
+                            <constraint firstItem="GY4-Dh-cM5" firstAttribute="leading" secondItem="rz2-y5-t88" secondAttribute="leadingMargin" id="yGB-or-Cgl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ve0-e2-EX1" secondAttribute="trailing" id="zgN-h6-AEP"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QPs-Ce-5Yj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="635" y="-347"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btnLogin" width="288" height="65"/>
+        <image name="emojiLogin" width="346" height="199"/>
+        <image name="img1" width="277" height="155"/>
+    </resources>
+</document>
