@@ -1,0 +1,9 @@
+included:
+  - PixPic
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - Pods
+    - PixPic/PixPic/External
+disabled_rules: # rule identifiers to exclude from running
+  - super_call_separation
+  - trailing_whitespace
+  - force_cast
