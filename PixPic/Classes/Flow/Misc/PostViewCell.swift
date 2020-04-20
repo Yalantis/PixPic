@@ -20,35 +20,35 @@ class PostViewCell: UITableViewCell, CellInterface {
 
     weak var post = Post?()
 
-    var didSelectUser: ((cell: PostViewCell) -> Void)?
-    var didSelectSettings: ((cell: PostViewCell, items: [AnyObject]) -> Void)?
-    private let actionByTapProfile = #selector(didTapProfile)
+    var didSelectUser: ((_ cell: PostViewCell) -> Void)?
+    var didSelectSettings: ((_ cell: PostViewCell, _ items: [AnyObject]) -> Void)?
+    fileprivate let actionByTapProfile = #selector(didTapProfile)
 
-    private var locator: ServiceLocator!
+    fileprivate var locator: ServiceLocator!
 
-    @IBOutlet private weak var postImageView: UIImageView!
-    @IBOutlet private weak var profileImageView: UIImageView!
+    @IBOutlet fileprivate weak var postImageView: UIImageView!
+    @IBOutlet fileprivate weak var profileImageView: UIImageView!
 
-    @IBOutlet private weak var dateLabel: UILabel!
-    @IBOutlet private weak var profileLabel: UILabel!
+    @IBOutlet fileprivate weak var dateLabel: UILabel!
+    @IBOutlet fileprivate weak var profileLabel: UILabel!
 
-    @IBOutlet private weak var settingsButton: UIButton!
-    @IBOutlet private weak var indicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var settingsButton: UIButton!
+    @IBOutlet fileprivate weak var indicator: UIActivityIndicatorView!
 
-    @IBOutlet private weak var likeButton: UIButton!
-    @IBOutlet private weak var likesLebel: UILabel!
+    @IBOutlet fileprivate weak var likeButton: UIButton!
+    @IBOutlet fileprivate weak var likesLebel: UILabel!
 
-    private var likeStatus = LikeStatus.Unknown {
+    fileprivate var likeStatus = LikeStatus.unknown {
         didSet {
             switch likeStatus {
-            case .Liked:
-                likeButton.selected = true
-                likeButton.enabled = true
-            case .NotLiked:
-                likeButton.selected = false
-                likeButton.enabled = true
-            case .Unknown:
-                likeButton.enabled = false
+            case .liked:
+                likeButton.isSelected = true
+                likeButton.isEnabled = true
+            case .notLiked:
+                likeButton.isSelected = false
+                likeButton.isEnabled = true
+            case .unknown:
+                likeButton.isEnabled = false
             }
         }
     }
@@ -61,7 +61,7 @@ class PostViewCell: UITableViewCell, CellInterface {
 
         let labelGestureRecognizer = UITapGestureRecognizer(target: self, action: actionByTapProfile)
         profileLabel.addGestureRecognizer(labelGestureRecognizer)
-        selectionStyle = .None
+        selectionStyle = .none
     }
 
     override func prepareForReuse() {
@@ -69,8 +69,8 @@ class PostViewCell: UITableViewCell, CellInterface {
 
         postImageView.image = UIImage.placeholderImage
         profileImageView.image = UIImage.avatarPlaceholderImage
-        likeStatus = .Unknown
-        indicator.hidden = false
+        likeStatus = .unknown
+        indicator.isHidden = false
         indicator.startAnimating()
     }
 
@@ -84,8 +84,8 @@ class PostViewCell: UITableViewCell, CellInterface {
         dateLabel.text = post.createdAt?.timeAgoSinceNow()
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
 
-        settingsButton.enabled = false
-        if let urlString = post.image.url, url = NSURL(string: urlString) {
+        settingsButton.isEnabled = false
+        if let urlString = post.image.url, let url = URL(string: urlString) {
             postImageView.kf_setImageWithURL(
                 url,
                 placeholderImage: UIImage.placeholderImage,
@@ -102,7 +102,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
         if let avatar = user.avatar?.url {
             profileImageView.kf_setImageWithURL(
-                NSURL(string: avatar)!,
+                URL(string: avatar)!,
                 placeholderImage: UIImage.avatarPlaceholderImage
             )
         }
@@ -111,15 +111,15 @@ class PostViewCell: UITableViewCell, CellInterface {
         toggleLikeColor()
     }
 
-    @objc private func didTapProfile(recognizer: UIGestureRecognizer) {
-        didSelectUser?(cell: self)
+    @objc fileprivate func didTapProfile(_ recognizer: UIGestureRecognizer) {
+        didSelectUser?(self)
     }
 
-    @IBAction private func didTapSettingsButton() {
+    @IBAction fileprivate func didTapSettingsButton() {
         let cache = KingfisherManager.sharedManager.cache
         guard let username = profileLabel.text,
-            url = post?.image.url,
-            cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
+            let url = post?.image.url,
+            let cachedImage = cache.retrieveImageInDiskCacheForKey(url) else {
                 return
         }
         let message = "Created by " + username + " with PixPic app."
@@ -128,7 +128,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         didSelectSettings?(cell: self, items: items)
     }
 
-    @IBAction func didTapLikeButton(sender: AnyObject) {
+    @IBAction func didTapLikeButton(_ sender: AnyObject) {
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
 
@@ -141,30 +141,30 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
 
-    private func toggleLikePost() {
+    fileprivate func toggleLikePost() {
         guard let post = post else {
             return
         }
         let activityService: ActivityService = locator.getService()
 
-        if likeStatus == .Liked {
+        if likeStatus == .liked {
             // Unlike
-            likeStatus = .Unknown
+            likeStatus = .unknown
             activityService.unlikePostEventually(post) { [weak self] success, error in
                 guard let this = self else {
                     return
                 }
                 if success {
-                    this.likeStatus = .NotLiked
+                    this.likeStatus = .notLiked
                     this.fillLikesQuantity()
                 } else {
-                    this.likeStatus = .Liked
+                    this.likeStatus = .liked
                 }
             }
         } else {
             // Like
-            likeStatus = .Unknown
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            likeStatus = .unknown
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             indicator.center = likeButton.center
             indicator.hidesWhenStopped = true
             indicator.startAnimating()
@@ -175,9 +175,9 @@ class PostViewCell: UITableViewCell, CellInterface {
                 }
                 if error == nil {
                     log.debug("Attempt to like was \(succeeded) ")
-                    this.likeStatus = .Liked
+                    this.likeStatus = .liked
                 } else {
-                    this.likeStatus = .NotLiked
+                    this.likeStatus = .notLiked
                 }
                 indicator.removeFromSuperview()
                 this.fillLikesQuantity()
@@ -185,7 +185,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
 
-    private func fillLikesQuantity() {
+    fileprivate func fillLikesQuantity() {
         guard let post = post else {
             return
         }
@@ -200,7 +200,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
 
-    private func setLikeStatus() {
+    fileprivate func setLikeStatus() {
         guard let post = post else {
             return
         }
@@ -217,7 +217,7 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
 
-    private func getLikesString(count: Int) -> String {
+    fileprivate func getLikesString(_ count: Int) -> String {
         toggleLikeColor()
         if count == 1 {
             return "\(count) like"
@@ -228,14 +228,14 @@ class PostViewCell: UITableViewCell, CellInterface {
         }
     }
 
-    private func toggleLikeColor() {
+    fileprivate func toggleLikeColor() {
         let activityService: ActivityService = locator.getService()
         activityService.fetchLikeStatus(post!) { [weak self] likeStatus in
             switch likeStatus {
-            case .Liked:
+            case .liked:
                 self?.likeButton.imageView?.tintColor = UIColor.appPinkColor()
 
-            case  .NotLiked, .Unknown:
+            case  .notLiked, .unknown:
                 self?.likeButton.imageView?.tintColor = UIColor.appWhiteColor()
             }
         }

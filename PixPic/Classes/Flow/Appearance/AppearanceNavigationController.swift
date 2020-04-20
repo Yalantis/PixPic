@@ -15,21 +15,21 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     required init?(coder decoder: NSCoder) {
         super.init(coder: decoder)
 
-        interactivePopGestureRecognizer?.enabled = false
+        interactivePopGestureRecognizer?.isEnabled = false
         delegate = self
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
-        interactivePopGestureRecognizer?.enabled = false
+        interactivePopGestureRecognizer?.isEnabled = false
         delegate = self
     }
 
     override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
 
-        interactivePopGestureRecognizer?.enabled = false
+        interactivePopGestureRecognizer?.isEnabled = false
         delegate = self
     }
 
@@ -38,7 +38,7 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     }
 
     // MARK: - UINavigationControllerDelegate
-    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         guard let appearanceContext = viewController as? NavigationControllerAppearanceContext else {
             return
         }
@@ -53,9 +53,9 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     }
 
     // MARK: - Appearance Applying
-    private var appliedAppearance: Appearance?
+    fileprivate var appliedAppearance: Appearance?
 
-    private func applyAppearance(appearance: Appearance?, navigationItem: UINavigationItem?, animated: Bool) {
+    fileprivate func applyAppearance(_ appearance: Appearance?, navigationItem: UINavigationItem?, animated: Bool) {
         if let appearance = appearance {
             appliedAppearance = appearance
 
@@ -74,9 +74,8 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
     }
 
     // MARK: - Apperanace Update
-    func updateAppearanceForViewController(viewController: UIViewController) {
-        if let context = viewController as? NavigationControllerAppearanceContext
-            where viewController == topViewController && transitionCoordinator() == nil {
+    func updateAppearanceForViewController(_ viewController: UIViewController) {
+        if let context = viewController as? NavigationControllerAppearanceContext, viewController == topViewController && transitionCoordinator == nil {
             setNavigationBarHidden(context.prefersNavigationControllerBarHidden(self), animated: true)
             setToolbarHidden(context.prefersNavigationControllerToolbarHidden(self), animated: true)
             applyAppearance(
@@ -87,13 +86,13 @@ class AppearanceNavigationController: UINavigationController, UINavigationContro
         }
     }
 
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         return appliedAppearance?.statusBarStyle ?? self.topViewController?.preferredStatusBarStyle()
             ?? super.preferredStatusBarStyle()
     }
     
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return appliedAppearance != nil ? .Fade : super.preferredStatusBarUpdateAnimation()
+    override var preferredStatusBarUpdateAnimation : UIStatusBarAnimation {
+        return appliedAppearance != nil ? .fade : super.preferredStatusBarUpdateAnimation
     }
     
 }

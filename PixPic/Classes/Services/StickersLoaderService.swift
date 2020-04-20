@@ -8,11 +8,11 @@
 
 import Foundation
 
-typealias LoadingStickersCompletion = (objects: [StickersModel]?, error: NSError?) -> Void
+typealias LoadingStickersCompletion = (_ objects: [StickersModel]?, _ error: NSError?) -> Void
 
 class StickersLoaderService {
 
-    private var cachePolicy: PFCachePolicy!
+    fileprivate var cachePolicy: PFCachePolicy!
 
     //register Parse subclasses
     init() {
@@ -20,7 +20,7 @@ class StickersLoaderService {
         Sticker.initialize()
     }
 
-    func loadStickers(completion: LoadingStickersCompletion? = nil) {
+    func loadStickers(_ completion: LoadingStickersCompletion? = nil) {
         figureOutCachePolicy { [weak self] in
             guard let this = self else {
                 return
@@ -50,7 +50,7 @@ class StickersLoaderService {
         }
     }
 
-    private func loadStickersGroups(stickersVersion: StickersVersion, completion: LoadingStickersCompletion) {
+    fileprivate func loadStickersGroups(_ stickersVersion: StickersVersion, completion: @escaping LoadingStickersCompletion) {
         let groupsRelationQuery = stickersVersion.groupsRelation.query()
         groupsRelationQuery.cachePolicy = cachePolicy
         groupsRelationQuery.findObjectsInBackgroundWithBlock { [weak self] objects, error in
@@ -73,14 +73,14 @@ class StickersLoaderService {
         }
     }
 
-    private func loadAllStickers(stickersGroups: [StickersGroup], completion: LoadingStickersCompletion) {
+    fileprivate func loadAllStickers(_ stickersGroups: [StickersGroup], completion: @escaping LoadingStickersCompletion) {
         var stickersModels = [StickersModel]()
 
-        let dispatchGroup = dispatch_group_create()
+        let dispatchGroup = DispatchGroup()
 
         for group in stickersGroups {
             log.debug("\(group.label)")
-            dispatch_group_enter(dispatchGroup)
+            dispatchGroup.enter()
 
             let comletionBlock = {
                 let stickersRelationQuery = group.stickersRelation.query().addAscendingOrder("createdAt")
@@ -114,13 +114,13 @@ class StickersLoaderService {
             }
 
         }
-        dispatch_group_notify(dispatchGroup, dispatch_get_main_queue()) {
-            completion(objects: stickersModels, error: nil)
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            completion(stickersModels, nil)
         }
 
     }
 
-    private func figureOutCachePolicy(with handler: () -> Void) {
+    fileprivate func figureOutCachePolicy(with handler: @escaping () -> Void) {
         //load stickers from cache
         cachePolicy = PFCachePolicy.CacheElseNetwork
         handler()

@@ -10,7 +10,7 @@ import UIKit
 
 class ImageViewModel: NSObject {
 
-    private let setedOriginalImage: UIImage
+    fileprivate let setedOriginalImage: UIImage
 
     init(image: UIImage) {
         setedOriginalImage = image

@@ -10,28 +10,28 @@ import UIKit
 
 class ActivityViewController: UIActivityViewController {
 
-    private let facebookMessage = NSLocalizedString("posted_FB", comment: "")
-    private let twitterMessage = NSLocalizedString("posted_TW", comment: "")
-    private let cameraRollMessage = NSLocalizedString("saved_to_lib", comment: "")
-    private let vkMessage = NSLocalizedString("posted_VK", comment: "")
-    private let applyToContactMessage = NSLocalizedString("applied_to_contact", comment: "")
-    private let doneMessage = NSLocalizedString("shared", comment: "")
+    fileprivate let facebookMessage = NSLocalizedString("posted_FB", comment: "")
+    fileprivate let twitterMessage = NSLocalizedString("posted_TW", comment: "")
+    fileprivate let cameraRollMessage = NSLocalizedString("saved_to_lib", comment: "")
+    fileprivate let vkMessage = NSLocalizedString("posted_VK", comment: "")
+    fileprivate let applyToContactMessage = NSLocalizedString("applied_to_contact", comment: "")
+    fileprivate let doneMessage = NSLocalizedString("shared", comment: "")
 
-    private let activityTypePostToVK = "com.vk.vkclient.shareextension"
+    fileprivate let activityTypePostToVK = "com.vk.vkclient.shareextension"
 
-    static func initWith(items: [AnyObject]) -> ActivityViewController {
+    static func initWith(_ items: [AnyObject]) -> ActivityViewController {
         let activityViewController = ActivityViewController(activityItems: items, applicationActivities: nil)
         activityViewController.excludedActivityTypes = [
-            UIActivityTypePostToTencentWeibo,
-            UIActivityTypePostToWeibo,
-            UIActivityTypePrint,
-            UIActivityTypeOpenInIBooks
+            UIActivityType.postToTencentWeibo,
+            UIActivityType.postToWeibo,
+            UIActivityType.print,
+            UIActivityType.openInIBooks
         ]
         activityViewController.completionWithItemsHandler = { activity, success, items, error in
             if let error = error {
                 log.debug(error.localizedDescription)
             }
-            if let activity = activity where success {
+            if let activity = activity, success {
                 let message = activityViewController.activityViewController(
                     activityViewController,
                     itemForActivityType: activity
@@ -48,22 +48,22 @@ class ActivityViewController: UIActivityViewController {
 // MARK: - UIActivityItemSource methods
 extension ActivityViewController: UIActivityItemSource {
 
-    func activityViewControllerPlaceholderItem(activityViewController: UIActivityViewController) -> AnyObject {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return ""
     }
 
-    func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType) -> Any? {
         switch activityType {
-        case UIActivityTypePostToFacebook:
+        case UIActivityType.postToFacebook:
             return facebookMessage
 
-        case UIActivityTypePostToTwitter:
+        case UIActivityType.postToTwitter:
             return twitterMessage
 
-        case UIActivityTypeSaveToCameraRoll:
+        case UIActivityType.saveToCameraRoll:
             return cameraRollMessage
 
-        case UIActivityTypeAssignToContact:
+        case UIActivityType.assignToContact:
             return applyToContactMessage
 
         case activityTypePostToVK:

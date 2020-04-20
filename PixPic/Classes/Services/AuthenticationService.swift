@@ -12,16 +12,16 @@ import ParseFacebookUtilsV4
 
 enum AuthenticationError: Int {
     
-    case FacebookError = 701
-    case ParseError = 702
-    case ParseCurrentUserNotExist = 703
-    case InvalidAccessToken = 704
+    case facebookError = 701
+    case parseError = 702
+    case parseCurrentUserNotExist = 703
+    case invalidAccessToken = 704
     
 }
 
 class AuthenticationService {
 
-    func signInWithPermission(completion: (User!, NSError?) -> Void) {
+    func signInWithPermission(_ completion: @escaping (User?, NSError?) -> Void) {
         guard let token = FBSDKAccessToken.currentAccessToken() else {
             let accessTokenError = NSError.authenticationError(.InvalidAccessToken)
             completion(nil, accessTokenError)
@@ -48,7 +48,7 @@ class AuthenticationService {
         }
     }
 
-    func signInWithFacebookInController(controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
+    func signInWithFacebookInController(_ controller: UIViewController, completion: (FBSDKLoginManagerLoginResult?, NSError?) -> Void) {
         let loginManager = FBSDKLoginManager()
         let permissions = ["public_profile", "email", "user_photos"]
 
@@ -63,7 +63,7 @@ class AuthenticationService {
         }
     }
 
-    func updateUserInfoViaFacebook(user: User, completion: (User?, NSError?) -> Void) {
+    func updateUserInfoViaFacebook(_ user: User, completion: @escaping (User?, NSError?) -> Void) {
         let parameters = ["fields": "id, name, first_name, last_name, picture.type(large), email"]
         let fbRequest = FBSDKGraphRequest(
             graphPath: "me",
@@ -72,9 +72,9 @@ class AuthenticationService {
         fbRequest.startWithCompletionHandler { _, result, error in
             if error == nil && result != nil {
                 guard let facebookInfo = result as? [String: AnyObject],
-                    picture = facebookInfo["picture"] as? [String: AnyObject],
-                    data = picture["data"] as? [String: AnyObject],
-                    url = data["url"] as? String else {
+                    let picture = facebookInfo["picture"] as? [String: AnyObject],
+                    let data = picture["data"] as? [String: AnyObject],
+                    let url = data["url"] as? String else {
                         completion(nil, nil)
 
                         return
@@ -91,7 +91,7 @@ class AuthenticationService {
                 }
                 user.facebookId = facebookInfo["id"] as? String
                 if let firstname = facebookInfo["first_name"] as? String,
-                    lastname = facebookInfo["last_name"] as? String {
+                    let lastname = facebookInfo["last_name"] as? String {
                         user.username = "\(firstname) \(lastname)"
                 }
                 completion(user, nil)
@@ -101,7 +101,7 @@ class AuthenticationService {
         }
     }
 
-    func anonymousLogIn(completion completion: (object: User?) -> Void, failure: (error: NSError?) -> Void) {
+    func anonymousLogIn(completion: @escaping (_ object: User?) -> Void, failure: @escaping (_ error: NSError?) -> Void) {
         PFAnonymousUtils.logInWithBlock { user, error in
             if let error = error {
                 failure(error: error)

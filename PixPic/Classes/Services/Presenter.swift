@@ -8,8 +8,8 @@
 
 import UIKit
 
-private let appRouterAnimationDelay: NSTimeInterval = 0.3
-private let appRouterAnimationDuration: NSTimeInterval = 0.45
+private let appRouterAnimationDelay: TimeInterval = 0.3
+private let appRouterAnimationDuration: TimeInterval = 0.45
 
 typealias Handler = () -> Void
 
@@ -17,8 +17,8 @@ protocol Router: class {
 
     associatedtype Context
 
-    func execute(context: Context)
-    func execute(context: Context, userInfo: AnyObject?)
+    func execute(_ context: Context)
+    func execute(_ context: Context, userInfo: AnyObject?)
 
 }
 
@@ -48,37 +48,36 @@ extension FeedPresenter {
     func showFeed() {
         currentViewController.navigationController?.viewControllers.first?.navigationItem.title =
             Constants.Feed.navigationTitle
-        currentViewController.navigationController?.popToRootViewControllerAnimated(true)
+        currentViewController.navigationController?.popToRootViewController(animated: true)
     }
 
 }
 
 protocol ProfilePresenter: PresenterType {
 
-    func showProfile(user: User)
+    func showProfile(_ user: User)
 
 }
 
 extension ProfilePresenter {
 
-    func showProfile(user: User) {
+    func showProfile(_ user: User) {
         let profileRouter = ProfileRouter(user: user, locator: locator)
         if let appearanceController = currentViewController.navigationController as? AppearanceNavigationController {
             profileRouter.execute(appearanceController)
         }
     }
 
-    func showProfile(userId: String) {
+    func showProfile(_ userId: String) {
         let profileRouter = ProfileRouter(userId: userId, locator: locator)
         if let appearanceController = currentViewController.navigationController as? AppearanceNavigationController {
             profileRouter.execute(appearanceController)
         }
     }
 
-    func showMyProfileWithPost(postId: String) {
+    func showMyProfileWithPost(_ postId: String) {
         let profileRouter = ProfileRouter(locator: locator)
-        if let currentViewController = currentViewController as? ProfileViewController
-            where currentViewController.user == User.currentUser() {
+        if let currentViewController = currentViewController as? ProfileViewController, currentViewController.user == User.currentUser() {
             currentViewController.setUserInfo(postId)
         } else if let appearanceController =
             currentViewController.navigationController as? AppearanceNavigationController {
@@ -124,13 +123,13 @@ extension AuthorizationPresenter {
 
 protocol PhotoEditorPresenter: PresenterType {
 
-    func showPhotoEditor(image: UIImage)
+    func showPhotoEditor(_ image: UIImage)
 
 }
 
 extension PhotoEditorPresenter {
 
-    func showPhotoEditor(image: UIImage) {
+    func showPhotoEditor(_ image: UIImage) {
         let photoEditorRouter = PhotoEditorRouter(image: image, locator: locator)
         if let appearanceController = currentViewController.navigationController as? AppearanceNavigationController {
             photoEditorRouter.execute(appearanceController)
@@ -158,13 +157,13 @@ extension SettingsPresenter {
 
 protocol FollowersListPresenter: PresenterType {
 
-    func showFollowersList(user: User, followType: FollowType)
+    func showFollowersList(_ user: User, followType: FollowType)
 
 }
 
 extension FollowersListPresenter {
 
-    func showFollowersList(user: User, followType: FollowType) {
+    func showFollowersList(_ user: User, followType: FollowType) {
         let followersListRouter = FollowersListRouter(user: user, followType: followType, locator: locator)
         if let appearanceController = currentViewController.navigationController as? AppearanceNavigationController {
             followersListRouter.execute(appearanceController, userInfo:  nil)

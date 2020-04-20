@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoEditorModel: NSObject {
 
-    private(set) var originalImage: UIImage
+    fileprivate(set) var originalImage: UIImage
 
     init(image: UIImage) {
         originalImage = image

@@ -10,35 +10,35 @@ import Foundation
 
 enum RemoteNotificationObject {
 
-    case NewPost(message: String, postId: String)
-    case NewFollower(message: String, followerId: String)
-    case NewLikedPost(message: String, likedPostId: String)
+    case newPost(message: String, postId: String)
+    case newFollower(message: String, followerId: String)
+    case newLikedPost(message: String, likedPostId: String)
 
 }
 
 final class RemoteNotificationParser {
 
-    static func parse(userInfo: [NSObject: AnyObject]?) -> RemoteNotificationObject? {
+    static func parse(_ userInfo: [AnyHashable: Any]?) -> RemoteNotificationObject? {
         guard let type = userInfo?["t"] as? String,
-            aps = userInfo?["aps"] as? [String: AnyObject],
-            message = aps["alert"] as? String else {
+            let aps = userInfo?["aps"] as? [String: AnyObject],
+            let message = aps["alert"] as? String else {
                 return nil
         }
 
         switch type {
         case "p":
             if let postId = userInfo?["postid"] as? String {
-                return RemoteNotificationObject.NewPost(message: message, postId: postId)
+                return RemoteNotificationObject.newPost(message: message, postId: postId)
             }
 
         case "f":
             if let followerId = userInfo?["fromUserId"] as? String {
-                return RemoteNotificationObject.NewFollower(message: message, followerId: followerId)
+                return RemoteNotificationObject.newFollower(message: message, followerId: followerId)
             }
 
         case "l":
             if let likedPostId = userInfo?["pid"] as? String {
-                return RemoteNotificationObject.NewLikedPost(message: message, likedPostId: likedPostId)
+                return RemoteNotificationObject.newLikedPost(message: message, likedPostId: likedPostId)
             }
 
         default:

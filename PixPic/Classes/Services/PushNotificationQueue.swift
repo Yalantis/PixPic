@@ -13,8 +13,8 @@ class PushNotificationQueue: NSObject {
     static var notificationQueue = [String]()
 
     static func handleNotificationQueue() {
-        NSTimer.scheduledTimerWithTimeInterval(
-            2,
+        Timer.scheduledTimer(
+            timeInterval: 2,
             target: PushNotificationQueue.self,
             selector: #selector(showNotificationFromQueue),
             userInfo: nil,
@@ -22,7 +22,7 @@ class PushNotificationQueue: NSObject {
         )
     }
 
-    static func addObjectToQueue(message: String?) {
+    static func addObjectToQueue(_ message: String?) {
         guard let message = message else {
             return
         }

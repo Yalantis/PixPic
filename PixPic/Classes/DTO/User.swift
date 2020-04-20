@@ -15,7 +15,7 @@ class User: PFUser {
     @NSManaged var appUsername: String?
     @NSManaged var passwordSet: Bool
 
-    private static var onceToken: dispatch_once_t = 0
+    fileprivate static var onceToken: dispatch_once_t = 0
 
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: User.parseClassName())
@@ -41,7 +41,7 @@ extension User {
 
     var isCurrentUser: Bool {
         get {
-            if let currentUser = User.currentUser() where currentUser.facebookId == self.facebookId {
+            if let currentUser = User.currentUser(), currentUser.facebookId == self.facebookId {
                 return true
             }
 

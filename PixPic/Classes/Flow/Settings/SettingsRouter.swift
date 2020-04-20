@@ -10,8 +10,8 @@ import Foundation
 
 class SettingsRouter: AlertManagerDelegate, FeedPresenter, AuthorizationPresenter {
 
-    private(set) weak var currentViewController: UIViewController!
-    private(set) weak var locator: ServiceLocator!
+    fileprivate(set) weak var currentViewController: UIViewController!
+    fileprivate(set) weak var locator: ServiceLocator!
 
     init(locator: ServiceLocator) {
         self.locator = locator
@@ -21,11 +21,11 @@ class SettingsRouter: AlertManagerDelegate, FeedPresenter, AuthorizationPresente
 
 extension SettingsRouter: Router {
 
-    func execute(context: AppearanceNavigationController) {
+    func execute(_ context: AppearanceNavigationController) {
         execute(context, userInfo: nil)
     }
 
-    func execute(context: AppearanceNavigationController, userInfo: AnyObject?) {
+    func execute(_ context: AppearanceNavigationController, userInfo: AnyObject?) {
         let settingsController = SettingsViewController.create()
         settingsController.router = self
         settingsController.setLocator(locator)

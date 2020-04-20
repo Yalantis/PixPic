@@ -7,19 +7,19 @@
 //
 
 import UIKit
-private let buttonAnimationDuration: NSTimeInterval = 0.7
+private let buttonAnimationDuration: TimeInterval = 0.7
 
 class FeedToolBar: UIView {
 
     var didSelectPhoto: (() -> Void)?
 
-    @IBOutlet private weak var bottomSpaceConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var bottomSpaceConstraint: NSLayoutConstraint!
 
-    static func loadFromNibNamed(nibNamed: String, bundle: NSBundle? = nil) -> FeedToolBar? {
+    static func loadFromNibNamed(_ nibNamed: String, bundle: Bundle? = nil) -> FeedToolBar? {
         return UINib(
             nibName: nibNamed,
             bundle: bundle
-            ).instantiateWithOwner(nil, options: nil)[0] as? FeedToolBar
+            ).instantiate(withOwner: nil, options: nil)[0] as? FeedToolBar
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,14 +32,14 @@ class FeedToolBar: UIView {
         bottomSpaceConstraint.constant = -Constants.BaseDimensions.toolBarHeight
     }
 
-    func animateButton(isLifting isLifting: Bool) {
+    func animateButton(isLifting: Bool) {
         bottomSpaceConstraint.constant = isLifting ? 0 : -Constants.BaseDimensions.toolBarHeight
-        UIView.animateWithDuration(
-            buttonAnimationDuration,
+        UIView.animate(
+            withDuration: buttonAnimationDuration,
             delay: 0,
             usingSpringWithDamping: 0.4,
             initialSpringVelocity: 0.7,
-            options: .CurveEaseInOut,
+            options: UIViewAnimationOptions(),
             animations: {
                 self.layoutIfNeeded()
             },

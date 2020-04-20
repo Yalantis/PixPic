@@ -10,7 +10,7 @@ import Foundation
 
 class ErrorHandler {
 
-    static func handle(error: NSError) {
+    static func handle(_ error: NSError) {
         var message: String
         let errorCode = error.code
 
@@ -60,7 +60,7 @@ class ErrorHandler {
                 message = error.localizedDescription
                 break
             }
-        } else if error.domain == NSBundle.mainBundle().bundleIdentifier {
+        } else if error.domain == Bundle.main.bundleIdentifier {
 
             message = error.localizedDescription
         }

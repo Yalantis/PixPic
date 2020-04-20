@@ -21,10 +21,10 @@ private let registerActionTitle = NSLocalizedString("register", comment: "")
 class SettingsMenu: NSObject, UINavigationControllerDelegate {
 
     var locator: ServiceLocator!
-    var postRemovalHandler: ((atIndex: Int) -> Void)!
-    private var presenter: UIViewController!
+    var postRemovalHandler: ((_ atIndex: Int) -> Void)!
+    fileprivate var presenter: UIViewController!
 
-    func showInViewController(controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
+    func showInViewController(_ controller: UIViewController, forPost post: Post, atIndex index: Int, items: [AnyObject]) {
         presenter = controller
 
         guard ReachabilityHelper.isReachable() else {
@@ -35,7 +35,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         if User.notAuthorized {
             AlertManager.sharedInstance.showLoginAlert()
         } else {
-            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let settingsMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction.appAlertAction(
                 title: cancelActionTitle,
                 style: .Cancel,
@@ -50,8 +50,7 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
             }
             settingsMenu.addAction(shareAction)
 
-            if let userFacebookId = post.user!.facebookId, currentUserFacebookId = User.currentUser()!.facebookId
-                where userFacebookId == currentUserFacebookId {
+            if let userFacebookId = post.user!.facebookId, let currentUserFacebookId = User.currentUser()!.facebookId, userFacebookId == currentUserFacebookId {
                 let removeAction = UIAlertAction.appAlertAction(
                     title: removeActionTitle,
                     style: .Default
@@ -68,11 +67,11 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
                 }
                 settingsMenu.addAction(complaintAction)
             }
-            controller.presentViewController(settingsMenu, animated: true, completion: nil)
+            controller.present(settingsMenu, animated: true, completion: nil)
         }
     }
 
-    private func removePost(post: Post, atIndex index: Int) {
+    fileprivate func removePost(_ post: Post, atIndex index: Int) {
         UIAlertController.showAlert(
             inViewController: presenter,
             message: removePostMessage) { [weak self] _ in
@@ -91,8 +90,8 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         }
     }
 
-    private func complaintToPost(post: Post) {
-        let complaintMenu = UIAlertController(title: complaintMessage, message: nil, preferredStyle: .ActionSheet)
+    fileprivate func complaintToPost(_ post: Post) {
+        let complaintMenu = UIAlertController(title: complaintMessage, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction.appAlertAction(
             title: cancelActionTitle,
             style: .Cancel,
@@ -131,12 +130,12 @@ class SettingsMenu: NSObject, UINavigationControllerDelegate {
         complaintMenu.addAction(complainAboutUserAvatarAction)
         complaintMenu.addAction(complainAboutPostAction)
 
-        presenter.presentViewController(complaintMenu, animated: true, completion: nil)
+        presenter.present(complaintMenu, animated: true, completion: nil)
     }
 
-    private func showActivityController(withItems items: [AnyObject]) {
+    fileprivate func showActivityController(withItems items: [AnyObject]) {
         let activityViewController = ActivityViewController.initWith(items)
-        presenter.presentViewController(activityViewController, animated: true, completion: nil)
+        presenter.present(activityViewController, animated: true, completion: nil)
     }
 
 }

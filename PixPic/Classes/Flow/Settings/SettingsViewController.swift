@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias SettingsRouterInterface = protocol<FeedPresenter, AlertManagerDelegate, AuthorizationPresenter>
+typealias SettingsRouterInterface = FeedPresenter & AlertManagerDelegate & AuthorizationPresenter
 
 private let logoutMessage = NSLocalizedString("will_logout", comment: "")
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
@@ -22,38 +22,38 @@ private let logOutString = NSLocalizedString("log_out", comment: "")
 
 enum SettingsState {
 
-    case Common, LoggedIn, LoggedOut
+    case common, loggedIn, loggedOut
 
 }
 
 final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
 
-    @IBOutlet private weak var logInButton: UIButton!
-    @IBOutlet private weak var logOutButton: UIButton!
+    @IBOutlet fileprivate weak var logInButton: UIButton!
+    @IBOutlet fileprivate weak var logOutButton: UIButton!
 
     static let storyboardName = Constants.Storyboard.settings
     var router: SettingsRouterInterface!
 
-    private lazy var enableNotificationsSwitch =
+    fileprivate lazy var enableNotificationsSwitch =
         SwitchView.instanceFromNib(enableNotificationsNibName,
                                    initialState: SettingsHelper.isRemoteNotificationsEnabled) { switchState in
                                     SettingsHelper.isRemoteNotificationsEnabled = switchState
     }
-    private lazy var followedPostsSwitch =
+    fileprivate lazy var followedPostsSwitch =
         SwitchView.instanceFromNib(followedPostsNibName,
                                    initialState: SettingsHelper.isShownOnlyFollowingUsersPosts) { switchState in
                                     SettingsHelper.isShownOnlyFollowingUsersPosts = switchState
-                                    NSNotificationCenter.defaultCenter().postNotificationName(
-                                        Constants.NotificationName.newPostIsUploaded,
+                                    NotificationCenter.default.post(
+                                        name: Notification.Name(rawValue: Constants.NotificationName.newPostIsUploaded),
                                         object: nil
                                     )
     }
 
-    private var settings = [SettingsState: [UIView]]()
-    private weak var locator: ServiceLocator!
+    fileprivate var settings = [SettingsState: [UIView]]()
+    fileprivate weak var locator: ServiceLocator!
 
-    @IBOutlet private weak var versionLabel: UILabel!
-    @IBOutlet private weak var settingsStack: UIStackView!
+    @IBOutlet fileprivate weak var versionLabel: UILabel!
+    @IBOutlet fileprivate weak var settingsStack: UIStackView!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -67,12 +67,12 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
     }
 
     // MARK: - Setup methods
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
     // MARK: - Private methods
-    private func setupAvailableSettings() {
+    fileprivate func setupAvailableSettings() {
         settings[.Common] = [enableNotificationsSwitch]
         for view in settings[.Common]! {
             settingsStack.addArrangedSubview(view)
@@ -91,12 +91,12 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
 
     }
 
-    private func updateVersionLabel() {
-        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]!
+    fileprivate func updateVersionLabel() {
+        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]!
         versionLabel.text = "PixPic v. \(version)"
     }
 
-    @IBAction private func logout(sender: AnyObject) {
+    @IBAction fileprivate func logout(_ sender: AnyObject) {
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
 
@@ -115,11 +115,11 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
         )
     }
 
-    @IBAction private func logIn(sender: AnyObject) {
+    @IBAction fileprivate func logIn(_ sender: AnyObject) {
         self.router.showAuthorization()
     }
 
-    private func showlogOutAlert() {
+    fileprivate func showlogOutAlert() {
         let alertController = UIAlertController(
             title: nil,
             message: logoutMessage,
@@ -150,7 +150,7 @@ final class SettingsViewController: BaseUIViewController, StoryboardInitiable {
 // MARK: - NavigationControllerAppearanceContext methods
 extension SettingsViewController: NavigationControllerAppearanceContext {
     
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = Constants.Settings.navigationTitle
         return appearance

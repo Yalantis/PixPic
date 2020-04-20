@@ -14,17 +14,17 @@ private let defaultNumberOfStickersInGroup = 5
 
 class StickersPickerAdapter: NSObject {
 
-    private var isUserInteractionsEnabled = true
-    private var currentGroupIndex: Int? {
+    fileprivate var isUserInteractionsEnabled = true
+    fileprivate var currentGroupIndex: Int? {
         didSet {
             currentHeaderIndexChangingHandler(currentGroupIndex)
         }
     }
-    var currentHeaderIndexChangingHandler: (Int? -> ())!
-    private var stickersModels: [StickersModel]?
+    var currentHeaderIndexChangingHandler: ((Int?) -> ())!
+    fileprivate var stickersModels: [StickersModel]?
 
-    func stickerImage(atIndexPath indexPath: NSIndexPath, completion: (UIImage?, NSError?) -> Void) {
-        guard let currentGroupNumber = currentGroupIndex, stickersGroups = stickersModels else {
+    func stickerImage(atIndexPath indexPath: IndexPath, completion: @escaping (UIImage?, NSError?) -> Void) {
+        guard let currentGroupNumber = currentGroupIndex, let stickersGroups = stickersModels else {
             return
         }
         let image = stickersGroups[currentGroupNumber].stickers[indexPath.row].image
@@ -40,8 +40,8 @@ class StickersPickerAdapter: NSObject {
         }
     }
 
-    func sortStickersGroups(groups: [StickersModel]) {
-        stickersModels = groups.sort {
+    func sortStickersGroups(_ groups: [StickersModel]) {
+        stickersModels = groups.sorted {
             $0.stickersGroup.label < $1.stickersGroup.label
         }
     }
@@ -51,18 +51,18 @@ class StickersPickerAdapter: NSObject {
 // MARK: - UICollectionViewDataSource
 extension StickersPickerAdapter: UICollectionViewDataSource {
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return  stickersModels?.count ?? defaultNumberOfStickerGroups
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return stickersModels?[section].stickers.count ?? defaultNumberOfStickersInGroup
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            StickerViewCell.id,
-            forIndexPath: indexPath
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: StickerViewCell.id,
+            for: indexPath
             ) as? StickerViewCell {
 
             if let stickersGroups = stickersModels {
@@ -76,14 +76,14 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
         return UICollectionViewCell()
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableview = UICollectionReusableView()
 
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(
-                kind,
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
                 withReuseIdentifier: StickersGroupHeaderView.id,
-                forIndexPath: indexPath
+                for: indexPath
                 ) as! StickersGroupHeaderView
 
             guard let stickersGroups = stickersModels else {
@@ -92,12 +92,12 @@ extension StickersPickerAdapter: UICollectionViewDataSource {
             let group = stickersGroups[indexPath.section].stickersGroup
 
             headerView.configureWith(group: group) { [weak self] complition in
-                guard let this = self where this.isUserInteractionsEnabled == true else {
+                guard let this = self, this.isUserInteractionsEnabled == true else {
                     return
                 }
                 this.isUserInteractionsEnabled = false
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(changingLayoutDuration * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                let delayTime = DispatchTime.now() + Double(Int64(changingLayoutDuration * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: delayTime) {
                     this.isUserInteractionsEnabled = true
                 }
                 if this.currentGroupIndex == nil {

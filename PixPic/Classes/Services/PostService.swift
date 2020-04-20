@@ -10,19 +10,19 @@ import Foundation
 
 private let messageUploadSuccessful = NSLocalizedString("upload_successful", comment: "")
 
-typealias LoadingPostsCompletion = (posts: [Post]?, error: NSError?) -> Void
+typealias LoadingPostsCompletion = (_ posts: [Post]?, _ error: NSError?) -> Void
 
 class PostService {
 
     // MARK: - Public methods
-    func loadPosts(user: User? = nil, completion: LoadingPostsCompletion) {
+    func loadPosts(_ user: User? = nil, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery
         query.cachePolicy = .NetworkElseCache
         query.limit = Constants.DataSource.queryLimit
         loadPosts(user, query: query, completion: completion)
     }
 
-    func loadPagedPosts(user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
+    func loadPagedPosts(_ user: User? = nil, offset: Int = 0, completion: LoadingPostsCompletion) {
         let query = Post.sortedQuery
         query.cachePolicy = .NetworkElseCache
         query.limit = Constants.DataSource.queryLimit
@@ -30,7 +30,7 @@ class PostService {
         loadPosts(user, query: query, completion: completion)
     }
 
-    func savePost(image: PFFile, comment: String? = nil) {
+    func savePost(_ image: PFFile, comment: String? = nil) {
         image.saveInBackgroundWithBlock({ succeeded, error in
             if succeeded {
                 log.debug("Saved!")
@@ -43,12 +43,12 @@ class PostService {
         })
     }
 
-    func removePost(post: Post, completion: (Bool, NSError?) -> Void) {
+    func removePost(_ post: Post, completion: (Bool, NSError?) -> Void) {
         post.deleteInBackgroundWithBlock(completion)
     }
 
     // MARK: - Private methods
-    private func uploadPost(image: PFFile, comment: String?) {
+    fileprivate func uploadPost(_ image: PFFile, comment: String?) {
         guard let user = User.currentUser() else {
             // Authentication service
             return
@@ -69,7 +69,7 @@ class PostService {
         }
     }
 
-    private func loadPosts(user: User?, query: PFQuery, completion: LoadingPostsCompletion) {
+    fileprivate func loadPosts(_ user: User?, query: PFQuery, completion: @escaping LoadingPostsCompletion) {
         if User.isAbsent {
             log.debug("No user signUP")
             fetchPosts(query, completion: completion)
@@ -105,7 +105,7 @@ class PostService {
         }
     }
 
-    private func fetchPosts(query: PFQuery, completion: LoadingPostsCompletion) {
+    fileprivate func fetchPosts(_ query: PFQuery, completion: @escaping LoadingPostsCompletion) {
         var posts = [Post]()
         query.findObjectsInBackgroundWithBlock { objects, error in
             if let objects = objects {

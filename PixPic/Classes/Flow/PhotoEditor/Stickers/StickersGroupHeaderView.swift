@@ -8,17 +8,17 @@
 
 import Foundation
 
-private let tintColorAnimationDuration: NSTimeInterval = 0.2
+private let tintColorAnimationDuration: TimeInterval = 0.2
 
 class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
 
-    private var headerSelectionCompletion: ((() -> Void) -> Void)!
-    private var isSelected = false
+    fileprivate var headerSelectionCompletion: ((() -> Void) -> Void)!
+    fileprivate var isSelected = false
 
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var label: UILabel!
+    @IBOutlet fileprivate weak var imageView: UIImageView!
+    @IBOutlet fileprivate weak var label: UILabel!
 
-    func configureWith(group group: StickersGroup, headerSelectionCompletion: (() -> Void) -> Void) {
+    func configureWith(group: StickersGroup, headerSelectionCompletion: @escaping (() -> Void) -> Void) {
         downloadImageFromFile(group.image)
         label.text = group.label
         self.headerSelectionCompletion = headerSelectionCompletion
@@ -27,7 +27,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
         addGestureRecognizer(recognizer)
     }
 
-    @objc private func toggleGroup() {
+    @objc fileprivate func toggleGroup() {
         headerSelectionCompletion { [weak self] in
             guard let this = self else {
                 return
@@ -47,7 +47,7 @@ class StickersGroupHeaderView: UICollectionReusableView, CellInterface {
 
     }
 
-    private func downloadImageFromFile(file: PFFile) {
+    fileprivate func downloadImageFromFile(_ file: PFFile) {
         imageView.image = UIImage.stickerPlaceholderImage
         file.getImage { image, error in
             if let image = image {

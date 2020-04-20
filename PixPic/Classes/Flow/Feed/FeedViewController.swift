@@ -11,8 +11,7 @@
  import DZNEmptyDataSet
  import Toast
 
- typealias FeedRouterInterface = protocol<ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter,
-    SettingsPresenter, FeedPresenter, AlertManagerDelegate>
+ typealias FeedRouterInterface = ProfilePresenter & PhotoEditorPresenter & AuthorizationPresenter & SettingsPresenter & FeedPresenter & AlertManagerDelegate
 
  private let titleForEmptyData = NSLocalizedString("no_data_available", comment: "")
  private let descriptionForEmptyData = NSLocalizedString("pull_to_refresh", comment: "")
@@ -21,15 +20,15 @@
 
     static let storyboardName = Constants.Storyboard.feed
 
-    private var router: FeedRouterInterface!
-    private weak var locator: ServiceLocator!
+    fileprivate var router: FeedRouterInterface!
+    fileprivate weak var locator: ServiceLocator!
 
-    private lazy var photoProvider = PhotoProvider()
-    private lazy var settingsMenu = SettingsMenu()
-    private lazy var postAdapter: PostAdapter = PostAdapter(locator: self.locator)
-    private var toolBar: FeedToolBar!
+    fileprivate lazy var photoProvider = PhotoProvider()
+    fileprivate lazy var settingsMenu = SettingsMenu()
+    fileprivate lazy var postAdapter: PostAdapter = PostAdapter(locator: self.locator)
+    fileprivate var toolBar: FeedToolBar!
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet fileprivate weak var tableView: UITableView!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -49,7 +48,7 @@
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         AlertManager.sharedInstance.setAlertDelegate(router)
@@ -57,13 +56,13 @@
 
         if let subviews = navigationController?.navigationBar.subviews {
             for view in subviews {
-                view.exclusiveTouch = true
+                view.isExclusiveTouch = true
             }
         }
         updateCurrentUserInfoIfNeeded()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         toolBar.animateButton(isLifting: true)
@@ -81,26 +80,26 @@
         )
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         toolBar.animateButton(isLifting: false)
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Setup methods
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
-    func setRouter(router: FeedRouterInterface) {
+    func setRouter(_ router: FeedRouterInterface) {
         self.router = router
     }
 
-    private func setupToolBar() {
+    fileprivate func setupToolBar() {
         toolBar = FeedToolBar.loadFromNibNamed(String(FeedToolBar))
         toolBar.didSelectPhoto = { [weak self] in
             self?.choosePhoto()
@@ -108,60 +107,60 @@
         view.addSubview(toolBar)
     }
 
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
     }
 
-    private func setupObserver() {
-        NSNotificationCenter.defaultCenter().addObserver(
+    fileprivate func setupObserver() {
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(FeedViewController.fetchDataFromNotification),
-            name: Constants.NotificationName.newPostIsUploaded,
+            name: NSNotification.Name(rawValue: Constants.NotificationName.newPostIsUploaded),
             object: nil
         )
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
-            name: Constants.NotificationName.newPostIsReceaved,
+            name: NSNotification.Name(rawValue: Constants.NotificationName.newPostIsReceaved),
             object: nil
         )
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(fetchDataFromNotification),
-            name: Constants.NotificationName.followersListIsUpdated,
+            name: NSNotification.Name(rawValue: Constants.NotificationName.followersListIsUpdated),
             object: nil
         )
     }
 
-    private func setupAdapter() {
-        tableView.dataSource = postAdapter
+    fileprivate func setupAdapter() {
+        tableView.dataSource = postAdapter as! UITableViewDataSource
         postAdapter.delegate = self
 
         let postService: PostService = locator.getService()
         postService.loadPosts { [weak self] objects, error in
             if let objects = objects {
-                self?.postAdapter.update(withPosts: objects, action: .Reload)
+                self?.postAdapter.update(withPosts: objects, action: .reload)
             } else if let error = error {
                 log.debug(error.localizedDescription)
             }
         }
     }
 
-    private func setupPlaceholderForEmptyDataSet() {
+    fileprivate func setupPlaceholderForEmptyDataSet() {
         tableView?.emptyDataSetDelegate = self
     }
 
-    private func loadStickers() {
+    fileprivate func loadStickers() {
         let stickersService: StickersLoaderService = locator.getService()
         stickersService.loadStickers()
     }
 
 
     // MARK: - photo editor
-    private func choosePhoto() {
+    fileprivate func choosePhoto() {
         if User.notAuthorized {
             router.showAuthorization()
 
@@ -173,7 +172,7 @@
         photoProvider.presentPhotoOptionsDialog(in: self)
     }
 
-    private func handlePhotoSelected(image: UIImage) {
+    fileprivate func handlePhotoSelected(_ image: UIImage) {
         router.showPhotoEditor(image)
     }
 
@@ -186,7 +185,7 @@
             }
             this.view.hideToastActivity()
             if let objects = objects {
-                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.postAdapter.update(withPosts: objects, action: .reload)
                 this.scrollToFirstRow()
             } else if let error = error {
                 log.debug(error.localizedDescription)
@@ -197,13 +196,13 @@
         }
     }
 
-    private func scrollToFirstRow() {
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+    fileprivate func scrollToFirstRow() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
 
-    private func updateCurrentUserInfoIfNeeded() {
-        if let currentUser = User.currentUser() where currentUser.facebookId == nil && !User.notAuthorized {
+    fileprivate func updateCurrentUserInfoIfNeeded() {
+        if let currentUser = User.currentUser(), currentUser.facebookId == nil && !User.notAuthorized {
             let authenticationService: AuthenticationService = locator.getService()
             authenticationService.updateUserInfoViaFacebook(currentUser) { _, error in
                 if let error = error {
@@ -214,7 +213,7 @@
     }
 
     // MARK: - IBActions
-    @IBAction private func profileButtonTapped(sender: AnyObject) {
+    @IBAction fileprivate func profileButtonTapped(_ sender: AnyObject) {
         let currentUser = User.currentUser()
 
         if User.notAuthorized {
@@ -224,12 +223,12 @@
         }
     }
 
-    @IBAction func presentSettings(sender: AnyObject) {
+    @IBAction func presentSettings(_ sender: AnyObject) {
         router.showSettings()
     }
 
     // MARK: - UserInteractive
-    private func setupLoadersCallback() {
+    fileprivate func setupLoadersCallback() {
         let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
@@ -288,11 +287,11 @@
  // MARK: - UITableViewDelegate methods
  extension FeedViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.frame.width + PostViewCell.designedHeight
     }
 
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         view.hideToastActivity()
     }
 
@@ -301,7 +300,7 @@
  // MARK: - PostAdapterDelegate methods
  extension FeedViewController: PostAdapterDelegate {
 
-    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+    func showSettingsMenu(_ adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         settingsMenu.locator = locator
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
 
@@ -314,11 +313,11 @@
         }
     }
 
-    func showUserProfile(adapter: PostAdapter, user: User) {
+    func showUserProfile(_ adapter: PostAdapter, user: User) {
         router.showProfile(user)
     }
 
-    func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
+    func showPlaceholderForEmptyDataSet(_ adapter: PostAdapter) {
         if postAdapter.postQuantity == 0 {
             setupPlaceholderForEmptyDataSet()
             view.hideToastActivity()
@@ -326,7 +325,7 @@
         }
     }
 
-    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
+    func postAdapterRequestedViewUpdate(_ adapter: PostAdapter) {
         tableView.reloadData()
     }
 
@@ -335,7 +334,7 @@
  // MARK: - DZNEmptyDataSetDelegate methods
  extension FeedViewController: DZNEmptyDataSetDelegate {
 
-    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView!) -> Bool {
         return true
     }
 
@@ -344,7 +343,7 @@
  // MARK: - NavigationControllerAppearanceContext methods
  extension FeedViewController: NavigationControllerAppearanceContext {
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = Constants.Feed.navigationTitle
         return appearance

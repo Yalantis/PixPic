@@ -8,7 +8,7 @@
 
 extension NSError {
 
-    static func authenticationError(type: AuthenticationError) -> NSError {
+    static func authenticationError(_ type: AuthenticationError) -> NSError {
         switch type {
         case .FacebookError:
             let error = NSError(

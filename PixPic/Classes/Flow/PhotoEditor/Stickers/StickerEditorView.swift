@@ -10,16 +10,16 @@ import UIKit
 
 class StickerEditorView: UIView {
 
-    private var touchStart: CGPoint?
-    private var previousPoint: CGPoint?
-    private var deltaAngle: CGFloat?
+    fileprivate var touchStart: CGPoint?
+    fileprivate var previousPoint: CGPoint?
+    fileprivate var deltaAngle: CGFloat?
 
-    private var resizingControl: StickerEditorViewControl!
-    private var deleteControl: StickerEditorViewControl!
-    private var borderView: BorderView!
+    fileprivate var resizingControl: StickerEditorViewControl!
+    fileprivate var deleteControl: StickerEditorViewControl!
+    fileprivate var borderView: BorderView!
 
-    private var oldBounds: CGRect!
-    private var oldTransform: CGAffineTransform!
+    fileprivate var oldBounds: CGRect!
+    fileprivate var oldTransform: CGAffineTransform!
 
     init(image: UIImage) {
         let stickerImageView = UIImageView(image: image)
@@ -44,7 +44,7 @@ class StickerEditorView: UIView {
     func switchControls(toState state: Bool, animated: Bool = false) {
         if animated {
             let controlAlpha: CGFloat = state ? 1 : 0
-            UIView.animateWithDuration(0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.resizingControl.alpha = controlAlpha
                 self.deleteControl.alpha = controlAlpha
                 self.borderView.alpha = controlAlpha
@@ -52,11 +52,11 @@ class StickerEditorView: UIView {
         } else {
             resizingControl.hidden = !state
             deleteControl.hidden = !state
-            borderView.hidden = !state
+            borderView.isHidden = !state
         }
     }
 
-    private func setupDefaultAttributes() {
+    fileprivate func setupDefaultAttributes() {
         borderView = BorderView(frame: bounds)
         addSubview(borderView)
 
@@ -82,46 +82,46 @@ class StickerEditorView: UIView {
         deltaAngle = atan2(frame.origin.y + frame.height - center.y, frame.origin.x + frame.width - center.x)
     }
 
-    private func setupContentView(content: UIView) {
+    fileprivate func setupContentView(_ content: UIView) {
         let contentView = UIView(frame: content.frame)
-        contentView.backgroundColor = .clearColor()
+        contentView.backgroundColor = .clear
         contentView.addSubview(content)
-        contentView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
 
         for subview in contentView.subviews {
             subview.frame = CGRect(x: 0, y: 0, width: contentView.frame.width, height: contentView.frame.height)
-            subview.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            subview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }
     // MARK: Gestures with controls
-    @objc private func singleTap(recognizer: UIPanGestureRecognizer) {
+    @objc fileprivate func singleTap(_ recognizer: UIPanGestureRecognizer) {
         let close = recognizer.view
         if let close = close {
             close.superview?.removeFromSuperview()
         }
     }
 
-    @objc private func resizeTranslate(recognizer: UIPanGestureRecognizer) {
-        if recognizer.state == .Began {
+    @objc fileprivate func resizeTranslate(_ recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == .began {
             enableTranslucency(true)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
 
-        } else if recognizer.state == .Changed {
+        } else if recognizer.state == .changed {
             resizeView(recognizer)
             rotateView(with: deltaAngle, recognizer: recognizer)
 
-        } else if recognizer.state == .Ended {
+        } else if recognizer.state == .ended {
             enableTranslucency(false)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
         }
         updateControlsPosition()
     }
 
-    private func resizeView(recognizer: UIPanGestureRecognizer) {
-        let point = recognizer.locationInView(self)
+    fileprivate func resizeView(_ recognizer: UIPanGestureRecognizer) {
+        let point = recognizer.location(in: self)
         guard let previousPoint = previousPoint else {
             return
         }
@@ -130,20 +130,20 @@ class StickerEditorView: UIView {
         let totalRatio = pow(diagonal / previousDiagonal, 2)
 
         bounds = CGRect(x: 0, y: 0, width: bounds.size.width * totalRatio, height: bounds.size.height * totalRatio)
-        self.previousPoint = recognizer.locationInView(self)
+        self.previousPoint = recognizer.location(in: self)
     }
 
-    private func rotateView(with deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
-        let angle = atan2(recognizer.locationInView(superview).y - center.y,
-                          recognizer.locationInView(superview).x - center.x)
+    fileprivate func rotateView(with deltaAngle: CGFloat?, recognizer: UIPanGestureRecognizer) {
+        let angle = atan2(recognizer.location(in: superview).y - center.y,
+                          recognizer.location(in: superview).x - center.x)
 
         if let deltaAngle = deltaAngle {
             let angleDiff = deltaAngle - angle
-            transform = CGAffineTransformMakeRotation(-angleDiff)
+            transform = CGAffineTransform(rotationAngle: -angleDiff)
         }
     }
 
-    private func updateControlsPosition() {
+    fileprivate func updateControlsPosition() {
         let offset = Constants.StickerEditor.userResizableViewGlobalOffset
         borderView.frame = CGRect(x: -offset, y: -offset, width: bounds.size.width + offset * 2,
                                   height: bounds.size.height + offset * 2)
@@ -154,89 +154,89 @@ class StickerEditorView: UIView {
     }
 
     // MARK: Gestures without controls
-    @objc private func pinch(recognizer: UIPinchGestureRecognizer) {
-        if recognizer.state == .Began {
+    @objc fileprivate func pinch(_ recognizer: UIPinchGestureRecognizer) {
+        if recognizer.state == .began {
             oldBounds = bounds
             enableTranslucency(true)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
-        } else if recognizer.state == .Changed {
+        } else if recognizer.state == .changed {
             bounds = CGRect(x: 0, y: 0, width: oldBounds.width * recognizer.scale,
                             height: oldBounds.height * recognizer.scale)
-        } else if recognizer.state == .Ended {
+        } else if recognizer.state == .ended {
             oldBounds = bounds
             enableTranslucency(false)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
         }
         updateControlsPosition()
     }
 
-    @objc private func rotate(recognizer: UIRotationGestureRecognizer) {
-        if recognizer.state == .Began {
+    @objc fileprivate func rotate(_ recognizer: UIRotationGestureRecognizer) {
+        if recognizer.state == .began {
             oldTransform = transform
             enableTranslucency(true)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
-        } else if recognizer.state == .Changed {
-            transform = CGAffineTransformRotate(oldTransform, recognizer.rotation)
-        } else if recognizer.state == .Ended {
+        } else if recognizer.state == .changed {
+            transform = oldTransform.rotated(by: recognizer.rotation)
+        } else if recognizer.state == .ended {
             oldTransform = transform
             enableTranslucency(false)
-            previousPoint = recognizer.locationInView(self)
+            previousPoint = recognizer.location(in: self)
             setNeedsDisplay()
         }
         updateControlsPosition()
     }
 
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         enableTranslucency(true)
 
         let touch = touches.first
         if let touch = touch {
-            touchStart = touch.locationInView(superview)
+            touchStart = touch.location(in: superview)
         }
     }
 
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let touchLocation = touches.first?.locationInView(self)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchLocation = touches.first?.location(in: self)
         if resizingControl.frame.contains(touchLocation!) {
             return
         }
 
-        let touch = touches.first?.locationInView(superview)
+        let touch = touches.first?.location(in: superview)
         translateUsingTouchLocation(touch!)
         touchStart = touch
     }
 
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         enableTranslucency(false)
     }
 
-    private func translateUsingTouchLocation(touchPoint: CGPoint) {
+    fileprivate func translateUsingTouchLocation(_ touchPoint: CGPoint) {
         if let touchStart = touchStart {
             center = CGPoint(x: center.x + touchPoint.x - touchStart.x, y: center.y + touchPoint.y - touchStart.y)
         }
     }
 
-    private func enableTranslucency(state: Bool) {
-        UIView.animateWithDuration(0.1) {
+    fileprivate func enableTranslucency(_ state: Bool) {
+        UIView.animate(withDuration: 0.1, animations: {
             if state == true {
                 self.alpha = 0.65
             } else {
                 self.alpha = 1
             }
-        }
+        }) 
     }
 
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if resizingControl.frame.contains(point) ||
             deleteControl.frame.contains(point) ||
             bounds.contains(point) {
 
-            for subview in subviews.reverse() {
-                let convertedPoint = subview.convertPoint(point, fromView: self)
-                let hitTestView = subview.hitTest(convertedPoint, withEvent: event)
+            for subview in subviews.reversed() {
+                let convertedPoint = subview.convert(point, from: self)
+                let hitTestView = subview.hitTest(convertedPoint, with: event)
                 if hitTestView != nil {
                     return hitTestView
                 }
@@ -250,9 +250,9 @@ class StickerEditorView: UIView {
 
 extension StickerEditorView: UIGestureRecognizerDelegate {
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer.isKindOfClass(UIPinchGestureRecognizer) &&
-            otherGestureRecognizer.isKindOfClass(UIRotationGestureRecognizer) {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UIPinchGestureRecognizer.self) &&
+            otherGestureRecognizer.isKind(of: UIRotationGestureRecognizer.self) {
             return true
         } else {
             return false

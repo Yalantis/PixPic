@@ -28,7 +28,7 @@ enum ComplaintReason: String {
 
 class ComplaintService {
 
-    func complainAboutUsername(user: User, completion: ComplainCompletion) {
+    func complainAboutUsername(_ user: User, completion: @escaping ComplainCompletion) {
         guard shouldContinueExecutionWith(user) else {
             return
         }
@@ -38,7 +38,7 @@ class ComplaintService {
         }
     }
 
-    func complainAboutUserAvatar(user: User, completion: ComplainCompletion) {
+    func complainAboutUserAvatar(_ user: User, completion: @escaping ComplainCompletion) {
         guard shouldContinueExecutionWith(user) else {
             return
         }
@@ -48,7 +48,7 @@ class ComplaintService {
         }
     }
 
-    func complainAboutPost(post: Post, completion: ComplainCompletion) {
+    func complainAboutPost(_ post: Post, completion: @escaping ComplainCompletion) {
         guard let user = post.user else {
             log.debug(nilUserInPost)
 
@@ -70,14 +70,14 @@ class ComplaintService {
     }
 
     // You should check reachability befor using this method
-    func performIfComplaintExsist(complaint: Complaint, existence: Bool -> Void)  {
+    func performIfComplaintExsist(_ complaint: Complaint, existence: @escaping (Bool) -> Void)  {
         complaint.postQuery().getFirstObjectInBackgroundWithBlock { object, error in
             if object != nil {
                 existence(true)
 
                 return
             }
-            guard let error = error where error.code == noObjectsFoundErrorCode else {
+            guard let error = error, error.code == noObjectsFoundErrorCode else {
                 return
             }
             existence(false)
@@ -87,7 +87,7 @@ class ComplaintService {
     }
 
     //MARK: Private methods
-    private func shouldContinueExecutionWith(user: User) -> Bool {
+    fileprivate func shouldContinueExecutionWith(_ user: User) -> Bool {
         if user.isCurrentUser {
             AlertManager.sharedInstance.showSimpleAlert(selfComplaint)
 
@@ -103,7 +103,7 @@ class ComplaintService {
         return ReachabilityHelper.isReachable()
     }
 
-    private func sendComplaint(complaint: Complaint, completion: ComplainCompletion) {
+    fileprivate func sendComplaint(_ complaint: Complaint, completion: @escaping ComplainCompletion) {
         complaint.saveInBackgroundWithBlock { succeeded, error in
             if succeeded {
                 AlertManager.sharedInstance.showSimpleAlert(complaintSuccessfull)

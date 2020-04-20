@@ -17,7 +17,7 @@ enum FollowType: String {
 
 protocol FollowerAdapterDelegate: class {
 
-    func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter)
+    func followerAdapterRequestedViewUpdate(_ adapter: FollowerAdapter)
 
 }
 
@@ -25,7 +25,7 @@ class FollowerAdapter: NSObject {
 
     weak var delegate: FollowerAdapterDelegate?
 
-    private var followers = [User]() {
+    fileprivate var followers = [User]() {
         didSet {
             delegate?.followerAdapterRequestedViewUpdate(self)
         }
@@ -35,36 +35,36 @@ class FollowerAdapter: NSObject {
         return followers.count
     }
 
-    func getFollower(atIndexPath indexPath: NSIndexPath) -> User {
+    func getFollower(atIndexPath indexPath: IndexPath) -> User {
         return followers[indexPath.row]
     }
 
     func update(withFollowers followers: [User], action: UpdateType) {
         switch action {
-        case .Reload:
+        case .reload:
             self.followers.removeAll()
 
         default:
             break
         }
 
-        self.followers.appendContentsOf(followers)
+        self.followers.append(contentsOf: followers)
     }
 
 }
 
 extension FollowerAdapter: UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return followersQuantity
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             FollowerViewCell.id,
             forIndexPath: indexPath
             ) as! FollowerViewCell
-        let follower = getFollower(atIndexPath: indexPath)
+        let follower = getFollower(atIndexPath: indexPath as IndexPath)
         cell.configure(withFollower: follower)
 
         return cell

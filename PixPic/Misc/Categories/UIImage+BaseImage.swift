@@ -30,13 +30,13 @@ extension UIImage {
         return UIImage(named: "btn_make_photo")
     }
 
-    public static func imageFromColor(color: UIColor, size: CGSize) -> UIImage? {
+    public static func imageFromColor(_ color: UIColor, size: CGSize) -> UIImage? {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(rect.size)
-        let context: CGContextRef = UIGraphicsGetCurrentContext()!
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
 
         return image

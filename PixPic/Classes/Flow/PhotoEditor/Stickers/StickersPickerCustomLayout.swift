@@ -13,10 +13,10 @@ private let cellsBasicZIndex = 100
 
 class StickersPickerCustomLayout: UICollectionViewLayout {
 
-    private let currentGroupIndex: Int?
-    private let leftStickersCount: Int
-    private let headersNeededToChangeOrderCount: Int
-    private let animationState: AnimationState
+    fileprivate let currentGroupIndex: Int?
+    fileprivate let leftStickersCount: Int
+    fileprivate let headersNeededToChangeOrderCount: Int
+    fileprivate let animationState: AnimationState
 
     init(animationState: AnimationState, currentGroupIndex: Int?, changeOrderHeadersCount: Int, leftStickersCount: Int) {
         self.animationState = animationState
@@ -31,7 +31,7 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(_ rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var itemsInRect = [UICollectionViewLayoutAttributes]()
         var headersInRect = [UICollectionViewLayoutAttributes]()
         for sectionIndex in 0..<collectionView!.numberOfSections() {
@@ -53,7 +53,7 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         return itemsInRect + headersInRect
     }
 
-    override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) ->
+    override func layoutAttributesForSupplementaryViewOfKind(_ elementKind: String, atIndexPath indexPath: NSIndexPath) ->
         UICollectionViewLayoutAttributes? {
             let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: elementKind,
                                                               withIndexPath: indexPath)
@@ -74,10 +74,10 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
             }
 
             switch animationState {
-            case .SectionsInOrder:
+            case .sectionsInOrder:
                 attributes.frame.origin = cellOriginFor(xPosition: indexPath.section, yPosition: 0)
 
-            case .SelectedSectionFirst:
+            case .selectedSectionFirst:
                 guard let currentGroupIndex = currentGroupIndex else {
                     return nil
                 }
@@ -91,12 +91,12 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
                         headersNeededToChangeOrderCount, yPosition: 0)
                 }
 
-            case .NotSelectedSectionsAbowe, .StickyHeaderWithItems:
+            case .notSelectedSectionsAbowe, .stickyHeaderWithItems:
                 guard let currentGroupIndex = currentGroupIndex else {
                     return nil
                 }
                 if isCurrentGroupIndex() {
-                    if animationState == .NotSelectedSectionsAbowe {
+                    if animationState == .notSelectedSectionsAbowe {
                         attributes.frame.origin = cellOriginFor(xPosition: 0, yPosition: 0)
                     } else {
                         attributes.frame.origin = CGPoint(x: collectionView!.contentOffset.x, y: 0)
@@ -113,7 +113,7 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
             return attributes
     }
 
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItemAtIndexPath(_ indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let cellSize = Constants.StickerCell.size
 
         let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
@@ -125,24 +125,24 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         }
 
         switch animationState {
-        case .SectionsInOrder:
+        case .sectionsInOrder:
             attributes.frame.origin = cellOriginFor(xPosition: indexPath.section, yPosition: 1)
 
-        case .SelectedSectionFirst:
+        case .selectedSectionFirst:
             if isCurrentGroupIndex() {
                 attributes.frame.origin = cellOriginFor(xPosition: indexPath.row + 1 - leftStickersCount, yPosition: 1)
             } else {
                 attributes.frame.origin = cellOriginFor(xPosition: 0, yPosition: 1)
             }
 
-        case .NotSelectedSectionsAbowe:
+        case .notSelectedSectionsAbowe:
             if isCurrentGroupIndex() {
                 attributes.frame.origin = cellOriginFor(xPosition: indexPath.row + 1 - leftStickersCount, yPosition: 0)
             } else {
                 attributes.frame.origin = cellOriginFor(xPosition: 0, yPosition: 1)
             }
 
-        case .StickyHeaderWithItems:
+        case .stickyHeaderWithItems:
             if isCurrentGroupIndex() {
                 attributes.frame.origin = cellOriginFor(xPosition: indexPath.row + 1, yPosition: 0)
             } else {
@@ -157,14 +157,14 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         let size: CGSize
 
         switch animationState {
-        case .SectionsInOrder:
+        case .sectionsInOrder:
             size = contentSize(collectionView!.numberOfSections())
 
-        case .SelectedSectionFirst, .NotSelectedSectionsAbowe:
+        case .selectedSectionFirst, .notSelectedSectionsAbowe:
             let cellsOnScreen = Int(ceil(collectionView!.frame.width / Constants.StickerCell.size.width))
             size = contentSize(cellsOnScreen)
 
-        case .StickyHeaderWithItems:
+        case .stickyHeaderWithItems:
             guard let currentGroupIndex = currentGroupIndex else {
                 return CGSizeZero
             }
@@ -174,12 +174,12 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         return size
     }
 
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayoutForBoundsChange(_ newBounds: CGRect) -> Bool {
         return true
     }
 
-    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
-        guard animationState == .SectionsInOrder,
+    override func targetContentOffsetForProposedContentOffset(_ proposedContentOffset: CGPoint) -> CGPoint {
+        guard animationState == .sectionsInOrder,
             let currentGroupIndex = currentGroupIndex else {
                 return CGPoint.zero
         }
@@ -187,13 +187,13 @@ class StickersPickerCustomLayout: UICollectionViewLayout {
         return cellOriginFor(xPosition: currentGroupIndex, yPosition: 0)
     }
 
-    private func cellOriginFor(xPosition xPosition: Int, yPosition: Int) -> CGPoint {
+    fileprivate func cellOriginFor(xPosition: Int, yPosition: Int) -> CGPoint {
         let cellSize = Constants.StickerCell.size
 
         return CGPoint(x: cellSize.width * CGFloat(xPosition), y: cellSize.height * CGFloat(yPosition))
     }
 
-    private func contentSize(widthMultiplier: Int) -> CGSize {
+    fileprivate func contentSize(_ widthMultiplier: Int) -> CGSize {
         let cellSize = Constants.StickerCell.size
 
         return CGSize(width: cellSize.width * CGFloat(widthMultiplier), height: cellSize.height)

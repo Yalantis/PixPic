@@ -22,11 +22,11 @@ class BaseUITableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = leftButton
     }
 
-    @objc private func navigateBack() {
+    @objc fileprivate func navigateBack() {
         navigationController?.popViewControllerAnimated(true)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if let subviews = navigationController?.navigationBar.subviews {

@@ -10,7 +10,7 @@ import UIKit
 
 class ValidationService {
 
-    static func validateUserName(userName: String, completion: Bool -> Void) {
+    static func validateUserName(_ userName: String, completion: @escaping (Bool) -> Void) {
         if !isUserNameContainsOnlyLetters(userName) {
             completion(false)
 
@@ -35,14 +35,14 @@ class ValidationService {
         }
     }
 
-    private static func isUserNameContainsOnlyLetters(userName: String) -> Bool {
+    fileprivate static func isUserNameContainsOnlyLetters(_ userName: String) -> Bool {
         if userName.characters.first == Constants.ValidationErrors.whiteSpace {
             AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.spaceInBegining)
 
             return false
         }
-        let invalidCharacterSet = NSCharacterSet(charactersInString: Constants.ValidationErrors.characterSet).invertedSet
-        if userName.rangeOfCharacterFromSet(invalidCharacterSet) != nil {
+        let invalidCharacterSet = CharacterSet(charactersIn: Constants.ValidationErrors.characterSet).inverted
+        if userName.rangeOfCharacter(from: invalidCharacterSet) != nil {
             AlertManager.sharedInstance.showSimpleAlert(Constants.ValidationErrors.numbersAndSymbolsInUsername)
 
             return false

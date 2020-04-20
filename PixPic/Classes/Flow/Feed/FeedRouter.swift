@@ -11,8 +11,8 @@ import Foundation
 class FeedRouter: AlertManagerDelegate, ProfilePresenter, PhotoEditorPresenter, AuthorizationPresenter, FeedPresenter,
 SettingsPresenter {
 
-    private(set) weak var locator: ServiceLocator!
-    private(set) weak var currentViewController: UIViewController!
+    fileprivate(set) weak var locator: ServiceLocator!
+    fileprivate(set) weak var currentViewController: UIViewController!
 
     init(locator: ServiceLocator) {
         self.locator = locator
@@ -22,11 +22,11 @@ SettingsPresenter {
 
 extension FeedRouter: Router {
 
-    func execute(context: UIWindow) {
+    func execute(_ context: UIWindow) {
         execute(context, userInfo: nil)
     }
 
-    func execute(context: UIWindow, userInfo: AnyObject?) {
+    func execute(_ context: UIWindow, userInfo: AnyObject?) {
         let feedViewController = FeedViewController.create()
         feedViewController.setRouter(self)
         feedViewController.setLocator(locator)

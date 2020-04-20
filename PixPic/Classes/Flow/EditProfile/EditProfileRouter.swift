@@ -10,9 +10,9 @@ import Foundation
 
 class EditProfileRouter: AlertManagerDelegate, FeedPresenter {
 
-    private var user: User!
-    private(set) weak var locator: ServiceLocator!
-    private(set) weak var currentViewController: UIViewController!
+    fileprivate var user: User!
+    fileprivate(set) weak var locator: ServiceLocator!
+    fileprivate(set) weak var currentViewController: UIViewController!
 
     init(user: User = User.currentUser()!, locator: ServiceLocator) {
         self.user = user
@@ -23,11 +23,11 @@ class EditProfileRouter: AlertManagerDelegate, FeedPresenter {
 
 extension EditProfileRouter: Router {
 
-    func execute(context: AppearanceNavigationController) {
+    func execute(_ context: AppearanceNavigationController) {
         execute(context, userInfo: nil)
     }
 
-    func execute(context: AppearanceNavigationController, userInfo: AnyObject?) {
+    func execute(_ context: AppearanceNavigationController, userInfo: AnyObject?) {
         let editProfileController = EditProfileViewController.create()
         editProfileController.setRouter(self)
         editProfileController.setLocator(locator)

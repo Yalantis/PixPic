@@ -10,8 +10,8 @@ import UIKit
 import Toast
 
 private let notification = NSLocalizedString("notification", comment: "")
-private let simpleAlertDuration: NSTimeInterval = 2
-private let notificationAlertDuration: NSTimeInterval = 3
+private let simpleAlertDuration: TimeInterval = 2
+private let notificationAlertDuration: TimeInterval = 3
 private let cancelActionTitle = NSLocalizedString("cancel", comment: "")
 private let registerActionTitle = NSLocalizedString("register", comment: "")
 
@@ -25,15 +25,15 @@ enum LoginNecessityReason: String {
 
 protocol AlertManagerDelegate: FeedPresenter, ProfilePresenter, AuthorizationPresenter {
 
-    func showSimpleAlert(message: String)
-    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?)
-    func suggestLogin(reason: LoginNecessityReason)
+    func showSimpleAlert(_ message: String)
+    func showNotificationAlert(_ userInfo: [AnyHashable: Any]?, message: String?)
+    func suggestLogin(_ reason: LoginNecessityReason)
 
 }
 
 extension AlertManagerDelegate {
 
-    func showSimpleAlert(message: String) {
+    func showSimpleAlert(_ message: String) {
         let style = CSToastStyle(defaultStyle: ())
         currentViewController.view.makeToast(message,
                                              duration: simpleAlertDuration,
@@ -41,7 +41,7 @@ extension AlertManagerDelegate {
                                              style: style)
     }
 
-    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
+    func showNotificationAlert(_ userInfo: [AnyHashable: Any]?, message: String?) {
         let title = notification
         var message = message
         guard let notificationObject = RemoteNotificationParser.parse(userInfo) else {
@@ -49,13 +49,13 @@ extension AlertManagerDelegate {
         }
 
         switch notificationObject {
-        case .NewPost(let alert, _):
+        case .newPost(let alert, _):
             message = alert
 
-        case .NewFollower(let alert, _):
+        case .newFollower(let alert, _):
             message = alert
 
-        case .NewLikedPost(let alert, _):
+        case .newLikedPost(let alert, _):
             message = alert
         }
 
@@ -94,9 +94,9 @@ extension AlertManagerDelegate {
         }
     }
 
-    func suggestLogin(reason: LoginNecessityReason) {
+    func suggestLogin(_ reason: LoginNecessityReason) {
         let alertTitle =  NSLocalizedString(reason.rawValue, comment: "")
-        let alertController = UIAlertController(title: alertTitle, message: "", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: alertTitle, message: "", preferredStyle: .alert)
         let cancelAction = UIAlertAction.appAlertAction( title: cancelActionTitle, style: .Cancel, handler: nil)
 
         let registerAction = UIAlertAction.appAlertAction(title: registerActionTitle, style: .Default) { [weak self] _ in
@@ -106,7 +106,7 @@ extension AlertManagerDelegate {
         alertController.addAction(cancelAction)
         alertController.addAction(registerAction)
 
-        currentViewController.presentViewController(alertController, animated: true, completion: nil)
+        currentViewController.present(alertController, animated: true, completion: nil)
     }
 
 }
@@ -115,52 +115,52 @@ final class AlertManager {
 
     static let sharedInstance = AlertManager()
 
-    private weak var delegate: AlertManagerDelegate?
+    fileprivate weak var delegate: AlertManagerDelegate?
 
-    private init() {
+    fileprivate init() {
     }
 
-    func setAlertDelegate(delegate: AlertManagerDelegate) {
+    func setAlertDelegate(_ delegate: AlertManagerDelegate) {
         self.delegate = delegate
     }
 
-    func showSimpleAlert(message: String) {
+    func showSimpleAlert(_ message: String) {
         delegate?.showSimpleAlert(message)
     }
 
-    func showNotificationAlert(userInfo: [NSObject: AnyObject]?, message: String?) {
+    func showNotificationAlert(_ userInfo: [AnyHashable: Any]?, message: String?) {
         delegate?.showNotificationAlert(userInfo, message: message)
     }
 
-    func showLoginAlert(reason: LoginNecessityReason = .Common) {
+    func showLoginAlert(_ reason: LoginNecessityReason = .Common) {
         delegate?.suggestLogin(reason)
     }
 
-    func handlePush(userInfo: [NSObject: AnyObject]) {
-        let application = UIApplication.sharedApplication()
+    func handlePush(_ userInfo: [AnyHashable: Any]) {
+        let application = UIApplication.shared
 
         switch application.applicationState {
-        case .Active:
+        case .active:
             showNotificationAlert(userInfo, message: nil)
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
 
-        case .Inactive:
+        case .inactive:
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
             if let notificationObject = RemoteNotificationParser.parse(userInfo) {
                 switch notificationObject {
-                case .NewFollower(_, let userId):
-                    dispatch_async(dispatch_get_main_queue()) {
+                case .newFollower(_, let userId):
+                    DispatchQueue.main.async {
                         self.delegate?.showProfile(userId)
                     }
 
-                case .NewLikedPost(_, let likedPostId):
-                    dispatch_async(dispatch_get_main_queue()) {
+                case .newLikedPost(_, let likedPostId):
+                    DispatchQueue.main.async {
                         self.delegate?.showMyProfileWithPost(likedPostId)
                     }
 
                 default:
-                    NSNotificationCenter.defaultCenter().postNotificationName(
-                        Constants.NotificationName.newPostIsReceaved,
+                    NotificationCenter.default.post(
+                        name: Notification.Name(rawValue: Constants.NotificationName.newPostIsReceaved),
                         object: nil
                     )
                     delegate?.showFeed()

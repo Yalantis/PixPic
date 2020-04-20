@@ -10,7 +10,7 @@ import UIKit
 
 class StickersPickerViewController: UICollectionViewController {
 
-    private lazy var stickersPickerAdapter: StickersPickerAdapter = {
+    fileprivate lazy var stickersPickerAdapter: StickersPickerAdapter = {
         let adapter = StickersPickerAdapter()
         adapter.currentHeaderIndexChangingHandler = { index in
             self.layoutAnimator.switchLayout(forCurrentGroupIndex: index)
@@ -19,8 +19,8 @@ class StickersPickerViewController: UICollectionViewController {
     }()
 
     weak var delegate: PhotoEditorViewController?
-    private weak var locator: ServiceLocator!
-    private lazy var layoutAnimator: StickersPickerLayoutAnimator =
+    fileprivate weak var locator: ServiceLocator!
+    fileprivate lazy var layoutAnimator: StickersPickerLayoutAnimator =
         StickersPickerLayoutAnimator(collectionView: self.collectionView!)
 
     // MARK: - Lifecycle
@@ -32,12 +32,12 @@ class StickersPickerViewController: UICollectionViewController {
         automaticallyAdjustsScrollViewInsets = false
     }
 
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
     // MARK: - Private methods
-    private func setupCollectionView() {
+    fileprivate func setupCollectionView() {
         collectionView!.registerNib(
             StickersGroupHeaderView.cellNib,
             forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
@@ -48,7 +48,7 @@ class StickersPickerViewController: UICollectionViewController {
         layoutAnimator.switchLayout(forCurrentGroupIndex: nil)
     }
 
-    private func setupAdapter() {
+    fileprivate func setupAdapter() {
         let stickersService: StickersLoaderService = locator.getService()
         collectionView!.reloadData()
         stickersService.loadStickers() { [weak self] objects, error in
@@ -63,7 +63,7 @@ class StickersPickerViewController: UICollectionViewController {
     }
 
     // MARK: - UICollectionViewDelegate
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         stickersPickerAdapter.stickerImage(atIndexPath: indexPath) { [weak self] image, error in
             if let image = image {
                 self?.delegate?.didChooseStickerFromPicket(image)

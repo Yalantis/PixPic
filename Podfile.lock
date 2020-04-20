@@ -68,6 +68,27 @@ DEPENDENCIES:
   - Toast (~> 3.0)
   - XCGLogger (~> 3.2)
 
+SPEC REPOS:
+  trunk:
+    - AFDropdownNotification
+    - AFNetworking
+    - Bolts
+    - Crashlytics
+    - DateTools
+    - DZNEmptyDataSet
+    - Fabric
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - Kingfisher
+    - MBProgressHUD
+    - Parse
+    - ParseFacebookUtilsV4
+    - SDWebImage
+    - SVPullToRefresh
+    - Toast
+    - XCGLogger
+
 SPEC CHECKSUMS:
   AFDropdownNotification: 4125b132cd03a8d6293e09ce000aeef55ced1364
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -82,7 +103,7 @@ SPEC CHECKSUMS:
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Parse: f51c24d2feb412e4b2d6cc73d37cb24e8d0089bc
-  ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
+  ParseFacebookUtilsV4: bd56a321d78e0880a9594f7ca433ffb1d6ed63c3
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   Toast: 32c59229abfcf41850162b83bb9259dc84372473
@@ -90,4 +111,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4fed9f79c679a5bd4caf5c1899df331b3e13c5c0
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.9.1

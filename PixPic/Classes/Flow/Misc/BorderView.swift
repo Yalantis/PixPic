@@ -10,20 +10,20 @@ import UIKit
 
 class BorderView: UIView {
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(context)
-        CGContextSetLineWidth(context, 1)
+        context?.saveGState()
+        context?.setLineWidth(1)
 
         let dash: Array<CGFloat> = [4.0, 2.0]
         CGContextSetLineDash(context, 0.0, dash, 2)
 
-        CGContextSetStrokeColorWithColor(context, UIColor.whiteColor().CGColor)
+        context?.setStrokeColor(UIColor.white.cgColor)
 
-        CGContextAddRect(context, rect)
+        context?.addRect(rect)
 
-        CGContextStrokePath(context)
-        CGContextRestoreGState(context)
+        context?.strokePath()
+        context?.restoreGState()
     }
 
     override init(frame: CGRect) {
@@ -38,8 +38,8 @@ class BorderView: UIView {
         setupView()
     }
 
-    private func setupView() {
-        backgroundColor = UIColor.clearColor()
+    fileprivate func setupView() {
+        backgroundColor = UIColor.clear
     }
 
 }

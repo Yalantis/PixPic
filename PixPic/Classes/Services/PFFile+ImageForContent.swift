@@ -8,13 +8,13 @@
 
 import UIKit
 
-typealias LoadingImageCompletion = (image: UIImage?, error: NSError?) -> Void
+typealias LoadingImageCompletion = (_ image: UIImage?, _ error: NSError?) -> Void
 
 extension PFFile {
 
-    func getImage(completion: LoadingImageCompletion) {
+    func getImage(_ completion: @escaping LoadingImageCompletion) {
         getDataInBackgroundWithBlock { data, error in
-            if let data = data, image = UIImage(data: data) {
+            if let data = data, let image = UIImage(data: data) {
                 completion(image: image, error: error)
             }
         }

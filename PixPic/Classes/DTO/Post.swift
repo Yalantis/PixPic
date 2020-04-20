@@ -12,7 +12,7 @@ class Post: PFObject {
     @NSManaged var user: User?
     @NSManaged var comment: String?
 
-    private static var onceToken: dispatch_once_t = 0
+    fileprivate static var onceToken: dispatch_once_t = 0
 
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: Post.parseClassName())
@@ -49,6 +49,6 @@ extension Post: PFSubclassing {
 
 enum LikeStatus: Int {
 
-    case Liked, NotLiked, Unknown
+    case liked, notLiked, unknown
     
 }

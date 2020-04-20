@@ -20,7 +20,7 @@ extension UIColor {
     }
 
     static func appWhiteColor() -> UIColor {
-        return UIColor.whiteColor()
+        return UIColor.white
     }
 
     static func appPinkColor() -> UIColor {

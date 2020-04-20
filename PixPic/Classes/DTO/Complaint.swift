@@ -10,16 +10,18 @@ import UIKit
 
 class Complaint: PFObject {
 
+    private static var __once: () = {
+            self.registerSubclass()
+        }()
+
     @NSManaged var complainer: User
     @NSManaged var complaintReason: String
     @NSManaged var suspectedUser: User
     @NSManaged var suspectedPost: Post?
-    private static var onceToken: dispatch_once_t = 0
+    fileprivate static var onceToken: Int = 0
 
     override class func initialize() {
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
-        }
+        _ = Complaint.__once
     }
 
     convenience init(user: User, post: Post? = nil, reason: ComplaintReason) {

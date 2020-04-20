@@ -10,33 +10,33 @@ import UIKit
 import Toast
 import ParseFacebookUtilsV4
 
-typealias AuthorizationRouterInterface = protocol<FeedPresenter, AlertManagerDelegate>
+typealias AuthorizationRouterInterface = FeedPresenter & AlertManagerDelegate
 
 final class AuthorizationViewController: UIViewController, StoryboardInitiable {
 
     static let storyboardName = Constants.Storyboard.authorization
 
-    private var router: AuthorizationRouterInterface!
-    private weak var locator: ServiceLocator!
+    fileprivate var router: AuthorizationRouterInterface!
+    fileprivate weak var locator: ServiceLocator!
 
     // MARK: - Lifecycle
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         AlertManager.sharedInstance.setAlertDelegate(router)
     }
 
     // MARK: - Setup methods
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
-    func setRouter(router: AuthorizationRouterInterface) {
+    func setRouter(_ router: AuthorizationRouterInterface) {
         self.router = router
     }
 
     // MARK: - Private methods
-    private func signInWithFacebook() {
+    fileprivate func signInWithFacebook() {
         let authenticationService: AuthenticationService = locator.getService()
         authenticationService.signInWithFacebookInController(self) { [weak self] _, error in
             if let error = error {
@@ -56,7 +56,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitiable {
         }
     }
 
-    private func proceedWithoutAuthorization() {
+    fileprivate func proceedWithoutAuthorization() {
         router.showFeed()
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
@@ -66,7 +66,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitiable {
     }
 
     // MARK: - IBAction
-    @IBAction private func logInWithFBButtonTapped() {
+    @IBAction fileprivate func logInWithFBButtonTapped() {
         view.makeToastActivity(CSToastPositionCenter)
         signInWithFacebook()
     }
@@ -75,7 +75,7 @@ final class AuthorizationViewController: UIViewController, StoryboardInitiable {
 
 extension AuthorizationViewController: NavigationControllerAppearanceContext {
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = Constants.Profile.navigationTitle
         return appearance

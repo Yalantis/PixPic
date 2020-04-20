@@ -14,10 +14,10 @@ final class LaunchViewController: UIViewController, StoryboardInitiable {
 
     static let storyboardName = Constants.Storyboard.launchScreen
 
-    private var router: LaunchRouterInterface!
+    fileprivate var router: LaunchRouterInterface!
 
     // MARK: - Setup methods
-    func setRouter(router: LaunchRouterInterface) {
+    func setRouter(_ router: LaunchRouterInterface) {
         self.router = router
     }
 
@@ -26,7 +26,7 @@ final class LaunchViewController: UIViewController, StoryboardInitiable {
 // MARK: - NavigationControllerAppearanceContext methods
 extension LaunchViewController: NavigationControllerAppearanceContext {
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         let appearance = Appearance()
         return appearance
     }

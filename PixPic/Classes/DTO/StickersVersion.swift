@@ -9,7 +9,7 @@
 class StickersVersion: PFObject {
 
     @NSManaged var version: Float
-    private static var onceToken: dispatch_once_t = 0
+    fileprivate static var onceToken: dispatch_once_t = 0
 
     static var sortedQuery: PFQuery {
         let query = PFQuery(className: StickersVersion.parseClassName())

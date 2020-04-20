@@ -8,19 +8,19 @@
 
 import UIKit
 
-typealias FollowersListRouterInterface = protocol<ProfilePresenter, AlertManagerDelegate>
+typealias FollowersListRouterInterface = ProfilePresenter & AlertManagerDelegate
 
 final class FollowersListViewController: UIViewController, StoryboardInitiable {
 
     static let storyboardName = Constants.Storyboard.profile
 
-    private var router: FollowersListRouterInterface!
+    fileprivate var router: FollowersListRouterInterface!
 
-    private var user: User!
-    private var followType: FollowType = .Followers
+    fileprivate var user: User!
+    fileprivate var followType: FollowType = .Followers
 
-    private lazy var followerAdapter = FollowerAdapter()
-    private weak var locator: ServiceLocator!
+    fileprivate lazy var followerAdapter = FollowerAdapter()
+    fileprivate weak var locator: ServiceLocator!
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -33,41 +33,41 @@ final class FollowersListViewController: UIViewController, StoryboardInitiable {
         setupObserver()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         AlertManager.sharedInstance.setAlertDelegate(router)
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Setup methods
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
-    func setUser(user: User) {
+    func setUser(_ user: User) {
         self.user = user
     }
 
-    func setFollowType(type: FollowType) {
+    func setFollowType(_ type: FollowType) {
         self.followType = type
     }
 
-    func setRouter(router: FollowersListRouterInterface) {
+    func setRouter(_ router: FollowersListRouterInterface) {
         self.router = router
     }
 
     // MARK: - Private methods
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         tableView.delegate = self
         tableView.registerNib(FollowerViewCell.cellNib, forCellReuseIdentifier: FollowerViewCell.id)
     }
 
-    private func setupAdapter() {
-        tableView.dataSource = followerAdapter
+    fileprivate func setupAdapter() {
+        tableView.dataSource = followerAdapter as! UITableViewDataSource
         followerAdapter.delegate = self
         let cache = AttributesCache.sharedCache
         let activityService: ActivityService = locator.getService()
@@ -75,27 +75,27 @@ final class FollowersListViewController: UIViewController, StoryboardInitiable {
         let isFollowers = (followType == .Followers)
         let key = isFollowers ? Constants.Attributes.followers : Constants.Attributes.following
 
-        if let attributes = cache.attributes(for: user), cachedUsers = attributes[key] as? [User] {
-            self.followerAdapter.update(withFollowers: cachedUsers, action: .Reload)
+        if let attributes = cache.attributes(for: user), let cachedUsers = attributes[key] as? [User] {
+            self.followerAdapter.update(withFollowers: cachedUsers, action: .reload)
         }
 
         activityService.fetchFollowers(followType, forUser: user) { [weak self] followers, _ in
             if let followers = followers {
-                self?.followerAdapter.update(withFollowers: followers, action: .Reload)
+                self?.followerAdapter.update(withFollowers: followers, action: .reload)
             }
         }
     }
 
-    private func setupObserver() {
-        NSNotificationCenter.defaultCenter().addObserver(
+    fileprivate func setupObserver() {
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(updateData),
-            name: Constants.NotificationName.followersListIsUpdated,
+            name: NSNotification.Name(rawValue: Constants.NotificationName.followersListIsUpdated),
             object: nil
         )
     }
 
-    @objc private func updateData() {
+    @objc fileprivate func updateData() {
         setupAdapter()
     }
 
@@ -104,7 +104,7 @@ final class FollowersListViewController: UIViewController, StoryboardInitiable {
 // MARK: - FollowerAdapterDelegate methods
 extension FollowersListViewController: FollowerAdapterDelegate {
 
-    func followerAdapterRequestedViewUpdate(adapter: FollowerAdapter) {
+    func followerAdapterRequestedViewUpdate(_ adapter: FollowerAdapter) {
         tableView.reloadData()
     }
 
@@ -113,7 +113,7 @@ extension FollowersListViewController: FollowerAdapterDelegate {
 // MARK: - UITableViewDelegate methods
 extension FollowersListViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let follower = followerAdapter.getFollower(atIndexPath: indexPath)
         router.showProfile(follower)
     }
@@ -123,7 +123,7 @@ extension FollowersListViewController: UITableViewDelegate {
 // MARK: - NavigationControllerAppearanceContext methods
 extension FollowersListViewController: NavigationControllerAppearanceContext {
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = followType.rawValue
         return appearance

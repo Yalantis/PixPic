@@ -9,12 +9,12 @@
 import Foundation
 import Parse
 
-typealias FetchingFollowersCompletion = ((followers: [User]?, error: NSError?) -> Void)?
-typealias FetchingLikesCompletion = ((likers: [User]?, error: NSError?) -> Void)?
+typealias FetchingFollowersCompletion = ((_ followers: [User]?, _ error: NSError?) -> Void)?
+typealias FetchingLikesCompletion = ((_ likers: [User]?, _ error: NSError?) -> Void)?
 
 class ActivityService {
 
-    func fetchFollowers(type: FollowType, forUser user: User, completion: FetchingFollowersCompletion) {
+    func fetchFollowers(_ type: FollowType, forUser user: User, completion: FetchingFollowersCompletion) {
         let isFollowers = (type == .Followers)
         let key = isFollowers ? Constants.ActivityKey.toUser : Constants.ActivityKey.fromUser
 
@@ -52,7 +52,7 @@ class ActivityService {
         }
     }
 
-    func fetchFollowersQuantity(user: User, completion: ((followersCount: Int, followingCount: Int) -> Void)?) {
+    func fetchFollowersQuantity(_ user: User, completion: ((_ followersCount: Int, _ followingCount: Int) -> Void)?) {
         var followersCount = 0
         var followingCount = 0
         fetchFollowers(.Followers, forUser: user) { [weak self] activities, error -> Void in
@@ -61,7 +61,7 @@ class ActivityService {
                 self?.fetchFollowers(.Following, forUser: user) { activities, error -> Void in
                     if let activities = activities {
                         followingCount = activities.count
-                        completion?(followersCount: followersCount, followingCount: followingCount)
+                        completion?(followersCount, followingCount)
                         AttributesCache.sharedCache.setAttributesForUser(
                             user,
                             followersCount: followersCount,
@@ -73,7 +73,7 @@ class ActivityService {
         }
     }
 
-    func checkFollowingStatus(user: User, completion: FollowStatus -> Void) {
+    func checkFollowingStatus(_ user: User, completion: @escaping (FollowStatus) -> Void) {
         let isFollowingQuery = PFQuery(className: Activity.parseClassName())
         isFollowingQuery.whereKey(Constants.ActivityKey.fromUser, equalTo: User.currentUser()!)
         isFollowingQuery.whereKey(Constants.ActivityKey.type, equalTo: ActivityType.Follow.rawValue)
@@ -85,7 +85,7 @@ class ActivityService {
         }
     }
 
-    func followUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+    func followUserEventually(_ user: User, block completionBlock: ((_ succeeded: Bool, _ error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
@@ -93,7 +93,7 @@ class ActivityService {
             return
         }
         if user.objectId == currentUser.objectId {
-            completionBlock?(succeeded: false, error: nil)
+            completionBlock?(false, nil)
 
             return
         }
@@ -102,10 +102,10 @@ class ActivityService {
         followActivity.fromUser = currentUser
         followActivity.toUser = user
         followActivity.saveInBackgroundWithBlock(completionBlock)
-        AttributesCache.sharedCache.setFollowStatus(.Following, user: user)
+        AttributesCache.sharedCache.setFollowStatus(.following, user: user)
     }
 
-    func unfollowUserEventually(user: User, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+    func unfollowUserEventually(_ user: User, block completionBlock: ((_ succeeded: Bool, _ error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
@@ -126,10 +126,10 @@ class ActivityService {
                 }
             }
         }
-        AttributesCache.sharedCache.setFollowStatus(.NotFollowing, user: user)
+        AttributesCache.sharedCache.setFollowStatus(.notFollowing, user: user)
     }
 
-    func likePostEventually(post: Post, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+    func likePostEventually(_ post: Post, block completionBlock: ((_ succeeded: Bool, _ error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
@@ -141,10 +141,10 @@ class ActivityService {
         likeActivity.fromUser = currentUser
         likeActivity.toPost = post
         likeActivity.saveInBackgroundWithBlock(completionBlock)
-        AttributesCache.sharedCache.setLikeStatusByCurrentUser(post, likeStatus: .Liked)
+        AttributesCache.sharedCache.setLikeStatusByCurrentUser(post, likeStatus: .liked)
     }
 
-    func unlikePostEventually(post: Post, block completionBlock: ((succeeded: Bool, error: NSError?) -> Void)?) {
+    func unlikePostEventually(_ post: Post, block completionBlock: ((_ succeeded: Bool, _ error: NSError?) -> Void)?) {
         guard let currentUser = User.currentUser() else {
             let userError = NSError.authenticationError(.ParseCurrentUserNotExist)
             completionBlock?(succeeded: false, error: userError)
@@ -165,10 +165,10 @@ class ActivityService {
                 }
             }
         }
-        AttributesCache.sharedCache.setLikeStatusByCurrentUser(post, likeStatus: .NotLiked)
+        AttributesCache.sharedCache.setLikeStatusByCurrentUser(post, likeStatus: .notLiked)
     }
 
-    func fetchLikers(post: Post, completion: FetchingLikesCompletion) {
+    func fetchLikers(_ post: Post, completion: FetchingLikesCompletion) {
         let key = Constants.ActivityKey.toPost
         let query = PFQuery(className: Activity.parseClassName())
         query.cachePolicy = .CacheThenNetwork
@@ -187,17 +187,17 @@ class ActivityService {
         }
     }
 
-    func fetchLikesQuantity(post: Post, completion: (Int -> Void)?) {
+    func fetchLikesQuantity(_ post: Post, completion: ((Int) -> Void)?) {
         fetchLikers(post) { likers, error in
             if let likers = likers {
                 let likersCount = likers.count
                 completion?(likersCount)
-                AttributesCache.sharedCache.setAttributes(for: post, likers: likers, likeStatusByCurrentUser: .Liked)
+                AttributesCache.sharedCache.setAttributes(for: post, likers: likers, likeStatusByCurrentUser: .liked)
             }
         }
     }
 
-    func fetchLikeStatus(post: Post, completion: LikeStatus -> Void) {
+    func fetchLikeStatus(_ post: Post, completion: @escaping (LikeStatus) -> Void) {
         let islikedQuery = PFQuery(className: Activity.parseClassName())
         islikedQuery.cachePolicy = .CacheThenNetwork
         islikedQuery.whereKey(Constants.ActivityKey.fromUser, equalTo: User.currentUser()!)

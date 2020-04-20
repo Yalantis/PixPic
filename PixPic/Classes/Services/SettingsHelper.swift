@@ -10,30 +10,30 @@ import Foundation
 
 class SettingsHelper {
 
-    private static let remoteNotificationsKey = Constants.UserDefaultsKeys.remoteNotifications
-    private static let followedPostsKey = Constants.UserDefaultsKeys.followedPosts
+    fileprivate static let remoteNotificationsKey = Constants.UserDefaultsKeys.remoteNotifications
+    fileprivate static let followedPostsKey = Constants.UserDefaultsKeys.followedPosts
 
     static var isRemoteNotificationsEnabled: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(remoteNotificationsKey)
+            return UserDefaults.standard.bool(forKey: remoteNotificationsKey)
         }
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: remoteNotificationsKey)
+            UserDefaults.standard.set(newValue, forKey: remoteNotificationsKey)
             RemoteNotificationHelper.setNotificationsAvailable(newValue)
         }
     }
 
     static var isShownOnlyFollowingUsersPosts: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(followedPostsKey)
+            return UserDefaults.standard.bool(forKey: followedPostsKey)
         }
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: followedPostsKey)
+            UserDefaults.standard.set(newValue, forKey: followedPostsKey)
         }
     }
 
     static func setupDefaultValues() {
-        let isThisFirstTimeAppLaunched = NSUserDefaults.standardUserDefaults().objectForKey(remoteNotificationsKey) == nil
+        let isThisFirstTimeAppLaunched = UserDefaults.standard.object(forKey: remoteNotificationsKey) == nil
         if isThisFirstTimeAppLaunched {
             isRemoteNotificationsEnabled = true
             isShownOnlyFollowingUsersPosts = false

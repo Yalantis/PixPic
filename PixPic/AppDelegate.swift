@@ -21,19 +21,19 @@ let log = XCGLogger.defaultInstance()
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private lazy var router = LaunchRouter()
+    fileprivate lazy var router = LaunchRouter()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         setupParse()
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
 
         Fabric.with([Crashlytics.self])
 
-        if application.applicationState != .Background {
+        if application.applicationState != .background {
             setupParseAnalyticsWith(launchOptions: launchOptions)
         }
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.shared.statusBarStyle = .lightContent
 
         log.setup()
         setupToast()
@@ -43,69 +43,69 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application,
                                                                      openURL: url,
                                                                      sourceApplication: sourceApplication,
                                                                      annotation: annotation)
     }
 
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
         installation.channels = ["global"]
         installation.saveEventually()
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
-        if application.applicationState == .Inactive {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        if application.applicationState == .inactive {
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
         }
         PFPush.handlePush(userInfo)
     }
 
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         AlertManager.sharedInstance.handlePush(userInfo)
         if User.isAbsent {
-            completionHandler(.NoData)
+            completionHandler(.noData)
         } else {
-            completionHandler(.NewData)
+            completionHandler(.newData)
         }
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
         resetBadge()
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         resetBadge()
     }
 
-    private func resetBadge() {
+    fileprivate func resetBadge() {
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
         currentInstallation.saveEventually()
     }
 
-    private func setupParse() {
+    fileprivate func setupParse() {
         User.registerSubclass()
         Parse.setApplicationId(Constants.ParseApplicationId.appID, clientKey: Constants.ParseApplicationId.clientKey)
     }
 
-    private func setupParseAnalyticsWith(launchOptions options: [NSObject: AnyObject]?) {
-        if options?[UIApplicationLaunchOptionsRemoteNotificationKey] != nil {
+    fileprivate func setupParseAnalyticsWith(launchOptions options: [AnyHashable: Any]?) {
+        if options?[UIApplicationLaunchOptionsKey.remoteNotification] != nil {
             PFAnalytics.trackAppOpenedWithLaunchOptions(options)
         }
     }
 
-    private func setupRouter() {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+    fileprivate func setupRouter() {
+        window = UIWindow(frame: UIScreen.main.bounds)
         window!.makeKeyAndVisible()
         router.execute(window!, userInfo:  nil)
     }
 
-    private func setupToast() {
+    fileprivate func setupToast() {
         let style = CSToastStyle(defaultStyle: ())
         style.backgroundColor = UIColor.clearColor()
         CSToastManager.setSharedStyle(style)

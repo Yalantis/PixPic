@@ -10,12 +10,12 @@ import Foundation
 
 final class AttributesCache {
 
-    private var cache: NSCache
+    fileprivate var cache: NSCache<AnyObject, AnyObject>
 
     // MARK:- Initialization
     static let sharedCache = AttributesCache()
 
-    private init() {
+    fileprivate init() {
         self.cache = NSCache()
     }
 
@@ -27,49 +27,49 @@ final class AttributesCache {
         var attributes = [String: AnyObject]()
 
         if let likers = likers {
-            attributes[Constants.Attributes.likers] = likers
-            attributes[Constants.Attributes.likesCount] = likers.count
+            attributes[Constants.Attributes.likers] = likers as AnyObject
+            attributes[Constants.Attributes.likesCount] = likers.count as AnyObject
         }
 
         if let commentes = commentes {
-            attributes[Constants.Attributes.comments] = commentes
+            attributes[Constants.Attributes.comments] = commentes as AnyObject
         }
 
         if let likeStatusByCurrentUser = likeStatusByCurrentUser {
-            attributes[Constants.Attributes.likeStatusByCurrentUser] = likeStatusByCurrentUser.rawValue
+            attributes[Constants.Attributes.likeStatusByCurrentUser] = likeStatusByCurrentUser.rawValue as AnyObject
         }
 
         setAttributes(attributes, forPost: post)
     }
 
-    func setAttributesForUser(user: User, followers: [User]) {
+    func setAttributesForUser(_ user: User, followers: [User]) {
         let attributes = [
             Constants.Attributes.followers: followers,
             Constants.Attributes.followersCount: followers.count
-        ]
-        setAttributes(attributes as! [String : AnyObject], forUser: user)
+        ] as [String : Any]
+        setAttributes(attributes as [String : AnyObject], forUser: user)
     }
 
-    func setAttributesForUser(user: User, following: [User]) {
+    func setAttributesForUser(_ user: User, following: [User]) {
         let attributes = [
             Constants.Attributes.following: following,
             Constants.Attributes.followingCount: following.count
-        ]
-        setAttributes(attributes as! [String: AnyObject], forUser: user)
+        ] as [String : Any]
+        setAttributes(attributes as [String: AnyObject], forUser: user)
     }
 
-    func setAttributesForUser(user: User, followersCount: Int, followingCount: Int) {
+    func setAttributesForUser(_ user: User, followersCount: Int, followingCount: Int) {
         let attributes = [
             Constants.Attributes.followersCount: followersCount,
             Constants.Attributes.followingCount: followingCount
         ]
-        setAttributes(attributes, forUser: user)
+        setAttributes(attributes as [String : AnyObject], forUser: user)
     }
 
     func attributes(for post: Post) -> [String: AnyObject]? {
         let key = keyForPost(post)
 
-        return cache.objectForKey(key) as? [String: AnyObject]
+        return cache.object(forKey: key as AnyObject) as? [String: AnyObject]
     }
 
     func likesCount(for post: Post) -> Int {
@@ -85,33 +85,33 @@ final class AttributesCache {
     }
 
     func likers(for post: Post) -> [User] {
-        if let attributes = attributes(for: post), likers = attributes[Constants.Attributes.likers] as? [User] {
+        if let attributes = attributes(for: post), let likers = attributes[Constants.Attributes.likers] as? [User] {
             return likers
         }
 
         return [User]()
     }
 
-    func setLikeStatusByCurrentUser(post: Post, likeStatus: LikeStatus) {
+    func setLikeStatusByCurrentUser(_ post: Post, likeStatus: LikeStatus) {
         if var attributes = attributes(for: post) {
-            attributes[Constants.Attributes.likeStatusByCurrentUser] = likeStatus.rawValue
+            attributes[Constants.Attributes.likeStatusByCurrentUser] = likeStatus.rawValue as AnyObject
             setAttributes(attributes, forPost: post)
         }
     }
 
-    func postLikeStatusByCurrentUser(post: Post) -> LikeStatus {
-        if let attributes = attributes(for: post), likeStatus =
+    func postLikeStatusByCurrentUser(_ post: Post) -> LikeStatus {
+        if let attributes = attributes(for: post), let likeStatus =
             LikeStatus(rawValue: attributes[Constants.Attributes.likeStatusByCurrentUser] as! Int) {
             return likeStatus
         }
 
-        return LikeStatus.Unknown
+        return LikeStatus.unknown
     }
 
     func incrementLikersCount(for post: Post) {
         let likerCount = likesCount(for: post) + 1
         if var attributes = attributes(for: post) {
-            attributes[Constants.Attributes.likesCount] = likerCount
+            attributes[Constants.Attributes.likesCount] = likerCount as AnyObject
             setAttributes(attributes, forPost: post)
         }
     }
@@ -122,15 +122,15 @@ final class AttributesCache {
             return
         }
         if var attributes = attributes(for: post) {
-            attributes[Constants.Attributes.likesCount] = likersCount
+            attributes[Constants.Attributes.likesCount] = likersCount as AnyObject
             setAttributes(attributes, forPost: post)
         }
     }
 
     func setAttributes(for user: User, postCount count: Int, followedByCurrentUser followStatus: FollowStatus) {
         let attributes: [String: AnyObject] = [
-            Constants.Attributes.postsCount: count,
-            Constants.Attributes.followStatusByCurrentUser: followStatus.rawValue
+            Constants.Attributes.postsCount: count as AnyObject,
+            Constants.Attributes.followStatusByCurrentUser: followStatus.rawValue as AnyObject
         ]
         setAttributes(attributes, forUser: user)
     }
@@ -138,12 +138,12 @@ final class AttributesCache {
     func attributes(for user: User) -> [String: AnyObject]? {
         let key = keyForUser(user)
 
-        return cache.objectForKey(key) as? [String: AnyObject]
+        return cache.object(forKey: key as AnyObject) as? [String: AnyObject]
     }
 
-    func postsCountForUser(user: User) -> Int {
+    func postsCountForUser(_ user: User) -> Int {
         if let attributes = attributes(for: user),
-            postsCount = attributes[Constants.Attributes.postsCount] as? Int {
+            let postsCount = attributes[Constants.Attributes.postsCount] as? Int {
 
             return postsCount
         }
@@ -152,44 +152,44 @@ final class AttributesCache {
     }
 
     func followStatus(for user: User) -> FollowStatus? {
-        if let attributes = attributes(for: user), followStatus =
+        if let attributes = attributes(for: user), let followStatus =
             attributes[Constants.Attributes.followStatusByCurrentUser] {
             return FollowStatus(rawValue: followStatus as! Int)
         }
 
-        return FollowStatus.Unknown
+        return FollowStatus.unknown
     }
 
-    func setPostCount(count: Int, user: User) {
+    func setPostCount(_ count: Int, user: User) {
         if var attributes = attributes(for: user) {
-            attributes[Constants.Attributes.postsCount] = count
+            attributes[Constants.Attributes.postsCount] = count as AnyObject
             setAttributes(attributes, forUser: user)
         }
     }
 
-    func setFollowStatus(followStatus: FollowStatus, user: User) {
+    func setFollowStatus(_ followStatus: FollowStatus, user: User) {
         if var attributes = attributes(for: user) {
-            attributes[Constants.Attributes.followStatusByCurrentUser] = followStatus.rawValue
+            attributes[Constants.Attributes.followStatusByCurrentUser] = followStatus.rawValue as AnyObject
             setAttributes(attributes, forUser: user)
         }
     }
 
     // MARK: - Private methods
-    private func setAttributes(attributes: [String: AnyObject], forPost post: Post) {
+    fileprivate func setAttributes(_ attributes: [String: AnyObject], forPost post: Post) {
         let key = keyForPost(post)
-        cache.setObject(attributes, forKey: key)
+        cache.setObject(attributes as AnyObject, forKey: key as AnyObject)
     }
 
-    private func setAttributes(attributes: [String: AnyObject], forUser user: User) {
+    fileprivate func setAttributes(_ attributes: [String: AnyObject], forUser user: User) {
         let key = keyForUser(user)
-        cache.setObject(attributes, forKey: key)
+        cache.setObject(attributes as AnyObject, forKey: key as AnyObject)
     }
 
-    private func keyForPost(post: Post) -> String {
+    fileprivate func keyForPost(_ post: Post) -> String {
         return "post_\(post.objectId)"
     }
 
-    private func keyForUser(user: User) -> String {
+    fileprivate func keyForUser(_ user: User) -> String {
         return "user_\(user.objectId)"
     }
 }

@@ -10,7 +10,7 @@ class StickersGroup: PFObject {
 
     @NSManaged var image: PFFile
     @NSManaged var label: String
-    private static var onceToken: dispatch_once_t = 0
+    fileprivate static var onceToken: dispatch_once_t = 0
 
     var stickersRelation: PFRelation! {
         return relationForKey("stickersRelation")

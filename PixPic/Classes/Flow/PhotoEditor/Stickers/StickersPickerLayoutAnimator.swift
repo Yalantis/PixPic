@@ -22,19 +22,19 @@ import Foundation
  */
 enum AnimationState {
 
-    case SectionsInOrder, SelectedSectionFirst, NotSelectedSectionsAbowe, StickyHeaderWithItems
+    case sectionsInOrder, selectedSectionFirst, notSelectedSectionsAbowe, stickyHeaderWithItems
 
 }
 
 class StickersPickerLayoutAnimator {
 
-    private var currentGroupIndex: Int?
-    private var leftStickersCount = 0
-    private var changeOrderHeadersCount = 0
-    private weak var collectionView: UICollectionView!
-    private var animationState = AnimationState.SectionsInOrder
+    fileprivate var currentGroupIndex: Int?
+    fileprivate var leftStickersCount = 0
+    fileprivate var changeOrderHeadersCount = 0
+    fileprivate weak var collectionView: UICollectionView!
+    fileprivate var animationState = AnimationState.sectionsInOrder
 
-    private var layout: StickersPickerCustomLayout {
+    fileprivate var layout: StickersPickerCustomLayout {
         return StickersPickerCustomLayout(animationState: animationState,
                                           currentGroupIndex: currentGroupIndex,
                                           changeOrderHeadersCount: changeOrderHeadersCount,
@@ -48,7 +48,7 @@ class StickersPickerLayoutAnimator {
 
     func switchLayout(forCurrentGroupIndex index: Int?) {
         //initial state
-        if animationState == .SectionsInOrder && index == nil {
+        if animationState == .sectionsInOrder && index == nil {
             currentGroupIndex = index
             collectionView.setCollectionViewLayout(layout, animated: false)
             //expanding
@@ -56,7 +56,7 @@ class StickersPickerLayoutAnimator {
             currentGroupIndex = index
             leftStickersCount = 0
             collectionView.userInteractionEnabled = false
-            animationState = .SelectedSectionFirst
+            animationState = .selectedSectionFirst
             callculateChangeOrderHeadersCount()
             collectionView.setCollectionViewLayout(layout, animated: true) { [weak self] _ in
                 guard let this = self else {
@@ -74,7 +74,7 @@ class StickersPickerLayoutAnimator {
         } else {
             collectionView.userInteractionEnabled = false
             leftStickersCount = Int(collectionView.contentOffset.x / Constants.StickerCell.size.width)
-            animationState = .NotSelectedSectionsAbowe
+            animationState = .notSelectedSectionsAbowe
             collectionView.setCollectionViewLayout(layout, animated: true) { [weak self] _ in
                 guard let this = self else {
                     return
@@ -91,7 +91,7 @@ class StickersPickerLayoutAnimator {
         }
     }
 
-    private func callculateChangeOrderHeadersCount() {
+    fileprivate func callculateChangeOrderHeadersCount() {
         guard let currentGroupIndex = currentGroupIndex else {
             return
         }

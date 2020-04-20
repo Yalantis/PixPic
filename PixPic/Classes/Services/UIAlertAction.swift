@@ -10,7 +10,7 @@ import Foundation
 
 extension UIAlertAction {
 
-    static func appAlertAction(title title: String?, style: UIAlertActionStyle, color: UIColor = UIColor.appTintColor(), handler: ((UIAlertAction) -> Void)?) -> UIAlertAction {
+    static func appAlertAction(title: String?, style: UIAlertActionStyle, color: UIColor = UIColor.appTintColor(), handler: ((UIAlertAction) -> Void)?) -> UIAlertAction {
         let action = UIAlertAction(title: title, style: style, handler: handler)
         action.setValue(color, forKey: "titleTextColor")
 

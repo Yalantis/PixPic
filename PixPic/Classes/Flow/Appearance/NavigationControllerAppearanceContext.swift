@@ -11,9 +11,9 @@ import UIKit
 
 protocol NavigationControllerAppearanceContext: class {
 
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance?
+    func prefersNavigationControllerBarHidden(_ navigationController: UINavigationController) -> Bool
+    func prefersNavigationControllerToolbarHidden(_ navigationController: UINavigationController) -> Bool
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance?
 
     func setNeedsUpdateNavigationControllerAppearance()
 
@@ -21,21 +21,21 @@ protocol NavigationControllerAppearanceContext: class {
 
 extension NavigationControllerAppearanceContext {
 
-    func prefersNavigationControllerBarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersNavigationControllerBarHidden(_ navigationController: UINavigationController) -> Bool {
         return false
     }
 
-    func prefersNavigationControllerToolbarHidden(navigationController: UINavigationController) -> Bool {
+    func prefersNavigationControllerToolbarHidden(_ navigationController: UINavigationController) -> Bool {
         return true
     }
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         return nil
     }
 
     func setNeedsUpdateNavigationControllerAppearance() {
         if let viewController = self as? UIViewController,
-            navigationController = viewController.navigationController as? AppearanceNavigationController {
+            let navigationController = viewController.navigationController as? AppearanceNavigationController {
                 navigationController.updateAppearanceForViewController(viewController)
         }
     }

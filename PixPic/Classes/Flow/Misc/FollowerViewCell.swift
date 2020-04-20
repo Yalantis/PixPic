@@ -10,13 +10,13 @@ import UIKit
 
 class FollowerViewCell: UITableViewCell, CellInterface {
 
-    @IBOutlet private weak var profileImageView: UIImageView!
-    @IBOutlet private weak var profileLabel: UILabel!
+    @IBOutlet fileprivate weak var profileImageView: UIImageView!
+    @IBOutlet fileprivate weak var profileLabel: UILabel!
 
     func configure(withFollower follower: User) {
         profileLabel.text = follower.username ?? ""
         profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-        if let avatar = follower.avatar?.url, url = NSURL(string: avatar) {
+        if let avatar = follower.avatar?.url, let url = URL(string: avatar) {
             profileImageView.kf_setImageWithURL(
                 url,
                 placeholderImage: UIImage.avatarPlaceholderImage

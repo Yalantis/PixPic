@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Exception: String, ErrorType {
+enum Exception: String, Error {
     
     case NoConnection = "There is no internet connection"
     case CantApplyStickers = "You can't apply stickers to the photo"
@@ -19,7 +19,7 @@ enum Exception: String, ErrorType {
 
 class ExceptionHandler {
 
-    static func handle(exception: Exception) {
+    static func handle(_ exception: Exception) {
         AlertManager.sharedInstance.showSimpleAlert(exception.rawValue)
     }
 

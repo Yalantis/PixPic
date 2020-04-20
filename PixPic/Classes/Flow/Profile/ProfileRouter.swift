@@ -10,10 +10,10 @@ import Foundation
 
 class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, FollowersListPresenter, AuthorizationPresenter {
 
-    private var user: User?
-    private var userId: String?
-    private(set) weak var currentViewController: UIViewController!
-    private(set) weak var locator: ServiceLocator!
+    fileprivate var user: User?
+    fileprivate var userId: String?
+    fileprivate(set) weak var currentViewController: UIViewController!
+    fileprivate(set) weak var locator: ServiceLocator!
 
     init(user: User = User.currentUser()!, locator: ServiceLocator) {
         self.user = user
@@ -29,11 +29,11 @@ class ProfileRouter: AlertManagerDelegate, EditProfilePresenter, FeedPresenter, 
 
 extension ProfileRouter: Router {
 
-    func execute(context: AppearanceNavigationController) {
+    func execute(_ context: AppearanceNavigationController) {
         execute(context, userInfo: nil)
     }
 
-    func execute(context: AppearanceNavigationController, userInfo: AnyObject?) {
+    func execute(_ context: AppearanceNavigationController, userInfo: AnyObject?) {
         let profileController = ProfileViewController.create()
         profileController.setRouter(self)
         profileController.setLocator(locator)

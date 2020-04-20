@@ -10,13 +10,13 @@ import UIKit
 
 class StickerViewCell: UICollectionViewCell, CellInterface {
 
-    @IBOutlet private weak var stickerImage: UIImageView!
+    @IBOutlet fileprivate weak var stickerImage: UIImageView!
 
-    func setStickerContent(sticker: Sticker) {
+    func setStickerContent(_ sticker: Sticker) {
         downloadImageFromFile(sticker.image)
     }
 
-    private func downloadImageFromFile(file: PFFile) {
+    fileprivate func downloadImageFromFile(_ file: PFFile) {
         stickerImage.image = UIImage.stickerPlaceholderImage
         file.getImage { image, error in
             if let error = error {

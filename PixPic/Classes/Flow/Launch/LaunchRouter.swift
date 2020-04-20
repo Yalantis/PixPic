@@ -10,8 +10,8 @@ import Foundation
 
 class LaunchRouter: AlertManagerDelegate, FeedPresenter {
 
-    private(set) var locator: ServiceLocator!
-    private(set) weak var currentViewController: UIViewController!
+    fileprivate(set) var locator: ServiceLocator!
+    fileprivate(set) weak var currentViewController: UIViewController!
 
     init() {
         locator = ServiceLocator()
@@ -28,11 +28,11 @@ class LaunchRouter: AlertManagerDelegate, FeedPresenter {
 
 extension LaunchRouter: Router {
 
-    func execute(context: UIWindow) {
+    func execute(_ context: UIWindow) {
         execute(context, userInfo: nil)
     }
 
-    func execute(context: UIWindow, userInfo: AnyObject?) {
+    func execute(_ context: UIWindow, userInfo: AnyObject?) {
         let launchViewController = LaunchViewController.create()
         launchViewController.setRouter(self)
         currentViewController = launchViewController
@@ -55,7 +55,7 @@ extension LaunchRouter: Router {
         }
     }
 
-    private func presentFeed(context: UIWindow) {
+    fileprivate func presentFeed(_ context: UIWindow) {
         let feedRouter = FeedRouter(locator: locator)
         feedRouter.execute(context, userInfo:  nil)
     }

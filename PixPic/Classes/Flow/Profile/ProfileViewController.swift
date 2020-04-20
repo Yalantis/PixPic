@@ -9,12 +9,11 @@
 import UIKit
 import Toast
 
-typealias ProfileRouterInterface = protocol<EditProfilePresenter, FollowersListPresenter, AuthorizationPresenter,
-    FeedPresenter, AlertManagerDelegate>
+typealias ProfileRouterInterface = EditProfilePresenter & FollowersListPresenter & AuthorizationPresenter & FeedPresenter & AlertManagerDelegate
 
 enum FollowStatus: Int {
 
-    case Following, NotFollowing, Unknown
+    case following, notFollowing, unknown
     
 }
 
@@ -34,53 +33,53 @@ private let headerMinHeight: CGFloat = headerMaxHeight - followButtonMaxHeight -
 final class ProfileViewController: BaseUITableViewController, StoryboardInitiable {
 
     static let storyboardName = Constants.Storyboard.profile
-    private var router: ProfileRouterInterface!
-    private var userId: String?
+    fileprivate var router: ProfileRouterInterface!
+    fileprivate var userId: String?
 
     var user: User? {
         didSet {
             reloadData()
         }
     }
-    private var userInfo: AnyObject? {
+    fileprivate var userInfo: AnyObject? {
         didSet {
             if user != nil, let postId = userInfo as? String {
                 scrollToPost(postId, animated: true)
             }
         }
     }
-    private weak var locator: ServiceLocator!
-    private var activityShown: Bool?
-    private lazy var postAdapter: PostAdapter = PostAdapter(locator: self.locator)
-    private lazy var settingsMenu = SettingsMenu()
+    fileprivate weak var locator: ServiceLocator!
+    fileprivate var activityShown: Bool?
+    fileprivate lazy var postAdapter: PostAdapter = PostAdapter(locator: self.locator)
+    fileprivate lazy var settingsMenu = SettingsMenu()
 
-    private var followStatus = FollowStatus.Unknown {
+    fileprivate var followStatus = FollowStatus.unknown {
         didSet {
             switch followStatus {
-            case .Following:
-                followButton.selected = true
-                followButton.enabled = true
-            case .NotFollowing:
-                followButton.selected = false
-                followButton.enabled = true
-            case .Unknown:
-                followButton.enabled = false
+            case .following:
+                followButton.isSelected = true
+                followButton.isEnabled = true
+            case .notFollowing:
+                followButton.isSelected = false
+                followButton.isEnabled = true
+            case .unknown:
+                followButton.isEnabled = false
             }
         }
     }
-    private var timeoutTimer: NSTimer!
+    fileprivate var timeoutTimer: Timer!
 
-    @IBOutlet private weak var profileSettingsButton: UIBarButtonItem!
-    @IBOutlet private weak var userAvatar: UIImageView!
-    @IBOutlet private weak var userName: UILabel!
-    @IBOutlet private weak var tableViewFooter: UIView!
-    @IBOutlet private weak var tableViewHeader: UIView!
+    @IBOutlet fileprivate weak var profileSettingsButton: UIBarButtonItem!
+    @IBOutlet fileprivate weak var userAvatar: UIImageView!
+    @IBOutlet fileprivate weak var userName: UILabel!
+    @IBOutlet fileprivate weak var tableViewFooter: UIView!
+    @IBOutlet fileprivate weak var tableViewHeader: UIView!
 
-    @IBOutlet private weak var followersQuantity: UILabel!
-    @IBOutlet private weak var followingQuantity: UILabel!
-    @IBOutlet private weak var followButton: UIButton!
+    @IBOutlet fileprivate weak var followersQuantity: UILabel!
+    @IBOutlet fileprivate weak var followingQuantity: UILabel!
+    @IBOutlet fileprivate weak var followButton: UIButton!
 
-    @IBOutlet private weak var followButtonHeight: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var followButtonHeight: NSLayoutConstraint!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -92,7 +91,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         setupGestureRecognizers()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         AlertManager.sharedInstance.setAlertDelegate(router)
@@ -103,15 +102,15 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
     }
 
     // MARK: - Setup methods
-    func setLocator(locator: ServiceLocator) {
+    func setLocator(_ locator: ServiceLocator) {
         self.locator = locator
     }
 
-    func setUserInfo(userInfo: AnyObject?) {
+    func setUserInfo(_ userInfo: AnyObject?) {
         self.userInfo = userInfo
     }
 
-    func setUserId(userId: String) {
+    func setUserId(_ userId: String) {
         self.userId = userId
         let userService: UserService = locator.getService()
         userService.fetchUser(userId) { [weak self] user, error in
@@ -123,20 +122,20 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    func setRouter(router: ProfileRouterInterface) {
+    func setRouter(_ router: ProfileRouterInterface) {
         self.router = router
     }
 
     // MARK: - Private methods
-    private func setupController() {
+    fileprivate func setupController() {
         tableView.dataSource = postAdapter
         postAdapter.delegate = self
         tableView.registerNib(PostViewCell.cellNib, forCellReuseIdentifier: PostViewCell.id)
-        profileSettingsButton.tintColor = .clearColor()
+        profileSettingsButton.tintColor = .clear
         setupTableViewFooter()
     }
 
-    private func reloadData() {
+    fileprivate func reloadData() {
         showToast()
         updateUser()
         loadUserPosts()
@@ -144,15 +143,15 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         fillFollowersQuantity(user!)
     }
 
-    private func checkIsFollowing() {
+    fileprivate func checkIsFollowing() {
         guard let user = user else {
-            followStatus = .Unknown
+            followStatus = .unknown
 
             return
         }
         let cache = AttributesCache.sharedCache
         let status = cache.followStatus(for: user)!
-        if status == .Unknown {
+        if status == .unknown {
             let activityService: ActivityService = locator.getService()
             activityService.checkFollowingStatus(user) { [weak self] follow in
                 self?.followStatus = follow
@@ -162,7 +161,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    private func loadUserPosts() {
+    fileprivate func loadUserPosts() {
         guard let user = user else {
             return
         }
@@ -172,12 +171,12 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
                 return
             }
             if let objects = objects {
-                this.postAdapter.update(withPosts: objects, action: .Reload)
+                this.postAdapter.update(withPosts: objects, action: .reload)
                 this.view.hideToastActivity()
 
                 if let postId = this.userInfo as? String {
-                    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                    dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    let delayTime = DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                    DispatchQueue.main.asyncAfter(deadline: delayTime) {
                         this.scrollToPost(postId, animated: true)
                     }
                 }
@@ -187,13 +186,13 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    private func scrollToPost(postId: String, animated: Bool) {
+    fileprivate func scrollToPost(_ postId: String, animated: Bool) {
         if let indexPath = postAdapter.getPostIndexPath(postId) {
             tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: animated)
         }
     }
 
-    private func setupTableViewFooter() {
+    fileprivate func setupTableViewFooter() {
         let screenSize = view.bounds
         var frame = tableViewFooter.frame
         if let navigationController = navigationController {
@@ -206,7 +205,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         tableView.tableFooterView = tableViewFooter
     }
 
-    private func setupGestureRecognizers() {
+    fileprivate func setupGestureRecognizers() {
         let followersGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                 action: #selector(didTapFollowersLabel(_:)))
         followersQuantity.addGestureRecognizer(followersGestureRecognizer)
@@ -215,16 +214,16 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
                                                                 action: #selector(didTapFollowingLabel(_:)))
         followingQuantity.addGestureRecognizer(followingGestureRecognizer)
     }
-    private func setupUserImagePlaceholder() {
+    fileprivate func setupUserImagePlaceholder() {
         userAvatar.layer.cornerRadius = Constants.Profile.avatarImageCornerRadius
         userAvatar.image = UIImage(named: Constants.Profile.avatarImagePlaceholderName)
     }
 
-    private func applyCurrentUserAppearance() {
-        profileSettingsButton.enabled = true
+    fileprivate func applyCurrentUserAppearance() {
+        profileSettingsButton.isEnabled = true
         profileSettingsButton.tintColor = .appWhiteColor()
 
-        followButton.hidden = true
+        followButton.isHidden = true
         followButtonHeight.constant = followButtonMinHeight
 
         tableViewHeader.frame = CGRect(x: tableViewHeader.frame.origin.x,
@@ -234,7 +233,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         tableView.tableHeaderView = tableViewHeader
     }
 
-    private func updateUser() {
+    fileprivate func updateUser() {
         guard let user = user else {
             return
         }
@@ -262,17 +261,17 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         fillFollowersQuantity(user)
     }
 
-    private func showToast() {
+    fileprivate func showToast() {
         view.showToastActivityWithDuration(Constants.Profile.toastActivityDuration)
         activityShown = true
     }
 
-    private func deleteTimer() {
+    fileprivate func deleteTimer() {
         timeoutTimer?.invalidate()
         timeoutTimer = nil
     }
 
-    private func setupLoadersCallback() {
+    fileprivate func setupLoadersCallback() {
         let postService: PostService = locator.getService()
         tableView.addPullToRefreshWithActionHandler { [weak self] in
             guard let this = self else {
@@ -322,19 +321,19 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    private func toggleFollowFriend() {
+    fileprivate func toggleFollowFriend() {
         guard let user = user else {
             return
         }
 
         let activityService: ActivityService = locator.getService()
-        if followStatus == .Following {
+        if followStatus == .following {
             // Unfollow
 
             let alertController = UIAlertController(
                 title: unfollowTitle,
                 message: unfollowMessage,
-                preferredStyle: .ActionSheet
+                preferredStyle: .actionSheet
             )
             let cancelAction = UIAlertAction.appAlertAction(
                 title: cancelActionTitle,
@@ -346,7 +345,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
                 title: unfollowActionTitle,
                 style: .Default
             ) { [weak self] _ in
-                guard let this = self, user = this.user else {
+                guard let this = self, let user = this.user else {
                     return
                 }
                 this.followStatus = .Unknown
@@ -373,8 +372,8 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
             presentViewController(alertController, animated: true, completion: nil)
         } else {
             // Follow
-            followStatus = .Unknown
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+            followStatus = .unknown
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             indicator.center = followButton.center
             indicator.hidesWhenStopped = true
             indicator.startAnimating()
@@ -385,26 +384,26 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
                 }
                 if error == nil {
                     log.debug("Attempt to follow was \(succeeded) ")
-                    this.followStatus = .Following
+                    this.followStatus = .following
                 } else {
-                    this.followStatus = .NotFollowing
+                    this.followStatus = .notFollowing
                 }
                 indicator.removeFromSuperview()
                 this.fillFollowersQuantity(user)
-                NSNotificationCenter.defaultCenter().postNotificationName(
-                    Constants.NotificationName.followersListIsUpdated,
+                NotificationCenter.default.post(
+                    name: Notification.Name(rawValue: Constants.NotificationName.followersListIsUpdated),
                     object: nil
                 )
             }
         }
     }
 
-    private func fillFollowersQuantity(user: User) {
+    fileprivate func fillFollowersQuantity(_ user: User) {
         let attributes = AttributesCache.sharedCache.attributes(for: user)
         if let followersQuantity = attributes?[Constants.Attributes.followersCount],
-            followingQuantity = attributes?[Constants.Attributes.followingCount] {
-            self.followersQuantity.text = String(followersQuantity) + " followers"
-            self.followingQuantity.text = String(followingQuantity) + " following"
+            let followingQuantity = attributes?[Constants.Attributes.followingCount] {
+            self.followersQuantity.text = String(describing: followersQuantity) + " followers"
+            self.followingQuantity.text = String(describing: followingQuantity) + " following"
         }
 
         let activityService: ActivityService = locator.getService()
@@ -417,7 +416,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
     }
 
     // MARK: - IBActions
-    @IBAction private func followSomeone() {
+    @IBAction fileprivate func followSomeone() {
         guard ReachabilityHelper.isReachable() else {
             ExceptionHandler.handle(Exception.NoConnection)
 
@@ -430,11 +429,11 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    @IBAction private func profileSettings() {
+    @IBAction fileprivate func profileSettings() {
         router.showEditProfile()
     }
 
-    @objc private func didTapFollowersLabel(recognizer: UIGestureRecognizer) {
+    @objc fileprivate func didTapFollowersLabel(_ recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
@@ -448,7 +447,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
         }
     }
 
-    @objc private func didTapFollowingLabel(recognizer: UIGestureRecognizer) {
+    @objc fileprivate func didTapFollowingLabel(_ recognizer: UIGestureRecognizer) {
         guard let user = user else {
             return
         }
@@ -468,7 +467,7 @@ final class ProfileViewController: BaseUITableViewController, StoryboardInitiabl
 // MARK: - PostAdapterDelegate methods
 extension ProfileViewController: PostAdapterDelegate {
 
-    func showSettingsMenu(adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
+    func showSettingsMenu(_ adapter: PostAdapter, post: Post, index: Int, items: [AnyObject]) {
         settingsMenu.locator = locator
         settingsMenu.showInViewController(self, forPost: post, atIndex: index, items: items)
 
@@ -481,11 +480,11 @@ extension ProfileViewController: PostAdapterDelegate {
         }
     }
 
-    func showPlaceholderForEmptyDataSet(adapter: PostAdapter) {
+    func showPlaceholderForEmptyDataSet(_ adapter: PostAdapter) {
         tableView.reloadData()
     }
 
-    func postAdapterRequestedViewUpdate(adapter: PostAdapter) {
+    func postAdapterRequestedViewUpdate(_ adapter: PostAdapter) {
         tableView.reloadData()
     }
 
@@ -494,15 +493,15 @@ extension ProfileViewController: PostAdapterDelegate {
 // MARK: - UITableViewDelegate methods
 extension ProfileViewController {
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: IndexPath) {
         if activityShown == true {
             view.hideToastActivity()
             tableView.tableFooterView = nil
-            tableView.scrollEnabled = true
+            tableView.isScrollEnabled = true
         }
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return tableView.bounds.size.width + PostViewCell.designedHeight
     }
 
@@ -511,7 +510,7 @@ extension ProfileViewController {
 // MARK: - NavigationControllerAppearanceContext methods
 extension ProfileViewController: NavigationControllerAppearanceContext {
 
-    func preferredNavigationControllerAppearance(navigationController: UINavigationController) -> Appearance? {
+    func preferredNavigationControllerAppearance(_ navigationController: UINavigationController) -> Appearance? {
         var appearance = Appearance()
         appearance.title = Constants.Profile.navigationTitle
         return appearance
